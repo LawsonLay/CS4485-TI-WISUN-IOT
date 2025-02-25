@@ -5,7 +5,7 @@
     1  sudo apt-get update
     2  sudo apt-get install dbus libreadline8
     3  sudo apt-get install gcc g++ libdbus-1-dev libboost-dev libreadline-dev
-    4  sudo apt-get install libcoap2-bin
+    4  sudo apt-get install libcoap3-bin
     5  sudo apt-get install make
     8  git clone -b TI_WiSUN_STACK_01_00_07  https://github.com/TexasInstruments/ti-wisunfantund.git
    10  cd ti-wisunfantund/

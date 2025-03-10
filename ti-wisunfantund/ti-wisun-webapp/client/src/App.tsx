@@ -101,6 +101,9 @@ const DEFAULT_NCP_PROPERTY_VALUES = () => {
 enum TAB_VIEW {
   MONITOR = 'Monitor',
   CONFIG = 'Config',
+  DEVICES = 'Devices',
+  ROUTINES = 'Routines',
+  STORK = 'Stork',
   CONNECT = 'Connect',
   INVALID_HOST = 'Invalid Host',
 }
@@ -396,6 +399,15 @@ export class App extends React.Component<AppProps, AppState> {
       <ThemeContext.Provider value={this.state.theme}>
         <AppContext.Provider value={this}>
           <DashTitle>
+          {this.state.connected && (
+              <TabSelector
+                name={TAB_VIEW.CONFIG}
+                isSelected={this.state.tabView === TAB_VIEW.CONFIG}
+                selectTab={() => {
+                  this.setTab(TAB_VIEW.CONFIG);
+                }}
+              />
+            )}
             {this.state.connected && (
               <TabSelector
                 name={TAB_VIEW.MONITOR}
@@ -407,10 +419,28 @@ export class App extends React.Component<AppProps, AppState> {
             )}
             {this.state.connected && (
               <TabSelector
-                name={TAB_VIEW.CONFIG}
-                isSelected={this.state.tabView === TAB_VIEW.CONFIG}
+                name={TAB_VIEW.STORK}
+                isSelected={this.state.tabView === TAB_VIEW.STORK}
                 selectTab={() => {
-                  this.setTab(TAB_VIEW.CONFIG);
+                  this.setTab(TAB_VIEW.STORK);
+                }}
+              />
+            )}
+            {this.state.connected && (
+              <TabSelector
+                name={TAB_VIEW.DEVICES}
+                isSelected={this.state.tabView === TAB_VIEW.DEVICES}
+                selectTab={() => {
+                  this.setTab(TAB_VIEW.DEVICES);
+                }}
+              />
+            )}
+            {this.state.connected && (
+              <TabSelector
+                name={TAB_VIEW.ROUTINES}
+                isSelected={this.state.tabView === TAB_VIEW.ROUTINES}
+                selectTab={() => {
+                  this.setTab(TAB_VIEW.ROUTINES);
                 }}
               />
             )}

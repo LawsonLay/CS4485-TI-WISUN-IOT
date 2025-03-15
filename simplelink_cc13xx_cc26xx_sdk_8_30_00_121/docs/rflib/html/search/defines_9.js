@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['mce_5frfe_5foverride',['MCE_RFE_OVERRIDE',['../cc13x2__cc26x2_2driverlib_2rf__mailbox_8h.html#ac6d914977b71e33c48b279830b551ad9',1,'MCE_RFE_OVERRIDE():&#160;rf_mailbox.h'],['../cc13x1__cc26x1_2driverlib_2rf__mailbox_8h.html#ac6d914977b71e33c48b279830b551ad9',1,'MCE_RFE_OVERRIDE():&#160;rf_mailbox.h'],['../cc13x4__cc26x4_2driverlib_2rf__mailbox_8h.html#ac6d914977b71e33c48b279830b551ad9',1,'MCE_RFE_OVERRIDE():&#160;rf_mailbox.h']]],
-  ['mce_5frfe_5fsplit_5foverride',['MCE_RFE_SPLIT_OVERRIDE',['../cc13x2__cc26x2_2driverlib_2rf__mailbox_8h.html#a60c30e1fcf5e1e97297df4f377ba2ae2',1,'MCE_RFE_SPLIT_OVERRIDE():&#160;rf_mailbox.h'],['../cc13x1__cc26x1_2driverlib_2rf__mailbox_8h.html#a60c30e1fcf5e1e97297df4f377ba2ae2',1,'MCE_RFE_SPLIT_OVERRIDE():&#160;rf_mailbox.h'],['../cc13x4__cc26x4_2driverlib_2rf__mailbox_8h.html#a60c30e1fcf5e1e97297df4f377ba2ae2',1,'MCE_RFE_SPLIT_OVERRIDE():&#160;rf_mailbox.h']]],
-  ['mod_5ftype_5foverride',['MOD_TYPE_OVERRIDE',['../cc13x2__cc26x2_2driverlib_2rf__mailbox_8h.html#af2423d282bbbbdb0dd0cf9a0094b4926',1,'MOD_TYPE_OVERRIDE():&#160;rf_mailbox.h'],['../cc13x1__cc26x1_2driverlib_2rf__mailbox_8h.html#af2423d282bbbbdb0dd0cf9a0094b4926',1,'MOD_TYPE_OVERRIDE():&#160;rf_mailbox.h'],['../cc13x4__cc26x4_2driverlib_2rf__mailbox_8h.html#af2423d282bbbbdb0dd0cf9a0094b4926',1,'MOD_TYPE_OVERRIDE():&#160;rf_mailbox.h']]]
-];

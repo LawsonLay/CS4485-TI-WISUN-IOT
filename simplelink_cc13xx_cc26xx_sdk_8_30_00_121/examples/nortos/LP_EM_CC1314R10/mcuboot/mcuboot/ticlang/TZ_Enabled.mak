@@ -1,5 +1,0 @@
-CFLAGS += -DDUAL_SLOT
-
-LFLAGS += -Wl,--define=DUAL_SLOT
-
-

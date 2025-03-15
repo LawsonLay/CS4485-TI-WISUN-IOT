@@ -1,0 +1,331 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_watchdog_c_c26_x_x_8h" kind="file" language="C++">
+    <compoundname>WatchdogCC26XX.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes refid="_watchdog_8h" local="no">ti/drivers/Watchdog.h</includes>
+    <includes refid="_hwi_p_8h" local="no">ti/drivers/dpl/HwiP.h</includes>
+    <incdepgraph>
+      <node id="2198">
+        <label>stdbool.h</label>
+      </node>
+      <node id="2197">
+        <label>stdint.h</label>
+      </node>
+      <node id="2201">
+        <label>stddef.h</label>
+      </node>
+      <node id="2200">
+        <label>ti/drivers/dpl/HwiP.h</label>
+        <link refid="_hwi_p_8h"/>
+        <childnode refid="2197" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+        <childnode refid="2201" relation="include">
+        </childnode>
+      </node>
+      <node id="2196">
+        <label>WatchdogCC26XX.h</label>
+        <link refid="_watchdog_c_c26_x_x_8h"/>
+        <childnode refid="2197" relation="include">
+        </childnode>
+        <childnode refid="2198" relation="include">
+        </childnode>
+        <childnode refid="2199" relation="include">
+        </childnode>
+        <childnode refid="2200" relation="include">
+        </childnode>
+      </node>
+      <node id="2199">
+        <label>ti/drivers/Watchdog.h</label>
+        <link refid="_watchdog_8h"/>
+        <childnode refid="2197" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_watchdog_c_c26_x_x___h_w_attrs" prot="public">WatchdogCC26XX_HWAttrs</innerclass>
+    <innerclass refid="struct_watchdog_c_c26_x_x___object" prot="public">WatchdogCC26XX_Object</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_watchdog_c_c26_x_x_8h_1a1f60b940055d37c5bf8545499e948ca3" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_watchdog___fxn_table" kindref="compound">Watchdog_FxnTable</ref></type>
+        <definition>const Watchdog_FxnTable WatchdogCC26XX_fxnTable</definition>
+        <argsstring></argsstring>
+        <name>WatchdogCC26XX_fxnTable</name>
+        <briefdescription>
+<para>Watchdog function table for CC26XX. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/watchdog/WatchdogCC26XX.h" line="221" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Watchdog driver implementation for CC13XX/CC26XX. </para>    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para><para><heading level="1">Driver include</heading>
+</para><para>The Watchdog header file should be included in an application as follows: <programlisting><codeline><highlight class="normal">#include<sp/>&lt;ti/drivers/Watchdog.h&gt;</highlight></codeline>
+<codeline><highlight class="normal">#include<sp/>&lt;ti/drivers/watchdog/WatchdogCC26XX.h&gt;</highlight></codeline>
+</programlisting></para><para>Refer to <ref refid="_watchdog_8h" kindref="compound">Watchdog.h</ref> for a complete description of APIs.</para><para><heading level="1">Overview</heading>
+</para><para>The general Watchdog API should be used in application code, i.e. <ref refid="_watchdog_8h_1a26795f67f599b74de830ca7bf36bdced" kindref="member">Watchdog_open()</ref> should be used instead of WatchdogCC26XX_open(). The board file will define the device specific config, and casting in the general API will ensure that the correct device specific functions are called.</para><para><heading level="1">General Behavior</heading>
+</para><para>This Watchdog driver implementation is designed to operate on a CC13XX/CC26XX device. Before using the Watchdog in CC13XX/CC26XX, the Watchdog driver is initialized by calling <ref refid="_watchdog_8h_1afaadfb59be17661ae95562f2081355e7" kindref="member">Watchdog_init()</ref>. The Watchdog HW is configured by calling <ref refid="_watchdog_8h_1a26795f67f599b74de830ca7bf36bdced" kindref="member">Watchdog_open()</ref>. Once opened, the Watchdog will count down from the reload value specified in <ref refid="struct_watchdog_c_c26_x_x___h_w_attrs" kindref="compound">WatchdogCC26XX_HWAttrs</ref>. If it times out, a non-maskable interrupt will be triggered, the Watchdog interrupt flag will be set, and a user-provided callback function will be called. If reset is enabled in the <ref refid="struct_watchdog___params" kindref="compound">Watchdog_Params</ref> and the Watchdog timer is allowed to time out again while the interrupt flag is still pending, a reset signal will be generated. To prevent a reset, <ref refid="_watchdog_8h_1a396decd6b1807db10c636f9987c3be4c" kindref="member">Watchdog_clear()</ref> must be called to clear the interrupt flag and to reload the timer.</para><para>The Watchdog counts down at a rate of the device clock SCLK_HF (48 MHz) divided by a fixed-division ratio of 32, which equals to 1.5 MHz. The Watchdog rate will change if SCLK_HF deviates from 48 MHz.</para><para><simplesect kind="note"><para>The Watchdog interrupt is configured as a non-maskable interrupt (NMI) and the user-defined callback function is called in the context of NMI. Because the Watchdog interrupt is non-maskable, it is not safe to call any BIOS APIs from the Watchdog callback function. Calls to DPL and TIDRIVERS APIs should also be avoided given that they may indirectly make calls to BIOS APIs. Furthermore, the watchdog callback should only be reached if the watchdog times out. This should indicate an error event and allow logging or other housekeeping before resetting the device. Clearing of the watchdog and checking alive signals should be done in another execution context.</para></simplesect>
+The reload value from which the Watchdog timer counts down may be changed during runtime using <ref refid="_watchdog_8h_1a63ea82dda83e42e236578b9810e56880" kindref="member">Watchdog_setReload()</ref>. This value should be specified in Watchdog clock ticks and should not exceed the maximum value of 32 bits, which corresponds to a timeout period of 2863.3 seconds at the Watchdog rate of 1.5 MHz. If the reload value is set to zero, the Watchdog interrupt is immediately generated.</para><para>Since the device is not reset on the first Watchdog timeout, the maximum time lapse between the time when the device gets locked up and the time when it is reset can be up to <bold>two</bold> Watchdog timeout periods.</para><para><ref refid="_watchdog_8h_1a1c0dfea7011b06f303d01afb631ffbdd" kindref="member">Watchdog_close()</ref> is <bold>not</bold> supported by this driver implementation. Once started, the Watchdog timer can only be stopped by a hardware reset.</para><para><bold>No</bold> CC13XX/CC26XX specific command has been implemented. Any call to <ref refid="_watchdog_8h_1a513c121c62f277318a7c35b0b2bdc869" kindref="member">Watchdog_control()</ref> will receive the return code Watchdog_STATUS_UNDEFINEDCMD.</para><para>By default the Watchdog driver has reset enabled. However, it may be disabled in the <ref refid="struct_watchdog___params" kindref="compound">Watchdog_Params</ref> which allows the Watchdog Timer to be used like another timer interrupt. This functionality is <bold>not</bold> supported by all platforms, refer to device specific documentation for details.</para><para><heading level="1">Power Management</heading>
+</para><para>Once started, the Watchdog will keep running in Active or Idle mode. When the device enters Standby mode, the Watchdog timer will stop counting down but the counter value will be preserved. When the device wakes up from Standby, the Watchdog timer will continue to count down from the previous counter value.</para><para>This means that if a system goes into Standby 50% of the time and the Watchdog reload value is set to 1 second, the Watchdog timer will actually time out in 2 seconds. A system which is only in Active/Idle mode for 1% of the time, the Watchdog timer will time out in 100 seconds. However, if a bug locks up the application in Active mode, the Watchdog timer will time out in the configured time.</para><para><heading level="1">Supported Functions</heading>
+</para><para>| Generic API Function | API Function | Description | |---------------------------<mdash/> |-------------------------------<mdash/> |------------------------------------------------<mdash/>| | <ref refid="_watchdog_8h_1afaadfb59be17661ae95562f2081355e7" kindref="member">Watchdog_init()</ref> | WatchdogCC26XX_init() | Initialize Watchdog driver | | <ref refid="_watchdog_8h_1a26795f67f599b74de830ca7bf36bdced" kindref="member">Watchdog_open()</ref> | WatchdogCC26XX_open() | Initialize Watchdog HW and set system dependencies| | <ref refid="_watchdog_8h_1a396decd6b1807db10c636f9987c3be4c" kindref="member">Watchdog_clear()</ref> | WatchdogCC26XX_clear() | Clear Watchdog interrupt flag and reload counter | | <ref refid="_watchdog_8h_1a63ea82dda83e42e236578b9810e56880" kindref="member">Watchdog_setReload()</ref> | WatchdogCC26XX_setReload() | Set Watchdog timer reload value in clock ticnks | | <ref refid="_watchdog_8h_1a7b93cd0bd3a6f11aa28b0c7219755979" kindref="member">Watchdog_convertMsToTicks()</ref> | WatchdogCC26XX_convertMsToTicks() | Converts milliseconds to clock ticks |</para><para><simplesect kind="note"><para>All calls should go through the generic API. Please refer to <ref refid="_watchdog_8h" kindref="compound">Watchdog.h</ref> for a complete description of the generic APIs.</para></simplesect>
+<heading level="1">Use Cases</heading>
+</para><para><heading level="2">Basic Watchdog</heading>
+</para><para>In this basic watchdog example, the application is expected to define a Watchdog callback function and start the Watchdog timer by calling <ref refid="_watchdog_8h_1a26795f67f599b74de830ca7bf36bdced" kindref="member">Watchdog_open()</ref>. If needed, <ref refid="_watchdog_8h_1a63ea82dda83e42e236578b9810e56880" kindref="member">Watchdog_setReload()</ref> may be called to change the timeout period. If all monitored tasks are doing alright, <ref refid="_watchdog_8h_1a396decd6b1807db10c636f9987c3be4c" kindref="member">Watchdog_clear()</ref> should be called regularly to reload the counter so as to restart the timeout period and to avoid the Watchdog interrupt being triggered. If the <ref refid="_watchdog_8h_1a396decd6b1807db10c636f9987c3be4c" kindref="member">Watchdog_clear()</ref> is missed and the Watchdog timer is allowed to timeout, the user-defined callback function is called. In this function, the user may do whatever is appropriate for the application. Here are some suggestions:<itemizedlist>
+<listitem><para>do nothing so that the timer will timeout again and trigger the reset</para></listitem><listitem><para>immediately reset the device</para></listitem><listitem><para>do self-test to check the integrity of the application</para></listitem></itemizedlist>
+</para><para><simplesect kind="note"><para>The Watchdog interrupt is configured as a non-maskable interrupt (NMI) and the user-defined callback function is called in NMI context. Therefore it is not safe to call any OS APIs from the Watchdog callback function. This includes any driver calls that rely on OS APIs.</para></simplesect>
+The following code example shows how to define the callback function and to start the Watchdog timer. <programlisting><codeline><highlight class="normal">void<sp/>watchdogCallback(uintptr_t<sp/>handle);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">...</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Watchdog_Handle<sp/>handle;</highlight></codeline>
+<codeline><highlight class="normal">Watchdog_Params<sp/>params;</highlight></codeline>
+<codeline><highlight class="normal">uint32_t<sp/>tickValue;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Watchdog_Params_init(&amp;params);</highlight></codeline>
+<codeline><highlight class="normal">params.callbackFxn<sp/>=<sp/>watchdogCallback;</highlight></codeline>
+<codeline><highlight class="normal">handle<sp/>=<sp/>Watchdog_open(Watchdog_configIndex,<sp/>&amp;params);</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>set<sp/>timeout<sp/>period<sp/>to<sp/>100<sp/>ms</highlight></codeline>
+<codeline><highlight class="normal">tickValue<sp/>=<sp/>Watchdog_convertMsToTicks(handle,<sp/>100);</highlight></codeline>
+<codeline><highlight class="normal">Watchdog_setReload(handle,<sp/>tickValue);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">...</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">void<sp/>watchdogCallback(uintptr_t<sp/>handle)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>User-defined<sp/>code<sp/>here</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>...</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2015-2021,<sp/>Texas<sp/>Instruments<sp/>Incorporated</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">/*!****************************************************************************</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*<sp/><sp/>@file<sp/><sp/><sp/><sp/><sp/><sp/><sp/>WatchdogCC26XX.h</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*<sp/><sp/>@brief<sp/><sp/><sp/><sp/><sp/><sp/>Watchdog<sp/>driver<sp/>implementation<sp/>for<sp/>CC13XX/CC26XX</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Driver<sp/>include<sp/>#</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>Watchdog<sp/>header<sp/>file<sp/>should<sp/>be<sp/>included<sp/>in<sp/>an<sp/>application<sp/>as<sp/>follows:</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*<sp/><sp/>#include<sp/>&lt;ti/drivers/Watchdog.h&gt;</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/><sp/>#include<sp/>&lt;ti/drivers/watchdog/WatchdogCC26XX.h&gt;</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/>*<sp/><sp/>Refer<sp/>to<sp/>@ref<sp/>Watchdog.h<sp/>for<sp/>a<sp/>complete<sp/>description<sp/>of<sp/>APIs.</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Overview<sp/>#</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>general<sp/>Watchdog<sp/>API<sp/>should<sp/>be<sp/>used<sp/>in<sp/>application<sp/>code,<sp/>i.e.</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/>*<sp/><sp/>#Watchdog_open()<sp/>should<sp/>be<sp/>used<sp/>instead<sp/>of<sp/>WatchdogCC26XX_open().<sp/>The<sp/>board</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/>*<sp/><sp/>file<sp/>will<sp/>define<sp/>the<sp/>device<sp/>specific<sp/>config,<sp/>and<sp/>casting<sp/>in<sp/>the<sp/>general<sp/>API</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/>*<sp/><sp/>will<sp/>ensure<sp/>that<sp/>the<sp/>correct<sp/>device<sp/>specific<sp/>functions<sp/>are<sp/>called.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>General<sp/>Behavior<sp/>#</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/>*<sp/><sp/>This<sp/>Watchdog<sp/>driver<sp/>implementation<sp/>is<sp/>designed<sp/>to<sp/>operate<sp/>on<sp/>a<sp/>CC13XX/CC26XX</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/>*<sp/><sp/>device.<sp/>Before<sp/>using<sp/>the<sp/>Watchdog<sp/>in<sp/>CC13XX/CC26XX,<sp/>the<sp/>Watchdog<sp/>driver<sp/>is</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/>*<sp/><sp/>initialized<sp/>by<sp/>calling<sp/>#Watchdog_init().<sp/>The<sp/>Watchdog<sp/>HW<sp/>is<sp/>configured<sp/>by</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/>*<sp/><sp/>calling<sp/>#Watchdog_open().<sp/>Once<sp/>opened,<sp/>the<sp/>Watchdog<sp/>will<sp/>count<sp/>down<sp/>from</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/>*<sp/><sp/>the<sp/>reload<sp/>value<sp/>specified<sp/>in<sp/>#WatchdogCC26XX_HWAttrs.<sp/>If<sp/>it<sp/>times<sp/>out,<sp/>a</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/>*<sp/><sp/>non-maskable<sp/>interrupt<sp/>will<sp/>be<sp/>triggered,<sp/>the<sp/>Watchdog<sp/>interrupt<sp/>flag<sp/>will</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/>*<sp/><sp/>be<sp/>set,<sp/>and<sp/>a<sp/>user-provided<sp/>callback<sp/>function<sp/>will<sp/>be<sp/>called.<sp/>If<sp/>reset<sp/>is</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/>*<sp/><sp/>enabled<sp/>in<sp/>the<sp/>#Watchdog_Params<sp/>and<sp/>the<sp/>Watchdog<sp/>timer<sp/>is<sp/>allowed<sp/>to<sp/>time</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/>*<sp/><sp/>out<sp/>again<sp/>while<sp/>the<sp/>interrupt<sp/>flag<sp/>is<sp/>still<sp/>pending,<sp/>a<sp/>reset<sp/>signal<sp/>will<sp/>be</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/>*<sp/><sp/>generated.<sp/>To<sp/>prevent<sp/>a<sp/>reset,<sp/>#Watchdog_clear()<sp/>must<sp/>be<sp/>called<sp/>to<sp/>clear<sp/>the</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/>*<sp/><sp/>interrupt<sp/>flag<sp/>and<sp/>to<sp/>reload<sp/>the<sp/>timer.</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>Watchdog<sp/>counts<sp/>down<sp/>at<sp/>a<sp/>rate<sp/>of<sp/>the<sp/>device<sp/>clock<sp/>SCLK_HF<sp/>(48<sp/>MHz)</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/>*<sp/><sp/>divided<sp/>by<sp/>a<sp/>fixed-division<sp/>ratio<sp/>of<sp/>32,<sp/>which<sp/>equals<sp/>to<sp/>1.5<sp/>MHz.<sp/>The</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/>*<sp/><sp/>Watchdog<sp/>rate<sp/>will<sp/>change<sp/>if<sp/>SCLK_HF<sp/>deviates<sp/>from<sp/>48<sp/>MHz.</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/>*<sp/><sp/>@note<sp/>The<sp/>Watchdog<sp/>interrupt<sp/>is<sp/>configured<sp/>as<sp/>a<sp/>non-maskable<sp/>interrupt</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/>*<sp/><sp/>(NMI)<sp/>and<sp/>the<sp/>user-defined<sp/>callback<sp/>function<sp/>is<sp/>called<sp/>in<sp/>the<sp/>context<sp/>of</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/>*<sp/><sp/>NMI.<sp/>Because<sp/>the<sp/>Watchdog<sp/>interrupt<sp/>is<sp/>non-maskable,<sp/>it<sp/>is<sp/>not<sp/>safe<sp/>to<sp/>call</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/>*<sp/><sp/>any<sp/>BIOS<sp/>APIs<sp/>from<sp/>the<sp/>Watchdog<sp/>callback<sp/>function.<sp/>Calls<sp/>to<sp/>DPL<sp/>and<sp/>TIDRIVERS</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/>*<sp/><sp/>APIs<sp/>should<sp/>also<sp/>be<sp/>avoided<sp/>given<sp/>that<sp/>they<sp/>may<sp/>indirectly<sp/>make<sp/>calls<sp/>to<sp/>BIOS</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/>*<sp/><sp/>APIs.<sp/>Furthermore,<sp/>the<sp/>watchdog<sp/>callback<sp/>should<sp/>only<sp/>be<sp/>reached<sp/>if<sp/>the</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/>*<sp/><sp/>watchdog<sp/>times<sp/>out.<sp/>This<sp/>should<sp/>indicate<sp/>an<sp/>error<sp/>event<sp/>and<sp/>allow<sp/>logging</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/>*<sp/><sp/>or<sp/>other<sp/>housekeeping<sp/>before<sp/>resetting<sp/>the<sp/>device.<sp/>Clearing<sp/>of<sp/>the<sp/>watchdog</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/>*<sp/><sp/>and<sp/>checking<sp/>alive<sp/>signals<sp/>should<sp/>be<sp/>done<sp/>in<sp/>another<sp/>execution<sp/>context.</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>reload<sp/>value<sp/>from<sp/>which<sp/>the<sp/>Watchdog<sp/>timer<sp/>counts<sp/>down<sp/>may<sp/>be<sp/>changed</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/>*<sp/><sp/>during<sp/>runtime<sp/>using<sp/>#Watchdog_setReload().<sp/>This<sp/>value<sp/>should<sp/>be<sp/>specified</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/>*<sp/><sp/>in<sp/>Watchdog<sp/>clock<sp/>ticks<sp/>and<sp/>should<sp/>not<sp/>exceed<sp/>the<sp/>maximum<sp/>value<sp/>of<sp/>32<sp/>bits,</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/>*<sp/><sp/>which<sp/>corresponds<sp/>to<sp/>a<sp/>timeout<sp/>period<sp/>of<sp/>2863.3<sp/>seconds<sp/>at<sp/>the<sp/>Watchdog<sp/>rate</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/>*<sp/><sp/>of<sp/>1.5<sp/>MHz.<sp/>If<sp/>the<sp/>reload<sp/>value<sp/>is<sp/>set<sp/>to<sp/>zero,<sp/>the<sp/>Watchdog<sp/>interrupt<sp/>is</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/>*<sp/><sp/>immediately<sp/>generated.</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*<sp/><sp/>Since<sp/>the<sp/>device<sp/>is<sp/>not<sp/>reset<sp/>on<sp/>the<sp/>first<sp/>Watchdog<sp/>timeout,<sp/>the<sp/>maximum</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/>*<sp/><sp/>time<sp/>lapse<sp/>between<sp/>the<sp/>time<sp/>when<sp/>the<sp/>device<sp/>gets<sp/>locked<sp/>up<sp/>and<sp/>the<sp/>time<sp/>when</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/>*<sp/><sp/>it<sp/>is<sp/>reset<sp/>can<sp/>be<sp/>up<sp/>to<sp/>&lt;b&gt;two&lt;/b&gt;<sp/>Watchdog<sp/>timeout<sp/>periods.</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/>*<sp/><sp/>Watchdog_close()<sp/>is<sp/>&lt;b&gt;not&lt;/b&gt;<sp/>supported<sp/>by<sp/>this<sp/>driver<sp/>implementation.<sp/>Once</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/>*<sp/><sp/>started,<sp/>the<sp/>Watchdog<sp/>timer<sp/>can<sp/>only<sp/>be<sp/>stopped<sp/>by<sp/>a<sp/>hardware<sp/>reset.</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/>*<sp/><sp/>&lt;b&gt;No&lt;/b&gt;<sp/>CC13XX/CC26XX<sp/>specific<sp/>command<sp/>has<sp/>been<sp/>implemented.<sp/>Any<sp/>call<sp/>to</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/>*<sp/><sp/>Watchdog_control()<sp/>will<sp/>receive<sp/>the<sp/>return<sp/>code<sp/>Watchdog_STATUS_UNDEFINEDCMD.</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/>*<sp/><sp/>By<sp/>default<sp/>the<sp/>Watchdog<sp/>driver<sp/>has<sp/>reset<sp/>enabled.<sp/>However,<sp/>it<sp/>may<sp/>be</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*<sp/><sp/>disabled<sp/>in<sp/>the<sp/>#Watchdog_Params<sp/>which<sp/>allows<sp/>the<sp/>Watchdog<sp/>Timer<sp/>to<sp/>be<sp/>used</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/>*<sp/><sp/>like<sp/>another<sp/>timer<sp/>interrupt.<sp/>This<sp/>functionality<sp/>is<sp/>&lt;b&gt;not&lt;/b&gt;<sp/>supported<sp/>by</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/>*<sp/><sp/>all<sp/>platforms,<sp/>refer<sp/>to<sp/>device<sp/>specific<sp/>documentation<sp/>for<sp/>details.</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Power<sp/>Management<sp/>#</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/>*<sp/><sp/>Once<sp/>started,<sp/>the<sp/>Watchdog<sp/>will<sp/>keep<sp/>running<sp/>in<sp/>Active<sp/>or<sp/>Idle<sp/>mode.<sp/>When</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/>*<sp/><sp/>the<sp/>device<sp/>enters<sp/>Standby<sp/>mode,<sp/>the<sp/>Watchdog<sp/>timer<sp/>will<sp/>stop<sp/>counting<sp/>down</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/>*<sp/><sp/>but<sp/>the<sp/>counter<sp/>value<sp/>will<sp/>be<sp/>preserved.<sp/>When<sp/>the<sp/>device<sp/>wakes<sp/>up<sp/>from</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/>*<sp/><sp/>Standby,<sp/>the<sp/>Watchdog<sp/>timer<sp/>will<sp/>continue<sp/>to<sp/>count<sp/>down<sp/>from<sp/>the<sp/>previous</highlight></codeline>
+<codeline lineno="107"><highlight class="comment"><sp/>*<sp/><sp/>counter<sp/>value.</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/>*<sp/><sp/>This<sp/>means<sp/>that<sp/>if<sp/>a<sp/>system<sp/>goes<sp/>into<sp/>Standby<sp/>50%<sp/>of<sp/>the<sp/>time<sp/>and<sp/>the</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/>*<sp/><sp/>Watchdog<sp/>reload<sp/>value<sp/>is<sp/>set<sp/>to<sp/>1<sp/>second,<sp/>the<sp/>Watchdog<sp/>timer<sp/>will<sp/>actually</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/>*<sp/><sp/>time<sp/>out<sp/>in<sp/>2<sp/>seconds.<sp/>A<sp/>system<sp/>which<sp/>is<sp/>only<sp/>in<sp/>Active/Idle<sp/>mode<sp/>for<sp/>1%<sp/>of</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/>*<sp/><sp/>the<sp/>time,<sp/>the<sp/>Watchdog<sp/>timer<sp/>will<sp/>time<sp/>out<sp/>in<sp/>100<sp/>seconds.<sp/>However,<sp/>if<sp/>a<sp/>bug</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/>*<sp/><sp/>locks<sp/>up<sp/>the<sp/>application<sp/>in<sp/>Active<sp/>mode,<sp/>the<sp/>Watchdog<sp/>timer<sp/>will<sp/>time<sp/>out<sp/>in</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/>*<sp/><sp/>the<sp/>configured<sp/>time.</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/>*<sp/>#<sp/>Supported<sp/>Functions<sp/>#</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/>*<sp/><sp/>|<sp/>Generic<sp/>API<sp/>Function<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>API<sp/>Function<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/>*<sp/><sp/>|------------------------------<sp/>|----------------------------------</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/>*<sp/>|---------------------------------------------------|<sp/>|<sp/>#Watchdog_init()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>WatchdogCC26XX_init()<sp/>|</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/>*<sp/>Initialize<sp/>Watchdog<sp/>driver<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>|<sp/>#Watchdog_open()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>WatchdogCC26XX_open()<sp/>|</highlight></codeline>
+<codeline lineno="122"><highlight class="comment"><sp/>*<sp/>Initialize<sp/>Watchdog<sp/>HW<sp/>and<sp/>set<sp/>system<sp/>dependencies|<sp/>|<sp/>#Watchdog_clear()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>WatchdogCC26XX_clear()<sp/>|<sp/>Clear</highlight></codeline>
+<codeline lineno="123"><highlight class="comment"><sp/>*<sp/>Watchdog<sp/>interrupt<sp/>flag<sp/>and<sp/>reload<sp/>counter<sp/><sp/>|<sp/>|<sp/>#Watchdog_setReload()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>WatchdogCC26XX_setReload()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="124"><highlight class="comment"><sp/>*<sp/>Set<sp/>Watchdog<sp/>timer<sp/>reload<sp/>value<sp/>in<sp/>clock<sp/>ticnks<sp/><sp/><sp/>|<sp/>|<sp/>#Watchdog_convertMsToTicks()<sp/>|</highlight></codeline>
+<codeline lineno="125"><highlight class="comment"><sp/>*<sp/>WatchdogCC26XX_convertMsToTicks()<sp/>|<sp/>Converts<sp/>milliseconds<sp/>to<sp/>clock<sp/>ticks<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="126"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="127"><highlight class="comment"><sp/>*<sp/><sp/>@note<sp/>All<sp/>calls<sp/>should<sp/>go<sp/>through<sp/>the<sp/>generic<sp/>API.<sp/>Please<sp/>refer<sp/>to<sp/>@ref<sp/>Watchdog.h<sp/>for<sp/>a</highlight></codeline>
+<codeline lineno="128"><highlight class="comment"><sp/>*<sp/><sp/>complete<sp/>description<sp/>of<sp/>the<sp/>generic<sp/>APIs.</highlight></codeline>
+<codeline lineno="129"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/>*<sp/>#<sp/>Use<sp/>Cases<sp/>#</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/>*<sp/>##<sp/>Basic<sp/>Watchdog<sp/>#</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/>*<sp/><sp/>In<sp/>this<sp/>basic<sp/>watchdog<sp/>example,<sp/>the<sp/>application<sp/>is<sp/>expected<sp/>to<sp/>define<sp/>a</highlight></codeline>
+<codeline lineno="133"><highlight class="comment"><sp/>*<sp/><sp/>Watchdog<sp/>callback<sp/>function<sp/>and<sp/>start<sp/>the<sp/>Watchdog<sp/>timer<sp/>by<sp/>calling<sp/>#Watchdog_open().</highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/>*<sp/><sp/>If<sp/>needed,<sp/>#Watchdog_setReload()<sp/>may<sp/>be<sp/>called<sp/>to<sp/>change<sp/>the<sp/>timeout<sp/>period.</highlight></codeline>
+<codeline lineno="135"><highlight class="comment"><sp/>*<sp/><sp/>If<sp/>all<sp/>monitored<sp/>tasks<sp/>are<sp/>doing<sp/>alright,<sp/>#Watchdog_clear()<sp/>should<sp/>be<sp/>called</highlight></codeline>
+<codeline lineno="136"><highlight class="comment"><sp/>*<sp/><sp/>regularly<sp/>to<sp/>reload<sp/>the<sp/>counter<sp/>so<sp/>as<sp/>to<sp/>restart<sp/>the<sp/>timeout<sp/>period<sp/>and<sp/>to</highlight></codeline>
+<codeline lineno="137"><highlight class="comment"><sp/>*<sp/><sp/>avoid<sp/>the<sp/>Watchdog<sp/>interrupt<sp/>being<sp/>triggered.<sp/>If<sp/>the<sp/>#Watchdog_clear()<sp/>is</highlight></codeline>
+<codeline lineno="138"><highlight class="comment"><sp/>*<sp/><sp/>missed<sp/>and<sp/>the<sp/>Watchdog<sp/>timer<sp/>is<sp/>allowed<sp/>to<sp/>timeout,<sp/>the<sp/>user-defined</highlight></codeline>
+<codeline lineno="139"><highlight class="comment"><sp/>*<sp/><sp/>callback<sp/>function<sp/>is<sp/>called.<sp/>In<sp/>this<sp/>function,<sp/>the<sp/>user<sp/>may<sp/>do<sp/>whatever<sp/>is</highlight></codeline>
+<codeline lineno="140"><highlight class="comment"><sp/>*<sp/><sp/>appropriate<sp/>for<sp/>the<sp/>application.</highlight></codeline>
+<codeline lineno="141"><highlight class="comment"><sp/>*<sp/><sp/>Here<sp/>are<sp/>some<sp/>suggestions:</highlight></codeline>
+<codeline lineno="142"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>do<sp/>nothing<sp/>so<sp/>that<sp/>the<sp/>timer<sp/>will<sp/>timeout<sp/>again<sp/>and<sp/>trigger<sp/>the<sp/>reset</highlight></codeline>
+<codeline lineno="143"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>immediately<sp/>reset<sp/>the<sp/>device</highlight></codeline>
+<codeline lineno="144"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>do<sp/>self-test<sp/>to<sp/>check<sp/>the<sp/>integrity<sp/>of<sp/>the<sp/>application</highlight></codeline>
+<codeline lineno="145"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="146"><highlight class="comment"><sp/>*<sp/><sp/>@note<sp/>The<sp/>Watchdog<sp/>interrupt<sp/>is<sp/>configured<sp/>as<sp/>a<sp/>non-maskable<sp/>interrupt</highlight></codeline>
+<codeline lineno="147"><highlight class="comment"><sp/>*<sp/><sp/>(NMI)<sp/>and<sp/>the<sp/>user-defined<sp/>callback<sp/>function<sp/>is<sp/>called<sp/>in<sp/>NMI<sp/>context.</highlight></codeline>
+<codeline lineno="148"><highlight class="comment"><sp/>*<sp/><sp/>Therefore<sp/>it<sp/>is<sp/>not<sp/>safe<sp/>to<sp/>call<sp/>any<sp/>OS<sp/>APIs<sp/>from<sp/>the<sp/>Watchdog<sp/>callback</highlight></codeline>
+<codeline lineno="149"><highlight class="comment"><sp/>*<sp/><sp/>function.<sp/>This<sp/>includes<sp/>any<sp/>driver<sp/>calls<sp/>that<sp/>rely<sp/>on<sp/>OS<sp/>APIs.</highlight></codeline>
+<codeline lineno="150"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="151"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>following<sp/>code<sp/>example<sp/>shows<sp/>how<sp/>to<sp/>define<sp/>the<sp/>callback<sp/>function<sp/>and<sp/>to</highlight></codeline>
+<codeline lineno="152"><highlight class="comment"><sp/>*<sp/><sp/>start<sp/>the<sp/>Watchdog<sp/>timer.</highlight></codeline>
+<codeline lineno="153"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="154"><highlight class="comment"><sp/>*<sp/><sp/>void<sp/>watchdogCallback(uintptr_t<sp/>handle);</highlight></codeline>
+<codeline lineno="155"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="156"><highlight class="comment"><sp/>*<sp/><sp/>...</highlight></codeline>
+<codeline lineno="157"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="158"><highlight class="comment"><sp/>*<sp/><sp/>Watchdog_Handle<sp/>handle;</highlight></codeline>
+<codeline lineno="159"><highlight class="comment"><sp/>*<sp/><sp/>Watchdog_Params<sp/>params;</highlight></codeline>
+<codeline lineno="160"><highlight class="comment"><sp/>*<sp/><sp/>uint32_t<sp/>tickValue;</highlight></codeline>
+<codeline lineno="161"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="162"><highlight class="comment"><sp/>*<sp/><sp/>Watchdog_Params_init(&amp;params);</highlight></codeline>
+<codeline lineno="163"><highlight class="comment"><sp/>*<sp/><sp/>params.callbackFxn<sp/>=<sp/>watchdogCallback;</highlight></codeline>
+<codeline lineno="164"><highlight class="comment"><sp/>*<sp/><sp/>handle<sp/>=<sp/>Watchdog_open(Watchdog_configIndex,<sp/>&amp;params);</highlight></codeline>
+<codeline lineno="165"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>set<sp/>timeout<sp/>period<sp/>to<sp/>100<sp/>ms</highlight></codeline>
+<codeline lineno="166"><highlight class="comment"><sp/>*<sp/><sp/>tickValue<sp/>=<sp/>Watchdog_convertMsToTicks(handle,<sp/>100);</highlight></codeline>
+<codeline lineno="167"><highlight class="comment"><sp/>*<sp/><sp/>Watchdog_setReload(handle,<sp/>tickValue);</highlight></codeline>
+<codeline lineno="168"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="169"><highlight class="comment"><sp/>*<sp/><sp/>...</highlight></codeline>
+<codeline lineno="170"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="171"><highlight class="comment"><sp/>*<sp/><sp/>void<sp/>watchdogCallback(uintptr_t<sp/>handle)</highlight></codeline>
+<codeline lineno="172"><highlight class="comment"><sp/>*<sp/><sp/>{</highlight></codeline>
+<codeline lineno="173"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>User-defined<sp/>code<sp/>here</highlight></codeline>
+<codeline lineno="174"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>...</highlight></codeline>
+<codeline lineno="175"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="176"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="177"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="178"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ti_drivers_watchdog_WatchdogCC26XX__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_drivers_watchdog_WatchdogCC26XX__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_watchdog_8h" kindref="compound">ti/drivers/Watchdog.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_hwi_p_8h" kindref="compound">ti/drivers/dpl/HwiP.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="comment">/*<sp/>Add<sp/>WatchdogCC26XX_STATUS_*<sp/>macros<sp/>here<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="comment">/*<sp/>Add<sp/>WatchdogCC26XX_CMD_*<sp/>macros<sp/>here<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_watchdog___fxn_table" kindref="compound">Watchdog_FxnTable</ref><sp/><ref refid="_watchdog_c_c26_x_x_8h_1a1f60b940055d37c5bf8545499e948ca3" kindref="member">WatchdogCC26XX_fxnTable</ref>;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226" refid="struct_watchdog_c_c26_x_x___h_w_attrs" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="228" refid="struct_watchdog_c_c26_x_x___h_w_attrs_1a0eda34ad75c65e399e2c97ce3ee9bbc9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_watchdog_c_c26_x_x___h_w_attrs_1a0eda34ad75c65e399e2c97ce3ee9bbc9" kindref="member">baseAddr</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="229" refid="struct_watchdog_c_c26_x_x___h_w_attrs_1a4d5992495525d1457f5aa356046ce055" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="struct_watchdog_c_c26_x_x___h_w_attrs_1a4d5992495525d1457f5aa356046ce055" kindref="member">reloadValue</ref>;<sp/></highlight></codeline>
+<codeline lineno="230"><highlight class="normal">}<sp/><ref refid="struct_watchdog_c_c26_x_x___h_w_attrs" kindref="compound">WatchdogCC26XX_HWAttrs</ref>;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237" refid="struct_watchdog_c_c26_x_x___object" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="239" refid="struct_watchdog_c_c26_x_x___object_1a841c8d0d31d1579a93b252a1fa0f24ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_watchdog_c_c26_x_x___object_1a841c8d0d31d1579a93b252a1fa0f24ee" kindref="member">isOpen</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Flag<sp/>for<sp/>open/close<sp/>status<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="240" refid="struct_watchdog_c_c26_x_x___object_1aa6c9f831aad4ab34f61bf323aa3c0b51" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_watchdog_8h_1a2d201451a10bb67efc3e222ac7f099c1" kindref="member">Watchdog_Callback</ref><sp/><ref refid="struct_watchdog_c_c26_x_x___object_1aa6c9f831aad4ab34f61bf323aa3c0b51" kindref="member">callbackFxn</ref>;<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Pointer<sp/>to<sp/>callback.<sp/>Not<sp/>supported</highlight></codeline>
+<codeline lineno="241"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>on<sp/>all<sp/>targets.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242" refid="struct_watchdog_c_c26_x_x___object_1a6d5b931599fbf0753e7cba317d638385" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_watchdog_8h_1ada0db7216129d7dad494bb0cd0169f88" kindref="member">Watchdog_ResetMode</ref><sp/><ref refid="struct_watchdog_c_c26_x_x___object_1a6d5b931599fbf0753e7cba317d638385" kindref="member">resetMode</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Mode<sp/>to<sp/>enable<sp/>resets.</highlight></codeline>
+<codeline lineno="243"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Not<sp/>supported<sp/>on<sp/>all<sp/>targets.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="244" refid="struct_watchdog_c_c26_x_x___object_1a1d7fd3a5482cda6047764bdd4d5c81e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_watchdog_8h_1ab1aa5862661c88a16b9d7bc12709d51e" kindref="member">Watchdog_DebugMode</ref><sp/><ref refid="struct_watchdog_c_c26_x_x___object_1a1d7fd3a5482cda6047764bdd4d5c81e3" kindref="member">debugStallMode</ref>;<sp/></highlight><highlight class="comment">/*<sp/>Mode<sp/>to<sp/>stall<sp/>Watchdog<sp/>at<sp/>breakpoints.</highlight></codeline>
+<codeline lineno="245"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Not<sp/>supported<sp/>on<sp/>all<sp/>targets.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Watchdog<sp/>SYS/BIOS<sp/>objects<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247" refid="struct_watchdog_c_c26_x_x___object_1ad4ff3bd63542d01fef51a1fd2ac469ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="union_hwi_p___struct" kindref="compound">HwiP_Struct</ref><sp/><ref refid="struct_watchdog_c_c26_x_x___object_1ad4ff3bd63542d01fef51a1fd2ac469ea" kindref="member">hwi</ref>;<sp/></highlight><highlight class="comment">/*<sp/>Hwi<sp/>object<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal">}<sp/><ref refid="struct_watchdog_c_c26_x_x___object" kindref="compound">WatchdogCC26XX_Object</ref>;</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_drivers_watchdog_WatchdogCC26XX__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/watchdog/WatchdogCC26XX.h"/>
+  </compounddef>
+</doxygen>

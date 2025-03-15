@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_a_e_s_c_t_r_c_c26_x_x_8h" kind="file" language="C++">
+    <compoundname>AESCTRCC26XX.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes refid="_a_e_s_c_t_r_8h" local="no">ti/drivers/AESCTR.h</includes>
+    <includes local="no">ti/devices/DeviceFamily.h</includes>
+    <includes local="no">DeviceFamily_constructPath(driverlib/aes.h)</includes>
+    <incdepgraph>
+      <node id="311">
+        <label>stdbool.h</label>
+      </node>
+      <node id="314">
+        <label>ti/drivers/AESCommon.h</label>
+        <link refid="_a_e_s_common_8h"/>
+        <childnode refid="311" relation="include">
+        </childnode>
+        <childnode refid="313" relation="include">
+        </childnode>
+        <childnode refid="310" relation="include">
+        </childnode>
+      </node>
+      <node id="310">
+        <label>stdint.h</label>
+      </node>
+      <node id="313">
+        <label>stddef.h</label>
+      </node>
+      <node id="316">
+        <label>ti/devices/DeviceFamily.h</label>
+      </node>
+      <node id="309">
+        <label>AESCTRCC26XX.h</label>
+        <link refid="_a_e_s_c_t_r_c_c26_x_x_8h"/>
+        <childnode refid="310" relation="include">
+        </childnode>
+        <childnode refid="311" relation="include">
+        </childnode>
+        <childnode refid="312" relation="include">
+        </childnode>
+        <childnode refid="316" relation="include">
+        </childnode>
+        <childnode refid="317" relation="include">
+        </childnode>
+      </node>
+      <node id="315">
+        <label>ti/drivers/cryptoutils/cryptokey/CryptoKey.h</label>
+        <link refid="_crypto_key_8h"/>
+        <childnode refid="310" relation="include">
+        </childnode>
+        <childnode refid="311" relation="include">
+        </childnode>
+      </node>
+      <node id="312">
+        <label>ti/drivers/AESCTR.h</label>
+        <link refid="_a_e_s_c_t_r_8h"/>
+        <childnode refid="313" relation="include">
+        </childnode>
+        <childnode refid="310" relation="include">
+        </childnode>
+        <childnode refid="314" relation="include">
+        </childnode>
+        <childnode refid="315" relation="include">
+        </childnode>
+      </node>
+      <node id="317">
+        <label>DeviceFamily_constructPath(driverlib/aes.h)</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_a_e_s_c_t_r_c_c26_x_x___h_w_attrs" prot="public">AESCTRCC26XX_HWAttrs</innerclass>
+    <innerclass refid="struct_a_e_s_c_t_r_c_c26_x_x___object" prot="public">AESCTRCC26XX_Object</innerclass>
+    <briefdescription>
+<para>AESCTR driver implementation for the CC26XX family. </para>    </briefdescription>
+    <detaileddescription>
+<para>============================================================================</para><para>This file should only be included in the board file to fill the AESCTR_config struct.</para><para><heading level="1">Hardware Accelerator</heading>
+</para><para>The CC26XX family has a dedicated hardware crypto accelerator. It is capable of multiple AES block cipher modes of operation including CTR. Only one operation can be carried out on the accelerator at a time. Mutual exclusion is implemented at the driver level and coordinated between all drivers relying on the accelerator. It is transparent to the application and only noted to ensure sensible access timeouts are set.</para><para><heading level="1">Key Store</heading>
+</para><para>The CC26XX crypto module contains a key store. The only way to load a key into the AES accelerator is to first load it into the key store. To guarantee availability of open key locations in the key store for AES operations, the last two key locations (6 and 7) are reserved for ad-hoc operations. The key is loaded into the key store, the AES operation is carried out, and the key is deleted from the key store. Since the key store does not have retention and the keys can not survive going into standby, the key store is only used to load keys into the AES accelerator rather than store keys. Support for pre-loading keys into the key store and using them in an AES operation is not supported in this driver.</para><para><heading level="1">Implementation Limitations</heading>
+</para><para><itemizedlist>
+<listitem><para>Only plaintext CryptoKeys are supported by this implementation.</para></listitem></itemizedlist>
+</para><para><heading level="1">Runtime Parameter Validation</heading>
+</para><para>The driver implementation does not perform runtime checks for most input parameters. Only values that are likely to have a stochastic element to them are checked (such as whether a driver is already open). Higher input parameter validation coverage is achieved by turning on assertions when compiling the driver. </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2018-2021,<sp/>Texas<sp/>Instruments<sp/>Incorporated</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight></codeline>
+<codeline lineno="69"><highlight class="preprocessor">#ifndef<sp/>ti_drivers_aesctr_AESCTRCC26XX__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_drivers_aesctr_AESCTRCC26XX__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_a_e_s_c_t_r_8h" kindref="compound">ti/drivers/AESCTR.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ti/devices/DeviceFamily.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>DeviceFamily_constructPath(driverlib/aes.h)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="struct_a_e_s_c_t_r_c_c26_x_x___h_w_attrs" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="105" refid="struct_a_e_s_c_t_r_c_c26_x_x___h_w_attrs_1afa933c2dedc35c3a254351c11aa39cd3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___h_w_attrs_1afa933c2dedc35c3a254351c11aa39cd3" kindref="member">intPriority</ref>;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal">}<sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___h_w_attrs" kindref="compound">AESCTRCC26XX_HWAttrs</ref>;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="struct_a_e_s_c_t_r_c_c26_x_x___object" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="115" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1ab9f87f83935db60f261f0d9a1304e22c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>counter[AES_BLOCK_SIZE<sp/>/<sp/>4];</highlight></codeline>
+<codeline lineno="116" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a8ad010e6ec68601fd3f31472f42c3bd2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a8ad010e6ec68601fd3f31472f42c3bd2" kindref="member">semaphoreTimeout</ref>;</highlight></codeline>
+<codeline lineno="117" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a7238ce376b169d5096e40195235c9262" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_a_e_s_c_t_r_8h_1adc2c56e8ba2292d0b57d8fd3b28d92e3" kindref="member">AESCTR_CallbackFxn</ref><sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a7238ce376b169d5096e40195235c9262" kindref="member">callbackFxn</ref>;</highlight></codeline>
+<codeline lineno="118" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1af2a1b9c822b24e09128296ecc387be8d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="union_a_e_s_c_t_r___operation_union" kindref="compound">AESCTR_OperationUnion</ref><sp/>*<ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1af2a1b9c822b24e09128296ecc387be8d" kindref="member">operation</ref>;</highlight></codeline>
+<codeline lineno="119" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a0d9ad3b64ebfda6800c215eb44935c8d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>*<ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a0d9ad3b64ebfda6800c215eb44935c8d" kindref="member">input</ref>;</highlight></codeline>
+<codeline lineno="120" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a6293b546d1993e77acf9c7548eb31004" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>*<ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a6293b546d1993e77acf9c7548eb31004" kindref="member">output</ref>;</highlight></codeline>
+<codeline lineno="121" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a6593577e31ae8b6f561211a2c35ff35e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a6593577e31ae8b6f561211a2c35ff35e" kindref="member">inputLength</ref>;</highlight></codeline>
+<codeline lineno="122" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a168e1102235f31f27e8992d38128ab86" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref><sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a168e1102235f31f27e8992d38128ab86" kindref="member">key</ref>;</highlight></codeline>
+<codeline lineno="123" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a31f996f087a7ab166ecec9ea8d8bc7d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/>int_fast16_t<sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a31f996f087a7ab166ecec9ea8d8bc7d2" kindref="member">returnStatus</ref>;</highlight></codeline>
+<codeline lineno="124" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1af85690faa0ed9d6976b353eb3ba457fe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_a_e_s_c_t_r_8h_1a4bca2f2e747d2006dafafb098fd2f2b4" kindref="member">AESCTR_ReturnBehavior</ref><sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1af85690faa0ed9d6976b353eb3ba457fe" kindref="member">returnBehavior</ref>;</highlight></codeline>
+<codeline lineno="125" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1af3ce0454dedf598be5efe3c2db7b843d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_a_e_s_c_t_r_8h_1a09812f1f01333df2b7cf00570b8e529e" kindref="member">AESCTR_OperationType</ref><sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1af3ce0454dedf598be5efe3c2db7b843d" kindref="member">operationType</ref>;</highlight></codeline>
+<codeline lineno="126" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a14802a0f7015460f3db5b3cdb571db18" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a14802a0f7015460f3db5b3cdb571db18" kindref="member">isOpen</ref>;</highlight></codeline>
+<codeline lineno="127" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a4844408302b2b3cf5c014f58ae517d84" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a4844408302b2b3cf5c014f58ae517d84" kindref="member">threadSafe</ref>;</highlight></codeline>
+<codeline lineno="128" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1aafb405dd2d3f9670efb52f556834fbbe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1aafb405dd2d3f9670efb52f556834fbbe" kindref="member">cryptoResourceLocked</ref>;</highlight></codeline>
+<codeline lineno="129" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1aa0ff3b9d9d1c7a2726380d1308ca169e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1aa0ff3b9d9d1c7a2726380d1308ca169e" kindref="member">hwBusy</ref>;</highlight></codeline>
+<codeline lineno="130" refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a306ddb3a4fa7aa0486683dccd1f8a4f3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object_1a306ddb3a4fa7aa0486683dccd1f8a4f3" kindref="member">operationInProgress</ref>;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal">}<sp/><ref refid="struct_a_e_s_c_t_r_c_c26_x_x___object" kindref="compound">AESCTRCC26XX_Object</ref>;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>AESCTR_acquireLock(<ref refid="struct_a_e_s_common___config" kindref="compound">AESCTR_Handle</ref><sp/>handle,<sp/>uint32_t<sp/>timeout);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AESCTR_releaseLock(<ref refid="struct_a_e_s_common___config" kindref="compound">AESCTR_Handle</ref><sp/>handle);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AESCTR_enableThreadSafety(<ref refid="struct_a_e_s_common___config" kindref="compound">AESCTR_Handle</ref><sp/>handle);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AESCTR_disableThreadSafety(<ref refid="struct_a_e_s_common___config" kindref="compound">AESCTR_Handle</ref><sp/>handle);</highlight></codeline>
+<codeline lineno="144"><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_drivers_aesctr_AESCTRCC26XX__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/aesctr/AESCTRCC26XX.h"/>
+  </compounddef>
+</doxygen>

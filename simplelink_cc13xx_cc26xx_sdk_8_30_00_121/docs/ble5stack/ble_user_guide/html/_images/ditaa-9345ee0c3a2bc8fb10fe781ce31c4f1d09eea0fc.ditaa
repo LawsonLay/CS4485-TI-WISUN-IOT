@@ -1,0 +1,36 @@
+  LL goes through the second and the third connection to determine if there is collision.
+
+
+                                            +-------+
+                                            | Conn 3|
+                   +-------+          +-----+-+     |   +-------+       +-------+
+                   | Conn 1|          | Conn 2|     |   | Conn 4|       | Conn n|
+                   |  cFFF |          | cGRE  | cGRE|   | cAAA  | ..... | cAAA  |
+                   |       |          |       |     |   |       |       |       |
+ ------------------+-------+----------+-------+-----+---+-------+-------+-------+-------
+                                      <----->
+                                       conn
+                                       Diff
+
+  LL determines there is collision between connection 2 and connection 3,
+  and connection 2 has higher priority over connection 3, connection
+  3 will not be scheduled and its miss count will be incremented by 1.
+  LL continues going through the rest of connections until it finds no collision.
+
+                                             +-------+
+                                             | Conn 3|
+                    +-------+          +-----+-+     |   +-------+       +-------+
+                    | Conn 1|          | Conn 2|     |   | Conn 4|       | Conn n|
+                    |  cFFF |          | cGRE  | cFFF|   | cGRE  | ..... | cAAA  |
+                    |       |          |       |     |   |       |       |       |
+  ------------------+-------+----------+-------+-----+---+-------+-------+-------+-------
+                                       <----------------->
+                                             connDiff
+
+  /--------------------------------\
+  | cFFF Not scheduled connections |
+  +--------------------------------+
+  |cGRE Connections in comparison  |
+  +--------------------------------+
+  | cAAA Unchecked connections     |
+  \--------------------------------/

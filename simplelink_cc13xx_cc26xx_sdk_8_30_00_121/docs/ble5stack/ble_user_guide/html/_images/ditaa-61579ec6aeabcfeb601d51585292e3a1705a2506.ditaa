@@ -1,0 +1,38 @@
+                      +-------------------------+
+                      |       Phase 1           |
+        /------------>| Get next secondary task |----------------------------\
+        |             |         cCFF            |                            |
+        |             +-------------------------+                            |
+        |                           ^                                        |
+        |                           |                                        v
+        |                           |                           +------------------------+
+ +-----------------+                |             No            |        Phase 2         |
+ | Phase 5 option 1|                |     /---------------------| Are there connections? |
+ | Schedule primary|                |     |                     |       c3FF             |
+ | task            |                |     |                     +------------------------+
+ |   c189          |                |     |                                | Yes, get next
+ +-----------------+                |     |                                | primary task.
+         ^                          |     v                                v
+         |                       +------------------+            +------------------------+
+         |                       | Phase 5 option 2 |            |        Phase 3         |
+         |                       | Schedule next    |            | Do we have enough time |
+         |                       | secondary task   |<-----------|  for secondary task?   |
+         |                       |  c189            |    Yes     |         c0CC           |
+         |                       +------------------+            +------------------------+
+         |                                ^                                 |
+         |                                |                                 |
+         |                                |Yes                              |
+         |                                |                                 |No
+         |                                |                                 |
+         |                        +---------------------+                   |
+         |                        |      Phase 4        |                   |
+         |        No              | Does secondary task |                   |
+         \------------------------| has higher priority |<------------------/
+                                  | than primary task   |
+                                  | and primary task has|
+                                  | not reached 1/2     |
+                                  | supervision timeout |
+                                  | or not in connection|
+                                  | establishment phase?|
+                                  |     c0BC            |
+                                  +---------------------+

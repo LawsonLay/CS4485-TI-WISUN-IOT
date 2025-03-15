@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_u_d_m_a_c_c26_x_x___h_w_attrs" kind="struct" language="C++" prot="public">
+    <compoundname>UDMACC26XX_HWAttrs</compoundname>
+    <includes refid="_u_d_m_a_c_c26_x_x_8h" local="no">UDMACC26XX.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_u_d_m_a_c_c26_x_x___h_w_attrs_1a62ff254a8b85ecced4f749c35065515d" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t UDMACC26XX_HWAttrs::baseAddr</definition>
+        <argsstring></argsstring>
+        <name>baseAddr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Base address for UDMACC26XX </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dma/UDMACC26XX.h" line="222" column="1" bodyfile="source/ti/drivers/dma/UDMACC26XX.h" bodystart="222" bodyend="-1"/>
+        <referencedby refid="_u_d_m_a_c_c26_x_x_8h_1a0cd214fa0e13f1ddb1a519a30acfe30c" compoundref="_u_d_m_a_c_c26_x_x_8h" startline="403" endline="411">UDMACC26XX_channelDisable</referencedby>
+        <referencedby refid="_u_d_m_a_c_c26_x_x_8h_1a5725e1db13295ef9096723f2b7c6364c" compoundref="_u_d_m_a_c_c26_x_x_8h" startline="349" endline="358">UDMACC26XX_channelDone</referencedby>
+        <referencedby refid="_u_d_m_a_c_c26_x_x_8h_1a1eec9bde0731a07b492a9f483b0c554b" compoundref="_u_d_m_a_c_c26_x_x_8h" startline="320" endline="329">UDMACC26XX_channelEnable</referencedby>
+        <referencedby refid="_u_d_m_a_c_c26_x_x_8h_1a1571fcbf7f44fca000fef38d8955eae6" compoundref="_u_d_m_a_c_c26_x_x_8h" startline="375" endline="384">UDMACC26XX_clearInterrupt</referencedby>
+        <referencedby refid="_u_d_m_a_c_c26_x_x_8h_1a3118471d8450fd14aaf03f3e1b087a17" compoundref="_u_d_m_a_c_c26_x_x_8h" startline="433" endline="441">UDMACC26XX_disableAttribute</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_u_d_m_a_c_c26_x_x___h_w_attrs_1a77e02a4666668a7d35d012e5dd7b2d24" prot="public" static="no" mutable="no">
+        <type>PowerCC26XX_Resource</type>
+        <definition>PowerCC26XX_Resource UDMACC26XX_HWAttrs::powerMngrId</definition>
+        <argsstring></argsstring>
+        <name>powerMngrId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>UDMACC26XX Peripheral&apos;s power manager ID </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dma/UDMACC26XX.h" line="223" column="1" bodyfile="source/ti/drivers/dma/UDMACC26XX.h" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_u_d_m_a_c_c26_x_x___h_w_attrs_1a842b5f7c2c0a2563eaf6f037cff07785" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t UDMACC26XX_HWAttrs::intNum</definition>
+        <argsstring></argsstring>
+        <name>intNum</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>UDMACC26XX error interrupt number </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dma/UDMACC26XX.h" line="224" column="1" bodyfile="source/ti/drivers/dma/UDMACC26XX.h" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_u_d_m_a_c_c26_x_x___h_w_attrs_1a56b5f00f14e051a08329130b6d2c6fe6" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t UDMACC26XX_HWAttrs::intPriority</definition>
+        <argsstring></argsstring>
+        <name>intPriority</name>
+        <briefdescription>
+<para>UDMACC26XX error interrupt priority. intPriority is the DMA peripheral&apos;s interrupt priority, as defined by the underlying OS. It is passed unmodified to the underlying OS&apos;s interrupt handler creation code, so you need to refer to the OS documentation for usage. If the driver uses the ti.dpl interface instead of making OS calls directly, then the HwiP port handles the interrupt priority in an OS specific way. In the case of the SYS/BIOS port, intPriority is passed unmodified to Hwi_create(). </para>        </briefdescription>
+        <detaileddescription>
+<para>The CC26xx uses three of the priority bits, meaning ~0 has the same effect as (7 &lt;&lt; 5).</para><para>(7 &lt;&lt; 5) will apply the lowest priority.</para><para>(1 &lt;&lt; 5) will apply the highest priority.</para><para>Setting the priority to 0 is not supported by this driver.</para><para>HWI&apos;s with priority 0 ignore the HWI dispatcher to support zero-latency interrupts, thus invalidating the critical sections in this driver. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dma/UDMACC26XX.h" line="247" column="1" bodyfile="source/ti/drivers/dma/UDMACC26XX.h" bodystart="247" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>UDMACC26XX hardware attributes. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="source/ti/drivers/dma/UDMACC26XX.h" line="221" column="1" bodyfile="source/ti/drivers/dma/UDMACC26XX.h" bodystart="220" bodyend="248"/>
+    <listofallmembers>
+      <member refid="struct_u_d_m_a_c_c26_x_x___h_w_attrs_1a62ff254a8b85ecced4f749c35065515d" prot="public" virt="non-virtual"><scope>UDMACC26XX_HWAttrs</scope><name>baseAddr</name></member>
+      <member refid="struct_u_d_m_a_c_c26_x_x___h_w_attrs_1a842b5f7c2c0a2563eaf6f037cff07785" prot="public" virt="non-virtual"><scope>UDMACC26XX_HWAttrs</scope><name>intNum</name></member>
+      <member refid="struct_u_d_m_a_c_c26_x_x___h_w_attrs_1a56b5f00f14e051a08329130b6d2c6fe6" prot="public" virt="non-virtual"><scope>UDMACC26XX_HWAttrs</scope><name>intPriority</name></member>
+      <member refid="struct_u_d_m_a_c_c26_x_x___h_w_attrs_1a77e02a4666668a7d35d012e5dd7b2d24" prot="public" virt="non-virtual"><scope>UDMACC26XX_HWAttrs</scope><name>powerMngrId</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

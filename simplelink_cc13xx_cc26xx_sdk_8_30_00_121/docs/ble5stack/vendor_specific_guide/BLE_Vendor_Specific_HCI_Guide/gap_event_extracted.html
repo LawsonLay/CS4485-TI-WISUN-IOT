@@ -1,0 +1,3846 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAP_DeviceInitDone &mdash; Vendor Specific Guide 5.00.00 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Vendor Specific Guide
+          </a>
+              <div class="version">
+                5.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hci_interface.html">HCI Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="att_api.html">ATT Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gap_api.html">GAP Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gapbondmgr_api.html">GapBondMgr Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gatt_api.html">GATT Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hci_ext_api.html">HCI Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2cap_api.html">L2CAP Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util_api.html">UTIL Extension Vendor Specific API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vendor Specific Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>GAP_DeviceInitDone</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gap-deviceinitdone">
+<h1>GAP_DeviceInitDone<a class="headerlink" href="#gap-deviceinitdone" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0600</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This event is sent to indicate that the device is done initializing.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">devAddr<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The devices address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>6 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">dataPktLen<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HC_LE_Data_Packet_Length</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">numDataPkts<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HC_Total_Num_LE_Data_Packets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">IRK<span class="colon">:</span></dt>
+<dd class="field-odd"><p>16 byte Identity Resolving Key (IRK). This is either a randomly generated key or the original key passed in the GAP_DeviceInit command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>16 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">CSRK<span class="colon">:</span></dt>
+<dd class="field-odd"><p>16 byte Connection Signature Resolving Key (CSRK). This is either a randomly generated key or the original key passed in the GAP_DeviceInit command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>16 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-linkestablished">
+<h1>GAP_LinkEstablished<a class="headerlink" href="#gap-linkestablished" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0605</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This message is sent when a connection is established with another device. On a Central device, this message is a result for a GAP Establish Link Request. On a Peripheral device, this message is received when a central device initiated a connection.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Device Address Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Address type of the connected device.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>ADDRTYPE_PUBLIC</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>ADDRTYPE_RANDOM</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>ADDRTYPE_PUBLIC_ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>ADDRTYPE_RANDOM_ID</p></td>
+</tr>
+<tr class="row-even"><td><p>0xFE</p></td>
+<td><p>ADDRTYPE_RANDOM_NR</p></td>
+</tr>
+<tr class="row-odd"><td><p>0xFF</p></td>
+<td><p>ADDRTYPE_NONE</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Device Address<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Address of the connected device</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>6 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>Any 6-byte address</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">connectionHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Handle of the connection. This will be used to reference the connection in other “connection based” commands.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">connRole<span class="colon">:</span></dt>
+<dd class="field-odd"><p>GAP role of the local device for this connection.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>GAP_PROFILE_BROADCASTER</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>GAP_PROFILE_OBSERVER</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>GAP_PROFILE_PERIPHERAL</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x08</p></td>
+<td><p>GAP_PROFILE_CENTRAL</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">connInterval<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection interval used on this connection (* 1.25 ms)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">connLatency<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection latency used on this connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">connTimeout<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection supervision timeout (* 10 ms)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">clockAccuracy<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Clock accuracy (in ppm) of the connected device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-linkterminated">
+<h1>GAP_LinkTerminated<a class="headerlink" href="#gap-linkterminated" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0606</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This message is sent whenever a link is terminated.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">connectionHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection Handle of terminated link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">reason<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Reason the link was terminated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>See Status Table</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-linkparamupdate">
+<h1>GAP_LinkParamUpdate<a class="headerlink" href="#gap-linkparamupdate" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0607</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This message is sent whenever connection parameter update is completed</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>See Status Table</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">connectionHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection Handle of link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">connInterval<span class="colon">:</span></dt>
+<dd class="field-odd"><p>New connection interval in use after the update (* 1.25 ms).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">connLatency<span class="colon">:</span></dt>
+<dd class="field-odd"><p>New connection latency in use after the update</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">connTimeout<span class="colon">:</span></dt>
+<dd class="field-odd"><p>New connection supervision timeout in use after the update (* 10 ms)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-signatureupdated">
+<h1>GAP_SignatureUpdated<a class="headerlink" href="#gap-signatureupdated" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0609</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This message is sent whenever sign counter is updated (incremented). This message will be generated when a new sign counter is received from a connected device or when this device increments its own sign counter.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">addrType<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Address type of the update</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>ADDRTYPE_PUBLIC</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>ADDRTYPE_RANDOM</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>ADDRTYPE_PUBLIC_ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>ADDRTYPE_RANDOM_ID</p></td>
+</tr>
+<tr class="row-even"><td><p>0xFE</p></td>
+<td><p>ADDRTYPE_RANDOM_NR</p></td>
+</tr>
+<tr class="row-odd"><td><p>0xFF</p></td>
+<td><p>ADDRTYPE_NONE</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">devAddr<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The device address of the sign counter that changed. It may be the local device or a connected device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>6 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">signCounter<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The new sign counter value for the referenced device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>4 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-passkeyneeded">
+<h1>GAP_PasskeyNeeded<a class="headerlink" href="#gap-passkeyneeded" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x060B</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This event is generated during the pairing process if a passkey is needed.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">deviceAddr<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Address of the pairing device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>6 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">connectionHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection Handle of link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">uiInputs<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Whether to ask for a passcode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">uiOutputs<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Whether to display a passcode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">numComparison<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Numeric Comparison value if nonzero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>4 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-authenticationcomplete">
+<h1>GAP_AuthenticationComplete<a class="headerlink" href="#gap-authenticationcomplete" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x060A</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This event is generated whenever the pairing process is completed (pass or fail).</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>SMP_PAIRING_FAILED_PASSKEY_ENTRY_FAILED</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>SMP_PAIRING_FAILED_OOB_NOT_AVAIL</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>SMP_PAIRING_FAILED_AUTH_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>SMP_PAIRING_FAILED_CONFIRM_VALUE</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x05</p></td>
+<td><p>SMP_PAIRING_FAILED_NOT_SUPPORTED</p></td>
+</tr>
+<tr class="row-even"><td><p>0x06</p></td>
+<td><p>SMP_PAIRING_FAILED_ENC_KEY_SIZE</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x07</p></td>
+<td><p>SMP_PAIRING_FAILED_CMD_NOT_SUPPORTED</p></td>
+</tr>
+<tr class="row-even"><td><p>0x08</p></td>
+<td><p>SMP_PAIRING_FAILED_UNSPECIFIED</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x09</p></td>
+<td><p>SMP_PAIRING_FAILED_REPEATED_ATTEMPTS</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0A</p></td>
+<td><p>SMP_PAIRING_FAILED_INVALID_PARAMETERS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0B</p></td>
+<td><p>SMP_PAIRING_FAILED_DHKEY_CHECK_FAILED</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0C</p></td>
+<td><p>SMP_PAIRING_FAILED_NUM_COMPARISON_FAILED</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0D</p></td>
+<td><p>SMP_PAIRING_FAILED_BREDR_PAIR_IN_PROGRESS</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0E</p></td>
+<td><p>SMP_PAIRING_FAILED_CT_KEYDER_NOT_ALLOWED</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0F</p></td>
+<td><p>SMP_PAIRING_FAILED_KEY_REJECTED</p></td>
+</tr>
+<tr class="row-even"><td><p>0x10</p></td>
+<td><p>Command Disallowed</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x11</p></td>
+<td><p>Unsupported Feature Or Parameter Value</p></td>
+</tr>
+<tr class="row-even"><td><p>0x12</p></td>
+<td><p>Invalid HCI Command Parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x17</p></td>
+<td><p>bleTimeout</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">connectionHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection Handle of link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">authState<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Pairing / bonding state of the link</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>Bonding</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x04</p></td>
+<td><p>MITM</p></td>
+</tr>
+<tr class="row-even"><td><p>0x08</p></td>
+<td><p>SC</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10</p></td>
+<td><p>KP</p></td>
+</tr>
+<tr class="row-even"><td><p>0x20</p></td>
+<td><p>CT2</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">securityInfo<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Whether or not the securityInfo parameters are enabled in this event</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Disable</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Enable</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">securityInfo.LTKsize<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Encryption key size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">securityInfo.LTK<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Long Term Key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>16 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">securityInfo.DIV<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DIV for this LTK</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">securityInfo.rand<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Random number for this LTK</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>8 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">devSecInfo<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Whether or not the devSecInfo parameters are enabled in this event.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Disable</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Enable</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">devSecInfo.LTKsize<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Encryption key size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">devSecInfo.LTK<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Long term key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>16 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">devSecInfo.DIV<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Div for this LTK</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">devSecInfo.rand<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Random number for this LTK</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>8 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">identityInfo<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Whether the identityInfo parameters are enabled in this event.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Disable</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Enable</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">identityInfo.IRK<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identity Resolving Key used to resolve private resolvable addresses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>16 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">identityInfo.BD_ADDR<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The connected devices Public Address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>6 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">identityInfo.addrType<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The connected device’s address type</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>ADDRTYPE_PUBLIC</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>ADDRTYPE_RANDOM</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>ADDRTYPE_PUBLIC_ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>ADDRTYPE_RANDOM_ID</p></td>
+</tr>
+<tr class="row-even"><td><p>0xFE</p></td>
+<td><p>ADDRTYPE_RANDOM_NR</p></td>
+</tr>
+<tr class="row-odd"><td><p>0xFF</p></td>
+<td><p>ADDRTYPE_NONE</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">signingInfo<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Whether the signingInfo parameters are enabled in this event.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Disable</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Enable</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">signingInfo.CSRK<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connected Signature Resolving Key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>16 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">signingInfo.signCounter<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The connected devices current sign counter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>4 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-slaverequestedsecurity">
+<h1>GAP_SlaveRequestedSecurity<a class="headerlink" href="#gap-slaverequestedsecurity" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x060C</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This message is generated when the master device receives an SM Slave Request from the connected slave device.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">connectionHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection Handle of link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">deviceAddr<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The connected devices address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>6 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">authReq<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Requested pairing / bonding properties from the slave.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>Bonding</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x04</p></td>
+<td><p>MITM</p></td>
+</tr>
+<tr class="row-even"><td><p>0x08</p></td>
+<td><p>SC</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10</p></td>
+<td><p>KP</p></td>
+</tr>
+<tr class="row-even"><td><p>0x20</p></td>
+<td><p>CT2</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-bondcomplete">
+<h1>GAP_BondComplete<a class="headerlink" href="#gap-bondcomplete" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x060E</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This message is sent when a bond is complete and the connection is encrypted.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x06</p></td>
+<td><p>KEY_REQ_REJECTED</p></td>
+</tr>
+<tr class="row-even"><td><p>0x1A</p></td>
+<td><p>KEY_REQ_UNSUPPORTED</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">connectionHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection Handle of link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-pairingrequested">
+<h1>GAP_PairingRequested<a class="headerlink" href="#gap-pairingrequested" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x060F</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This message is sent when a pairing request is received from a master..</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">connectionHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection Handle of link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">ioCap<span class="colon">:</span></dt>
+<dd class="field-odd"><p>I/O Capabilities of the connected device</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>DisplayOnly</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>DisplayYesNo</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>KeyboardOnly</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>NoInputNoOutput</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>KeyboardDisplay</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">oobDataFlag<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Wheter OOB data is enabled or not.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Disable</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Enable</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">authReq<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Type of pairing / bonding that is requested</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>Bonding</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x04</p></td>
+<td><p>MITM</p></td>
+</tr>
+<tr class="row-even"><td><p>0x08</p></td>
+<td><p>SC</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10</p></td>
+<td><p>KP</p></td>
+</tr>
+<tr class="row-even"><td><p>0x20</p></td>
+<td><p>CT2</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">maxEncKeySize<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Maximum encryption key size to supported</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">keyDist<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Desired key distribution</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>GAPBOND_KEYDIST_SENCKEY</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>GAPBOND_KEYDIST_SIDKEY</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>GAPBOND_KEYDIST_SSIGN</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x08</p></td>
+<td><p>GAPBOND_KEYDIST_SLINK</p></td>
+</tr>
+<tr class="row-even"><td><p>0x10</p></td>
+<td><p>GAPBOND_KEYDIST_MENCKEY</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x20</p></td>
+<td><p>GAPBOND_KEYDIST_MIDKEY</p></td>
+</tr>
+<tr class="row-even"><td><p>0x40</p></td>
+<td><p>GAPBOND_KEYDIST_MSIGN</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x80</p></td>
+<td><p>GAPBOND_KEYDIST_MLINK</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-connectingcancelled">
+<h1>GAP_ConnectingCancelled<a class="headerlink" href="#gap-connectingcancelled" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0615</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This event is sent when a connection has been canceled.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-connectioneventnotice">
+<h1>GAP_ConnectionEventNotice<a class="headerlink" href="#gap-connectioneventnotice" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0616</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This event is sent to when a connection handle has been registered for connection event notices after each connection event.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Status of Connection Event</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>GAP_CONN_EVT_STAT_SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>GAP_CONN_EVT_STAT_CRC_ERROR</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>GAP_CONN_EVT_STAT_MISSED</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection handle of connection event</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>0-0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">channel<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BLE RF channel index of connection event</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>0-39</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">phy<span class="colon">:</span></dt>
+<dd class="field-odd"><p>PHY of connection event</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>GAP_CONN_EVT_PHY_1MBPS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>GAP_CONN_EVT_PHY_2MBPS</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>GAP_CONN_EVT_PHY_CODED</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">lastRssi<span class="colon">:</span></dt>
+<dd class="field-odd"><p>RSSI of last packet received</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>-128 - 127</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">packets<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of packets received for this connection event</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>0-0xFFFF</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">errors<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Total number of CRC errors for the entire connection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>0-0xFFFF</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">nextTaskType<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Type of next BLE task</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>GAP_CONN_EVT_TASK_TYPE_ADV</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>GAP_CONN_EVT_TASK_TYPE_SCAN</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>GAP_CONN_EVT_TASK_TYPE_INIT</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x40</p></td>
+<td><p>GAP_CONN_EVT_TASK_TYPE_SLAVE</p></td>
+</tr>
+<tr class="row-even"><td><p>0x80</p></td>
+<td><p>GAP_CONN_EVT_TASK_TYPE_MASTER</p></td>
+</tr>
+<tr class="row-odd"><td><p>0xFF</p></td>
+<td><p>GAP_CONN_EVT_TASK_TYPE_NONE</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">nextTaskTime<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time to next BLE task (in us). Note that the actual time will be shorter due to latency from sending this event over the transport layer. If 0xFFFFFFFF, there is no next RF command scheduled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>4 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>0-0xFFFFFFFF</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">eventCounter<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Event Counter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>0-0xFFFF</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">timeStamp<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The anchor point of the current event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>4 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>0-0xFFFFFFFF</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">eventType<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Event Type registerted to</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>GAP_CB_CONN_ESTABLISHED</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>GAP_CB_PHY_UPDATE</p></td>
+</tr>
+<tr class="row-even"><td><p>0x03</p></td>
+<td><p>GAP_CB_CONN_ESTABLISHED | GAP_CB_PHY_UPDATE</p></td>
+</tr>
+<tr class="row-odd"><td><p>0xFF</p></td>
+<td><p>GAP_CB_CONN_EVENT_ALL</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="sm-getecckeys">
+<h1>SM_GetEccKeys<a class="headerlink" href="#sm-getecckeys" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0610</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This message is sent when ECC Keys have been generated by the BLE Stack.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">privateKey<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Private key to use</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>32 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">publicKeyX<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Public Key X-coordinate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>32 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">publicKeyY<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Public Key Y-coordinate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>32 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="sm-getdhkey">
+<h1>SM_GetDHKey<a class="headerlink" href="#sm-getdhkey" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0611</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This message is sent when Diffie-Hellman Key have been generated by the BLE Stack.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">DHKey<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Diffie-Hellman Key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>32 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-linkparamupdaterequest">
+<h1>GAP_LinkParamUpdateRequest<a class="headerlink" href="#gap-linkparamupdaterequest" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0612</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This message is sent whenever connection parameter update is completed.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">connectionHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection Handle of link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">minConnInterval<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Minimum desired connection interval (n * 1.25 ms)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">maxConnInterval<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Maximum desired connection interval (n * 1.25 ms)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">connLatency<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Desired connection latency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">connTimeout<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Desired connection timeout (n * 10 ms)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">signalIdentifier<span class="colon">:</span></dt>
+<dd class="field-odd"><p>L2CAP signal identifier. 0 for LL Connection Parameter Request</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-advertiser-scanner-event">
+<h1>GAP_Advertiser/Scanner_Event<a class="headerlink" href="#gap-advertiser-scanner-event" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0613</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gap Advertising / Scanning Event.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">event<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>4 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00000001</p></td>
+<td><p>GAP_EVT_ADV_START_AFTER_ENABLE</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00000002</p></td>
+<td><p>GAP_EVT_ADV_END_AFTER_DISABLE</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00000004</p></td>
+<td><p>GAP_EVT_ADV_START</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00000008</p></td>
+<td><p>GAP_EVT_ADV_END</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00000010</p></td>
+<td><p>GAP_EVT_ADV_SET_TERMINATED</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00000020</p></td>
+<td><p>GAP_EVT_SCAN_REQ_RECEIVED</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00000040</p></td>
+<td><p>GAP_EVT_ADV_DATA_TRUNCATED</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00010000</p></td>
+<td><p>GAP_EVT_SCAN_ENABLED</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00020000</p></td>
+<td><p>GAP_EVT_SCAN_DISABLED</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00040000</p></td>
+<td><p>GAP_EVT_SCAN_PRD_ENDED</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00080000</p></td>
+<td><p>GAP_EVT_SCAN_DUR_ENDED</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00100000</p></td>
+<td><p>GAP_EVT_SCAN_INT_ENDED</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00200000</p></td>
+<td><p>GAP_EVT_SCAN_WND_ENDED</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00400000</p></td>
+<td><p>GAP_EVT_ADV_REPORT</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00800000</p></td>
+<td><p>GAP_EVT_ADV_REPORT_FULL</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01000000</p></td>
+<td><p>GAP_EVT_PRD_ADV_SYNC_ESTABLISHED</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02000000</p></td>
+<td><p>GAP_EVT_PRD_ADV_REPORT</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x04000000</p></td>
+<td><p>GAP_EVT_PRD_ADV_SYNC_LOST</p></td>
+</tr>
+<tr class="row-even"><td><p>0x80000000</p></td>
+<td><p>GAP_EVT_INSUFFICIENT_MEMORY</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">advertising handle<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID&lt;0x00010000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">data length<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID&lt;0x00010000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">connection handle<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00000010)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>2 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">num of completed adv events<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00000010)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">scanner address type<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00000020)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>ADDRTYPE_PUBLIC</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>ADDRTYPE_RANDOM</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>ADDRTYPE_PUBLIC_ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>ADDRTYPE_RANDOM_ID</p></td>
+</tr>
+<tr class="row-even"><td><p>0xFE</p></td>
+<td><p>ADDRTYPE_RANDOM_NR</p></td>
+</tr>
+<tr class="row-odd"><td><p>0xFF</p></td>
+<td><p>ADDRTYPE_NONE</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">scanner address<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00000020)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>6 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">channel<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00000020)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">RSSI<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00000020)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>127</p></td>
+<td><p>Invalid RSSI</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">truncated adv data size<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00000040)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">attempted adv data size<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00000040)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>2 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">reason<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00020000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SCAN_END_REASON_USR_REQ</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>SCAN_END_REASON_DUR_EXP</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">number of reports<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00020000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">evtType<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x0000</p></td>
+<td><p>AE Undir NC/NS | Data Complete</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0001</p></td>
+<td><p>AE Undir Conn | Data Complete</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0002</p></td>
+<td><p>AE Undir Scan | Data Complete</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0003</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0004</p></td>
+<td><p>AE Dir NC/NS | Data Complete</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0005</p></td>
+<td><p>AE Dir Conn | Data Complete</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0006</p></td>
+<td><p>AE Dir Scan | Data Complete</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0007</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0008</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0009</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x000A</p></td>
+<td><p>AE Scan Rsp to AE Undir Scan | Data Complete</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x000B</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x000C</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x000D</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x000E</p></td>
+<td><p>AE Scan Rsp to AE Dir Scan | Data Complete</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x000F</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0010</p></td>
+<td><p>Legacy ADV_NONCONN | Data Complete</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0011</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0012</p></td>
+<td><p>Legacy ADV_SCAN | Data Complete</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0013</p></td>
+<td><p>Legacy ADV_IND | Data Complete</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0014</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0015</p></td>
+<td><p>Legacy ADV_DIR | Data Complete</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0016</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0017</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0018</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0019</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x001A</p></td>
+<td><p>Legacy SCAN_RSP to ADV_SCAN | Data Complete</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x001B</p></td>
+<td><p>Legacy SCAN_RSP to ADV_IND | Data Complete</p></td>
+</tr>
+<tr class="row-even"><td><p>0x001C</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x001D</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x001E</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x001F</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0020</p></td>
+<td><p>AE Undir NC/NS | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0021</p></td>
+<td><p>AE Undir Conn | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0022</p></td>
+<td><p>AE Undir Scan | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0023</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0024</p></td>
+<td><p>AE Dir NC/NS | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0025</p></td>
+<td><p>AE Dir Conn | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0026</p></td>
+<td><p>AE Dir Scan | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0027</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0028</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0029</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x002A</p></td>
+<td><p>AE Scan Rsp to AE Undir Scan | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x002B</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x002C</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x002D</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x002E</p></td>
+<td><p>AE Scan Rsp to AE Dir Scan | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x002F</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0030</p></td>
+<td><p>Legacy ADV_NONCONN | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0031</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0032</p></td>
+<td><p>Legacy ADV_SCAN | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0033</p></td>
+<td><p>Legacy ADV_IND | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0034</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0035</p></td>
+<td><p>Legacy ADV_DIR | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0036</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0037</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0038</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0039</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x003A</p></td>
+<td><p>Legacy SCAN_RSP to ADV_SCAN | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x003B</p></td>
+<td><p>Legacy SCAN_RSP to ADV_IND | Data Incomplete, More to Come</p></td>
+</tr>
+<tr class="row-even"><td><p>0x003C</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x003D</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x003E</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x003F</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0040</p></td>
+<td><p>AE Undir NC/NS | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0041</p></td>
+<td><p>AE Undir Conn | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0042</p></td>
+<td><p>AE Undir Scan | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0043</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0044</p></td>
+<td><p>AE Dir NC/NS | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0045</p></td>
+<td><p>AE Dir Conn | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0046</p></td>
+<td><p>AE Dir Scan | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0047</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0048</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0049</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x004A</p></td>
+<td><p>AE Scan Rsp to AE Undir Scan | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x004B</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x004C</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x004D</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x004E</p></td>
+<td><p>AE Scan Rsp to AE Dir Scan | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x004F</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0050</p></td>
+<td><p>Legacy ADV_NONCONN | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0051</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0052</p></td>
+<td><p>Legacy ADV_SCAN | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0053</p></td>
+<td><p>Legacy ADV_IND | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0054</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0055</p></td>
+<td><p>Legacy ADV_DIR | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0056</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0057</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0058</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0059</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x005A</p></td>
+<td><p>Legacy SCAN_RSP to ADV_SCAN | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x005B</p></td>
+<td><p>Legacy SCAN_RSP to ADV_IND | Data Incomplete, Truncated</p></td>
+</tr>
+<tr class="row-even"><td><p>0x005C</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x005D</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x005E</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x005F</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0060</p></td>
+<td><p>AE Undir NC/NS | Reserved!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0061</p></td>
+<td><p>AE Undir Conn | Reserved!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0062</p></td>
+<td><p>AE Undir Scan | Reserved!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0063</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0064</p></td>
+<td><p>AE Dir NC/NS | Reserved!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0065</p></td>
+<td><p>AE Dir Conn | Reserved!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0066</p></td>
+<td><p>AE Dir Scan | Reserved!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0067</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0068</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0069</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x006A</p></td>
+<td><p>AE Scan Rsp to AE Undir Scan | Reserved!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x006B</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x006C</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x006D</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x006E</p></td>
+<td><p>AE Scan Rsp to AE Dir Scan | Reserved!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x006F</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0070</p></td>
+<td><p>Legacy ADV_NONCONN | Reserved!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0071</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0072</p></td>
+<td><p>Legacy ADV_SCAN | Reserved!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0073</p></td>
+<td><p>Legacy ADV_IND | Reserved!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0074</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0075</p></td>
+<td><p>Legacy ADV_DIR | Reserved!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0076</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0077</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0078</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0079</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x007A</p></td>
+<td><p>Legacy SCAN_RSP to ADV_SCAN | Reserved!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x007B</p></td>
+<td><p>Legacy SCAN_RSP to ADV_IND | Reserved!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x007C</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x007D</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x007E</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x007F</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0080</p></td>
+<td><p>AE Undir NC/NS | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0081</p></td>
+<td><p>AE Undir Conn | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0082</p></td>
+<td><p>AE Undir Scan | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0083</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0084</p></td>
+<td><p>AE Dir NC/NS | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0085</p></td>
+<td><p>AE Dir Conn | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0086</p></td>
+<td><p>AE Dir Scan | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0087</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0088</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0089</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x008A</p></td>
+<td><p>AE Scan Rsp to AE Undir Scan | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x008B</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x008C</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x008D</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x008E</p></td>
+<td><p>AE Scan Rsp to AE Dir Scan | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x008F</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0090</p></td>
+<td><p>Legacy ADV_NONCONN | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0091</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0092</p></td>
+<td><p>Legacy ADV_SCAN | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0093</p></td>
+<td><p>Legacy ADV_IND | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0094</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0095</p></td>
+<td><p>Legacy ADV_DIR | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0096</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0097</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0098</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0099</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x009A</p></td>
+<td><p>Legacy SCAN_RSP to ADV_SCAN | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x009B</p></td>
+<td><p>Legacy SCAN_RSP to ADV_IND | Data Complete (Previous Truncated)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x009C</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x009D</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x009E</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x009F</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00A0</p></td>
+<td><p>AE Undir NC/NS | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00A1</p></td>
+<td><p>AE Undir Conn | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00A2</p></td>
+<td><p>AE Undir Scan | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00A3</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00A4</p></td>
+<td><p>AE Dir NC/NS | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00A5</p></td>
+<td><p>AE Dir Conn | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00A6</p></td>
+<td><p>AE Dir Scan | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00A7</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00A8</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00A9</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00AA</p></td>
+<td><p>AE Scan Rsp to AE Undir Scan | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00AB</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00AC</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00AD</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00AE</p></td>
+<td><p>AE Scan Rsp to AE Dir Scan | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00AF</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00B0</p></td>
+<td><p>Legacy ADV_NONCONN | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00B1</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00B2</p></td>
+<td><p>Legacy ADV_SCAN | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00B3</p></td>
+<td><p>Legacy ADV_IND | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00B4</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00B5</p></td>
+<td><p>Legacy ADV_DIR | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00B6</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00B7</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00B8</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00B9</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00BA</p></td>
+<td><p>Legacy SCAN_RSP to ADV_SCAN | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00BB</p></td>
+<td><p>Legacy SCAN_RSP to ADV_IND | Data Incomplete, More to Come (Previous Truncated)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00BC</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00BD</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00BE</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00BF</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00C0</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00C1</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00C2</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00C3</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00C4</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00C5</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00C6</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00C7</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00C8</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00C9</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00CA</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00CB</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00CC</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00CD</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00CE</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00CF</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00D0</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00D1</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00D2</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00D3</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00D4</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00D5</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00D6</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00D7</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00D8</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00D9</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00DA</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00DB</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00DC</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00DD</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00DE</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00DF</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00E0</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00E1</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00E2</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00E3</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00E4</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00E5</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00E6</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00E7</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00E8</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00E9</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00EA</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00EB</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00EC</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00ED</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00EE</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00EF</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F0</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F1</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F2</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F3</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F4</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F5</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F6</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F7</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00F8</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00F9</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00FA</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00FB</p></td>
+<td><p>Invalid Data Status!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00FC</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00FD</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00FE</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00FF</p></td>
+<td><p>Invalid Event Type!</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">addrType<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>ADDRTYPE_PUBLIC</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>ADDRTYPE_RANDOM</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>ADDRTYPE_PUBLIC_ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>ADDRTYPE_RANDOM_ID</p></td>
+</tr>
+<tr class="row-even"><td><p>0xFE</p></td>
+<td><p>ADDRTYPE_RANDOM_NR</p></td>
+</tr>
+<tr class="row-odd"><td><p>0xFF</p></td>
+<td><p>ADDRTYPE_NONE</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">address<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>6 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">primPhy<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SCANNED_PHY_NONE</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>SCANNED_PHY_1M</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>SCANNED_PHY_2M</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>SCANNED_PHY_CODED</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">secPhy<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SCANNED_PHY_NONE</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>SCANNED_PHY_1M</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>SCANNED_PHY_2M</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>SCANNED_PHY_CODED</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">advSid<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">txPower<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">rssi<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">directAddrType<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>ADDRTYPE_PUBLIC</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>ADDRTYPE_RANDOM</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>ADDRTYPE_PUBLIC_ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>ADDRTYPE_RANDOM_ID</p></td>
+</tr>
+<tr class="row-even"><td><p>0xFE</p></td>
+<td><p>ADDRTYPE_RANDOM_NR</p></td>
+</tr>
+<tr class="row-odd"><td><p>0xFF</p></td>
+<td><p>ADDRTYPE_NONE</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">directAddr<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>6 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">periodicAdvInt<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>2 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">dataLen<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>2 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">data<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( eventID==0x00400000)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataLength byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-bondlost">
+<h1>GAP_BondLost<a class="headerlink" href="#gap-bondlost" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0617</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This message is generated when bond has been removed on peer.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">connectionHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connection Handle of link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">deviceAddr<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The connected devices address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>6 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gapadv-setperiodicadvparams">
+<h1>GAPAdv_SetPeriodicAdvParams<a class="headerlink" href="#gapadv-setperiodicadvparams" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0619</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This event is sent when creating periodic advertising set</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gapadv-setperiodicadvdata">
+<h1>GAPAdv_SetPeriodicAdvData<a class="headerlink" href="#gapadv-setperiodicadvdata" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x061A</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This event is sent when creating periodic advertising set</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gapadv-setperiodicadvenable">
+<h1>GAPAdv_SetPeriodicAdvEnable<a class="headerlink" href="#gapadv-setperiodicadvenable" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x061B</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This event is sent when enabling periodic advertising set</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>SUCCESS</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>bleIncorrectMode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>INVALIDPARAMETER</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-periodicadvsyncestablishevent">
+<h1>GAP_PeriodicAdvSyncEstablishEvent<a class="headerlink" href="#gap-periodicadvsyncestablishevent" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x061C</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The scanner was received the first periodic advertisong packet from an advertiser</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">BLEEventCode<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>See Status Table</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">SyncHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Handle identifying the periodic advertising train</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">AdvSID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Value of the Advertising SID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">PHY<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Advertiser PHY</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">Interval<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Periodic advertising interval</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">ClockAccuracy<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Accuracy of the periodic advertiser’s clock</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">AddressType<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Advertiser address type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">Address<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Advertiser address</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>6 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-periodicadvreportevent">
+<h1>GAP_PeriodicAdvReportEvent<a class="headerlink" href="#gap-periodicadvreportevent" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x061D</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>Periodic Advertising Report</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">SyncHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Handle identifying the periodic advertising train</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">TxPower<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tx Power information (Range: -127 to +20)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">RSSI<span class="colon">:</span></dt>
+<dd class="field-odd"><p>RSSI value for the received packet (Range: -127 to +20). If the packet contains CTE, this value is not available</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">cteType<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Constant Tone Extension type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">DataStatus<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Data status</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">dataLength<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Advertiser data length</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-odd">Data<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Data received from a Periodic Advertising packet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>length byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gap-periodicadvsynclostevent">
+<h1>GAP_PeriodicAdvSyncLostEvent<a class="headerlink" href="#gap-periodicadvsynclostevent" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x061E</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>Periodic Advertising - Sync Lost Event</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">SyncHandle<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gapscan-periodicadvcreatesync">
+<h1>GAPScan_PeriodicAdvCreateSync<a class="headerlink" href="#gapscan-periodicadvcreatesync" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x061F</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>Periodic Advertising - Create Sync command complete Event</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>See Status Table</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gapscan-periodicadvcreatesynccancel">
+<h1>GAPScan_PeriodicAdvCreateSyncCancel<a class="headerlink" href="#gapscan-periodicadvcreatesynccancel" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0620</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>Periodic Advertising - Create Sync cancel command complete Event</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>See Status Table</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gapscan-periodicadvterminatesync">
+<h1>GAPScan_PeriodicAdvTerminateSync<a class="headerlink" href="#gapscan-periodicadvterminatesync" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0621</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>Periodic Advertising - Terminate Sync command complete Event</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>See Status Table</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gapscan-setperiodicadvreceiveenable">
+<h1>GAPScan_SetPeriodicAdvReceiveEnable<a class="headerlink" href="#gapscan-setperiodicadvreceiveenable" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0622</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>Periodic Advertising - Receive enable command complete Event</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>See Status Table</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gapscan-adddevicetoperiodicadvlist">
+<h1>GAPScan_AddDeviceToPeriodicAdvList<a class="headerlink" href="#gapscan-adddevicetoperiodicadvlist" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0623</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>Periodic Advertising - Add device to advertisers list command complete Event</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>See Status Table</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gapscan-removedevicefromperiodicadvlist">
+<h1>GAPScan_RemoveDeviceFromPeriodicAdvList<a class="headerlink" href="#gapscan-removedevicefromperiodicadvlist" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0624</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>Periodic Advertising - Remove device to advertisers list command complete Event</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>See Status Table</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gapscan-readperiodicadvlistsize">
+<h1>GAPScan_ReadPeriodicAdvListSize<a class="headerlink" href="#gapscan-readperiodicadvlistsize" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0625</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>Periodic Advertising - Read advertisers list size command complete Event</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>See Status Table</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">ListSize<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="gapscan-clearperiodicadvlist">
+<h1>GAPScan_ClearPeriodicAdvList<a class="headerlink" href="#gapscan-clearperiodicadvlist" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0626</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>Periodic Advertising - Clear advertisers list command complete Event</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>See Status Table</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright &amp;copy; Copyright 1995-2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

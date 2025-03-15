@@ -1,0 +1,191 @@
+BLE5-Stack 2.00.03 (SDK 3.10) to BLE5-Stack 2.00.04 (SDK 3.20)
+==============================================================
+
+This section will describe a way to migrate a project from BLE5-Stack 2.00.03 to
+a BLE5-Stack 2.00.04 project.
+
+.. note::
+
+    The BLE5-Stack 2.00.04 now has the RTLS (Real Time Localization System) examples
+    which were previously available solely for the CC2640R2.
+
+The changes between BLE5-Stack 2.00.03 and BLE5-Stack 2.00.04 are:
+
+#. Change of the folder structure in the four complementary projects that were not
+   changed in BLE5-Stack 2.00.02. The explanations in this regard will be similar
+   to the explanations in the porting guide from BLE5-Stack 2.00.01 to
+   BLE5-Stack 2.00.02.
+
+   From BLE5-Stack 2.00.04, all example projects now have the same structure:
+
+   +--------------------------------+---------------------------------+
+   | Example Project                | Project structure               |
+   +================================+=================================+
+   | Host test                      | Updated folder structure        |
+   +--------------------------------+---------------------------------+
+   | Multi role                     | Same as previous release        |
+   +--------------------------------+---------------------------------+
+   | Project zero                   | Updated folder structure        |
+   +--------------------------------+---------------------------------+
+   | Simple broadcaster             | Same as previous release        |
+   +--------------------------------+---------------------------------+
+   | Simple central                 | Same as previous release        |
+   +--------------------------------+---------------------------------+
+   | Simple peripheral              | Same as previous release        |
+   +--------------------------------+---------------------------------+
+   | Simple peripheral oad off-chip | Updated folder structure        |
+   +--------------------------------+---------------------------------+
+   | Simple peripheral oad on-chip  | Updated folder structure        |
+   +--------------------------------+---------------------------------+
+
+   If you are porting a project that has been updated with the new folder
+   structure, please skip to the :ref:`sec-porting-examplesgen-2-00-04`.
+
+#. The removal of the BIM and the Persistent Application projects from the OAD
+   workspaces in the different IDE workspaces.
+
+
+Porting A Project With The Same Folder Structure As The Previous Release
+------------------------------------------------------------------------
+
+For this migration guide, Simple Peripheral from BLE5-Stack 2.00.03 will be ported
+over to BLE5-Stack 2.00.04. Because the directory structure is nearly
+identical between the two releases, the recommended approach is to start with a
+BLE5-Stack 2.00.03 project that contains the same base functionality as the
+porting target project and merge in any custom functionality.
+
+#. Choose a BLE5-Stack 2.00.04 example project that contains your target
+   project's base functionality.
+
+
+#. Transfer all modified application files from BLE5-Stack 2.00.03 into the
+   BLE5-Stack 2.00.04 example project.
+
+   In this example, the following files from BLE5-Stack 2.00.03 were moved into
+   Simple Peripheral BLE5-Stack 2.00.04 example:
+
+    - ``simple_peripheral.c``
+    - ``simple_peripheral.h``
+
+#. Modify ``main.c`` in the BLE5-Stack 2.00.04 example if additional tasks were
+   added in the BLE5-Stack 2.00.03 project.
+
+#. Move any profiles and services that the application is using to the BLE5-Stack
+   2.00.04 project.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|.
+
+#. Refer to the Core SDK release notes for additional information and the TI-RTOS
+   examples included with |SDK|.
+
+   For additional information on how BLE5-Stack 2.00.04 uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+
+.. _sec-porting-examplesgen-2-00-04:
+
+Porting a Project With The Updated Folder Structure
+---------------------------------------------------
+
+In BLE5-Stack 2.00.04 some projects have been updated to the new folder structure.
+The biggest differences are:
+
+* Only one project per example (stack library is pre-built and included in the app project as library files).
+* Many project configurations moved from the ``.projectspec``/``.ewp`` files to the project ``makefile``.
+* IAR: New required step to set up the workspace.
+
+For this migration guide, Project Zero from BLE5-Stack 2.00.03 will be ported
+over to BLE5-Stack 2.00.04. Because of this restructuring, the recommended approach is to start with a
+BLE5-Stack 2.00.04 project that contains the same base functionality as the
+porting target project and merge in any custom functionality.
+
+#. Choose a BLE5-Stack 2.00.04 example project that contains your target
+   project's base functionality.
+
+
+#. Transfer all modified application files from BLE5-Stack 2.00.03 into the
+   BLE5-Stack 2.00.04 example project.
+
+   In this example, the following files from BLE5-Stack 2.00.03 were moved into
+   Project Zero BLE5-Stack 2.00.04 example:
+
+    - ``project_zero.c``
+    - ``project_zero.h``
+
+
+#. The BIM project has been removed from the Project Zero workspace and now
+   resides in the common nortos folder that is shared between the different
+   protocol stacks (e.g. for the CC26X2R1: ``<sdk_install_dir>\examples\nortos\CC26X2R1_LAUNCHXL\common\bim``)
+
+
+#. Configure ``build_config.opt``.
+
+
+#. Modify ``main.c`` in the BLE5-Stack 2.00.04 example if additional tasks were
+   added in the BLE5-Stack 2.00.03 project.
+
+
+#. Move any profiles and services that the application is using to the BLE5-Stack
+   2.00.04 project.
+
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|.
+
+
+#. Refer to the Core SDK release notes for additional information and the TI-RTOS
+   examples included with |SDK|.
+
+   For additional information on how BLE5-Stack 2.00.04 uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+
+#. The following predefined symbols used to be stored in the stack library
+   project. In order to use these features, the linked stack libraries must be
+   replaced with custom libraries for that feature.
+
+   For CCS, open the Project |rarr| Properties |rarr| Build |rarr| ARM Linker
+   |rarr| File Search Path and make the substitutions.
+
+   For IAR, open Options |rarr| Runtime Checking |rarr| Linker |rarr| Extra
+   Options and make the substitutions.
+
+   +------------------+--------------------+----------------------------+-------------------------------------+
+   | Define           | Default File       | Replace with file          | More information                    |
+   +==================+====================+============================+=====================================+
+   | ATT_DELAYED_REQ  | ``OneLib.a``       | ``OneLib_del.a``           | :ref:`delaying_an_att_read_request` |
+   +                  +--------------------+----------------------------+                                     +
+   |                  | ``StackWrapper.a`` | ``StackWrapper_del.a``     |                                     |
+   +                  +--------------------+----------------------------+                                     +
+   |                  | ``ble_r2.symbols`` | ``ble_r2_del.symbols``     |                                     |
+   +------------------+--------------------+----------------------------+-------------------------------------+
+   | GATT_NO_CLIENT   | ``OneLib.a``       | N/A                        | :ref:`exchange-privacy-features`    |
+   +                  +--------------------+----------------------------+                                     +
+   |                  | ``StackWrapper.a`` | ``StackWrapper_no_clnt.a`` |                                     |
+   +                  +--------------------+----------------------------+                                     +
+   |                  | ``ble_r2.symbols`` | ``ble_r2_no_clnt.symbols`` |                                     |
+   +------------------+--------------------+----------------------------+-------------------------------------+
+   | L2CAP_COC_CFG    | ``OneLib.a``       | ``OneLib_coc.a``           | :ref:`sec-gatt-coc`                 |
+   +                  +--------------------+----------------------------+                                     +
+   |                  | ``StackWrapper.a`` | ``StackWrapper_coc.a``     |                                     |
+   +                  +--------------------+----------------------------+                                     +
+   |                  | ``ble_r2.symbols`` | ``ble_r2_coc.symbols``     |                                     |
+   +------------------+--------------------+----------------------------+-------------------------------------+
+
+
+#. The ``SC_HOST_DEBUG`` symbols has been moved from the stack project to the app
+   project list of predefined symbols. For information on how to use this define,
+   please see :ref:`lesc-intro`.
+
+OAD Modifications
+-----------------
+If you have modified any part of the BIM or Persistent Application projects in
+your BLE5-Stack 2.00.03 implementation, and need to rebuild the binaries,
+please pay notice to the fact that these projects are no longer included in the
+oad workspace. In BLE5-Stack 2.00.04 you must open these projects separately in
+their own workspace. This is the case for both CCS and IAR IDEs.

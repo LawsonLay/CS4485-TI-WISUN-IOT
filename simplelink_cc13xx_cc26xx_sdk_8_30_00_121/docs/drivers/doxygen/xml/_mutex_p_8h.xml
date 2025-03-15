@@ -1,0 +1,417 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_mutex_p_8h" kind="file" language="C++">
+    <compoundname>MutexP.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includedby refid="_s_p_i_f_f_s_n_v_s_8h" local="no">SPIFFSNVS.h</includedby>
+    <incdepgraph>
+      <node id="1433">
+        <label>stdbool.h</label>
+      </node>
+      <node id="1432">
+        <label>stdint.h</label>
+      </node>
+      <node id="1434">
+        <label>stddef.h</label>
+      </node>
+      <node id="1431">
+        <label>MutexP.h</label>
+        <link refid="_mutex_p_8h"/>
+        <childnode refid="1432" relation="include">
+        </childnode>
+        <childnode refid="1433" relation="include">
+        </childnode>
+        <childnode refid="1434" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1435">
+        <label>MutexP.h</label>
+        <link refid="_mutex_p_8h"/>
+        <childnode refid="1436" relation="include">
+        </childnode>
+      </node>
+      <node id="1436">
+        <label>SPIFFSNVS.h</label>
+        <link refid="_s_p_i_f_f_s_n_v_s_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="union_mutex_p___struct" prot="public">MutexP_Struct</innerclass>
+    <innerclass refid="struct_mutex_p___params" prot="public">MutexP_Params</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_mutex_p_8h_1a609a505f2e142f1b5363f37a56be6c62" prot="public" static="no">
+        <name>MutexP_STRUCT_SIZE</name>
+        <initializer>(80)</initializer>
+        <briefdescription>
+<para>Number of bytes greater than or equal to the size of any RTOS MutexP object. </para>        </briefdescription>
+        <detaileddescription>
+<para>NoRTOS: 12 BIOS 6.x: 40 BIOS 7.x: 40 FreeRTOS: 80 </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/MutexP.h" line="75" column="9" bodyfile="source/ti/drivers/dpl/MutexP.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="_mutex_p_8h_1aa73c706cf0956982c1a84a0e6fe2135d" prot="public" static="no">
+        <name>MutexP_Status</name>
+        <enumvalue id="_mutex_p_8h_1aa73c706cf0956982c1a84a0e6fe2135da64a440a76488541a75038263621380bc" prot="public">
+          <name>MutexP_OK</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>API completed successfully </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_mutex_p_8h_1aa73c706cf0956982c1a84a0e6fe2135da4a5635016f1caa1382d00bc0a07f9183" prot="public">
+          <name>MutexP_FAILURE</name>
+          <initializer>= -1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>API failed </para>          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Status codes for MutexP APIs. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/MutexP.h" line="93" column="1" bodyfile="source/ti/drivers/dpl/MutexP.h" bodystart="92" bodyend="98"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_mutex_p_8h_1a4b2c2d87a2d8a14370da46ca07191c71" prot="public" static="no">
+        <type>union <ref refid="union_mutex_p___struct" kindref="compound">MutexP_Struct</ref></type>
+        <definition>typedef union MutexP_Struct  MutexP_Struct</definition>
+        <argsstring></argsstring>
+        <name>MutexP_Struct</name>
+        <briefdescription>
+<para>MutexP structure. </para>        </briefdescription>
+        <detaileddescription>
+<para>Opaque structure that should be large enough to hold any of the RTOS specific MutexP objects. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/MutexP.h" line="87" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_mutex_p_8h_1a1bf40a0e31521bb036d1180d4338b5d9" prot="public" static="no">
+        <type>void *</type>
+        <definition>typedef void* MutexP_Handle</definition>
+        <argsstring></argsstring>
+        <name>MutexP_Handle</name>
+        <briefdescription>
+<para>Opaque client reference to an instance of a MutexP. </para>        </briefdescription>
+        <detaileddescription>
+<para>A MutexP_Handle returned from the <ref refid="_mutex_p_8h_1af05d5dc3cadfca5a06572ef7e9ead652" kindref="member">MutexP_create</ref> represents that instance. and then is used in the other instance based functions (e.g. <ref refid="_mutex_p_8h_1a2447ad3ba46c2117235253fc4abb4566" kindref="member">MutexP_lock</ref>, <ref refid="_mutex_p_8h_1a3bb8c88366ec4b5c5903bf0f37924486" kindref="member">MutexP_unlock</ref>, etc.). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/MutexP.h" line="107" column="1" bodyfile="source/ti/drivers/dpl/MutexP.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_mutex_p_8h_1a9e03c966b56524fe7a9a21c26f4045e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_mutex_p_8h_1a1bf40a0e31521bb036d1180d4338b5d9" kindref="member">MutexP_Handle</ref></type>
+        <definition>MutexP_Handle MutexP_construct</definition>
+        <argsstring>(MutexP_Struct *handle, MutexP_Params *params)</argsstring>
+        <name>MutexP_construct</name>
+        <param>
+          <type><ref refid="union_mutex_p___struct" kindref="compound">MutexP_Struct</ref> *</type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_mutex_p___params" kindref="compound">MutexP_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Function to construct a mutex. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a <ref refid="union_mutex_p___struct" kindref="compound">MutexP_Struct</ref> object</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the instance configuration parameters. NULL denotes to use the default parameters (MutexP default parameters as noted in <ref refid="_mutex_p_8h_1a023e95c8429aa68dcbb98adacb1ac381" kindref="member">MutexP_Params_init</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A MutexP_Handle on success or a NULL on an error </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/MutexP.h" line="134" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_mutex_p_8h_1a6f81b316ea0528ca454d9b51bb682d7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MutexP_destruct</definition>
+        <argsstring>(MutexP_Struct *mutexP)</argsstring>
+        <name>MutexP_destruct</name>
+        <param>
+          <type><ref refid="union_mutex_p___struct" kindref="compound">MutexP_Struct</ref> *</type>
+          <declname>mutexP</declname>
+        </param>
+        <briefdescription>
+<para>Function to destruct a mutex object. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mutexP</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a <ref refid="union_mutex_p___struct" kindref="compound">MutexP_Struct</ref> object that was passed to <ref refid="_mutex_p_8h_1a9e03c966b56524fe7a9a21c26f4045e0" kindref="member">MutexP_construct()</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/MutexP.h" line="144" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_mutex_p_8h_1af05d5dc3cadfca5a06572ef7e9ead652" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_mutex_p_8h_1a1bf40a0e31521bb036d1180d4338b5d9" kindref="member">MutexP_Handle</ref></type>
+        <definition>MutexP_Handle MutexP_create</definition>
+        <argsstring>(MutexP_Params *params)</argsstring>
+        <name>MutexP_create</name>
+        <param>
+          <type><ref refid="struct_mutex_p___params" kindref="compound">MutexP_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Function to create a mutex. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the instance configuration parameters. NULL denotes to use the default parameters. The MutexP default parameters are noted in <ref refid="_mutex_p_8h_1a023e95c8429aa68dcbb98adacb1ac381" kindref="member">MutexP_Params_init</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A MutexP_Handle on success or a NULL on an error </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/MutexP.h" line="155" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_mutex_p_8h_1a1c48f235c360e68c83c41544c5049a30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MutexP_delete</definition>
+        <argsstring>(MutexP_Handle handle)</argsstring>
+        <name>MutexP_delete</name>
+        <param>
+          <type><ref refid="_mutex_p_8h_1a1bf40a0e31521bb036d1180d4338b5d9" kindref="member">MutexP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to delete a mutex. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MutexP_Handle returned from MutexP_create </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/MutexP.h" line="162" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_mutex_p_8h_1a023e95c8429aa68dcbb98adacb1ac381" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MutexP_Params_init</definition>
+        <argsstring>(MutexP_Params *params)</argsstring>
+        <name>MutexP_Params_init</name>
+        <param>
+          <type><ref refid="struct_mutex_p___params" kindref="compound">MutexP_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Initialize params structure to default values. </para>        </briefdescription>
+        <detaileddescription>
+<para>The default parameters are: callback - NULL.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the instance configuration parameters. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/MutexP.h" line="172" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_mutex_p_8h_1a2447ad3ba46c2117235253fc4abb4566" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uintptr_t</type>
+        <definition>uintptr_t MutexP_lock</definition>
+        <argsstring>(MutexP_Handle handle)</argsstring>
+        <name>MutexP_lock</name>
+        <param>
+          <type><ref refid="_mutex_p_8h_1a1bf40a0e31521bb036d1180d4338b5d9" kindref="member">MutexP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to lock a mutex. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function can only be called from a Task. It cannot be called from an interrupt. The lock will block until the mutex is available.</para><para>Users of a mutex should make every attempt to minimize the duration that that they have it locked. This is to minimize latency. It is recommended that the users of the mutex do not block while they have the mutex locked.</para><para>This function locks the mutex. If the mutex is locked multiple times by the caller, the same number of unlocks must be called.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MutexP_Handle returned from <ref refid="_mutex_p_8h_1af05d5dc3cadfca5a06572ef7e9ead652" kindref="member">MutexP_create</ref></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A key is returned. This key must be passed into <ref refid="_mutex_p_8h_1a3bb8c88366ec4b5c5903bf0f37924486" kindref="member">MutexP_unlock</ref>. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/MutexP.h" line="191" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_mutex_p_8h_1a3bb8c88366ec4b5c5903bf0f37924486" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MutexP_unlock</definition>
+        <argsstring>(MutexP_Handle handle, uintptr_t key)</argsstring>
+        <name>MutexP_unlock</name>
+        <param>
+          <type><ref refid="_mutex_p_8h_1a1bf40a0e31521bb036d1180d4338b5d9" kindref="member">MutexP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>uintptr_t</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Function to unlock a mutex. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function unlocks the mutex. If the mutex is locked multiple times by the caller, the same number of unlocks must be called. The order of the keys must be reversed. For example <programlisting><codeline><highlight class="normal">uintptr_t<sp/>key1,<sp/>key2;</highlight></codeline>
+<codeline><highlight class="normal">key1<sp/>=<sp/>MutexP_lock();</highlight></codeline>
+<codeline><highlight class="normal">key2<sp/>=<sp/>MutexP_lock();</highlight></codeline>
+<codeline><highlight class="normal">MutexP_unlock(key2);</highlight></codeline>
+<codeline><highlight class="normal">MutexP_unlock(key1);</highlight></codeline>
+</programlisting></para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MutexP_Handle returned from <ref refid="_mutex_p_8h_1af05d5dc3cadfca5a06572ef7e9ead652" kindref="member">MutexP_create</ref></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Return from <ref refid="_mutex_p_8h_1a2447ad3ba46c2117235253fc4abb4566" kindref="member">MutexP_lock</ref>. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/MutexP.h" line="211" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Mutex module for the RTOS Porting Interface. </para>    </briefdescription>
+    <detaileddescription>
+<para>============================================================================</para><para>The MutexP module allows tasks to maintain critical region segments. The MutexP module has two main functions: <ref refid="_mutex_p_8h_1a2447ad3ba46c2117235253fc4abb4566" kindref="member">MutexP_lock</ref> and <ref refid="_mutex_p_8h_1a3bb8c88366ec4b5c5903bf0f37924486" kindref="member">MutexP_unlock</ref>.</para><para>The MutexP module supports recursive calls to the MutexP_lock API by a single task. The same number of MutexP_unlock calls must be done for the mutex to be release. Note: the returned key must be provided in the LIFO order. For example: <programlisting><codeline><highlight class="normal">uintptr_t<sp/>key1,<sp/>key2;</highlight></codeline>
+<codeline><highlight class="normal">key1<sp/>=<sp/>MutexP_lock();</highlight></codeline>
+<codeline><highlight class="normal">key2<sp/>=<sp/>MutexP_lock();</highlight></codeline>
+<codeline><highlight class="normal">MutexP_unlock(key2);</highlight></codeline>
+<codeline><highlight class="normal">MutexP_unlock(key1);</highlight></codeline>
+</programlisting> <hruler/>
+ </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2015-2024,<sp/>Texas<sp/>Instruments<sp/>Incorporated</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight></codeline>
+<codeline lineno="55"><highlight class="preprocessor">#ifndef<sp/>ti_dpl_MutexP__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_dpl_MutexP__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="_mutex_p_8h_1a609a505f2e142f1b5363f37a56be6c62" refkind="member"><highlight class="preprocessor">#define<sp/>MutexP_STRUCT_SIZE<sp/>(80)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="union_mutex_p___struct" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">union<sp/></highlight><highlight class="normal"><ref refid="union_mutex_p___struct" kindref="compound">MutexP_Struct</ref></highlight></codeline>
+<codeline lineno="84"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="85" refid="union_mutex_p___struct_1a01040d42d2bec506fea5b9128619ef6f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="union_mutex_p___struct_1a01040d42d2bec506fea5b9128619ef6f" kindref="member">dummy</ref>;<sp/></highlight></codeline>
+<codeline lineno="86" refid="union_mutex_p___struct_1ae0ede106dc5b68866314c758e329fccd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="union_mutex_p___struct_1ae0ede106dc5b68866314c758e329fccd" kindref="member">data</ref>[<ref refid="_mutex_p_8h_1a609a505f2e142f1b5363f37a56be6c62" kindref="member">MutexP_STRUCT_SIZE</ref>];</highlight></codeline>
+<codeline lineno="87"><highlight class="normal">}<sp/><ref refid="_mutex_p_8h_1a4b2c2d87a2d8a14370da46ca07191c71" kindref="member">MutexP_Struct</ref>;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92" refid="_mutex_p_8h_1aa73c706cf0956982c1a84a0e6fe2135d" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="95" refid="_mutex_p_8h_1aa73c706cf0956982c1a84a0e6fe2135da64a440a76488541a75038263621380bc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_mutex_p_8h_1aa73c706cf0956982c1a84a0e6fe2135da64a440a76488541a75038263621380bc" kindref="member">MutexP_OK</ref><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="97" refid="_mutex_p_8h_1aa73c706cf0956982c1a84a0e6fe2135da4a5635016f1caa1382d00bc0a07f9183" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_mutex_p_8h_1aa73c706cf0956982c1a84a0e6fe2135da4a5635016f1caa1382d00bc0a07f9183" kindref="member">MutexP_FAILURE</ref><sp/>=<sp/>-1</highlight></codeline>
+<codeline lineno="98"><highlight class="normal">}<sp/><ref refid="_mutex_p_8h_1aa73c706cf0956982c1a84a0e6fe2135d" kindref="member">MutexP_Status</ref>;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107" refid="_mutex_p_8h_1a1bf40a0e31521bb036d1180d4338b5d9" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="_mutex_p_8h_1a1bf40a0e31521bb036d1180d4338b5d9" kindref="member">MutexP_Handle</ref>;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118" refid="struct_mutex_p___params" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="120" refid="struct_mutex_p___params_1ab08d51d817c33ca26d903ac2fdc5595e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>void<sp/>(*callback)(void);<sp/></highlight></codeline>
+<codeline lineno="121"><highlight class="normal">}<sp/><ref refid="struct_mutex_p___params" kindref="compound">MutexP_Params</ref>;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>MutexP_Handle<sp/><ref refid="_mutex_p_8h_1a9e03c966b56524fe7a9a21c26f4045e0" kindref="member">MutexP_construct</ref>(<ref refid="union_mutex_p___struct" kindref="compound">MutexP_Struct</ref><sp/>*handle,<sp/><ref refid="struct_mutex_p___params" kindref="compound">MutexP_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_mutex_p_8h_1a6f81b316ea0528ca454d9b51bb682d7a" kindref="member">MutexP_destruct</ref>(<ref refid="union_mutex_p___struct" kindref="compound">MutexP_Struct</ref><sp/>*mutexP);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>MutexP_Handle<sp/><ref refid="_mutex_p_8h_1af05d5dc3cadfca5a06572ef7e9ead652" kindref="member">MutexP_create</ref>(<ref refid="struct_mutex_p___params" kindref="compound">MutexP_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_mutex_p_8h_1a1c48f235c360e68c83c41544c5049a30" kindref="member">MutexP_delete</ref>(MutexP_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_mutex_p_8h_1a023e95c8429aa68dcbb98adacb1ac381" kindref="member">MutexP_Params_init</ref>(<ref refid="struct_mutex_p___params" kindref="compound">MutexP_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uintptr_t<sp/><ref refid="_mutex_p_8h_1a2447ad3ba46c2117235253fc4abb4566" kindref="member">MutexP_lock</ref>(MutexP_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_mutex_p_8h_1a3bb8c88366ec4b5c5903bf0f37924486" kindref="member">MutexP_unlock</ref>(MutexP_Handle<sp/>handle,<sp/>uintptr_t<sp/>key);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_dpl_MutexP__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/dpl/MutexP.h"/>
+  </compounddef>
+</doxygen>

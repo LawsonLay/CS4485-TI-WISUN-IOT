@@ -1,0 +1,200 @@
+BLE5-Stack 2.01.01 (SDK 3.40) to BLE5-Stack 2.01.02 (SDK 4.10)
+==============================================================
+
+This section will describe a way to migrate a project from BLE5-Stack 2.01.01 to
+a BLE5-Stack 2.01.02 project.
+
+The best way to migrate is to open a new project from the new SDK and transfer 
+your changes and application code over to the new example. 
+
+Porting Simple Peripheral
+-------------------------
+
+For this migration guide, Simple Peripheral from BLE5-Stack 2.01.01 will be 
+ported over to BLE5-Stack 2.01.02. The recommended approach is to start with a
+BLE5-Stack 2.01.02 project that contains the same base functionality as the
+porting target project and merge in any custom functionality.
+
+#. Choose a BLE5-Stack 2.01.02 example project that contains your target
+   project's base functionality.
+
+#. Transfer all modified application files from BLE5-Stack 2.01.01 into the
+   BLE5-Stack 2.01.02 example project.
+
+   In this example, the following files from BLE5-Stack 2.01.01 were moved into
+   Simple Peripheral BLE5-Stack 2.01.02 example:
+
+      - ``simple_peripheral.c``
+      - ``simple_peripheral.h``
+
+#. Add the pointer ``&pRandomAddress``  as argument in the last parameter in 
+   GAP_DeviceInit call. This is needed to correctly set a random static address
+   if configured.
+
+    .. code-block:: c
+      :caption: Modified GAP_DeviceInit call
+
+        GAP_DeviceInit(GAP_PROFILE_PERIPHERAL, selfEntity, addrMode, &pRandomAddress);
+
+#. Add the following code section in ``simple_peripheral.c`` at the end of 
+   SimplePeripheral_processGapMessage before the ``default:`` case:
+
+    .. code-block:: c
+      :caption: Added section to handle HCI Events for rejection of peer device Connection parameter update request.
+      :linenos:
+
+        #if defined ( NOTIFY_PARAM_UPDATE_RJCT )
+            case GAP_LINK_PARAM_UPDATE_REJECT_EVENT:
+            {
+              linkDBInfo_t linkInfo;
+              gapLinkUpdateEvent_t *pPkt = (gapLinkUpdateEvent_t *)pMsg;
+
+              // Get the address from the connection handle
+              linkDB_GetInfo(pPkt->connectionHandle, &linkInfo);
+
+              // Display the address of the connection update failure
+              Display_printf(dispHandle, SP_ROW_STATUS_2, 0,
+                             "Peer Device's Update Request Rejected 0x%x: %s", pPkt->opcode,
+                             Util_convertBdAddr2Str(linkInfo.addr));
+
+              break;
+            }
+        #endif
+
+#. Modify ``main.c`` in the BLE5-Stack 2.01.02 example if additional tasks were
+   added in the BLE5-Stack 2.01.01 project.
+
+#. Move any profiles and services that the application is using to the BLE5-Stack
+   2.01.02 project.
+
+#. Transfer the Sysconfig settings either visually through the GUI or open both 
+   the old and the new project .syscfg files and copy-paste the desired settings.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|.
+
+#. Refer to the Core SDK release notes for additional information and the TI-RTOS
+   examples included with |SDK|.
+
+   For additional information on how BLE5-Stack 2.01.02 uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+Application Related Changes from BLE5-Stack 2.01.01 to BLE5-Stack 2.01.02
+-------------------------------------------------------------------------
+
+You can follow the guide above without addressing these updates, they are listed
+for your information only. All fine grained detailes might not be mentioned, 
+please refer to the specific example you need to port and to a compare between 
+the old and new project files.
+
+* The stack_library project in HostTest has been updated to a stack_wrapper 
+  project.
+
+* Log statements (``BLE_LOG_X``) have been added to some of the latest 
+  application source code. These are disabled by default.
+
+* Handling added in application code for HCI Events for rejection of peer 
+  device Connection parameter update request (``NOTIFY_PARAM_UPDATE_RJCT``).
+
+* _app postfix remove from some of the project names and project files, for 
+  example simple_peripheral_app renamed to simple_peripheral.
+
+* Define ``NVOCMP_NWSAMEITEM`` (set to avoid re-writing the same NV item) and 
+  define ``FLASH_ROM_BUILD`` added to project.
+
+* Define ``DEFAULT_DEV_DISC_BY_SVC_UUID`` is now controlled in the checkbox
+  SysConfig->Observer Configuration->Discover Devices By Service UUID. This is 
+  used in multi_role and the simple_central example.
+
+* Privacy Override Offset (``privOverrideOffset``) and CoEx configuration 
+  (``coexUseCaseConfig``) added to ``llUserCfg_t``. Configured in 
+  ``ble_user_config_stack.c``.
+
+* Updated code in osal_icall_ble.c to match the extended number of 
+  parameters in ``GATTServApp_Init()`` and ``GAPBondMgr_Init()``. Parameters 
+  ``cfg_GATTServApp_att_delayed_req`` and 
+  ``cfg_GATTServApp_gatt_no_service_changed`` are added.
+
+* RF Design module (RF Front end settings) is added to SysConfig.
+
+* XDCtools updated from version 3.60.02.34_core to 3.61.00.16_core.
+
+RTLS Examples
+-------------
+
+Please refer to the RTLS Toolbox chapter for up-to-date status and information 
+about the RTLS offering. In this section a few application code related changes 
+are listed for your information, but there are more code changes than listed.
+
+* Time-of-Flight (TOF) removed from RTLS Toolbox.
+
+* Extensive code changes to RTLSCtrl which also includes removal of ToF 
+  functionality. Please manually compare files from old and new SDK for more 
+  details.
+
+* Host Test Example:
+
+    * Added handling for channel map changes 
+      (``HCI_BLE_CHANNEL_MAP_UPDATE_EVENT``).
+    * Added compilation options for Constant Tone Extension (``RTLS_CTE_TEST``).
+
+* RTLS API ``rtls_ctrl_api.h`` changes
+
+    * ``RTLSCtrl_sendDebugEvent`` renamed to ``RTLSCtrl_sendDebugEvt``.
+    * ``RTLSCtrl_processDataSent`` renamed to ``RTLSCtrl_dataSentEvt``.
+    * ``RTLSCtrl_processRtlsPacket`` renamed to ``RTLSCtrl_rtlsPacketEvt``.
+    * ``RTLSCtrl_syncEventNotify`` renamed to ``RTLSCtrl_syncNotifyEvt``.
+
+* Updates to rtls_master.c
+
+    * Added handling for ``RM_EVT_CONN_EVT`` that will call new function 
+      ``RTLSMaster_processConnEvt()``.
+    * Functionality from ``RTLSMaster_connEvtCB`` is moved to 
+      ``RTLSMaster_processConnEvt``.
+    * Added handling for ``HCI_BLE_CHANNEL_MAP_UPDATE_EVENT``.
+    * Updated handling for ``GAP_LINK_PARAM_UPDATE_EVENT``.
+    * Testing of dynamic change of the channel map added 
+      (``RTLS_TEST_CHAN_MAP_DYNAMIC_CHANGE``).
+    * ``DEFAULT_MAX_SCAN_RES`` changed from 8 to 16.
+
+* Updates to rtls_slave
+
+    * Minor changes to ``RTLSPassive_cmStartReq``.
+    * AssertHandler added to ubStack_taskFxn.
+    * Small code updates in ``micro_ble_cm.c`` and ``micro_ble_cm.h``
+
+* Updates to rtls_passive
+
+    * Only changes related to RTLS API name changes.
+
+* Changes in AoA Driver:
+
+    * ``AOA_NUM_ANTENNAS`` redefined to ``BOOSTXL_AOA_NUM_ANT``.
+    * ``RF_PriorityCoexDefault`` added to ``AOA_rfEnableRam``.
+    * Define ``AOA_NUM_ANTENNAS`` changed to ``BOOSTXL_AOA_NUM_ANT``.
+    * The ``AoA_IQSample_t`` struct split into two structs.
+      ``AoA_IQSample_Ext_t`` and  ``AoA_IQSample_t``. This affect code and 
+      functions that use it (ex. ``AOA_getPairAngles``).
+    * Changes in ``AOA_getPairAngles`` parameter.
+    * Changes in ``AOA_postProcess`` parameter.
+    * Minor updates in ``AOA_getRfIqSamples``.
+
+.. _specific-guilines-when-using-sysconfig-and-cc1352p:
+
+Specific guidelines when using SysConfig and CC1352P
+----------------------------------------------------
+
+In SysConfig, when using CC1352P, the correct RF front end must be
+selected to meet the design's needs. 
+In the RF Design and RF Stack modules, select the correct option for
+"*Based On RF Design*" inside the RF Design and the stack modules of
+SysConfig (only the stack modules used by the project needs attention).
+
+  .. figure:: ../resources/SysConfig_CC1352P.png
+    :align: center
+
+    Select the correct option for "Based On RF Design" inside the RF Design
+    and the stack modules of SysConfig [here an example for the RF Design
+    module]

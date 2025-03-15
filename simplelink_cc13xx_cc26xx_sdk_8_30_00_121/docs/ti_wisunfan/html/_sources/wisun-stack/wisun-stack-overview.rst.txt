@@ -1,0 +1,117 @@
+Overview
+--------
+
+Wi-SUN is a wireless communication standard aiming to enable large-scale IOT
+networks in a mesh structure. The network typically consists of line powered
+routers and gateways, and battery powered end nodes. The |SPEC| is given by the
+`Wi-SUN Alliance`_.
+
+In |STACK|, the 6LoWPAN, RPL, IPv6, ICMPv6 and UDP layers have been adapted from
+open source components. An overview of the SW components is given in
+:numref:`fig-wisun-block-diagram`
+
+.. _fig-wisun-block-diagram:
+.. figure:: resources/block-diagram.png
+    :width: 300px
+    :align: center
+
+    TI Wi-SUN FAN Stack Overview
+
+
+What is a FAN?
+--------------
+
+FAN - field area network is a network type aiming for connectivity on a larger
+scale. Example uses are within a smart city. To achieve this, the FAN consists
+of multiple smaller personal area networks (PANs). The FAN can connect to a Wide
+area network (WAN) in order to grow the scale even more.
+
+Within each PAN, nodes assume one of three operational roles (set via the local
+administrative policy):
+
+- Each PAN contains a **Border Router** providing WAN connectivity to the PAN.
+  The Border Router maintains source routing tables for all nodes within its PAN,
+  provides node authentication and key management services, and disseminates PAN
+  wide information such as broadcast schedules.
+- **Router node**, which provides upward and downward packet forwarding (within
+  a PAN). A Router also provides services for relaying security and address
+  management protocols.
+- **Leaf nodes** provide minimum capabilities: discovering and joining a PAN,
+  send/receive IPv6 packets, etc. (Leaf node role is not implemented in TI Wi-SUN
+  FAN.)
+
+The node roles and network leves are visualized in :numref:`fig-pan-fan`
+
+.. _fig-pan-fan:
+.. figure:: resources/nw_topology_wisun.png
+    :align: center
+
+    FAN Overview
+
+.. _sec-wisun-architecture:
+
+Architecture Choices
+--------------------
+
+|STACK| can be used in two separate architectures based on the end product
+application. :numref:`fig-wisun-device-configuration` shows the two different
+system architectures enabled by |STACK|.
+
+.. _fig-wisun-device-configuration:
+.. figure:: resources/fig-device-configuration.png
+    :width: 350px
+    :align: center
+
+    NWP and Embedded Configurations
+
+-   A co-processor is shown in :numref:`fig-wisun-device-configuration` (left). The
+    protocol stack runs on the device while the application is executed on an
+    external MPU or MCU. The application interfaces with the device using the
+    network protocol interface (NWP) over a serial universal asynchronous
+    receiver/transmitter (UART) connection. This configuration is useful for
+    cases where the application image is large. If the application is run from a
+    host device, it will not be limited by the flash size of the device. The NWP
+    interface is documented in the :ref:`chap-wisun-NWP-guide`.
+
+-   A single device is shown in :numref:`fig-wisun-device-configuration` (right).
+    The application and protocol stack are both implemented on the embedded device
+    as a true single-chip solution.This configuration is the simplest and most
+    common for network nodes.
+
+Please see the :ref:`sec-wisun-examples` for availability of the modes on
+specific part numbers.
+
+Network Profiles
+----------------
+
+The |STACK| supports three network profiles to optimize network performance that can be 
+selected in `SysConfig` -> `TI Wi-SUN FAN` -> `Advanced`.
+
+1.	Maximize responsiveness
+2.	Balanced mode
+3.	Maximize scalability
+
+When selecting a network profile the internal network timing and behavior is adjusted
+to meet the requirements of the network size. The following settings are set to the 
+recommended value for the selected network profile in SysConfig.
+
+- **Rapid join:** Calibrated settings for an expedited join process are used for 
+  `Maximize responsiveness` networks.
+- **MPL low latency:** Latency optimizations for multicast forwarding. Since this feature 
+  is not Wi-SUN compliant, it is not used by default in all three network profiles.
+- **Disconnection detection times:** The time it takes for a Router Node (RN) to recognize 
+  a disconnection from the Border Router (BR) and vice versa. Appropriate values for 
+  disconnection detection times are used based on the selected network profile. These 
+  values directly affect trade off between responsiveness vs scalability.
+
+The modification of these settings is possible but not recommended and could result in 
+reduced performance.
+
+We recommend starting by using the `Maximize responsiveness` profile. This profile 
+configures the network for rapid join time, rapid disconnection detection, rapid 
+PAN timeout and rapid DIO updates. If you experience data overflow, we recommend switching 
+to the `Balanced mode` profile which will allow longer timeouts for the initial key 
+transmission and increases the disconnection detection time, the PAN timeout and the DIO 
+message intervals. If you expand your network to the point where you need to further 
+minimize data overflow, you can switch to the `Maximize scalability` profile which will 
+configure even longer intervals to further reduce network traffic and allow slower responses.

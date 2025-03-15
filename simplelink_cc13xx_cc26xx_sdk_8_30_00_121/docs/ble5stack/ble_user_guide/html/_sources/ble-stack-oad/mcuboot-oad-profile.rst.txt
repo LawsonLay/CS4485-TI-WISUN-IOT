@@ -1,0 +1,465 @@
+.. _sect-mcuboot-oad-profile:
+
+BLE-Stack OAD Profile
+=====================
+
+The TI OAD Profile has been designed to provide a simple and customizable.
+In its most basic form, for both on-chip and off-chip OAD, this profile is
+responsible for accepting an OAD interaction based on image header criteria,
+storing the image onto the flash, and causing a device reset if the download is
+successful so that the downloaded application image is run by the secure 
+bootloader. The OAD distributor and OAD target perform the GATT client role 
+and server role respectively. The TI OAD Profile consists of two services:
+
+    - OAD Service
+    - OAD Reset Service. (used for on-chip OAD only)
+
+Over the Air Message Sequence
+-----------------------------
+
+The following section details the over the interaction between the target and
+distributor. See the following sections for description of the individual
+messages and how to decode them.
+
+    .. _fig-mcuboot-oad-sequence-diagram:
+    .. uml::
+        :caption: Sequence diagram for OAD process
+        :align: center
+
+        @startuml
+        Distributor <- Target: Advertisements
+        Distributor -> Target: Connect Req
+        Distributor <-> Target: OAD Service Discovery
+
+        Distributor -> Target: Enable Notifications on OAD Img Identify Char
+        Distributor -> Target: Enable Notifications on Ext Control Char
+
+        Distributor -> Target: ATT_ExchangeMTUReq
+        Distributor <- Target: ATT_ExchangeMTURsp
+
+        note right of Target
+        Target uses negotiated MTU to select OAD block size in the range of
+        [20, 244]
+        end note
+
+        Distributor -> Target: Get OAD Block Size Ext Ctrl Command
+        Distributor <- Target: OAD Block Size Response
+
+        group Optional Throughput Enhancements
+            Distributor -> Target: LE Set Data Length (4.2 Data length extension)
+            Distributor <- Target: LE Set Data Length Response
+        end group
+
+        Distributor -> Target: Write to Image Identify Char
+        Distributor <- Target: notification on Image ID Char with OAD_SUCCESS
+
+        note left of Distributor
+        Read requested block
+        from image file
+        end note
+
+        Distributor -> Target: Write 1st block with block num to Image Block Char
+
+        group Repeat For Each Block In the Image
+
+        Distributor <- Target: Notification on Image Block Char requesting next block
+        note left of Distributor
+        Read requested block
+        from image file
+        end note
+
+        Distributor -> Target: Write requested block with block num to Image Block Char
+
+        note right of Target
+        Write block to flash
+        end note
+        end
+
+        ...Repeat above until all blocks are sent...
+
+        Distributor <- Target: Notification on Ext Ctrl Char: OAD_SUCCESS
+        Distributor -> Target: Enable Image Ext Ctrl Command
+        Distributor <- Target: Enable Image Ext Ctrl Command Rsp
+
+        note right of Target
+        Reboot device (jump to secure bootloader)
+        Then secure bootloader validate the image
+        end note
+
+        note over Distributor, Target
+          Supervision Timeout
+        end note
+
+        alt Image is valid
+        note over Distributor, Target
+          Secure bootloader will jump to user application
+        end note
+
+        else Image is invalid
+        note over Distributor, Target
+          Secure bootloader will jump to persistent application
+        end note
+        end        
+
+        @enduml
+		
+.. _sect-mcuboot-oad-service-desc:
+
+OAD Service (0xFFC0)
+--------------------
+
+The OAD service is responsible for receiving/storing an OAD image 
+in its appropriate location, and causing a device jump to the secure 
+bootloader to validate the downloaded user application.
+
+A screenshot of BTool displaying the OAD service is shown below:
+
+.. _fig-mcuboot-oad-service-overview:
+.. figure:: ./resources/image3.png
+    :align: center
+
+    OAD Service Overview
+
+The OAD service is a primary service with three characteristics. The
+characteristics of the OAD service, their UUIDs, and descriptions are
+listed in :numref:`fig-mcuboot-oad-service-overview`
+
+.. _tbl-mcuboot-oad-service-description:
+.. table:: OAD Service Description.
+
+    +----------+------------------+---------------------------------------------+
+    | UUID     | Name             | Description                                 |
+    +==========+==================+=============================================+
+    | 0xFFC0   | OAD Service      | OAD service declaration                     |
+    +----------+------------------+---------------------------------------------+
+    | 0xFFC1   | Image Identify   | Used to send image image header over the air|
+    +----------+------------------+---------------------------------------------+
+    | 0xFFC2   | Image Block      | Actual block of image data along with       |
+    |          |                  | offset into the image.                      |
+    +----------+------------------+---------------------------------------------+
+    | 0xFFC5   | OAD Control      | Controls various aspects of OAD process     |
+    +----------+------------------+---------------------------------------------+
+
+The primary method for sending data from the OAD distributor to the OAD
+target is the GATT writes with no response message with the exception of the
+image identify message. This reduces code size and increases data throughput as
+much as possible. Using GATT Notifications would require adding the
+GATT_ClientInit() call. However, in a noisy or otherwise poor
+RF-environment, the “write with no response” GATT message may not be sufficient
+to successfully transmit an entire image and software driven timeouts and
+retries may need to be added.
+
+The primary method for sending data from the OAD target to the
+OAD distributor is GATT notifications since the GATT_Client will have
+already been initialized.
+
+.. note::
+    Both GATT notifications and GATT write without response are
+    non-acknowledged message types. To ensure reliability, it is recommended to
+    limit OAD payload transfers to one procedure per connection event.
+
+You can refer to the :ref:`fig-mcuboot-oad-state-machine` for an overview of the OAD
+verification and image download process.
+
+..
+    For a message sequence chart describing the OAD process in terms OAD
+    service messages exchanged between the target and OAD distributor please
+    see :numref:`fig-oad-sequence-diagram`.
+
+.. _sect-mcuboot-oad-img-identify:
+
+OAD Image Identify (0xFFC1)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Image Identify characteristic is used to exchange image header information
+between OAD distributor and target. The OAD process begins when the
+OAD distributor sends the image header information of the proposed OAD
+image to the target. Note that a GATT long write was selected for this
+procedure because the entire image ID message will not fit in a single
+write no response packet for MTU < 25.
+
+For more information about the Image Header, please refer to 
+`MCUboot Image format <https://docs.mcuboot.com/design.html#image-format>`_
+
+See :ref:`sec-mcuboot-oad-image-header` for more information about each field.
+
+“01:00” shall be written to the :term:`CCCD` of this characteristic
+so that notification for image header rejection is enabled.
+
+Once the target receives the image header information, it will continue 
+the OAD process as seen in :ref:`sec-mcuboot-oad-process`. The “01:00” shall
+be written to the CCCD of this characteristic to enable the notification. The
+error codes are listed in :ref:`sec-mcuboot-oad-error-codes`.
+
+.. comment out
+    Need a new screenshot probably
+    A successful OAD initiation is shown in below:
+
+    .. _fig-oad-initiation-sniffer-capture:
+    .. figure:: ./resources/image5.png
+        :align: center
+
+        Successful OAD Initiation Sniffer Capture
+
+OAD Image Block Characteristic (0xFFC2)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The OAD Image Block characteristic is used to request and transfer a block of
+data of an OAD Image. “01:00” shall be written to the :term:`CCCD` of this
+characteristic to enable the notification for block write. The target requests
+the next block of the image by sending a GATT notification to the OAD
+distributor with the requested block number from the OAD Control Point
+characteristic.  The OAD distributor will respond (GATT write, no response)
+with the block number and the OAD image block. The image block contains the
+actual binary data from the OAD image offset by the block number multiplied by
+the size of a block. The OAD distributor shall get the block size from target
+device by issuing the ‘Get OAD Block Size command’ to the OAD Control Point
+characteristic described in :ref:`sec-mcuboot-oad-control-point-characteristic`.
+
+:numref:`fig-mcuboot-block-request-response-sniffer-capture` shows a
+block request/response sniffer capture.
+
+.. _fig-mcuboot-block-request-response-sniffer-capture:
+.. figure:: ./resources/image6.png
+    :align: center
+
+    Block Request/Response Sniffer Capture
+
+In :numref:`fig-mcuboot-block-request-response-sniffer-capture` above, the Image
+Block Write Char Response is shown in gray (0x12), status of last block is shown
+in teal (0x00 = "SUCCESS"), block number field is 4 bytes (little endian) and
+highlighted in red. The OAD image block highlighted in purple.
+
+.. _sec-mcuboot-oad-control-point-characteristic:
+
+OAD Control Point Characteristic (0xFFC5)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The OAD control characteristic is written with the intent of extending the TI
+OAD Profile by adding a characteristic that can handle multiple commands.
+Commands are sent unidirectionally from the OAD Distributor application to the
+target using GATT Write No Response. The target will send command status and
+return values back to the OAD distributor using GATT Notifications. If the
+target doesn't support a command it shall respond with OAD_EXT_NOT_SUPPORTED,
+sent as a single byte notification on the OAD Control Char with value 0xFF.
+0xFF is defined as a reserved command ID. If target receives any of the control
+commands without receiving 'Image Identify' it will return 'OAD_AUTH_FAIL'.
+
+Below is the list of commands that are supported by the OAD Control Point
+Characteristic:
+
+.. _tbl-mcuboot-oad-control-supported-commands:
+.. table:: OAD Control Characteristic Supported Commands.
+
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Description                            | CMD_ID | LEN | Payload                                                        |
+    +========================================+========+=====+================================================================+
+    | Get OAD Block Size Command             | 0x01   | 0   | None                                                           |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Get OAD Block Size Response            | 0x01   | 3   | OAD_BLOCK_SIZE                                                 |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Disable OAD Image Block Write Command  | 0x06   | 0   | None                                                           |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Disable OAD Image Block Write Response | 0x06   | 2   | Byte 0: Command ID (0x06)                                      |
+    +                                        +        +     +                                                                +
+    |                                        |        |     | Byte 1: Return Status                                          |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Get Software Version Command           | 0x07   | 0   | None                                                           |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Get Software Version Response          | 0x07   | 5   | Byte 0: Command ID (0x07)                                      |
+    +                                        +        +     +                                                                +
+    |                                        |        |     | Byte 1-4: Software Version of currently running image          |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Get OAD Image Status Command           | 0x08   | 0   | None                                                           |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Get OAD Image Status Response          | 0x08   | 2   | Byte 0: Command ID (0x08)                                      |
+    +                                        +        +     +                                                                +
+    |                                        |        |     | Byte 1: Return Status                                          |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Get Profile Version Command            | 0x09   | 0   | None                                                           |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Get Profile Version Response           | 0x09   | 2   | Byte 0: Command ID (0x09)                                      |
+    +                                        +        +     +                                                                +
+    |                                        |        |     | Byte 1: Version of OAD profile supported by target             |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Get Device Type Command                | 0x10   | 0   | None                                                           |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Get Device Type Response               | 0x10   | 5   | Byte 0: Command ID (0x10)                                      |
+    +                                        +        +     +                                                                +
+    |                                        |        |     | Byte 1-4: Value of Device ID register                          |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Image Block Write Char Response        | 0x12   | 6   | Byte 0: Command ID (0x12)                                      |
+    +                                        +        +     +                                                                +
+    |                                        |        |     | Byte 1: Status of the previous block received                  |
+    +                                        +        +     +                                                                +
+    |                                        |        |     | Byte 2-5: Block number                                         |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Erase All Bonds Request                | 0x13   | 0   | None                                                           |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+    | Erase All Bonds Response               | 0x13   | 2   | Byte 0: Command ID (0x13)                                      |
+    +                                        +        +     +                                                                +
+    |                                        |        |     | Byte 1: Return status                                          |
+    +----------------------------------------+--------+-----+----------------------------------------------------------------+
+
+Get OAD Block Size CMD/RSP
+""""""""""""""""""""""""""
+
+The Get OAD block size command is used to return the active OAD block size. The
+OAD block size is always set by the target (|DEVICE|) device based on the
+negotiated MTU size. For optimal throughput, the distributor shall perform an
+MTU exchange and wait for the exchange to complete before issuing this command.
+
+The block size is returned in the Get OAD Block Size RSP as a 16-bit value.
+
+See :ref:`sec-mcuboot-blk-size-rules` for restrictions on block size.
+
+Disable OAD Image Block Write CMD/RSP
+"""""""""""""""""""""""""""""""""""""
+
+By the default, OAD target application sends notifications for each ‘Block
+write’ message by sending notification via ‘OAD control point’ characteristic.
+This can be overhead for the OAD process overall and can impact the battery
+life. The distributor application can disable the notifications via this
+command.
+
+Get Software Version CMD/RSP
+""""""""""""""""""""""""""""
+
+Used to return the command ID +  4-byte long software version of the active
+image.
+
+Get OAD Image Status CMD/RSP
+""""""""""""""""""""""""""""
+
+Reports various failures that may occur during the OAD process in one byte long
+response. Error codes can be see in :ref:`sec-mcuboot-oad-error-codes`
+
+Get Profile Version CMD/RSP
+"""""""""""""""""""""""""""
+.. warning::
+
+    This command is not yet supported
+
+The command will return two-byte(command ID + profile) long OAD profile version
+supported by the application.
+
+Get Device Type CMD/RSP
+"""""""""""""""""""""""
+.. warning::
+
+    This command is not yet supported
+
+The command will return the command ID + 4-byte device ID register.
+
+Image Block Write Char RSP
+""""""""""""""""""""""""""
+
+The OAD target will respond with notification with status and block number of
+the next requested payload block from the Control Point characteristic.
+The return status codes are listed in :ref:`sec-mcuboot-oad-error-codes`. If the
+download of the entire image is complete, the OAD target device will respond
+with status code OAD_DL_COMPLETE and Block number set to 0xFFFFFFFF to indicate
+the download completion.
+
+Erase All Bonds (CMD/RSP)
+"""""""""""""""""""""""""
+
+Target device will erase all bond records from non-volatile memory.
+
+.. _mcuboot-oad-reset-service:
+
+OAD Reset Service (0xFFD0)
+--------------------------
+
+The OAD reset service is only used by on-chip OAD solutions. It
+implements a method for switching/invalidating the currently running image and
+resetting the device. This must occur because in on-chip solutions the currently
+running image cannot update itself. More information about the
+on-chip OAD process will be covered in the on-chip OAD chapter.
+:numref:`fig-mcuboot-oad-reset-service` shows an overview of the OAD reset
+service and its characteristics. Like the OAD service, the reset service uses
+the 128 bit TI base UUID with a 16 bit short UUID of 0xFFD0.
+
+.. _fig-mcuboot-oad-reset-service:
+.. figure:: ./resources/btool_oad_reset_service.png
+    :align: center
+
+    OAD Reset Service
+
+OAD Start/Reset Characteristic (0xFFD1)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The OAD Start/Reset Characteristic is responsible for starting the OAD process
+or resetting the target device. The size of the characteristic payload can vary
+between 1 byte and many depending on if security is enabled.
+
+The reset command contains at minimum a 1 byte command as described below:
+
+ - 0x01: Start OAD process, reset device, and boot into persistent app
+ - 0x00: Reset device, and boot into user application
+
+The command is followed by a security payload as described below in secure
+configurations. In non secure configurations, the security payload is absent.
+
+The security payload is identical to the payload that is described in
+:ref:`sect-mcuboot-oad-img-identify`. If the security payload is present the device
+will only reset if the command is from a known peer. Secure versions of
+the application/BIM require that the security is present.
+
+.. _sec-mcuboot-oad-error-codes:
+
+OAD Return Values
+-----------------
+
++------------------------------+-------+----------------------------------------------------------------------------------------------------+    
+| OAD Status Code              | Value | Description                                                                                        |
++==============================+=======+====================================================================================================+
+| OAD_SUCCESS                  | 0     | OAD succeeded                                                                                      |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_CRC_ERR                  | 1     | The downloaded image’s CRC doesn’t match the one expected from the image header                    |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_FLASH_ERR                | 2     | Flash function failure such as flashOpen/flashRead/flash write/flash erase                         |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_BUFFER_OFL               | 3     | The block number of the received packet doesn’t match the one requested, an overflow has occurred. |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_ALREADY_STARTED          | 4     | OAD start command received, while OAD is already is progress                                       |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_NOT_STARTED              | 5     | OAD data block received with OAD start process                                                     |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_DL_NOT_COMPLETE          | 6     | OAD enable command received without complete OAD image download                                    |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_NO_RESOURCES             | 7     | Memory allocation fails/ used only for backward compatibility                                      |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_IMAGE_TOO_BIG            | 8     | Image is too big                                                                                   |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_INCOMPATIBLE_IMAGE       | 9     | Stack and flash boundary mismatch, program entry mismatch                                          |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_INVALID_FILE             | 10    | Invalid image ID received                                                                          |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_INCOMPATIBLE_FILE        | 11    | BIM/image header/firmware version mismatch                                                         |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_AUTH_FAIL                | 12    | Start OAD process / Image Identify message/image payload authentication/validation fail            |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_EXT_NOT_SUPPORTED        | 13    | Data length extension or OAD control point characteristic not supported                            |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_DL_COMPLETE              | 14    | OAD image payload download complete                                                                |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_CCCD_NOT_ENABLED         | 15    | Internal (target side) error code used to halt the process if a CCCD has not been enabled          |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_IMG_ID_TIMEOUT           | 16    | OAD Image ID has been tried too many times and has timed out. Device will disconnect.              |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_PROFILE_APP_STOP_PROCESS | 17    | The target app canceled OAD                                                                        |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+| OAD_PROFILE_ERROR            | 18    | An internal error occured in the module                                                            |
++------------------------------+-------+----------------------------------------------------------------------------------------------------+
+
+.. _sec-mcuboot-blk-size-rules:
+
+OAD Block Size Rules
+--------------------
+
+The distributor device must use the block size returned by 'Get OAD Block Size
+RSP' throughout the OAD process. Once the OAD process starts, the block size
+must not change. The OAD target device will select the block size as the largest
+multiple of 4B that fits into the negotiated MTU size. The acceptable range of
+OAD block sizes is [20, 244].

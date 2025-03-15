@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HCI Vendor Specific Guide &mdash; Vendor Specific Guide 5.00.00 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> Vendor Specific Guide
+          </a>
+              <div class="version">
+                5.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hci_interface.html">HCI Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="att_api.html">ATT Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gap_api.html">GAP Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gapbondmgr_api.html">GapBondMgr Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gatt_api.html">GATT Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hci_ext_api.html">HCI Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2cap_api.html">L2CAP Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util_api.html">UTIL Extension Vendor Specific API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Vendor Specific Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>HCI Vendor Specific Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hci-vendor-specific-guide">
+<span id="sdg-overview"></span><h1>HCI Vendor Specific Guide<a class="headerlink" href="#hci-vendor-specific-guide" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Table of contents</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#functional-overview">Functional Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#numerical-notation-conventions">Numerical Notation Conventions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#standard-hexadecimal-notation">Standard Hexadecimal Notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#colon-separated-hexadecimal-notation">Colon Separated Hexadecimal Notation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#definitions-abbreviations-acronyms">Definitions, Abbreviations, Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#revision-history">Revision History</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hci_interface.html">HCI Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hci_interface.html#hci-overview">HCI Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hci_interface.html#specification-interface">Specification Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hci_interface.html#hci-interface-protocol">HCI Interface Protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_interface.html#hci-commands">HCI Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_interface.html#hci-events">HCI Events</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hci_interface.html#vendor-specific-interface">Vendor Specific Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hci_interface.html#vendor-specific-commands">Vendor Specific Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_interface.html#vendor-specific-events">Vendor Specific Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_interface.html#request-and-response-tunneling">Request and Response Tunneling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="att_api.html">ATT Vendor Specific API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="att_api.html#att-commands">ATT Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-errorrsp">ATT_ErrorRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-exchangemtureq">ATT_ExchangeMTUReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-exchangemtursp">ATT_ExchangeMTURsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-findinforeq">ATT_FindInfoReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-findinforsp">ATT_FindInfoRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-findbytypevaluereq">ATT_FindByTypeValueReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-findbytypevaluersp">ATT_FindByTypeValueRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readbytypereq">ATT_ReadByTypeReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readbytypersp">ATT_ReadByTypeRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readreq">ATT_ReadReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readrsp">ATT_ReadRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readblobreq">ATT_ReadBlobReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readblobrsp">ATT_ReadBlobRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readmultireq">ATT_ReadMultiReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readmultirsp">ATT_ReadMultiRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readbygrptypereq">ATT_ReadByGrpTypeReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readbygrptypersp">ATT_ReadByGrpTypeRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-writereq">ATT_WriteReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-writersp">ATT_WriteRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-preparewritereq">ATT_PrepareWriteReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-preparewritersp">ATT_PrepareWriteRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-executewritereq">ATT_ExecuteWriteReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-executewritersp">ATT_ExecuteWriteRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-handlevaluenoti">ATT_HandleValueNoti</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-handlevalueind">ATT_HandleValueInd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-handlevaluecfm">ATT_HandleValueCfm</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="att_api.html#att-events">ATT Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-errorrsp-1">ATT_ErrorRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-exchangemtureq-1">ATT_ExchangeMTUReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-exchangemtursp-1">ATT_ExchangeMTURsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-findinforeq-1">ATT_FindInfoReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-findinforsp-1">ATT_FindInfoRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-findbytypevaluereq-1">ATT_FindByTypeValueReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-findbytypevaluersp-1">ATT_FindByTypeValueRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readbytypereq-1">ATT_ReadByTypeReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readbytypersp-1">ATT_ReadByTypeRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readreq-1">ATT_ReadReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readrsp-1">ATT_ReadRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readblobreq-1">ATT_ReadBlobReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readblobrsp-1">ATT_ReadBlobRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readmultireq-1">ATT_ReadMultiReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readmultirsp-1">ATT_ReadMultiRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readbygrptypereq-1">ATT_ReadByGrpTypeReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-readbygrptypersp-1">ATT_ReadByGrpTypeRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-writereq-1">ATT_WriteReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-writersp-1">ATT_WriteRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-preparewritereq-1">ATT_PrepareWriteReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-preparewritersp-1">ATT_PrepareWriteRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-executewritereq-1">ATT_ExecuteWriteReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-executewritersp-1">ATT_ExecuteWriteRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-handlevaluenoti-1">ATT_HandleValueNoti</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-handlevalueind-1">ATT_HandleValueInd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-handlevaluecfm-1">ATT_HandleValueCfm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-flowctrlviolatedevt-t">ATT_FlowCtrlViolatedEvt_t</a></li>
+<li class="toctree-l3"><a class="reference internal" href="att_api.html#att-mtuupdatedevt">ATT_MtuUpdatedEvt</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gap_api.html">GAP Vendor Specific API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gap_api.html#gap-commands">GAP Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-deviceinit">GAP_DeviceInit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-terminatelinkreq">GAP_TerminateLinkReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-authenticate">GAP_Authenticate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-terminateauth">GAP_TerminateAuth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-updatelinkparamreq">GAP_UpdateLinkParamReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-updatelinkparamreqreply">GAP_UpdateLinkParamReqReply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-registerconnevent">Gap_RegisterConnEvent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-setperiodicadvparams">GapAdv_SetPeriodicAdvParams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-setperiodicadvdata">GapAdv_setPeriodicAdvData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-setperiodicadvenable">GapAdv_SetPeriodicAdvEnable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-periodicadvcreatesync">GapScan_PeriodicAdvCreateSync</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-periodicadvcreatesynccancel">GapScan_PeriodicAdvCreateSyncCancel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-periodicadvterminatesync">GapScan_PeriodicAdvTerminateSync</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-setperiodicadvreceiveenable">GapScan_SetPeriodicAdvReceiveEnable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-adddevicetoperiodicadvlist">GapScan_AddDeviceToPeriodicAdvList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-removedevicefromperiodicadvlist">GapScan_RemoveDeviceFromPeriodicAdvList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-readperiodicadvlistsize">GapScan_ReadPeriodicAdvListSize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-clearperiodicadvlist">GapScan_ClearPeriodicAdvList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-bond">GAP_Bond</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-signable">GAP_Signable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-passkeyupdate">GAP_PasskeyUpdate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-slavesecurityrequest">GAP_SlaveSecurityRequest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapconfig-setparameter">GapConfig_SetParameter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-setparamvalue">GAP_SetParamValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-getparamvalue">GAP_GetParamValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-create">GapAdv_create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-enable">GapAdv_enable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-disable">GapAdv_disable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-setparam">GapAdv_setParam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-destroy">GapAdv_destroy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-getparam">GapAdv_getParam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-loaddata">GapAdv_loadData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-seteventmask">GapAdv_setEventMask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-setvirtualadvaddr">GapAdv_setVirtualAdvAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-enable">GapScan_enable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-disable">GapScan_disable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-setphyparams">GapScan_setPhyParams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-getphyparams">GapScan_getPhyParams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-setparam">GapScan_setParam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-getparam">GapScan_getParam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-seteventmask">GapScan_setEventMask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-getadvreport">GapScan_getAdvReport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapinit-setphyparam">GapInit_setPhyParam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapinit-getphyparam">GapInit_getPhyParam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapinit-connect">GapInit_connect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapinit-connectwl">GapInit_connectWl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapinit-cancelconnect">GapInit_cancelConnect</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gap_api.html#gap-events">GAP Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-deviceinitdone">GAP_DeviceInitDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-linkestablished">GAP_LinkEstablished</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-linkterminated">GAP_LinkTerminated</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-linkparamupdate">GAP_LinkParamUpdate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-signatureupdated">GAP_SignatureUpdated</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-passkeyneeded">GAP_PasskeyNeeded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-authenticationcomplete">GAP_AuthenticationComplete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-slaverequestedsecurity">GAP_SlaveRequestedSecurity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-bondcomplete">GAP_BondComplete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-pairingrequested">GAP_PairingRequested</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-connectingcancelled">GAP_ConnectingCancelled</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-connectioneventnotice">GAP_ConnectionEventNotice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#sm-getecckeys">SM_GetEccKeys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#sm-getdhkey">SM_GetDHKey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-linkparamupdaterequest">GAP_LinkParamUpdateRequest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-advertiser-scanner-event">GAP_Advertiser/Scanner_Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-bondlost">GAP_BondLost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-setperiodicadvparams-1">GAPAdv_SetPeriodicAdvParams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-setperiodicadvdata-1">GAPAdv_SetPeriodicAdvData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapadv-setperiodicadvenable-1">GAPAdv_SetPeriodicAdvEnable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-periodicadvsyncestablishevent">GAP_PeriodicAdvSyncEstablishEvent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-periodicadvreportevent">GAP_PeriodicAdvReportEvent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gap-periodicadvsynclostevent">GAP_PeriodicAdvSyncLostEvent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-periodicadvcreatesync-1">GAPScan_PeriodicAdvCreateSync</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-periodicadvcreatesynccancel-1">GAPScan_PeriodicAdvCreateSyncCancel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-periodicadvterminatesync-1">GAPScan_PeriodicAdvTerminateSync</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-setperiodicadvreceiveenable-1">GAPScan_SetPeriodicAdvReceiveEnable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-adddevicetoperiodicadvlist-1">GAPScan_AddDeviceToPeriodicAdvList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-removedevicefromperiodicadvlist-1">GAPScan_RemoveDeviceFromPeriodicAdvList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-readperiodicadvlistsize-1">GAPScan_ReadPeriodicAdvListSize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gap_api.html#gapscan-clearperiodicadvlist-1">GAPScan_ClearPeriodicAdvList</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gapbondmgr_api.html">GapBondMgr Extension Vendor Specific API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gapbondmgr_api.html#gapbondmgr-extension-commands">GapBondMgr Extension Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#gapbondmgr-setparameter">GAPBondMgr_SetParameter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#gapbondmgr-getparameter">GAPBondMgr_GetParameter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#gapbondmgr-servicechangeind">GAPBondMgr_ServiceChangeInd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#gapbondmgr-pair">GAPBondMgr_Pair</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#gapbondmgr-findaddr">GAPBondMgr_FindAddr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#gapbondmgr-passcodersp">GAPBondMgr_PasscodeRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#sm-registertask">SM_RegisterTask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#sm-getecckeys">SM_GetEccKeys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#sm-getdhkey">SM_GetDHKey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#sm-getscconfirmoob">SM_GetScConfirmOob</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#gapbondmgr-scgetlocaloobparameters">GAPBondMgr_SCGetLocalOOBParameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#gapbondmgr-scsetremoteoobparameters">GAPBondMgr_SCSetRemoteOOBParameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gapbondmgr_api.html#gap-setprivacymode">GAP_SetPrivacyMode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gapbondmgr_api.html#gapbondmgr-extension-events">GapBondMgr Extension Events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gatt_api.html">GATT Vendor Specific API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gatt_api.html#gatt-commands">GATT Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-exchangemtu">GATT_ExchangeMTU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-discallprimaryservices">GATT_DiscAllPrimaryServices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-discprimaryservicebyuuid">GATT_DiscPrimaryServiceByUUID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-findincludedservices">GATT_FindIncludedServices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-discallchars">GATT_DiscAllChars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-disccharsbyuuid">GATT_DiscCharsByUUID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-discallchardescs">GATT_DiscAllCharDescs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-readcharvalue">GATT_ReadCharValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-readusingcharuuid">GATT_ReadUsingCharUUID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-readlongcharvalue">GATT_ReadLongCharValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-readmulticharvalues">GATT_ReadMultiCharValues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-writenorsp">GATT_WriteNoRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-signedwritenorsp">GATT_SignedWriteNoRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-writecharvalue">GATT_WriteCharValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-writelongcharvalue">GATT_WriteLongCharValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-readchardesc">GATT_ReadCharDesc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-readlongchardesc">GATT_ReadLongCharDesc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-writechardesc">GATT_WriteCharDesc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-writelongchardesc">GATT_WriteLongCharDesc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-notification">GATT_Notification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-indication">GATT_Indication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-addservice">GATT_AddService</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-delservice">GATT_DelService</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-addattribute">GATT_AddAttribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-updatemtu">GATT_UpdateMTU</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gatt_api.html#gatt-events">GATT Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gatt_api.html#gatt-clientcharcfgupdated">GATT_ClientCharCfgUpdated</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hci_ext_api.html">HCI Extension Vendor Specific API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hci_ext_api.html#hci-extension-commands">HCI Extension Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setrxgaincmd">HCI_EXT_SetRxGainCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-settxpowercmd">HCI_EXT_SetTxPowerCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-onepktperevtcmd">HCI_EXT_OnePktPerEvtCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-decryptcmd">HCI_EXT_DecryptCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setlocalsupportedfeaturescmd">HCI_EXT_SetLocalSupportedFeaturesCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-modemtesttxcmd">HCI_EXT_ModemTestTxCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-modemhoptesttxcmd">HCI_EXT_ModemHopTestTxCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-modemtestrxcmd">HCI_EXT_ModemTestRxCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-enhancedmodemtesttxcmd">HCI_EXT_EnhancedModemTestTxCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-enhancedmodemhoptesttxcmd">HCI_EXT_EnhancedModemHopTestTxCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-enhancedmodemtestrxcmd">HCI_EXT_EnhancedModemTestRxCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-endmodemtestcmd">HCI_EXT_EndModemTestCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setbdaddrcmd">HCI_EXT_SetBDADDRCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setvirtualadvaddrcmd">HCI_EXT_SetVirtualAdvAddrCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setqosparameters">HCI_EXT_SetQOSParameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setqosdefaultparameters">HCI_EXT_SetQOSDefaultParameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-sethostdefchanclassificationcmd">HCI_EXT_SetHostDefChanClassificationCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-sethostconnchanclassificationcmd">HCI_EXT_SetHostConnChanClassificationCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setscacmd">HCI_EXT_SetSCACmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-enableptmcmd">HCI_EXT_EnablePTMCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setmaxdtmtxpowercmd">HCI_EXT_SetMaxDtmTxPowerCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-disconnectimmedcmd">HCI_EXT_DisconnectImmedCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-packeterrorratecmd">HCI_EXT_PacketErrorRateCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setslavelatencyoverridecmd">HCI_EXT_SetSlaveLatencyOverrideCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-buildrevisioncmd">HCI_EXT_BuildRevisionCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-resetsystemcmd">HCI_EXT_ResetSystemCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-numcomplpktslimitcmd">HCI_EXT_NumComplPktsLimitCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-getconninfocmd">HCI_EXT_GetConnInfoCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setmaxdatalencmd">HCI_EXT_SetMaxDataLenCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setdtmtxpktcntcmd">HCI_EXT_SetDtmTxPktCntCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setpinoutputcmd">HCI_EXT_SetPinOutputCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setlocationingaccuracycmd">HCI_EXT_SetLocationingAccuracyCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-getactiveconninfocmd">HCI_EXT_GetActiveConnInfoCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-getrxstatisticscmd">HCI_EXT_GetRxStatisticsCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-gettxstatisticscmd">HCI_EXT_GetTxStatisticsCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-getcoexstatisticscmd">HCI_EXT_GetCoexStatisticsCmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-coexenablecmd">HCI_EXT_CoexEnableCmd</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hci_ext_api.html#hci-extension-events">HCI Extension Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setrxgaindone">HCI_EXT_SetRxGainDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-settxpowerdone">HCI_EXT_SetTxPowerDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-onepacketpereventdone">HCI_EXT_OnePacketPerEventDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-decryptcommanddone">HCI_EXT_DecryptCommandDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-writelocalfeaturesupportdone">HCI_EXT_WriteLocalFeatureSupportDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setfasttxresponsetimedone">HCI_EXT_SetFastTxResponseTimeDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-modemtesttxdone">HCI_EXT_ModemTestTxDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-modemhoptesttxdone">HCI_EXT_ModemHopTestTxDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-modemtestrxdone">HCI_EXT_ModemTestRxDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-enhancedmodemtesttxdone">HCI_EXT_EnhancedModemTestTxDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-enhancedmodemhoptesttxdone">HCI_EXT_EnhancedModemHopTestTxDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-enhancedmodemtestrxdone">HCI_EXT_EnhancedModemTestRxDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-endmodemtestdone">HCI_EXT_EndModemTestDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setbdaddrdone">HCI_EXT_SetBDADDRDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setvirtualadvaddrdone">HCI_EXT_SetVirtualAdvAddrDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setscadone">HCI_EXT_SetSCADone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-enableptmdone">HCI_EXT_EnablePTMDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setmaxdtmtxpowerdone">HCI_EXT_SetMaxDtmTxPowerDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-disconnectimmeddone">HCI_EXT_DisconnectImmedDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-per">HCI_EXT_PER</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-overridesldone">HCI_EXT_OverrideSLDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-buildrevisiondone">HCI_EXT_BuildRevisionDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-resetsystemdone">HCI_EXT_ResetSystemDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-numcomplpktslimitdone">HCI_EXT_NumComplPktsLimitDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-getconninfodone">HCI_EXT_GetConnInfoDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setmaxdatalengthdone">HCI_EXT_SetMaxDataLengthDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setdtmtxpktcntdone">HCI_EXT_SetDtmTxPktCntDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-le-adv-event">HCI_EXT_LE_ADV_EVENT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-le-scan-event">HCI_EXT_LE_SCAN_EVENT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setpinoutputdone">HCI_EXT_SetPinOutputDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setlocationingaccuracydone">HCI_EXT_SetLocationingAccuracyDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-getactiveconninfodone">HCI_EXT_GetActiveConnInfoDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-coexenabledone">HCI_EXT_CoexEnableDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setdefaultchannelmapdone">HCI_EXT_SetDefaultChannelMapDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-setconnectionchannelmapdone">HCI_EXT_SetConnectionChannelMapDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-getrxstatisticsdone">HCI_EXT_GetRxStatisticsDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-gettxstatisticsdone">HCI_EXT_GetTxStatisticsDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-getcoexstatisticsdone">HCI_EXT_GetCoexStatisticsDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#hci-ext-lltestmodedone">HCI_EXT_LLTestModeDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hci_ext_api.html#commandstatus">CommandStatus</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="l2cap_api.html">L2CAP Extension Vendor Specific API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="l2cap_api.html#l2cap-extension-commands">L2CAP Extension Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-senddata">L2CAP_SendData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-registerpsm">L2CAP_RegisterPsm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-deregisterpsm">L2CAP_DeregisterPsm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-psminfo">L2CAP_PsmInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-psmchannels">L2CAP_PsmChannels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-channelinfo">L2CAP_ChannelInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-connectreq">L2CAP_ConnectReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-connectrsp">L2CAP_ConnectRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-disconnectreq">L2CAP_DisconnectReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-flowctrlcredit">L2CAP_FlowCtrlCredit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-inforeq">L2CAP_InfoReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-connparamupdatereq">L2CAP_ConnParamUpdateReq</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="l2cap_api.html#l2cap-extension-events">L2CAP Extension Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-cmdreject">L2CAP_CmdReject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-connectreq-1">L2CAP_ConnectReq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-connparamupdatersp">L2CAP_ConnParamUpdateRsp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-channelestablished">L2CAP_ChannelEstablished</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-channelterminated">L2CAP_ChannelTerminated</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-outofcredit">L2CAP_OutOfCredit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-peercreditthreshold">L2CAP_PeerCreditThreshold</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-sendsdudone">L2CAP_SendSduDone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l2cap_api.html#l2cap-senddata-1">L2CAP_SendData</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util_api.html">UTIL Extension Vendor Specific API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util_api.html#util-extension-commands">UTIL Extension Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="util_api.html#util-nv-read">UTIL_NV_Read</a></li>
+<li class="toctree-l3"><a class="reference internal" href="util_api.html#util-nv-write">UTIL_NV_Write</a></li>
+<li class="toctree-l3"><a class="reference internal" href="util_api.html#util-forceboot">UTIL_ForceBoot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="util_api.html#util-buildrevision">UTIL_BuildRevision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="util_api.html#util-getmemstats">UTIL_GetMemStats</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util_api.html#util-extension-events">UTIL Extension Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="util_api.html#util-getmemstats-1">UTIL_GetMemStats</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="indexes-and-tables">
+<h2>Indexes and tables<a class="headerlink" href="#indexes-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../genindex.html"><span class="std std-ref">Index</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright &amp;copy; Copyright 1995-2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

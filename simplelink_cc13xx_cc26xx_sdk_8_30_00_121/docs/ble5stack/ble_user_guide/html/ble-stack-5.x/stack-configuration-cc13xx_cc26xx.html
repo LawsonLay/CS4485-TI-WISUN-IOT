@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stack Configurations &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Developing a Bluetooth LE Application" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html" />
+    <link rel="prev" title="Physical Layer (PHY)" href="phy.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-stack-5.x stack-configuration-cc13xx_cc26xx";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview-cc13xx_cc26xx.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gap-cc13xx_cc26xx.html">Generic Access Profile (GAP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gatt.html">Generic Attribute Profile (GATT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gatt.html#gap-gatt-service-ggs">GAP GATT Service (GGS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gatt.html#generic-attribute-profile-service-gatt-service">Generic Attribute Profile Service (GATT Service)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gatt.html#gattservapp-module">GATTServApp Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gapbondmngr-cc13xx_cc26xx.html">GAP Bond Manager and LE Secure Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="privacy.html">Privacy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-common/l2cap.html">Logical Link Control and Adaptation Layer Protocol (L2CAP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-common/link-layer-cc13xx_cc26xx.html">Link Layer (LL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channel-selection-algorithm-number-two.html">Channel Selection Algorithm #2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hci.html">Host Controller Interface (HCI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phy.html">Physical Layer (PHY)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Stack Configurations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-bluetooth-low-energy-protocol-stack-features">Configuring Bluetooth Low Energy Protocol Stack Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-time-bluetooth-low-energy-protocol-stack-configuration">Run-Time Bluetooth Low Energy Protocol Stack Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a> &raquo;</li>
+      <li>Stack Configurations</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="stack-configurations">
+<span id="stack-features-configuration"></span><h1>Stack Configurations<a class="headerlink" href="#stack-configurations" title="Permalink to this headline">¶</a></h1>
+<p>Most projects are using SysConfig to configure the BLE-Stack. See
+<a class="reference internal" href="../sysconfig/ble5-sysconfig.html#sec-sysconfig-ble-check"><span class="std std-ref">Checking if SysConfig is used for BLE</span></a> for steps on how to check if SysConfig is
+enabled for BLE. Based on the selected SysConfig settings, only the necessary
+precompiled libraries will be linked to the project.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Note that the following section applies only to example applications that are
+<strong>not</strong> configuring the BLE-Stack via SysConfig. For information
+about configuring the BLE-Stack with SysConfig see <a class="reference internal" href="../sysconfig/ble5-sysconfig.html#sysconfig-ble5"><span class="std std-ref">BLE5-Stack SysConfig Features</span></a>.</p>
+</div>
+<div class="section" id="configuring-bluetooth-low-energy-protocol-stack-features">
+<h2>Configuring Bluetooth Low Energy Protocol Stack Features<a class="headerlink" href="#configuring-bluetooth-low-energy-protocol-stack-features" title="Permalink to this headline">¶</a></h2>
+<p>The Bluetooth Low Energy protocol stack can be configured to include
+or exclude certain Bluetooth Low Energy features by changing the
+library configuration. The available Bluetooth
+Low Energy features are defined in the <code class="docutils literal notranslate"><span class="pre">build_config.opt</span></code> file in
+the Tools folder of the stack project within the IDE. Based on the features
+selected in the <code class="docutils literal notranslate"><span class="pre">build_config.opt</span></code> file, the respective precompiled libraries
+will be selected during the build process of the stack project.</p>
+</div>
+<div class="section" id="run-time-bluetooth-low-energy-protocol-stack-configuration">
+<h2>Run-Time Bluetooth Low Energy Protocol Stack Configuration<a class="headerlink" href="#run-time-bluetooth-low-energy-protocol-stack-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The Bluetooth Low Energy protocol stack can be configured with
+various parameters that control its runtime behavior and RF antenna
+layout. The available configuration parameters are described in
+the <code class="docutils literal notranslate"><span class="pre">ble_user_config.h</span></code> file in the ICallBLE IDE folder of the
+application. During initialization, these parameters are supplied to the
+Bluetooth Low Energy protocol stack by the <code class="docutils literal notranslate"><span class="pre">user0Cfg</span></code> structure, declared in
+main.c.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ble_user_config.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// BLE user defined configuration</span>
+<span class="n">bleUserCfg_t</span><span class="w"> </span><span class="n">user0Cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BLE_USER_CFG</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Because the <code class="docutils literal notranslate"><span class="pre">ble_user_config.h</span></code> file is shared filed between the Bluetooth
+Low Energy projects within the SDK, TI recommends defining configuration
+parameters in the <code class="docutils literal notranslate"><span class="pre">.opt</span></code> files found under <code class="docutils literal notranslate"><span class="pre">TOOLS\defines</span></code>. The <code class="docutils literal notranslate"><span class="pre">.opt</span></code>
+files contain preprocessor symbols of the application when the default value
+isn’t sufficient. For example, to change the maximum PDU size from the default
+27 to 162, set the preprocessor symbol <code class="docutils literal notranslate"><span class="pre">MAX_PDU_SIZE=162</span></code> in the
+preprocessor symbols for the application project. Increasing certain
+parameters may increase heap memory use by the protocol stack;
+adjust the <code class="docutils literal notranslate"><span class="pre">HEAPMGR_SIZE</span></code> as required (if not using auto sized heap).
+<a class="reference internal" href="#appconfigurablefeatures"><span class="std std-numref">Table 21.</span></a> and <a class="reference internal" href="#stackconfigurablefeatures"><span class="std std-numref">Table 22.</span></a>
+list the available configuration parameters.</p>
+<span id="appconfigurablefeatures"></span><table class="docutils align-default" id="id2">
+<caption><span class="caption-number">Table 21. </span><span class="caption-text">Bluetooth Low Energy Application Configuration Parameters</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 13%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Configurable?</p></th>
+<th class="head"><p>Define</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>BOARD_DISPLAY_USE_LCD</p></td>
+<td><p>0 or 1 determines if the Display driver should use LCD</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>BOARD_DISPLAY_USE_UART</p></td>
+<td><p>0 or 1 determines if the Display driver should use UART</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>BOARD_DISPLAY_USE_UART_ANSI</p></td>
+<td><p>0 or 1 determines if the Display driver should use UART ANSI</p></td>
+</tr>
+<tr class="row-odd"><td><p>N</p></td>
+<td><p>CC26X2</p></td>
+<td><p>This selects the chipset</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>CC26X2R1_LAUNCHXL</p></td>
+<td><p>This define may be changed when migrating to a custom development board</p></td>
+</tr>
+<tr class="row-odd"><td><p>N</p></td>
+<td><p>CC26XX</p></td>
+<td><p>This selects the chipset</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>DeviceFamily_CC26X2</p></td>
+<td><p>This selects the chipset</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>Display_DISABLE_ALL</p></td>
+<td><p>If set, the Display module will be disabled.</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>EXT_HAL_ASSERT</p></td>
+<td><p>Defining this assert will forward ble5stack asserts to the application</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>EXTENDED_STACK_SETTINGS</p></td>
+<td><p>Bitmask of extended stack settings that are passed to the stack via ble_user_config. Options are defined in build_components.opt.</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>HEAPMGR_METRICS</p></td>
+<td><p>Defining this will enable heap profiling.</p></td>
+</tr>
+<tr class="row-odd"><td><p>N</p></td>
+<td><p>ICALL_EVENTS</p></td>
+<td><p>This define is used with ICALL - do not modify</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>ICALL_JT</p></td>
+<td><p>This define is used with ICALL - do not modify</p></td>
+</tr>
+<tr class="row-odd"><td><p>N</p></td>
+<td><p>ICALL_LITE</p></td>
+<td><p>This define is used with ICALL - do not modify</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>ICALL_MAX_NUM_ENTITIES</p></td>
+<td><p>This Maximum number of entities that use ICall, including service entities and application entities.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>ICALL_MAX_NUM_TASKS</p></td>
+<td><p>Defines the max number of ICall enabled tasks. Must be the same as OSAL_MAX_NUM_PROXY_TASKS + 1. Default is 2.</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>L2CAP_NUM_CO_CHANNELS</p></td>
+<td><p>Maximum number of L2CAP Connection-Oriented (CO) Channels. Default is 3.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>L2CAP_NUM_PSM</p></td>
+<td><p>Maximum number of L2CAP Protocol/Service Multiplexers (PSM). Default is 3.</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>MAX_NUM_BLE_CONNS</p></td>
+<td><p>This is the maximum number of simultaneous Bluetooth Low Energy collections allowed. Adding more connections uses more RAM and may require increasing HEAPMGR_SIZE. Profile heap usage accordingly</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>MAX_NUM_PDU</p></td>
+<td><p>Maximum number of Bluetooth Low Energy HCI PDUs. Default is 5. If the maximum number of connections is set to 0, then this number should also be set to 0.</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>MAX_PDU_SIZE</p></td>
+<td><p>Maximum size in bytes of the Bluetooth Low Energy HCI PDU. Default is 27. Valid range is 27 to 255. The maximum ATT_MTU is MAX_PDU_SIZE - 4. See Configuring for Larger MTU Values.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>NPI_SPI_CONFIG</p></td>
+<td><p>When NPI_USE_API is defined, this will allows you to choose which SPI driver instance NPI will be used.</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>NPI_USE_SPI</p></td>
+<td><p>Configure NPI to use SPI. Do not define NPI_USE_UART and NPI_USE_SPI at the same time.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>NPI_USE_UART</p></td>
+<td><p>Configure NPI to use UART. Do not define NPI_USE_SPI and NPI_USE_UART at the same time.</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>PM_STARTUP_MARGIN</p></td>
+<td><p>Defines time in microseconds (us) the system will wake up before the start of the connection event. Default is 300. This value is optimized for the example projects.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>POWER_SAVING</p></td>
+<td><p>Power management is enabled when defined, and disabled when not defined. Requires same option in stack project</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>PTM_MODE</p></td>
+<td><p>Define this will enable PTM mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>SC_HOST_DEBUG</p></td>
+<td><p>Define this will make the LE Secure Connection use the debug keys specified by the Bluetooth Core Specification, therefore it’s easy to decrypt the link and follow the over the air traffic.</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>STACK_LIBRARY</p></td>
+<td><p>Build/Use the build configuration where the stack is built as a library</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>TBM_ACTIVE_ITEMS_ONLY</p></td>
+<td><p>When using the Two Button Menu, Only active items will be displayed</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>USE_ICALL</p></td>
+<td><p>This define is used with ICALL - do not modify</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>USE_RCOSC</p></td>
+<td><p>This define will make the software to operate the CC13xx or CC26xx in a 32kHz crystal-less mode.</p></td>
+</tr>
+</tbody>
+</table>
+<span id="stackconfigurablefeatures"></span><table class="docutils align-default" id="id3">
+<caption><span class="caption-number">Table 22. </span><span class="caption-text">Bluetooth Low Energy Stack Configuration Parameters</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 15%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Configurable?</p></th>
+<th class="head"><p>Define</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>ATT_DELAYED_REQ</p></td>
+<td><p>Allows to reply to a Read Att Request at a later stage, if the request cannot be processed when received (see also <a class="reference internal" href="gatt.html#delaying-an-att-read-request"><span class="std std-ref">Delaying an ATT Read Request</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>BROADCASTER_CFG</p></td>
+<td><p>Used to include the GAP Broadcaster Role support</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>CC26X2</p></td>
+<td><p>This selects the chipset</p></td>
+</tr>
+<tr class="row-odd"><td><p>N</p></td>
+<td><p>CC26XX</p></td>
+<td><p>This selects the chipset</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>CENTRAL_CFG</p></td>
+<td><p>Used to include the GAP Central Role support</p></td>
+</tr>
+<tr class="row-odd"><td><p>N</p></td>
+<td><p>DeviceFamily_CC26X2</p></td>
+<td><p>This selects the chipset</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>EXT_HAL_ASSERT</p></td>
+<td><p>Defining this assert will forward ble5stack asserts to the application</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>GATT_NO_CLIENT</p></td>
+<td><p>Should only be done for devices that do not wish to discover the RPAO characteristic</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>GATT_NO_SERVICE_CHANGED</p></td>
+<td><p>Used to exclude service changed characteristic from GATT Service</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>HEAPMGR_METRICS</p></td>
+<td><p>Defining this will enable heap profiling.</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>ICALL_EVENTS</p></td>
+<td><p>This define is used with ICALL - do not modify</p></td>
+</tr>
+<tr class="row-odd"><td><p>N</p></td>
+<td><p>ICALL_JT</p></td>
+<td><p>This define is used with ICALL - do not modify</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>ICALL_LITE</p></td>
+<td><p>This define is used with ICALL - do not modify</p></td>
+</tr>
+<tr class="row-odd"><td><p>N</p></td>
+<td><p>ICALL_STACK0_ADDR</p></td>
+<td><p>This define is used with ICALL - do not modify</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>L2CAP_COC_CFG</p></td>
+<td><p>Enable L2CAP Connection Oriented Channels</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>OBSERVER_CFG</p></td>
+<td><p>Used to include the GAP Observer Role support</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>PERIPHERAL_CFG</p></td>
+<td><p>Used to include the GAP Peripheral Role support</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>POWER_SAVING</p></td>
+<td><p>Used to allow the device to go to standby</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>STACK_LIBRARY</p></td>
+<td><p>Build/Use the build configuration where the stack is built as a library</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>USE_DMM</p></td>
+<td><p>Required if DMM functionalities are used</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>USE_ICALL</p></td>
+<td><p>This define is used with ICALL - do not modify</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>USE_RTLS</p></td>
+<td><p>Required if RTLS functionalities are used</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>RTLS_CTE</p></td>
+<td><p>Required if RTLS functionalities are used</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>RTLS_CTE_TEST</p></td>
+<td><p>Required if RTLS test mode functionalities are used</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>USE_PERIODIC_ADV</p></td>
+<td><p>Required to send periodic advertisements</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>USE_PERIODIC_SCAN</p></td>
+<td><p>Required to synchronize with periodic advertisements</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>SYSCFG</p></td>
+<td><p>Set when BLE module is added in the sysconfig</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>NPI_FLOW_CTRL</p></td>
+<td><p>Defining this will enable NPI flow control</p></td>
+</tr>
+<tr class="row-even"><td><p>Y</p></td>
+<td><p>USE_COEX</p></td>
+<td><p>Defining this will enable coexistence</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>GAP_BOND_MGR</p></td>
+<td><p>Defining this will enable Gap Bond Manager</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>OSAL_CBTIMER_NUM_TASKS</p></td>
+<td><p>Internal symbol - do not modify</p></td>
+</tr>
+<tr class="row-odd"><td><p>N</p></td>
+<td><p>ONE_BLE_LIB_SIZE_OPTIMIZATION</p></td>
+<td><p>Internal symbol - do not modify</p></td>
+</tr>
+<tr class="row-even"><td><p>N</p></td>
+<td><p>HCI_TL_NONE</p></td>
+<td><p>Internal symbol - do not modify</p></td>
+</tr>
+<tr class="row-odd"><td><p>N</p></td>
+<td><p>HOST_CONFIG</p></td>
+<td><p>Internal symbol - do not modify</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="phy.html" class="btn btn-neutral float-left" title="Physical Layer (PHY)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html" class="btn btn-neutral float-right" title="Developing a Bluetooth LE Application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

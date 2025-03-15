@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_e_c_d_s_a___operation_verify" kind="struct" language="C++" prot="public">
+    <compoundname>ECDSA_OperationVerify</compoundname>
+    <includes refid="_e_c_d_s_a_8h" local="no">ECDSA.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_e_c_d_s_a___operation_verify_1af6e99bfc14d2c8dd7768719ed0a445ab" prot="public" static="no" mutable="no">
+        <type><ref refid="_e_c_d_s_a_8h_1acbeddeb9ec24f98c63b1cd6b622f644b" kindref="member">ECDSA_CurveType</ref></type>
+        <definition>ECDSA_CurveType ECDSA_OperationVerify::curveType</definition>
+        <argsstring></argsstring>
+        <name>curveType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDSA.h" line="701" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="701" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_c_d_s_a___operation_verify_1a00d9dd6bfbca401c1864b4695f4778d7" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> *</type>
+        <definition>const CryptoKey* ECDSA_OperationVerify::theirPublicKey</definition>
+        <argsstring></argsstring>
+        <name>theirPublicKey</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to the public key of the party that signed the hash of the message </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDSA.h" line="705" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="705" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_c_d_s_a___operation_verify_1a769f7680681d01f69682d421962a0f3e" prot="public" static="no" mutable="no">
+        <type>const uint8_t *</type>
+        <definition>const uint8_t* ECDSA_OperationVerify::hash</definition>
+        <argsstring></argsstring>
+        <name>hash</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to the hash of the message in octet string format. Must be the same length as the other curve parameters. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDSA.h" line="708" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="708" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_c_d_s_a___operation_verify_1aebe0eb36778b225c51d7d024e6aa69bc" prot="public" static="no" mutable="no">
+        <type>const uint8_t *</type>
+        <definition>const uint8_t* ECDSA_OperationVerify::r</definition>
+        <argsstring></argsstring>
+        <name>r</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to the r component of the received signature. Formatted in octet string format. Must be of the same length as other params of the curve used. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDSA.h" line="712" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="712" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_c_d_s_a___operation_verify_1a88c77cd7664b04e6eecb0abe2d34d271" prot="public" static="no" mutable="no">
+        <type>const uint8_t *</type>
+        <definition>const uint8_t* ECDSA_OperationVerify::s</definition>
+        <argsstring></argsstring>
+        <name>s</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to the s component of the received signature. Formatted in octet string format. Must be of the same length as other params of the curve used. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDSA.h" line="718" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="718" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct containing the parameters required for verifying a message. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="880">
+        <label>ECDSA_OperationVerify</label>
+        <link refid="struct_e_c_d_s_a___operation_verify"/>
+        <childnode refid="881" relation="usage">
+          <edgelabel>theirPublicKey</edgelabel>
+        </childnode>
+      </node>
+      <node id="881">
+        <label>CryptoKey</label>
+        <link refid="struct_crypto_key"/>
+        <childnode refid="882" relation="usage">
+          <edgelabel>plaintext</edgelabel>
+        </childnode>
+        <childnode refid="883" relation="usage">
+          <edgelabel>keyStore</edgelabel>
+        </childnode>
+      </node>
+      <node id="882">
+        <label>CryptoKey_Plaintext</label>
+        <link refid="struct_crypto_key___plaintext"/>
+      </node>
+      <node id="883">
+        <label>CryptoKey_KeyStore</label>
+        <link refid="struct_crypto_key___key_store"/>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/ECDSA.h" line="699" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="698" bodyend="724"/>
+    <listofallmembers>
+      <member refid="struct_e_c_d_s_a___operation_verify_1af6e99bfc14d2c8dd7768719ed0a445ab" prot="public" virt="non-virtual"><scope>ECDSA_OperationVerify</scope><name>curveType</name></member>
+      <member refid="struct_e_c_d_s_a___operation_verify_1a769f7680681d01f69682d421962a0f3e" prot="public" virt="non-virtual"><scope>ECDSA_OperationVerify</scope><name>hash</name></member>
+      <member refid="struct_e_c_d_s_a___operation_verify_1aebe0eb36778b225c51d7d024e6aa69bc" prot="public" virt="non-virtual"><scope>ECDSA_OperationVerify</scope><name>r</name></member>
+      <member refid="struct_e_c_d_s_a___operation_verify_1a88c77cd7664b04e6eecb0abe2d34d271" prot="public" virt="non-virtual"><scope>ECDSA_OperationVerify</scope><name>s</name></member>
+      <member refid="struct_e_c_d_s_a___operation_verify_1a00d9dd6bfbca401c1864b4695f4778d7" prot="public" virt="non-virtual"><scope>ECDSA_OperationVerify</scope><name>theirPublicKey</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

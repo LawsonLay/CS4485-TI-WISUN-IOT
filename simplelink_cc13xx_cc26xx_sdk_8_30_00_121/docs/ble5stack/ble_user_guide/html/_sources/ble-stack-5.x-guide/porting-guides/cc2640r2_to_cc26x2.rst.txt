@@ -1,0 +1,68 @@
+.. _cc2640r2-cc26x2-migration-guide:
+
+CC2640R2 to CC26x2
+******************
+
+This section describes the main differences an Application Developer must
+be aware of between the CC2640R2 and the CC26x2 along with a porting guide to
+demonstrate the migration effort.
+
+Features and Benefits
+=====================
+
+Increased Processing Power and Scalability
+------------------------------------------
+
+The CC26x2 is a wireless MCU with a dedicated Arm Cortex-M4F application
+processor that is pin-to-pin compatible to the CC2640R2 in the 7x7mm QFN
+package.
+
+More memory is available with an increase of non-volatile memory from
+275kB to 608kB. This breaks down into 352kB Flash memory + 256 KB ROM.
+RAM has also increased from 28 kB to 80 kB.
+The availability of this increased memory provides support for
+Over-the-Air Downloads (OAD), larger applications, and more simultaneous
+connections.
+
+Other improvements include an additional UART and a 70% reduction in current
+consumption in the Sensor Controller.
+
+Bluetooth 5.2 Enabled
+---------------------
+
+If your project wasn't already on a BLE5 platform, the CC26x2 will provide the
+ability to support the features of Bluetooth 5.2. This includes features such as
+higher throughput, longer range, advertising extensions, and improved
+coexistence with other wireless technology. For a full list of supported
+features, see :any:`sec-ble-stack-feature-intro`.
+
+Enhanced Security
+-----------------
+
+With additional hardware security accelerators for AES-128/256, SHA-256, and
+ECC, CC26x2 saves five times the processing time and current consumption for
+implementing security algorithms.  This is critical to enable strong network
+security.
+
+|LP_CC26xx| Support
+-------------------
+
+All example applications are compatible with the |LP_CC26xx| development
+kit. These features allow for a unified development experience and empowers
+developers to rapidly release to market.
+
+For more information on this device, see the |LP_CC26xx| tool page.
+
+Compatibility Notes
+===================
+
+Due to a number of improvements and feature additions, the recommended migration
+path for customers is to start with a CC26x2 based project and migrate any
+custom application code and project configuration to the new project.
+
+The following sections describe, in general terms, the software differences when
+migrating from CC2640R2 to CC26x2.
+
+.. include:: inc_cc2640r2_compatibility.rst
+
+.. include:: /ble-stack-5.x-guide/porting-guides/blestack_to_ble5stack.rst

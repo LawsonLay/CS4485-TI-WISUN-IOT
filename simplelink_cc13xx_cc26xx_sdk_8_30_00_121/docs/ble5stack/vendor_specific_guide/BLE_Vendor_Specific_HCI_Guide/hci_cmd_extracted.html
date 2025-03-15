@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HCI_EXT_SetRxGainCmd &mdash; Vendor Specific Guide 5.00.00 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Vendor Specific Guide
+          </a>
+              <div class="version">
+                5.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hci_interface.html">HCI Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="att_api.html">ATT Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gap_api.html">GAP Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gapbondmgr_api.html">GapBondMgr Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gatt_api.html">GATT Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hci_ext_api.html">HCI Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2cap_api.html">L2CAP Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util_api.html">UTIL Extension Vendor Specific API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vendor Specific Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>HCI_EXT_SetRxGainCmd</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hci-ext-setrxgaincmd">
+<h1>HCI_EXT_SetRxGainCmd<a class="headerlink" href="#hci-ext-setrxgaincmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC00</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>Set the receiver gain.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">RX Gain<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Set RX gain to standard or high.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>RX Gain Standard</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>RX Gain High</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetRxGainDone event shall be generated.</p>
+</section>
+<section id="hci-ext-settxpowercmd">
+<h1>HCI_EXT_SetTxPowerCmd<a class="headerlink" href="#hci-ext-settxpowercmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC01</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to set the RF transmitter output power.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">TX Power<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tx power to use.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>2</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>-20 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>-18 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>-15 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>-12 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>-10 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>-9 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>-6 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>-5 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>-3 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>0 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>1 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>2 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>3 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>4 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>5 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  14 dBm CC13x2P_4:  6 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  15 dBm CC13x2P_4:  7 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  16 dBm CC13x2P_4:  8 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  17 dBm CC13x2P_4:  9 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  18 dBm CC13x2P_4:  10 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  19 dBm CC13x2P_4:  N/A</p></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  20 dBm CC13x2P_4:  N/A</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetTxPowerDone event shall be generated.</p>
+</section>
+<section id="hci-ext-onepktperevtcmd">
+<h1>HCI_EXT_OnePktPerEvtCmd<a class="headerlink" href="#hci-ext-onepktperevtcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC02</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to configure the Link Layer to only allow one packet per connection event. This command can be used to trade-off throughput and power consumption during a connection. When enabled, power can be conserved during a connection by limiting the number of packets per connection event to one, at the expense of more limited throughput. When disabled, the number of packets transferred during a connection event is not limited, at the expense of higher power consumption. Note that when set, all connections will be restricted to one packet per event.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Control<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Enable or disable allowing only one packet per event.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Disable</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Enable</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_OnePacketPerEventDone event shall be generated.</p>
+</section>
+<section id="hci-ext-decryptcmd">
+<h1>HCI_EXT_DecryptCmd<a class="headerlink" href="#hci-ext-decryptcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC05</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to decrypt encrypted text using AES128.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Key<span class="colon">:</span></dt>
+<dd class="field-odd"><p>128 bit key for the decryption of the data given in the command. The most significant octet of the data corresponds to key[0] using the notation specified in FIPS 197.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>16 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“BF:01:FB:9D:4E:F3:BC:36:D8:74:F5:39:41:38:68:4C”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 16 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Data<span class="colon">:</span></dt>
+<dd class="field-even"><p>128 bit encrypted data to be decrypted. The most significant octet of the key corresponds to key[0] using the notation specified in FIPS 197.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>16 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“66:C6:C2:27:8E:3B:8E:05:3E:7E:A3:26:52:1B:AD:99”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 16 byte value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_DecryptCommandDone event shall be generated.</p>
+</section>
+<section id="hci-ext-setlocalsupportedfeaturescmd">
+<h1>HCI_EXT_SetLocalSupportedFeaturesCmd<a class="headerlink" href="#hci-ext-setlocalsupportedfeaturescmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC06</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to set the Controllers Local Supported Features. For a complete list of supported LE features, please see [1], Part B, Section 4.6. Note: This command can be issued either before or after one or more connections are formed. However, the local features set in this manner are only effective if performed before a Feature Exchange Procedure has been initiated by the Master. Once this control procedure has been completed for a particular connection, only the exchanged feature set for that connection will be used. Since the Link Layer may initiate the feature exchange procedure autonomously, it is best to use this command before the connection is formed.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">FeatureSet<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Write LL local supported features.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>8 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000000000000001</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x0000000000000000</p></td>
+<td><p>No Events Specified</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000000000000001</p></td>
+<td><p>Encryption</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000000000000002</p></td>
+<td><p>Connection Parameters Request</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000000000000004</p></td>
+<td><p>Reject Extended Indication</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000000000000008</p></td>
+<td><p>Slave Features Exchange</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000000000000010</p></td>
+<td><p>Ping</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000000000000020</p></td>
+<td><p>Data Packet Length Extension</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000000000000040</p></td>
+<td><p>Privacy</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000000000000080</p></td>
+<td><p>Extended Scanner Filter Policies</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000000000000100</p></td>
+<td><p>2M PHY</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000000000000200</p></td>
+<td><p>Stable Modulation Index Tx</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000000000000400</p></td>
+<td><p>Stable Modulation Index Rx</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000000000000800</p></td>
+<td><p>Coded PHY</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000000000001000</p></td>
+<td><p>Extended Advertising</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000000000002000</p></td>
+<td><p>Periodic Advertising</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000000000004000</p></td>
+<td><p>Channel Selection Algorithm #2</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000000000008000</p></td>
+<td><p>LE Power Class 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000000000010000</p></td>
+<td><p>Minimum Number of Used Channels</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000000000020000</p></td>
+<td><p>Connection CTE Request</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000000000040000</p></td>
+<td><p>Connection CTE Response</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000000000080000</p></td>
+<td><p>Connectionless CTE Transmitter</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000000000100000</p></td>
+<td><p>Connectionless CTE Receiver</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000000000200000</p></td>
+<td><p>Antenna Switching During CTE Tx</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000000000400000</p></td>
+<td><p>Antenna Switching During CTE Rx</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000000000800000</p></td>
+<td><p>Receiving CTE</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_WriteLocalFeatureSupportDone event shall be generated.</p>
+</section>
+<section id="hci-ext-modemtesttxcmd">
+<h1>HCI_EXT_ModemTestTxCmd<a class="headerlink" href="#hci-ext-modemtesttxcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC08</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to start a continuous transmitter modem test, using either a modulated or unmodulated carrier wave tone, at the frequency that corresponds to the specified RF channel. Use the HCI_EXT_EndModemTest command to end the test. Note: The RF channel, not the BLE frequency, is specified! You can obtain the RF channel from the BLE frequency as follows: RF Channel = (BLE Frequency - 2402) / 2. Note: When the HCI_EXT_EndModemTest is issued to stop this test, a Controller reset will take place. Note: The device will transmit at the default output power (0 dBm) unless changed by HCI_EXT_SetTxPowerCmd. Note: This modem test can be used to satisfy in part radio regulation requirements as specific in standards such as ARIB STD-T66.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">CW Mode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Set Modem Test CW modulation.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Modulated Transmit Carrier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Unmodulated Transmit Carrier</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">TX RF Channel<span class="colon">:</span></dt>
+<dd class="field-even"><p>RF channel of transmit frequency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0-39</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_ModemTestTxDone event shall be generated.</p>
+</section>
+<section id="hci-ext-modemhoptesttxcmd">
+<h1>HCI_EXT_ModemHopTestTxCmd<a class="headerlink" href="#hci-ext-modemhoptesttxcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC09</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to start a continuous transmitter direct test mode test using a modulated carrier wave and transmitting a 37 byte packet of pseudo-random 9 bit data. A packet is transmitted on a different frequency (linearly stepping through all RF channels 0..39) every 625us. Use the HCI_EXT_EndModemTest command to end the test. Note: When the HCI_EXT_EndModemTest is issued to stop this test, a Controller reset will take place. Note: The device will transmit at the default output power (0 dBm) unless changed by HCI_EXT_SetTxPowerCmd. Note: This modem test can be used to satisfy in part radio regulation requirements as specific in standards such as ARIB STD-T66.</p>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_ModemHopTestTxDone event shall be generated.</p>
+</section>
+<section id="hci-ext-modemtestrxcmd">
+<h1>HCI_EXT_ModemTestRxCmd<a class="headerlink" href="#hci-ext-modemtestrxcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC0A</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to start a continuous receiver modem test using a modulated carrier wave tone, at the frequency that corresponds to the specific RF channel. Any received data is discarded. Receiver gain may be adjusted using the HCI_EXT_SetRxGain command. RSSI may be read during this test by using the HCI_ReadRssi command. Use HCI_EXT_EndModemTest command to end the test. Note: The RF channel, not the BLE frequency, is specified! You can obtain the RF channel from the BLE frequency as follows: RF Channel = (BLE Frequency - 2402) / 2. Note: When the HCI_EXT_EndModemTest is issued to stop this test, a Controller reset will take place. Note: This modem test can be used to satisfy in part radio regulation requirements as specific in standards such as ARIB STD-T66.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">RX RF Channel<span class="colon">:</span></dt>
+<dd class="field-odd"><p>RF channel of receive frequency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0-39</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_ModemTestRxDone event shall be generated.</p>
+</section>
+<section id="hci-ext-enhancedmodemtesttxcmd">
+<h1>HCI_EXT_EnhancedModemTestTxCmd<a class="headerlink" href="#hci-ext-enhancedmodemtesttxcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC27</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used start the enhanced BLE5 continuous transmitter modem test, using either a modulated or unmodulated carrier wave tone, at the frequency that corresponds to the specified RF channel, for a given PHY (1M, 2M, Coded S2, or Coded S8). Use LL_EXT_EndModemTest to end the test.Note: A Controller reset will be issued by the HCI_EXT_EndModemTest command! Note: The BLE device will transmit at the current TX power setting. Note: This API can be used to verify this device meets Japan’s TELEC regulations.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">CW Mode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Set Enhanced Modem Test Tx CW modulation.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Modulated Transmit Carrier</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Unmodulated Transmit Carrier</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">RF PHY<span class="colon">:</span></dt>
+<dd class="field-even"><p>PHY to transmit on</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>1 Mbps Phy</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>2 Mbps Phy</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>Coded S8 Phy (125kpbs)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x06</p></td>
+<td><p>Coded S2 Phy (500 kbps)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">RF Channel<span class="colon">:</span></dt>
+<dd class="field-even"><p>RF channel of transmit frequency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0-39</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_EnhancedModemTestTxDone event shall be generated.</p>
+</section>
+<section id="hci-ext-enhancedmodemhoptesttxcmd">
+<h1>HCI_EXT_EnhancedModemHopTestTxCmd<a class="headerlink" href="#hci-ext-enhancedmodemhoptesttxcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC28</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to start the enhanced continuous transmitter direct test mode test using a modulated carrier wave. A test reference data packet is transmitted on a different frequency (linearly stepping through all RF channels 0..39), for a given PHY (1M, 2M, Coded S2, or Coded S8), every period (depending on the payload length, as given Vol. 6, Part F, section 4.1.6). Use LL_EXT_EndModemTest to end the test. Note: A Controller reset will be issued by the HCI_EXT_EndModemTest command! Note: The BLE device will transmit at the current TX power setting. Note: This API can be used to verify this device meets Japan’s TELEC regulations.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Payload Length<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Data payload length in bytes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>37</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0-37</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Payload Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>DTM Packet Pattern Type</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x00</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>PRBS9</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>0x0F</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>0x55</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>PRBS15</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>0xFF</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x05</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x06</p></td>
+<td><p>0xF0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x07</p></td>
+<td><p>0xAA</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">RF PHY<span class="colon">:</span></dt>
+<dd class="field-even"><p>PHY to transmit on</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>1 Mbps Phy</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>2 Mbps Phy</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>Coded S8 Phy (125kpbs)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x06</p></td>
+<td><p>Coded S2 Phy (500 kbps)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_EnhancedModemHopTestTxDone event shall be generated.</p>
+</section>
+<section id="hci-ext-enhancedmodemtestrxcmd">
+<h1>HCI_EXT_EnhancedModemTestRxCmd<a class="headerlink" href="#hci-ext-enhancedmodemtestrxcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC29</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to start the enhanced BLE5 continuous receiver modem test using a modulated carrier wave tone, at the frequency that corresponds to the specific RF channel, for a given PHY (1M, 2M, Coded S2, or Coded S8). Any received data is discarded. RSSI may be read during this test by using the LL_ReadRssi command. Use LL_EXT_EndModemTest command to end the test. Note: A Controller reset will be issued by LL_EXT_EndModemTest!</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">RF PHY<span class="colon">:</span></dt>
+<dd class="field-odd"><p>PHY to transmit on</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>1 Mbps Phy</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>2 Mbps Phy</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>Coded S8 Phy (125kpbs)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x06</p></td>
+<td><p>Coded S2 Phy (500 kbps)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">RF Channel<span class="colon">:</span></dt>
+<dd class="field-even"><p>RF Channel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0 to 39</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_EnhancedModemTestRxDone event shall be generated.</p>
+</section>
+<section id="hci-ext-endmodemtestcmd">
+<h1>HCI_EXT_EndModemTestCmd<a class="headerlink" href="#hci-ext-endmodemtestcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC0B</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to end a modem test. A Controller reset will take place.</p>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_EndModemTestDone event shall be generated.</p>
+</section>
+<section id="hci-ext-setbdaddrcmd">
+<h1>HCI_EXT_SetBDADDRCmd<a class="headerlink" href="#hci-ext-setbdaddrcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC0C</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to set this devices BLE address (BDADDR). This address will override the devices address determined when the device is reset (i.e. a hardware reset, not an HCI Controller Reset). To restore the devices initialized address, issue this command with an invalid address. Note: This command is only allowed when the Controller is in the Standby state. Note: This command is intended to only be used during initialization. Changing the devices BDADDR after various BLE operations have already taken place may cause unexpected problems.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">BDADDR<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BLE Public Address (MSB..LSB). Use “FF:FF:FF:FF:FF:FF” to restore the device address to that which was determined at initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>6 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“00:00:00:00:00:00”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 6 byte value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetBDADDRDone event shall be generated.</p>
+</section>
+<section id="hci-ext-setvirtualadvaddrcmd">
+<h1>HCI_EXT_SetVirtualAdvAddrCmd<a class="headerlink" href="#hci-ext-setvirtualadvaddrcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC73</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to set the advertiser’s virtual public address. Note: This command is only allowed when the advertise set is not active and its PDU type is Legacy Non-Connectable and Non-Scanable.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Adv handle to which address will be assigned</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“0”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>From 0 to 20 sets</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">BDADDR<span class="colon">:</span></dt>
+<dd class="field-even"><p>Advertiser’s virtual public address</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>6 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“00:00:00:00:00:00”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 6 byte value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetVirtualAdvAddrDone event shall be generated.</p>
+</section>
+<section id="hci-ext-setqosparameters">
+<h1>HCI_EXT_SetQOSParameters<a class="headerlink" href="#hci-ext-setqosparameters" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC75</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to set the QOS Parameters according to the entered parameter type.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">taskType<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The type of task: 0=LL_QOS_CONN_TASK_TYPE, 1=LL_QOS_ADV_TASK_TYPE, 2=LL_QOS_SCN_TASK_TYPE, 3=LL_QOS_INIT_TASK_TYPE, 4=LL_QOS_PERIODIC_ADV_TASK_TYPE, 5=LL_QOS_PERIODIC_SCN_TASK_TYPE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“0”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>From 0 to 5.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">paramType<span class="colon">:</span></dt>
+<dd class="field-even"><p>The type of parameter: 0=LL_QOS_TYPE_PRIORITY, 1=LL_QOS_TYPE_CONN_MIN_LENGTH, 2=LL_QOS_TYPE_CONN_MAX_LENGTH.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“0”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>From 0 to 2: LL_QOS_TYPE_PRIORITY, LL_QOS_TYPE_CONN_MIN_LENGTH, LL_QOS_TYPE_CONN_MAX_LENGTH.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">ParamVal<span class="colon">:</span></dt>
+<dd class="field-even"><p>The parameter value. For LL_QOS_TYPE_PRIORITY: 0=Low, 1=Medium, 2=High. For LL_QOS_TYPE_CONN_MIN_LENGTH/LL_QOS_TYPE_CONN_MAX_LENGTH: time in [us].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>4 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“0”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>For LL_QOS_TYPE_PRIORITY: LL_QOS_LOW_PRIORITY (=0), LL_QOS_MED_PRIORITY (=1), LL_HIGH_LOW_PRIORITY (=2). For LL_QOS_TYPE_CONN_MIN_LENGTH: For coded connection the range LL_MIN_LINK_DATA_TIME_CODED (2704 us) - LL_MAX_LINK_DATA_TIME_CODED (17040 us).For uncoded connection the range LL_MIN_LINK_DATA_TIME (328 us) - LL_MAX_LINK_DATA_TIME_UNCODED (2120 us). For LL_QOS_TYPE_CONN_MAX_LENGTH: For coded connection the range LL_MIN_LINK_DATA_TIME_CODED (2704 us) - connection’s interval (us). For uncoded connection the range LL_MIN_LINK_DATA_TIME (328 us) - connection’s interval.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">taskHandle<span class="colon">:</span></dt>
+<dd class="field-even"><p>The task handle to be changed (secondary and primary tasks). For connection enter the connection’s Id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“0”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>From 0 to 20</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetQOSParametersDone event shall be generated.</p>
+</section>
+<section id="hci-ext-setqosdefaultparameters">
+<h1>HCI_EXT_SetQOSDefaultParameters<a class="headerlink" href="#hci-ext-setqosdefaultparameters" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC76</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to set the default QOS Parameters values.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">paramDefaultVal<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The parameter default value. For LL_QOS_TYPE_PRIORITY: 0=Low, 1=Medium, 2=High.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>4 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“0”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>For LL_QOS_TYPE_PRIORITY: LL_QOS_LOW_PRIORITY (=0), LL_QOS_MED_PRIORITY (=1), LL_HIGH_LOW_PRIORITY (=2).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">paramType<span class="colon">:</span></dt>
+<dd class="field-even"><p>The type of parameter: 0=LL_QOS_TYPE_PRIORITY</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“0”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>From 0 to 0: LL_QOS_TYPE_PRIORITY</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">taskType<span class="colon">:</span></dt>
+<dd class="field-even"><p>The type of task: 0=LL_QOS_CONN_TASK_TYPE, 1=LL_QOS_ADV_TASK_TYPE, 2=LL_QOS_SCN_TASK_TYPE, 3=LL_QOS_INIT_TASK_TYPE, 4=LL_QOS_PERIODIC_ADV_TASK_TYPE, 5=LL_QOS_PERIODIC_SCN_TASK_TYPE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“0”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>From 0 to 5</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetQOSDefaultParameters event shall be generated.</p>
+</section>
+<section id="hci-ext-sethostdefchanclassificationcmd">
+<h1>HCI_EXT_SetHostDefChanClassificationCmd<a class="headerlink" href="#hci-ext-sethostdefchanclassificationcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC79</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to set the default channel map to use in future connections.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Channel Map<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The channel map to set as default. bit map for each channel. 1 to use channel, 0 to not use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>5 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“00:00:00:00:01”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 6 byte value, will use only 37 LSb, one for each channel.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetHostDefChanClassificationCmd event shall be generated.</p>
+</section>
+<section id="hci-ext-sethostconnchanclassificationcmd">
+<h1>HCI_EXT_SetHostConnChanClassificationCmd<a class="headerlink" href="#hci-ext-sethostconnchanclassificationcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC7A</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to set the channel map of a specific active connection.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Channel Map<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The channel map to set as default. bit map for each channel. 1 to use channel, 0 to not use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>5 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“00:00:00:00:01”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 6 byte value, will use only 37 LSb, one for each channel.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Handle<span class="colon">:</span></dt>
+<dd class="field-even"><p>Local identifier of the LL connection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0x0EFF</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetHostConnChanClassificationCmd event shall be generated.</p>
+</section>
+<section id="hci-ext-setscacmd">
+<h1>HCI_EXT_SetSCACmd<a class="headerlink" href="#hci-ext-setscacmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC0D</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to set this devices Sleep Clock Accuracy (SCA) value, in parts per million (PPM), from 0 to 500. For a Master device, the value is converted to one of eight ordinal values representing a SCA range (per [1], Volume 6, Part B, Section 2.3.3.1, Table 2.2), which will be used when a connection is created. For a Slave device, the value is directly used. The system default value for a Master and Slave device is 50ppm and 40ppm, respectively. Note: This command is only allowed when the device is not in a connection. Note: The devices SCA value remains unaffected by an HCI Reset.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">SCA<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BLE Device Sleep Clock Accuracy (PPM).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“40”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(0..500)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetSCADone event shall be generated.</p>
+</section>
+<section id="hci-ext-enableptmcmd">
+<h1>HCI_EXT_EnablePTMCmd<a class="headerlink" href="#hci-ext-enableptmcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC0E</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to enable Production Test Mode (PTM). This mode is used by the customer during assembly of their product to allow limited access to the BLE Controller for testing and configuration. This command is only available when the BLE Controller is built without external access to the Controller (i.e. when no transport interface such as RS232 is permitted). This mode will remain enabled until the device is reset. Please see the related application note for additional details. Note: This command is only allowed as a direct function call, and is only intended to be used by an embedded application. No vendor specific Command Complete event will be generated.</p>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, will simply return. No vendor specific Command Complete event will be generated.</p>
+</section>
+<section id="hci-ext-setmaxdtmtxpowercmd">
+<h1>HCI_EXT_SetMaxDtmTxPowerCmd<a class="headerlink" href="#hci-ext-setmaxdtmtxpowercmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC11</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to override the RF transmitter output power used by the Direct Test Mode (DTM). Normally, the maximum transmitter output power setting used by DTM is the maximum transmitter output power setting for the device (i.e. 4 dBm for the CC2540; 0 dBm for the CC2541; 5 dBm for the CC264x). This command will change the value used by DTM. Note: When DTM is ended by a call to HCI_LE_TestEndCmd, or a HCI_Reset is used, the transmitter output power setting is restored to the default value of 0 dBm.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">TX Power<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Set TX power to -23, -6, 0, or 4 dBm.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>3</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>-20 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>-18 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>-15 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>-12 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>-10 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>-9 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>-6 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>-5 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>-3 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>0 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>1 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>2 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>3 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>4 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>5 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  14 dBm CC13x2P_4:  6 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  15 dBm CC13x2P_4:  7 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  16 dBm CC13x2P_4:  8 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  17 dBm CC13x2P_4:  9 dBm</p></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  18 dBm CC13x2P_4:  10 dBm</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  19 dBm CC13x2P_4:  N/A</p></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>CC26xx: N/A CC13x2P_2:  20 dBm CC13x2P_4:  N/A</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetMaxDtmTxPowerDone event shall be generated.</p>
+</section>
+<section id="hci-ext-disconnectimmedcmd">
+<h1>HCI_EXT_DisconnectImmedCmd<a class="headerlink" href="#hci-ext-disconnectimmedcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC13</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to disconnect a connection immediately. This command can be useful for when a connection needs to be ended without the latency associated with the normal BLE Controller Terminate control procedure. Note that the Host issuing the command will still receive the HCI Disconnection Complete event with a Reason status of 0x16 (i.e. Connection Terminated by Local Host), followed by an HCI Vendor Specific Event.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Handle used to identify a connection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0x0EFF</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_DisconnectImmedDone event shall be generated.</p>
+</section>
+<section id="hci-ext-packeterrorratecmd">
+<h1>HCI_EXT_PacketErrorRateCmd<a class="headerlink" href="#hci-ext-packeterrorratecmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC14</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to Reset or Read the Packet Error Rate counters for a connection. When Reset, the counters are cleared; when Read, the total number of packets received, the number of packets received with a CRC error, the number of events, and the number of missed events are returned. The system default value upon hardware reset is Reset. Note: The counters are only 16 bits. At the shortest connection interval, this provides a little over 8 minutes of data. Note: This command is only valid for a valid connection handle (i.e. for an active connection). It is therefore not possible to read the packet error rate data once the connection has ended.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Handle used to identify a connection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0x0EFF</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">PER Test Command<span class="colon">:</span></dt>
+<dd class="field-even"><p>Reset or Read the PER counters.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Reset PER Counters</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Read PER Counters</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_PER event shall be generated.</p>
+</section>
+<section id="hci-ext-setslavelatencyoverridecmd">
+<h1>HCI_EXT_SetSlaveLatencyOverrideCmd<a class="headerlink" href="#hci-ext-setslavelatencyoverridecmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC1A</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to enable or disable the Slave Latency Override, allowing the user to ensure that Slave Latency is not applied even though it is active. The default value is Disable. Note: This command will be disallowed for no connection, or the connection is not in the Slave role.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Control<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Enable or disable suspending slave latency.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Disable</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Enable</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_OverrideSLDone event shall be generated.</p>
+</section>
+<section id="hci-ext-buildrevisioncmd">
+<h1>HCI_EXT_BuildRevisionCmd<a class="headerlink" href="#hci-ext-buildrevisioncmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC1B</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to a) allow the embedded user code to set their own 16 bit revision number, and b) to read the build revision number of the BLE stack library software. The default value of the user revision number is zero. When the user updates a BLE project by adding their own code, they may use this API to set their own revision number. When called with mode set to HCI_EXT_SET_APP_REVISION, the stack will save this value. No event will be returned from this API when used this way as it is intended to be called from within the target itself. Note however that this does not preclude this command from being received via the HCI. However, no event will be returned. When this API is used from the HCI, then the second parameter is ignored, and a vendor specific event is returned with the users revision number and the build revision number of the BLE stack.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Mode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Set User Revision or Get Build Revision.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Set User Revision Number</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Read Build Revision</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">UserRevNum<span class="colon">:</span></dt>
+<dd class="field-even"><p>User Revision Number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 16 bit value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_BuildRevisionDone event shall be generated but only when the value of mode is HCI_EXT_READ_BUILD_REVISION.</p>
+</section>
+<section id="hci-ext-resetsystemcmd">
+<h1>HCI_EXT_ResetSystemCmd<a class="headerlink" href="#hci-ext-resetsystemcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC1D</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to issue a hard or soft system reset. A hard reset is caused by setting the SYSRESET bit in the System Controller Reset Control register. The soft reset is currently not supported on the CC264x.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Reset Type</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>Chip Reset</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>Soft Reset</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_ResetSystemDone event shall be generated.</p>
+</section>
+<section id="hci-ext-numcomplpktslimitcmd">
+<h1>HCI_EXT_NumComplPktsLimitCmd<a class="headerlink" href="#hci-ext-numcomplpktslimitcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC1F</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to set the limit on the minimum number of complete packets before a Number of Completed Packets event is returned by the Controller. If the limit is not reached by the end of a connection event, then the Number of Completed Packets event will be returned (if non-zero) based on the flushOnEvt flag. The limit can be set from one to the maximum number of HCI buffers (please see the LE Read Buffer Size command in the Bluetooth Core specification). The default limit is one; the default flushOnEvt flag is FALSE.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Limit<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Set Number of Completed Packets Limit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>1</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x01 to the value returned from HCI_LE_ReadBufSizeCmd</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">flushOnEvt<span class="colon">:</span></dt>
+<dd class="field-even"><p>Enable or disable flush of Number of Completed Packets at end of Event.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Disable</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Enable</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_NumComplPktsLimitDone event shall be generated.</p>
+</section>
+<section id="hci-ext-getconninfocmd">
+<h1>HCI_EXT_GetConnInfoCmd<a class="headerlink" href="#hci-ext-getconninfocmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC20</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command (which replaces Get Number Connections) is used to get the number of allocated connections, the number of active connections, and for each active connection, the connection handle, the connection role, the peer device address and peer device address type. The number of allocated connections is based on a default build value that can be changed in the project using MAX_NUM_BLE_CONNS (please see the software users guide for additional details). The number of active connections refers to active BLE connections. The information per connection is based on the structure hciConnInfo_t provided in hci.h. If all parameters are NULL, then the call to this command is considered a network processor call via a transport layer, and the results will be provided via a vendor specific command complete event.If any parameter is not NULL, then the call to this command is considered a direct function call and the valid pointers will be used to store the result. In this case, it is the users responsibility to ensure there is sufficient memory allocated! Note that partial results can be obtained by selective use of the pointers. For example, if only the number of active connections is desired, this can be obtained as follows:</p>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_GetConnInfoDone event shall be generated.</p>
+</section>
+<section id="hci-ext-setmaxdatalencmd">
+<h1>HCI_EXT_SetMaxDataLenCmd<a class="headerlink" href="#hci-ext-setmaxdatalencmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC21</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to set the Data Length Extension internal variables supportedMaxTxOctets, supportedMaxTxTime, supportedMaxRxOctets and supportedMaxRxTime that are normally set exclusively by the Controller to the maximum data length and duration allowed by this device (default Tx and Rx Octets is 251; default Tx and Rx Time is 2120 us [but note that any future change to support PHYs could alter the default values of Time]).</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Tx Octets<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Maximum number of payload octets that the local Controller supports for transmission of a single Link Layer Data Channel PDU.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x001B to 0x00FB</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Tx Time<span class="colon">:</span></dt>
+<dd class="field-even"><p>Maximum time, in microseconds, that the local Controller supports for transmission of a single Link Layer Data Channel PDU.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0148 to 0x0848</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Rx Octets<span class="colon">:</span></dt>
+<dd class="field-even"><p>Maximum number of payload octets that the local Controller supports for reception of a single Link Layer Data Channel PDU.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x001B to 0x00FB</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Rx Time<span class="colon">:</span></dt>
+<dd class="field-even"><p>Maximum time, in microseconds, that the local Controller supports for reception of a single Link Layer Data Channel PDU.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0148 to 0x0848</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetMaxDataLengthDone event shall be generated.</p>
+</section>
+<section id="hci-ext-setdtmtxpktcntcmd">
+<h1>HCI_EXT_SetDtmTxPktCntCmd<a class="headerlink" href="#hci-ext-setdtmtxpktcntcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC24</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to set the DTM TX packet count.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">TX Packet Count<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of DTM packets to transmit</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x0000</p></td>
+<td><p>Continuous Tx</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetDtmTxPktCntDone event shall be generated.</p>
+</section>
+<section id="hci-ext-setpinoutputcmd">
+<h1>HCI_EXT_SetPinOutputCmd<a class="headerlink" href="#hci-ext-setpinoutputcmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC2A</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to set GPIO as output.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Pin<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Pin Number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x00 to 0x1F</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Value<span class="colon">:</span></dt>
+<dd class="field-even"><p>initialize value 0 or 1</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>Output Low</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>Output High</p></td>
+</tr>
+<tr class="row-even"><td><p>0xFF</p></td>
+<td><p>Input</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetPinOutputDone event shall be generated.</p>
+</section>
+<section id="hci-ext-setlocationingaccuracycmd">
+<h1>HCI_EXT_SetLocationingAccuracyCmd<a class="headerlink" href="#hci-ext-setlocationingaccuracycmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC2B</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to set CTE accuracy.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>connection handle (0x0XXX) or periodic advertising train handle (0x1XXX)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0x1EFF</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">CTE PHY<span class="colon">:</span></dt>
+<dd class="field-even"><p>Indicate which PHY to configure.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x01</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>LE 1M</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>LE 2M</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">1M:sample rate<span class="colon">:</span></dt>
+<dd class="field-even"><p>Accuracy between 1 (least accuracy as in 5.1 spec) to 4 (most accuracy)</p>
+<dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (phyMask &amp; 0x1) == 0x01)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>1us AoD transmission</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>1us AoD reception</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>1us AoA reception</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">1M:sample size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Size 8 bits (as in 5.1 spec) or 16 bits (more accurate)</p>
+<dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (phyMask &amp; 0x1) == 0x01)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>8 bits</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>16 bits</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">1M:sample rate<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (phyMask &amp; 0x1) != 0x01)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Value<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">1M:sample size<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (phyMask &amp; 0x1) != 0x01)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Value<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">2M:sample rate<span class="colon">:</span></dt>
+<dd class="field-even"><p>Accuracy between 1 (least accuracy as in 5.1 spec) to 4 (most accuracy)</p>
+<dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (phyMask &amp; 0x2) == 0x02)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>1us AoD transmission</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>1us AoD reception</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>1us AoA reception</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">2M:sample size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Size 8 bits (as in 5.1 spec) or 16 bits (more accurate)</p>
+<dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (phyMask &amp; 0x2) == 0x02)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>8 bits</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>16 bits</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">2M:sample rate<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (phyMask &amp; 0x2) != 0x02)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Value<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">2M:sample size<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (phyMask &amp; 0x2) != 0x02)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Value<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">sample control<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x00-default filtering(skip antenna switching samples, …), 0x01-RAW_RF no filtering</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x00</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x00 to 0x01</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_SetLocationingAccuracyDone event shall be generated.</p>
+</section>
+<section id="hci-ext-getactiveconninfocmd">
+<h1>HCI_EXT_GetActiveConnInfoCmd<a class="headerlink" href="#hci-ext-getactiveconninfocmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC2C</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to get connection information needed to track an active BLE connection.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">connId<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0x0EFF</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_GetActiveConnInfoDone event shall be generated.</p>
+</section>
+<section id="hci-ext-getrxstatisticscmd">
+<h1>HCI_EXT_GetRxStatisticsCmd<a class="headerlink" href="#hci-ext-getrxstatisticscmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC31</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to Reset or Read the RX statistics counters for a connection. When Reset, the counters are cleared; when Read, the total number of ok packets received, the number of control packets received, the number of control packets received that were ACKed, the number of packets received with a CRC error, the number of packets that were ignored, the number of empty packets that were received, and the number of discarded packets are returned. The system default value upon hardware reset is Reset. Note: The counters are only 16 bits. At the shortest connection interval, this provides a little over 8 minutes of data. Note: This command is only valid for a valid connection handle (i.e. for an active connection). It is therefore not possible to read the packet error rate data once the connection has ended.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Handle used to identify a connection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0x0EFF</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">RX Stats Test Command<span class="colon">:</span></dt>
+<dd class="field-even"><p>Reset or Read the RX statistics counters.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Reset Statistics Counters</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Read Statistics Counters</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_GET_RX_STATS event shall be generated.</p>
+</section>
+<section id="hci-ext-gettxstatisticscmd">
+<h1>HCI_EXT_GetTxStatisticsCmd<a class="headerlink" href="#hci-ext-gettxstatisticscmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC32</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to Reset or Read the RX statistics counters for a connection. When Reset, the counters are cleared; when Read, the total number of ok packets transmitted, the number of transmitted packets ACKed, the number of control packets transmitted, the number of control packets transmitted ACKed, the number of control packets transmitted ACKed that were ACKed, the number of  packets retransmissions, and the number of packets on Tx queue that are finished. The system default value upon hardware reset is Reset. Note: The counters are only 16 bits. At the shortest connection interval, this provides a little over 8 minutes of data. Note: This command is only valid for a valid connection handle (i.e. for an active connection). It is therefore not possible to read the packet error rate data once the connection has ended.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Handle used to identify a connection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0x0EFF</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">TX Stats Test Command<span class="colon">:</span></dt>
+<dd class="field-even"><p>Reset or Read the TX statistics counters.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Reset Statistics Counters</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Read Statistics Counters</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_GET_TX_STATS event shall be generated.</p>
+</section>
+<section id="hci-ext-getcoexstatisticscmd">
+<h1>HCI_EXT_GetCoexStatisticsCmd<a class="headerlink" href="#hci-ext-getcoexstatisticscmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC33</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This command is used to Reset or Read the COEX statistics counters for a connection. When Reset, the counters are cleared; when Read, the total number of grants (CC33xx: grants_asserted), the total number of rejects (CC33xx: request_deassrted), the total number of continuously rejected requests (CC33xx: grants_deasserted), and the number of max continuously rejected requests (CC33xx: request_assrted). The system default value upon hardware reset is Reset.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Coex Stats Test Command<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Reset or Read the Coex statistics counters.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Reset Statistics Counters</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Read Statistics Counters</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_GET_COEX_STATS event shall be generated.</p>
+</section>
+<section id="hci-ext-coexenablecmd">
+<h1>HCI_EXT_CoexEnableCmd<a class="headerlink" href="#hci-ext-coexenablecmd" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFC2E</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This API is used to enable or disable the Coex feature.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Enable<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 for enable and 0 for disable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>1</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x00 to 0x01</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this command has completed, an HCI_EXT_CoexEnableDone event shall be generated.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright &amp;copy; Copyright 1995-2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

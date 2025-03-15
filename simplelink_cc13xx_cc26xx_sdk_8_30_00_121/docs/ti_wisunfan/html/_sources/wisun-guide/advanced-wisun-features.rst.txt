@@ -1,0 +1,203 @@
+.. _sec-wisun-adv-features:
+
+Advanced |STACK| Features
+#########################
+
+The following section outlines advanced features that can benefit specific applications.
+This section describes the features and how to use them in your application.
+
+.. warning::
+    Some of these features are not compliant with Wi-SUN FAN Specification.
+    So it is up to the user to decide if they want their product to be compliant, they
+    should only use the subset of the features which are Wi-SUN FAN compliant.
+
+Wi-SUN Compliance
+-----------------
+
+The default out of the box examples of |STACK| are Wi-SUN compliant.
+Some of the advanced features that can be enabled in the application can break compliance.
+The following :numref:`tab-wisun-compliance` lists the features and mentions if it is Wi-SUN compliant or not.
+The descriptions of each feature is in the subsequent section.
+
+.. _tab-wisun-compliance:
+.. table:: Wi-SUN compliance of the advanced features.
+    :align: center
+
+    +-----------------------------------------------------------------------+------------------------+
+    | Feature Name                                                          | Wi-SUN Compliance      |
+    +=======================================================================+========================+
+    | `Rapid Join`_                                                         | Yes                    |
+    +-----------------------------------------------------------------------+------------------------+
+    | `Disconnect Detection Time`_                                          | Yes                    |
+    +-----------------------------------------------------------------------+------------------------+
+    | `Production Test Mode (Wi-SUN Direct TX/RX)`_                         | No                     |
+    +-----------------------------------------------------------------------+------------------------+
+    | `Pre-shared Network Keys`_                                            | No                     |
+    +-----------------------------------------------------------------------+------------------------+
+    | `Join to Specific Border Router/EUI based Controlled Device Joining`_ | No                     |
+    +-----------------------------------------------------------------------+------------------------+
+    | `Low Latency Multicast`_                                              | No                     |
+    +-----------------------------------------------------------------------+------------------------+
+
+
+The user can enable and disable the following features in TI Wi-SUN FAN module of SysConfig.
+
+.. _fig-wisun-adv_features:
+.. figure:: resources/advanced_features.png
+    :align: center
+
+    Advanced Wi-SUN Feature Selection in SysConfig
+
+.. _Rapid Join:
+
+Rapid Join
+----------
+
+If Rapid join is enabled, TI Wi-SUN FAN timers are optimized for join time.
+There are several timers in the Wi-SUN can stack that determine the performance of the stack.
+This feature is enabled by default on all the |STACK| projects. Can be enabled or disabled in SysConfig.
+The benefit of this feature is mostly seen in networks of 50 devices or less and comes at the cost of
+higher network utilization and power consumption.
+
+.. warning::
+    If the network size is larger, the rapid join feature will be less effective due to higher network traffic.
+    In a network with high data density, enabling rapid join may affect data latency.
+
+.. _Disconnect Detection Time:
+
+Disconnect Detection Time
+-------------------------
+
+This feature can be adjusted in SysConfig. The setting called Router Node Disconnect Disconnection Time on SysConfig
+enables the user to set a timer for Border Router (BR) to remove unresponsive nodes from the routing table.
+On the Router Nodes (RN), the setting called Border Router Disconnect Disconnection Time on SysConfig allows the user to
+set a timer to detect if a BR is down and initiates the search and join process to other BR networks.
+
+.. note::
+    The timers need to have the same values in the BR and the RN but don't have to be equal
+    to each other.
+
+.. _Production Test Mode (Wi-SUN Direct TX/RX):
+
+Production Test Mode (Wi-SUN Direct TX/RX)
+------------------------------------------
+
+This feature enables the user to get ping responses within a few seconds of device start.
+The production test mode is enabled on the Border Router (BR) through a py-spinel command. On the Router Node (RN),
+no changes are necessary. Once the BR is in the production test mode (Wisun Direct Mode),
+the ping command can be used with the MAC address of the RN in the vicinity instead of its IPv6 address.
+The use of MAC address instead of IPv6 address allows the RN to respond to ping requests very early in the join
+process.
+
+This feature is useful when you have the list of MAC addresses of a batch of RN you want to test
+and you are looking for a way to check if the RN are capable of joining a Wi-SUN network and respond
+to BR messages. This feature allows to perform this check without needing to wait for
+a full Wi-SUN join process.
+
+Using pre-shared MAC security keys allows the RN to respond to ping requests from the BR
+as soon as it receives PAN Advertisement Frames. This would be join state 2 mentioned in the :ref:`Join Process<sec-wisun-node-join>` section.
+It is not Wi-SUN specification compliant to use pre-shared MAC keys.
+
+
+.. note::
+    The BR does not transmit PAN Configuration Frames in this mode, thus will not function as a
+    fully functioning BR. But the RN need no modification or special modes. It only needs to
+    use pre-shared MAC keys. It functions as a fully functioning RN.
+
+.. _Pre-shared Network Keys:
+
+Pre-shared Network Keys
+-----------------------
+In a typical Wi-SUN join process, EAPOL protocol is used for exchanging security keys and the Border Router (BR)
+is responsible to refresh these security keys periodically. While using the pre-shared security keys,
+the EAPOL exchange stage is not needed anymore, this results in shorter join times.
+You can use SysConfig to enable this feature and load the pre-shared key that will be compiled into the firmware.
+
+.. warning::
+    In this mode, you only have MAC layer security. And the keys are never refreshed throughout the network's
+    lifetime.
+
+.. _Join to Specific Border Router/EUI based Controlled Device Joining:
+
+Join to Specific Border Router/EUI based Controlled Device Joining
+------------------------------------------------------------------
+This feature can be enabled in SysConfig and can be used only when using pre-shared keys.
+It needs to be enabled/disabled in all devices in the network. This feature allows the user
+to filter the Router Nodes (RN) allowed to join a Border Router's (BR) network.
+During the joining process, the RN's Extended Unique Identifier/MAC address is checked against the
+list of allowed devices and only allowed if the RN is in the allow list.
+The user is free to choose how to supply the list of allowed devices to the BR.
+
+When the feature is enabled, the callback function bool `customAuthCheckAllowedJoin(uint8_t* eui)` is called on
+the BR when the custom join request message has been received via EAPOL protocol. The function is used to
+determine whether a joining device is allowed to join. The eui parameter is the EUI of the joining device.
+The function should return true if the BR allows this device to join the current network.
+The function is weakly defined in ws_bootstrap.c to allow all devices, but can be overwritten by users to
+accept/reject devices with specific EUIs.
+
+.. _Low Latency Multicast:
+
+Low Latency Multicast
+---------------------
+Multicast messages over the Wi-SUN network follow the MPL (Multicast Protocol for Low-Power and Lossy Networks)
+protocol. RFC7331 and Wi-SUN Specification describes this in detail.
+The specification puts limits on the timers so that it avoids flooding of multicast messages and optimizes this
+for network stability for medium to large networks.
+If you need lower latencies of multicast frames, you can enable this feature, which makes the following optimizations
+
+1. Reduction of MPL trickle timers to their lowest value, reducing latency before transmission and forwarding.
+2. Disabling of initial transmission replays, lowering network flooding.
+3. Disabling of MPL trickle inconsistency checking, lowering network flooding.
+
+These optimizations lead to multicast latency average in the order of milliseconds, without this feature, multicast
+latencies of up to several seconds.
+
+.. note::
+    It is recommended to reduce the hop limit (recommended 2-4) of multicast frames when using low latency
+    multicast mode to reduce multicast storms caused by flooding.
+
+To test the MPL latency you can follow the instructions below to enable the built-in MAC MPL latency tests.
+
+1. Add the following flags to the Router Node (RN) project so that the RN will use trace to print the MAC MPL packet latency.
+
+.. code-block:: text
+    
+    DEBUG_MPL_BROADCAST_BACK_OFF
+    MBED_TRACE_MAX_LEVEL=1
+
+.. _fig-SysConfig_MPL-latency:
+.. figure:: resources/SysConfig_MPL-latency.png
+    :align: center
+
+    Add the required predefined symbols in the project properties
+
+2. Build the project and flash the RN.
+
+3. Wait for the RN to join the Border Router (BR).
+
+4. After the RN joins the BR, you can use the following PySpinel command of the BR to start sending MAC MPL packets.
+
+.. code-block:: text
+
+    testcommand macmpl on
+
+.. _fig-br_macmpl-on:
+.. figure:: resources/br_macmpl-on.png
+    :align: center
+
+    Insert the command in the SpinelCli terminal
+
+5. On the RN side, use the UART to monitor the trace information.
+
+- **Seq:** Each packet has a unique sequence number. If there is a gap in the sequence number, this indicates that a packet has been dropped.
+- **D(xxx):** This is the MPL latency `xxx` in `ms`.
+
+.. _fig-UART-traceInfo:
+.. figure:: resources/UART-traceInfo.png
+    :align: center
+
+    UART log of the RN showing the MPL latency in ms.
+
+Testing results can be found in the `app note swra826 <https://www.ti.com/lit/swra826>`_.
+
+

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Wireless Solar Management System User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example Application Guide" href="../wsms-guide/example-applications.html" />
+    <link rel="prev" title="Wireless Solar Management System" href="../wsms-guide/wsms-index.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug wsms wsms-overview";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../wsms-guide/index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Wireless Solar Management System User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wsms-quick-start.html">Wireless Solar Management System Quick Start Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../wsms-guide/wsms-index.html">Wireless Solar Management System</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wsms-vs-ti-wi-sun-fan-stack">WSMS vs TI Wi-SUN FAN Stack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wsms-guide/example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wsms-guide/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wsms-guide/references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../wsms-guide/index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Wireless Solar Management System User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../wsms-guide/index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../wsms-guide/wsms-index.html">Wireless Solar Management System</a> &raquo;</li>
+      <li>Overview</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>The Wireless Solar Management System (WSMS) examples can be used to demonstrate
+IPv6-based mesh networks using TI’s SimpleLink Connectivity devices.</p>
+<p>The ipv6base and ipv6node examples are a pair of applications demonstrating a
+basic CoAP client-server model on WSMS. The ipv6base example is configured to
+work as a Network Co-Processor, and acts as the CoAP client, while the ipv6node
+is a standalone embedded application acting as a server.</p>
+<p>WSMS is optimized for networks of 50 nodes or fewer. For larger networks, consider
+using TI Wi-SUN FAN Stack. If using WSMS with larger network there is a risk of
+network congestion and long data latency.</p>
+<p>WSMS is optimized for networks with few hops (no more than 4 hops). For networks
+with more required hops, the recommendation is to se TI Wi-SUN FAN instead.</p>
+<p>6LoWPAN, RPL, IPv6, ICMPv6 and UDP layers have been adapted from
+<a class="reference external" href="https://github.com/ARMmbed/mbed-os/tree/master/connectivity/nanostack">ARM mbed-os nanostack</a>. You can find documentation about all these layers in
+the TI Wi-SUN FAN Stack User’s Guide.</p>
+</div>
+<div class="section" id="wsms-vs-ti-wi-sun-fan-stack">
+<h1>WSMS vs TI Wi-SUN FAN Stack<a class="headerlink" href="#wsms-vs-ti-wi-sun-fan-stack" title="Permalink to this headline">¶</a></h1>
+<p>The Wireless Solar Management System (WSMS) is similar to TI Wi-SUN FAN Stack in
+that 6LoWPAN, RPL, IPv6, ICMPv6 and UDP layers have been adapted from
+<a class="reference external" href="https://github.com/ARMmbed/mbed-os/tree/master/connectivity/nanostack">ARM mbed-os nanostack</a>. However WSMS does not adhere to the Wi-SUN FAN spec
+and can not be certified with the Wi-SUN Alliance.</p>
+<p>Here are a list of featured that are enabled in WSMS:</p>
+<ul class="simple">
+<li><p>Rapid join: In WSMS examples timers are optimized for rapid join times. This
+may affect data latency in particular for networks of more than 50 nodes.</p></li>
+<li><p>Low latency Multicast Protocol: Multicast frames are optimized for lowest
+possible latency. In most cases, multicast frame latency average in the order
+of milliseconds. If a large number of multicast messages is sent, this might
+cause a “multicast storm”, i.e. the network is flooded by multicast messages.
+There is a highers risk of this happening the more hops in the network, and
+the more multicast messages are sent.</p></li>
+<li><p>Disconnect detection time is set to 300 s</p></li>
+</ul>
+<p>You can find a more detailed description of these features in the TI Wi-SUN FAN
+Stack User’s Guide. Please note that it’s not possible to disable these features
+in WSMS.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../wsms-guide/wsms-index.html" class="btn btn-neutral float-left" title="Wireless Solar Management System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../wsms-guide/example-applications.html" class="btn btn-neutral float-right" title="Example Application Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

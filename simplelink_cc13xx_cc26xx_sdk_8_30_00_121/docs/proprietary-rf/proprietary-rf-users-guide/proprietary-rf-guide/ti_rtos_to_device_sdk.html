@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upgrading from TI-RTOS 2.21 to Device SDK &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User&#39;s Guide
+ 7.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Devices without LaunchPads" href="../cc13xx_cc26xx/devices_without_launchpads.html" />
+    <link rel="prev" title="Migration Guides" href="migration-cc13xx_cc26xx.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug proprietary-rf-guide ti_rtos_to_device_sdk";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples-cc13xx_cc26xx.html">Examples User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-hardware.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nortos-index.html">noRTOS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rf-core-index.html">RF Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physical-rf-layer-cc13xx_cc26xx.html">Physical Layer (PHY)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proprietary-rf-oad-bim-index.html">BIM Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proprietary-rf-oad-mcuboot-index.html">MCUBoot Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="migration-cc13xx_cc26xx.html">Migration Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="migration-cc13xx_cc26xx.html#porting-guides">Porting Guides</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Upgrading from TI-RTOS 2.21 to Device SDK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#necessary-changes-to-the-cfg-file">Necessary Changes to the .cfg File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#necessary-changes-to-the-application-code">Necessary Changes to the Application Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#necessary-changes-to-the-board-files">Necessary Changes to the Board Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-changes-due-to-misra-updates">Application Changes due to MISRA Updates</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#upgrading-an-existing-ti-rtos-project-to-sdk">Upgrading an Existing TI-RTOS Project to SimpleLink CC13xx/CC26xx SDK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#changes-in-the-project-configuration-settings-and-device-specific-includes">Changes in the Project Configuration Settings and Device-Specific Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Code Composer Studio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#iar">IAR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#command-line-makefile-projects">Command Line Makefile Projects</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="migration-cc13xx_cc26xx.html#id2">Migration Guides</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary-cc13xx_cc26xx.html">Terms and acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="migration-cc13xx_cc26xx.html">Migration Guides</a> &raquo;</li>
+      <li>Upgrading from TI-RTOS 2.21 to Device SDK</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="upgrading-from-ti-rtos-2-21-to-device-sdk">
+<span id="updating-from-tirtos-to-sdk"></span><h1>Upgrading from TI-RTOS 2.21 to Device SDK<a class="headerlink" href="#upgrading-from-ti-rtos-2-21-to-device-sdk" title="Permalink to this headline">¶</a></h1>
+<p>This section will cover the migration of applications that are using the TI-RTOS
+cc13xx/cc26xx v2.21.00.06. It is separated into required target code
+changes for all applications and then the three different supported
+development environments for TI-RTOS applications: CCS, IAR and command-line
+makefile projects.</p>
+<p>This section will show the migration of an application for a CC1310_LAUNCHXL
+board but the concepts are the same for all CC13xx boards.</p>
+<div class="section" id="necessary-changes-to-the-cfg-file">
+<h2>Necessary Changes to the .cfg File<a class="headerlink" href="#necessary-changes-to-the-cfg-file" title="Permalink to this headline">¶</a></h2>
+<p>The .cfg file configures all Real Time Software Component (<a class="reference internal" href="glossary-cc13xx_cc26xx.html#term-RTSC"><span class="xref std std-term">RTSC</span></a>) packages
+of the application project. It is the central instance of a TI-RTOS project. The
+.cfg file is read by <em>xs</em> from the XDCTools package which builds a customized
+version of the kernel and also generates some code and linker command files. The
+TI-RTOS kernel makes heavy use of <a class="reference internal" href="glossary-cc13xx_cc26xx.html#term-RTSC"><span class="xref std std-term">RTSC</span></a>.</p>
+<ul class="simple">
+<li><p>Remove all references to the <code class="docutils literal notranslate"><span class="pre">ti.driver.Config</span></code> module. In <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>, only
+the non-instrumented TI driver library is available.</p></li>
+</ul>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>var driversConfig = xdc.useModule(&#39;ti.drivers.Config&#39;);
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Add the <code class="docutils literal notranslate"><span class="pre">Power_idleFunc</span></code> function as an Idle function. This was previously
+done in <code class="docutils literal notranslate"><span class="pre">xdc.useModule('ti.drivers.Config')</span></code>.</p></li>
+</ul>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>Idle = xdc.useModule(&#39;ti.sysbios.knl.Idle&#39;);
+Idle.addFunc(&#39;&amp;Power_idleFunc&#39;)
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Remove all references to the <code class="docutils literal notranslate"><span class="pre">ti.mw.fatfs.FatFS</span></code> module.</p></li>
+</ul>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>var FatFS = xdc.useModule(&#39;ti.mw.fatfs.FatFS&#39;);
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>In the SimpleLink SDK, the system stack (ISR stack) is now specified in the
+linker command file of the application (detailed in a later step). The linker
+command file is provided with the board files. Set the Program.stack variable to
+zero.</p></li>
+</ul>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>Program.stack = 0;
+</pre></div>
+</div>
+</div>
+<div class="section" id="necessary-changes-to-the-application-code">
+<h2>Necessary Changes to the Application Code<a class="headerlink" href="#necessary-changes-to-the-application-code" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>DriverLib include paths must be changed from</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;driverlib/XXX.h&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include DeviceFamily_constructPath(driverlib/XXX.h)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Display include paths must be changed from</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ti/mw/Display_XXX.h&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ti/display/Display_XXX.h&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>All calls to <code class="docutils literal notranslate"><span class="pre">Board_initXXX()</span></code> have been changed to simply <code class="docutils literal notranslate"><span class="pre">XXX_init()</span></code>.
+These changes are not required since there are compatibility macros present, but
+for completeness, this change is recommended. For example, change the following</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Call board init functions */</span><span class="w"></span>
+<span class="n">Board_initGeneral</span><span class="p">();</span><span class="w"></span>
+<span class="n">Board_initUART</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Call board init functions */</span><span class="w"></span>
+<span class="n">Board_initGeneral</span><span class="p">();</span><span class="w"></span>
+<span class="n">UART_init</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The FatFS package has been removed from the TI-RTOS Configuration file. This
+configuration setting created some background code. The application is now
+responsible for making these calls (e.g. add_device()). Use a driver fatfs
+example in the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> as a guideline to see the changes needed.</p></li>
+</ul>
+</div>
+<div class="section" id="necessary-changes-to-the-board-files">
+<h2>Necessary Changes to the Board Files<a class="headerlink" href="#necessary-changes-to-the-board-files" title="Permalink to this headline">¶</a></h2>
+<p>The board files (CC1310_LAUNCHXL.c, CC1310_LAUNCHXL.h, CC1310_LAUNCHXL.cmd,
+Board.h, and ccfg.c etc) contain configuration structures for all drivers. They
+have significantly changed from the tirtos 2.21 release. It is highly
+recommended to use the new files from an SDK example (e.g. drivers/empty).
+Then make the necessary changes to the SDK example files as needed.</p>
+<p>For example, if you added a new UART in your TI-RTOS for cc13xx/cc26xx
+v2.21.00.06 application, add the UART again in the board files in the SDK example
+project. Make sure to compare your old linker file with the new one. Starting in
+the SimpleLink SDK, the system stack (ISR stack) is now configured in the linker
+file instead of the TI-RTOS configuration (.cfg) file. This allows changes to the
+system stack size without changing the TI-RTOS configuration.</p>
+<p>For a summary of the board file changes, please refer to the SimpleLink Core SDK
+Release Notes.</p>
+</div>
+<div class="section" id="application-changes-due-to-misra-updates">
+<h2>Application Changes due to MISRA Updates<a class="headerlink" href="#application-changes-due-to-misra-updates" title="Permalink to this headline">¶</a></h2>
+<p>There might be some compiler warnings in your application because of type
+mismatches with some of the driver APIs. These are caused by MISRA compliance
+updates that were detailed in the SimpleLink Core SDK Release Notes. This
+should be trivial to fix once you build in the application via the development
+environment changes listed below.</p>
+</div>
+</div>
+<div class="section" id="upgrading-an-existing-ti-rtos-project-to-sdk">
+<h1>Upgrading an Existing TI-RTOS Project to <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a><a class="headerlink" href="#upgrading-an-existing-ti-rtos-project-to-sdk" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="changes-in-the-project-configuration-settings-and-device-specific-includes">
+<h2>Changes in the Project Configuration Settings and Device-Specific Includes<a class="headerlink" href="#changes-in-the-project-configuration-settings-and-device-specific-includes" title="Permalink to this headline">¶</a></h2>
+<p>Both the TI-RTOS configuration and SimpleLink SDK provide low-level
+hardware-specific header files. These were formerly known as
+CC13xxWare/DriverLib. Although there are no functional changes, the structure has
+changed a bit. Here is how the SDK examples and generated code from SmartRF
+Studio is handling device-specific includes across chip families.</p>
+</div>
+<div class="section" id="id2">
+<h2>Code Composer Studio<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>These steps assume that CCS has discovered both the TI-RTOS for cc13xx/cc26xx
+v2.21.00.06 and SimpleLink CC13x0 SDK products.</p>
+<ul class="simple">
+<li><p>Import the project into CCS (<code class="docutils literal notranslate"><span class="pre">Project-&gt;Import</span> <span class="pre">CCS</span> <span class="pre">Project</span></code>… and navigate as
+required) if not already present.</p></li>
+<li><p>Target Content Changes: Please make sure the above target content changes are done.</p></li>
+<li><p>Use SimpleLink SDK instead of TI-RTOS: Select <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">Properties-&gt;General-&gt;RTSC</span></code>
+and check/un-check in the following order. If you switch the order, you’ll
+lose the platform name (<code class="docutils literal notranslate"><span class="pre">ti.platforms.simplelink:CC1310F128</span></code>). If that
+happens, you can manually re-select it.</p></li>
+<li><p>Check the SimpleLink CC13x0 SDK box</p></li>
+<li><p>Un-check the TI-RTOS for CC13XX and CC26XX v2.21.00.06 box. Note: a warning
+at the top of the window may appear (show below). This can be ignored.</p></li>
+<li><p>Select an appropriate version of XDCTools. (See the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> release notes for
+what version number to use.)</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../_images/ccs_rtsc_products.png" src="../_images/ccs_rtsc_products.png" />
+</div>
+<p>Note: If TI-RTOS for CC13XX and CC26XX v2.21.00.06 has not been discovered by
+CCS, it will look like this. Please check/un-check in the following order</p>
+<ul class="simple">
+<li><p>Select the SimpleLink CC13x0 SDK box</p></li>
+<li><p>Un-check the unknown 2.21.00.06 box</p></li>
+<li><p>Un-check the unresolved box</p></li>
+<li><p>Select an appropriate version of XDCTools.</p></li>
+</ul>
+<div class="figure align-center" id="id3">
+<img alt="../_images/ccs_rtsc_products_no_tirtos.png" src="../_images/ccs_rtsc_products_no_tirtos.png" />
+<p class="caption"><span class="caption-number">Figure 104. </span><span class="caption-text">Real Time Software Component (<a class="reference internal" href="glossary-cc13xx_cc26xx.html#term-RTSC"><span class="xref std std-term">RTSC</span></a>) panel with only SimpleLink SDK installed</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Update XDCTools build options. In <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">Properties-&gt;CCS</span> <span class="pre">Build-&gt;XDCTools</span></code>
+add <code class="docutils literal notranslate"><span class="pre">&quot;${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR_REPOS}&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">Package</span>
+<span class="pre">Repositories</span></code> and set <code class="docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">-DDeviceFamily_CC13X0</span> <span class="pre">&quot;</span></code> in the field <code class="docutils literal notranslate"><span class="pre">Advanced</span>
+<span class="pre">Options-&gt;Additional</span> <span class="pre">Compiler</span> <span class="pre">Options</span></code>. After that, you should see the
+following options summary:</p></li>
+</ul>
+<div class="figure align-center" id="id4">
+<img alt="../_images/ccs_xdctools_options.png" src="../_images/ccs_xdctools_options.png" />
+<p class="caption"><span class="caption-number">Figure 105. </span><span class="caption-text">XDCTools options for the CC13x0 SDK</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Change Compiler Include Paths Options. The following <code class="docutils literal notranslate"><span class="pre">Project</span>
+<span class="pre">Properties-&gt;Build-&gt;ARM</span> <span class="pre">Compiler-&gt;Include</span> <span class="pre">Options</span></code> include paths need to
+change from</p></li>
+</ul>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>&quot;${COM_TI_RTSC_TIRTOSCC13XX_CC26XX_INSTALL_DIR}/products/cc13xxware_2_04_03_17272&quot;
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>&quot;${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/kernel/tirtos/packages/ti/sysbios/posix&quot;
+</pre></div>
+</div>
+<p>Here is what it should look like:</p>
+<div class="figure align-center" id="id5">
+<img alt="../_images/ccs_compiler_paths.png" src="../_images/ccs_compiler_paths.png" />
+<p class="caption"><span class="caption-number">Figure 106. </span><span class="caption-text">Include paths for the CC13x0 SDK</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Change Compiler Predefined Symbols Options. In the <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">Properties-&gt;Build</span>
+<span class="pre">-&gt;Arm</span> <span class="pre">Compiler-&gt;Predefined</span> <span class="pre">Symbols</span> <span class="pre">window</span></code>, remove <code class="docutils literal notranslate"><span class="pre">ccs</span></code> symbol and add
+<code class="docutils literal notranslate"><span class="pre">DeviceFamily_CC13X0</span></code>. Here is what it should look like:</p></li>
+</ul>
+<div class="figure align-center" id="id6">
+<img alt="../_images/ccs_compiler_symbols.png" src="../_images/ccs_compiler_symbols.png" />
+<p class="caption"><span class="caption-number">Figure 107. </span><span class="caption-text">Predefined symbols for the CC13x0 SDK</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Change Linker Libraries. The following <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">Properties-&gt;Build-&gt;Arm</span> <span class="pre">Linker-&gt;File</span> <span class="pre">Search</span> <span class="pre">Path</span></code> libraries need to change from</p></li>
+</ul>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>${COM_TI_RTSC_TIRTOSCC13XX_CC26XX_INSTALL_DIR}/products/cc13xxware_2_04_03_17272/driverlib/bin/ccs/driverlib.lib
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>&quot;${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/display/lib/display.aem3&quot;
+&quot;${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/mw/lcd/lib/lcd.aem3&quot;
+&quot;${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/grlib/lib/grlib.aem3&quot;
+&quot;${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/drivers/rf/lib/rf_multiMode_cc13x0.aem3&quot;
+&quot;${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/drivers/lib/drivers_cc13x0.aem3&quot;
+&quot;${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/drivers/pdm/lib/pdm_cc13x0.aem3&quot;
+&quot;${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/kernel/tirtos/packages/ti/dpl/lib/dpl_cc13x0.aem3&quot;
+&quot;${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/devices/cc13x0/driverlib/bin/ccs/driverlib.lib&quot;
+</pre></div>
+</div>
+<p>Here is what it should look like:</p>
+<div class="figure align-center" id="id7">
+<img alt="../_images/ccs_linker_libraries.png" src="../_images/ccs_linker_libraries.png" />
+<p class="caption"><span class="caption-number">Figure 108. </span><span class="caption-text">Linker paths and libraries for the CC13x0 SDK</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Finally rebuild the CCS project.</p></li>
+</ul>
+</div>
+<div class="section" id="iar">
+<h2>IAR<a class="headerlink" href="#iar" title="Permalink to this headline">¶</a></h2>
+<p>A project that was developed with TI-RTOS cc13xx/cc26xx v2.21.00.06 in IAR
+can be migrated with the following steps to work with the new SimpleLink SDK.</p>
+<ul class="simple">
+<li><p>Target Content Changes. Please make sure the above target content changes are done.</p></li>
+<li><p>Configure Custom Argument Variables. Import the
+<code class="docutils literal notranslate"><span class="pre">SDK</span> <span class="pre">Install</span> <span class="pre">Dir/tools/iar/SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars</span></code> file via
+<code class="docutils literal notranslate"><span class="pre">Tools-&gt;Configure</span> <span class="pre">Custom</span> <span class="pre">Argument</span> <span class="pre">Variables</span></code> and make sure that it is enabled.</p></li>
+</ul>
+<p>Here is what it should look like:</p>
+<div class="figure align-center" id="id8">
+<img alt="../_images/iar_import_custom.png" src="../_images/iar_import_custom.png" />
+<p class="caption"><span class="caption-number">Figure 109. </span><span class="caption-text">Import custom argument variables</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Change Compiler Options. Change the default <code class="docutils literal notranslate"><span class="pre">Projects</span> <span class="pre">Options-&gt;Runtime</span> <span class="pre">Checking</span>
+<span class="pre">-&gt;C/C++</span> <span class="pre">Compiler-&gt;Extra</span> <span class="pre">Options</span></code> specified for a TI-RTOS example</p></li>
+</ul>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>-f
+$PROJ_DIR$/configPkg/compiler.opt.defs
+--diag_suppress=Pa050
+-I$CC13XXWARE$
+-Dewarm
+--debug
+--silent
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>-f
+$PROJ_DIR$/configPkg/compiler.opt.defs
+-I$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/kernel/tirtos/packages/ti/sysbios/posix
+-I$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source
+-DDeviceFamily_CC13X0
+--debug
+--silent
+-e
+--aeabi
+--thumb
+--diag_suppress=Pa050
+-I$PROJ_DIR$
+</pre></div>
+</div>
+<p>Here is what it should look like:</p>
+<div class="figure align-center" id="id9">
+<img alt="../_images/iar_compiler_extra_options.png" src="../_images/iar_compiler_extra_options.png" />
+<p class="caption"><span class="caption-number">Figure 110. </span><span class="caption-text">Extra compiler options in IAR</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Change Linker Libraries. Change the default <code class="docutils literal notranslate"><span class="pre">Projects</span> <span class="pre">Options-&gt;Runtime</span> <span class="pre">Checking</span>
+<span class="pre">-&gt;Linker-&gt;Extra</span> <span class="pre">Options</span></code> specified for a TI-RTOS example</p></li>
+</ul>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>-f
+$PROJ_DIR$/configPkg/linker.cmd
+$CC13XXWARE$/driverlib/bin/iar/driverlib.lib
+--silent
+--cpu=Cortex-M3
+--entry=__iar_program_start
+--redirect
+_Printf=_PrintfSmall
+--redirect
+_Scanf=_ScanfSmall
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>-f
+$PROJ_DIR$/configPkg/linker.cmd
+$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/display/lib/display.arm3
+$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/mw/lcd/lib/lcd.arm3
+$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/grlib/lib/grlib.arm3
+$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/drivers/rf/lib/rf_multiMode_cc13x0.arm3
+$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/drivers/lib/drivers_cc13x0.arm3
+$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/drivers/pdm/lib/pdm_cc13x0.arm3
+$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/kernel/tirtos/packages/ti/dpl/lib/dpl_cc13x0.arm3
+$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/devices/cc13x0/driverlib/bin/iar/driverlib.lib
+--silent
+--cpu=Cortex-M3
+--redirect
+_Printf=_PrintfSmall
+--redirect
+_Scanf=_ScanfSmall
+</pre></div>
+</div>
+<p>Here is what it should look like:</p>
+<div class="figure align-center" id="id10">
+<img alt="../_images/iar_linker_extra_options.png" src="../_images/iar_linker_extra_options.png" />
+<p class="caption"><span class="caption-number">Figure 111. </span><span class="caption-text">Extra linker options in IAR</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Change Linker Libraries. Make sure to update the <code class="docutils literal notranslate"><span class="pre">Linker-&gt;Config-&gt;Linker</span></code>
+configuration file with the new name if the linker file has a new name or
+location. Here is what it should look like:</p></li>
+</ul>
+<div class="figure align-center" id="id11">
+<img alt="../_images/iar_linker_file.png" src="../_images/iar_linker_file.png" />
+<p class="caption"><span class="caption-number">Figure 112. </span><span class="caption-text">Modify linker file in IAR</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Finally rebuild the IAR project.</p></li>
+</ul>
+</div>
+<div class="section" id="command-line-makefile-projects">
+<h2>Command Line Makefile Projects<a class="headerlink" href="#command-line-makefile-projects" title="Permalink to this headline">¶</a></h2>
+<p>In this section, all the required changes (besides the target content changes
+listed above) for porting to <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> are going to be isolated to the imports.mak
+and makedefs for all compiler tools (TI, GCC and IAR). The basic idea is to
+replace parts of the makedefs file from a tirtos_cc13xx_cc26xx example with parts
+of an example’s makefile from the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>. The SimpleLink SDK product has fewer
+directories (e.g. no TIRTOS_INSTALL_DIR/products directory). This allows for a
+simpler makefile.</p>
+<p>This section will focus on the TI compiler (CCS), but the GCC and IAR changes are
+similar.</p>
+<ul class="simple">
+<li><p>Edit <code class="docutils literal notranslate"><span class="pre">imports.mak</span></code> at the root directory of the SimpleLink SDK. Update the
+directories at the top of the <code class="docutils literal notranslate"><span class="pre">imports.mak</span></code> as needed in the SimpleLink SDK
+you are using. Note: If you did not want to build with all compiler tools,
+leave the assignment open. For example, if you are only using the TI compiler
+in CCS, you could have the following content:</p></li>
+</ul>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>XDC_INSTALL_DIR        ?= c:/ti/xdctools_3_32_01_22_core
+<span class="linenos">2</span>
+<span class="linenos">3</span>CCS_ARMCOMPILER        ?= c:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.0.LTS
+<span class="linenos">4</span>GCC_ARMCOMPILER        ?=
+<span class="linenos">5</span>IAR_ARMCOMPILER        ?=
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Edit makedefs in the examples. The top of this file can be replaced with
+basically the contents of a sysbios example’s makefile (e.g. <code class="docutils literal notranslate"><span class="pre">SDK_INSTALL_DIR/</span>
+<span class="pre">examples/rtos/CC1310_LAUNCHXL/sysbios/swi/tirtos/ccs/makefile</span></code>). The
+SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR and linker location need to be adjusted
+accordingly and the CODEGEN_INSTALL_DIR must be retained and adjusted accordingly.
+For example, the tirtos_cc13xx_cc26xx_2_21_00_06/examples/TI/CC1310_LAUNCHXL/makedefs
+can be changed from this:</p></li>
+</ul>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>CODEGEN_INSTALL_DIR = c:/ti/ccsv6/tools/compiler/ti-cgt-arm_15.12.1.LTS
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>CC = &quot;$(CODEGEN_INSTALL_DIR)/bin/armcl&quot;
+<span class="linenos"> 4</span>LNK = &quot;$(CODEGEN_INSTALL_DIR)/bin/armcl&quot;
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>XDC_INSTALL_DIR := c:/ti/xdctools_3_32_00_06_core
+<span class="linenos"> 7</span>TIRTOS_INSTALL_DIR := c:/ti/tirtos_cc13xx_cc26xx_2_21_00_06
+<span class="linenos"> 8</span>TIDRIVERS_INSTALL_DIR := $(TIRTOS_INSTALL_DIR)/products/tidrivers_cc13xx_cc26xx_2_21_00_04
+<span class="linenos"> 9</span>BIOS_INSTALL_DIR := $(TIRTOS_INSTALL_DIR)/products/bios_6_46_01_37
+<span class="linenos">10</span>UIA_INSTALL_DIR := $(TIRTOS_INSTALL_DIR)/products/uia_2_01_00_01
+<span class="linenos">11</span>CC13XXWARE_INSTALL_DIR ?= $(TIRTOS_INSTALL_DIR)/products/cc13xxware_2_04_03_17272
+<span class="linenos">12</span>
+<span class="linenos">13</span>TIRTOS_PACKAGES_DIR = $(TIRTOS_INSTALL_DIR)/packages
+<span class="linenos">14</span>TIDRIVERS_PACKAGES_DIR = $(TIDRIVERS_INSTALL_DIR)/packages
+<span class="linenos">15</span>BIOS_PACKAGES_DIR = $(BIOS_INSTALL_DIR)/packages
+<span class="linenos">16</span>UIA_PACKAGES_DIR = $(UIA_INSTALL_DIR)/packages
+<span class="linenos">17</span>
+<span class="linenos">18</span>XDCPATH = $(TIRTOS_PACKAGES_DIR);$(TIDRIVERS_PACKAGES_DIR);$(BIOS_PACKAGES_DIR);$(UIA_PACKAGES_DIR);
+<span class="linenos">19</span>
+<span class="linenos">20</span>CFLAGS = -I$(CC13XXWARE_INSTALL_DIR) -Dccs -mv7M3 --code_state=16 --abi=eabi -me -g --display_error_number --diag_warning=255 --diag_wrap=off --gen_func_subsections=on --float_support=vfplib
+<span class="linenos">21</span>
+<span class="linenos">22</span>LFLAGS = -l$(CC13XXWARE_INSTALL_DIR)/driverlib/bin/ccs/driverlib.lib CC1310_LAUNCHXL.cmd -m$(NAME).map --warn_sections --display_error_number --diag_wrap=off --rom_model -i$(CODEGEN_INSTALL_DIR)/lib -llibc.a
+</pre></div>
+</div>
+<p>to</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR ?= c:/ti/simplelink_cc13x0_sdk_1_00_00_09_eng
+include $(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/imports.mak
+
+CODEGEN_INSTALL_DIR = $(CCS_ARMCOMPILER)
+
+XDCPATH = $(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/source;$(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/kernel/tirtos/packages;
+
+CC = $(CCS_ARMCOMPILER)/bin/armcl
+LNK = $(CCS_ARMCOMPILER)/bin/armcl
+
+XDCTARGET = ti.targets.arm.elf.M3
+PLATFORM = ti.platforms.simplelink:CC1310F128
+
+CFLAGS =  -I../..   -DDeviceFamily_CC13X0 -I$(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/kernel/tirtos/packages/ti/sysbios/posix -I$(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/source -mv7M3 --code_state=16 -me -g --display_error_number --diag_warning=255 --diag_wrap=off --gen_func_subsections=on --float_support=vfplib
+
+LFLAGS =   -l$(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/source/ti/display/lib/display.aem3 -l$(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/source/ti/mw
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Finally rebuild the Makefile project.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="migration-cc13xx_cc26xx.html" class="btn btn-neutral float-left" title="Migration Guides" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../cc13xx_cc26xx/devices_without_launchpads.html" class="btn btn-neutral float-right" title="Devices without LaunchPads" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

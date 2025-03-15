@@ -1,0 +1,818 @@
+ATT_ErrorRsp
+------------
+:Opcode: 0xFD01
+:Command Description: The Error Response is used to state that a given request cannot be performed and to provide the reason.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:reqOpcode: The request that generated this error response
+
+ :Size: 1 byte(s)
+ :Default: 0x01
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  ATT_ERROR_RSP
+         0x02                  ATT_EXCHANGE_MTU_REQ
+         0x03                  ATT_EXCHANGE_MTU_RSP
+         0x04                  ATT_FIND_INFO_REQ
+         0x05                  ATT_FIND_INFO_RSP
+         0x06                  ATT_FIND_BY_TYPE_VALUE_REQ
+         0x07                  ATT_FIND_BY_TYPE_VALUE_RSP
+         0x08                  ATT_READ_BY_TYPE_REQ
+         0x09                  ATT_READ_BY_TYPE_RSP
+         0x0A                  ATT_READ_REQ
+         0x0B                  ATT_READ_RSP
+         0x0C                  ATT_READ_BLOB_REQ
+         0x0D                  ATT_READ_BLOB_RSP
+         0x0E                  ATT_READ_MULTI_REQ
+         0x0F                  ATT_READ_MULTI_RSP
+         0x10                  ATT_READ_BY_GRP_TYPE_REQ
+         0x11                  ATT_READ_BY_GRP_TYPE_RSP
+         0x12                  ATT_WRITE_REQ
+         0x13                  ATT_WRITE_RSP
+         0x16                  ATT_PREPARE_WRITE_REQ
+         0x17                  ATT_PREPARE_WRITE_RSP
+         0x18                  ATT_EXECUTE_WRITE_REQ
+         0x19                  ATT_EXECUTE_WRITE_RSP
+         0x1B                  ATT_HANDLE_VALUE_NOTI
+         0x1D                  ATT_HANDLE_VALUE_IND
+         0x1E                  ATT_HANDLE_VALUE_CFM
+         ===================== ========================================================
+
+:handle: The attribute handle that generated this error response
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:errorCode: The reason why the request has generated an error response
+
+ :Size: 1 byte(s)
+ :Default: 0x80
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  INVALID_HANDLE
+         0x02                  READ_NOT_PERMITTED
+         0x03                  WRITE_NOT_PERMITTED
+         0x04                  INVALID_PDU
+         0x05                  INSUFFICIENT_AUTHEN
+         0x06                  UNSUPPORTED_REQ
+         0x07                  INVALID_OFFSET
+         0x08                  INSUFFICIENT_AUTHOR
+         0x09                  PREPARE_QUEUE_FULL
+         0x0a                  ATTR_NOT_FOUND
+         0x0b                  ATTR_NOT_LONG
+         0x0c                  INSUFFICIENT_KEY_SIZE
+         0x0d                  INVALID_VALUE_SIZE
+         0x0e                  UNLIKELY_ERROR
+         0x0f                  INSUFFICIENT_ENCRYPTION
+         0x10                  UNSUPPORTED_GRP_TYPE
+         0x11                  INSUFFICIENT_RESOURCES
+         0x80                  INVALID_VALUE
+         ===================== ========================================================
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_ExchangeMTUReq
+------------------
+:Opcode: 0xFD02
+:Command Description: The Exchange MTU Request is used by the client to inform the server of the clients maximum receive MTU size and request the server to respond with its maximum receive MTU size is used to state that a given request cannot be performed and to provide the reason.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:clientRxMTU: Attribute client receive MTU size
+
+ :Size: 2 byte(s)
+ :Default: 23
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+The server will respond to this request with a ATT_ExchangeMTURsp.
+
+ATT_ExchangeMTURsp
+------------------
+:Opcode: 0xFD03
+:Command Description: The Exchange MTU Response is sent in reply to a received Exchange MTU Request.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:serverRxMTU: Attribute server receive MTU size
+
+ :Size: 2 byte(s)
+ :Default: 23
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_FindInfoReq
+---------------
+:Opcode: 0xFD04
+:Command Description: The Find Information Request is used to obtain the mapping of attribute handles with their associated types. This allows a client to discover the list of attributes and their types on a server.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0xFFFF
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+When this request is received, the server will send the ATT_FindInfoRsp. The client will forward all the Find Information Responses to the calling application. The response with the status of bleProcedureComplete will indicate the end of the sub-procedure. If no attributes will be returned or any of the requested parameters is invalid, the server will send an ATT_ErrorRsp.
+
+ATT_FindInfoRsp
+---------------
+:Opcode: 0xFD05
+:Command Description: The Find Information Response is sent in reply to a received Find Information Request and contains information about the server.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:format: The format of the information data
+
+ :Size: 1 byte(s)
+ :Default: 0x01
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  HANDLE_BT_UUID_TYPE - handle(s) and 16-bit Bluetooth UUID(s)
+         0x02                  HANDLE_UUID_TYPE - handle(s) and 128-bit UUID(s)
+         ===================== ========================================================
+
+:info: The information data whose format is determined by the format field
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: 4 to (ATT_MTU - 2) octets
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_FindByTypeValueReq
+----------------------
+:Opcode: 0xFD06
+:Command Description: The Find By Type Value Request is used to obtain the handles of attributes that have a 16-bit UUID attribute type and attribute value. This allows the range of handles associated with a given attribute to be discovered when the attribute type determines the grouping of a set of attributes.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0xFFFF
+ :Range: Any 2 byte value
+
+:type: 2-octet UUID to find
+
+ :Size: 2 byte(s)
+ :Default: "00:00"
+ :Range: Any 2 byte value
+
+:value: Attribute value to find
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: 0 to (ATT_MTU - 7) octets
+
+**Events Generated**
+
+When this request is received, the server will send the ATT_FindByTypeValueRsp. The client will forward all the ATT_FindByTypeValueRsp events to the calling application. The response with the status of bleProcedureComplete will indicate the end of the sub-procedure. If no attributes will be returned or any of the requested parameters is invalid, the server will send an ATT_ErrorRsp.
+
+ATT_FindByTypeValueRsp
+----------------------
+:Opcode: 0xFD07
+:Command Description: The Find By Type Value Response is sent in reply to a received Find By Type Value Request and contains information about this server.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handlesInfo: The Handles Information List field is a list of one or more Handle Information groups where the first 2 bytes are the attribute handle and the next two bytes are the handle end group handle.
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any 2-byte value for each element.
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_ReadByTypeReq
+-----------------
+:Opcode: 0xFD08
+:Command Description: The Read By Type Request is used to obtain the values of attributes where the attribute type is known but the handle is not known.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0xFFFF
+ :Range: Any 2 byte value
+
+:type: 2 or 16 octet UUID
+
+ :Size: input byte(s)
+ :Default: "00:00"
+ :Range: Any 2 or 16 byte value
+
+**Events Generated**
+
+When this request is received, the server will send the ATT_ReadByTypeRsp. The client will forward all the ATT_ReadByTypeRsp events to the calling application. The response with the status of bleProcedureComplete will indicate the end of the sub-procedure. If no attribute with the given type exists within the handle range or the attribute value cannot be read, the server will send an ATT_ErrorRsp.
+
+ATT_ReadByTypeRsp
+-----------------
+:Opcode: 0xFD09
+:Command Description: The Read By Type Response is sent in reply to a received Read By Type Request and contains the handles and values of the attributes that have been read.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:length: The size of each attribute handle-value pair.
+
+ :Size: 1 byte(s)
+ :Default: 0
+ :Range: Any 1 byte value
+
+:dataList: A list of Attribute Data (handle-value pairs) where the first two bytes are the attribute handle and the next two bytes are the attribute value.
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any 2 byte value for each attribute handle and any (length -2) bytes for each attribute value.
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_ReadReq
+-----------
+:Opcode: 0xFD0A
+:Command Description: The Read Request is used request the server to read the value of an attribute and return its value in a Read Response.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be read
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value.
+
+**Events Generated**
+
+When this request is received, the server will send the ATT_ReadRsp. If the attribute handle is invalid or the attribute value cannot be read, the server will send an ATT_ErrorRsp.
+
+ATT_ReadRsp
+-----------
+:Opcode: 0xFD0B
+:Command Description: The Read Response is sent in reply to a received Read Request and contains the value of the attribute that has been read.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:value: The value of the attribute with the handle given
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 1) byte) value
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_ReadBlobReq
+---------------
+:Opcode: 0xFD0C
+:Command Description: The Read Blob Request is used request the server to read part of the value of an attribute at a given offset and return a specific part of the value in a ATT_ReadBlobRsp.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be read
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:offset: The offset of the first octet to be read
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+When this request is received, the server will send the ReadBlobRsp. The client will forward all the ReadBlobRsp events to the calling application. The response with the status of bleProcedureComplete will indicate the end of the sub-procedure. If the attribute handle or offset is invalid, or the attribute value cannot be read, the server will send an ATT_ErrorRsp.
+
+ATT_ReadBlobRsp
+---------------
+:Opcode: 0xFD0D
+:Command Description: The Read Blob Response is sent in reply to a received Read Blob Request and contains part of the value of the attribute that has been read.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:value: Part of the value of the attribute with the handle given
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 1) octets) value.
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_ReadMultiReq
+----------------
+:Opcode: 0xFD0E
+:Command Description: The Read Multiple Request is used to request the server to read two or more values of a set of attributes and return their values in a ATT_ReadMultiRsp. Only values that have a known fixed size can be read, with the exception of the last value that can have a variable length.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handles: A set of two or more two-byte attribute handles
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (4 to (ATT_MTU-1) byte) value
+
+**Events Generated**
+
+When this request is received, the server will send the ATT_ReadMultiRsp. If any of the attribute handles are invalid or any of the attribute values cannot be read, the server will send an ATT_ErrorRsp.
+
+ATT_ReadMultiRsp
+----------------
+:Opcode: 0xFD0F
+:Command Description: The Read Multiple Response is sent in reply to a received ATT_ReadMultiReq and contains the values of the attributes that have been read.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:values: A set of two or more values
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 1) byte) value.
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_ReadByGrpTypeReq
+--------------------
+:Opcode: 0xFD10
+:Command Description: The Read By Group Type Request is used to obtain the values of attributes where the attribute type is known, the type of a grouping attribute as defined by a higher layer specification, but the handle is not known.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0xFFFF
+ :Range: Any 2 byte value
+
+:groupType: 2 or 16 octet UUID
+
+ :Size: input byte(s)
+ :Default: "00:00"
+ :Range: Any 2 or 16 byte value
+
+**Events Generated**
+
+When this request is received, the server will send the ATT_ReadByGrpTypeRsp. The client will forward all the ATT_ReadByGrpTypeRsp Events to the calling application. The response with the status of bleProcedureComplete will indicate the end of the sub-procedure. If no attributes with the given type exists within the handle ranges or the Attribute Group Type is not a supported grouping attribute, the server will send an ATT_ErrorRsp
+
+ATT_ReadByGrpTypeRsp
+--------------------
+:Opcode: 0xFD11
+:Command Description: The Read By Group Type Response is sent in reply to a received ATT_ReadByGrpTypeReq and contains the handles and values of the attributes that have been read.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:length: The size of each Attribute Data (attribute handle, end group handle and attribute value set)
+
+ :Size: 1 byte(s)
+ :Default: 0
+ :Range: Any 1 byte value.
+
+:dataList:  The Attribute Data field is comprised of a list of attribute handle and value pairs where the first two bytes are the attribute handle, the next two bytes are the end group handle, and the next (length - 4) bytes are the attribute value.
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any value formatted as described above.
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_WriteReq
+------------
+:Opcode: 0xFD12
+:Command Description: The Write Request is used to request the server to write the value of an attribute and acknowledge that this has been achieved in a ATT_WriteRsp. The command field is set for the Write Command. The signature and command fields are set for the Signed Write Command.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:signature: Whether to include the Authentication Signature with the Write PDU
+
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  No 
+         0x01                  Yes  
+         ===================== ========================================================
+
+:command: Whether this is the Write Command
+
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  No 
+         0x01                  Yes  
+         ===================== ========================================================
+
+:handle: The handle of the attribute to be set
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:value: The value to be written to the attribute
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 3) byte) value
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_WriteRsp
+------------
+:Opcode: 0xFD13
+:Command Description: The Write Response is sent in reply to a valid Write Request and acknowledges that the attribute has been successfully written.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_PrepareWriteReq
+-------------------
+:Opcode: 0xFD16
+:Command Description: The Prepare Write Request is used to request the server to prepare to write the value of an attribute. The server will respond to this request with a ATT_PrepareWriteRsp, so that the client can verify that the value was received correctly. A client may send more than one ATT_PrepareWriteReq to a server, which will queue and send a response for each handle value pair.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be written
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:offset: The offset of the first octet to be written
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:value: Part of the value of the attribute to be written
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: (0 to (ATT_MTU - 5) octets)
+
+**Events Generated**
+
+When this request is received, the server will send the ATT_PrepareWriteRsp. If the attribute handle is invalid or the attribute value cannot be written, the server will send an ATT_ErrorRsp.
+
+ATT_PrepareWriteRsp
+-------------------
+:Opcode: 0xFD17
+:Command Description: The Prepare Write Response is sent in response to a received Prepare Write Request and acknowledges that the value has been successfully received and placed in the prepare write queue.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be written
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:offset: The offset of the first octet to be written
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:value: Part of the value of the attribute to be written
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 5) byte) value.
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_ExecuteWriteReq
+-------------------
+:Opcode: 0xFD18
+:Command Description: The Execute Write Request is used to request the server to write or cancel the write of all the prepared values currently held in the prepare queue from this client. This request shall be handled by the server as an atomic operation.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:flags: Whether to cancel or write.
+
+ :Size: 1 byte(s)
+ :Default: 0x01
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  CANCEL_WRITES
+         0x01                  WRITE_VALUES
+         ===================== ========================================================
+
+**Events Generated**
+
+When this request is received, the server will send the ATT_ExecuteWriteRsp. If the attribute value cannot be written, the server will send an ATT_ErrorRsp.
+
+ATT_ExecuteWriteRsp
+-------------------
+:Opcode: 0xFD19
+:Command Description: The Execute Write Response is sent in response to a received Execute Write Request.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_HandleValueNoti
+-------------------
+:Opcode: 0xFD1B
+:Command Description: A server can send a notification of an attributes value at any time.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:authenticated: Whether or not an authenticated link is required
+
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  No 
+         0x01                  Yes  
+         ===================== ========================================================
+
+:handle: The handle of the attribute
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:value: The current value of the attribute
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 3) byte) value
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+ATT_HandleValueInd
+------------------
+:Opcode: 0xFD1D
+:Command Description: A server can send an indication of an attributes value at any time.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:authenticated: Whether or not an authenticated link is required
+
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  No 
+         0x01                  Yes  
+         ===================== ========================================================
+
+:handle: The handle of the attribute
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:value: The current value of the attribute
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 3) byte) value.
+
+**Events Generated**
+
+The client shall send a ATT_HandleValueCfm in response to a Handle Value Indication. No further indications to this client shall occur until the confirmation has been received by the server.
+
+ATT_HandleValueCfm
+------------------
+:Opcode: 0xFD1E
+:Command Description: The Handle Value Confirmation is sent in response to a received ATT_HandleValueInd and confirms that the client has received an indication of the given attribute.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+

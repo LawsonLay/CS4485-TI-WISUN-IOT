@@ -1,0 +1,26 @@
+        Internal Flash
+    +------------------------+<--DEVICE_SIZE
+    |                        |
+    +------------------------+
+    |   NVS   c777           |
+    +------------------------+<--0x000FC000
+    |        c7AF            |
+    |                        |
+    |   Secondary App Image  |
+    |                        |
+    +------------------------+<--0x0005C000[Secondary Slot]
+    |   MCUBoot Trailer c333 |
+    +------------------------+
+    |         c7AF           |
+    |                        |
+    |   Primary App Image    |
+    +------------------------+
+    |         c777           |
+    |  App Interrupt Vectors |
+    +------------------------+
+    |   MCUBoot Header c333  |
+    +------------------------+<--0x00006000[Primary Slot]
+    |                        |
+    |   MCUBoot Bootloader   |
+    |         cRED           |
+    +------------------------+<--0x00000000

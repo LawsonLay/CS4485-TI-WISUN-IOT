@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UART to UART2 Porting Guide &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Sidewalk Stack User&#39;s Guide
+ 7.40.00.xx documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug cc13xx_cc26xx uart_to_uart2";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ti_sidewalk/index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Sidewalk Stack User's Guide
+
+          </a>
+              <div class="version">
+                7.40.00.xx
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/sidewalk-quick-start.html">Amazon Sidewalk Quick Start Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ti_sidewalk/index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI Sidewalk Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ti_sidewalk/index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>UART to UART2 Porting Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="uart-to-uart2-porting-guide">
+<span id="id2"></span><h1>UART to UART2 Porting Guide<a class="headerlink" href="#uart-to-uart2-porting-guide" title="Permalink to this headline">¶</a></h1>
+<p>This guide will briefly outline the significant changes when
+porting from UART to UART2.</p>
+<div class="section" id="notable-changes">
+<h2>Notable Changes<a class="headerlink" href="#notable-changes" title="Permalink to this headline">¶</a></h2>
+<p>The improved UART2 driver replaces the UART driver, with small changes to the API, and porting
+existing code should be straight-forward. Some notable changes are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>UART2 has two ring buffers, one for RX and one for TX to send/receive data.</p></li>
+<li><p>UART2 uses DMA to transfer data between the UART FIFOs and the RX and TX ring buffers.</p></li>
+<li><p>The UART2 APIs for reading and writing data have been made more posix-like.</p></li>
+<li><p>UART2 provides for event notification, allowing the application to receive TX start and
+completion events, and RX error events.</p></li>
+<li><p>Minor changes in driver parameters and available modes.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="uart-uart2-code-examples">
+<h2>UART/UART2 Code Examples<a class="headerlink" href="#uart-uart2-code-examples" title="Permalink to this headline">¶</a></h2>
+<p>A typical UART use-case in the classic UART driver would look like this, where the
+driver is initialized, opened, and a read/write operation is performed.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Import the UART driver definitions</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ti/drivers/UART.h&gt;</span><span class="cp"></span>
+
+<span class="c1">// One-time initialization of UART driver</span>
+<span class="n">UART_init</span><span class="p">();</span><span class="w"></span>
+
+<span class="c1">// Initialize UART parameters</span>
+<span class="n">UART_Params</span><span class="w"> </span><span class="n">params</span><span class="p">;</span><span class="w"></span>
+<span class="n">UART_Params_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">params</span><span class="p">);</span><span class="w"></span>
+<span class="n">params</span><span class="p">.</span><span class="n">baudRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9600</span><span class="p">;</span><span class="w"></span>
+<span class="n">params</span><span class="p">.</span><span class="n">readMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_MODE_BLOCKING</span><span class="p">;</span><span class="w"></span>
+<span class="n">params</span><span class="p">.</span><span class="n">writeMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_MODE_BLOCKING</span><span class="p">;</span><span class="w"></span>
+<span class="n">params</span><span class="p">.</span><span class="n">readTimeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_WAIT_FOREVER</span><span class="p">;</span><span class="w"></span>
+<span class="n">params</span><span class="p">.</span><span class="n">writeTimeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_WAIT_FOREVER</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Open the UART</span>
+<span class="n">UART_Handle</span><span class="w"> </span><span class="n">uart</span><span class="p">;</span><span class="w"></span>
+<span class="n">uart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_open</span><span class="p">(</span><span class="n">CONFIG_UART0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">params</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Read from the UART</span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">readCount</span><span class="p">;</span><span class="w"></span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="n">BUFSIZE</span><span class="p">];</span><span class="w"></span>
+<span class="n">readCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_read</span><span class="p">(</span><span class="n">uart</span><span class="p">,</span><span class="w"> </span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">BUFSIZE</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Write to the UART</span>
+<span class="n">UART_write</span><span class="p">(</span><span class="n">uart</span><span class="p">,</span><span class="w"> </span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">BUFSIZE</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Close the UART</span>
+<span class="n">UART_close</span><span class="p">(</span><span class="n">uart</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The same example, but using the new UART2 driver would look like the following:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Import the UART2 driver definitions</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ti/drivers/UART2.h&gt;</span><span class="cp"></span>
+
+<span class="c1">// Initialize UART2 parameters</span>
+<span class="n">UART2_Params</span><span class="w"> </span><span class="n">params</span><span class="p">;</span><span class="w"></span>
+<span class="n">UART2_Params_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">params</span><span class="p">);</span><span class="w"></span>
+<span class="n">params</span><span class="p">.</span><span class="n">baudRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9600</span><span class="p">;</span><span class="w"></span>
+<span class="n">params</span><span class="p">.</span><span class="n">readMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART2_Mode_BLOCKING</span><span class="p">;</span><span class="w"></span>
+<span class="n">params</span><span class="p">.</span><span class="n">writeMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART2_Mode_BLOCKING</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Open the UART</span>
+<span class="n">UART2_Handle</span><span class="w"> </span><span class="n">uart</span><span class="p">;</span><span class="w"></span>
+<span class="n">uart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART2_open</span><span class="p">(</span><span class="n">CONFIG_UART0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">params</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Read from the UART.</span>
+<span class="kt">size_t</span><span class="w">  </span><span class="n">bytesRead</span><span class="p">;</span><span class="w"></span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="n">BUFSIZE</span><span class="p">];</span><span class="w"></span>
+<span class="kt">int32_t</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w"></span>
+<span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART2_read</span><span class="p">(</span><span class="n">uart</span><span class="p">,</span><span class="w"> </span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">BUFSIZE</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">bytesRead</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Write to the UART</span>
+<span class="c1">// Instead of retrieving bytesWritten, NULL can also be passed</span>
+<span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART2_write</span><span class="p">(</span><span class="n">uart</span><span class="p">,</span><span class="w"> </span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">BUFSIZE</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Close the UART</span>
+<span class="n">UART2_close</span><span class="p">(</span><span class="n">uart</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>When comparing the two examples, one can see that the differences are minor
+and the changes required are fairly straightforward.</p>
+</div>
+<div class="section" id="api-changes">
+<h2>API Changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p><strong>#include</strong> - The include must be changed from UART.h to UART2.</p></li>
+<li><p><strong>Initializing UART</strong> - It is not necessary to initialize UART when
+using the UART2 library. There is no equivalent to the <code class="docutils literal notranslate"><span class="pre">UART_unit()</span></code>
+function in the UART2 library.</p></li>
+<li><p><strong>Params</strong> - Within the UART2.h file, the parameter structure
+UART2_Params is defined. There are some key differences between the
+UART2_Params and the UART_Params structures. The following fields
+have been changed</p>
+<ul class="simple">
+<li><p>readTimeout and writeTimeout has been removed from the structure,
+and these values can instead be passed to <code class="docutils literal notranslate"><span class="pre">UART2_readTime()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">UART2_writeTimeout()</span></code>.</p></li>
+<li><p>eventCallback has been added, where the user can supply a
+callback function to receive events from the driver, as well as
+an eventMask to mask which events to subscribe to.</p></li>
+<li><p>readDataMode and writeDataMode has been removed, and is no
+longer a concept in the UART2 driver. All data is handled as
+binary data, corresponding to the previous UART_DATA_BINARY.</p></li>
+<li><p>readEcho has been removed and, and setting the driver to
+automatically echo received data is no longer supported</p></li>
+<li><p>custom has been replaced by userArg, which is passed to the
+readCallback, writeCallback, and eventCallback</p></li>
+</ul>
+<p>The default parameters set by the <code class="docutils literal notranslate"><span class="pre">UART2_Params_init()</span></code> are mostly
+the same as the parameters set by <code class="docutils literal notranslate"><span class="pre">UART_Params_init()</span></code>, with one
+exepection</p>
+<ul class="simple">
+<li><p>readReturnMode = UART2_ReadReturnMode_PARTIAL</p></li>
+</ul>
+<p>This mode replaces UART_RETURN_NEWLINE as the default. In this
+mode, instead of returning when a newline character is detected,
+a read-operation will now return when some data has been
+received by the driver, and a read-timeout event occurs in the
+low-level peripheral. A read-timeout event can vary between
+devices, but is typically defined as <em>“when the RX FIFO is not
+empty, and no further data is received over a 32-bit period.”</em></p>
+</li>
+<li><p><strong>Opening the driver</strong> - <code class="docutils literal notranslate"><span class="pre">UART2_open()</span></code> should be used instead of
+<code class="docutils literal notranslate"><span class="pre">UART_open()</span></code>, which is identical in return-type an arguments.</p></li>
+<li><p><strong>Reading and writing</strong> - <code class="docutils literal notranslate"><span class="pre">UART2_read()</span></code> and <code class="docutils literal notranslate"><span class="pre">UART2_write()</span></code> should
+be used instead of <code class="docutils literal notranslate"><span class="pre">UART_read()</span></code> and <code class="docutils literal notranslate"><span class="pre">UART_write()</span></code>. The prototype
+of these functions have changes one should be aware of when
+porting existing code.</p>
+<ul class="simple">
+<li><p>The return-type for both functions is strictly a status-code,
+and has a greater number of status-codes available for more detail.
+The error codes can be found within <span class="xref std std-ref">ti_driver_reference</span>.</p></li>
+<li><p>To get the number of bytes read/written, a variable is passed by
+reference to the function. Alternatively, one can pass NULL if these
+values are not needed</p></li>
+</ul>
+<p>In addition to these functions, one can also call <code class="docutils literal notranslate"><span class="pre">UART2_readTimeout()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">UART2_writeTimeout()</span></code> with an extra parameter specifying a
+timeout-value</p>
+<p>See the UART2 documentation for more details</p>
+</li>
+<li><p><strong>Closing</strong> - <code class="docutils literal notranslate"><span class="pre">UART2_close()</span></code> should be used instead of <code class="docutils literal notranslate"><span class="pre">UART_close()</span></code>,
+which is identical in return-type and arguments</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="updating-existing-sysconfig-files">
+<h2>Updating existing SysConfig files<a class="headerlink" href="#updating-existing-sysconfig-files" title="Permalink to this headline">¶</a></h2>
+<p>The SysConfig file must be updated to use the UART2 driver instead of the UART driver. This can be
+done through the SysConfig GUI. Alternatively, if the SysConfig tool displays an error when opened in
+the GUI, open the file with a text editor instead modify the file as shown below (the commented lines
+may be deleted)</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// var UART = scripting.addModule(&quot;/ti/drivers/UART&quot;);</span>
+<span class="c1">// var uart = UART.addInstance();</span>
+
+<span class="n">var</span><span class="w"> </span><span class="n">UART2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scripting</span><span class="p">.</span><span class="n">addModule</span><span class="p">(</span><span class="s">&quot;/ti/drivers/UART2&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">var</span><span class="w"> </span><span class="n">uart2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART2</span><span class="p">.</span><span class="n">addInstance</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

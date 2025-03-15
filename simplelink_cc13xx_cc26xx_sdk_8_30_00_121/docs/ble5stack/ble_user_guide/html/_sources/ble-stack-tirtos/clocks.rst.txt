@@ -1,0 +1,199 @@
+Clocks
+------
+
+Clock instances are functions that can be scheduled to run after a certain
+number of system ticks. Clock instances are either one-shot or periodic. These
+instances start immediately upon creation, are configured to start after a
+delay, and can be stopped at any time. All clock instances are executed when
+they expire in the context of a :term:`Swi`. 
+
+.. ifconfig:: device in ['cc13x0', 'cc2640']
+
+    The following example shows the
+    minimum resolution is the TI-RTOS clock tick period set in the TI-RTOS
+    configuration file (``.cfg``).
+
+    .. note::
+        The default TI-RTOS kernel tick period is 1 millisecond. For |DEVICE|
+        devices, this is reconfigured in the TI-RTOS configuration file
+        (``.cfg``)::
+
+            Clock.tickPeriod = 10;
+
+.. ifconfig:: device == 'cc13xx_cc26xx'
+
+    The following example shows the
+    minimum resolution of the TI-RTOS clock tick period as configured via
+    SysConfig in the TI-RTOS configuration panel.
+
+    .. note::
+        The default TI-RTOS kernel tick period is 1 millisecond. For |DEVICE|
+        devices, this is reconfigured by SysConfig inside ``TI-RTOS`` |rarr|
+        ``Core Kernel`` |rarr| ``Clock``, where
+        ``Clock Tick Period in microseconds`` is set to 10.
+
+Each system tick, which is derived from the real-time clock :term:`RTC`,
+launches a Clock object that compares the running tick count with the period of
+each clock to determine if the associated function should run. For
+higher-resolution timers, TI recommends using a 16-bit hardware timer channel
+or the sensor controller. See the Clock module in the package ti.sysbios.knl
+section of the |TI-RTOS_UG|. for more information on these
+functions.
+
+.. only:: sdk_targets_cc2640
+
+    .. note::
+        The Sensor Controller is not available on the CC2640R2L_.
+
+You can use the Kernel's Clock APIs directly in your application and in addition
+the ``Util`` module also contains a set of abstracted TI-RTOS Clock functions as
+shown here:
+
+*   :ble_api:`Util_constructClock` creates a Clock object.
+*   :ble_api:`Util_startClock` starts an existing Clock object.
+*   :ble_api:`Util_restartClock` stops, restarts an existing Clock object.
+*   :ble_api:`Util_isActive` checks if a Clock object is running.
+*   :ble_api:`Util_stopClock` stop an existing Clock object.
+*   :ble_api:`Util_rescheduleClock` reconfigure an existing Clock object.
+
+.. _sec-rtos-overview-functional-clock-example:
+
+Functional Example
+^^^^^^^^^^^^^^^^^^
+The following example was taken from the simple\_peripheral project in
+|STACK|.
+
+.. _fig-periodic-clock:
+.. uml::
+    :caption: Triggering Clock objects
+    :align: center
+
+    @startuml
+    hide footbox
+
+    participant simple_perpherial.c as A
+    box "Swi context"
+        participant "Clock Object" as B
+    end box
+
+    activate A
+    group Initialize Clock object
+        autonumber
+        A -> B : Util_clockConstruct()
+        autonumber stop
+        A <-- B
+    end
+
+    ...
+
+    group Start Clock object
+        A -> B : Util_clockStart()
+
+        B --> A
+        note left: Event_pend(event,...)
+
+        deactivate A
+    end
+
+    ...
+
+    group Clock function triggers after expiration
+        autonumber resume
+        rnote over B
+            The Clock object invokes supplied function pointer
+            (e.g. SimplePeripheral_performPeriodicTask())
+            This function only posts a signal such as an Event
+        end note
+        B -> B : SimplePeripheral_clockHandler();
+        activate B
+        autonumber stop
+        B -> : Event_post(event, SP_PERIODIC_EVT);
+        B <--
+        deactivate B
+    end
+
+    group Process period function and restart Clock object
+        -> A : Unblocked due to posted SP_PERIODIC_EVT.
+        activate A
+        rnote over A
+            Given that an event was posted, we can process the
+            periodic function from a Task context
+            (e.g. SimplePeripheral_performPeriodicTask())
+        end note
+        autonumber resume
+        A -> A : SimplePeripheral_performPeriodicTask()
+        activate A
+
+        rnote over A
+            Restart the clock after the periodic process
+        end note
+        deactivate A
+        autonumber stop
+        A -> B : Util_startClock();
+        B --> A
+
+        deactivate A
+        note left: Event_pend(event,...)
+    end
+
+    rnote over A, B
+        The Clock object will trigger after
+        expiration and the cycle will repeat itself.
+    end note
+
+    ...
+
+    @enduml
+
+**Step 1** in :ref:`fig-periodic-clock` constructs the Clock object via
+:ble_api:`Util_constructClock`. After the example entered a connected state, it
+will then start the Clock object via a :ble_api:`Util_startClock`.
+
+.. code-block:: c
+    :caption: Constructing ``periodicClock`` Clock object in simple\_peripheral
+    :emphasize-lines: 2,5-6
+
+    // Clock instances for internal periodic events.
+    static Clock_Struct periodicClock;
+
+    // Create one-shot clocks for internal periodic events.
+    Util_constructClock(&periodicClock, SimplePeripheral_clockHandler,
+        SP_PERIODIC_EVT_PERIOD, 0, false, SP_PERIODIC_EVT);
+
+**Step 2** in :ref:`fig-periodic-clock`, after the Clock object's timer expired,
+it will execute ``SimplePeripheral_clockHandler()`` within a Swi context. As
+this call cannot be blocked and blocks all Tasks, it is kept short by invoking
+an ``Event_post(SP_PERIODIC_EVT)`` for post processing in simple\_peripheral.
+
+.. code-block:: c
+    :caption: Defining SimplePeripheral_clockHandler()
+    :emphasize-lines: 4
+
+    static void SimplePeripheral_clockHandler(UArg arg)
+    {
+        /* arg is passed in from Clock_construct() */
+        Event_post(events, arg);
+    }
+
+.. attention::
+    Clock functions must not call blocking kernel APIs or TI Driver APIs.
+    Executing long routines will impact real-time constraints placed in high
+    priority tasks allocated for wireless protocol stacks!
+
+**Step 3** in :ref:`fig-periodic-clock`, the simple\_peripheral task is
+unblocked due the ``Event_post(SP_PERIODIC_EVT)``, where it proceeds to invoke
+the ``SimplePeripheral_performPeriodicTask()`` function. Afterwards, to
+restart the periodic execution of this function, it will restart the
+``periodicClock`` Clock object.
+
+.. code-block:: c
+    :caption: Servicing the SP_PERIODIC_EVT event
+    :emphasize-lines: 4, 6
+
+    if (events & SP_PERIODIC_EVT)
+    {
+      // Perform periodic application task
+      SimplePeripheral_performPeriodicTask();
+
+      Util_startClock(&periodicClock);
+    }

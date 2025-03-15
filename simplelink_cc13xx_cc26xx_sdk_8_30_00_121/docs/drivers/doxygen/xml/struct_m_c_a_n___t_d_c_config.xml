@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_m_c_a_n___t_d_c_config" kind="struct" language="C++" prot="public">
+    <compoundname>MCAN_TDCConfig</compoundname>
+    <includes refid="_m_c_a_n_8h" local="no">MCAN.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_m_c_a_n___t_d_c_config_1aadeab20c96e14356e36bf8eaa142f24f" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MCAN_TDCConfig::tdcf</definition>
+        <argsstring></argsstring>
+        <name>tdcf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Transmitter Delay Compensation Filter Window Length. Defines the minimum value for the Secondary Sample Point (SSP) position; dominant edges on M_CAN Rx that would result in an earlier SSP position are ignored for transmitter delay measurement. The feature is enabled when <computeroutput>TDCF</computeroutput> is configured to a value greater than <computeroutput>TDCO</computeroutput>. Range:[0x0-0x7F] </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/third_party/mcan/MCAN.h" line="416" column="1" bodyfile="source/third_party/mcan/MCAN.h" bodystart="416" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_m_c_a_n___t_d_c_config_1a66a3f13a3dc513d32325bb91c20afb5b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MCAN_TDCConfig::tdco</definition>
+        <argsstring></argsstring>
+        <name>tdco</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Transmitter Delay Compensation Offset. Defines the distance between the measured delay from M_CAN Tx to M_CAN Rx and the secondary sample point. Transmitter Delay Compensation is enabled when this value is non-zero and the <computeroutput>dataRatePrescaler</computeroutput> is 0 or 1. If the <computeroutput>dataRatePrescaler</computeroutput> is &gt; 1, Transmitter Delay Compensation cannot be enabled. Range:[0x0-0x7F] </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/third_party/mcan/MCAN.h" line="424" column="1" bodyfile="source/third_party/mcan/MCAN.h" bodystart="424" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for MCAN Transmitter Delay Compensation parameters. </para>    </briefdescription>
+    <detaileddescription>
+<para>&lt; Any read access to the Protocol Status Register re-initializes the LEC to<orderedlist>
+<listitem><para>When the LEC shows the value 7, no CAN bus event was detected since the last CPU read access to the Protocol Status Register. </para></listitem></orderedlist>
+</para>    </detaileddescription>
+    <location file="source/third_party/mcan/MCAN.h" line="415" column="1" bodyfile="source/third_party/mcan/MCAN.h" bodystart="414" bodyend="433"/>
+    <listofallmembers>
+      <member refid="struct_m_c_a_n___t_d_c_config_1aadeab20c96e14356e36bf8eaa142f24f" prot="public" virt="non-virtual"><scope>MCAN_TDCConfig</scope><name>tdcf</name></member>
+      <member refid="struct_m_c_a_n___t_d_c_config_1a66a3f13a3dc513d32325bb91c20afb5b" prot="public" virt="non-virtual"><scope>MCAN_TDCConfig</scope><name>tdco</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

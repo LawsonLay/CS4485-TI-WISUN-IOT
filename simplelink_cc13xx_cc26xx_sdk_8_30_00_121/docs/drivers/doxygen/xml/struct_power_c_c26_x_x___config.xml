@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_power_c_c26_x_x___config" kind="struct" language="C++" prot="public">
+    <compoundname>PowerCC26XX_Config</compoundname>
+    <includes refid="_power_c_c26_x_x_8h" local="no">PowerCC26XX.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_power_c_c26_x_x___config_1aa5fa2edd433b84788c63277a21bc8dea" prot="public" static="no" mutable="no">
+        <type><ref refid="_power_8h_1a435fdeb71d13ea6be86f599c9b6a0d78" kindref="member">Power_PolicyInitFxn</ref></type>
+        <definition>Power_PolicyInitFxn PowerCC26XX_Config::policyInitFxn</definition>
+        <argsstring></argsstring>
+        <name>policyInitFxn</name>
+        <briefdescription>
+<para>The Power Policy&apos;s initialization function. </para>        </briefdescription>
+        <detaileddescription>
+<para>If the policy does not have an initialization function, &apos;NULL&apos; should be specified. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/power/PowerCC26XX.h" line="415" column="1" bodyfile="source/ti/drivers/power/PowerCC26XX.h" bodystart="415" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_power_c_c26_x_x___config_1acd4011995544865f832440e9d869b563" prot="public" static="no" mutable="no">
+        <type><ref refid="_power_8h_1a333038d1e9cd5f93dda7b83f8a1afa8b" kindref="member">Power_PolicyFxn</ref></type>
+        <definition>Power_PolicyFxn PowerCC26XX_Config::policyFxn</definition>
+        <argsstring></argsstring>
+        <name>policyFxn</name>
+        <briefdescription>
+<para>The Power Policy function. </para>        </briefdescription>
+        <detaileddescription>
+<para>When enabled, this function is invoked in the idle loop, to opportunistically select and activate sleep states.</para><para>Two reference policies are provided:</para><para><ref refid="_power_c_c26_x_x_8h_1ad4ff77b3854dd494aac42e42f70bdee7" kindref="member">PowerCC26XX_doWFI()</ref> - a simple policy that invokes CPU wait for interrupt (WFI)</para><para><ref refid="_power_c_c26_x_x_8h_1aea49c1a01cb045b1ce6be1ecb3587498" kindref="member">PowerCC26XX_standbyPolicy()</ref> - an agressive policy that considers constraints, time until next scheduled work, and sleep state latencies, and optionally puts the device into the STANDBY state, the IDLE state, or as a minimum, WFI.</para><para>Custom policies can be written, and specified via this function pointer.</para><para>In addition to this static selection, the Power Policy can be dynamically changed at runtime, via the <ref refid="_power_8h_1aa4af0d238813058bf6146df6021df8cc" kindref="member">Power_setPolicy()</ref> API. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/power/PowerCC26XX.h" line="437" column="1" bodyfile="source/ti/drivers/power/PowerCC26XX.h" bodystart="437" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_power_c_c26_x_x___config_1a43a131974520764dfee08832f0551c3f" prot="public" static="no" mutable="no">
+        <type>bool(*</type>
+        <definition>bool(* PowerCC26XX_Config::calibrateFxn) (unsigned int arg)</definition>
+        <argsstring>)(unsigned int arg)</argsstring>
+        <name>calibrateFxn</name>
+        <briefdescription>
+<para>The function to be used for activating RC Oscillator (RCOSC) calibration. </para>        </briefdescription>
+        <detaileddescription>
+<para>Calibration is normally enabled, via specification of the function <ref refid="_power_c_c26_x_x_8h_1a27a4c7312d5cf59eb699ad5f87104408" kindref="member">PowerCC26XX_calibrate()</ref>. This enables high accuracy operation, and faster high frequency crystal oscillator (XOSC_HF) startups.</para><para>To disable RCOSC calibration, the function <ref refid="_power_c_c26_x_x_8h_1a39c82b7c57a1b5c013f5e285e98232e9" kindref="member">PowerCC26XX_noCalibrate()</ref> should be specified. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/power/PowerCC26XX.h" line="449" column="1" bodyfile="source/ti/drivers/power/PowerCC26XX.h" bodystart="449" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_power_c_c26_x_x___config_1a2984f1a5a8939c690067bcaa82f8edba" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t PowerCC26XX_Config::maxStandbyDuration</definition>
+        <argsstring></argsstring>
+        <name>maxStandbyDuration</name>
+        <briefdescription>
+<para>Time in system ticks that specifies the maximum duration the device may spend in standby. </para>        </briefdescription>
+        <detaileddescription>
+<para>When the power driver tries to put the device into standby and determines the next wakeup should usually be further into the future than maxStandbyDuration system ticks, the power driver will schedule a wakeup maxStandbyDuration into the future. When the device wakes up after being in standby for maxStandbyDuration ticks, the power driver will repeat this process and go back into standby if the state of the system allows it.</para><para>Inserting such periodic wakeups can be used to automatically calibrate the RCOSC with a maximum period between calibrations or to force the recalculation of the initial VDDR recharge period. This assumes that the constraint to prohibit standby is not set and that periods of inactivity are long enough for the power driver to put the device into standby.</para><para>The value 0 is invalid. When <ref refid="struct_power_c_c26_x_x___config_1a34214625d9b49848b0297e40d4af8188" kindref="member">PowerCC26XX_Config.enableMaxStandbyDuration</ref> is set to false, any value (including 0) is ignored and the feature is disabled. This feature should not be used to disallow entering standby; the PowerCC26XX_DISALLOW_STANDBY constraint should be used for this purpose. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/power/PowerCC26XX.h" line="476" column="1" bodyfile="source/ti/drivers/power/PowerCC26XX.h" bodystart="476" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_power_c_c26_x_x___config_1a7878a56b4a04b55c66e3a32f102fb525" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t PowerCC26XX_Config::vddrRechargeMargin</definition>
+        <argsstring></argsstring>
+        <name>vddrRechargeMargin</name>
+        <briefdescription>
+<para>Margin in SCLK_LF periods subtracted from previous longest VDDR recharge period. </para>        </briefdescription>
+        <detaileddescription>
+<para>As the device comes out of standby, it updated its previous initial VDDR recharge period to be closer to the longest recharge period experienced during the time spent in standby before waking up.</para><para>vddrRechargeMargin is subtracted from the longest VDDR recharge period in SysCtrlAdjustRechargeAfterPowerDown to ensure there is some margin between the new initial and converged VDDR recharge period. The converged recharge period at a certain temperature is board and device dependent.</para><para>The default value of 0 disables this feature. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/power/PowerCC26XX.h" line="493" column="1" bodyfile="source/ti/drivers/power/PowerCC26XX.h" bodystart="493" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_power_c_c26_x_x___config_1a34214625d9b49848b0297e40d4af8188" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool PowerCC26XX_Config::enableMaxStandbyDuration</definition>
+        <argsstring></argsstring>
+        <name>enableMaxStandbyDuration</name>
+        <briefdescription>
+<para>Boolean that enables limiting the duration spent in standby. </para>        </briefdescription>
+        <detaileddescription>
+<para>If false, the power driver will put the device into standby as appropriate without duration restrictions.</para><para>If true, the the power driver will force a wakeup every <ref refid="struct_power_c_c26_x_x___config_1a2984f1a5a8939c690067bcaa82f8edba" kindref="member">PowerCC26XX_Config.maxStandbyDuration</ref> system ticks before reevaluating the state of the system.</para><para>This is set to false by default. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/power/PowerCC26XX.h" line="506" column="1" bodyfile="source/ti/drivers/power/PowerCC26XX.h" bodystart="506" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_power_c_c26_x_x___config_1a0dabcd65e4700189af683ce0f54e8479" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool PowerCC26XX_Config::enablePolicy</definition>
+        <argsstring></argsstring>
+        <name>enablePolicy</name>
+        <briefdescription>
+<para>Boolean specifying if the Power Policy function is enabled. </para>        </briefdescription>
+        <detaileddescription>
+<para>If &apos;true&apos;, the policy function will be invoked once for each pass of the idle loop.</para><para>If &apos;false&apos;, the policy will not be invoked.</para><para>In addition to this static setting, the power policy can be dynamically enabled and disabled at runtime, via the <ref refid="_power_8h_1ae8d6092a8fb35b6db52a69a35fcc327f" kindref="member">Power_enablePolicy()</ref> and <ref refid="_power_8h_1acf9706c39bd0fa07ec977dd643e5dd2a" kindref="member">Power_disablePolicy()</ref> functions, respectively. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/power/PowerCC26XX.h" line="519" column="1" bodyfile="source/ti/drivers/power/PowerCC26XX.h" bodystart="519" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_power_c_c26_x_x___config_1ae5541ad9e9fb883e9bdf9c68d1c0226b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool PowerCC26XX_Config::calibrateRCOSC_LF</definition>
+        <argsstring></argsstring>
+        <name>calibrateRCOSC_LF</name>
+        <briefdescription>
+<para>Boolean specifying whether the low frequency RC oscillator (RCOSC_LF) should be calibrated. </para>        </briefdescription>
+        <detaileddescription>
+<para>If RCOSC calibration is enabled (above, via specification of an appropriate calibrateFxn), this Boolean specifies whether RCOSC_LF should be calibrated. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/power/PowerCC26XX.h" line="528" column="1" bodyfile="source/ti/drivers/power/PowerCC26XX.h" bodystart="528" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_power_c_c26_x_x___config_1a896b6c56c0d1be28de7ce4ef09fe616a" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool PowerCC26XX_Config::calibrateRCOSC_HF</definition>
+        <argsstring></argsstring>
+        <name>calibrateRCOSC_HF</name>
+        <briefdescription>
+<para>Boolean specifying whether the high frequency RC oscillator (RCOSC_HF) should be calibrated. </para>        </briefdescription>
+        <detaileddescription>
+<para>If RCOSC calibration is enabled (above, via specification of an appropriate calibrateFxn), this Boolean specifies whether RCOSC_HF should be calibrated. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/power/PowerCC26XX.h" line="537" column="1" bodyfile="source/ti/drivers/power/PowerCC26XX.h" bodystart="537" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Global configuration structure. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="source/ti/drivers/power/PowerCC26XX.h" line="408" column="1" bodyfile="source/ti/drivers/power/PowerCC26XX.h" bodystart="407" bodyend="538"/>
+    <listofallmembers>
+      <member refid="struct_power_c_c26_x_x___config_1a43a131974520764dfee08832f0551c3f" prot="public" virt="non-virtual"><scope>PowerCC26XX_Config</scope><name>calibrateFxn</name></member>
+      <member refid="struct_power_c_c26_x_x___config_1a896b6c56c0d1be28de7ce4ef09fe616a" prot="public" virt="non-virtual"><scope>PowerCC26XX_Config</scope><name>calibrateRCOSC_HF</name></member>
+      <member refid="struct_power_c_c26_x_x___config_1ae5541ad9e9fb883e9bdf9c68d1c0226b" prot="public" virt="non-virtual"><scope>PowerCC26XX_Config</scope><name>calibrateRCOSC_LF</name></member>
+      <member refid="struct_power_c_c26_x_x___config_1a34214625d9b49848b0297e40d4af8188" prot="public" virt="non-virtual"><scope>PowerCC26XX_Config</scope><name>enableMaxStandbyDuration</name></member>
+      <member refid="struct_power_c_c26_x_x___config_1a0dabcd65e4700189af683ce0f54e8479" prot="public" virt="non-virtual"><scope>PowerCC26XX_Config</scope><name>enablePolicy</name></member>
+      <member refid="struct_power_c_c26_x_x___config_1a2984f1a5a8939c690067bcaa82f8edba" prot="public" virt="non-virtual"><scope>PowerCC26XX_Config</scope><name>maxStandbyDuration</name></member>
+      <member refid="struct_power_c_c26_x_x___config_1acd4011995544865f832440e9d869b563" prot="public" virt="non-virtual"><scope>PowerCC26XX_Config</scope><name>policyFxn</name></member>
+      <member refid="struct_power_c_c26_x_x___config_1aa5fa2edd433b84788c63277a21bc8dea" prot="public" virt="non-virtual"><scope>PowerCC26XX_Config</scope><name>policyInitFxn</name></member>
+      <member refid="struct_power_c_c26_x_x___config_1a7878a56b4a04b55c66e3a32f102fb525" prot="public" virt="non-virtual"><scope>PowerCC26XX_Config</scope><name>vddrRechargeMargin</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

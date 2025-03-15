@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EAPOL Layer &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="JP/EU Certification Features" href="arib-regulation-type.html" />
+    <link rel="prev" title="Join Process" href="join_process.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug wisun-stack networklayer";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../wisun-guide/index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../wisun-guide/wisun-index.html">TI Wi-SUN FAN Stack</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="wisun-stack-overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wisun-stack-overview.html#what-is-a-fan">What is a FAN?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wisun-stack-overview.html#architecture-choices">Architecture Choices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wisun-stack-overview.html#network-profiles">Network Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PHY.html">Data Rate and PHY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MAC.html">MAC and Frequency Hopping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="join_process.html">Join Process</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EAPOL Layer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage-of-nv-for-storing-keys">Usage of NV for Storing Keys</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enable-nv-to-store-keys">Enable NV to Store Keys</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#certificates-for-certification">Certificates for Certification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configure-certificates">Configure Certificates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#lowpan-layer">6LoWPAN Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ipv6-layer">IPv6 Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#routing-layer-rpl">Routing Layer (RPL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arib-regulation-type.html">JP/EU Certification Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/advanced-wisun-features.html">Advanced TI Wi-SUN FAN Stack Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/network-management.html">Wi-SUN Network Topology Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/NWP_interface.html">TI Wi-SUN FAN NWP Interface Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/wisun-oad-index.html">MCUBoot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/migration-guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../wisun-guide/index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../wisun-guide/index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../wisun-guide/wisun-index.html">TI Wi-SUN FAN Stack</a> &raquo;</li>
+      <li>EAPOL Layer</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="eapol-layer">
+<h1>EAPOL Layer<a class="headerlink" href="#eapol-layer" title="Permalink to this headline">¶</a></h1>
+<p>The Extensible Authentication Protocol over LAN (EAPOL) layer is responsible for
+authenticating devices in the Wi-SUN network.</p>
+<p>Wi-SUN FAN networks mandate encryption of packets at the MAC level as well as
+allowing only authentic devices with right credentials to join the network. As
+per the Wi-SUN FAN Specification, EAPOL is used to exchange identities and to install the keys
+required to establish an encrypted connection.</p>
+<p>Four types of keys are used for achieving security in the network:</p>
+<ul class="simple">
+<li><p>Pairwise Master Key (PMK): Installed during authentication and used to derive
+PTK.</p></li>
+<li><p>Pairwise Temporal Key (PTK): The packet containing the GTK is encrypted using
+a pair wise common key called PTK.</p></li>
+<li><p>Group Transient Key (<a class="reference internal" href="../wisun-guide/references.html#term-GTK"><span class="xref std std-term">GTK</span></a>): Installed on the node during the joining
+process.</p></li>
+<li><p>Group AES Key (<a class="reference internal" href="../wisun-guide/references.html#term-GAK"><span class="xref std std-term">GAK</span></a>):  All devices within a Wi-SUN FAN and PAN network
+use a common key called GAK for encrypting packets at MAC layer. The GAK is
+derived from the GTK.</p></li>
+</ul>
+<p>In TI Wi-SUN FAN examples, the EAPOL authenticator runs on the border router
+itself, and the nodes which have already joined the network provide EAPOL relay
+services to the joining node or the EAP supplicant.</p>
+<p>Details of the process between the EAP supplicant, relay agents, authenticator
+and authentication server can be found in the Wi-SUN FAN Specification.</p>
+<div class="section" id="usage-of-nv-for-storing-keys">
+<h2>Usage of NV for Storing Keys<a class="headerlink" href="#usage-of-nv-for-storing-keys" title="Permalink to this headline">¶</a></h2>
+<p>Keys and network information can be stored in flash by using the non volatile
+(NV) layer.</p>
+<ul class="simple">
+<li><p>On-chip non volatile storage is used by both border router and router devices
+for storing different information related to network, keys, frame counter etc.</p></li>
+<li><p>On both border router and router devices, 16 kB of flash is reserved for these
+needs. This can be increased through the SysConfig interface as needed.</p></li>
+</ul>
+<p>On the router side, following information is stored in the NV:</p>
+<ul class="simple">
+<li><p>Network &amp; <a class="reference internal" href="../wisun-guide/references.html#term-GTK"><span class="xref std std-term">GTK</span></a> related info: pan_id, network name, own-self EUI-64 and
+for each GTK: GTK expiry time stamp + install order + actual key value</p></li>
+<li><p>PTK and PMK related info: PMK + PMK lifetime + PMK replay counter + PTK + PTK
+lifetime</p></li>
+<li><p>Frame counter related info: restart counter + stored time + pan version + (GTK
++ frame counter) for every GTK key</p></li>
+</ul>
+<p>On the border router side, apart from network &amp; GTK related info, Frame counter
+related info and the pair wise key information is stored for every device in the
+network.</p>
+<div class="section" id="enable-nv-to-store-keys">
+<h3>Enable NV to Store Keys<a class="headerlink" href="#enable-nv-to-store-keys" title="Permalink to this headline">¶</a></h3>
+<p>In order to enable NV to store keys and related network information, it is
+required to perform the following steps:</p>
+<ol class="arabic">
+<li><p>After importing your project, right click the SysConfig file associated with
+the project to open using the default CCS text editor:</p>
+<blockquote>
+<div><div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/open-in-text-editor.png"><img alt="../_images/open-in-text-editor.png" src="../_images/open-in-text-editor.png" style="width: 600px;" /></a>
+</div>
+</div></blockquote>
+</li>
+<li><p>On line 55 in the SysConfig file, paste in the following code to add the NVS
+Module in SysConfig. Please note that depending on role (Border Router vs
+Router Node), the <code class="docutils literal notranslate"><span class="pre">regionBase</span></code> is different.</p></li>
+</ol>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-number">Listing 29. </span><span class="caption-text">Add NVS to SysConfig (Border Router)</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* ======== NVS ======== */</span><span class="w"></span>
+<span class="n">var</span><span class="w"> </span><span class="n">NVS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scripting</span><span class="p">.</span><span class="n">addModule</span><span class="p">(</span><span class="s">&quot;/ti/drivers/NVS&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Add a NVS module</span>
+<span class="n">var</span><span class="w"> </span><span class="n">NVS_INT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NVS</span><span class="p">.</span><span class="n">addInstance</span><span class="p">();</span><span class="w"> </span><span class="c1">// Add an internal NVS module instance</span>
+
+<span class="n">NVS_INT</span><span class="p">.</span><span class="n">$name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CONFIG_NVSINTERNAL&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Internal NVS</span>
+<span class="n">NVS_INT</span><span class="p">.</span><span class="n">internalFlash</span><span class="p">.</span><span class="n">regionBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xAA000</span><span class="p">;</span><span class="w"></span>
+<span class="n">NVS_INT</span><span class="p">.</span><span class="n">internalFlash</span><span class="p">.</span><span class="n">regionSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x4000</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-number">Listing 30. </span><span class="caption-text">Add NVS to SysConfig (Router Node)</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* ======== NVS ======== */</span><span class="w"></span>
+<span class="n">var</span><span class="w"> </span><span class="n">NVS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scripting</span><span class="p">.</span><span class="n">addModule</span><span class="p">(</span><span class="s">&quot;/ti/drivers/NVS&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Add a NVS module</span>
+<span class="n">var</span><span class="w"> </span><span class="n">NVS_INT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NVS</span><span class="p">.</span><span class="n">addInstance</span><span class="p">();</span><span class="w"> </span><span class="c1">// Add an internal NVS module instance</span>
+
+<span class="n">NVS_INT</span><span class="p">.</span><span class="n">$name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CONFIG_NVSINTERNAL&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Internal NVS</span>
+<span class="n">NVS_INT</span><span class="p">.</span><span class="n">internalFlash</span><span class="p">.</span><span class="n">regionBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x52000</span><span class="p">;</span><span class="w"></span>
+<span class="n">NVS_INT</span><span class="p">.</span><span class="n">internalFlash</span><span class="p">.</span><span class="n">regionSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x4000</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic" start="3">
+<li><p>Save and close the SysConfig file.</p></li>
+<li><p>Open Project -&gt; Properties -&gt; Build -&gt; Arm Compiler -&gt; Predefined Symbols -&gt;
+Pre-define NAME and add a predefined symbol: <code class="docutils literal notranslate"><span class="pre">NV_RESTORE</span></code></p></li>
+<li><p>The NV layer provides APIs for initializing the driver, storing, updating and
+clearing data from NV. The user application should however ensure the NV driver
+is initialized before any NV related APIs are called. In the TI Wi-SUN fan SDK
+examples, the code related to NV initialization can be found in <code class="docutils literal notranslate"><span class="pre">main_tirtos.c</span></code>
+file as below. Make sure to save the NV driver’s API function pointers in the
+pointer <code class="docutils literal notranslate"><span class="pre">pNV</span></code>, so that the TI Wi-SUN FAN stack can use them to store/retrieve
+data from NV.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Setup the NV driver</span>
+<span class="n">NVOCMP_loadApiPtrs</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Main_user1Cfg</span><span class="p">.</span><span class="n">nvFps</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Do NV init</span>
+<span class="k">if</span><span class="p">(</span><span class="n">Main_user1Cfg</span><span class="p">.</span><span class="n">nvFps</span><span class="p">.</span><span class="n">initNV</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Main_user1Cfg</span><span class="p">.</span><span class="n">nvFps</span><span class="p">.</span><span class="n">initiNV</span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// Save off the NV function pointers</span>
+<span class="n">pNV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Main_user1Cfg</span><span class="p">.</span><span class="n">nvFps</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The information stored in NV is updated when needed, based on a slow timer
+managed by the TI Wi-SUN FAN Stack or when there is an update in the keys used.</p>
+<p>To clear NV content for a fresh start, see the section <a class="reference internal" href="../wisun-guide/NWP_interface.html#sec-wisun-erase-nv"><span class="std std-ref">2. Erasing the NV</span></a>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="certificates-for-certification">
+<h2>Certificates for Certification<a class="headerlink" href="#certificates-for-certification" title="Permalink to this headline">¶</a></h2>
+<p>Wi-SUN requires the use of x.509 (RFC 5280) based certificates. The device
+identifier should be based on IDevId as defined in IEEE 802.1AR.</p>
+<p>There are two types of certificates that needs to be configured for a Wi-SUN device:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Root Certificate(s):</dt><dd><ul class="simple">
+<li><p>This forms the trusted root certificate(s) to validate other devices</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Device Certificate and corresponding private key. Components are:</dt><dd><ul class="simple">
+<li><p>Device certificate to be sent to the other device for authentication</p></li>
+<li><p>Private key corresponding to the device certificate to be used for key
+exchange. (Note: the private key will not be sent over the air and is used
+internally only)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p>In the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> examples, default certificates are enabled. A guide is provided to
+enable and change certificates.</p>
+<div class="section" id="configure-certificates">
+<h3>Configure Certificates<a class="headerlink" href="#configure-certificates" title="Permalink to this headline">¶</a></h3>
+<p>An example implementation of Wi-SUN certificates and keys is given in the
+<code class="docutils literal notranslate"><span class="pre">wisun_certificates.h</span></code> file. The certificates and keys in this file are added
+in <code class="docutils literal notranslate"><span class="pre">mbed_config_app.h</span></code> and set in <code class="docutils literal notranslate"><span class="pre">wisun_tasklet.h</span></code>.</p>
+<p>When using your own certificates and keys, you can either replace the values in
+<code class="docutils literal notranslate"><span class="pre">wisun_certificates.h</span></code>, make your own version of <code class="docutils literal notranslate"><span class="pre">wisun_certificates.h</span></code> or
+define your certificates and keys in <code class="docutils literal notranslate"><span class="pre">application.c</span></code>. Only PEM format is
+supported for certificates and key.</p>
+<p>Adding certificates are done with the <code class="docutils literal notranslate"><span class="pre">wisun_tasklet</span></code> APIs, defined in <code class="docutils literal notranslate"><span class="pre">wisun_tasklet.h</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">wisun_tasklet_set_trusted_certificate</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wisun_tasklet_remove_trusted_certificates</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wisun_tasklet_remove_own_certificates</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wisun_tasklet_set_own_certificate</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>In <code class="docutils literal notranslate"><span class="pre">application.c</span></code>, locate the <code class="docutils literal notranslate"><span class="pre">*mainThread</span></code> and add your code snippet after
+<code class="docutils literal notranslate"><span class="pre">nanostack_wisunInterface_bringup()</span></code> has run.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">MESH_ERROR_NONE</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">nanostack_wisunInterface_bringup</span><span class="p">())</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// release mutex</span>
+<span class="w">        </span><span class="n">nanostack_unlock</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// do not proceed further</span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// Set up custom certificates and keys</span>
+<span class="w">        </span><span class="n">wisun_tasklet_remove_trusted_certificates</span><span class="p">();</span><span class="w"></span>
+<span class="n">wisun_tasklet_set_trusted_certificate</span><span class="p">(</span><span class="n">MBED_CONF_MBED_MESH_APP_ROOT_CERTIFICATE</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">((</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">MBED_CONF_MBED_MESH_APP_ROOT_CERTIFICATE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="n">wisun_tasklet_remove_own_certificates</span><span class="p">();</span><span class="w"></span>
+<span class="n">wisun_tasklet_set_own_certificate</span><span class="p">(</span><span class="n">MBED_CONF_MBED_MESH_APP_OWN_CERTIFICATE</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">((</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">MBED_CONF_MBED_MESH_APP_OWN_CERTIFICATE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                  </span><span class="n">MBED_CONF_MBED_MESH_APP_OWN_CERTIFICATE_KEY</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">((</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">MBED_CONF_MBED_MESH_APP_OWN_CERTIFICATE_KEY</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">MBED_CONF_MBED_MESH_APP_ROOT_CERTIFICATE</span></code> and
+<code class="docutils literal notranslate"><span class="pre">MBED_CONF_MBED_MESH_APP_OWN_CERTIFICATE</span></code> are analogous to
+<code class="docutils literal notranslate"><span class="pre">MBED_CONF_MBED_MESH_API_ROOT_CERTIFICATE</span></code> and
+<code class="docutils literal notranslate"><span class="pre">MBED_CONF_MBED_MESH_API_OWN_CERTIFICATE</span></code> defined in <code class="docutils literal notranslate"><span class="pre">mbed_config_app.h</span></code>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="lowpan-layer">
+<h1>6LoWPAN Layer<a class="headerlink" href="#lowpan-layer" title="Permalink to this headline">¶</a></h1>
+<p>The goal of the 6LoWPAN protocol is to support the <a class="reference internal" href="#sec-wisun-ipv6"><span class="std std-ref">IPv6 Layer</span></a> IP
+services by reducing the gap between IPv6 and lower stacks. This serves IPv6
+applications on the low-end devices typically restricted in processing power,
+memory, and energy. The primary tasks of the 6LoWPAN are:</p>
+<ul class="simple">
+<li><p>fragmentation and reassembly</p></li>
+<li><p>IPv6 and UDP header compression</p></li>
+<li><p>stateless IPv6 address auto-configuration</p></li>
+<li><p>neighbor discovery optimization.</p></li>
+</ul>
+<p>For details of the 6LoWPAN protocol, see the RFC standards RFC 4944 and RFC 6282
+or the <a class="reference external" href="https://training.ti.com/introduction-wireless-network-challenges-and-solutions-smarter-grid-iot">Wireless Network Challenges and Solutions for a Smarter Grid IoT</a> TI
+Training video.</p>
+</div>
+<div class="section" id="ipv6-layer">
+<span id="sec-wisun-ipv6"></span><h1>IPv6 Layer<a class="headerlink" href="#ipv6-layer" title="Permalink to this headline">¶</a></h1>
+<p>In a Wi-SUN FAN network, all devices have an assigned Internet Protocol v6 (IPv6)
+address.</p>
+</div>
+<div class="section" id="routing-layer-rpl">
+<span id="sec-wisun-rpl"></span><h1>Routing Layer (RPL)<a class="headerlink" href="#routing-layer-rpl" title="Permalink to this headline">¶</a></h1>
+<p>The Wi-SUN FAN Specification mandates usage of a routing protocol for low-power and lossy networks
+(RPL) algorithm in non-storing mode to achieve layer 3 routing. This protocol
+assigns the following roles in the network:</p>
+<ul class="simple">
+<li><p>Root: First device in the mesh network, other devices join the root. For each
+device joining the network, a hierarchical connection is formed.</p></li>
+<li><p>Parent: Device closer to the root. The parent can act as proxy for their child.</p></li>
+<li><p>Child: Device farther from the root. Interacts with the root through the parent.</p></li>
+</ul>
+<p>The network formation with RPL routing is initiated by broadcasting Destination
+Oriented Directed Acyclic Graph (DODAG) information object (DIO) by the Border
+router as well the nodes who can provide routing services to/from the border
+router.</p>
+<p>During the process of joining the network, a new child node receives the DIOs,
+then selects the best possible parents (minimum 2 parents if possible) who can
+provide the best possible route to the border router i.e. root of the RPL tree.
+The preferred parent is chosen by a RPL metric. Per default, the RPL metric is
+the expected transmission count (ETX). Thus the preferred parent will be the one
+with the fewest expected transmissions to the border router.</p>
+<p>The selected parent information is conveyed to the border router using DAO
+messages. After updating its routing tables, the border router acknowledges the
+receipt of DAO packet by sending DAO ACK back to the newly joined node. (The DIO
+and DAO transmission times are determined by the trickle algorithm (RFC 6206).)</p>
+<p>You can see a figure of all the steps in the node joining process in the
+<a class="reference internal" href="join_process.html#sec-wisun-node-join"><span class="std std-ref">Join Process</span></a> chapter.</p>
+<p>For details on RPL routing, see the RFC standard RFC 6550 or the <a class="reference external" href="https://training.ti.com/introduction-wireless-network-challenges-and-solutions-smarter-grid-iot">Wireless
+Network Challenges and Solutions for a Smarter Grid IoT</a> TI Training video.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="join_process.html" class="btn btn-neutral float-left" title="Join Process" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="arib-regulation-type.html" class="btn btn-neutral float-right" title="JP/EU Certification Features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

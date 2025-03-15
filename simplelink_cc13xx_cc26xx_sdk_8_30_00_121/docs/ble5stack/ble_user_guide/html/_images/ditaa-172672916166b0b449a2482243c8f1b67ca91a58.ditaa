@@ -1,0 +1,28 @@
+                  OAD App Only         Secure OAD App Only      OAD App + Stack
+                      Image                  Image              Library Image
+
+
+                                       |   App Image   |
+                                       |     ...       |
+                                       |               |
+                                       |               |
+                |   App Image   |      |               |
+                |     ...       |      +---------------+
+                |               |      |    Contiguous |
+                |               |      |    Image      |
+                |               |      |    Segment    |      |   App Image   |
+                +---------------+      |     c7AF      |      |     ...       |
+                |    Contiguous |      +---------------+      |               |
+                |    Image      |      |    Boundary   |      |               |
+                |    Segment    |      |    Segment    |      |               |
+                |     c7AF      |      |     c7AF      |      +---------------+
+                +---------------+      +---------------+      |    Contiguous |
+                |    Boundary   |      |    Security   |      |    Image      |
+                |    Segment    |      |    Segment    |      |    Segment    |
+                |     c7AF      |      |     c7AF      |      |     c7AF      |
+                +---------------+      +---------------+      +---------------+
+  addresses     |               |      |               |      |               |
+      ^         |     Core      |      |     Core      |      |     Core      |
+      |         |  Image Header |      |  Image Header |      |  Image Header |
+      |         |     cRED      |      |     cRED      |      |     cRED      |
+------+-----    +---------------+      +---------------+      +---------------+

@@ -1,0 +1,602 @@
+.. _sec-freertos-migration:
+
+Migrating TI-RTOS examples to use FreeRTOS
+------------------------------------------
+
+There are significant project setting modifications required to migrate from a
+TI-RTOS example to one that supports FreeRTOS, such as modifying the toolchain,
+adding include paths, and managing predefined symbols. For this reason, the
+recommended approach to port an example from TI-RTOS to FreeRTOS is to create a
+new projectspec file. A projectspec, or project specification file, is used to
+create a new project based on predefined settings. For more information on
+projectspec files, see the `ProjectSpecs in CCS <https://software-dl.ti.com/ccs/esd/documents/ccs_projectspecs.html>`_
+page. In this section, we will be using the ``multi_role`` example as a guide to
+convert the ``simple_central`` project to FreeRTOS.
+
+Most embedded applications are built the same way: a main loop that receives
+messages from the iCall or from the application itself. This "loop" is
+implemented and located inside the ``multi_role`` example so, the developer can
+take the example from there. This means that the majority of the application
+code can be reused with slight modifications.
+
+In this section, we will be using the ``multi_role`` FreeRTOS example as a guide
+to convert the ``simple_central`` project to FreeRTOS. The same can be used to
+convert any BLE application into FreeRTOS + GCC.
+
+.. important::
+
+   If you are starting with an example that already enables FreeRTOS (i.e. if
+   using ``multi_role`` imported from |SDK|), skip the section below and
+   jump to :ref:`sec_freertos_migration_application`.
+
+Modify the Project Properties to support FreeRTOS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The goal of this section is to inherit the project configuration settings from
+an existing example project that is already setup for FreeRTOS.
+
+#. Setup the new project folders. Create a freertos folder inside the
+   ``simple_central`` project directory located in: 
+   ``{SDK_INSTALL_DIR}\examples\rtos\CC26X2R1_LAUNCHXL\ble5stack\simple_central``
+
+#. Create a new projectspec file. Copy the gcc folder from ``multi_role/freertos/gcc``
+   to ``simple_central/freertos/gcc`` and rename the projectspec from
+   ``multi_role_CC26X2R1_LAUNCHXL_freertos_gcc.projectspec`` to 
+   ``simple_central_CC26X2R1_LAUNCHXL_freertos_gcc.projectspec``. 
+   
+#. Ensure the linker file ``CC26X2R1_LAUNCHXL_FREERTOS.lds`` is copied inside
+   ``simple_central/freertos/gcc`` if not already done.
+
+#. Update ``simple_central_CC26X2R1_LAUNCHXL_freertos_gcc.projectspec``, find
+   and replace all ``multi_role`` with ``simple_central``.
+
+#. By comparing the projectspecs, there will be some files that will need to be
+   added or removed. 
+
+    * ``simple_central_CC26X2R1_LAUNCHXL_freertos_gcc.projectspec`` new (FreeRTOS + gcc)
+    * ``simple_central_CC26X2R1_LAUNCHXL_tirtos_ccs.projectspec`` legacy (TI-RTOS + CCS)
+
+   The following diff below shows files that are used by ``multi_role`` for its
+   peripheral service declarations. Since we are using the ``simple_central``
+   example, these are not needed and can be removed.
+
+   .. code-block:: diff
+     :caption: Files removed from the new projectspec
+    
+     -<file path="${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/profiles/dev_info/cc26xx/devinfoservice.c" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Profiles">
+     -</file>
+     -<file path="${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/profiles/dev_info/devinfoservice.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Profiles">
+     -</file>
+     -<file path="${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/inc/gatt_profile_uuid.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Profiles">
+     -</file>
+     -<file path="${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/host/gatt_uuid.c" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Profiles">
+     -</file>
+     -<file path="${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/inc/gatt_uuid.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Profiles">
+     -</file>
+     -<file path="${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/host/gattservapp_util.c" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Profiles">
+     -</file>
+     -<file path="${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/profiles/simple_profile/cc26xx/simple_gatt_profile.c" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Profiles">
+     -</file>
+     -<file path="${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/profiles/simple_profile/simple_gatt_profile.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Profiles">
+     -</file>
+
+.. _sec_freertos_migration_application:
+
+Modify the application code to support FreeRTOS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This section describes the changes to the application code that are necessary to
+support FreeRTOS. It is recommended to import the ``multi_role``
+FreeRTOS project and search for the predefined symbol ``FREERTOS``. This will
+reveal the modifications to the ``multi_role`` application that were done. The
+following steps are provided using the search mentioned in the previous section
+as a guide.
+
+The diffs below provide an overview of all the differences and changes between
+the legacy (TI-RTOS + CCS) ``multi_role`` example and the new (FreeRTOS + gcc)
+``multi_role`` example. These changes should be applied to the corresponding
+``simple_central`` example.
+
+#. Replace all the TI-RTOS calls with DPL/FreeRTOS/POSIX calls in ``simple_central.c``. 
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - INCLUDES
+
+      +#ifdef FREERTOS
+      +#include <FreeRTOS.h>
+      +#include <task.h>
+      +//#include <pthread.h>
+      +#include <mqueue.h>
+      +#else
+      #include <string.h>
+      #include <ti/sysbios/knl/Clock.h>
+      #include <ti/sysbios/knl/Event.h>
+      #include <ti/sysbios/knl/Queue.h>
+      #include <ti/sysbios/knl/Task.h>
+      +#endif
+
+      #ifdef FREERTOS
+      #include <stdarg.h>
+      #endif
+
+      #include <ti/display/Display.h>
+
+      +#if (!(defined FREERTOS) && !(defined __TI_COMPILER_VERSION__)) && !(defined(__clang__))
+      #include <intrinsics.h>
+      #endif
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - STACK SIZE
+
+      #ifndef MR_TASK_STACK_SIZE
+      +#ifdef FREERTOS
+      +#define MR_TASK_STACK_SIZE                   2048
+      +#else
+      #define MR_TASK_STACK_SIZE                   1024
+      +#endif
+     
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - EVENT QUEUE
+
+      /*********************************************************************
+      * GLOBAL VARIABLES
+      */
+      +#ifdef FREERTOS
+      +mqd_t g_EventsQueueID;
+      +#endif
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - ICall_Sync
+
+      /*********************************************************************
+      * LOCAL VARIABLES
+      */
+
+      // Entity ID globally used to check for source and/or destination of messages
+      static ICall_EntityID selfEntity;
+
+      // Event globally used to post local events and pend on system and
+      // local events.
+      +#ifdef FREERTOS
+      +ICall_SyncHandle syncEvent;
+      +#else
+      static ICall_SyncHandle syncEvent;
+      +#endif
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - TASK VARIABLES
+
+      +#ifdef FREERTOS
+      +/*Non blocking queue */
+      +mqd_t g_POSIX_appMsgQueue;
+
+      +#else
+      // Queue object used for app messages
+      static Queue_Struct appMsg;
+      static Queue_Handle appMsgQueue;
+      +#endif
+
+      // Task configuration
+      +#ifdef FREERTOS
+      +typedef uint32_t * Task_Handle;
+      +TaskHandle_t mrTask = NULL;
+      +#else
+      Task_Struct mrTask;
+      +#endif
+
+      +#ifndef FREERTOS
+      #if defined __TI_COMPILER_VERSION__
+      #pragma DATA_ALIGN(mrTaskStack, 8)
+      +#else
+      +#pragma data_alignment=8
+      +#endif
+      +#ifndef FREERTOS
+      uint8_t mrTaskStack[MR_TASK_STACK_SIZE];
+      +#endif
+      +#endif
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - LOCAL FUNCTIONS
+
+      /*********************************************************************
+      * LOCAL FUNCTIONS
+      */
+      static void multi_role_init(void);
+      static void multi_role_scanInit(void);
+      static void multi_role_advertInit(void);
+
+      +#ifdef FREERTOS
+      +static void multi_role_taskFxn(void *a0);
+      +#else//TI_RTOS
+      static void multi_role_taskFxn(UArg a0, UArg a1);
+      +#endif
+      
+      //..
+      //..
+      //..
+
+      +#ifdef FREERTOS
+      +static void multi_role_clockHandler(void * arg);
+      +#else
+      static void multi_role_clockHandler(UArg arg);
+      +#endif
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - multi_role_createTask
+
+      /*********************************************************************
+      * @fn      multi_role_createTask
+      *
+      * @brief   Task creation function for multi_role.
+      *
+      * @param   None.
+      *
+      * @return  None.
+      */
+
+
+      void multi_role_createTask(void)
+      {
+
+      +#ifdef FREERTOS
+      +    BaseType_t xReturned;
+      +
+      +    /* Create the task, storing the handle. */
+      +    xReturned = xTaskCreate(
+      +            multi_role_taskFxn,                     /* Function that implements the task. */
+      +            "MULTI_ROLE_APP",                       /* Text name for the task. */
+      +            MR_TASK_STACK_SIZE / sizeof(uint32_t),  /* Stack size in words, not bytes. */
+      +            ( void * ) NULL,                        /* Parameter passed into the task. */
+      +            MR_TASK_PRIORITY,                       /* Priority at which the task is created. */
+      +            &mrTask );                              /* Used to pass out the created task's handle. */
+      +
+      +    if(xReturned == errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY)
+      +    {
+      +        /* Creation of FreeRTOS task failed */
+      +        while(1);
+      +    }
+      +#else
+            Task_Params taskParams;
+
+            // Configure task
+            Task_Params_init(&taskParams);
+            taskParams.stack = mrTaskStack;
+            taskParams.stackSize = MR_TASK_STACK_SIZE;
+            taskParams.priority = MR_TASK_PRIORITY;
+            Task_construct(&mrTask, multi_role_taskFxn, &taskParams, NULL);
+
+      +#endif
+
+      }
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - multi_role_init()
+
+      +#ifdef FREERTOS
+      +  Util_constructQueue(&g_POSIX_appMsgQueue);
+      +#else
+         // Create an RTOS queue for message from profile to be sent to app.
+         appMsgQueue = Util_constructQueue(&appMsg);
+      +#endif
+         // Create one-shot clock for internal periodic events.
+      +#ifdef FREERTOS
+      +  Util_constructClock(&clkPeriodic,(void*) multi_role_clockHandler,
+      +                        MR_PERIODIC_EVT_PERIOD, 0, false,
+      +                        (void*)&periodicUpdateData);
+      +#else
+
+         Util_constructClock(&clkPeriodic, multi_role_clockHandler,
+                              MR_PERIODIC_EVT_PERIOD, 0, false,
+                              (UArg)&periodicUpdateData);
+      +#endif
+
+   .. note:: 
+      ``simple_central`` does not make use of a periodic timer like the
+      one shown above. The above change should be performed to any clock
+      constructed in the application using *Util_constructClock(*) to avoid
+      build issues.
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - multi_role_taskFxn
+
+      /*********************************************************************
+      * @fn      multi_role_taskFxn
+      *
+      * @brief   Application task entry point for the multi_role.
+      *
+      * @param   a0, a1 - not used.
+      *
+      * @return  None.
+      */
+      +#ifdef FREERTOS
+      +static void multi_role_taskFxn(void* a0)
+      +#else
+      static void multi_role_taskFxn(UArg a0, UArg a1)
+      +#endif
+      {
+         // Initialize application
+         multi_role_init();
+
+         // Application main loop
+         for (;;)
+         {
+            uint32_t events;
+
+            // Waits for an event to be posted associated with the calling thread.
+            // Note that an event associated with a thread is posted when a
+            // message is queued to the message receive queue of the thread
+
+      +#ifdef FREERTOS
+      +    mq_receive(syncEvent, (char*)&events, sizeof(uint32_t), NULL);
+      +#else
+            events = Event_pend(syncEvent, Event_Id_NONE, MR_ALL_EVENTS,
+                              ICALL_TIMEOUT_FOREVER); // event_31 + event_30
+      +#endif
+
+            if (events)
+
+      //..
+      //..
+      //..
+
+               // If RTOS queue is not empty, process app message.
+            if (events & MR_QUEUE_EVT)
+            {
+      +#ifdef FREERTOS
+      +
+      +         mrEvt_t *pMsg;
+      +         do {
+      +             pMsg = (mrEvt_t *)Util_dequeueMsg(g_POSIX_appMsgQueue);
+      +             if (NULL != pMsg)
+      +             {
+      +                 // Process message.
+      +                 multi_role_processAppMsg(pMsg);
+      +
+      +                // Free the space from the message.
+      +                ICall_free(pMsg);
+      +             }
+      +             else
+      +             {
+      +                 break;
+      +             }
+      +           }while(1);
+      +#else
+                  while (!Queue_empty(appMsgQueue))
+                     {
+                        mrEvt_t *pMsg = (mrEvt_t *)Util_dequeueMsg(appMsgQueue);
+                        if (pMsg)
+                        {
+                        // Process message.
+                        multi_role_processAppMsg(pMsg);
+
+                        // Free the space from the message.
+                        ICall_free(pMsg);
+                        }
+                     }
+      +#endif
+            }
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - multi_role_advertInit
+
+         if (addrMode > ADDRMODE_RANDOM)
+         {
+            multi_role_updateRPA();
+      +#ifdef FREERTOS
+      +    // Create one-shot clock for RPA check event.
+      +    Util_constructClock(&clkRpaRead, (void*)multi_role_clockHandler,
+      +                        READ_RPA_PERIOD, 0, true,
+      +                        (void*) &argRpaRead);
+      +
+      +#else
+            // Create one-shot clock for RPA check event.
+            Util_constructClock(&clkRpaRead, multi_role_clockHandler,
+                              READ_RPA_PERIOD, 0, true,
+                              (UArg) &argRpaRead);
+      +#endif
+         }
+      }
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - multi_role_enqueueMsg
+
+            pMsg->pData = pData;
+
+            // Enqueue the message.
+      +#ifdef FREERTOS
+      +    success = Util_enqueueMsg(g_POSIX_appMsgQueue, syncEvent, (uint8_t *)pMsg);
+      +#else
+            success = Util_enqueueMsg(appMsgQueue, syncEvent, (uint8_t *)pMsg);
+      +#endif
+            return (success) ? SUCCESS : FAILURE;
+         }
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - multi_role_clockHandler
+
+      /*********************************************************************
+      * @fn      multi_role_clockHandler
+      *
+      * @brief   Handler function for clock timeouts.
+      *
+      * @param   arg - event type
+      *
+      * @return  None.
+      */
+      +#ifdef FREERTOS
+      +static void multi_role_clockHandler(void * arg)
+      +#else
+      static void multi_role_clockHandler(UArg arg)
+      +#endif
+      {
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - multi_role_handleKeys
+
+      /*********************************************************************
+      * @fn      multi_role_handleKeys
+      *
+      * @brief   Handles all key events for this device.
+      *
+      * @param   keys - bit field for key events. Valid entries:
+      *                 HAL_KEY_SW_2
+      *                 HAL_KEY_SW_1
+      *
+      * @return  none
+      */
+      static void multi_role_handleKeys(uint8_t keys)
+      {
+      +#ifndef FREERTOS
+            uint32_t rtnVal = 0;
+      +#endif
+            if (keys & KEY_LEFT)
+         {
+      +#ifndef FREERTOS
+            // Check if the key is still pressed
+            if (PIN_getInputValue(CONFIG_GPIO_BTN1) == 0)
+            {
+      +#endif
+            tbm_buttonLeft();
+      +#ifndef FREERTOS
+            }
+      +#endif
+         }
+         else if (keys & KEY_RIGHT)
+         {
+            // Check if the key is still pressed
+      +#ifndef FREERTOS
+            rtnVal = PIN_getInputValue(CONFIG_GPIO_BTN2);
+            if (rtnVal == 0)
+            {
+      +#endif
+            tbm_buttonRight();
+      +#ifndef FREERTOS
+            }
+      +#endif
+         }
+      } 
+
+   .. code-block:: diff
+      :caption: multi_role FreeRTOS differences - multi_role_addConnInfo
+
+                  // Create a clock object and start
+                  connList[i].pUpdateClock
+                  = (Clock_Struct*) ICall_malloc(sizeof(Clock_Struct));
+
+                  if (connList[i].pUpdateClock)
+                  {
+      +#ifdef FREERTOS
+      +              Util_constructClock(connList[i].pUpdateClock,
+      +                                              (void*)multi_role_clockHandler,
+      +                                              SEND_PARAM_UPDATE_DELAY, 0, true,
+      +                                              (void*) connList[i].pParamUpdateEventData);
+      +
+      +#else
+                     Util_constructClock(connList[i].pUpdateClock,
+                                          multi_role_clockHandler,
+                                       SEND_PARAM_UPDATE_DELAY, 0, true,
+                                       (UArg) connList[i].pParamUpdateEventData);
+      +#endif
+                  }
+                  else
+                  {
+
+   .. note:: 
+      There are other clocks (i.e. pRssiClock) defined in the
+      ``simple_central`` project. Make sure to apply the above change to those
+      instances as shown in the code snippet below, take note of the new
+      *scClockEventData_t* structure used to pass in arguments. This can be
+      taken from ``multi_role.c`` file and renamed.
+
+      The example below shows the syntax required when passing in parameters to
+      the Util_constructClock() function using FreeRTOS. Simply put, logical
+      statements made inside the function call will result in a build issue.
+
+   .. code-block:: diff
+      :caption: simple_central::SimpleCentral_StartRssi() - Clock construction
+
+            if (connList[connIndex].pRssiClock)
+         {
+      +#ifdef FREERTOS
+      +    scClockEventData_t locData;
+      +    locData.event = (connIndex << 8) | SC_EVT_READ_RSSI;
+      +
+      +    // Create one-shot clock for RPA check event.
+      +    Util_constructClock(connList[connIndex].pRssiClock,
+      +                        (void*)SimpleCentral_clockHandler,
+      +                        DEFAULT_RSSI_PERIOD, 0, true,
+      +                        (void*)&locData);
+      +#else      
+            Util_constructClock(connList[connIndex].pRssiClock,
+                              SimpleCentral_clockHandler,
+                              DEFAULT_RSSI_PERIOD, 0, true,
+                              (connIndex << 8) | SC_EVT_READ_RSSI);
+      +#endif                        
+         }
+
+   While searching for the macro **FREERTOS** in the project, you will find
+   changes to other files (i.e. ``util.c/h``, ``icall_user_config.c``, etc).
+   These changes do not need to be applied to the new example because these
+   files are inherited directly from the SDK.
+
+#. Modify main_freertos.c
+
+   .. code-block:: diff
+     :caption: Modifying main.c - include
+ 
+     #include "bcomdef.h"
+     -#include "multi_role.h"
+     +#include "simple_central.h"
+
+   .. code-block:: diff
+     :caption: Modifying main.c - createTask
+ 
+     /* Kick off application - Priority 1 */
+     -multi_role_createTask();
+     +SimpleCentral_createTask();
+
+#. Modify the .syscfg file using a text editor to change the target rtos to 
+   freertos.
+
+   .. code-block:: diff
+      :caption: multi_role freertos differences - SysConfig
+
+      */
+      -// @cliArgs --board /ti/boards/CC26X2R1_LAUNCHXL --rtos tirtos
+      +// @cliArgs --board /ti/boards/CC26X2R1_LAUNCHXL --rtos freertos
+
+      /*
+      *  simple_central.syscfg
+      */
+
+.. caution:: 
+   **Workaround for Button Debouncing**
+
+   There exists a known issue with FreeRTOS projects in the |BLE5_STACK| (see
+   Release Notes for more information). This issue affects only the usage of the
+   example application's two button menu. To workaround this, manually add a
+   delay inside board_key.c::Board_keyCallback, as opposed to starting a
+   FreeRTOS timer. Below is an example of the modification:
+
+   .. code-block:: diff
+      :caption: Reworking the Pin debounce timer
+
+      //define this outside the function
+      +#define CPU_convertMsToDelayCycles(milliseconds) \
+      +   (((uint32_t)(milliseconds)) * (48000 / 3))
+      
+      //Place the below changes at the end of Board_keyCallback
+               keysPressed |= KEY_RIGHT;
+      }
+      #endif
+
+      +#ifdef FREERTOS
+      +/* 100 ms delay */
+      +CPUdelay(CPU_convertMsToDelayCycles(100));
+
+      +// Notify the application
+      +(*appKeyChangeHandler)(keysPressed);
+      +#else
+      Util_startClock(&keyChangeClock);
+      +#endif
+   

@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OAD Image Header &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OAD External Flash Image Header" href="ext-flash-image-header.html" />
+    <link rel="prev" title="BIM for On-Chip OAD (Stack Library)" href="bim-on-chip-stack-library.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug oad-secure image-header";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oad-types.html">OAD Storage &amp; Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bim.html">Boot Image Manager (BIM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bim-off-chip.html">BIM for Off-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bim-on-chip-stack-library.html">BIM for On-Chip OAD (Stack Library)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">OAD Image Header</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#oad-image-header-overview">OAD Image Header Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#oad-core-image-header">OAD Core Image Header</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#oad-image-identification-value">OAD Image Identification Value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#crc">CRC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bim-version">BIM Version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-header-version">Image Header Version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wireless-technology">Wireless Technology</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-information">Image Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-validation">Image Validation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-length">Image Length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#program-entry-address">Program Entry Address</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#software-version">Software version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-end-address">Image End Address</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#header-length">Header Length</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#oad-image-header-segments">OAD Image Header segments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#segment-header">Segment Header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#boundary-information-segment">Boundary Information Segment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#contiguous-image-information-segment">Contiguous Image Information Segment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#security-information-segment">Security Information Segment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ext-flash-image-header.html">OAD External Flash Image Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-off-chip.html">Flash Layout for Off-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-on-chip-stack-library.html">Flash Layout for On-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html">OAD Image Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/oad-application.html">OAD Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/oad-profile.html">BLE-Stack OAD Profile</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a> &raquo;</li>
+      <li>OAD Image Header</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="oad-image-header">
+<span id="sec-oad-image-image-header"></span><span id="sec-oad-image-header"></span><h1>OAD Image Header<a class="headerlink" href="#oad-image-header" title="Permalink to this headline">¶</a></h1>
+<p>All firmware images delivered via OAD are in binary format and contain an image
+header. The information in the image header is used by the application and
+BIM to determine the suitability of an image for download or loading. In order
+to prevent this information from being calculated multiple times
+all TI OAD images use a standard image header.</p>
+<p>This section explains the various fields within the image header and what they
+mean.</p>
+<p>TI provides a tool to generate an OAD ready image, it is called
+<a class="reference internal" href="tools.html#sec-generating-image-header-vector"><span class="std std-ref">OAD Image Tool</span></a>. By default, this tool runs as a
+post-build step of all OAD enabled projects.</p>
+<div class="section" id="oad-image-header-overview">
+<h2>OAD Image Header Overview<a class="headerlink" href="#oad-image-header-overview" title="Permalink to this headline">¶</a></h2>
+<p>The OAD image header is made up of two parts:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The core image header which is fixed and mandatory for all OAD images</p></li>
+<li><p>The image segments which are optional and used to describe specific types
+of images</p></li>
+</ul>
+</div></blockquote>
+<p>The OAD image header is composed of a core header and segments. The core
+header is required and common to all OAD image headers. The image segments are
+optional and may be different for a given OAD use case (i.e. on-chip vs
+off-chip OAD).</p>
+<p>The image below illustrates the makeup of an image header, and compares two
+types. When added to an image by the <a class="reference internal" href="tools.html#sec-oad-tools"><span class="std std-ref">OAD Image Tool</span></a> the OAD core header
+and segments are packed together sequentially.</p>
+<img alt="../_images/ditaa-172672916166b0b449a2482243c8f1b67ca91a58.png" src="../_images/ditaa-172672916166b0b449a2482243c8f1b67ca91a58.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In general it is not necessary for the customer or user to manually add or
+modify segments. The segments should be populated and packed out of the
+box by the TI oad_image_tool. The images above show a sampling of the
+potential image header + segment configurations. All potential
+configuratiions are not shown, depending on the selected build configuration
+and project, the segments present may be different.</p>
+</div>
+</div>
+<div class="section" id="oad-core-image-header">
+<h2>OAD Core Image Header<a class="headerlink" href="#oad-core-image-header" title="Permalink to this headline">¶</a></h2>
+<p>The core header contains the essential information required for all types of OAD
+across all supported wireless stacks. The core header must be present as the
+BIM relies heavily on it to boot and OAD image.</p>
+<p><a class="reference internal" href="#tbl-image-header-description-table"><span class="std std-numref">Table 39.</span></a> below shows a description of the
+core image header.</p>
+<span id="tbl-image-header-description-table"></span><table class="docutils align-default" id="id3">
+<caption><span class="caption-number">Table 39. </span><span class="caption-text">Description of the core image header.</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 18%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Size (in bytes)</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OAD Image Identification Value</p></td>
+<td><p>8</p></td>
+<td><p>Unique number to identify the start of an OAD image</p></td>
+</tr>
+<tr class="row-odd"><td><p>CRC</p></td>
+<td><p>4</p></td>
+<td><p>Cyclic Redundancy Check</p></td>
+</tr>
+<tr class="row-even"><td><p>BIM Version</p></td>
+<td><p>1</p></td>
+<td><p>Version required to support image format</p></td>
+</tr>
+<tr class="row-odd"><td><p>Image Header Version</p></td>
+<td><p>1</p></td>
+<td><p>Version of image header contained in image</p></td>
+</tr>
+<tr class="row-even"><td><p>Wireless Technology</p></td>
+<td><p>2</p></td>
+<td><p>Type of connectivity used in image</p></td>
+</tr>
+<tr class="row-odd"><td><p>Image Information</p></td>
+<td><p>4</p></td>
+<td><p>Image information bytes</p></td>
+</tr>
+<tr class="row-even"><td><p>Image Validation</p></td>
+<td><p>4</p></td>
+<td><p>Check if image is valid to run</p></td>
+</tr>
+<tr class="row-odd"><td><p>Image Length</p></td>
+<td><p>4</p></td>
+<td><p>The total length of the image including header</p></td>
+</tr>
+<tr class="row-even"><td><p>Program Entry Address</p></td>
+<td><p>4</p></td>
+<td><p>Application startup entry address</p></td>
+</tr>
+<tr class="row-odd"><td><p>Image Software Version</p></td>
+<td><p>4</p></td>
+<td><p>Software version of the image</p></td>
+</tr>
+<tr class="row-even"><td><p>Image End Address</p></td>
+<td><p>4</p></td>
+<td><p>End address of the image</p></td>
+</tr>
+<tr class="row-odd"><td><p>Header Length</p></td>
+<td><p>2</p></td>
+<td><p>Total length of the image header</p></td>
+</tr>
+</tbody>
+</table>
+<p>The core header is defined in <code class="docutils literal notranslate"><span class="pre">oad_image_header.h</span></code> in the struct
+<code class="docutils literal notranslate"><span class="pre">imgFixedHdr_t</span></code>.</p>
+<p>Each entry from <a class="reference internal" href="#tbl-image-header-description-table"><span class="std std-numref">Table 39.</span></a> are described in
+the following sections.</p>
+<div class="section" id="oad-image-identification-value">
+<h3>OAD Image Identification Value<a class="headerlink" href="#oad-image-identification-value" title="Permalink to this headline">¶</a></h3>
+<p>The OAD Image Identification Value for the CC13xx or CC26xx is set based on the
+<code class="docutils literal notranslate"><span class="pre">DeviceFamily_*</span></code> defined that is provided by the SDK. The value is using the
+the <code class="docutils literal notranslate"><span class="pre">OAD_IMG_ID_VAL</span></code> define. Note the protocol specific implementation OAD
+should check that the <code class="docutils literal notranslate"><span class="pre">OAD_IMG_ID_VAL</span></code> field matches between the image
+currently resident on the device and the incoming image.</p>
+<p>The OAD Image Identification Value serves two purposes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Provides the application a quick way to identify if it is receiving the
+correct image.</p></li>
+<li><p>Provides a means for the BIM to find the flash page containing the start
+of OAD image for on-chip OAD</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is recommended that the customer customize the image identification
+field to uniquely identify their product.</p>
+</div>
+</div>
+<div class="section" id="crc">
+<h3>CRC<a class="headerlink" href="#crc" title="Permalink to this headline">¶</a></h3>
+<p>The cyclic redundancy check (CRC) is a means to check the integrity of an
+image.  This must be done in two steps. First the CRC must be calculated when
+the image is generated from the toolchain (by the <a class="reference internal" href="tools.html#sec-oad-tools"><span class="std std-ref">OAD Image Tool</span></a>), this
+will be stored in the CRC field within the image header.</p>
+<p>Later, once the target has received the OAD image, CRC will be recalculated to
+determine if the image has been corrupted during transfer.</p>
+<p>If the CRC is equivalent before and after the OAD, the target can assume that
+the image was not corrupted while sending over the air.</p>
+<p>A CRC-32 algorithm is used to calculate the CRC. This algorithm results in a 1
+in 2<sup>32</sup> chance of collision. This allows for a 99.9999% error detection
+rate.  In addition to this CRC, transfers through the protocol transport are
+also protected by a CRC.  So the risk of an undetected data corruption is
+reduced even further.</p>
+</div>
+<div class="section" id="bim-version">
+<span id="sec-oad-image-header-bim-version"></span><h3>BIM Version<a class="headerlink" href="#bim-version" title="Permalink to this headline">¶</a></h3>
+<p>The BIM Version byte is used to determine whether or not the image is
+compatible with the version of BIM that is running on the device.</p>
+</div>
+<div class="section" id="image-header-version">
+<h3>Image Header Version<a class="headerlink" href="#image-header-version" title="Permalink to this headline">¶</a></h3>
+<p>The image header Version byte is used to determine whether or image contains
+image header that is compatible with the current version of the application and
+BIM.</p>
+</div>
+<div class="section" id="wireless-technology">
+<h3>Wireless Technology<a class="headerlink" href="#wireless-technology" title="Permalink to this headline">¶</a></h3>
+<p>The Wireless Technology field in the image header describes what technology is
+used in the image to be downloaded. Multiple technologies can be selected here
+if the device used supports multiple technologies. These fields are added for
+future expansion. Bits are set to 1 by default. To select the Wireless
+Technology field, set the appropriate bit(s) to 0.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 54%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit Number</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Hex Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Bluetooth Low Energy</p></td>
+<td><p>0xFFFE</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>IEEE 802.15.4 (Sub-1 GHz)</p></td>
+<td><p>0xFFFD</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>IEEE 802.15.4 (2.4 GHz)</p></td>
+<td><p>0xFFFB</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Zigbee</p></td>
+<td><p>0xFFF7</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>RF4CE</p></td>
+<td><p>0xFFEF</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>Thread</p></td>
+<td><p>0xFFDF</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>Proprietary RF</p></td>
+<td><p>0xFFBF</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>MIOTY</p></td>
+<td><p>0xFF7F</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>Wireless BMS</p></td>
+<td><p>0xFEFF</p></td>
+</tr>
+<tr class="row-odd"><td><p>9-15</p></td>
+<td><p>Reserved</p></td>
+<td><p>N/A</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="image-information">
+<h3>Image Information<a class="headerlink" href="#image-information" title="Permalink to this headline">¶</a></h3>
+<p>The Image Information provides details about the OAD image status and type. The
+format is as follows:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 16%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Byte Number</p></th>
+<th class="head"><p>Item</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Image Copy Status</p></td>
+<td><div class="line-block">
+<div class="line">0xFF: Default status, no action needed</div>
+<div class="line">0xFE: Image to be copied to on-chip flash at location indicated in the image header</div>
+<div class="line">0xFC: Image copied</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>CRC Status</p></td>
+<td><div class="line-block">
+<div class="line">0xFC: CRC Invalid</div>
+<div class="line">0xFE: CRC Valid</div>
+<div class="line">0xFF: CRC Not Calculated Yet</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Image Type</p></td>
+<td><div class="line-block">
+<div class="line">Device Images (0x00-0x15)</div>
+<div class="line">0x00: Persistent application (for On-chip OAD)</div>
+<div class="line">0x01: Application</div>
+<div class="line">0x02: Stack</div>
+<div class="line">0x03: Application &amp; Stack Merged</div>
+<div class="line">0x04: Network Processor</div>
+<div class="line">0x05: Factory Image</div>
+<div class="line">0x06: BIM</div>
+<div class="line">0x07: App &amp; Stack Combined (App/Stack_Library)</div>
+<div class="line"><br /></div>
+<div class="line">0x10-0xFF: Reserved</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Image Number</p></td>
+<td><div class="line-block">
+<div class="line">Image number if more than one type is stored</div>
+<div class="line">0xFF: Default</div>
+<div class="line">0x00-0xFE: Image number</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Image type 0x03 (Application &amp; Stack Merged) is different from 0x07 (App &amp;
+Stack Combined). Image type 0x03 refers to the case where app and stack are
+build as separate split images and combined using a hex merging tool. Image
+type 0x07 refers to a app and stack being built as a single executable.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>BIM will not try to interpret user data/application (anything with image
+type &gt; 0x10).</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The OAD Image Tool currently only supports the following image types:
+0x00-0x03, 0x07.</p>
+</div>
+</div>
+<div class="section" id="image-validation">
+<h3>Image Validation<a class="headerlink" href="#image-validation" title="Permalink to this headline">¶</a></h3>
+<p>The image validation field is used by the BIM to switch back and forth
+between the user application and target image, without corrupting the
+current image header. This field is only used with on-chip OAD.</p>
+</div>
+<div class="section" id="image-length">
+<h3>Image Length<a class="headerlink" href="#image-length" title="Permalink to this headline">¶</a></h3>
+<p>The Image Length field is the total length of the executable portion of the
+image in bytes. Image length is calculated by the OAD image tool using the
+following equation:</p>
+<div class="math">
+<p><img src="../_images/math/23be36b5c6032ee0bb47c82c1491024823a801e8.svg" alt="\textrm{imgLen} = \textrm{imgEndAddr} - \textrm{imgStAddr} + 1"/></p>
+</div><p>Note that the tool will pad the image length to be word aligned, updating the
+length if needed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>imgEndAddr: Last used address in flash</p></li>
+<li><p>imgStAddr: The first address used in flash (starts at <code class="docutils literal notranslate"><span class="pre">_imgHdr.imgID</span></code>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="program-entry-address">
+<h3>Program Entry Address<a class="headerlink" href="#program-entry-address" title="Permalink to this headline">¶</a></h3>
+<p>The Program Entry Address is a pointer to the application interrupt vector table
+or application program entry address. This provides flexibility so that if the
+program entry address changes between images, BIM will still be able to use this
+field to run the application.</p>
+</div>
+<div class="section" id="software-version">
+<span id="sec-oad-image-header-software-version"></span><h3>Software version<a class="headerlink" href="#software-version" title="Permalink to this headline">¶</a></h3>
+<p>The Software Version field is used to keep track of the application and stack
+revision contained in the image. This field follows the following format:</p>
+<p>These values are assigned as shown in the table below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Byte Number</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3-2</p></td>
+<td><p>Stack version</p></td>
+</tr>
+<tr class="row-odd"><td><p>1-0</p></td>
+<td><p>Application version</p></td>
+</tr>
+</tbody>
+</table>
+<p>For example an image with app version 1.0 and stack version 3.0 would be
+designated as: <code class="docutils literal notranslate"><span class="pre">{'3',</span> <span class="pre">'0',</span> <span class="pre">'1',</span> <span class="pre">'0'}</span></code>. This field is to be set by the user in
+their header implementation. (i.e. <code class="docutils literal notranslate"><span class="pre">oad_image_header*.c</span></code>)</p>
+</div>
+<div class="section" id="image-end-address">
+<h3>Image End Address<a class="headerlink" href="#image-end-address" title="Permalink to this headline">¶</a></h3>
+<p>The Image End Address is the last address in flash occupied by the image.</p>
+</div>
+<div class="section" id="header-length">
+<h3>Header Length<a class="headerlink" href="#header-length" title="Permalink to this headline">¶</a></h3>
+<p>The Header Length is the length of the core portion of the header. This is up to
+and including the <code class="docutils literal notranslate"><span class="pre">rfu2</span></code> field in the structure defined in
+<code class="docutils literal notranslate"><span class="pre">oad_image_header.h</span></code>.</p>
+</div>
+</div>
+<div class="section" id="oad-image-header-segments">
+<h2>OAD Image Header segments<a class="headerlink" href="#oad-image-header-segments" title="Permalink to this headline">¶</a></h2>
+<p>The segment structure was designed to make the current OAD implementation
+flexible and extensible. This makes it possible to expand the image header
+vector as features are added to the OAD implementation without breaking the
+existing system.</p>
+<span id="tbl-image-header-description-segments-table"></span><table class="docutils align-default" id="id4">
+<caption><span class="caption-number">Table 40. </span><span class="caption-text">Description of the image header segments.</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 18%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Size (in bytes)</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Boundary Information</p></td>
+<td><p>24</p></td>
+<td><p>Contains information about RAM and Flash boundaries</p></td>
+</tr>
+<tr class="row-odd"><td><p>Contiguous Image Information</p></td>
+<td><p>12</p></td>
+<td><p>Contains information about image to be downloaded</p></td>
+</tr>
+<tr class="row-even"><td><p>Security Information</p></td>
+<td><p>85</p></td>
+<td><p>Contains image signature and related information</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The current implementation only supports images of contiguous type, thus this
+segment is required.</p>
+<p>The boundary segment is optional and only required for split image types.</p>
+</div>
+<div class="section" id="segment-header">
+<h3>Segment Header<a class="headerlink" href="#segment-header" title="Permalink to this headline">¶</a></h3>
+<p>Each segment has a common header structure. This is useful when parsing an image
+for segments. The header structure is used by all segments. The common header
+will be documented below so it does not have to be repeated for each segment
+type.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 13%" />
+<col style="width: 71%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Size (in bytes)</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Segment type = X</p></td>
+<td><p>1</p></td>
+<td><p>Segment header op-code</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wireless technology</p></td>
+<td><p>2</p></td>
+<td><p>Same options as in the main wireless technology table above. Only one bit may be set here.</p></td>
+</tr>
+<tr class="row-even"><td><p>Reserved</p></td>
+<td><p>1</p></td>
+<td><p>Default is set to 0xFF</p></td>
+</tr>
+<tr class="row-odd"><td><p>Payload length</p></td>
+<td><p>4</p></td>
+<td><p>The length of the segment in bytes</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="section" id="segment-type">
+<h4>Segment Type<a class="headerlink" href="#segment-type" title="Permalink to this headline">¶</a></h4>
+<p>The segment type field is a one byte op-code that is useful in identifying the
+segment type.</p>
+</div>
+<div class="section" id="id2">
+<h4>Wireless Technology<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>This is the type of wireless technology that is contained in the segment. Each
+segment may be built for only one wireless tech, thus only one bit can be set in
+this field.</p>
+</div>
+<div class="section" id="reserved">
+<h4>Reserved<a class="headerlink" href="#reserved" title="Permalink to this headline">¶</a></h4>
+<p>This field is currently unused and existing designs should not rely on this
+field.</p>
+</div>
+<div class="section" id="payload-length">
+<h4>Payload Length<a class="headerlink" href="#payload-length" title="Permalink to this headline">¶</a></h4>
+<p>The length of the entire segement in bytes.</p>
+</div>
+</div>
+<div class="section" id="boundary-information-segment">
+<h3>Boundary Information Segment<a class="headerlink" href="#boundary-information-segment" title="Permalink to this headline">¶</a></h3>
+<p>The Boundary Information field is intended for split image type OAD
+(where the application and stack are separate images) and is optional.
+The boundary segment provides information to BIM on the flash and RAM boundaries
+of the image and its associated wireless stack image.</p>
+<p>This information is formatted in the following way:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 13%" />
+<col style="width: 71%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p>Size (in bytes)</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Segment type = 0</p></td>
+<td><p>1</p></td>
+<td><p>Tells the BIM that the following fields provide RAM and stack boundary information</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wireless technology</p></td>
+<td><p>2</p></td>
+<td><p>Same options as in the main wireless technology table above. Only one bit may be set here.</p></td>
+</tr>
+<tr class="row-even"><td><p>Reserved</p></td>
+<td><p>1</p></td>
+<td><p>Default is set to 0xFF</p></td>
+</tr>
+<tr class="row-odd"><td><p>Payload length</p></td>
+<td><p>4</p></td>
+<td><p>The length of the boundary information field in bytes</p></td>
+</tr>
+<tr class="row-even"><td><p>Stack Entry Address</p></td>
+<td><p>4</p></td>
+<td><p>Stack entry address</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICALL_STACK0_ADDR</p></td>
+<td><p>4</p></td>
+<td><p>Stack boundary address</p></td>
+</tr>
+<tr class="row-even"><td><p>RAM_START_ADDR</p></td>
+<td><p>4</p></td>
+<td><p>Start address of RAM</p></td>
+</tr>
+<tr class="row-odd"><td><p>RAM_END_ADDR</p></td>
+<td><p>4</p></td>
+<td><p>End address of RAM</p></td>
+</tr>
+</tbody>
+</table>
+<p>The boundary segment is defined in <code class="docutils literal notranslate"><span class="pre">oad_image_header.h</span></code> in the struct
+<code class="docutils literal notranslate"><span class="pre">boundarySeg_t</span></code>. See this structure in Doxygen for more information.</p>
+<div class="section" id="stack-entry-address">
+<h4>Stack Entry Address<a class="headerlink" href="#stack-entry-address" title="Permalink to this headline">¶</a></h4>
+<p>This is the entry point to the stack image, required when the app and stack are
+of split image type.</p>
+</div>
+<div class="section" id="stack-boundary-address-icall-stack0-addr">
+<h4>Stack Boundary Address (ICALL_STACK0_ADDR)<a class="headerlink" href="#stack-boundary-address-icall-stack0-addr" title="Permalink to this headline">¶</a></h4>
+<p>The address of the app/stack boundary. This is the lowest address occupied by
+the stack.</p>
+</div>
+<div class="section" id="lower-ram-boundary-ram-start-addr">
+<h4>Lower RAM Boundary (RAM_START_ADDR)<a class="headerlink" href="#lower-ram-boundary-ram-start-addr" title="Permalink to this headline">¶</a></h4>
+<p>The lower address of the RAM region reserved by the stack image.</p>
+</div>
+<div class="section" id="upper-ram-boundary-ram-end-addr">
+<h4>Upper RAM Boundary (RAM_END_ADDR)<a class="headerlink" href="#upper-ram-boundary-ram-end-addr" title="Permalink to this headline">¶</a></h4>
+<p>The upper address of the RAM region reserved by the stack image.</p>
+</div>
+</div>
+<div class="section" id="contiguous-image-information-segment">
+<h3>Contiguous Image Information Segment<a class="headerlink" href="#contiguous-image-information-segment" title="Permalink to this headline">¶</a></h3>
+<p>The Continuous Image Information field provides information about the image to be
+downloaded during the OAD process. The information is formatted in the following
+way:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 13%" />
+<col style="width: 71%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p>Size (in bytes)</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Segment type = 1</p></td>
+<td><p>1</p></td>
+<td><p>Tells the BIM that the following fields provide information about the image payload</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wireless technology</p></td>
+<td><p>2</p></td>
+<td><p>Same options as in the main wireless technology table above. Only one bit may be set here.</p></td>
+</tr>
+<tr class="row-even"><td><p>Reserved</p></td>
+<td><p>1</p></td>
+<td><p>Default is set to 0xFF</p></td>
+</tr>
+<tr class="row-odd"><td><p>Image Segment Len</p></td>
+<td><p>4</p></td>
+<td><p>The length of the continuous image segment in bytes</p></td>
+</tr>
+<tr class="row-even"><td><p>Image Start Address</p></td>
+<td><p>4</p></td>
+<td><p>Address of executable image data</p></td>
+</tr>
+</tbody>
+</table>
+<p>The contiguous image segment is defined in <code class="docutils literal notranslate"><span class="pre">oad_image_header.h</span></code> in the struct
+<code class="docutils literal notranslate"><span class="pre">imgPayloadSeg_t</span></code>. See this structure in Doxygen for more information.</p>
+<div class="section" id="image-start-address">
+<h4>Image Start Address<a class="headerlink" href="#image-start-address" title="Permalink to this headline">¶</a></h4>
+<p>The starting address of the contiguous image segment. The information in this
+segment will be filled in sequentially from the start address.</p>
+</div>
+</div>
+<div class="section" id="security-information-segment">
+<span id="sec-oad-security-seg"></span><h3>Security Information Segment<a class="headerlink" href="#security-information-segment" title="Permalink to this headline">¶</a></h3>
+<p>Images that are built using the secure OAD feature will contain a security
+information segment as part of the image header. The format of the security
+segment is shown below</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 13%" />
+<col style="width: 70%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Item</p></td>
+<td><p>Size(in bytes)</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>Segment type = 3</p></td>
+<td><p>1</p></td>
+<td><p>Tells the BIM that this segment contains security info.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wireless technology</p></td>
+<td><p>2</p></td>
+<td><p>Same options as in main wireless technology table above. Only one bit can be set here.</p></td>
+</tr>
+<tr class="row-even"><td><p>Verification status</p></td>
+<td><p>1</p></td>
+<td><p>Default is set to 0xFF.
+0xFC indicates that sign verification fails
+0xFE indicates successful verification</p></td>
+</tr>
+<tr class="row-odd"><td><p>Payload len</p></td>
+<td><p>4</p></td>
+<td><p>The actual length of the security information bytes + length of the structure</p></td>
+</tr>
+<tr class="row-even"><td><p>Security payload</p></td>
+<td><p>variable</p></td>
+<td><p>Structure will include security algorithm type and data about its various components</p></td>
+</tr>
+</tbody>
+</table>
+<p>The security payload strcture is defined below:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 23%" />
+<col style="width: 46%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Item</p></td>
+<td><p>Size(in bytes)</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>1</p></td>
+<td><p>0x1: ECC P-256 raw public key
+0x2-0xFF: reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>Timestamp</p></td>
+<td><p>4</p></td>
+<td><p>Timestamp</p></td>
+</tr>
+<tr class="row-even"><td><p>certificate payload</p></td>
+<td><p>Variable</p></td>
+<td><p>8 byte signer info,
+64 byte public key
+See  <code class="docutils literal notranslate"><span class="pre">eccSignature_t</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The security structure is defined by <code class="docutils literal notranslate"><span class="pre">securityInfoSeg_t</span></code> in
+<code class="docutils literal notranslate"><span class="pre">oad_image_header.h</span></code></p>
+<div class="section" id="verification-status">
+<h4>Verification status<a class="headerlink" href="#verification-status" title="Permalink to this headline">¶</a></h4>
+<p>Tracks whether or not the BIM has verified the signature embedded in the image.
+Once a signature has been checked and is validated or invalidated, the result
+will be stored in the flag and not calculated again.</p>
+</div>
+<div class="section" id="security-version">
+<h4>Security Version<a class="headerlink" href="#security-version" title="Permalink to this headline">¶</a></h4>
+<p>Indicates which signing algorithm was performed on the image.
+At this time only ECDSA P-256 signatures are supported. In the future other
+algorithms may be supported, other values for the version field are considered
+RFU.</p>
+</div>
+<div class="section" id="security-timestamp">
+<h4>Security Timestamp<a class="headerlink" href="#security-timestamp" title="Permalink to this headline">¶</a></h4>
+<p>Intended to provide a timestamp on an image to prevent relay attacks.
+Not used at this time.</p>
+</div>
+<div class="section" id="certificate-payload">
+<h4>Certificate Payload<a class="headerlink" href="#certificate-payload" title="Permalink to this headline">¶</a></h4>
+<p>The certificate payload is a combination of two fields</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Security signer information: 8 bytes of SHA2 hash</p></li>
+<li><p>Image signature: 64 bytes of signature as calculated by ECDSA algorithm</p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bim-on-chip-stack-library.html" class="btn btn-neutral float-left" title="BIM for On-Chip OAD (Stack Library)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ext-flash-image-header.html" class="btn btn-neutral float-right" title="OAD External Flash Image Header" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

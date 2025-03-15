@@ -1,0 +1,84 @@
+BLE5-Stack 2.01.04 (SDK 4.30) to BLE5-Stack 2.02.00 (SDK 4.40)
+==============================================================
+
+This section will describe a way to migrate a project from BLE5-Stack 2.01.04 to
+a BLE5-Stack 2.02.00 project.
+
+The best way to migrate is to open a new project from the new SDK and transfer 
+your changes and application code over to the new example. 
+
+Porting Simple Peripheral
+-------------------------
+
+For this migration guide, Simple Peripheral from BLE5-Stack 2.01.04 will be 
+ported over to BLE5-Stack 2.02.00. The recommended approach is to start with a
+BLE5-Stack 2.02.00 project that contains the same base functionality as the
+porting target project and merge in any custom functionality.
+
+#. Choose a BLE5-Stack 2.02.00 example project that contains your target
+   project's base functionality.
+
+#. Transfer all modified application files from BLE5-Stack 2.01.04 into the
+   BLE5-Stack 2.02.00 example project.
+
+   In this example, the following files from BLE5-Stack 2.01.04 were moved into
+   Simple Peripheral BLE5-Stack 2.02.00 example:
+
+      - ``simple_peripheral.c``
+      - ``simple_peripheral.h``
+
+#. Move any profiles and services that the application is using to the 
+   BLE5-Stack 2.02.00 project.
+
+#. Transfer the SysConfig settings either visually through the GUI or open both 
+   the old and the new project .syscfg files and copy-paste the desired 
+   settings.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|.
+
+#. Refer to the Core SDK release notes for additional information and the 
+   TI-RTOS examples included with |SDK|.
+
+   For additional information on how BLE5-Stack 2.02.00 uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+
+A Few Noteworthy Changes from BLE5-Stack 2.01.02 to BLE5-Stack 2.02.01
+-------------------------------------------------------------------------
+
+You can follow the guide above without addressing these updates, they are listed
+for your information only. All fine grained details might not be mentioned, 
+please refer to the specific example you need to port and to a compare between 
+the old and new project files. Please refer to the BLE5-Stack Release Notes for 
+all the details.
+
+* Connectionless-AoA is now supported. For more information, refer to 
+  :ref:`sec-aoa`.
+
+* Periodic Advertisements are now supported. For more information, refer to
+  :ref:`gap_periodic_advertising`.
+
+* TI clang compiler support was added to BLE projects. See 
+  :ref:`get-started-ble5-develop` for a list of projects supported. This change
+  required some modifications to code (i.e. passing in "" to functions
+  that do not receive any input). When porting, no change is required if the 
+  legacy compiler is used.
+
+* Improvements were made to the BLE5 Stack's scheduling of events. For details,
+  see :ref:`sec-connection-fairness`.
+
+* A new define was added to gapbondmgr.h. ``GAPBOND_AUTHEN_PAIRING_ONLY`` is
+  used to enforce authenticated pairing. Additional checks were added to the
+  GAPBondMgr to ensure proper IO capabilities are set when when authenticated
+  pairing is used. Refer to :ref:`authentication-pairing-only`.
+
+* The Project Zero data_service.c profile 's *String Characterisitc Value* has 
+  been modified to support encrpyted reads/writes. Additionally, in 
+  simple_gatt_profile.c, *Simple Profile Characteristic 4 Properties* were 
+  modified to support writes in addition to the original notify support 
+  (i.e. ``` simpleProfileChar4Props = GATT_PROP_WRITE | GATT_PROP_NOTIFY;)```)
+
+​

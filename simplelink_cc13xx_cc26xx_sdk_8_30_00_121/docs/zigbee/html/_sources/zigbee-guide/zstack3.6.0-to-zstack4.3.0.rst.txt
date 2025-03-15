@@ -1,0 +1,169 @@
+.. _sec-zstack3.6.0-to-stack4.3.0:
+
+Z-Stack 3.6.0+ to Z-Stack 4.3.0
+===============================
+
+This section will describe a way to migrate a projects Z-Stack 3.6.0 and
+later to a Z-Stack 4.3.0 project.
+
+.. note:: Z-Stack 3.6.0 is the last 3.x version, the next being Z-Stack
+    4.1.0 and since then following the same |SDK| version naming convention.
+
+For this guide, *zc_light* from Z-Stack 3.6.0 will be compared
+with Z-Stack 4.3.0.  New features and updates that have occurred in between include:
+
+-  Project pre-definition changes
+
+-  Renaming of several ZCL definitions
+
+-  Revised callbacks and API names/parameters
+
+-  LED handling
+
+The recommended approach is to start with a Z-Stack 4.3.0 project that contains 
+the same base application as the porting target project and merge any custom functionality.
+
+1. Choose a Z-Stack 4.3.0 example project that contains your target project's base 
+   functionality.  For reference and use in this example, *zc_light* from 
+   |SDK_DIR|\ \\examples\\rtos\\\ |DEVICE|\_LAUNCHXL\\zstack
+   is chosen as a starting point.
+
+#. Multiple application predefinitions have changed, including (but not limited to)
+   ``USE_ZCL_SAMPLEAPP_UI`` to ``CUI_DISABLE`` and ``OTA_CLIENT`` to 
+   ``OTA_CLIENT_INTEGRATED``.  The list of current preprocessor definitions are 
+   available in :ref:`sec-app-configuration` and developers must take caution to
+   modify their project settings and application files accordingly.  For example,
+   instances of ``#ifdef USE_ZCL_SAMPLEAPP_UI`` should become ``ifndef CUI_DISABLE``
+   in ``zcl_sample*.[c/h]``.
+
+#. As SysConfig has been upgraded to version 1.6.0, developers must modify their
+   Z-Stack settings (and thus the definitions generated for ``ti_zstack_config.h``) 
+   in the new ``.syscfg`` file from the Z-Stack 4.3.0 project.  Refer to the 
+   directions in :ref:`sysconfig-zigbee-configuration` for more information.
+
+#. Several ZCL files inside |SDK_DIR|\ \\source\\ti\\\zstack\\stack\\zcl have renamed 
+   definitions for cluster IDs, attributes, and commands.  For example, 
+   ``ZCL_CLUSTER_ID_GEN_BASIC`` from ``zcl.h`` is now ``ZCL_CLUSTER_ID_GENERAL_BASIC``.  
+   Several  changes have been made to other common ``zcl*.h`` files including 
+   ``zcl_general.h`` and ``zcl_ha.h``, among others.  Affected definitions range from 
+   ``ZCL_*``, ``COMMAND_*``, ``ATTRID_*``, and more.  Developers must be sure to update 
+   the ``zcl_sample*_data.c`` and ``zcl_sample*.c`` files accordingly for consistency.  
+   Other clusters, attributes, or simple descriptors which were added or altered in the 
+   previous Z-Stack project should also be migrated accordingly.
+
+The following items specifically concern ``zcl_samplelight.c``:
+
+1. DMM functionality for related projects has been modified slightly, thus instances of
+   ``if USE_DMM`` are replaced with ``#if defined(USE_DMM) && defined(BLE_START)``.
+
+#. ``static void zclSampleLight_LevelControlMoveToClosestFrequencyCB( zclLCMoveFreq_t *pCmd );``
+   has been added and is placed in the ``zclGeneral_AppCallbacks_t zclSampleLight_CmdCallbacks``
+   table:
+
+   .. code-block:: c
+
+	 static zclGeneral_AppCallbacks_t zclSampleLight_CmdCallbacks =
+	 {
+	 ...
+	 #ifdef ZCL_LEVEL_CTRL
+	   zclSampleLight_LevelControlMoveToLevelCB,             // Level Control Move to Level command
+	   zclSampleLight_LevelControlMoveCB,                    // Level Control Move command
+	   zclSampleLight_LevelControlStepCB,                    // Level Control Step command
+	   zclSampleLight_LevelControlStopCB,                    // Level Control Stop command
+	   zclSampleLight_LevelControlMoveToClosestFrequencyCB,  // Level Control Stop command
+	 #endif
+	 ...
+	 };
+
+   Also, ``zclSampleLight_LevelControlStopCB`` now has parameter ``zclLCStop_t *pCmd``
+   instead of ``void``.
+
+#. Key and button handling have been modified:
+
+   .. code-block:: c
+
+	 #include <ti/drivers/apps/Button.h>
+	 #include <ti/drivers/apps/LED.h>
+	 ...
+	 ##ifndef CUI_DISABLE
+	 CONST char zclSampleLight_appStr[] = APP_TITLE_STR;
+	 CUI_clientHandle_t gCuiHandle;
+	 static LED_Handle gRedLedHandle;
+	 static uint32_t gSampleLightInfoLine;
+	 #endif
+	 ...
+	 #ifndef CUI_DISABLE
+	 static void zclSampleLight_processKey(uint8_t key, Button_EventMask buttonEvents);
+	 static void zclSampleLight_RemoveAppNvmData(void);
+	 static void zclSampleLight_InitializeStatusLine(CUI_clientHandle_t gCuiHandle);
+	 static void zclSampleLight_UpdateStatusLine(void);
+	 #endif
+	 ...
+	   //Request the Red LED for App
+  	   LED_Params ledParams;
+  	   LED_Params_init(&ledParams);
+  	   gRedLedHandle = LED_open(CONFIG_LED_RED, &ledParams);
+
+  	   //Initialize the sampleLight UI status line
+       zclSampleLight_InitializeStatusLine(gCuiHandle);
+  	 ...
+  	 static void zclSampleLight_UpdateLedState(void)
+	 {
+
+	 #ifndef CUI_DISABLE
+  	   // set the LED1 based on light (on or off)
+	   if ( LIGHT_ON == zclSampleLight_getOnOffAttribute())
+	   {
+	 #ifdef ZCL_LEVEL_CTRL
+	     uint8_t lightLevel = zclSampleLight_getCurrentLevelAttribute();
+
+	     // lightLevel is a value from 0-255. We must map this to a percentage (0-100%)
+	     LED_stopBlinking(gRedLedHandle);
+	     LED_setOn(gRedLedHandle, (lightLevel * 100) / 255);
+	 #else
+	     LED_stopBlinking(gRedLedHandle);
+	     LED_setOn(gRedLedHandle, LED_BRIGHTNESS_MAX);
+	     #endif
+	   }
+	   else
+	   {
+	     LED_stopBlinking(gRedLedHandle);
+	     LED_setOff(gRedLedHandle);
+	   }
+	 #endif
+
+	 }
+	 ...
+	 static void zclSampleLight_processKey(uint8_t key, Button_EventMask buttonEvents)
+ 	 {
+	     if (buttonEvents & Button_EV_CLICKED)
+	     {
+	         if(key == CONFIG_BTN_LEFT)
+	         {
+	             zstack_bdbStartCommissioningReq_t zstack_bdbStartCommissioningReq;
+
+	             zstack_bdbStartCommissioningReq.commissioning_mode = zclSampleLight_BdbCommissioningModes;
+	             Zstackapi_bdbStartCommissioningReq(appServiceTaskId, &zstack_bdbStartCommissioningReq);
+	         }
+	         if(key == CONFIG_BTN_RIGHT)
+	         {
+
+	         }
+	     }
+	 }
+
+   The ``CUI_led*`` APIs are no longer used.
+
+#. ``zclport_registerZclHandleExternal`` now includes an endpoint as the first parameter,
+   ``zclport_registerZclHandleExternal(SAMPLELIGHT_ENDPOINT, zclSampleLight_ProcessIncomingMsg);``.
+
+#. All ``Timer_*`` APIs have become ``UtilTimer_*``.
+
+#. Updated third parameter for ``CUI_statusLineResourceRequest``, ``const bool _refreshInd``
+   set to ``false`` in the default application.
+
+#. Any other Z-Stack 3.6.0+ application changes to the Z-Stack 4.3.0 file, if not
+   pertaining to the items listed above, should be added accordingly.
+
+.. note:: Difference comparison software is recommended for discerning all differences
+    between software stacks.

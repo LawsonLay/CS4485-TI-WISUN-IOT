@@ -1,0 +1,260 @@
+.. _sec-litedevice:
+
+Running Software Examples on the |LITEDEVICE|
+=============================================
+
+Porting Software Examples for the |LITEDEVICE|
+----------------------------------------------
+
+The |LITEDEVICE| devices are pin compatible with their respective |DEVICE1| devices 
+but with only one UART and SSI, 32KB + 8KB GP cache SRAM (with parity 
+removed), and 40 kB of ROM.  The following features  and peripherals have 
+also been removed entirely:
+
+-  IEEE 754-compliant single-precision Floating Point Unit (FPU)
+-  Memory Protection Unit (MPU)
+-  AES 256-bit crypto accelerator
+-  ECC and RSA Public Key Hardware Accelerator
+-  SHA2 Accelerator
+-  Sensor Controller with 4KB of SRAM
+
+.. note::
+    |LITEDEVICE| devices offer a software implementation of the AES,
+    ECC, RSA, and SHA2 functions with a similar API as the one available
+    on |DEVICE1|. Refer to the |TI_DRIVERS_API| for additional details.
+
+It is not possible to use the :ref:`sec-sysconfig-migrate-device` tool to 
+change the device types of projects using |DEVICE1| to |LITEDEVICE|.  
+Developers are strongly encouraged to import a project which contains the 
+correct settings for their target device and port the stack application 
+accordingly.  Example projects can be found from the following location:
+``<SDK_DIR>\\examples\\rtos\\<LaunchPad variant>\\<stack>\\<application>\\tirtos\\<ccs/iar>``
+
+
+CC1311R3
+--------
+
+For `CC1311R3`_ development, the recommended approach is to start with a
+software project from the `CC1311P3 LaunchPad`_ folder. The main difference
+between the `CC1311R3`_ and `CC1311P3`_ devices is the high PA on the `CC1311P3`_.
+You can read details about this in the device data sheets. 
+
+Software Development
+^^^^^^^^^^^^^^^^^^^^
+
+For software development, use a `CC1311P3 LaunchPad`_ example project.
+
+CC1311R3 Evaluation
+^^^^^^^^^^^^^^^^^^^
+
+When you have `CC1311R3`_ devices that you want to test, you can follow this
+guide. If you are using a custom board, you can disregard this guide and instead
+look at the :ref:`sec-custom-hardware` section. 
+
+Please follow the steps below to migrate a CC1311P3 LaunchPad software example
+to CC1311R3. The assumption here is that you have a `CC1311R3`_ device mounted
+on a LaunchPad. `CC1311R3`_ is pin compatible with `CC1312R`_ and `CC1312R7`_
+devices, so a `CC1312R LaunchPad`_ or `CC1312R7 LaunchPad`_ should be used. 
+
+Proprietary RF and Drivers Examples
+"""""""""""""""""""""""""""""""""""
+
+.. tip:: 
+    
+    For ``prop_rf`` and ``drivers`` folder examples, you can use this method or
+    the one described under "TI 15.4-Stack Examples"
+
+1. Import or open your ``LP_CC1311P3`` example in your IDE. Open the ``.syscfg``
+   file.
+
+2. Press the SWITCH button.
+
+   .. figure:: resources/sysconfig-cc1311p3.png
+      :align: center
+
+3. Press the dropdown menu for New Value for Board. Select None. 
+
+4. Press the dropdown menu for New Value for Device. Select the CC1311R3.
+
+   .. figure:: resources/sysconfig-cc1311r3.png
+      :align: center
+
+5. Press Confirm. Save your Sysconfig file. It will now try to migrate your
+   project.
+
+6. You will likely get some errors from SysConfig and even build errors. In each
+   case try to resolve them or ``Accept`` them. 
+
+7. If you get a build error referring to the antenna switch callback, open
+   SysConfig -> TI DRIVERS -> RF and make sure the number of antenna switch pins
+   is set to 0. 
+
+   .. figure:: resources/sysconfig-antenna-switch.png
+      :align: center
+
+
+TI 15.4-Stack Examples
+""""""""""""""""""""""
+
+* First, navigate to the board metadata folder located in:
+  ``<SDK_DIR>\\source\\ti\\boards\\.meta``. Note: This folder is hidden by
+  default on Windows OS. If you do not see this directory, please show
+  "Hidden Items" to view the folder. You can do this by going to the View tab in
+  Windows Explorer and checking the "Hidden items" check box inside the
+  "Show/Hide" panel.
+
+* In the same directory, make a copy of the board file corresponding to your
+  LaunchPad board. E.g. if you are using a `CC1311R3`_ on a `CC1312R7 LaunchPad`_,
+  make a copy of ``LP_CC1312R7.syscfg.json``. Rename the file to
+  ``LP_CC1311R3.syscfg.json``. This file is used by the SysConfig tool and
+  specifies board related configuration metadata.
+
+* Open the newly created ``LP_CC1311R3.syscfg.json`` file and change
+  the following fields to point to the **LP_CC1311R3**:
+
+    - Change the *name* field to ``"LP_CC1311R3"``
+    - Change the *displayName* field to ``"CC1311R3 LaunchPad"``
+    - Change the *device* field to ``"CC1311R3RGZ"``
+
+* Import a `CC1311P3 LaunchPad`_ project into CCS or IAR.
+
+* Open the ``.syscfg`` file with a text editor. Make the following edit to
+  replace ``LP_CC1311P3`` with ``LP_CC1311R3`` in the first line. This will tell
+  SysConfig of the new board type to be used.
+  
+  .. code-block:: c
+     :caption: Replace SysConfig board type
+
+     * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     */
+     // @cliArgs --board /ti/boards/LP_CC1311R3 --rtos tirtos7
+
+* Clean and build the project to confirm that no errors exist
+
+
+CC2651R3
+--------
+
+The `CC2651P3 LaunchPad`_ is highly recommended for evaluating |LITEDEVICE|
+solutions.  As the `CC2651R3`_ is pin compatible with `CC2652R`_ or 
+`CC2652R7`_ variants, either of these LaunchPad options must be considered
+as candidates for swapping the on-board device.  Yet the `CC2651R3`_ is
+functionally identical to the `CC2651P3`_ device for non-PA operation and
+thus `CC2651P3`_ software examples should be referenced after making the
+following changes.
+
+* First, navigate to the board metadata folder located in:
+  ``<SDK_DIR>\\source\\ti\\boards\\.meta``. Note: This folder is hidden by
+  default on Windows OS. If you do not see this directory, please show
+  "Hidden Items" to view the folder. You can do this by going to the View tab in
+  Windows Explorer and checking the "Hidden items" check box inside the
+  "Show/Hide" panel.
+* In the same directory, make a copy of **LP_CC2652R7.syscfg.json** and rename
+  it to **LP_CC2651R3.syscfg.json**. This file is used by the SysConfig tool
+  and specifies board related configuration metadata.
+* Open the newly created **LP_CC2651R3.syscfg.json** file and change
+  the following fields to point to the **LP_CC2651R3**:
+
+    - Change the *name* field to ``"LP_CC2651R3"``
+    - Change the *displayName* field to ``"CC2651R3 LaunchPad"``
+    - Change the *device* field to ``"CC2651R3RGZ"``
+
+* Import a CC2651P3 project into CCS or IAR
+* Open the ``.syscfg`` file with a text editor. Make the following edit to
+  replace ``LP_CC2651P3`` with ``LP_CC2651R3`` in the first line. This will tell
+  SysConfig of the new board type to be used.
+  
+  .. code-block:: diff
+     :caption: Replace SysConfig board type
+
+     * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     */
+     -// @cliArgs --board /ti/boards/LP_CC2651P3 --rtos tirtos  
+     +// @cliArgs --board /ti/boards/LP_CC2651R3 --rtos tirtos
+
+* Clean and build the project to confirm that no errors exist
+
+.. only:: sdk_includes_ble
+
+    .. note:: When porting the BLE5-Stack **host_test** project from `CC2651P3`_ to 
+              `CC2651R3`_, you must also modify the linker file search path and
+              make sure the `CC2651R3`_ library is selected. Navigate to
+              *Project Properties -> Arm Linker -> File Search Path* and
+              change ``${SRC_BLE_DIR}/libraries/cc2651p3/OneLib.a`` to
+              ``${SRC_BLE_DIR}/libraries/cc2651r3/OneLib.a``.
+
+              Additionally, modify the predefined symbols (*Project Properties
+              -> Arm Compiler -> Predefined Symbols*)  as shown below:
+
+              .. code-block:: diff
+                 :caption: Replace predefined symbols
+
+                 -CC2651P3_LP
+                 -CC13XX
+                 -CC13X2P
+                 +CC2651R3_LP
+                 +CC26XX
+                 +CC26X2
+
+
+If a |LITEDEVICE| hardware is not available, developers could
+begin evaluation using |DEVICE1| LaunchPads and devices.  However,
+the following should be accounted for when starting development using 
+|DEVICE1| projects with the intent of migrating to the |LITEDEVICE|:
+
+-  RAM_SIZE defined in cc26x2lp.cmd should be reduced from 0x14000 
+   to 0x8000 to account for the SRAM reduction.  FLASH_SIZE should 
+   likewise be reduced from 0x52000 to 0x42000 since the BLE and 
+   15.4 stacks will be moved from ROM to Flash to account for the 
+   decrease in ROM.  This is a worst-case scenario as additional 
+   flash requirements range from ~28 to 63 kB based on application.
+   FLASH_LAST_BASE should remain the same as it will still contain
+   the CCFG and BIM (if applicable).
+-  Follow all :ref:`section-cache-as-ram` instructions and disable 
+   NVOCMP_GPRAM in nvocmp.c (only pertaining to projects using the 
+   multi-page NV driver).  Be aware that the program will need to 
+   run at a slightly reduced speed which will increase the device 
+   power consumption in sleep as noted in the User’s Guide.  This 
+   difference can be further investigated using the Power Consumption
+   |rarr| Power Modes table in the device datasheet
+
+Beyond these feasible software changes, it should be noted that 
+additional radio patches are required for the |LITEDEVICE| that cannot 
+be emulated with a |DEVICE1| device.  These changes are not expected 
+to have a significant effect on radio performance and are thus 
+inconsequential for initial evaluations.
+
+The on-board devices can be swapped for the desired variant since they
+are pin compatible.  As mentioned previously, the correct 
+example project must be selected for the specific device being used.
+
+
+Using a different package variant
+---------------------------------
+
+The |LITEDEVICE| devices are available with two RoHS-compliant package variants.
+
+* 7-mm × 7-mm RGZ VQFN48 (31 GPIOs)
+* 5-mm × 5-mm RKP VQFN40 (23 GPIOs)
+
+See the datasheet for all the package options and IO descriptions.
+
+* `CC1311R3 Datasheet`_
+* `CC2651R3 Datasheet`_
+
+.. warning:: Only the 7-mm × 7-mm RGZ VQFN48 (31 GPIOs) variant of the
+    |LITEDEVICE| devices are pin compatible with their respective |DEVICE1|.
+
+The different package variants are binary compatible as long as the software
+does not access a non-existing IO on the considered package.
+For the 5x5 package, the available IOs are between IOID_0 and IOID_22.  The
+:ref:`sec-sysconfig-migrate-device` instructions should be used to change
+from the RGZ package to the RKP, which will also require selecting
+**Use Custom Board** as directed in :ref:`sec-custom-hardware` since the
+|LP| hardware uses the RGZ variant.
+
+Moving From LaunchPad to Custom Board
+-------------------------------------
+
+You can find instructions on how to design and configure a custom board in the 
+:ref:`sec-custom-hardware` chapter.

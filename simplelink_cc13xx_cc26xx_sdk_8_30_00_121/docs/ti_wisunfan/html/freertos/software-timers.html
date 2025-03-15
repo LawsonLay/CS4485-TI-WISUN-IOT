@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Software Timers &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Queues" href="queues.html" />
+    <link rel="prev" title="Tasks" href="tasks.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug freertos software-timers";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../wisun-guide/index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../wisun-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config.html">Kernel Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#posix-support">POSIX Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#driver-porting-layer-dpl">Driver Porting Layer (DPL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#using-freertos-with-ccs">Using FreeRTOS with CCS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#freertos-vs-ti-rtos7-modules">FreeRTOS vs. TI-RTOS7 modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="power.html">Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rov.html">Debugging FreeRTOS with Runtime Object View (ROV)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Software Timers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-basics">The basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-software-timers">Using Software Timers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#details-on-implementation">Details on Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-and-starting-a-software-timer">Creating and Starting a Software Timer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html">Queues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization.html">Thread Synchronization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/wisun-index.html">TI Wi-SUN FAN Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/advanced-wisun-features.html">Advanced TI Wi-SUN FAN Stack Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/network-management.html">Wi-SUN Network Topology Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/NWP_interface.html">TI Wi-SUN FAN NWP Interface Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/wisun-oad-index.html">MCUBoot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/migration-guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../wisun-guide/index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../wisun-guide/index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../wisun-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a> &raquo;</li>
+      <li>Software Timers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="software-timers">
+<span id="sec-freertos-software-timers"></span><h1>Software Timers<a class="headerlink" href="#software-timers" title="Permalink to this headline">¶</a></h1>
+<p>FreeRTOS includes a mechanism called Software Timers that is very similar to
+what other RTOS call ‘Clocks’. In this section we will provide a brief
+introduction to FreeRTOS Software Timers. For all the details, please visit
+<a class="reference external" href="https://freertos.org/RTOS-software-timer.html">FreeRTOS Software Timers</a> and the <a class="reference external" href="https://www.freertos.org/a00106.html">FreeRTOS API Reference</a>.</p>
+<div class="section" id="the-basics">
+<h2>The basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">¶</a></h2>
+<p>A Software Timer allows you to execute a function some time in the future. To
+make use of this feature, you will need to:</p>
+<ul class="simple">
+<li><p>Create a software timer</p></li>
+<li><p>Define the software timer’s callback function (i.e. the function that you
+want to execute in the future)</p></li>
+<li><p>Define the software timer’s period (i.e. the point in the future when you
+want it executed)</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As indicated in <a class="reference external" href="https://freertos.org/RTOS-software-timer.html">FreeRTOS Software Timers</a>, it is imperative that
+a timer’s callback does not attempt to block. That is, it cannot call
+vTaskDelay(), vTaskDelayUntil(), or specify a non-zero block time when
+accessing a queue or a semaphore.</p>
+</div>
+<p>You can select a Software Timer to be one-shot or auto-reload during creation.
+See more details about this in section <a class="reference internal" href="#sec-freertos-create-sw-timer-listing"><span class="std std-ref">Creating and Starting a Software Timer</span></a>
+below. You may also want to check the FreeRTOS documentation, specifically
+<a class="reference external" href="https://freertos.org/One-shot-Vs-auto-reload-real-time-software-timers.html">FreeRTOS Software Timer One-Shot vs Autoreload</a> and the description of
+<a class="reference external" href="https://www.freertos.org/a00125.html">xTaskCreate()</a>.</p>
+</div>
+<div class="section" id="using-software-timers">
+<h2>Using Software Timers<a class="headerlink" href="#using-software-timers" title="Permalink to this headline">¶</a></h2>
+<p>Please note that Software Timers are not part of the core FreeRTOS kernel.
+In order to use them, you must first take the following two steps:</p>
+<ol class="arabic simple">
+<li><p>Add the FreeRTOS/Source/timers.c source file to your project, and…</p></li>
+<li><p>Define a few constants in the FreeRTOSConfig.h header file.</p></li>
+</ol>
+<p>FreeRTOSConfig.h is part of the freertos_builds project.</p>
+<p>See all the details at <a class="reference external" href="https://freertos.org/Configuring-a-real-time-RTOS-application-to-use-software-timers.html">FreeRTOS Software Timer Configuration</a>.</p>
+</div>
+<div class="section" id="details-on-implementation">
+<h2>Details on Implementation<a class="headerlink" href="#details-on-implementation" title="Permalink to this headline">¶</a></h2>
+<p>FreeRTOS Software Timers are provided by a timer service (or daemon) task.
+Your application will interact with FreeRTOS Timers through API functions,
+which will allow you to do operations such as create a timer, start and stop
+a timer, etc.
+These functions use a standard FreeRTOS queue to send commands to the timer
+service task. This queue is called the ‘timer command queue’ and cannot be
+accessed directly.
+Learn more about this at <a class="reference external" href="https://freertos.org/RTOS-software-timer-service-daemon-task.html">FreeRTOS Software Timers Service Task</a>.</p>
+</div>
+<div class="section" id="creating-and-starting-a-software-timer">
+<span id="sec-freertos-create-sw-timer-listing"></span><h2>Creating and Starting a Software Timer<a class="headerlink" href="#creating-and-starting-a-software-timer" title="Permalink to this headline">¶</a></h2>
+<p>In this section we will provide an example of how to create and start a
+Software Timer. See more examples of usage in the <a class="reference external" href="https://www.freertos.org/a00106.html">FreeRTOS API Reference</a>.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-number">Listing 27. </span><span class="caption-text">Create a FreeRTOS Software Timer</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;FreeRTOS.h&gt;</span><span class="cp"></span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdarg.h&gt;</span><span class="cp"></span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">xReturned</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="w">    </span><span class="cm">/* Create and start the timer. Recommended to do before starting the scheduler */</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">    </span><span class="n">xTimer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTimerCreate</span><span class="p">(</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">            </span><span class="s">&quot;Timer 1&quot;</span><span class="p">,</span><span class="w">                      </span><span class="cm">/* Textual name, helpful during debugging! */</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">            </span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="p">),</span><span class="w">           </span><span class="cm">/* Timer period: 500 ms */</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">            </span><span class="n">pdTRUE</span><span class="p">,</span><span class="w">                         </span><span class="cm">/* Autoreload */</span><span class="w"></span>
+<span class="linenos">16</span><span class="w">            </span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">                   </span><span class="cm">/* Timer ID. Can be used to identify which</span>
+<span class="linenos">17</span><span class="cm">                                               timer expired if multiple timers share a</span>
+<span class="linenos">18</span><span class="cm">                                               timer callback */</span><span class="w"></span>
+<span class="linenos">19</span><span class="w">            </span><span class="o">&amp;</span><span class="n">vTimerCallback</span><span class="w"> </span><span class="p">);</span><span class="w">              </span><span class="cm">/* Function to call when timer expires. When</span>
+<span class="linenos">20</span><span class="cm">                                               invoked by FreeRTOS, the Timer ID will be</span>
+<span class="linenos">21</span><span class="cm">                                               passed as a parameter */</span><span class="w"></span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">xTimer</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">25</span><span class="w">        </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">started</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">26</span><span class="w">        </span><span class="n">started</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTimerStart</span><span class="p">(</span><span class="w"></span>
+<span class="linenos">27</span><span class="w">               </span><span class="n">xTimer</span><span class="p">,</span><span class="w">                      </span><span class="cm">/* Handle returned by xTimerCreate */</span><span class="w"></span>
+<span class="linenos">28</span><span class="w">               </span><span class="mi">0</span><span class="p">);</span><span class="w">                          </span><span class="cm">/* Time to block in ticks: 0 (Do not block) */</span><span class="w"></span>
+<span class="linenos">29</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pdPASS</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">sarted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">30</span><span class="w">            </span><span class="cm">/* Failed to start the timer! */</span><span class="w"></span>
+<span class="linenos">31</span><span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">32</span><span class="w">     </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">33</span><span class="w">       </span><span class="cm">/* Failed to create the timer! */</span><span class="w"></span>
+<span class="linenos">34</span><span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="w">    </span><span class="cm">/* Start the FreeRTOS scheduler */</span><span class="w"></span>
+<span class="linenos">37</span><span class="w">    </span><span class="n">vTaskStartScheduler</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">38</span><span class="p">}</span><span class="w"></span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="cm">/* Timer Callback Function (this may be reused by multiple timers if desired) */</span><span class="w"></span>
+<span class="linenos">41</span><span class="kt">void</span><span class="w"> </span><span class="nf">vTimerCallback</span><span class="p">(</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="linenos">42</span><span class="p">{</span><span class="w"></span>
+<span class="linenos">43</span><span class="w">    </span><span class="cm">/* *** Enter your application code here *** */</span><span class="w"></span>
+<span class="linenos">44</span><span class="w">    </span><span class="cm">/* Ex. */</span><span class="w"></span>
+<span class="linenos">45</span><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">timer_count__500ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">46</span><span class="w">    </span><span class="n">timer_count__500ms</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">47</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tasks.html" class="btn btn-neutral float-left" title="Tasks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="queues.html" class="btn btn-neutral float-right" title="Queues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,765 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_d_a_c_8h" kind="file" language="C++">
+    <compoundname>DAC.h</compoundname>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">ti/devices/DeviceFamily.h</includes>
+    <includes local="no">DeviceFamily_constructPath(driverlib/aux_dac.h)</includes>
+    <includedby refid="_d_a_c_c_c26_x2_8h" local="no">DACCC26X2.h</includedby>
+    <incdepgraph>
+      <node id="749">
+        <label>stdbool.h</label>
+      </node>
+      <node id="750">
+        <label>stdint.h</label>
+      </node>
+      <node id="747">
+        <label>DAC.h</label>
+        <link refid="_d_a_c_8h"/>
+        <childnode refid="748" relation="include">
+        </childnode>
+        <childnode refid="749" relation="include">
+        </childnode>
+        <childnode refid="750" relation="include">
+        </childnode>
+        <childnode refid="751" relation="include">
+        </childnode>
+        <childnode refid="752" relation="include">
+        </childnode>
+      </node>
+      <node id="748">
+        <label>stddef.h</label>
+      </node>
+      <node id="751">
+        <label>ti/devices/DeviceFamily.h</label>
+      </node>
+      <node id="752">
+        <label>DeviceFamily_constructPath(driverlib/aux_dac.h)</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="753">
+        <label>DAC.h</label>
+        <link refid="_d_a_c_8h"/>
+        <childnode refid="754" relation="include">
+        </childnode>
+      </node>
+      <node id="754">
+        <label>DACCC26X2.h</label>
+        <link refid="_d_a_c_c_c26_x2_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_d_a_c___config" prot="public">DAC_Config</innerclass>
+    <innerclass refid="struct_d_a_c___params" prot="public">DAC_Params</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_d_a_c_8h_1a19097740487eb2277bc745f628631269" prot="public" static="no">
+        <name>DAC_STATUS_SUCCESS</name>
+        <initializer>(0)</initializer>
+        <briefdescription>
+<para>Successful status code returned by DAC API. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="180" column="9" bodyfile="source/ti/drivers/DAC.h" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_d_a_c_8h_1a7fe6197163dcd315f1f1297c2d05b5fa" prot="public" static="no">
+        <name>DAC_STATUS_ERROR</name>
+        <initializer>(-1)</initializer>
+        <briefdescription>
+<para>Generic error status code returned by DAC API. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="185" column="9" bodyfile="source/ti/drivers/DAC.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_d_a_c_8h_1a3bbdf44ec963378a640658df28018380" prot="public" static="no">
+        <name>DAC_STATUS_INUSE</name>
+        <initializer>(-2)</initializer>
+        <briefdescription>
+<para>The DAC is currently in use by another handle or by the sensor controller. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="190" column="9" bodyfile="source/ti/drivers/DAC.h" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_d_a_c_8h_1a3a2166a35e32b207236baa1fa1473647" prot="public" static="no">
+        <name>DAC_STATUS_INVALID</name>
+        <initializer>(-3)</initializer>
+        <briefdescription>
+<para>The desired output value is outside the DAC&apos;s output range. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="195" column="9" bodyfile="source/ti/drivers/DAC.h" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_d_a_c_8h_1a38bf835dba6f42ec8d59251d6cb71f0e" prot="public" static="no">
+        <type><ref refid="struct_d_a_c___config" kindref="compound">DAC_Config</ref> *</type>
+        <definition>typedef DAC_Config* DAC_Handle</definition>
+        <argsstring></argsstring>
+        <name>DAC_Handle</name>
+        <briefdescription>
+<para>A handle that is returned from a <ref refid="_d_a_c_8h_1a5935608de76756537ba5ae2642994dac" kindref="member">DAC_open()</ref> call. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="218" column="1" bodyfile="source/ti/drivers/DAC.h" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_d_a_c_8h_1a4681d31222b96c97fe28169abeac6864" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_d_a_c___params" kindref="compound">DAC_Params</ref></type>
+        <definition>const DAC_Params DAC_defaultParams</definition>
+        <argsstring></argsstring>
+        <name>DAC_defaultParams</name>
+        <briefdescription>
+<para>Default <ref refid="struct_d_a_c___params" kindref="compound">DAC_Params</ref> structure. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_d_a_c_8h_1a237b51991ad02352e8adaa0570f51cc1" kindref="member">DAC_Params_init()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="241" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_d_a_c_8h_1a4500c15ee6b13637e00fd6b901b60224" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DAC_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>DAC_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Function to initialize the DAC module. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para>The DAC_config structure must exist and be persistent before this function can be called. This function must also be called before any other DAC driver APIs. This function call does not modify any peripheral registers. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="251" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_d_a_c_8h_1a5935608de76756537ba5ae2642994dac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_d_a_c_8h_1a38bf835dba6f42ec8d59251d6cb71f0e" kindref="member">DAC_Handle</ref></type>
+        <definition>DAC_Handle DAC_open</definition>
+        <argsstring>(uint_least8_t index, DAC_Params *params)</argsstring>
+        <name>DAC_open</name>
+        <param>
+          <type>uint_least8_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_d_a_c___params" kindref="compound">DAC_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Function to initialize a given DAC peripheral specified by the particular index value. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para>DAC controller has been initialized</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Logical peripheral number for the DAC indexed into the DAC_config table</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a parameter block. All the fields in this structure are RO (read-only). Providing a NULL pointer cannot open the module.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A DAC_Handle on success or a NULL on an error or if it has been opened already.</para></simplesect>
+<simplesect kind="see"><para><ref refid="_d_a_c_8h_1a4500c15ee6b13637e00fd6b901b60224" kindref="member">DAC_init()</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_d_a_c_8h_1a6008eb894ba2f416c9d3324f28ad34b5" kindref="member">DAC_close()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="272" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_d_a_c_8h_1a6008eb894ba2f416c9d3324f28ad34b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DAC_close</definition>
+        <argsstring>(DAC_Handle handle)</argsstring>
+        <name>DAC_close</name>
+        <param>
+          <type><ref refid="_d_a_c_8h_1a38bf835dba6f42ec8d59251d6cb71f0e" kindref="member">DAC_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to close a given DAC peripheral specified by the DAC handle. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_d_a_c_8h_1a5935608de76756537ba5ae2642994dac" kindref="member">DAC_open()</ref> had to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A DAC_Handle returned from DAC_open</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_d_a_c_8h_1a5935608de76756537ba5ae2642994dac" kindref="member">DAC_open()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="284" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_d_a_c_8h_1aa6356bd4a2a12ed08638febd59e6d7cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t DAC_setVoltage</definition>
+        <argsstring>(DAC_Handle handle, uint32_t uVoltOutput)</argsstring>
+        <name>DAC_setVoltage</name>
+        <param>
+          <type><ref refid="_d_a_c_8h_1a38bf835dba6f42ec8d59251d6cb71f0e" kindref="member">DAC_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>uVoltOutput</declname>
+        </param>
+        <briefdescription>
+<para>Function to set the DAC voltage value in microvolts. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>This function takes a value in microvolts, but the actual output is limited by the DAC&apos;s resolution.</para></simplesect>
+<simplesect kind="pre"><para><ref refid="_d_a_c_8h_1ab89fa281ad2ff8abe7f2bebb48e7e4a9" kindref="member">DAC_enable()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A DAC_Handle returned from DAC_open.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">uVoltOutput</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Desired output voltage in uV.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Implementation specific return codes. Negative values indicate unsuccessful operations.</para></simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_d_a_c_8h_1a19097740487eb2277bc745f628631269" kindref="member">DAC_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The call was successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_d_a_c_8h_1a7fe6197163dcd315f1f1297c2d05b5fa" kindref="member">DAC_STATUS_ERROR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The call was unsuccessful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_d_a_c_8h_1a3a2166a35e32b207236baa1fa1473647" kindref="member">DAC_STATUS_INVALID</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The desired output voltage was out of bounds for the DAC.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_d_a_c_8h_1ad3248f9bc884598311d5e53b1d659f71" kindref="member">DAC_setCode()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="308" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_d_a_c_8h_1ad3248f9bc884598311d5e53b1d659f71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t DAC_setCode</definition>
+        <argsstring>(DAC_Handle handle, uint32_t code)</argsstring>
+        <name>DAC_setCode</name>
+        <param>
+          <type><ref refid="_d_a_c_8h_1a38bf835dba6f42ec8d59251d6cb71f0e" kindref="member">DAC_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>code</declname>
+        </param>
+        <briefdescription>
+<para>Function to set the DAC voltage in terms of a DAC code. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>The appropriate DAC code is device-specific and admissible values depend on the DAC&apos;s resolution.</para></simplesect>
+<simplesect kind="pre"><para><ref refid="_d_a_c_8h_1a5935608de76756537ba5ae2642994dac" kindref="member">DAC_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A DAC_Handle returned from DAC_open.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">code</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Desired output in terms of a DAC code.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_d_a_c_8h_1a19097740487eb2277bc745f628631269" kindref="member">DAC_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The call was successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_d_a_c_8h_1a7fe6197163dcd315f1f1297c2d05b5fa" kindref="member">DAC_STATUS_ERROR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The call was unsuccessful.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_d_a_c_8h_1a5935608de76756537ba5ae2642994dac" kindref="member">DAC_open()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="328" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_d_a_c_8h_1ab89fa281ad2ff8abe7f2bebb48e7e4a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t DAC_enable</definition>
+        <argsstring>(DAC_Handle handle)</argsstring>
+        <name>DAC_enable</name>
+        <param>
+          <type><ref refid="_d_a_c_8h_1a38bf835dba6f42ec8d59251d6cb71f0e" kindref="member">DAC_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to enable the DAC&apos;s output. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function claims ownership of the DAC peripheral, and depending on the selected voltage reference source, it calculates the output voltage range.</para><para>Furthermore, the function configures and enables the DAC.</para><para><simplesect kind="pre"><para><ref refid="_d_a_c_8h_1a5935608de76756537ba5ae2642994dac" kindref="member">DAC_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A DAC_Handle returned from DAC_open.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_d_a_c_8h_1a19097740487eb2277bc745f628631269" kindref="member">DAC_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The call was successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_d_a_c_8h_1a7fe6197163dcd315f1f1297c2d05b5fa" kindref="member">DAC_STATUS_ERROR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The call was unsuccessful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_d_a_c_8h_1a3bbdf44ec963378a640658df28018380" kindref="member">DAC_STATUS_INUSE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The call was unsuccessful because the DAC is in use by the Sensor Controller or by another handle.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_d_a_c_8h_1a046a24d52f84de07487642035590c078" kindref="member">DAC_disable()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="351" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_d_a_c_8h_1a046a24d52f84de07487642035590c078" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t DAC_disable</definition>
+        <argsstring>(DAC_Handle handle)</argsstring>
+        <name>DAC_disable</name>
+        <param>
+          <type><ref refid="_d_a_c_8h_1a38bf835dba6f42ec8d59251d6cb71f0e" kindref="member">DAC_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to disable the DAC&apos;s output. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_d_a_c_8h_1ab89fa281ad2ff8abe7f2bebb48e7e4a9" kindref="member">DAC_enable()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A DAC_Handle returned from DAC_open.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_d_a_c_8h_1a19097740487eb2277bc745f628631269" kindref="member">DAC_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The call was successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_d_a_c_8h_1a7fe6197163dcd315f1f1297c2d05b5fa" kindref="member">DAC_STATUS_ERROR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The call was unsuccessful.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_d_a_c_8h_1ab89fa281ad2ff8abe7f2bebb48e7e4a9" kindref="member">DAC_enable()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="365" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_d_a_c_8h_1a237b51991ad02352e8adaa0570f51cc1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DAC_Params_init</definition>
+        <argsstring>(DAC_Params *params)</argsstring>
+        <name>DAC_Params_init</name>
+        <param>
+          <type><ref refid="struct_d_a_c___params" kindref="compound">DAC_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Function to initialize the <ref refid="struct_d_a_c___params" kindref="compound">DAC_Params</ref> struct to its defaults. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to <ref refid="struct_d_a_c___params" kindref="compound">DAC_Params</ref> structure for initialization</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Defaults values are: <programlisting><codeline><highlight class="normal">params.initCode<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0,</highlight></codeline>
+<codeline><highlight class="normal">params.custom<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>NULL;</highlight></codeline>
+</programlisting></para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Parameter structure to initialize </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/DAC.h" line="381" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Digital to Analog Conversion (DAC) Output Driver. </para>    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para><para><anchor id="_d_a_c_8h_1ti_drivers_DAC_Overview"/><heading level="1">Overview</heading>
+</para><para>The DAC driver allows you to manage a Digital to Analog peripheral via simple and portable APIs. This driver supports converting DAC codes into an analog voltage with varying degrees of precision (microvolts or millivolts) depending on the resolution of the DAC.</para><para><hruler/>
+ <anchor id="_d_a_c_8h_1ti_drivers_DAC_Usage"/><heading level="1">Usage</heading>
+</para><para>This documentation provides a basic <ref refid="_d_a_c_8h_1ti_drivers_DAC_Synopsis" kindref="member">usage summary</ref> and a set of <ref refid="_d_a_c_8h_1ti_drivers_DAC_Examples" kindref="member">examples</ref> in the form of commented code fragments. Detailed descriptions of the APIs are provided in subsequent sections.</para><para><anchor id="_d_a_c_8h_1ti_drivers_DAC_Synopsis"/><heading level="2">Synopsis</heading>
+</para><para><anchor id="_d_a_c_8h_1ti_drivers_DAC_Synopsis_Code"/><programlisting><codeline><highlight class="normal">//<sp/>Import<sp/>DAC<sp/>Driver<sp/>definitions</highlight></codeline>
+<codeline><highlight class="normal">#include<sp/>&lt;ti/drivers/DAC.h&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Define<sp/>name<sp/>for<sp/>DAC<sp/>channel<sp/>index</highlight></codeline>
+<codeline><highlight class="normal">#define<sp/>VREFERENCE_OUT<sp/><sp/>0</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>One-time<sp/>init<sp/>of<sp/>DAC<sp/>driver</highlight></codeline>
+<codeline><highlight class="normal">DAC_init();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Initialize<sp/>optional<sp/>DAC<sp/>parameters</highlight></codeline>
+<codeline><highlight class="normal">DAC_Params<sp/>params;</highlight></codeline>
+<codeline><highlight class="normal">DAC_Params_init(&amp;params);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Open<sp/>DAC<sp/>channels<sp/>for<sp/>usage</highlight></codeline>
+<codeline><highlight class="normal">DAC_Handle<sp/>dacHandle<sp/>=<sp/>DAC_open(VREFERENCE_OUT,<sp/>&amp;params);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Enable<sp/>the<sp/>DAC<sp/>channel</highlight></codeline>
+<codeline><highlight class="normal">DAC_enable(dacHandle);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Output<sp/>800mV<sp/>using<sp/>the<sp/>DAC</highlight></codeline>
+<codeline><highlight class="normal">DAC_setVoltage(dacHandle,<sp/>800000);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Output<sp/>a<sp/>voltage<sp/>using<sp/>DAC<sp/>codes</highlight></codeline>
+<codeline><highlight class="normal">DAC_setCode(dacHandle,<sp/>125);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Disable<sp/>the<sp/>DAC<sp/>channel</highlight></codeline>
+<codeline><highlight class="normal">DAC_disable(dacHandle);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Close<sp/>the<sp/>DAC<sp/>channel</highlight></codeline>
+<codeline><highlight class="normal">DAC_close(dacHandle);</highlight></codeline>
+</programlisting></para><para><hruler/>
+ <anchor id="_d_a_c_8h_1ti_drivers_DAC_Examples"/><heading level="1">Examples</heading>
+</para><para><itemizedlist>
+<listitem><para><ref refid="_d_a_c_8h_1ti_drivers_DAC_Examples_open" kindref="member">Opening a DAC instance</ref> </para></listitem>
+<listitem><para><ref refid="_d_a_c_8h_1ti_drivers_DAC_Examples_reference" kindref="member">Using DAC to set a reference voltage</ref> </para></listitem>
+<listitem><para><ref refid="_d_a_c_8h_1ti_drivers_DAC_Examples_code" kindref="member">Using DAC to set a code</ref></para></listitem>
+</itemizedlist>
+<anchor id="_d_a_c_8h_1ti_drivers_DAC_Examples_open"/><heading level="2">Opening a DAC instance</heading>
+</para><para><programlisting><codeline><highlight class="normal">DAC_Handle<sp/>dac;</highlight></codeline>
+<codeline><highlight class="normal">DAC_Params<sp/>params;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">DAC_Params_init(&amp;params);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">dac<sp/>=<sp/>DAC_open(0,<sp/>&amp;params);</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(dac<sp/>==<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>DAC_open()<sp/>failed</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>while<sp/>(1)<sp/>{}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para><para><anchor id="_d_a_c_8h_1ti_drivers_DAC_Examples_reference"/><heading level="2">Using DAC to set a reference voltage</heading>
+</para><para>To set a reference voltage first enable the DAC with <ref refid="_d_a_c_8h_1ab89fa281ad2ff8abe7f2bebb48e7e4a9" kindref="member">DAC_enable()</ref> and then set the desired output voltage with <ref refid="_d_a_c_8h_1aa6356bd4a2a12ed08638febd59e6d7cf" kindref="member">DAC_setVoltage()</ref>. The returned value can be used to check if the call was successful.</para><para><programlisting><codeline><highlight class="normal">int_fast16_t<sp/>res;</highlight></codeline>
+<codeline><highlight class="normal">uint32_t<sp/>outputMicroVolts<sp/>=<sp/>1500000;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">DAC_enable(dac);</highlight></codeline>
+<codeline><highlight class="normal">res<sp/>=<sp/>DAC_setVoltage(dac,<sp/>outputMicroVolts);</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(res<sp/>==<sp/>DAC_STATUS_SUCCESS)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>printf(outputMicroVolts);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para><para><anchor id="_d_a_c_8h_1ti_drivers_DAC_Examples_code"/><heading level="2">Using DAC to set a code</heading>
+</para><para>The following example shows how to set a DAC code. The use of <ref refid="_d_a_c_8h_1ad3248f9bc884598311d5e53b1d659f71" kindref="member">DAC_setCode()</ref> instead of <ref refid="_d_a_c_8h_1aa6356bd4a2a12ed08638febd59e6d7cf" kindref="member">DAC_setVoltage()</ref> comes handy in scenarios such as outputting a data buffer at a particular time rate (e.g. waveform generation). Nevertheless, it&apos;s important to remember that DAC codes produce different output voltages depending on the selected voltage reference source.</para><para><programlisting><codeline><highlight class="normal">int_fast16_t<sp/>res;</highlight></codeline>
+<codeline><highlight class="normal">uint32_t<sp/>outputCode<sp/>=<sp/>127;</highlight></codeline>
+<codeline><highlight class="normal">DAC_enable(dac);</highlight></codeline>
+<codeline><highlight class="normal">res<sp/>=<sp/>DAC_setCode(dac,<sp/>outputCode);</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(res<sp/>==<sp/>DAC_STATUS_SUCCESS)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>printf(outputCode);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para><para><hruler/>
+ <anchor id="_d_a_c_8h_1ti_drivers_DAC_Configuration"/><heading level="1">Configuration</heading>
+</para><para>Refer to the <ref refid="index_1driver_configuration" kindref="member">Driver&apos;s Configuration</ref> section for driver configuration information. <hruler/>
+ </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2021-2023,<sp/>Texas<sp/>Instruments<sp/>Incorporated</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">/*!****************************************************************************</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*<sp/><sp/>@file<sp/><sp/><sp/><sp/><sp/><sp/><sp/>DAC.h</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/><sp/>@brief<sp/><sp/><sp/><sp/><sp/><sp/>Digital<sp/>to<sp/>Analog<sp/>Conversion<sp/>(DAC)<sp/>Output<sp/>Driver</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_DAC_Overview</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Overview</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>DAC<sp/>driver<sp/>allows<sp/>you<sp/>to<sp/>manage<sp/>a<sp/>Digital<sp/>to<sp/>Analog<sp/>peripheral<sp/>via</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*<sp/><sp/>simple<sp/>and<sp/>portable<sp/>APIs.<sp/>This<sp/>driver<sp/>supports<sp/>converting<sp/>DAC<sp/>codes</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/><sp/>into<sp/>an<sp/>analog<sp/>voltage<sp/>with<sp/>varying<sp/>degrees<sp/>of<sp/>precision<sp/>(microvolts</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*<sp/><sp/>or<sp/>millivolts)<sp/>depending<sp/>on<sp/>the<sp/>resolution<sp/>of<sp/>the<sp/>DAC.</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/>*<sp/><sp/>&lt;hr&gt;</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_DAC_Usage</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Usage</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/>*<sp/><sp/>This<sp/>documentation<sp/>provides<sp/>a<sp/>basic<sp/>@ref<sp/>ti_drivers_DAC_Synopsis</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/>*<sp/><sp/>&quot;usage<sp/>summary&quot;<sp/>and<sp/>a<sp/>set<sp/>of<sp/>@ref<sp/>ti_drivers_DAC_Examples<sp/>&quot;examples&quot;</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/>*<sp/><sp/>in<sp/>the<sp/>form<sp/>of<sp/>commented<sp/>code<sp/>fragments.<sp/>Detailed<sp/>descriptions<sp/>of<sp/>the</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/>*<sp/><sp/>APIs<sp/>are<sp/>provided<sp/>in<sp/>subsequent<sp/>sections.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_DAC_Synopsis</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Synopsis</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_DAC_Synopsis_Code</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Import<sp/>DAC<sp/>Driver<sp/>definitions</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/>*<sp/><sp/>#include<sp/>&lt;ti/drivers/DAC.h&gt;</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Define<sp/>name<sp/>for<sp/>DAC<sp/>channel<sp/>index</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/>*<sp/><sp/>#define<sp/>VREFERENCE_OUT<sp/><sp/>0</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>One-time<sp/>init<sp/>of<sp/>DAC<sp/>driver</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/>*<sp/><sp/>DAC_init();</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Initialize<sp/>optional<sp/>DAC<sp/>parameters</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/>*<sp/><sp/>DAC_Params<sp/>params;</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/>*<sp/><sp/>DAC_Params_init(&amp;params);</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Open<sp/>DAC<sp/>channels<sp/>for<sp/>usage</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/>*<sp/><sp/>DAC_Handle<sp/>dacHandle<sp/>=<sp/>DAC_open(VREFERENCE_OUT,<sp/>&amp;params);</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"></highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Enable<sp/>the<sp/>DAC<sp/>channel</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/>*<sp/><sp/>DAC_enable(dacHandle);</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Output<sp/>800mV<sp/>using<sp/>the<sp/>DAC</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/>*<sp/><sp/>DAC_setVoltage(dacHandle,<sp/>800000);</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Output<sp/>a<sp/>voltage<sp/>using<sp/>DAC<sp/>codes</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/>*<sp/><sp/>DAC_setCode(dacHandle,<sp/>125);</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Disable<sp/>the<sp/>DAC<sp/>channel</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/>*<sp/><sp/>DAC_disable(dacHandle);</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Close<sp/>the<sp/>DAC<sp/>channel</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/>*<sp/><sp/>DAC_close(dacHandle);</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/>*<sp/><sp/>&lt;hr&gt;</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_DAC_Examples</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Examples</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/>*<sp/><sp/>@li<sp/>@ref<sp/>ti_drivers_DAC_Examples_open<sp/>&quot;Opening<sp/>a<sp/>DAC<sp/>instance&quot;</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/>*<sp/><sp/>@li<sp/>@ref<sp/>ti_drivers_DAC_Examples_reference<sp/>&quot;Using<sp/>DAC<sp/>to<sp/>set<sp/>a<sp/>reference<sp/>voltage&quot;</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*<sp/><sp/>@li<sp/>@ref<sp/>ti_drivers_DAC_Examples_code<sp/>&quot;Using<sp/>DAC<sp/>to<sp/>set<sp/>a<sp/>code&quot;</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_DAC_Examples_open</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Opening<sp/>a<sp/>DAC<sp/>instance</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/>*<sp/><sp/>DAC_Handle<sp/>dac;</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/>*<sp/><sp/>DAC_Params<sp/>params;</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/>*<sp/><sp/>DAC_Params_init(&amp;params);</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="107"><highlight class="comment"><sp/>*<sp/><sp/>dac<sp/>=<sp/>DAC_open(0,<sp/>&amp;params);</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(dac<sp/>==<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>DAC_open()<sp/>failed</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(1)<sp/>{}</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_DAC_Examples_reference</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Using<sp/>DAC<sp/>to<sp/>set<sp/>a<sp/>reference<sp/>voltage</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/>*<sp/><sp/>To<sp/>set<sp/>a<sp/>reference<sp/>voltage<sp/>first<sp/>enable<sp/>the<sp/>DAC<sp/>with<sp/>DAC_enable()</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/>*<sp/><sp/>and<sp/>then<sp/>set<sp/>the<sp/>desired<sp/>output<sp/>voltage<sp/>with<sp/>DAC_setVoltage().</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>returned<sp/>value<sp/>can<sp/>be<sp/>used<sp/>to<sp/>check<sp/>if<sp/>the<sp/>call<sp/>was<sp/>successful.</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="122"><highlight class="comment"><sp/>*<sp/><sp/>int_fast16_t<sp/>res;</highlight></codeline>
+<codeline lineno="123"><highlight class="comment"><sp/>*<sp/><sp/>uint32_t<sp/>outputMicroVolts<sp/>=<sp/>1500000;</highlight></codeline>
+<codeline lineno="124"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="125"><highlight class="comment"><sp/>*<sp/><sp/>DAC_enable(dac);</highlight></codeline>
+<codeline lineno="126"><highlight class="comment"><sp/>*<sp/><sp/>res<sp/>=<sp/>DAC_setVoltage(dac,<sp/>outputMicroVolts);</highlight></codeline>
+<codeline lineno="127"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(res<sp/>==<sp/>DAC_STATUS_SUCCESS)</highlight></codeline>
+<codeline lineno="128"><highlight class="comment"><sp/>*<sp/><sp/>{</highlight></codeline>
+<codeline lineno="129"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>printf(outputMicroVolts);</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="133"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_DAC_Examples_code</highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Using<sp/>DAC<sp/>to<sp/>set<sp/>a<sp/>code</highlight></codeline>
+<codeline lineno="135"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="136"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>following<sp/>example<sp/>shows<sp/>how<sp/>to<sp/>set<sp/>a<sp/>DAC<sp/>code.<sp/>The<sp/>use<sp/>of<sp/>DAC_setCode()</highlight></codeline>
+<codeline lineno="137"><highlight class="comment"><sp/>*<sp/><sp/>instead<sp/>of<sp/>DAC_setVoltage()<sp/>comes<sp/>handy<sp/>in<sp/>scenarios<sp/>such<sp/>as<sp/>outputting<sp/>a</highlight></codeline>
+<codeline lineno="138"><highlight class="comment"><sp/>*<sp/><sp/>data<sp/>buffer<sp/>at<sp/>a<sp/>particular<sp/>time<sp/>rate<sp/>(e.g.<sp/>waveform<sp/>generation).<sp/>Nevertheless,</highlight></codeline>
+<codeline lineno="139"><highlight class="comment"><sp/>*<sp/><sp/>it&apos;s<sp/>important<sp/>to<sp/>remember<sp/>that<sp/>DAC<sp/>codes<sp/>produce<sp/>different<sp/>output<sp/>voltages</highlight></codeline>
+<codeline lineno="140"><highlight class="comment"><sp/>*<sp/><sp/>depending<sp/>on<sp/>the<sp/>selected<sp/>voltage<sp/>reference<sp/>source.</highlight></codeline>
+<codeline lineno="141"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="142"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="143"><highlight class="comment"><sp/>*<sp/><sp/>int_fast16_t<sp/>res;</highlight></codeline>
+<codeline lineno="144"><highlight class="comment"><sp/>*<sp/><sp/>uint32_t<sp/>outputCode<sp/>=<sp/>127;</highlight></codeline>
+<codeline lineno="145"><highlight class="comment"><sp/>*<sp/><sp/>DAC_enable(dac);</highlight></codeline>
+<codeline lineno="146"><highlight class="comment"><sp/>*<sp/><sp/>res<sp/>=<sp/>DAC_setCode(dac,<sp/>outputCode);</highlight></codeline>
+<codeline lineno="147"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(res<sp/>==<sp/>DAC_STATUS_SUCCESS)</highlight></codeline>
+<codeline lineno="148"><highlight class="comment"><sp/>*<sp/><sp/>{</highlight></codeline>
+<codeline lineno="149"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>printf(outputCode);</highlight></codeline>
+<codeline lineno="150"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="151"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="152"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="153"><highlight class="comment"><sp/>*<sp/><sp/>&lt;hr&gt;</highlight></codeline>
+<codeline lineno="154"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_DAC_Configuration</highlight></codeline>
+<codeline lineno="155"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Configuration</highlight></codeline>
+<codeline lineno="156"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="157"><highlight class="comment"><sp/>*<sp/><sp/>Refer<sp/>to<sp/>the<sp/>@ref<sp/>driver_configuration<sp/>&quot;Driver&apos;s<sp/>Configuration&quot;<sp/>section</highlight></codeline>
+<codeline lineno="158"><highlight class="comment"><sp/>*<sp/><sp/>for<sp/>driver<sp/>configuration<sp/>information.</highlight></codeline>
+<codeline lineno="159"><highlight class="comment"><sp/>*<sp/><sp/>&lt;hr&gt;</highlight></codeline>
+<codeline lineno="160"><highlight class="comment"><sp/>******************************************************************************</highlight></codeline>
+<codeline lineno="161"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ti_drivers_DAC__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_drivers_DAC__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ti/devices/DeviceFamily.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>DeviceFamily_constructPath(driverlib/aux_dac.h)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180" refid="_d_a_c_8h_1a19097740487eb2277bc745f628631269" refkind="member"><highlight class="preprocessor">#define<sp/>DAC_STATUS_SUCCESS<sp/>(0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185" refid="_d_a_c_8h_1a7fe6197163dcd315f1f1297c2d05b5fa" refkind="member"><highlight class="preprocessor">#define<sp/>DAC_STATUS_ERROR<sp/>(-1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190" refid="_d_a_c_8h_1a3bbdf44ec963378a640658df28018380" refkind="member"><highlight class="preprocessor">#define<sp/>DAC_STATUS_INUSE<sp/>(-2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195" refid="_d_a_c_8h_1a3a2166a35e32b207236baa1fa1473647" refkind="member"><highlight class="preprocessor">#define<sp/>DAC_STATUS_INVALID<sp/>(-3)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207" refid="struct_d_a_c___config" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="210" refid="struct_d_a_c___config_1ad931747b2c0a0f57571ed074740d0515" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="struct_d_a_c___config_1ad931747b2c0a0f57571ed074740d0515" kindref="member">object</ref>;</highlight></codeline>
+<codeline lineno="212" refid="struct_d_a_c___config_1abda1c53eed6423fdb8dfb91650d868a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>*<ref refid="struct_d_a_c___config_1abda1c53eed6423fdb8dfb91650d868a0" kindref="member">hwAttrs</ref>;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal">}<sp/><ref refid="struct_d_a_c___config" kindref="compound">DAC_Config</ref>;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218" refid="_d_a_c_8h_1a38bf835dba6f42ec8d59251d6cb71f0e" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="struct_d_a_c___config" kindref="compound">DAC_Config</ref><sp/>*<ref refid="_d_a_c_8h_1a38bf835dba6f42ec8d59251d6cb71f0e" kindref="member">DAC_Handle</ref>;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="228" refid="struct_d_a_c___params" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="231" refid="struct_d_a_c___params_1a55dfbebca6c2c430b776016bb8b95185" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_d_a_c___params_1a55dfbebca6c2c430b776016bb8b95185" kindref="member">initCode</ref>;</highlight></codeline>
+<codeline lineno="233" refid="struct_d_a_c___params_1a0a22752a85dfd9051bda9b126df6d598" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="struct_d_a_c___params_1a0a22752a85dfd9051bda9b126df6d598" kindref="member">custom</ref>;</highlight></codeline>
+<codeline lineno="234"><highlight class="normal">}<sp/><ref refid="struct_d_a_c___params" kindref="compound">DAC_Params</ref>;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_d_a_c___params" kindref="compound">DAC_Params</ref><sp/><ref refid="_d_a_c_8h_1a4681d31222b96c97fe28169abeac6864" kindref="member">DAC_defaultParams</ref>;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_d_a_c_8h_1a4500c15ee6b13637e00fd6b901b60224" kindref="member">DAC_init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>DAC_Handle<sp/><ref refid="_d_a_c_8h_1a5935608de76756537ba5ae2642994dac" kindref="member">DAC_open</ref>(uint_least8_t<sp/>index,<sp/><ref refid="struct_d_a_c___params" kindref="compound">DAC_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_d_a_c_8h_1a6008eb894ba2f416c9d3324f28ad34b5" kindref="member">DAC_close</ref>(DAC_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"></highlight></codeline>
+<codeline lineno="308"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>int_fast16_t<sp/><ref refid="_d_a_c_8h_1aa6356bd4a2a12ed08638febd59e6d7cf" kindref="member">DAC_setVoltage</ref>(DAC_Handle<sp/>handle,<sp/>uint32_t<sp/>uVoltOutput);</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"></highlight></codeline>
+<codeline lineno="328"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>int_fast16_t<sp/><ref refid="_d_a_c_8h_1ad3248f9bc884598311d5e53b1d659f71" kindref="member">DAC_setCode</ref>(DAC_Handle<sp/>handle,<sp/>uint32_t<sp/>code);</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"></highlight></codeline>
+<codeline lineno="351"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>int_fast16_t<sp/><ref refid="_d_a_c_8h_1ab89fa281ad2ff8abe7f2bebb48e7e4a9" kindref="member">DAC_enable</ref>(DAC_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"></highlight></codeline>
+<codeline lineno="365"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>int_fast16_t<sp/><ref refid="_d_a_c_8h_1a046a24d52f84de07487642035590c078" kindref="member">DAC_disable</ref>(DAC_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"></highlight></codeline>
+<codeline lineno="381"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_d_a_c_8h_1a237b51991ad02352e8adaa0570f51cc1" kindref="member">DAC_Params_init</ref>(<ref refid="struct_d_a_c___params" kindref="compound">DAC_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"></highlight></codeline>
+<codeline lineno="383"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="384"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="386"><highlight class="normal"></highlight></codeline>
+<codeline lineno="387"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_drivers_DAC__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/DAC.h"/>
+  </compounddef>
+</doxygen>

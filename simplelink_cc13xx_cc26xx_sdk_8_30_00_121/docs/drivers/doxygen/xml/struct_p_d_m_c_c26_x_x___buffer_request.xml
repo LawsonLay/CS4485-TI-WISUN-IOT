@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_p_d_m_c_c26_x_x___buffer_request" kind="struct" language="C++" prot="public">
+    <compoundname>PDMCC26XX_BufferRequest</compoundname>
+    <includes refid="_p_d_m_c_c26_x_x_8h" local="no">PDMCC26XX.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___buffer_request_1af1ba97caba202d780151fb276b128802" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_p_d_m_c_c26_x_x__pcm_buffer" kindref="compound">PDMCC26XX_pcmBuffer</ref> *</type>
+        <definition>PDMCC26XX_pcmBuffer* PDMCC26XX_BufferRequest::buffer</definition>
+        <argsstring></argsstring>
+        <name>buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to requested buffer. Note that this includes PCM_METADATA_SIZE bytes of metadata as a header </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="563" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="563" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___buffer_request_1aced5abcb251e52d046809a985d8e2af7" prot="public" static="no" mutable="no">
+        <type><ref refid="_p_d_m_c_c26_x_x_8h_1afbfe993e790be75708df00186070a779" kindref="member">PDMCC26XX_Status</ref></type>
+        <definition>PDMCC26XX_Status PDMCC26XX_BufferRequest::status</definition>
+        <argsstring></argsstring>
+        <name>status</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Status code set by PDMCC26XX_requestBuffer </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="566" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="566" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A <ref refid="struct_p_d_m_c_c26_x_x___buffer_request" kindref="compound">PDMCC26XX_BufferRequest</ref> data structure is used with <ref refid="_p_d_m_c_c26_x_x_8h_1a15a0017513c13ca244f7e3a0f5761e8d" kindref="member">PDMCC26XX_requestBuffer()</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<para>buffer is a pointer to the requested buffer. It is NULL if no buffer is available. Each buffer contains a metadata header of size PCM_METADATA_SIZE. The first byte of the metadata is always an 8 bit sequence number. The other bytes depends on mode.</para><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Mode </para></entry><entry thead="yes"><para>Interpretation of bufferIn being NULL after returning  </para></entry></row>
+<row>
+<entry thead="no"><para>Blocking mode </para></entry><entry thead="no"><para>Request timed out and still no buffer available </para></entry></row>
+<row>
+<entry thead="no"><para>Non-Blocking mode </para></entry><entry thead="no"><para>No buffer available </para></entry></row>
+</table>
+</para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="1399">
+        <label>PDMCC26XX_metaData</label>
+        <link refid="struct_p_d_m_c_c26_x_x__meta_data"/>
+      </node>
+      <node id="1398">
+        <label>PDMCC26XX_pcmBuffer</label>
+        <link refid="struct_p_d_m_c_c26_x_x__pcm_buffer"/>
+        <childnode refid="1399" relation="usage">
+          <edgelabel>metaData</edgelabel>
+        </childnode>
+      </node>
+      <node id="1397">
+        <label>PDMCC26XX_BufferRequest</label>
+        <link refid="struct_p_d_m_c_c26_x_x___buffer_request"/>
+        <childnode refid="1398" relation="usage">
+          <edgelabel>buffer</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="562" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="561" bodyend="567"/>
+    <listofallmembers>
+      <member refid="struct_p_d_m_c_c26_x_x___buffer_request_1af1ba97caba202d780151fb276b128802" prot="public" virt="non-virtual"><scope>PDMCC26XX_BufferRequest</scope><name>buffer</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___buffer_request_1aced5abcb251e52d046809a985d8e2af7" prot="public" virt="non-virtual"><scope>PDMCC26XX_BufferRequest</scope><name>status</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

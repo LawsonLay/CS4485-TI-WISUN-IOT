@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SimpleLink Wireless MCU CC13xx and CC26xx Overview &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User&#39;s Guide
+ 7.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Hardware Architecture" href="hardware-architecture.html" />
+    <link rel="prev" title="Power Management" href="../freertos/power.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug cc13xx_cc26xx index-platform";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hardware-architecture.html">Hardware Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#further-information">Further information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/examples-cc13xx_cc26xx.html">Examples User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/custom-hardware.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/nortos-index.html">noRTOS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/rf-core-index.html">RF Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/physical-rf-layer-cc13xx_cc26xx.html">Physical Layer (PHY)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-bim-index.html">BIM Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-mcuboot-index.html">MCUBoot Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/sysconfig-index.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/glossary-cc13xx_cc26xx.html">Terms and acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>SimpleLink Wireless MCU CC13xx and CC26xx Overview</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="simplelink-wireless-mcu-deviceand-overview">
+<span id="sec-device-overview"></span><h1>SimpleLink Wireless MCU CC13xx and CC26xx Overview<a class="headerlink" href="#simplelink-wireless-mcu-deviceand-overview" title="Permalink to this headline">¶</a></h1>
+<p>This section describes how to use the SimpleLink Wireless MCU family CC13xx or CC26xx
+from a general software developer’s point of view.  Thus these contents do not
+apply specifically to the Proprietary RF development itself.  Additional information
+and resources are also provided for further development.</p>
+<p class="rubric">Table of contents</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware-architecture.html">Hardware Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hardware-architecture.html#system-core">System Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware-architecture.html#radio-core-arm-cortex-m0">Radio Core (Arm Cortex-M0)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware-architecture.html#flash-ram-and-peripherals">Flash, RAM, and Peripherals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware-architecture.html#programming-internal-flash-with-the-rom-bootloader">Programming Internal Flash With the ROM Bootloader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware-architecture.html#startup-sequence">Startup Sequence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware-architecture.html#resets">Resets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+</ul>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The main source of information for CC13xx and CC26xx hardware is the Technical
+Reference Manual:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/lit/pdf/swcu191">CC13x1x3 CC26x1x3 SimpleLink Wireless MCU Technical Reference Manual</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/pdf/swcu185">CC13x2 CC26x2 SimpleLink Wireless MCU Technical Reference Manual</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/pdf/swcu192">CC13x2x7 CC26x2x7 SimpleLink Wireless MCU Technical Reference Manual</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/pdf/swcu194">CC13x4 CC26x4 SimpleLink Wireless MCU Technical Reference Manual</a></p></li>
+</ul>
+</div>
+<div class="section" id="further-information">
+<h2>Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="../../../tirtos7/Bios_User_Guide.pdf">TI-RTOS7 Kernel (SYS/BIOS) User’s Guide</a>: Detailed information about the TI-RTOS7 kernel: scheduling,
+interrupts, synchronization.</p>
+<p><a class="reference external" href="../../../tirtos7/Bios_APIs.html">TI-RTOS7 Kernel (SYS/BIOS) API Reference</a>: API documentation of the TI-RTOS7 kernel modules and their
+configuration parameters.</p>
+<p><a class="reference external" href="../../../drivers/tidriversAPIs.html">TI Drivers API Reference</a>: Doxygen API documentation of the high-level drivers.</p>
+<p><a class="reference external" href="../../../drivers/Power_Management.pdf">Power Management User’s Guide</a>: Core SDK Power Management documentation.</p>
+<p><a class="reference external" href="../../../simplelink_mcu_sdk/Users_Guide.html">SimpleLink MCU SDK User’s Guide</a>: SimpleLink MCU SDK User’s Guide.</p>
+<p><a class="reference external" href="../../../driverlib/doc_overview_driverlib_cc13xx_cc26xx.html">DriverLib API Reference</a>: Doxygen API documentation of the low-level hardware abstraction
+layer.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../freertos/power.html" class="btn btn-neutral float-left" title="Power Management" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hardware-architecture.html" class="btn btn-neutral float-right" title="Hardware Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

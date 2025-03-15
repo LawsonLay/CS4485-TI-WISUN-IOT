@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CC26x0 to CC13xx or CC26xx &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User&#39;s Guide
+ 8.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CC253x to CC13xx or CC26xx" href="cc253x-to-cc26x2.html" />
+    <link rel="prev" title="SysConfig Migration" href="../sysconfig/zigbee-migration.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug zigbee-guide cc26x0-to-cc26x2";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+
+          </a>
+              <div class="version">
+                8.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/overview.html">SimpleLink CC13xx/CC26xx SDK Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/developing_zigbee_applications.html">Developing Zigbee Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zigbee-ota-index.html">Zigbee Over-The-Air Firmware Upgrade</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/packet_sniffer.html">Packet Sniffer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="migration_guide.html">Migration Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="migration_guide.html#updating-from-previous-sdks">Updating from previous SDKs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="migration_guide.html#porting-guides">Porting Guides</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="migration_guide.html#migration-guides">Migration Guides</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/gpio-porting-guide.html">GPIO++ Driver Porting Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/uart_to_uart2.html">UART to UART2 Porting Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/devices_without_launchpads.html">Devices without LaunchPads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/software-on-cc2652xSIP-cc2651RSIPA.html">Running Software Examples on CC2652XSIP and CC2651RSIPA devices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/software-on-cc2652p.html">Running Software Examples on CC2652P</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/software-on-cc13x2x7-26x2x7.html">Running Software Examples on the CC13x2x7 or CC26x2x7</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/software-on-cc13x1x-26x1x.html">Running Software Examples on the CC13x1x3 or CC26x1x3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/cc13x2-cc26x2-to-cc13x4-26x4.html">Migrate Your CC13x2 or CC26x2 Project to CC13x4 or CC26x4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/software-on-cc13x4-26x4.html">Migrate software examples from CC13x4 to CC26x4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/software-on-cc13x4-26x4-rgz-devices.html">CC13x4 and CC26x4 RGZ Variants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sysconfig/zigbee-migration.html">SysConfig Migration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tirtos/bios7_migration.html">TI-RTOS to TI-RTOS7 Migration</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">CC26x0 to CC13xx or CC26xx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cc253x-to-cc26x2.html">CC253x to CC13xx or CC26xx</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="migration_guide.html">Migration Guide</a> &raquo;</li>
+      <li>CC26x0 to CC13xx or CC26xx</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="cc26x0-to-device">
+<span id="cc26x0-to-cc26x2"></span><h1>CC26x0 to CC13xx or CC26xx<a class="headerlink" href="#cc26x0-to-device" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the main differences an application developer must
+be aware of between CC26x0 and CC13xx or CC26xx devices along with a porting guide to
+demonstrate the migration effort.</p>
+</div>
+<div class="section" id="features-and-benefits">
+<h2>Features and Benefits<a class="headerlink" href="#features-and-benefits" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="increased-processing-power-and-scalability">
+<h3>Increased Processing Power and Scalability<a class="headerlink" href="#increased-processing-power-and-scalability" title="Permalink to this headline">¶</a></h3>
+<p>The CC13xx or CC26xx is a wireless MCU with a dedicated Arm Cortex-M4F application
+processor that is pin-to-pin compatible to the CC26x0 in the 7x7mm QFN package.
+More memory is available with an increase of non-volatile memory
+to 608 to 960 kB. This breaks down into 352 kB Flash memory + 256 kB ROM in
+the CC13x2x1 or CC26x2x1 or 704 kB Flash memory + 256 kB ROM  in the CC13x2x7 or CC26x2x7.
+RAM has also increased to 80 kB. The availability of this increased memory
+provides support for Over-the-Air Downloads (OAD), larger applications,
+and more simultaneous connections.  An additional UART is also included.</p>
+</div>
+<div class="section" id="lower-power-operation-and-zigbee-green-power-devices">
+<h3>Lower Power Operation and Zigbee Green Power Devices<a class="headerlink" href="#lower-power-operation-and-zigbee-green-power-devices" title="Permalink to this headline">¶</a></h3>
+<p>A 50% reduction in standby current and 70% reduction in current consumption
+through the Sensor Controller allows for long-term operation from a single AA
+or coin-cell battery for sleepy end devices.  If an end application project
+requires battery-less products, the CC13xx or CC26xx will provide the ability to support
+both Green Power Source and Sink Devices.</p>
+</div>
+<div class="section" id="zigbee-3-0-enabled">
+<h3>Zigbee 3.0 enabled<a class="headerlink" href="#zigbee-3-0-enabled" title="Permalink to this headline">¶</a></h3>
+<p>If your project wasn’t already on the Zigbee 3.0 profile, the CC13xx or CC26xx Z-Stack
+solution provides support of Zigbee 3.0.  This includes features such as child
+aging, enhanced security, Base Device Behavior, and Green Power support.  More
+information can be found in the <cite>What’s New in Zigbee 3.0 White Paper &lt;http://www.ti.com/lit/swra615&gt;</cite>.</p>
+</div>
+<div class="section" id="enhanced-security">
+<h3>Enhanced security<a class="headerlink" href="#enhanced-security" title="Permalink to this headline">¶</a></h3>
+<p>With additional hardware security accelerators for AES-128/256, SHA-256, and
+ECC, CC13xx or CC26xx saves five times the processing time and current consumption for
+implementing security algorithms.  This is critical to enable strong network
+security.</p>
+</div>
+<div class="section" id="deviceand-launchpad-support">
+<h3>CC13xx and CC26xx LaunchPad Support<a class="headerlink" href="#deviceand-launchpad-support" title="Permalink to this headline">¶</a></h3>
+<p>All example applications are compatible with the CC13xx or CC26xx LaunchPad development
+kit. These features allow for a unified development experience and empowers
+developers to rapidly release to market.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.ti.com/tool/LAUNCHXL-CC26X2R1">CC26X2R1 LaunchPad Development Kit Product Page</a></p></li>
+<li><p><a class="reference external" href="http://www.ti.com/tool/LP-CC2652RB">CC2652RB LaunchPad Development Kit Product Page</a></p></li>
+<li><p><a class="reference external" href="http://www.ti.com/tool/LAUNCHXL-CC1352P">CC1352P LaunchPad Development Kit Product Page</a></p></li>
+<li><p><a class="reference external" href="http://www.ti.com/tool/LAUNCHXL-CC1352R1">CC1352R1 LaunchPad Development Kit Product Page</a></p></li>
+<li><p><a class="reference external" href="http://www.ti.com/tool/LPSTK-CC1352R">CC1352R1 LaunchPad SensorTag Kit Product Page</a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="porting-instructions-from-z-stack-1-2-2a-to-3-1-0">
+<h2>Porting Instructions from Z-Stack 1.2.2a to 3.1.0<a class="headerlink" href="#porting-instructions-from-z-stack-1-2-2a-to-3-1-0" title="Permalink to this headline">¶</a></h2>
+<p>The intention of these instructions is to help developers convert their legacy Zigbee
+projects to the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>.  This includes collecting all
+of the essential materials from the older Z-Stack project and recognizing the mesh
+network settings to which the new project must adhere.  It will then require importing a
+SimpleLink SDK sample application, renaming all appropriate resources, changing
+mesh network configurations, and customizing the application files.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This module is intended to provide a process overview and does not go into
+specific detail about each conversion aspect that should be considered per
+application.</p>
+</div>
+<ol class="arabic simple">
+<li><p>Copy the project files.  All significant application resources should be contained
+inside of the C:\ti\simplelink\zstack_home_1_02_02a_44539\Projects\zstack\HomeAutomation\&lt;Zigbee Project&gt;\CC26xx
+folder of the IAR project.  For basic designs this will consist of
+<code class="docutils literal notranslate"><span class="pre">[application].c</span></code>.  All files should be copied to a location on the system that
+can be accessed for later review.</p></li>
+</ol>
+<div class="figure align-center" id="fig-copy-application-files-cc26x0">
+<img alt="../_images/copy_application_files_cc26x0.png" src="../_images/copy_application_files_cc26x0.png" />
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Examine all configuration settings.  Zigbee projects contain several options that
+determine how the mesh network operates.  To duplicate this behavior inside the new
+project one must take note of the most important settings so that they may be
+reformatted inside the SimpleLink Zigbee SDK.  The description of the most crucial
+variables are captured in <a class="reference internal" href="../zigbee/network_configuration.html#network-config"><span class="std std-ref">Network Configurations</span></a> and located in the following IAR
+workspace locations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NWK\nwk_globals.h</span></code> of project <code class="docutils literal notranslate"><span class="pre">ZStackCore</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NWK\ZGlobals.h</span></code> of project <code class="docutils literal notranslate"><span class="pre">ZStackCore</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Config\app.cfg</span></code> of project <code class="docutils literal notranslate"><span class="pre">[Application]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Application\znwk_config.h</span></code> of project <code class="docutils literal notranslate"><span class="pre">[Application]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Application\zstart_config.h</span></code> of project <code class="docutils literal notranslate"><span class="pre">[Application]</span></code></p></li>
+<li><p><em>Project Options</em> → <em>C/C++ Compiler</em> → <em>Preprocessor</em> → <em>Defined symbols</em></p></li>
+</ul>
+</li>
+</ol>
+<div class="figure align-center" id="fig-network-configuration-iar-locations-cc26x0">
+<img alt="../_images/network_configuration_IAR_locations_cc26x0.png" src="../_images/network_configuration_IAR_locations_cc26x0.png" />
+</div>
+<p>Some variables have been added to Z-Stack 3.0, hence these files should not be copied
+directly from a Z-Stack HA 1.2.2a project.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Z-Stack HA 1.2.2a is based off of the Zigbee PRO 2012 (r20) specification
+whereas Z-Stack 3.x.x follows Zigbee PRO 2015 (r21) and later.  There are several
+significant changes between these specifications that greatly affect the behavior of
+the Zigbee mesh network, including child aging, enhanced security, BDB
+specification, and Green Power as described in the <cite>What’s New in Zigbee 3.0 White Paper &lt;http://www.ti.com/lit/swra615&gt;</cite>.  Caution
+should be taken to recognize these differences and the new/altered mesh network
+settings thereof.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Import a <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> project into Code Composer Studio (CCS) or IAR.  CCS
+will be used for demonstrative purposes, use either of the following options inside
+the IDE:</p>
+<ul class="simple">
+<li><p>View → Resource Explorer → Software → <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> → Connectivity → Examples → Development Tools → CC13xx or CC26xx LaunchPad</p></li>
+<li><p>File → Import → C/C++ Project → CCS Project, search directory C:\ti\simplelink_cc13xx_cc26xx_sdk_x_xx_xx_xx\examples\rtos\CC13xx or CC26xx_LAUNCHXL\zstack</p></li>
+</ul>
+</li>
+</ol>
+<div class="figure align-center" id="fig-import-ccs-project-cc26x0">
+<img alt="../_images/import_project_CCS.png" src="../_images/import_project_CCS.png" />
+</div>
+<p>Import either the <em>genericapp</em> example or a sample application that reflects the
+desired application, such as <em>switch</em> for a light switch device.
+The Zigbee end device (ZED) node type project must be selected as this is the only one
+which was supported by the CC26x0.  Make sure to build the project (<em>Project</em> → <em>Build
+Project</em>) before continuing and verify that all file paths resolve correctly as this will
+confirm the starting point for further code modifications.</p>
+<ol class="arabic simple" start="4">
+<li><p>Alter project names so that all application-specific files and dependencies now match
+the intended end application.  Inside the <em>Project Explorer</em>, right-click on the
+Project and choose <em>Rename</em> (or F2) to perform this task.  The same should be done
+for all <code class="docutils literal notranslate"><span class="pre">Application</span></code> files.  Furthermore, it is good practice to replace the
+format of all functions, defines, etc. that use the old naming convention.  Go to
+<em>Edit</em> → <em>Find/Replace</em> (or Ctrl+F), create the search parameters, and perform a
+<em>Replace All</em> for each application file.</p></li>
+</ol>
+<div class="figure align-center" id="fig-find-and-replace-all-cc26x0">
+<img alt="../_images/find_and_replace_all.png" src="../_images/find_and_replace_all.png" />
+</div>
+<p>A new Project Configuration name should be chosen (<em>Project Properties</em> → <em>CCS General</em> →
+<em>Manage Configurations</em>) and an entire project search (<em>Search</em> → <em>File Search</em> with
+Scope of <em>Enclosing projects</em>) will help verify that there are no old identities
+remaining.  At  this point, it is advised that the project be cleaned (<em>Project</em> → <em>Clean
+Project</em>) and  re-built to confirm that nothing has broken while changing names.  The
+original configuration build folder can now be deleted after the new one is generated.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Case sensitivity should be taken into account for each Find/Replace Search
+and it is recommended to try multiple instances to make sure everything has been
+correctly revised.  The only name change required outside of the application files
+is in <code class="docutils literal notranslate"><span class="pre">Application\StartUp\main.c</span></code> where <code class="docutils literal notranslate"><span class="pre">zcl[Project]_task</span></code> should be renamed
+and the header include should be changed to <code class="docutils literal notranslate"><span class="pre">Application/zcl_[Project].h</span></code></p>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Apply changes to the mesh network configuration files.  The <a class="reference internal" href="../zigbee/network_configuration.html#network-config"><span class="std std-ref">Network Configurations</span></a>
+section will further help complete this task.  The most common variable
+locations inside the CCS workspace are as such:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Application\Stack\nwk\nwk_globals.h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Application\Stack\sys\zglobals.h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Application\Stack\Config\f8wconfig.opts</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Application\Stack\bdb\bdb_interface.h</span></code></p></li>
+<li><p><em>Project Properties</em> → <em>CCS Build</em> → <em>ARM Compiler</em> → <em>Predefined Symbols</em></p></li>
+</ul>
+</li>
+</ol>
+<div class="figure align-center" id="fig-network-config-ccs-locations-cc26x0">
+<img alt="../_images/network_configuration_CCS_locations.png" src="../_images/network_configuration_CCS_locations.png" />
+</div>
+<p>The preprocessor symbols in the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> are different to those from
+the TI-RTOS projects, however the most important ones to notice are documented in
+<a class="reference internal" href="../zigbee/application_overview.html#sec-app-configuration"><span class="std std-ref">Application Preprocessor Configuration</span></a>.  The project Stack and Heap can also be
+altered in <code class="docutils literal notranslate"><span class="pre">TI_RTOS_Configuration\app.cfg</span></code> alongside other TI-RTOS settings.</p>
+<ol class="arabic simple" start="6">
+<li><p>Make changes to the project files(<code class="docutils literal notranslate"><span class="pre">zcl_[application].c</span></code>, <code class="docutils literal notranslate"><span class="pre">zcl_[application].h</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">zcl_[application]_data.c</span></code>) to support the application.  This will include:</p>
+<ul class="simple">
+<li><p>Separating attributes and cluster initialization from <code class="docutils literal notranslate"><span class="pre">[application].c</span></code> to <code class="docutils literal notranslate"><span class="pre">zcl_[application]_data.c</span></code></p></li>
+<li><p>Modifying initialization including endpoint, attribute, and cluster registration</p></li>
+<li><p>Changing Z-Stack and AF message handling</p></li>
+<li><p>Adding UI callback functions</p></li>
+<li><p>Updating cluster callback functions</p></li>
+</ul>
+</li>
+</ol>
+<p>Each of these points are detailed further in the <a class="reference internal" href="zstack1.2.2a-cc26x0-to-zstack3.1.0.html#sec-zstack1-2-2a-cc26x0-to-stack3-1-0"><span class="std std-ref">Z-Stack 1.2.2a (CC26x0) to Z-Stack 3.1.0</span></a>
+porting guide.  It is also recommended that difference comparison software be used to
+further understand the variation between the old and new Z-Stack project files.</p>
+<ol class="arabic simple" start="7">
+<li><p>Build the project and address each issue that spawned due to the migration.  Once
+no errors remain, the project itself will need to be further debugged to ensure
+that the application operates as expected.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Additional steps or changes will be required to further port the project to
+a Z-Stack version newer than 3.1.0.  Please see the respective
+<a class="reference internal" href="migration_guide.html#sec-porting-guides"><span class="std std-ref">Porting Guides</span></a> for further details.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../sysconfig/zigbee-migration.html" class="btn btn-neutral float-left" title="SysConfig Migration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cc253x-to-cc26x2.html" class="btn btn-neutral float-right" title="CC253x to CC13xx or CC26xx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2005-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

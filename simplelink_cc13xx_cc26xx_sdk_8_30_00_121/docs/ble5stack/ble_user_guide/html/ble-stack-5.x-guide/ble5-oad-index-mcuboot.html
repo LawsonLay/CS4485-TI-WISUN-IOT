@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCUboot Over-the-Air Download (OAD) &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction" href="../oad-mcuboot/intro.html" />
+    <link rel="prev" title="BLE-Stack OAD Profile" href="../ble-stack-oad/oad-profile.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-stack-5.x-guide ble5-oad-index-mcuboot";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MCUboot Over-the-Air Download (OAD)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/oad-types.html">OAD Storage &amp; Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/mcuboot.html">MCUboot Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/on-chip-stack-library.html">MCUboot for On-Chip OAD (Stack Library)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/image-header.html">MCUboot OAD Image Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/flash-layout-on-chip-stack-library.html">Flash Layout for On-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/flash-layout-off-chip.html">Flash Layout for Off-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/imgtool.html">Post-Build Script imgtool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-application.html">OAD Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html">BLE-Stack OAD Profile</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>MCUboot Over-the-Air Download (OAD)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="mcuboot-over-the-air-download-oad">
+<h1>MCUboot Over-the-Air Download (OAD)<a class="headerlink" href="#mcuboot-over-the-air-download-oad" title="Permalink to this headline">¶</a></h1>
+<p>The following sections aim to describe the lower layers of OAD software that are
+common across all protocol stack implementations. This includes the OAD image
+header, the flash layout, Secure Bootloader, and the oad image tool.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The BLE-Stack OAD Profile does not implement or perform any security or
+authentication mechanisms as part of the firmware update process.
+System developers should take measures to adequately authenticate peer
+devices and only accept and/or apply firmware images transferred from
+trusted sources via the OAD Profile. TI recommends applications use
+Bluetooth LE Secure Connections (LESC) with Man-in-the-Middle (MITM)
+protection with peer devices when performing wireless firmware updates,
+although the use of the LESC feature does not itself guarantee image
+authenticity.</p>
+<p>When using the Secure OAD feature along with recommended parameters,
+firmware images are authenticated on the device using ECDSA signature
+validation algorithms to ensure image authenticity prior to updating the
+running firmware image. Just as with the OAD Profile, TI recommends
+applications use Bluetooth LE Secure Connections with Man-in-the-Middle (MITM)
+protection with peer devices when performing wireless firmware updates.</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../oad-mcuboot/intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/intro.html#oad-topology-overview">OAD Topology Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../oad-mcuboot/oad-types.html">OAD Storage &amp; Security</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/oad-types.html#oad-storage">OAD Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/oad-types.html#oad-security">OAD Security</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../oad-mcuboot/mcuboot.html">MCUboot Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oad-mcuboot/on-chip-stack-library.html">MCUboot for On-Chip OAD (Stack Library)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oad-mcuboot/image-header.html">MCUboot OAD Image Header</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/image-header.html#id2">MCUboot OAD Image Header</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../oad-mcuboot/flash-layout-on-chip-stack-library.html">Flash Layout for On-Chip OAD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/flash-layout-on-chip-stack-library.html#constraints-and-requirements-for-on-chip-oad-stack-library">Constraints and Requirements for On-chip OAD (stack library)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/flash-layout-on-chip-stack-library.html#internal-flash-memory-layout">Internal Flash Memory Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../oad-mcuboot/flash-layout-off-chip.html">Flash Layout for Off-Chip OAD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/flash-layout-off-chip.html#requirements-and-constraints-for-off-chip-oad">Requirements and Constraints for Off-chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/flash-layout-off-chip.html#internal-flash-memory-layout">Internal Flash Memory Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/flash-layout-off-chip.html#external-flash-memory-layout">External Flash Memory Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../oad-mcuboot/imgtool.html">Post-Build Script imgtool</a></li>
+</ul>
+</div>
+<p>The following sections aim to describe the BLE5-Stack specific application and
+profile layer of the OAD solution. The OAD application section will describe
+the BLE OAD process from a high level in terms of events and states, and the
+profile section will cover the actual structures that are sent over the air.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-application.html">OAD Application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-application.html#oad-state-machine">OAD State Machine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-application.html#image-validation">Image Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-application.html#image-block-transfers">Image Block Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-application.html#completion-of-the-oad-process">Completion of the OAD Process</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html">BLE-Stack OAD Profile</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#over-the-air-message-sequence">Over the Air Message Sequence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#oad-service-0xffc0">OAD Service (0xFFC0)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#oad-image-identify-0xffc1">OAD Image Identify (0xFFC1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#oad-image-block-characteristic-0xffc2">OAD Image Block Characteristic (0xFFC2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#oad-control-point-characteristic-0xffc5">OAD Control Point Characteristic (0xFFC5)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#get-oad-block-size-cmd-rsp">Get OAD Block Size CMD/RSP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#disable-oad-image-block-write-cmd-rsp">Disable OAD Image Block Write CMD/RSP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#get-software-version-cmd-rsp">Get Software Version CMD/RSP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#get-oad-image-status-cmd-rsp">Get OAD Image Status CMD/RSP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#get-profile-version-cmd-rsp">Get Profile Version CMD/RSP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#get-device-type-cmd-rsp">Get Device Type CMD/RSP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#image-block-write-char-rsp">Image Block Write Char RSP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#erase-all-bonds-cmd-rsp">Erase All Bonds (CMD/RSP)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#oad-reset-service-0xffd0">OAD Reset Service (0xFFD0)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#oad-start-reset-characteristic-0xffd1">OAD Start/Reset Characteristic (0xFFD1)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#oad-return-values">OAD Return Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html#oad-block-size-rules">OAD Block Size Rules</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The <a class="reference external" href="https://dev.ti.com/tirex/explore/node?node=ACnG5QNDmI2jX1enNwHqCQ__BSEc4rl__LATEST">SimpleLink Academy OAD Fundamentals Module</a> covers the out of the box
+demo for OAD using the BLE5-Stack. It can be found here.
+This lab contains the following step by step instructions:</p>
+<ul>
+<li><p>Anatomy of an OAD</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Image Header</p></li>
+<li><p>Boot Image Manager (BIM)</p></li>
+<li><p>OAD Memory Layout</p></li>
+<li><p>OAD Protocol/BLE Profile</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Setting up the OAD Environment</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>OAD Distributor Setup</p></li>
+<li><p>OAD Target Setup</p></li>
+<li><p>Creating a Factory Image</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Running the OAD Demo</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Modifying the Image Version</p></li>
+<li><p>OAD using BTool</p></li>
+<li><p>Btool Image Header Dialog</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Reverting to a Factory Image</p></li>
+</ul>
+<p>The <a class="reference external" href="https://dev.ti.com/tirex/explore/node?node=ACnG5QNDmI2jX1enNwHqCQ__BSEc4rl__LATEST">SimpleLink Academy OAD Advanced Module</a> covers these advanced topics and
+instructions:</p>
+<ul>
+<li><p>Adding OAD to an Existing Project</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Project Changes</p></li>
+<li><p>Code Changes</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Advanced OAD Debugging</p></li>
+<li><p>Creating a Production Image</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Change to Release BIM</p></li>
+<li><p>Secure OAD: Change default keys</p></li>
+<li><p>Loading a Production Image</p></li>
+<li><p>Combined Production Image</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Mobile developers wishing to make applications that integrate the TI OAD
+should refer to the following sample implementations. These are intended
+as reference libraries that implement the TI OAD Downloader for Android and iOS.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://git.ti.com/simplelink-ble-oad-ios">ios-cocoapod-eoad</a>.</p></li>
+<li><p><a class="reference external" href="https://git.ti.com/simplelink-ble-oad-android">android-eoad</a></p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above libraries do not implement full fledged applications, but instead
+are intended to be integrated as part of an end application.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ble-stack-oad/oad-profile.html" class="btn btn-neutral float-left" title="BLE-Stack OAD Profile" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../oad-mcuboot/intro.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

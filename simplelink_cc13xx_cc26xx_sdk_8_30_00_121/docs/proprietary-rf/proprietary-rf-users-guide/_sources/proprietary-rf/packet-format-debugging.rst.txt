@@ -1,0 +1,50 @@
+Packet format debugging
+=======================
+
+When testing a custom packet format, it is often convenient to see what the
+|PROPRFDEVICE| sends on the air.  The RF core provides the internal signal
+``MCE_GPO0`` which reflects the binary modulator input.
+:numref:`fig_rf_mce_gpo0_output` shows a pin dump for a packet with the
+following configuration:
+
+- ``.preamConf.nPreamBytes`` = 1
+- ``.syncWord`` = 0x930B51DE
+- ``.pktConf.bVarLen`` = 0x0
+- payload: 4 bytes: { 0x81, 0x82, 0x83, 0x84}
+
+.. _fig_rf_mce_gpo0_output:
+.. figure:: mce_gpo0_output.png
+
+    Output of the internal modulator signal ``MCE_GPO0`` dumped with a logic
+    analyer.
+
+The triggers represent the parts:
+
+A. Preamble
+B. Sync word
+C. Payload
+D. CRC
+E. End
+
+There are signal fragments at the beginning of the packet which need to be
+filtered out.  The following code snippet routes ``MCE_GPO0`` to
+``Board_LED1``::
+
+    #include <inc/hw_rfc_dbell.h>
+
+    // Overrides for CMD_PROP_RADIO_DIV_SETUP
+    static uint32_t pOverrides[] =
+    {
+        // Route MCE_GPO0 to RFC_GPO0
+        HW_REG_OVERRIDE(0x1110, RFC_DBELL_SYSGPOCTL_GPOCTL0_MCEGPO0),
+        // ...
+    }
+
+
+    #include <ti/drivers/gpio/GPIOCC26XX.h>
+
+    // Route RFC_GPO0 to an LED
+    GPIO_setConfigAndMux(Board_LED1, GPIO_CFG_OUTPUT, IOC_PORT_RFC_GPO1);
+
+More information on signal routing can be found
+:ref:`here<rf_signal_routing>`.

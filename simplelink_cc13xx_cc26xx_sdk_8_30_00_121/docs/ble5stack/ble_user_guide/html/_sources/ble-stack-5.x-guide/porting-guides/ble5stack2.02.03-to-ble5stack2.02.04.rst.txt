@@ -1,0 +1,388 @@
+.. |OLD_STACK_VER| replace:: BLE5-Stack 2.02.03
+.. |NEW_STACK_VER| replace:: BLE5-Stack 2.02.04
+
+|OLD_STACK_VER| (SDK 5.30) to |NEW_STACK_VER| (SDK 5.40)
+========================================================
+
+This section will describe a way to migrate a project from |OLD_STACK_VER| to
+a |NEW_STACK_VER| project.
+
+The best way to migrate is to open a new project from the new SDK and transfer 
+your changes and application code over to the new example. 
+
+Porting Simple Peripheral
+-------------------------
+
+For this migration guide, Simple Peripheral from |OLD_STACK_VER| will be 
+ported over to |NEW_STACK_VER|. The recommended approach is to start with a
+|NEW_STACK_VER| project that contains the same base functionality as the
+porting target project and merge in any custom functionality.
+
+#. Choose a |NEW_STACK_VER| example project that contains your target
+   project's base functionality.
+
+#. Transfer all modified application files from |OLD_STACK_VER| into the
+   |NEW_STACK_VER| example project.
+
+   In this example, the following files from |OLD_STACK_VER| were moved into
+   Simple Peripheral |NEW_STACK_VER| example:
+
+      - ``simple_peripheral.c``
+      - ``simple_peripheral.h``
+
+#. Move any profiles and services that the application is using to the 
+   |NEW_STACK_VER| project.
+
+#. Transfer the SysConfig settings either visually through the GUI or open both 
+   the old and the new project .syscfg files and copy-paste the desired 
+   settings.
+
+#. Update the radio configuration as described in :ref:`radio-config-update-sdk-5-40`.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|.
+
+#. Refer to the Core SDK release notes for additional information and the 
+   TI-RTOS examples included with |SDK|.
+
+   For additional information on how |NEW_STACK_VER| uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+Porting Simple Central
+----------------------
+
+This section of the migration guide will focus on porting Simple Central 
+from |OLD_STACK_VER| to the |NEW_STACK_VER|. The recommended approach is 
+to start with a |NEW_STACK_VER| project that contains the same base 
+functionality as the porting target project and merge in any custom 
+functionality.
+
+#. Choose a |NEW_STACK_VER| example project that contains your target
+   project's base functionality.
+
+#. Transfer all modified application files from |OLD_STACK_VER| into the
+   |NEW_STACK_VER| example project.
+
+   In this example, the following files from |OLD_STACK_VER| were moved into
+   Simple Central |NEW_STACK_VER| example:
+
+      - ``simple_central.c``
+      - ``simple_central.h``
+
+#. Modify ``main.c`` in the |NEW_STACK_VER| example if additional tasks were
+   added in the |OLD_STACK_VER| project.
+
+#. Move any profiles and services that the application is using to the
+   |NEW_STACK_VER|.
+
+#. Transfer the Sysconfig settings either visually through the GUI or open both 
+   the old and the new project .syscfg files and copy-paste the desired settings.
+
+#. Update the radio configuration as described in :ref:`radio-config-update-sdk-5-40`.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|.
+
+#. Refer to the Core SDK release notes for additional information and the TI-RTOS
+   examples included with |SDK|.
+
+   For additional information on how |NEW_STACK_VER| uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+
+A Few Noteworthy Changes from |OLD_STACK_VER| to |NEW_STACK_VER|
+----------------------------------------------------------------
+
+You can follow the guide above without addressing these updates, they are listed
+for your information only. All fine grained details might not be mentioned, 
+please refer to the specific example you need to port and do a compare between 
+the old and new project files. Please refer to the |STACK| Release Notes for 
+all the details.
+
+.. attention:: 
+
+  Please note that the location of the precompiled RF libraries has moved to  
+  match the same pattern as other components in the SDK. The old path is now 
+  deprecated. Migration to the new library path may be required. Customers 
+  that disable SysCfg may be affected. See all the details in the RFLib release
+  notes. 
+
+* Stability and latency improvements in BLE Mesh
+
+* Added multi-role example for the CC2651P3 device
+
+* Bug fixes
+
+
+ .. _radio-config-update-sdk-5-40:
+
+Radio configuration update for migration from |OLD_STACK_VER| to |NEW_STACK_VER|
+--------------------------------------------------------------------------------
+
+The radio configuration has been updated in SDK 5.40 (|NEW_STACK_VER|) in relation
+with Radio_03 errata. Please refer to the silicon errata document of the device
+used for details.
+
+The suggestions below are only applicable to devices using Bluetooth LE.
+Please make sure to refer to the guide corresponding to the device you are using.
+
+* :ref:`radio-config-update-sdk-5-40_cc26x2`
+* :ref:`radio-config-update-sdk-5-40_cc2642r-q1`
+* :ref:`radio-config-update-sdk-5-40_cc2652rb`
+* :ref:`radio-config-update-sdk-5-40_cc1352`
+* :ref:`radio-config-update-sdk-5-40_cc2652x7`
+* :ref:`radio-config-update-sdk-5-40_cc2651`
+
+.. _radio-config-update-sdk-5-40_cc26x2:
+
+For `CC2642R`_, `CC2652R`_ and `CC2652P`_ devices
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* If **you are using SysConfig** - If configured to do so, SysConfig
+  automatically generates the proper radio configuration. 
+  Refer to :ref:`sysconfig-radio-config-ble` for more details and
+  verify if the option is properly enabled.
+
+* If **you are NOT using SysConfig** - Some changes should be implemented
+  manually in the file ``ti_radio_config.c``.
+
+  #. Add the following include
+
+     .. code-block:: c
+
+        #include DeviceFamily_constructPath(rf_patches/rf_patch_mce_bt5.h)
+
+  #. Modify the structure ``RF_modeBle`` as below
+
+     .. code-block:: c
+
+        // TI-RTOS RF Mode Object
+        RF_Mode RF_modeBle =
+        {
+            .rfMode = RF_MODE_AUTO,
+            .cpePatchFxn = &rf_patch_cpe_bt5,
+            .mcePatchFxn = &rf_patch_mce_bt5,
+            .rfePatchFxn = 0
+        };
+
+  #. Modify the table ``pOverrides_ble1Mbps`` as below
+
+     .. code-block:: c
+
+        // Overrides for CMD_BLE5_RADIO_SETUP
+        uint32_t pOverrides_ble1Mbps[] =
+        {
+            // override_ble5_setup_override_1mbps.json
+            // Bluetooth 5: Set pilot tone length to 20 us
+            HW_REG_OVERRIDE(0x5320,0x03C0),
+            // Bluetooth 5: Compensate syncTimeadjust
+            (uint32_t)0x015302A3,
+            // override_ble5_residual_per.json
+            // Symbol tracking: timing correction
+            HW_REG_OVERRIDE(0x50D4,0x00F9),
+            // Symbol tracking: reduce sample delay
+            HW_REG_OVERRIDE(0x50E0,0x0087),
+            // Symbol tracking: demodulation order
+            HW_REG_OVERRIDE(0x50F8,0x0014),
+            (uint32_t)0xFFFFFFFF
+        };
+
+  #. Modify the table ``pOverrides_ble2Mbps`` as below
+
+     .. code-block:: c
+
+        // Overrides for CMD_BLE5_RADIO_SETUP
+        uint32_t pOverrides_ble2Mbps[] =
+        {
+            // override_ble5_setup_override_2mbps_mce.json
+            // PHY: Use MCE RAM (patch), RFE ROM
+            MCE_RFE_OVERRIDE(1,0,2,0,3,2),
+            // override_ble5_setup_override_2mbps.json
+            // Bluetooth 5: Set pilot tone length to 20 us
+            HW_REG_OVERRIDE(0x5320,0x03C0),
+            // Bluetooth 5: Compensate syncTimeAdjust
+            (uint32_t)0x00F102A3,
+            // Bluetooth 5: increase low gain AGC delay for 2 Mbps
+            HW_REG_OVERRIDE(0x60A4,0x7D00),
+            // Rx: increase AGC hysteresis (HIGH_GAIN=15, LOW_GAIN=11)
+            HW_REG_OVERRIDE(0x6098,0x75FB),
+            // override_ble5_residual_per.json
+            // Symbol tracking: timing correction
+            HW_REG_OVERRIDE(0x50D4,0x00F9),
+            // Symbol tracking: reduce sample delay
+            HW_REG_OVERRIDE(0x50E0,0x0087),
+            // Symbol tracking: demodulation order
+            HW_REG_OVERRIDE(0x50F8,0x0014),
+            (uint32_t)0xFFFFFFFF
+        };
+
+  #. Modify the table ``pOverrides_bleCoded`` as below
+
+     .. code-block:: c
+
+        // Overrides for CMD_BLE5_RADIO_SETUP
+        uint32_t pOverrides_bleCoded[] =
+        {
+            // override_ble5_setup_override_coded.json
+            // Bluetooth 5: Set pilot tone length to 20 us
+            HW_REG_OVERRIDE(0x5320,0x03C0),
+            // Bluetooth 5: Compensate syncTimeadjust
+            (uint32_t)0x07A902A3,
+            // Rx: Set AGC reference level to 0x21 (default: 0x2E)
+            HW_REG_OVERRIDE(0x609C,0x0021),
+            (uint32_t)0xFFFFFFFF
+        };
+
+.. _radio-config-update-sdk-5-40_cc2642r-q1:
+
+For `CC2642R-Q1`_ devices
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* If **you are using SysConfig** - Leveraging, SysConfig and
+  :ref:`sysconfig-radio-config-ble` assess if you want to set
+  ``RF Designation`` to ``Selectivity`` or ``Sensitivity``.
+  After that, SysConfig will automatically generate the proper
+  radio configuration.
+
+* If **you are NOT using SysConfig** - First assess if the radio
+  should be optimized for *selectivity* or *sensitivity* while in receive mode
+  on the LE 2M PHY.
+
+  * If the radio should be optimized for **selectivity**, the radio configuration
+    used in SDK 5.30 can be kept as it. No additional change is required.
+
+  * If the radio should be optimized for **sensitivity**, some changes should
+    be implemented manually in the file ``ti_radio_config.c``.
+
+     #. Add the following include
+
+        .. code-block:: c
+
+           #include DeviceFamily_constructPath(rf_patches/rf_patch_mce_bt5.h)
+
+     #. Modify the structure ``RF_modeBle`` as below
+
+        .. code-block:: c
+
+           // TI-RTOS RF Mode Object
+           RF_Mode RF_modeBle =
+           {
+               .rfMode = RF_MODE_AUTO,
+               .cpePatchFxn = &rf_patch_cpe_bt5,
+               .mcePatchFxn = &rf_patch_mce_bt5,
+               .rfePatchFxn = 0
+           };
+
+     #. Modify the table ``pOverrides_ble1Mbps`` as below
+
+        .. code-block:: c
+
+           // Overrides for CMD_BLE5_RADIO_SETUP
+           uint32_t pOverrides_ble1Mbps[] =
+           {
+               // override_ble5_setup_override_1mbps.json
+               // Bluetooth 5: Set pilot tone length to 20 us
+               HW_REG_OVERRIDE(0x5320,0x03C0),
+               // Bluetooth 5: Compensate syncTimeadjust
+               (uint32_t)0x015302A3,
+               // override_ble5_residual_per.json
+               // Symbol tracking: timing correction
+               HW_REG_OVERRIDE(0x50D4,0x00F9),
+               // Symbol tracking: reduce sample delay
+               HW_REG_OVERRIDE(0x50E0,0x0087),
+               // Symbol tracking: demodulation order
+               HW_REG_OVERRIDE(0x50F8,0x0014),
+               (uint32_t)0xFFFFFFFF
+           };
+
+     #. Modify the table ``pOverrides_ble2Mbps`` as below
+
+        .. code-block:: c
+
+           // Overrides for CMD_BLE5_RADIO_SETUP
+           uint32_t pOverrides_ble2Mbps[] =
+           {
+               // override_ble5_setup_override_2mbps_mce.json
+               // PHY: Use MCE RAM (patch), RFE ROM
+               MCE_RFE_OVERRIDE(1,0,2,0,3,2),
+               // override_ble5_setup_override_2mbps.json
+               // Bluetooth 5: Set pilot tone length to 20 us
+               HW_REG_OVERRIDE(0x5320,0x03C0),
+               // Bluetooth 5: Compensate syncTimeAdjust
+               (uint32_t)0x00F102A3,
+               // Bluetooth 5: increase low gain AGC delay for 2 Mbps
+               HW_REG_OVERRIDE(0x60A4,0x7D00),
+               // Rx: increase AGC hysteresis (HIGH_GAIN=15, LOW_GAIN=11)
+               HW_REG_OVERRIDE(0x6098,0x75FB),
+               // override_ble5_residual_per.json
+               // Symbol tracking: timing correction
+               HW_REG_OVERRIDE(0x50D4,0x00F9),
+               // Symbol tracking: reduce sample delay
+               HW_REG_OVERRIDE(0x50E0,0x0087),
+               // Symbol tracking: demodulation order
+               HW_REG_OVERRIDE(0x50F8,0x0014),
+               (uint32_t)0xFFFFFFFF
+           };
+
+     #. Modify the table ``pOverrides_bleCoded`` as below
+
+        .. code-block:: c
+
+           // Overrides for CMD_BLE5_RADIO_SETUP
+           uint32_t pOverrides_bleCoded[] =
+           {
+               // override_ble5_setup_override_coded.json
+               // Bluetooth 5: Set pilot tone length to 20 us
+               HW_REG_OVERRIDE(0x5320,0x03C0),
+               // Bluetooth 5: Compensate syncTimeadjust
+               (uint32_t)0x07A902A3,
+               // Rx: Set AGC reference level to 0x21 (default: 0x2E)
+               HW_REG_OVERRIDE(0x609C,0x0021),
+               (uint32_t)0xFFFFFFFF
+           };
+
+
+.. _radio-config-update-sdk-5-40_cc2652rb:
+
+For `CC2652RB`_ devices
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The radio configuration used in SDK 5.30 can be kept as it. No additional
+change is required.
+
+
+.. _radio-config-update-sdk-5-40_cc1352:
+
+For `CC1352R`_ and `CC1352P`_ devices
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The radio configuration used in SDK 5.30 can be kept as it. No additional
+change is required.
+
+
+.. _radio-config-update-sdk-5-40_cc2652x7:
+
+For `CC2652R7`_, `CC2652P7`_ and `CC1352P7`_ devices
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* If **you are using SysConfig** - SysConfig automatically generates the proper
+  radio configuration. No additional action is required from your end.
+
+* If **you are NOT using SysConfig** - Run SysConfig once to
+  generate the updated ``ti_radio_config.c`` file.
+
+
+.. _radio-config-update-sdk-5-40_cc2651:
+
+For `CC2651R3`_ devices
+^^^^^^^^^^^^^^^^^^^^^^^
+
+* If **you are using SysConfig** - SysConfig automatically generates the proper
+  radio configuration. No additional action is required from your end.
+
+* If **you are NOT using SysConfig** - Run SysConfig once to
+  generate the updated ``ti_radio_config.c`` file.

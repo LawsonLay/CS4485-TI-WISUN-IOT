@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wi-SUN OAD &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="System Configuration (SysConfig)" href="sysconfig-index.html" />
+    <link rel="prev" title="Post-Build Script imgtool" href="imgtool-wisun.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug wisun-guide oad-application";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wisun-index.html">TI Wi-SUN FAN Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced-wisun-features.html">Advanced TI Wi-SUN FAN Stack Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="network-management.html">Wi-SUN Network Topology Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NWP_interface.html">TI Wi-SUN FAN NWP Interface Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory-index.html">Memory overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="wisun-oad-index.html">MCUBoot Over-the-Air Download (OAD)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wisun-oad-storage-and-security.html">OAD Storage &amp; Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/mcuboot.html">MCUboot Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-off-chip-oad.html">Flash Layout for Off-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-on-chip-oad.html">Flash Layout for On-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/image-header.html">MCUboot OAD Image Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imgtool-wisun.html">Post-Build Script imgtool</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Wi-SUN OAD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#oad-protocol">OAD Protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#oad-state-machines">OAD State Machines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#oad-messages">OAD Messages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#oad-firmware-request">OAD Firmware Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oad-notification-request">OAD Notification Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oad-notification-response">OAD Notification Response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oad-image-block-request">OAD Image Block Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oad-image-block-response">OAD Image Block Response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oad-complete-request">OAD Complete Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oad-complete-response">OAD Complete Response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oad-abort">OAD Abort</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#oad-target-module">OAD Target Module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#oad-tasklet">OAD Tasklet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oad-coap-callbacks">OAD CoAP Callbacks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oad-storage">OAD Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#oad-distributor">OAD Distributor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#token-based-coap-response-tracking">Token based CoAP Response Tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#block-request-handling">Block Request handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#response-handling">Response handling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration-guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="wisun-oad-index.html">MCUBoot Over-the-Air Download (OAD)</a> &raquo;</li>
+      <li>Wi-SUN OAD</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="wi-sun-oad">
+<span id="sec-mcuboot-wisun-oad-process"></span><h1>Wi-SUN OAD<a class="headerlink" href="#wi-sun-oad" title="Permalink to this headline">¶</a></h1>
+<p>The application layer is responsible for plugging the OAD service. This section documents
+WiSUN stack specific implementation of OAD. This covers the high level protocol, the message structures,
+OAD image distributor and the target side software needed to handle OAD.</p>
+<div class="section" id="oad-protocol">
+<h2>OAD Protocol<a class="headerlink" href="#oad-protocol" title="Permalink to this headline">¶</a></h2>
+<p>In the context of TI Wi-SUN stack, the distributor of OAD images is the Border Router
+in combination with the host. The OAD target is node flashed with the CoAP OAD application.
+The OAD module of this application handles the communication with the OAD image distributor, manages and stores the
+downloaded firmware images. The distributor initiates the OAD process. Then the target is responsible for
+requesting OAD image blocks, re-requesting when required and handle error conditions. Once OAD is complete,
+the OAD client will reset and start running with the new image.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-wisun-oad-architecture"></span><img alt="../_images/oad-architecture.png" src="../_images/oad-architecture.png" />
+<p class="caption"><span class="caption-number">Figure 74. </span><span class="caption-text">OAD distributor and target</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="oad-state-machines">
+<h2>OAD State Machines<a class="headerlink" href="#oad-state-machines" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="id3">
+<span id="fig-wisun-oad-server-state-machine"></span><img alt="../_images/ServerStateMachine.PNG" src="../_images/ServerStateMachine.PNG" />
+<p class="caption"><span class="caption-number">Figure 75. </span><span class="caption-text">OAD Distributor State Machine</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-center" id="id4">
+<span id="fig-wisun-oad-target-state-machine"></span><img alt="../_images/TargetStateMachine.PNG" src="../_images/TargetStateMachine.PNG" />
+<p class="caption"><span class="caption-number">Figure 76. </span><span class="caption-text">OAD Target State Machine</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="oad-messages">
+<h2>OAD Messages<a class="headerlink" href="#oad-messages" title="Permalink to this headline">¶</a></h2>
+<p>These messages are exchanged between the distributor and target over the air with CoAP protocol.</p>
+<div class="section" id="oad-firmware-request">
+<h3>OAD Firmware Request<a class="headerlink" href="#oad-firmware-request" title="Permalink to this headline">¶</a></h3>
+<p>The distributor sends a firmware request message to the target’s unicast address with the oad/fwv URI.
+The response from the target is the current software version number. This message is independent of the
+OAD protocol and is used independently by the distributor. The content of the response is as follows.:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* MCU Boot image version Structure */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span> <span class="nc">__attribute__</span><span class="p">((</span><span class="n">__packed__</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">iv_major</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">iv_minor</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">iv_revision</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">iv_build_num</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">mcuboot_image_version_t</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/* OAD Firmware request response content */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span> <span class="nc">__attribute__</span><span class="p">((</span><span class="n">__packed__</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">img_id</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">platform_type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">mcuboot_image_version_t</span><span class="w"> </span><span class="n">image_version</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">oad_fw_version_rsp_msg_t</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id5">
+<span id="fig-wisun-fw-request"></span><img alt="../_images/fw_request.png" src="../_images/fw_request.png" />
+<p class="caption"><span class="caption-number">Figure 77. </span><span class="caption-text">OAD Firmware Request(Distributor) &lt;-&gt; Response(Target)</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="oad-notification-request">
+<h3>OAD Notification Request<a class="headerlink" href="#oad-notification-request" title="Permalink to this headline">¶</a></h3>
+<p>To initiate the OAD process, the distributor sends the OAD notification request to the target.
+The request contains information about the new candidate image, such as firmware image type and size, and block size to be used.
+The target device responds with OAD notification response.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* OAD Notification Request */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>  <span class="nc">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">)){</span><span class="w"></span>
+<span class="kt">uint8_t</span><span class="w">        </span><span class="n">img_id</span><span class="p">;</span><span class="w"></span>
+<span class="kt">uint8_t</span><span class="w">        </span><span class="n">platform_type</span><span class="p">;</span><span class="w"></span>
+<span class="kt">uint16_t</span><span class="w">       </span><span class="n">block_len</span><span class="p">;</span><span class="w"></span>
+<span class="kt">uint32_t</span><span class="w">       </span><span class="n">image_len</span><span class="p">;</span><span class="w"></span>
+<span class="n">mcuboot_image_version_t</span><span class="w"> </span><span class="n">image_version</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">oad_notif_req_msg_t</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="oad-notification-response">
+<h3>OAD Notification Response<a class="headerlink" href="#oad-notification-response" title="Permalink to this headline">¶</a></h3>
+<p>When the OAD target receives OAD notification request, it checks the content of the request and validates
+the image. It makes a decision whether to accept or reject the image and sends the response back to the distributor.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* OAD Notification Response */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span> <span class="nc">__attribute__</span><span class="p">((</span><span class="n">__packed__</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">uint8_t</span><span class="w">      </span><span class="n">img_id</span><span class="p">;</span><span class="w"></span>
+<span class="kt">uint8_t</span><span class="w">      </span><span class="n">status</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">oad_notif_rsp_msg_t</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id6">
+<span id="fig-wisun-oad-notif-request"></span><img alt="../_images/oad_notif_request.png" src="../_images/oad_notif_request.png" />
+<p class="caption"><span class="caption-number">Figure 78. </span><span class="caption-text">OAD Notification Request(Distributor) &lt;-&gt; Response(Target)</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="oad-image-block-request">
+<h3>OAD Image Block Request<a class="headerlink" href="#oad-image-block-request" title="Permalink to this headline">¶</a></h3>
+<p>Once the target accepts the image, it will initiate the download process. The target sends image block requests to the
+distributor’s unicast address with the oad/img URI. The request sepcifies the block number of the image needed. These requests
+are done in a sequential order. Thus the target keeps track of the block number and requestest the next block, only when the current block is
+successfully downloaded. The target immediately requests the next block once the current block is downloaded.
+The OAD server does not keep track of the block number. If there is corrupted block or lost block, the target requests for the block again automatically.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* OAD Block Request */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>  <span class="nc">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">)){</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">imgId</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">blkNum</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">totalBlks</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">oad_imgBlockReq_t</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="oad-image-block-response">
+<h3>OAD Image Block Response<a class="headerlink" href="#oad-image-block-response" title="Permalink to this headline">¶</a></h3>
+<p>The distributor responds to valid block requests with a block of the OAD image with the block number specified by the request.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* OAD Block Response */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>  <span class="nc">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">)){</span><span class="w"></span>
+<span class="kt">uint8_t</span><span class="w">  </span><span class="n">imgId</span><span class="p">;</span><span class="w"></span>
+<span class="kt">uint16_t</span><span class="w"> </span><span class="n">blkNum</span><span class="p">;</span><span class="w"></span>
+<span class="kt">uint8_t</span><span class="w">  </span><span class="n">data</span><span class="p">[</span><span class="n">OAD_BLOCK_SIZE</span><span class="p">];</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">oad_imgBlockRsp_t</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="figure align-center" id="id7">
+<span id="fig-wisun-oad-img-download"></span><img alt="../_images/oad_image_download.png" src="../_images/oad_image_download.png" />
+<p class="caption"><span class="caption-number">Figure 79. </span><span class="caption-text">OAD Block Request(Target) &lt;-&gt; OAD Block Repsonse (Distributor)</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="oad-complete-request">
+<h3>OAD Complete Request<a class="headerlink" href="#oad-complete-request" title="Permalink to this headline">¶</a></h3>
+<p>When the target determines that it has received the last OAD image block, it sends an OAD complete request
+to the distributor. This is a block request as defined above with 0xFFFF(OAD_COMPLETE Flag) as the block id number.
+This tells the distributor to mark the OAD session as complete.
+The total blocks field in the block request structure is ignored for the OAD complete message.</p>
+</div>
+<div class="section" id="oad-complete-response">
+<h3>OAD Complete Response<a class="headerlink" href="#oad-complete-response" title="Permalink to this headline">¶</a></h3>
+<p>The distributor responds with an Ack called OAD complete response to the OAD complete request. This triggers a reset on the target
+and allows the target to boot to the newly downloaded image. Thereby, completing the OAD process.</p>
+<div class="figure align-center" id="id8">
+<span id="fig-wisun-oad-complete"></span><img alt="../_images/oad_complete.png" src="../_images/oad_complete.png" />
+<p class="caption"><span class="caption-number">Figure 80. </span><span class="caption-text">OAD Completion Interaction</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="oad-abort">
+<h3>OAD Abort<a class="headerlink" href="#oad-abort" title="Permalink to this headline">¶</a></h3>
+<p>The target can intiate an abort of the OAD process due to timing out of requests.
+The is done by sending a request to the unicast address of the distributor with the oad/abort URI.</p>
+</div>
+</div>
+<div class="section" id="oad-target-module">
+<h2>OAD Target Module<a class="headerlink" href="#oad-target-module" title="Permalink to this headline">¶</a></h2>
+<p>The software on the target that enables OAD functionality is called the OAD module. This module implements the
+behavior described by the <a class="reference internal" href="#fig-wisun-oad-target-state-machine"><span class="std std-ref">OAD Target State Machine</span></a>.</p>
+<p>The OAD module on that target has an event driven tasklet and callbacks that handle the requests to the OAD URIs.</p>
+<div class="section" id="oad-tasklet">
+<h3>OAD Tasklet<a class="headerlink" href="#oad-tasklet" title="Permalink to this headline">¶</a></h3>
+<p>The OAD tasklet handles block transfer and OAD complete messages.
+It constructs and sends to OAD block request (OAD_BLOCK_REQ_EVT) and handles the OAD block response (OAD_BLOCK_RECV_EVT),
+issuing another OAD block request afterwards if needed. On last block received, it sends and handles the response for the OAD complete request (OAD_COMPLETE_EVT).
+It also handles the abort request from the target(OAD_ABORT_EVT) and retries during block transfers due to timeout(OAD_BLOCK_REQ_TIMEOUT_EVT).</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm">* @brief OAD tasklet event enums</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">oad_evt</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">OAD_INIT_EVT</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">OAD_BLOCK_REQ_EVT</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">OAD_BLOCK_RECV_EVT</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">OAD_COMPLETE_EVT</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">OAD_ABORT_EVT</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">OAD_BLOCK_REQ_TIMEOUT_EVT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">OAD_COMPLETE_TIMEOUT_EVT</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">oad_evt_t</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm">* @brief   Initializes the CoAP OAD tasket which handles CoAP block transfer</span>
+<span class="cm">*</span>
+<span class="cm">* @param   None.</span>
+<span class="cm">*</span>
+<span class="cm">* @return  None.</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">oad_tasklet_start</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm">* @brief   Tasklet for handling OAD block request/response and OAD complete request/response.</span>
+<span class="cm">*          Handles OAD_BLOCK_REQ_EVT, OAD_BLOCK_RECV_EVT, OAD_COMPLETE_EVT, OAD_ABORT_EVT,</span>
+<span class="cm">*          OAD_BLOCK_REQ_TIMEOUT_EVT, and OAD_COMPLETE_TIMEOUT_EVT</span>
+<span class="cm">*</span>
+<span class="cm">* @param   event - Event object containing event type to trigger</span>
+<span class="cm">*</span>
+<span class="cm">* @return  None</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">oad_tasklet</span><span class="p">(</span><span class="n">arm_event_s</span><span class="w"> </span><span class="o">*</span><span class="n">event</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="oad-coap-callbacks">
+<h3>OAD CoAP Callbacks<a class="headerlink" href="#oad-coap-callbacks" title="Permalink to this headline">¶</a></h3>
+<p>There are multiple callbacks executing on the target reacting to requests and responses from the distributor.
+These process the incoming data and trigger events so that the tasklet can get unblocked.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm">* @brief   CoAP callback for the CoAP OAD service. Handles CoAP requests to the</span>
+<span class="cm">*          oad/fvw and oad/ntf URIs.</span>
+<span class="cm">*</span>
+<span class="cm">* @param   service_id     - Service ID for the CoAP server</span>
+<span class="cm">* @param   source_address - Source address of the CoAP request message</span>
+<span class="cm">* @param   source_port    - Source port of the CoAP request message</span>
+<span class="cm">* @param   request_ptr    - Pointer to the contents of the CoAP request message</span>
+<span class="cm">*</span>
+<span class="cm">* @return  0 on successfully processing CoAP request. -1 otherwise.</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">coap_oad_cb</span><span class="p">(</span><span class="kt">int8_t</span><span class="w"> </span><span class="n">service_id</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">source_address</span><span class="p">[</span><span class="k">static</span><span class="w"> </span><span class="mi">16</span><span class="p">],</span><span class="w"></span>
+<span class="w">                    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">source_port</span><span class="p">,</span><span class="w"> </span><span class="n">sn_coap_hdr_s</span><span class="w"> </span><span class="o">*</span><span class="n">request_ptr</span><span class="p">);</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm">* @brief   Callback for OAD image block response. Process the payload of the block</span>
+<span class="cm">*          response and trigger the OAD_BLOCK_RECV_EVT callback.</span>
+<span class="cm">*</span>
+<span class="cm">* @param   service_id     - Service ID for the CoAP block response</span>
+<span class="cm">* @param   source_address - Source address of the CoAP block response</span>
+<span class="cm">* @param   source_port    - Source port of the CoAP block response</span>
+<span class="cm">* @param   response_ptr    - Pointer to the contents of the CoAP block response</span>
+<span class="cm">*</span>
+<span class="cm">* @return  0 on successfully processing CoAP response. -1 otherwise.</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">oad_img_rsp_cb</span><span class="p">(</span><span class="kt">int8_t</span><span class="w"> </span><span class="n">service_id</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">source_address</span><span class="p">[</span><span class="k">static</span><span class="w"> </span><span class="mi">16</span><span class="p">],</span><span class="w"></span>
+<span class="w">                            </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">source_port</span><span class="p">,</span><span class="w"> </span><span class="n">sn_coap_hdr_s</span><span class="w"> </span><span class="o">*</span><span class="n">response_ptr</span><span class="p">)</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm">* @brief   Callback for OAD complete response. This triggers boot into the newly downloaded image.</span>
+<span class="cm">*</span>
+<span class="cm">* @param   service_id     - Service ID for the CoAP complete response</span>
+<span class="cm">* @param   source_address - Source address of the CoAP complete response</span>
+<span class="cm">* @param   source_port    - Source port of the CoAP complete response</span>
+<span class="cm">* @param   request_ptr    - Pointer to the contents of the CoAP complete response</span>
+<span class="cm">*</span>
+<span class="cm">* @return  0 on successfully processing CoAP response. -1 otherwise. Should reset before ever returning.</span>
+<span class="cm">*/</span><span class="w"></span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">oad_complete_rsp_cb</span><span class="p">(</span><span class="kt">int8_t</span><span class="w"> </span><span class="n">service_id</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">source_address</span><span class="p">[</span><span class="k">static</span><span class="w"> </span><span class="mi">16</span><span class="p">],</span><span class="w"></span>
+<span class="w">                            </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">source_port</span><span class="p">,</span><span class="w"> </span><span class="n">sn_coap_hdr_s</span><span class="w"> </span><span class="o">*</span><span class="n">response_ptr</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="oad-storage">
+<h3>OAD Storage<a class="headerlink" href="#oad-storage" title="Permalink to this headline">¶</a></h3>
+<p>The OAD module also handles the storage and provides device independent APIs to store the
+downloaded firmware image to flash. These APIs are the same for both on-chip and off-chip solutions.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*********************************************************************</span>
+<span class="cm">* @fn      OADStorage_init</span>
+<span class="cm">*</span>
+<span class="cm">* @brief   Initialize OAD flash storage interface.</span>
+<span class="cm">*</span>
+<span class="cm">* @param   None.</span>
+<span class="cm">*</span>
+<span class="cm">* @return  None.</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">OADStorage_init</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="w"></span>
+
+<span class="cm">/*********************************************************************</span>
+<span class="cm">* @fn      OADStorage_imgBlockWrite</span>
+<span class="cm">*</span>
+<span class="cm">* @brief   Write Image Block.</span>
+<span class="cm">*</span>
+<span class="cm">* @param   blockNum   - block number to be written</span>
+<span class="cm">* @param   blockLen   - length of block (full block size)</span>
+<span class="cm">* @param   pBlockData - pointer to data to be written</span>
+<span class="cm">* @param   dataLen    - length of data to be written (may be &lt;= blockLen)</span>
+<span class="cm">*</span>
+<span class="cm">*</span>
+<span class="cm">* @return  status</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="n">OADStorage_Status_t</span><span class="w"> </span><span class="nf">OADStorage_imgBlockWrite</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">blockNum</span><span class="p">,</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">blockLen</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">pBlockData</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">dataLen</span><span class="p">);</span><span class="w"></span>
+
+<span class="cm">/*********************************************************************</span>
+<span class="cm">* @fn      OADStorage_eraseImg</span>
+<span class="cm">*</span>
+<span class="cm">* @brief   Erases the required number of flash pages in preparation</span>
+<span class="cm">*          for a new image.</span>
+<span class="cm">*</span>
+<span class="cm">* @param   image_len Length of flash to be erased to prepare for the</span>
+<span class="cm">*                    new image.</span>
+<span class="cm">*</span>
+<span class="cm">* @return  OADStorage_Status_t</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="n">OADStorage_Status_t</span><span class="w"> </span><span class="nf">OADStorage_eraseImg</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">imageLen</span><span class="p">);</span><span class="w"></span>
+
+<span class="cm">/*********************************************************************</span>
+<span class="cm">* @fn      OADStorage_close</span>
+<span class="cm">*</span>
+<span class="cm">* @brief   Releases the OAD flash storage interface.</span>
+<span class="cm">*</span>
+<span class="cm">* @param  none</span>
+<span class="cm">*</span>
+<span class="cm">* @return none</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">OADStorage_close</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="oad-distributor">
+<h2>OAD Distributor<a class="headerlink" href="#oad-distributor" title="Permalink to this headline">¶</a></h2>
+<p>The OAD distributor is a system with an application processor(PC/AM64x) connected to a Wi-SUN Border Router as a Network Co-Processor.</p>
+<p><a class="reference external" href="https://github.com/TexasInstruments/ti-wisunfan-pyspinel">TI Wi-SUN FAN pySpinel GitHub repo</a> contains a python based CLI which now has the additional APIs that enable you to get firmware version
+from the target and initiate the OAD process. It also has additional logic to allow the host behave as a OAD Server that is described in <a class="reference internal" href="#fig-wisun-oad-server-state-machine"><span class="std std-ref">OAD Distributor State Machine</span></a>.
+This pyspinel application runs on both a windows or a linux host.</p>
+<p>The APIs are mentioned here, but the usage examples can be accessed with the help command in the spinel-cli.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 65%" />
+<col style="width: 35%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Function</p></td>
+<td><p>PySpinel API</p></td>
+</tr>
+<tr class="row-even"><td><p>OAD Firmware Request</p></td>
+<td><p>getoadfwver</p></td>
+</tr>
+<tr class="row-odd"><td><p>OAD Notification Request</p></td>
+<td><p>startoad</p></td>
+</tr>
+</tbody>
+</table>
+<p>In addition to the APIs, the Spinel CLI also has the following functionalities implemented.</p>
+<div class="section" id="token-based-coap-response-tracking">
+<h3>Token based CoAP Response Tracking<a class="headerlink" href="#token-based-coap-response-tracking" title="Permalink to this headline">¶</a></h3>
+<p>CoAP protocol provides the option of including an up to 8 byte token in each CoAP message.
+This token is echoed back in the response to the CoAP message to properly track which request maps to which response.
+See the <a class="reference external" href="https://www.rfc-editor.org/rfc/rfc7252#page-34">CoAP RFC</a> for details.</p>
+<p>PySpinel CoAP implementation includes token support. This support will be utilized in firmware, notification, and block request/response messages to distinguish between responses.</p>
+<p>In the case of received CoAP responses (triggered by CoAP requests sent by PySpinel):</p>
+<ul class="simple">
+<li><p>Saved tokens are compared to the response token. In PySpinel, 3 tokens are saved: firmware version request, notification request, LED request (updated from regular coap_node implementation).</p></li>
+<li><p>If there is a match, the response has been identified as a response to a specific request sent by PySpinel. Perform the appropriate action (usually different payload parsing and log output).</p></li>
+</ul>
+<p>In the case of received CoAP requests (currently only OAD block requests):</p>
+<ul class="simple">
+<li><p>Check the URI of the request and compare to supported URIs (oad/img for OAD block requests)</p></li>
+<li><p>If there is a match, take the appropriate action. Send the appropriate CoAP response, echoing the token in the CoAP request.</p></li>
+</ul>
+</div>
+<div class="section" id="block-request-handling">
+<h3>Block Request handling<a class="headerlink" href="#block-request-handling" title="Permalink to this headline">¶</a></h3>
+<p>Handle the block request as follows:</p>
+<ul class="simple">
+<li><p>Navigate to the appropriate byte of the OAD upgrade image as indicated by the requested block number and block size.</p></li>
+<li><p>Assemble the OAD response payload by combining OAD image ID, number of bytes in block, and block contents.</p></li>
+<li><p>Send the CoAP block response, echoing the token of the request as described above.</p></li>
+</ul>
+</div>
+<div class="section" id="response-handling">
+<h3>Response handling<a class="headerlink" href="#response-handling" title="Permalink to this headline">¶</a></h3>
+<p>Notification and Firmware Responses are processed by printing out the data of interest on the command line
+Notification response would have the decision of the target whether the distributor’s OAD request was accepted or rejected.
+Firmware Response would have the image ID, platform, OAD firmaware version number.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="imgtool-wisun.html" class="btn btn-neutral float-left" title="Post-Build Script imgtool" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sysconfig-index.html" class="btn btn-neutral float-right" title="System Configuration (SysConfig)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

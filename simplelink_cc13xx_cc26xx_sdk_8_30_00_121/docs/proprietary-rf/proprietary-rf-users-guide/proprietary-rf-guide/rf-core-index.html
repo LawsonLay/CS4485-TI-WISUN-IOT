@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RF Core &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User&#39;s Guide
+ 7.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Command Types" href="../rf-core/commands.html" />
+    <link rel="prev" title="noRTOS Overview" href="nortos-index.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug proprietary-rf-guide rf-core-index";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples-cc13xx_cc26xx.html">Examples User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-hardware.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nortos-index.html">noRTOS Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RF Core</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/commands.html">Command Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/radio-operation-commands.html">Radio operation commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/radio-operation-commands.html#start-and-end-triggers">Start and end triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/radio-operation-commands.html#conditional-execution-and-chaining">Conditional execution and chaining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/radio-operation-commands.html#callback-events">Callback events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/phy-configuration.html">PHY Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/data-queues.html">Working with Data Queues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/signal-routing.html">Routing RF Core Signals to Physical Pins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/signal-routing.html#routing-internal-signals-to-the-doorbell-register">Routing Internal Signals to the Doorbell Register</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/signal-routing.html#routing-doorbell-signals-to-gpio-pins">Routing Doorbell Signals to GPIO Pins</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="physical-rf-layer-cc13xx_cc26xx.html">Physical Layer (PHY)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proprietary-rf-oad-bim-index.html">BIM Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proprietary-rf-oad-mcuboot-index.html">MCUBoot Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration-cc13xx_cc26xx.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary-cc13xx_cc26xx.html">Terms and acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>RF Core</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="rf-core">
+<span id="chapter-rf-core"></span><h1>RF Core<a class="headerlink" href="#rf-core" title="Permalink to this headline">¶</a></h1>
+<p>The RF Core is the radio peripheral of the CC13xx and CC26xx family. It is a
+software configurable, high-performance transceiver that can handle multiple
+protocol standards. It operates autonomously from the main CPU and is
+controlled via various commands. Both RF core and CPU are connected by set of
+»doorbell« registers, interrupt signals and shared memory.</p>
+<p>This chapter describes the usage of the RF core and its features from a
+software developer’s perspective.  It provides a more high-level view than the
+<a class="reference external" href="https://www.ti.com/lit/pdf/swcu185">CC13x2 CC26x2 SimpleLink Wireless MCU Technical Reference Manual</a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rf-core/commands.html">Command Types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/commands.html#immediate-and-direct-commands">Immediate and Direct Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/commands.html#radio-operation-commands">Radio Operation Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/commands.html#wrapping-immediate-and-direct-commands-as-radio-operations">Wrapping Immediate and Direct Commands as Radio Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rf-core/radio-operation-commands.html">Radio operation commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/radio-operation-commands.html#execution-states-and-status-codes">Execution States and Status Codes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rf-core/radio-operation-commands.html#start-and-end-triggers">Start and end triggers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/radio-operation-commands.html#absolute-triggers-trig-abstime">Absolute triggers <code class="docutils literal notranslate"><span class="pre">TRIG_ABSTIME</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/radio-operation-commands.html#relative-triggers-trig-rel">Relative triggers <code class="docutils literal notranslate"><span class="pre">TRIG_REL_*</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/radio-operation-commands.html#external-triggers-trig-external">External triggers <code class="docutils literal notranslate"><span class="pre">TRIG_EXTERNAL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/radio-operation-commands.html#alternative-triggers-via-cmd-trigger">Alternative triggers via CMD_TRIGGER</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rf-core/radio-operation-commands.html#conditional-execution-and-chaining">Conditional execution and chaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rf-core/radio-operation-commands.html#callback-events">Callback events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rf-core/phy-configuration.html">PHY Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/phy-configuration.html#setup-command">Setup Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/phy-configuration.html#patches">Patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/phy-configuration.html#overrides">Overrides</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rf-core/data-queues.html">Working with Data Queues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/data-queues.html#queue-entry-types">Queue Entry Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/data-queues.html#single-packet-entries-rfc-dataentrygeneral-t">Single Packet Entries <code class="docutils literal notranslate"><span class="pre">rfc_dataEntryGeneral_t</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/data-queues.html#pointer-entries-rfc-dataentrypointer-t">Pointer Entries <code class="docutils literal notranslate"><span class="pre">rfc_dataEntryPointer_t</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/data-queues.html#partial-entries-rfc-dataentrypartial">Partial Entries <code class="docutils literal notranslate"><span class="pre">rfc_dataEntryPartial</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/data-queues.html#creating-a-queue">Creating a Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/data-queues.html#reading-data-from-a-queue">Reading Data from a Queue</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rf-core/signal-routing.html">Routing RF Core Signals to Physical Pins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/signal-routing.html#read-before-using-cpe-gpo1">Read Before Using CPE_GPO1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/signal-routing.html#read-before-using-rat-gpo1">Read Before Using RAT_GPO1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rf-core/signal-routing.html#read-before-using-mce-gpo1">Read Before Using MCE_GPO1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rf-core/signal-routing.html#routing-internal-signals-to-the-doorbell-register">Routing Internal Signals to the Doorbell Register</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rf-core/signal-routing.html#routing-doorbell-signals-to-gpio-pins">Routing Doorbell Signals to GPIO Pins</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nortos-index.html" class="btn btn-neutral float-left" title="noRTOS Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../rf-core/commands.html" class="btn btn-neutral float-right" title="Command Types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

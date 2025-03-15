@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_e_c_j_p_a_k_e__s___callback_msg" kind="struct" language="C++" prot="public">
+    <compoundname>ECJPAKE_s_CallbackMsg</compoundname>
+    <includes refid="_e_c_j_p_a_k_e_c_c26_x4__s_8h" local="no">ECJPAKECC26X4_s.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_e_c_j_p_a_k_e__s___callback_msg_1aa45ef03f219400f940f2188d1a8a809a" prot="public" static="no" mutable="no">
+        <type><ref refid="_e_c_j_p_a_k_e_8h_1a07fa2d7e815b145614a69ce6646c7f4c" kindref="member">ECJPAKE_Handle</ref></type>
+        <definition>ECJPAKE_Handle ECJPAKE_s_CallbackMsg::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecjpake/ECJPAKECC26X4_s.h" line="116" column="1" bodyfile="source/ti/drivers/ecjpake/ECJPAKECC26X4_s.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_c_j_p_a_k_e__s___callback_msg_1a3d42a5006ef29ddec0c3207fac4a2d1c" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_e_c_j_p_a_k_e__s___secure_callback" kindref="compound">ECJPAKE_s_SecureCallback</ref> *</type>
+        <definition>ECJPAKE_s_SecureCallback* ECJPAKE_s_CallbackMsg::callback</definition>
+        <argsstring></argsstring>
+        <name>callback</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecjpake/ECJPAKECC26X4_s.h" line="117" column="1" bodyfile="source/ti/drivers/ecjpake/ECJPAKECC26X4_s.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1019">
+        <label>SecureCallback_Object</label>
+        <link refid="struct_secure_callback___object"/>
+        <childnode refid="1020" relation="usage">
+          <edgelabel>elem</edgelabel>
+        </childnode>
+      </node>
+      <node id="1010">
+        <label>ECJPAKE_OperationVerifyZKP</label>
+        <link refid="struct_e_c_j_p_a_k_e___operation_verify_z_k_p"/>
+        <childnode refid="1011" relation="usage">
+          <edgelabel>curve</edgelabel>
+        </childnode>
+        <childnode refid="1012" relation="usage">
+          <edgelabel>theirGenerator</edgelabel>
+          <edgelabel>theirPublicKey</edgelabel>
+          <edgelabel>theirPublicV</edgelabel>
+        </childnode>
+      </node>
+      <node id="1017">
+        <label>ECJPAKE_OperationGenerateZKP</label>
+        <link refid="struct_e_c_j_p_a_k_e___operation_generate_z_k_p"/>
+        <childnode refid="1011" relation="usage">
+          <edgelabel>curve</edgelabel>
+        </childnode>
+        <childnode refid="1012" relation="usage">
+          <edgelabel>myPrivateV</edgelabel>
+          <edgelabel>myPrivateKey</edgelabel>
+        </childnode>
+      </node>
+      <node id="1015">
+        <label>ECJPAKE_OperationRoundOneGenerateKeys</label>
+        <link refid="struct_e_c_j_p_a_k_e___operation_round_one_generate_keys"/>
+        <childnode refid="1011" relation="usage">
+          <edgelabel>curve</edgelabel>
+        </childnode>
+        <childnode refid="1012" relation="usage">
+          <edgelabel>myPublicKey1</edgelabel>
+          <edgelabel>myPublicKey2</edgelabel>
+          <edgelabel>myPrivateKey1</edgelabel>
+          <edgelabel>myPrivateKey2</edgelabel>
+          <edgelabel>myPublicV1</edgelabel>
+          <edgelabel>myPublicV2</edgelabel>
+          <edgelabel>myPrivateV1</edgelabel>
+          <edgelabel>myPrivateV2</edgelabel>
+        </childnode>
+      </node>
+      <node id="1018">
+        <label>ECJPAKE_OperationComputeSharedSecret</label>
+        <link refid="struct_e_c_j_p_a_k_e___operation_compute_shared_secret"/>
+        <childnode refid="1011" relation="usage">
+          <edgelabel>curve</edgelabel>
+        </childnode>
+        <childnode refid="1012" relation="usage">
+          <edgelabel>theirPublicKey2</edgelabel>
+          <edgelabel>myPrivateKey2</edgelabel>
+          <edgelabel>myCombinedPrivateKey</edgelabel>
+          <edgelabel>sharedSecret</edgelabel>
+          <edgelabel>theirCombinedPublicKey</edgelabel>
+        </childnode>
+      </node>
+      <node id="1012">
+        <label>CryptoKey</label>
+        <link refid="struct_crypto_key"/>
+        <childnode refid="1013" relation="usage">
+          <edgelabel>plaintext</edgelabel>
+        </childnode>
+        <childnode refid="1014" relation="usage">
+          <edgelabel>keyStore</edgelabel>
+        </childnode>
+      </node>
+      <node id="1011">
+        <label>ECCParams_CurveParams</label>
+        <link refid="struct_e_c_c_params___curve_params"/>
+      </node>
+      <node id="1013">
+        <label>CryptoKey_Plaintext</label>
+        <link refid="struct_crypto_key___plaintext"/>
+      </node>
+      <node id="1007">
+        <label>ECJPAKE_Config</label>
+        <link refid="struct_e_c_j_p_a_k_e___config"/>
+      </node>
+      <node id="1006">
+        <label>ECJPAKE_s_CallbackMsg</label>
+        <link refid="struct_e_c_j_p_a_k_e__s___callback_msg"/>
+        <childnode refid="1007" relation="usage">
+          <edgelabel>handle</edgelabel>
+        </childnode>
+        <childnode refid="1008" relation="usage">
+          <edgelabel>callback</edgelabel>
+        </childnode>
+      </node>
+      <node id="1020">
+        <label>List_Elem_</label>
+        <link refid="struct_list___elem__"/>
+        <childnode refid="1020" relation="usage">
+          <edgelabel>prev</edgelabel>
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="1016">
+        <label>ECJPAKE_OperationRoundTwoGenerateKeys</label>
+        <link refid="struct_e_c_j_p_a_k_e___operation_round_two_generate_keys"/>
+        <childnode refid="1011" relation="usage">
+          <edgelabel>curve</edgelabel>
+        </childnode>
+        <childnode refid="1012" relation="usage">
+          <edgelabel>myNewGenerator</edgelabel>
+          <edgelabel>myPublicKey1</edgelabel>
+          <edgelabel>theirPublicKey1</edgelabel>
+          <edgelabel>myPublicKey2</edgelabel>
+          <edgelabel>theirPublicKey2</edgelabel>
+          <edgelabel>myPrivateV</edgelabel>
+          <edgelabel>myCombinedPublicKey</edgelabel>
+          <edgelabel>myCombinedPrivateKey</edgelabel>
+          <edgelabel>myPrivateKey2</edgelabel>
+          <edgelabel>theirNewGenerator</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+      </node>
+      <node id="1008">
+        <label>ECJPAKE_s_SecureCallback</label>
+        <link refid="struct_e_c_j_p_a_k_e__s___secure_callback"/>
+        <childnode refid="1009" relation="usage">
+          <edgelabel>operation</edgelabel>
+        </childnode>
+        <childnode refid="1007" relation="usage">
+          <edgelabel>handle</edgelabel>
+        </childnode>
+        <childnode refid="1019" relation="usage">
+          <edgelabel>object</edgelabel>
+        </childnode>
+      </node>
+      <node id="1014">
+        <label>CryptoKey_KeyStore</label>
+        <link refid="struct_crypto_key___key_store"/>
+      </node>
+      <node id="1009">
+        <label>ECJPAKE_Operation</label>
+        <link refid="union_e_c_j_p_a_k_e___operation"/>
+        <childnode refid="1010" relation="usage">
+          <edgelabel>verifyZKP</edgelabel>
+        </childnode>
+        <childnode refid="1015" relation="usage">
+          <edgelabel>generateRoundOneKeys</edgelabel>
+        </childnode>
+        <childnode refid="1016" relation="usage">
+          <edgelabel>generateRoundTwoKeys</edgelabel>
+        </childnode>
+        <childnode refid="1017" relation="usage">
+          <edgelabel>generateZKP</edgelabel>
+        </childnode>
+        <childnode refid="1018" relation="usage">
+          <edgelabel>computeSharedSecret</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/ecjpake/ECJPAKECC26X4_s.h" line="115" column="1" bodyfile="source/ti/drivers/ecjpake/ECJPAKECC26X4_s.h" bodystart="114" bodyend="118"/>
+    <listofallmembers>
+      <member refid="struct_e_c_j_p_a_k_e__s___callback_msg_1a3d42a5006ef29ddec0c3207fac4a2d1c" prot="public" virt="non-virtual"><scope>ECJPAKE_s_CallbackMsg</scope><name>callback</name></member>
+      <member refid="struct_e_c_j_p_a_k_e__s___callback_msg_1aa45ef03f219400f940f2188d1a8a809a" prot="public" virt="non-virtual"><scope>ECJPAKE_s_CallbackMsg</scope><name>handle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

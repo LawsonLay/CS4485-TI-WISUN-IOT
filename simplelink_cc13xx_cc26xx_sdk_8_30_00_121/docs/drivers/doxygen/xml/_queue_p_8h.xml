@@ -1,0 +1,282 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_queue_p_8h" kind="file" language="C++">
+    <compoundname>QueueP.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stddef.h</includes>
+    <incdepgraph>
+      <node id="1650">
+        <label>stdbool.h</label>
+      </node>
+      <node id="1648">
+        <label>QueueP.h</label>
+        <link refid="_queue_p_8h"/>
+        <childnode refid="1649" relation="include">
+        </childnode>
+        <childnode refid="1650" relation="include">
+        </childnode>
+        <childnode refid="1651" relation="include">
+        </childnode>
+      </node>
+      <node id="1649">
+        <label>stdint.h</label>
+      </node>
+      <node id="1651">
+        <label>stddef.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct___queue_p___elem" prot="public">_QueueP_Elem</innerclass>
+    <innerclass refid="struct___queue_p___obj" prot="public">_QueueP_Obj</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_queue_p_8h_1aa3cea35f521b9852b23f9fe0a486c4f7" prot="public" static="no">
+        <type>struct <ref refid="struct___queue_p___elem" kindref="compound">_QueueP_Elem</ref></type>
+        <definition>typedef struct _QueueP_Elem  QueueP_Elem</definition>
+        <argsstring></argsstring>
+        <name>QueueP_Elem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/QueueP.h" line="44" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_queue_p_8h_1a919b829b60cacfbbc48ee465f03fb98e" prot="public" static="no">
+        <type>struct <ref refid="struct___queue_p___obj" kindref="compound">_QueueP_Obj</ref></type>
+        <definition>typedef struct _QueueP_Obj  QueueP_Obj</definition>
+        <argsstring></argsstring>
+        <name>QueueP_Obj</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/QueueP.h" line="49" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_queue_p_8h_1a52a1ebbb883977d6df65a9ece2aceef4" prot="public" static="no">
+        <type><ref refid="_queue_p_8h_1a919b829b60cacfbbc48ee465f03fb98e" kindref="member">QueueP_Obj</ref> *</type>
+        <definition>typedef QueueP_Obj* QueueP_Handle</definition>
+        <argsstring></argsstring>
+        <name>QueueP_Handle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/QueueP.h" line="51" column="1" bodyfile="kernel/nortos/dpl/QueueP.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_queue_p_8h_1a36da8afc7aafb4505be9e95d60be7695" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void QueueP_init</definition>
+        <argsstring>(QueueP_Obj *obj)</argsstring>
+        <name>QueueP_init</name>
+        <param>
+          <type><ref refid="_queue_p_8h_1a919b829b60cacfbbc48ee465f03fb98e" kindref="member">QueueP_Obj</ref> *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/QueueP.h" line="53" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_queue_p_8h_1abecf3d50bd25383101668ba4a87cce33" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uintptr_t</type>
+        <definition>uintptr_t QueueP_head</definition>
+        <argsstring>(QueueP_Obj *obj)</argsstring>
+        <name>QueueP_head</name>
+        <param>
+          <type><ref refid="_queue_p_8h_1a919b829b60cacfbbc48ee465f03fb98e" kindref="member">QueueP_Obj</ref> *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/QueueP.h" line="54" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_queue_p_8h_1a1160c1ad4c35c471d5fec7b4bfc59f45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uintptr_t</type>
+        <definition>uintptr_t QueueP_next</definition>
+        <argsstring>(QueueP_Elem *qelem)</argsstring>
+        <name>QueueP_next</name>
+        <param>
+          <type><ref refid="_queue_p_8h_1aa3cea35f521b9852b23f9fe0a486c4f7" kindref="member">QueueP_Elem</ref> *</type>
+          <declname>qelem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/QueueP.h" line="55" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_queue_p_8h_1a263351592164543803851a2fe53b7a07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uintptr_t</type>
+        <definition>uintptr_t QueueP_prev</definition>
+        <argsstring>(QueueP_Elem *qelem)</argsstring>
+        <name>QueueP_prev</name>
+        <param>
+          <type><ref refid="_queue_p_8h_1aa3cea35f521b9852b23f9fe0a486c4f7" kindref="member">QueueP_Elem</ref> *</type>
+          <declname>qelem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/QueueP.h" line="56" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_queue_p_8h_1a44a15624dd94bbddb32b6be7cee31c74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uintptr_t</type>
+        <definition>uintptr_t QueueP_get</definition>
+        <argsstring>(QueueP_Obj *obj)</argsstring>
+        <name>QueueP_get</name>
+        <param>
+          <type><ref refid="_queue_p_8h_1a919b829b60cacfbbc48ee465f03fb98e" kindref="member">QueueP_Obj</ref> *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/QueueP.h" line="57" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_queue_p_8h_1a7044c7db224fdfc2970e814c386079ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void QueueP_put</definition>
+        <argsstring>(QueueP_Obj *obj, QueueP_Elem *elem)</argsstring>
+        <name>QueueP_put</name>
+        <param>
+          <type><ref refid="_queue_p_8h_1a919b829b60cacfbbc48ee465f03fb98e" kindref="member">QueueP_Obj</ref> *</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type><ref refid="_queue_p_8h_1aa3cea35f521b9852b23f9fe0a486c4f7" kindref="member">QueueP_Elem</ref> *</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/QueueP.h" line="58" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_queue_p_8h_1a4437ebb224044c127bff4d7f362ab417" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void QueueP_remove</definition>
+        <argsstring>(QueueP_Elem *qelem)</argsstring>
+        <name>QueueP_remove</name>
+        <param>
+          <type><ref refid="_queue_p_8h_1aa3cea35f521b9852b23f9fe0a486c4f7" kindref="member">QueueP_Elem</ref> *</type>
+          <declname>qelem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/QueueP.h" line="59" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_queue_p_8h_1a521f23484986bcd29f336dcb6dc0083a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool QueueP_empty</definition>
+        <argsstring>(QueueP_Obj *obj)</argsstring>
+        <name>QueueP_empty</name>
+        <param>
+          <type><ref refid="_queue_p_8h_1a919b829b60cacfbbc48ee465f03fb98e" kindref="member">QueueP_Obj</ref> *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/QueueP.h" line="60" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2017,<sp/>Texas<sp/>Instruments<sp/>Incorporated</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*<sp/><sp/>========<sp/>QueueP.h<sp/>========</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="struct___queue_p___elem" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct___queue_p___elem" kindref="compound">_QueueP_Elem</ref></highlight></codeline>
+<codeline lineno="41"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="42" refid="struct___queue_p___elem_1a3690d0a6d67ee94d0296ea50bc434703" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct___queue_p___elem" kindref="compound">_QueueP_Elem</ref><sp/>*</highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/><ref refid="struct___queue_p___elem_1a3690d0a6d67ee94d0296ea50bc434703" kindref="member">next</ref>;</highlight></codeline>
+<codeline lineno="43" refid="struct___queue_p___elem_1a52038b075ecf900896745aece5a31f55" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct___queue_p___elem" kindref="compound">_QueueP_Elem</ref><sp/>*</highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/><ref refid="struct___queue_p___elem_1a52038b075ecf900896745aece5a31f55" kindref="member">prev</ref>;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}<sp/><ref refid="_queue_p_8h_1aa3cea35f521b9852b23f9fe0a486c4f7" kindref="member">QueueP_Elem</ref>;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="struct___queue_p___obj" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct___queue_p___obj" kindref="compound">_QueueP_Obj</ref></highlight></codeline>
+<codeline lineno="47"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="48" refid="struct___queue_p___obj_1af82286c418b5c6db4eca668c1dce7431" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct___queue_p___elem" kindref="compound">QueueP_Elem</ref><sp/><ref refid="struct___queue_p___obj_1af82286c418b5c6db4eca668c1dce7431" kindref="member">elem</ref>;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">}<sp/><ref refid="_queue_p_8h_1a919b829b60cacfbbc48ee465f03fb98e" kindref="member">QueueP_Obj</ref>;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="_queue_p_8h_1a52a1ebbb883977d6df65a9ece2aceef4" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="struct___queue_p___obj" kindref="compound">QueueP_Obj</ref><sp/>*<ref refid="_queue_p_8h_1a52a1ebbb883977d6df65a9ece2aceef4" kindref="member">QueueP_Handle</ref>;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_queue_p_8h_1a36da8afc7aafb4505be9e95d60be7695" kindref="member">QueueP_init</ref>(<ref refid="struct___queue_p___obj" kindref="compound">QueueP_Obj</ref><sp/>*obj);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">uintptr_t<sp/><ref refid="_queue_p_8h_1abecf3d50bd25383101668ba4a87cce33" kindref="member">QueueP_head</ref>(<ref refid="struct___queue_p___obj" kindref="compound">QueueP_Obj</ref><sp/>*obj);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">uintptr_t<sp/><ref refid="_queue_p_8h_1a1160c1ad4c35c471d5fec7b4bfc59f45" kindref="member">QueueP_next</ref>(<ref refid="struct___queue_p___elem" kindref="compound">QueueP_Elem</ref><sp/>*qelem);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">uintptr_t<sp/><ref refid="_queue_p_8h_1a263351592164543803851a2fe53b7a07" kindref="member">QueueP_prev</ref>(<ref refid="struct___queue_p___elem" kindref="compound">QueueP_Elem</ref><sp/>*qelem);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">uintptr_t<sp/><ref refid="_queue_p_8h_1a44a15624dd94bbddb32b6be7cee31c74" kindref="member">QueueP_get</ref>(<ref refid="struct___queue_p___obj" kindref="compound">QueueP_Obj</ref><sp/>*obj);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_queue_p_8h_1a7044c7db224fdfc2970e814c386079ca" kindref="member">QueueP_put</ref>(<ref refid="struct___queue_p___obj" kindref="compound">QueueP_Obj</ref><sp/>*obj,<sp/><ref refid="struct___queue_p___elem" kindref="compound">QueueP_Elem</ref><sp/>*elem);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_queue_p_8h_1a4437ebb224044c127bff4d7f362ab417" kindref="member">QueueP_remove</ref>(<ref refid="struct___queue_p___elem" kindref="compound">QueueP_Elem</ref><sp/>*qelem);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="_queue_p_8h_1a521f23484986bcd29f336dcb6dc0083a" kindref="member">QueueP_empty</ref>(<ref refid="struct___queue_p___obj" kindref="compound">QueueP_Obj</ref><sp/>*obj);</highlight></codeline>
+    </programlisting>
+    <location file="kernel/nortos/dpl/QueueP.h"/>
+  </compounddef>
+</doxygen>

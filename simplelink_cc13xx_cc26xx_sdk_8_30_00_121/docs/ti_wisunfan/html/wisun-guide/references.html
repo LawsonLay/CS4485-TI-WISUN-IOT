@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>References &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="CC13x4 and CC26x4 RGZ Variants" href="../cc13xx_cc26xx/software-on-cc13x4-26x4-rgz-devices.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug wisun-guide references";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wisun-index.html">TI Wi-SUN FAN Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced-wisun-features.html">Advanced TI Wi-SUN FAN Stack Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="network-management.html">Wi-SUN Network Topology Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NWP_interface.html">TI Wi-SUN FAN NWP Interface Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wisun-oad-index.html">MCUBoot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration-guide.html">Migration Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#terms-and-acronyms">Terms and Acronyms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#stack-terms-and-acronyms">TI Wi-SUN FAN Stack Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sensor-controller-terms-and-acronyms">Sensor Controller Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ti-rtos7-terms-and-acronyms">TI-RTOS7 Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#over-the-air-download-oad-terms-and-acronyms">Over-the-Air Download (OAD) Terms and Acronyms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#general-terms-and-acronyms">General Terms and Acronyms</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>References</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="../../../drivers/Power_Management.pdf">Power Management User’s Guide</a></p>
+<p><a class="reference external" href="https://www.ti.com/tool/sensor-controller-studio">Sensor Controller Studio</a></p>
+<p><a class="reference external" href="../../../tirtos7/Bios_User_Guide.pdf">TI-RTOS7 Kernel (SYS/BIOS) User’s Guide</a></p>
+<p><a class="reference external" href="https://www.wi-sun.org">Wi-SUN FAN Specification</a></p>
+<p><a class="reference external" href="https://github.com/TexasInstruments/ti-wisunfan-pyspinel">TI Wi-SUN FAN pySpinel GitHub repo</a></p>
+</div>
+<div class="section" id="terms-and-acronyms">
+<span id="glossary"></span><h1>Terms and Acronyms<a class="headerlink" href="#terms-and-acronyms" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="stack-terms-and-acronyms">
+<h2>TI Wi-SUN FAN Stack Terms and Acronyms<a class="headerlink" href="#stack-terms-and-acronyms" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary simple">
+<dt id="term-AES">AES<a class="headerlink" href="#term-AES" title="Permalink to this term">¶</a></dt><dd><p>Advanced Encryption Standard.</p>
+</dd>
+<dt id="term-BR">BR<a class="headerlink" href="#term-BR" title="Permalink to this term">¶</a></dt><dt id="term-Border-router">Border router<a class="headerlink" href="#term-Border-router" title="Permalink to this term">¶</a></dt><dd><p>Each Wi-SUN network contains a Border Router providing WAN connectivity
+to the PAN. The Border Router maintains source routing tables for all
+nodes within its PAN, provides node authentication and key management
+services, and disseminates PAN wide information such as broadcast
+schedules.</p>
+</dd>
+<dt id="term-GAK">GAK<a class="headerlink" href="#term-GAK" title="Permalink to this term">¶</a></dt><dt id="term-Group-AES-Key">Group AES Key<a class="headerlink" href="#term-Group-AES-Key" title="Permalink to this term">¶</a></dt><dd><p>All devices within a Wi-SUN FAN or PAN network use a common key called GAK
+for encrypting packets at MAC layer.</p>
+</dd>
+<dt id="term-GTK">GTK<a class="headerlink" href="#term-GTK" title="Permalink to this term">¶</a></dt><dt id="term-Group-Transient-Key">Group Transient Key<a class="headerlink" href="#term-Group-Transient-Key" title="Permalink to this term">¶</a></dt><dd><p>The <a class="reference internal" href="#term-GAK"><span class="xref std std-term">GAK</span></a> is derived from the Group Transient Key (GTK) which is
+installed on the node during the joining process. More info in
+<a class="reference internal" href="../wisun-stack/join_process.html#sec-wisun-node-join"><span class="std std-ref">Join Process</span></a>.</p>
+</dd>
+<dt id="term-IEs">IEs<a class="headerlink" href="#term-IEs" title="Permalink to this term">¶</a></dt><dt id="term-Information-elements">Information elements<a class="headerlink" href="#term-Information-elements" title="Permalink to this term">¶</a></dt><dd><p>IEs allow hopping neighbors to transmit unicast messages to each other.
+IEs can be exchanged either during the joining of the network or during
+the network operation time.</p>
+</dd>
+<dt id="term-NCP">NCP<a class="headerlink" href="#term-NCP" title="Permalink to this term">¶</a></dt><dt id="term-Network-co-processor">Network co-processor<a class="headerlink" href="#term-Network-co-processor" title="Permalink to this term">¶</a></dt><dd><p>The TI Wi-SUN FAN network processor mode uses one host and one network
+co-processor with a UART interface.</p>
+</dd>
+<dt id="term-Root">Root<a class="headerlink" href="#term-Root" title="Permalink to this term">¶</a></dt><dd><p>In a Wi-SUN network, the border router is the root of the <a class="reference internal" href="#term-RPL"><span class="xref std std-term">RPL</span></a> tree.</p>
+</dd>
+<dt id="term-RPL">RPL<a class="headerlink" href="#term-RPL" title="Permalink to this term">¶</a></dt><dd><p>Routing protocol for low-power and lossy networks. See <a class="reference internal" href="../wisun-stack/networklayer.html#sec-wisun-rpl"><span class="std std-ref">Routing Layer (RPL)</span></a>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="sensor-controller-terms-and-acronyms">
+<h2>Sensor Controller Terms and Acronyms<a class="headerlink" href="#sensor-controller-terms-and-acronyms" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary simple">
+<dt id="term-SC">SC<a class="headerlink" href="#term-SC" title="Permalink to this term">¶</a></dt><dt id="term-Sensor-Controller">Sensor Controller<a class="headerlink" href="#term-Sensor-Controller" title="Permalink to this term">¶</a></dt><dd><p>A dedicated 16-bit CPU core on CC13xx and CC26xx devices, located in
+the auxiliary (AUX) power/clock domain. It can perform simple
+background tasks autonomously and independently of the System CPU and
+the MCU domain power states.</p>
+</dd>
+<dt id="term-SCS">SCS<a class="headerlink" href="#term-SCS" title="Permalink to this term">¶</a></dt><dt id="term-Sensor-Controller-Studio">Sensor Controller Studio<a class="headerlink" href="#term-Sensor-Controller-Studio" title="Permalink to this term">¶</a></dt><dd><p>A stand-alone IDE used to write, test and debug code for the Sensor
+Controller.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="ti-rtos7-terms-and-acronyms">
+<h2>TI-RTOS7 Terms and Acronyms<a class="headerlink" href="#ti-rtos7-terms-and-acronyms" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary simple">
+<dt id="term-HWI">HWI<a class="headerlink" href="#term-HWI" title="Permalink to this term">¶</a></dt><dt id="term-Hardware-Interrupts">Hardware Interrupts<a class="headerlink" href="#term-Hardware-Interrupts" title="Permalink to this term">¶</a></dt><dd><p>A <a class="reference internal" href="#term-TI-RTOS7"><span class="xref std std-term">TI-RTOS7</span></a> hardware interrupt.</p>
+</dd>
+<dt id="term-Idle-Task">Idle Task<a class="headerlink" href="#term-Idle-Task" title="Permalink to this term">¶</a></dt><dd><p>A <a class="reference internal" href="#term-TI-RTOS7"><span class="xref std std-term">TI-RTOS7</span></a> default task that is executes when no other higher
+priority thread needs to run.</p>
+</dd>
+<dt id="term-ROV">ROV<a class="headerlink" href="#term-ROV" title="Permalink to this term">¶</a></dt><dt id="term-Runtime-Object-View">Runtime Object View<a class="headerlink" href="#term-Runtime-Object-View" title="Permalink to this term">¶</a></dt><dd><p>A <a class="reference internal" href="#term-TI-RTOS7"><span class="xref std std-term">TI-RTOS7</span></a> kernel plugin for <a class="reference internal" href="#term-CCS"><span class="xref std std-term">CCS</span></a> and <a class="reference internal" href="#term-IAR"><span class="xref std std-term">IAR</span></a> to
+view a target’s instrumentation data.</p>
+</dd>
+<dt id="term-RTC">RTC<a class="headerlink" href="#term-RTC" title="Permalink to this term">¶</a></dt><dt id="term-Real-Time-Clock">Real-Time Clock<a class="headerlink" href="#term-Real-Time-Clock" title="Permalink to this term">¶</a></dt><dd><p>An accurate computer clock which keeps track of the current time.</p>
+</dd>
+<dt id="term-RTOS">RTOS<a class="headerlink" href="#term-RTOS" title="Permalink to this term">¶</a></dt><dt id="term-Real-Time-Operating-System">Real Time Operating System<a class="headerlink" href="#term-Real-Time-Operating-System" title="Permalink to this term">¶</a></dt><dd><p>An operating system intended to serve applications with real-time
+requirements.</p>
+</dd>
+<dt id="term-SWI">SWI<a class="headerlink" href="#term-SWI" title="Permalink to this term">¶</a></dt><dt id="term-Software-Interrupts">Software Interrupts<a class="headerlink" href="#term-Software-Interrupts" title="Permalink to this term">¶</a></dt><dd><p>A <a class="reference internal" href="#term-TI-RTOS7"><span class="xref std std-term">TI-RTOS7</span></a> software interrupt.</p>
+</dd>
+<dt id="term-TI-RTOS7">TI-RTOS7<a class="headerlink" href="#term-TI-RTOS7" title="Permalink to this term">¶</a></dt><dt id="term-Texas-Instruments-Real-Time-Operating-System">Texas Instruments Real Time Operating System<a class="headerlink" href="#term-Texas-Instruments-Real-Time-Operating-System" title="Permalink to this term">¶</a></dt><dd><p>An <a class="reference internal" href="#term-RTOS"><span class="xref std std-term">RTOS</span></a> developed by TI for TI microcontrollers.</p>
+</dd>
+<dt id="term-Zero-Latency-Interrupts">Zero-Latency Interrupts<a class="headerlink" href="#term-Zero-Latency-Interrupts" title="Permalink to this term">¶</a></dt><dd><p>An interrupt that will not be routed through the TI-RTOS kernel’s Hwi
+dispatcher. For more information, see the Hwi module documentation in
+the <a class="reference external" href="../../../tirtos7/Bios_User_Guide.pdf">TI-RTOS7 Kernel (SYS/BIOS) User’s Guide</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="over-the-air-download-oad-terms-and-acronyms">
+<h2>Over-the-Air Download (OAD) Terms and Acronyms<a class="headerlink" href="#over-the-air-download-oad-terms-and-acronyms" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary simple">
+<dt id="term-BIM">BIM<a class="headerlink" href="#term-BIM" title="Permalink to this term">¶</a></dt><dt id="term-Boot-Image-Manager">Boot Image Manager<a class="headerlink" href="#term-Boot-Image-Manager" title="Permalink to this term">¶</a></dt><dd><p>A bootloader that runs after the device’s ROM startup code. The BIM is
+responsible for analyzing the image header of all images and
+determining the most suitable image to run. Once the BIM has found the
+proper image, it will jump to it’s program entry.</p>
+</dd>
+<dt id="term-CRC">CRC<a class="headerlink" href="#term-CRC" title="Permalink to this term">¶</a></dt><dt id="term-Cyclic-Redundancy-Check">Cyclic Redundancy Check<a class="headerlink" href="#term-Cyclic-Redundancy-Check" title="Permalink to this term">¶</a></dt><dd><p>An error-detecting code used to check the integrity of blocks of data.</p>
+</dd>
+<dt id="term-ECDSA">ECDSA<a class="headerlink" href="#term-ECDSA" title="Permalink to this term">¶</a></dt><dt id="term-Elliptic-Curve-Digital-Signature-Algorithm">Elliptic Curve Digital Signature Algorithm<a class="headerlink" href="#term-Elliptic-Curve-Digital-Signature-Algorithm" title="Permalink to this term">¶</a></dt><dd><p>A variant of the Digital Signature Algorithm (DSA) which uses elliptic
+curve cryptography.</p>
+</dd>
+<dt id="term-Factory-Image">Factory Image<a class="headerlink" href="#term-Factory-Image" title="Permalink to this term">¶</a></dt><dd><p>The factory image is a “golden” image that resides in external flash
+as a fail-safe mechanism.</p>
+</dd>
+<dt id="term-HIB">HIB<a class="headerlink" href="#term-HIB" title="Permalink to this term">¶</a></dt><dt id="term-Halt-In-Boot">Halt In Boot<a class="headerlink" href="#term-Halt-In-Boot" title="Permalink to this term">¶</a></dt><dd><p>A mechanism in CC13xx or CC26xx to ensure that the external
+emulator can take control of the device before it executes any
+application code.</p>
+</dd>
+<dt id="term-OAD">OAD<a class="headerlink" href="#term-OAD" title="Permalink to this term">¶</a></dt><dt id="term-Over-the-Air-Download">Over-the-Air Download<a class="headerlink" href="#term-Over-the-Air-Download" title="Permalink to this term">¶</a></dt><dd><p>The process of performing a device firmware update over the air.</p>
+</dd>
+<dt id="term-OAD-Target">OAD Target<a class="headerlink" href="#term-OAD-Target" title="Permalink to this term">¶</a></dt><dd><p>The device whose firmware is being upgraded over the air. This is
+assumed to be a CC26xx or CC13xx device running the TI
+protocol-specific transport for OAD.</p>
+</dd>
+<dt id="term-OAD-Distributor">OAD Distributor<a class="headerlink" href="#term-OAD-Distributor" title="Permalink to this term">¶</a></dt><dd><p>The device responsible for accepting an OAD enabled image from the
+compiler and transferring it over the air to the OAD Target.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="general-terms-and-acronyms">
+<h2>General Terms and Acronyms<a class="headerlink" href="#general-terms-and-acronyms" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary simple">
+<dt id="term-CCFG">CCFG<a class="headerlink" href="#term-CCFG" title="Permalink to this term">¶</a></dt><dt id="term-Customer-Configuration">Customer Configuration<a class="headerlink" href="#term-Customer-Configuration" title="Permalink to this term">¶</a></dt><dt id="term-Customer-Configuration-Area">Customer Configuration Area<a class="headerlink" href="#term-Customer-Configuration-Area" title="Permalink to this term">¶</a></dt><dd><p>Customer Configuration is set by the application and contains
+configuration parameters for the ROM boot code, device hardware, and
+device firmware. It contains lock-bits on the last page of flash. You
+can read more in the Customer Configuration section in the <a class="reference external" href="https://www.ti.com/lit/pdf/swcu185">CC13x2 CC26x2 SimpleLink Wireless MCU Technical Reference Manual</a>.</p>
+</dd>
+<dt id="term-CCS">CCS<a class="headerlink" href="#term-CCS" title="Permalink to this term">¶</a></dt><dt id="term-Code-Composer-Studio">Code Composer Studio<a class="headerlink" href="#term-Code-Composer-Studio" title="Permalink to this term">¶</a></dt><dd><p>An integrated development environment to develop applications for
+Texas Instruments embedded processors. Download: <a class="reference external" href="https://www.ti.com/tool/ccstudio">Code Composer
+Studio</a></p>
+</dd>
+<dt id="term-cJTAG">cJTAG<a class="headerlink" href="#term-cJTAG" title="Permalink to this term">¶</a></dt><dt id="term-compact-JTAG">compact JTAG<a class="headerlink" href="#term-compact-JTAG" title="Permalink to this term">¶</a></dt><dd><p>Class 4 IEEE 1149.7: Standard for Reduced-pin and
+Enhanced-functionality Test Access Port and Boundary-scan
+Architecture. This is known by acronym cJTAG.</p>
+</dd>
+<dt id="term-GCC">GCC<a class="headerlink" href="#term-GCC" title="Permalink to this term">¶</a></dt><dt id="term-GNU-Compiler-Collection">GNU Compiler Collection<a class="headerlink" href="#term-GNU-Compiler-Collection" title="Permalink to this term">¶</a></dt><dd><p>A compiler system produced by the GNU Project, which support various
+programming languages such as C and C++.</p>
+</dd>
+<dt id="term-GPRAM">GPRAM<a class="headerlink" href="#term-GPRAM" title="Permalink to this term">¶</a></dt><dt id="term-General-purpose-RAM">General purpose RAM<a class="headerlink" href="#term-General-purpose-RAM" title="Permalink to this term">¶</a></dt><dd><p>This memory area is used for the cache per default,
+but can be configured to be used as RAM.</p>
+</dd>
+<dt id="term-IAR">IAR<a class="headerlink" href="#term-IAR" title="Permalink to this term">¶</a></dt><dd><p>Refers to IAR Systems’ IAR Embedded Workbench, which is an integrated
+development environment used for building and debugging embedded
+applications.</p>
+</dd>
+<dt id="term-JTAG">JTAG<a class="headerlink" href="#term-JTAG" title="Permalink to this term">¶</a></dt><dt id="term-Joint-Test-Action-Group">Joint Test Action Group<a class="headerlink" href="#term-Joint-Test-Action-Group" title="Permalink to this term">¶</a></dt><dd><p>IEEE standard 1149.1: Standard Test Access Port and Boundary Scan
+Architecture Test Access Port (TAP). This standard is known by the
+acronym JTAG.</p>
+</dd>
+<dt id="term-MCU">MCU<a class="headerlink" href="#term-MCU" title="Permalink to this term">¶</a></dt><dt id="term-Microcontroller-Unit">Microcontroller Unit<a class="headerlink" href="#term-Microcontroller-Unit" title="Permalink to this term">¶</a></dt><dd><p>A small computer on a single integrated circuit.</p>
+</dd>
+<dt id="term-NVS">NVS<a class="headerlink" href="#term-NVS" title="Permalink to this term">¶</a></dt><dt id="term-Non-Volatile-Storage">Non-Volatile Storage<a class="headerlink" href="#term-Non-Volatile-Storage" title="Permalink to this term">¶</a></dt><dd><p>Storage of data in non-volatile memory (NVM). NVM retains saved data
+during power cycles. In the context of CC13xx and CC26xx devices, NVM either
+refers to the internal flash or some external flash.</p>
+</dd>
+<dt id="term-ROM">ROM<a class="headerlink" href="#term-ROM" title="Permalink to this term">¶</a></dt><dt id="term-Read-only-Memory">Read-only Memory<a class="headerlink" href="#term-Read-only-Memory" title="Permalink to this term">¶</a></dt><dd><p>Type of non-volatile memory used in computers. Once data is written to
+ROM, the data cannot be removed and can only be read.</p>
+</dd>
+<dt id="term-RTSC">RTSC<a class="headerlink" href="#term-RTSC" title="Permalink to this term">¶</a></dt><dt id="term-Real-Time-Software-Components">Real Time Software Components<a class="headerlink" href="#term-Real-Time-Software-Components" title="Permalink to this term">¶</a></dt><dd><p>A toolset for creating reusable code, used by TI-RTOS. See
+<a class="reference external" href="http://www.eclipse.org/rtsc/">RTSC</a> and <a class="reference external" href="http://rtsc.eclipse.org/docs-tip/Main_Page">RTSC-Pedia</a>.</p>
+</dd>
+<dt id="term-SysConfig">SysConfig<a class="headerlink" href="#term-SysConfig" title="Permalink to this term">¶</a></dt><dt id="term-System-Configuration-Tool">System Configuration Tool<a class="headerlink" href="#term-System-Configuration-Tool" title="Permalink to this term">¶</a></dt><dd><p>SysConfig is a graphical interface for configuring software projects.
+Configuration files, C source files and header files are generated based
+on the parameters configured in the SysConfig dashboard. See
+<a class="reference internal" href="../sysconfig/getting-started.html#sysconfig-sysconfig"><span class="std std-ref">Get started with SysConfig</span></a>.</p>
+</dd>
+<dt id="term-TI-CLANG">TI-CLANG<a class="headerlink" href="#term-TI-CLANG" title="Permalink to this term">¶</a></dt><dt id="term-TI-Arm-Clang-Compiler-Toolchain">TI Arm Clang Compiler Toolchain<a class="headerlink" href="#term-TI-Arm-Clang-Compiler-Toolchain" title="Permalink to this term">¶</a></dt><dd><p>The TI Arm Clang Compiler Toolchain (tiarmclang) is the next generation
+TI Arm compiler, replacing the previous TI Arm Compiler Tools (armcl).
+You can use the tiarmclang compiler toolchain to build applications from
+C, C++, and/or assembly source files to be loaded and run on one of the
+Cortex-M or Cortex-R Arm processors that are supported by the toolchain.
+You can find more information
+<a class="reference external" href="https://www.ti.com/tool/download/ARM-CGT-CLANG-1">here</a>.</p>
+</dd>
+<dt id="term-VIMS">VIMS<a class="headerlink" href="#term-VIMS" title="Permalink to this term">¶</a></dt><dt id="term-Versatile-Instruction-Memory-System">Versatile Instruction Memory System<a class="headerlink" href="#term-Versatile-Instruction-Memory-System" title="Permalink to this term">¶</a></dt><dd><p>A system control module that handles access to the device memory areas
+from the CPU and system bus. You can read more in the <a class="reference external" href="https://www.ti.com/lit/pdf/swcu185">CC13x2 CC26x2 SimpleLink Wireless MCU Technical Reference Manual</a>.</p>
+</dd>
+<dt id="term-.bss">.bss<a class="headerlink" href="#term-.bss" title="Permalink to this term">¶</a></dt><dd><p>Block started by symbol. This memory section usually contains
+uninitialized variables including the task stacks.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../cc13xx_cc26xx/software-on-cc13x4-26x4-rgz-devices.html" class="btn btn-neutral float-left" title="CC13x4 and CC26x4 RGZ Variants" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

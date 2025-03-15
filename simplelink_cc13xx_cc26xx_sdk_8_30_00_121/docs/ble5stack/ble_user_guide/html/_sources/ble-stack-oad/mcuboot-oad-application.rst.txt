@@ -1,0 +1,62 @@
+.. _sec-mcuboot-oad-process:
+
+OAD Application
+===============
+
+OAD State Machine
+-----------------
+
+The OAD service implements an 'OAD State Machine' for performing the OAD. The
+following state machine depicts the OAD service state transitions and its
+interactions with the OAD communication profile messages for both on-chip and
+off-chip OAD.
+
+.. _fig-mcuboot-oad-state-machine:
+.. figure:: resources/oad_state_machine.png
+    :align: center
+
+    OAD Types Overview
+
+The states and state transitions are encapsulated inside the OAD service, but
+some of the critical states are described below to aide in understanding.
+
+Note these sections refer to internal state handling and transitions local to
+the target device. For a summary of the over the air sequence see
+:ref:`fig-mcuboot-oad-sequence-diagram` and for a breakdown of the different types of
+profile messages and how to interpret them over the air please see
+:ref:`sect-mcuboot-oad-profile`.
+
+Image Validation
+""""""""""""""""
+
+After establishing a new connection, updating the connection interval
+for a faster OAD and enabling notifications of OAD Image Identify and
+OAD Image Block characteristics on the OAD target, the
+OAD distributor shall write to the Image Identify characteristic of the
+OAD target. The message data will be the header retrieved from the OAD
+Image available for OAD.
+
+On receiving the `Image Identify` message, the OAD target will get ready
+for OAD process.
+
+Image Block Transfers
+"""""""""""""""""""""
+
+Once the OAD target is ready for receiving image, it will switch to
+the configuration state. There it will get the block size and set image count.
+When the OAD distributor sends the Start OAD Command to the Control
+Characteristic (for more details see
+:ref:`tbl-mcuboot-oad-control-supported-commands`), the OAD target will respond
+with a Control characteristic notification requesting the first block. The OAD
+distributor will then send the first block to the OAD target.
+
+This process continues with the OAD target notifying the OAD distributor
+of the next block it needs and the OAD distributor sending the requested
+image block until all blocks have been transferred.
+
+Completion of the OAD Process
+"""""""""""""""""""""""""""""
+
+After receiving the complete image, OAD application will transit to
+*OAD_COMPLETE* state and then trigger a reset. After reset the secure
+bootloader will start the new image validation.

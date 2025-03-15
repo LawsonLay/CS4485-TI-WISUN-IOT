@@ -1,0 +1,168 @@
+.. _tirtos_to_tirtos7-porting-guide:
+
+TI-RTOS to TI-RTOS7 Migration
+-----------------------------
+
+The purpose of this is to be a customer porting guide from TI-RTOS (tirtos) to TI-RTOS7 (tirtos7).
+
+.. note:: TI-RTOS7 is compiled in flash and does not use components in ROM.
+
+SDK folder structure
+^^^^^^^^^^^^^^^^^^^^
+TI-RTOS and TI-RTOS7 currently coexist in the SimpleLink SDK. They thus need separate folders for source and examples.
+The relative paths to header and source files are the same between tirtos and tirtos7.
+
+.. image:: resources/tirtos7_sdk_folder_struct.png
+
+
+.cfg vs .syscfg
+^^^^^^^^^^^^^^^
+
+Overview
+########
+
+The kernel on TI-RTOS was configured by specifying a configuration in a .cfg file and XDC Tools to actually construct and build the kernel. 
+When importing a TI-RTOS project, the dependent kernel project is also imported.
+
+TI-RTOS7 instead leverages SysConfig to generate `ti_sysbios_config.c/h` based on the project's .syscfg file. 
+This also means that the .cfg file, XDC Tools, and the dependent kernel project are no longer needed.
+
+.. image:: resources/tirtos7_syscfg_folder.png
+
+The module and field names have been chosen to make the transition as easy as possible. You will need to take your existing 
+.cfg file and translate it into content to add to your .syscfg.
+
+How to include common tirtos7 .syscfg file
+##########################################
+
+.. note:: TI-RTOS7 only works with SysConfig 1.10 and above. Earlier versions of SysConfig are not compatible.
+
+Depending on how often your projects share their kernel configurations and how complex they are, 
+it can be advantageous to store a default .syscfg configuration in a dedicated file that is loaded by the actual project's .sysconfig file.
+
+To facilitate this, SysConfig 1.10 added the `--rtos` command line parameter. 
+This behaves just like the `--board` option that exists today and allows you to execute additional scripting.
+
+| Note that TI-RTOS7 will not show up in SysConfig unless you specify –rtos tirtos7 in your @cliArgs.
+
+.. code-block:: c
+
+    // @cliArgs --rtos tirtos7
+ 
+    if (system.getRTOS() === "tirtos7") {
+        const tirtos7_release_syscfg_js = system.getScript("tirtos7_release.syscfg.js");
+    }
+
+
+The Core SDK is shipping a reasonable common configuration in kernel/tirtos7/builds/ that can be loaded via the code above.
+
+What SysConfig options do you have?
+###################################
+
+A complete listing of kernel configuration options is generated as html and can be found here: |TI-RTOS_SYSCONFIG| .
+
+To locate the SysConfig modules for more information on configurations and details on each configuration, navigate to the following location in Core SDK:
+
+.. image:: resources/tirtos7_kernel_folder.png
+
+Golden .syscfg
+##############
+
+Here is a excerpt of the old "golden" .cfg configuration and the equivalent in .syscfg. 
+These are what the Core SDK examples are based on.
+
+The golden .syscfg is expected to change over time as we remove POSIX from the default configuration 
+and examples, and expose additional options that let us reduce the footprint of the default configuration. 
+The current version has a number of features that are not necessarily useful to all users.
+
+.. code-block:: cfg
+    :caption: .cfg
+    :linenos:
+
+    /* ================ Clock configuration ================ */
+    var Clock = xdc.useModule('ti.sysbios.knl.Clock');
+    Clock.tickPeriod = 10;
+    
+    /* ================ Hwi configuration ================ */
+    var halHwi = xdc.useModule('ti.sysbios.hal.Hwi');
+    var m3Hwi = xdc.useModule('ti.sysbios.family.arm.m3.Hwi');
+    
+    //halHwi.checkStackFlag = true;
+    halHwi.checkStackFlag = false;
+    
+    //m3Hwi.enableException = true;
+    m3Hwi.enableException = false;
+    //m3Hwi.excHandlerFunc = null;
+    
+    m3Hwi.nvicCCR.DIV_0_TRP = 0;
+    //m3Hwi.nvicCCR.DIV_0_TRP = 1;
+    
+    /* ================ Idle configuration ================ */
+    var Idle = xdc.useModule('ti.sysbios.knl.Idle');
+    
+    //Idle.addFunc("&myIdleFunc");
+    Idle.addFunc('&Power_idleFunc');  /* add the Power module's idle function */
+
+
+.. code-block:: c
+    :caption: .syscfg
+    :linenos:
+
+    /* ================ Kernel (SYS/BIOS) configuration ================ */
+    const BIOS  = scripting.addModule("/ti/sysbios/BIOS");
+    
+    /* ================ Clock configuration ================ */
+    const Clock         = scripting.addModule("/ti/sysbios/knl/Clock", {}, false);
+    Clock.tickPeriod = 10;
+    
+    
+    /* ================ Hwi configuration ================ */
+    const Hwi           = scripting.addModule("/ti/sysbios/family/arm/m3/Hwi", {}, false);
+    
+    //Hwi.checkStackFlag = true;
+    Hwi.checkStackFlag = false;
+    
+    //Hwi.enableException = true;
+    Hwi.enableException = false;
+    //m3Hwi.excHandlerFunc = null;
+    
+    //Hwi.nvicCCR.DIV_0_TRP = 0;
+    //Hwi.nvicCCR.DIV_0_TRP = 1;
+    
+    const powerIdle = Idle.addInstance();
+    powerIdle.$name = "powerIdle";
+    powerIdle.idleFxn = "Power_idleFunc";
+
+
+The following are differences observed between the .cfg 
+configuration and .syscfg configuration that may not be a direct migration:
+
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - .cfg Module
+     - Difference between TI-RTOS and TI-RTOS7
+   * - Boot
+     - Boot.syscfg exists in tirtos7, but .syscfg doesn't need to add the Boot module unless non-default settings are used.
+
+
+Debugging
+#########
+
+.. list-table::
+   :widths: 25 50 25
+   :header-rows: 1
+
+   * - Error
+     - Description
+     - Resolution
+   * - When attempting to open the SysConfig file in CCS, *SysConfig will throw an error stating "/ti/boards/LP_CCXXXXXX: Device not found : CCXXXXXXGZ"*
+     - Example image of error: |error_image| This will occur if the SysConfig product version of the project does not match the expected SysConfig version.
+     - | Navigate to the the following settings:
+       | Right click project → Properties → General → Products
+       | Verify the SysConfig version matches the SysConfig version CoreSDK is using.
+
+.. |error_image| image:: resources/rtos7_error.png
+

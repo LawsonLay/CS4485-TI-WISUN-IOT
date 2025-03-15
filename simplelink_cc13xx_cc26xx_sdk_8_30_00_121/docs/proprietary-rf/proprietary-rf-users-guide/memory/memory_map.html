@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Map &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User&#39;s Guide
+ 7.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Flash Vector Table" href="memory_management.html" />
+    <link rel="prev" title="Memory overview" href="../proprietary-rf-guide/memory-index.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug memory memory_map";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/examples-cc13xx_cc26xx.html">Examples User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/custom-hardware.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/nortos-index.html">noRTOS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/rf-core-index.html">RF Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/physical-rf-layer-cc13xx_cc26xx.html">Physical Layer (PHY)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../proprietary-rf-guide/memory-index.html">Memory overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Memory Map</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#litedevice-memory-map">CC13x1x3 or CC26x1x3 Memory Map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#device-memory-map">CC13xx or CC26xx Memory Map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#device7-memory-map">CC13x2x7 or CC26x2x7 Memory Map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#device1m-memory-map">CC13x4 or CC26x4 Memory Map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-map-variables">Memory Map Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="memory_management.html">Flash Vector Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory_management.html#customer-configuration-ccfg-table">Customer Configuration (CCFG) Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aux-as-ram.html">Using the AUX RAM as RAM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cache-as-ram.html">Using the Cache as RAM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-bim-index.html">BIM Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-mcuboot-index.html">MCUBoot Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/sysconfig-index.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/glossary-cc13xx_cc26xx.html">Terms and acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../proprietary-rf-guide/memory-index.html">Memory overview</a> &raquo;</li>
+      <li>Memory Map</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="memory-map">
+<span id="sec-memory-map"></span><h1>Memory Map<a class="headerlink" href="#memory-map" title="Permalink to this headline">¶</a></h1>
+<p>The devices supported by the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> each contains several memory
+regions including RAM, ROM, and Flash. This section aims to show how these
+memory regions are utilized by the stack and user application.</p>
+<p>After building your application, the full overview of all your objects and their
+location is stored in the .map file found in the build folder (e.g. Release
+folder). The .map file for a given project can be consulted to see exactly what
+objects reside in flash and ROM.</p>
+<div class="section" id="litedevice-memory-map">
+<h2>CC13x1x3 or CC26x1x3 Memory Map<a class="headerlink" href="#litedevice-memory-map" title="Permalink to this headline">¶</a></h2>
+<p>The following table contains the Memory Map for the CC13x1x3 or CC26x1x3.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 21%" />
+<col style="width: 17%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Memory Section</p></th>
+<th class="head"><p>Starting Address</p></th>
+<th class="head"><p>Size (bytes)</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="4"><p>Flash</p></td>
+<td><p>0x00000000</p></td>
+<td><p>60</p></td>
+<td><p>Cortex Interrupt Vecs</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Application / Stack Code</p></td>
+</tr>
+<tr class="row-even"><td><p>SNV*</p></td>
+<td><p>1 or 2 pages</p></td>
+<td><p>Simple Non-Volatile Storage</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x56000
+(Last flash page)</p></td>
+<td><p>88</p></td>
+<td><p><a class="reference internal" href="../proprietary-rf-guide/glossary-cc13xx_cc26xx.html#term-Customer-Configuration"><span class="xref std std-term">Customer Configuration</span></a></p></td>
+</tr>
+<tr class="row-even"><td rowspan="4"><p>RAM</p></td>
+<td><p>0x20000000</p></td>
+<td><p>216 B</p></td>
+<td><p>Interrupt Vector Table in RAM
+for dynamic Hwi creation</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>.bss and .data</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Application and/or Stack heap</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>TI-RTOS7 kernel system stack (CSTACK)</p></td>
+</tr>
+</tbody>
+</table>
+<p>*SNV is mandatory for most protocol stacks. Optional for other applications.</p>
+</div>
+<div class="section" id="device-memory-map">
+<h2>CC13xx or CC26xx Memory Map<a class="headerlink" href="#device-memory-map" title="Permalink to this headline">¶</a></h2>
+<p>The following table contains the memory map for the CC13xx or CC26xx.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 20%" />
+<col style="width: 15%" />
+<col style="width: 40%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Memory Section</p></td>
+<td><p>Starting Address</p></td>
+<td><p>Size (bytes)</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td rowspan="4"><p>Flash</p></td>
+<td><p>0x00000000</p></td>
+<td><p>60</p></td>
+<td><p>Cortex Interrupt Vecs</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Application / Stack Code</p></td>
+</tr>
+<tr class="row-even"><td><p>SNV*</p></td>
+<td><p>1 or 2 pages</p></td>
+<td><p>Simple Non-Volatile Storage</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x56000
+(Last flash page)</p></td>
+<td><p>88</p></td>
+<td><p><a class="reference internal" href="../proprietary-rf-guide/glossary-cc13xx_cc26xx.html#term-Customer-Configuration"><span class="xref std std-term">Customer Configuration</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>ROM</p></td>
+<td><p>0x10000000</p></td>
+<td><p>256 kB</p></td>
+<td><p>BLE-Stack/BLE5-stack, TI 15.4-Stack,
+Crypto, Driverlib, Boot, TI-RTOS</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>RAM</p></td>
+<td><p>0x20000000</p></td>
+<td><p>216 B</p></td>
+<td><p>Interrupt Vector Table in RAM
+for dynamic Hwi creation</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>.bss and .data</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Application and/or Stack heap</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>TI-RTOS7 kernel system stack (CSTACK)</p></td>
+</tr>
+<tr class="row-odd"><td><p>AUX RAM</p></td>
+<td><p>0x400E0000</p></td>
+<td><p>4 kB</p></td>
+<td><p>Sensor Controller RAM</p></td>
+</tr>
+</tbody>
+</table>
+<p>*SNV is mandatory for most protocol stacks. Optional for other applications.</p>
+</div>
+<div class="section" id="device7-memory-map">
+<h2>CC13x2x7 or CC26x2x7 Memory Map<a class="headerlink" href="#device7-memory-map" title="Permalink to this headline">¶</a></h2>
+<p>The following table contains the memory map for the CC13x2x7 or CC26x2x7.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 20%" />
+<col style="width: 15%" />
+<col style="width: 40%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Memory Section</p></td>
+<td><p>Starting Address</p></td>
+<td><p>Size (bytes)</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td rowspan="4"><p>Flash</p></td>
+<td><p>0x00000000</p></td>
+<td><p>60</p></td>
+<td><p>Cortex Interrupt Vecs</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Application / Stack Code</p></td>
+</tr>
+<tr class="row-even"><td><p>SNV*</p></td>
+<td><p>1 or 2 pages</p></td>
+<td><p>Simple Non-Volatile Storage</p></td>
+</tr>
+<tr class="row-odd"><td><p>0xAE000
+(Last flash page)</p></td>
+<td><p>88</p></td>
+<td><p><a class="reference internal" href="../proprietary-rf-guide/glossary-cc13xx_cc26xx.html#term-Customer-Configuration"><span class="xref std std-term">Customer Configuration</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>ROM</p></td>
+<td><p>0x10000000</p></td>
+<td><p>256 kB</p></td>
+<td><p>BLE-Stack/BLE5-stack, TI 15.4-Stack,
+Crypto, Driverlib, Boot, TI-RTOS</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>RAM</p></td>
+<td><p>0x20000000</p></td>
+<td><p>216 B</p></td>
+<td><p>Interrupt Vector Table in RAM
+for dynamic Hwi creation</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>.bss and .data</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Application and/or Stack heap</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>TI-RTOS7 kernel system stack (CSTACK)</p></td>
+</tr>
+<tr class="row-odd"><td><p>AUX RAM</p></td>
+<td><p>0x400E0000</p></td>
+<td><p>4 kB</p></td>
+<td><p>Sensor Controller RAM</p></td>
+</tr>
+</tbody>
+</table>
+<p>*SNV is mandatory for most protocol stacks. Optional for other applications.</p>
+</div>
+<div class="section" id="device1m-memory-map">
+<span id="memory-map-1m"></span><h2>CC13x4 or CC26x4 Memory Map<a class="headerlink" href="#device1m-memory-map" title="Permalink to this headline">¶</a></h2>
+<p>The following table contains the Memory Map for the CC13x4 or CC26x4.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 21%" />
+<col style="width: 17%" />
+<col style="width: 36%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Memory Section</p></td>
+<td><p>Starting Address</p></td>
+<td><p>Size (bytes)</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td rowspan="4"><p>Flash</p></td>
+<td><p>0x00000000</p></td>
+<td><p>60</p></td>
+<td><p>Cortex Interrupt Vecs</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Application / Stack Code</p></td>
+</tr>
+<tr class="row-even"><td><p>SNV*</p></td>
+<td><p>1 or 2 pages</p></td>
+<td><p>Simple Non-Volatile Storage</p></td>
+</tr>
+<tr class="row-odd"><td><p>0xFE000</p></td>
+<td><p>8192</p></td>
+<td><p>Last flash page</p></td>
+</tr>
+<tr class="row-even"><td><p>CCFG</p></td>
+<td><p>0x50000000</p></td>
+<td><p>2048</p></td>
+<td><p><a class="reference internal" href="../proprietary-rf-guide/glossary-cc13xx_cc26xx.html#term-Customer-Configuration"><span class="xref std std-term">Customer Configuration</span></a></p></td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>RAM</p></td>
+<td><p>Allocated by
+linker</p></td>
+<td><p>252 B</p></td>
+<td><p>Interrupt Vector Table in RAM
+for dynamic Hwi creation</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>.bss and .data</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Application and/or Stack heap</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>TI-RTOS7 kernel system stack (CSTACK)</p></td>
+</tr>
+<tr class="row-odd"><td><p>AUX RAM</p></td>
+<td><p>0x400E0000</p></td>
+<td><p>4 kB</p></td>
+<td><p>Sensor Controller RAM</p></td>
+</tr>
+</tbody>
+</table>
+<p>*SNV is mandatory for most protocol stacks. Optional for other applications.</p>
+</div>
+<div class="section" id="memory-map-variables">
+<h2>Memory Map Variables<a class="headerlink" href="#memory-map-variables" title="Permalink to this headline">¶</a></h2>
+<p>In the tables above, the following variables are platform dependent.</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt><strong>Last Flash Page</strong>: top of the Flash subtracted by its page size</dt><dd><ul>
+<li><p>CC13x1x3 or CC26x1x3 : <strong>344 kB</strong> or 0x56000 (0x58000 - 0x2000)</p></li>
+<li><p>CC13x2x1 or CC26x2x1 : <strong>344 kB</strong> or 0x56000 (0x58000 - 0x2000)</p></li>
+<li><p>CC13x2x7 or CC26x2x7 : <strong>696 kB</strong> or 0xAE000 (0xB0000 - 0x2000)</p></li>
+<li><p>CC13x4 or CC26x4 : <strong>1016 kB</strong> or 0xFE000 (0x100000 - 0x2000)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>ROM_SIZE</strong> :</dt><dd><ul>
+<li><p>CC13x1x3 or CC26x1x3 : N/A. ROM not used on device</p></li>
+<li><p>CC13x2x1 or CC26x2x1 : 256 kB</p></li>
+<li><p>CC13x2x7 or CC26x2x7 : 256 kB</p></li>
+<li><p>CC13x4 or CC26x4 : N/A. ROM not used on device</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>AUXRAM_SIZE</strong> :</dt><dd><ul>
+<li><p>CC13x1x3 or CC26x1x3 : N/A. No AUX RAM present on device</p></li>
+<li><p>CC13x2x1 or CC26x2x1 : 4 kB</p></li>
+<li><p>CC13x2x7 or CC26x2x7 : 4 kB</p></li>
+<li><p>CC13x4 or CC26x4 : 4 kB</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../proprietary-rf-guide/memory-index.html" class="btn btn-neutral float-left" title="Memory overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="memory_management.html" class="btn btn-neutral float-right" title="Flash Vector Table" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

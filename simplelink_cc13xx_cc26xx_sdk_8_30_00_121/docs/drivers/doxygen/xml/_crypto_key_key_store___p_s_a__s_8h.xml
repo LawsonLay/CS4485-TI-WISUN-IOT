@@ -1,0 +1,483 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_crypto_key_key_store___p_s_a__s_8h" kind="file" language="C++">
+    <compoundname>CryptoKeyKeyStore_PSA_s.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes refid="_crypto_c_c26_x4__s_8h" local="no">ti/drivers/crypto/CryptoCC26X4_s.h</includes>
+    <includes refid="_crypto_key_key_store___p_s_a_8h" local="no">ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h</includes>
+    <includes local="no">third_party/tfm/interface/include/psa/crypto.h</includes>
+    <includes local="no">third_party/tfm/interface/include/psa/service.h</includes>
+    <includes local="no">third_party/tfm/interface/include/psa/crypto_client_struct.h</includes>
+    <incdepgraph>
+      <node id="720">
+        <label>ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h</label>
+        <link refid="_crypto_key_key_store___p_s_a_8h"/>
+        <childnode refid="721" relation="include">
+        </childnode>
+        <childnode refid="722" relation="include">
+        </childnode>
+        <childnode refid="723" relation="include">
+        </childnode>
+        <childnode refid="724" relation="include">
+        </childnode>
+      </node>
+      <node id="722">
+        <label>third_party/hsmddk/include/Integration/Adapter_PSA/incl/psa/crypto.h</label>
+      </node>
+      <node id="718">
+        <label>stdint.h</label>
+      </node>
+      <node id="724">
+        <label>third_party/hsmddk/include/Integration/Adapter_PSA/Adapter_mbedTLS/incl/private_access.h</label>
+      </node>
+      <node id="721">
+        <label>ti/devices/DeviceFamily.h</label>
+      </node>
+      <node id="723">
+        <label>third_party/hsmddk/include/Integration/Adapter_PSA/incl/psa/crypto_extra.h</label>
+      </node>
+      <node id="727">
+        <label>third_party/tfm/interface/include/psa/crypto_client_struct.h</label>
+      </node>
+      <node id="725">
+        <label>third_party/tfm/interface/include/psa/crypto.h</label>
+      </node>
+      <node id="717">
+        <label>CryptoKeyKeyStore_PSA_s.h</label>
+        <link refid="_crypto_key_key_store___p_s_a__s_8h"/>
+        <childnode refid="718" relation="include">
+        </childnode>
+        <childnode refid="719" relation="include">
+        </childnode>
+        <childnode refid="720" relation="include">
+        </childnode>
+        <childnode refid="725" relation="include">
+        </childnode>
+        <childnode refid="726" relation="include">
+        </childnode>
+        <childnode refid="727" relation="include">
+        </childnode>
+      </node>
+      <node id="719">
+        <label>ti/drivers/crypto/CryptoCC26X4_s.h</label>
+        <link refid="_crypto_c_c26_x4__s_8h"/>
+        <childnode refid="718" relation="include">
+        </childnode>
+      </node>
+      <node id="726">
+        <label>third_party/tfm/interface/include/psa/service.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_key_store__s___get_key_msg" prot="public">KeyStore_s_GetKeyMsg</innerclass>
+    <innerclass refid="struct_key_store__s___generate_key_msg" prot="public">KeyStore_s_GenerateKeyMsg</innerclass>
+    <innerclass refid="struct_key_store__s___export_msg" prot="public">KeyStore_s_ExportMsg</innerclass>
+    <innerclass refid="struct_key_store__s___import_key_msg" prot="public">KeyStore_s_ImportKeyMsg</innerclass>
+    <innerclass refid="struct_key_store__s___destroy_purge_key_msg" prot="public">KeyStore_s_DestroyPurgeKeyMsg</innerclass>
+    <innerclass refid="struct_key_store__s___get_key_attributes_msg" prot="public">KeyStore_s_GetKeyAttributesMsg</innerclass>
+    <innerclass refid="struct_key_store__s___reset_key_attributes_msg" prot="public">KeyStore_s_ResetKeyAttributesMsg</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_crypto_key_key_store___p_s_a__s_8h_1ad1c2c892950e6ae158ea7f9e116e6786" prot="public" static="no">
+        <name>KEYSTORE_PSA_S_MSG_TYPE_GET_KEY</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a48f291a1928fa7e0eef89b2b0f3b7c06" kindref="member">KEYSTORE_PSA_S_MSG_TYPE</ref>(0U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="61" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_crypto_key_key_store___p_s_a__s_8h_1a742cf9cd0fd18999e320b90915ff1ed1" prot="public" static="no">
+        <name>KEYSTORE_PSA_S_MSG_TYPE_GENERATE_KEY</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a48f291a1928fa7e0eef89b2b0f3b7c06" kindref="member">KEYSTORE_PSA_S_MSG_TYPE</ref>(1U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="62" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_crypto_key_key_store___p_s_a__s_8h_1aa757e66127ed9cadd4a45aebdff3138e" prot="public" static="no">
+        <name>KEYSTORE_PSA_S_MSG_TYPE_EXPORT_PUBLIC_KEY</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a48f291a1928fa7e0eef89b2b0f3b7c06" kindref="member">KEYSTORE_PSA_S_MSG_TYPE</ref>(2U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="63" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_crypto_key_key_store___p_s_a__s_8h_1a7f20558bf05295f581d199e633afb351" prot="public" static="no">
+        <name>KEYSTORE_PSA_S_MSG_TYPE_EXPORT_KEY</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a48f291a1928fa7e0eef89b2b0f3b7c06" kindref="member">KEYSTORE_PSA_S_MSG_TYPE</ref>(3U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="64" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_crypto_key_key_store___p_s_a__s_8h_1a7fef9e7995ba6a825aa0b0454d831a2b" prot="public" static="no">
+        <name>KEYSTORE_PSA_S_MSG_TYPE_DESTROY_KEY</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a48f291a1928fa7e0eef89b2b0f3b7c06" kindref="member">KEYSTORE_PSA_S_MSG_TYPE</ref>(4U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="65" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_crypto_key_key_store___p_s_a__s_8h_1a8f3ce1d6f9124525d9ee0cebf7285772" prot="public" static="no">
+        <name>KEYSTORE_PSA_S_MSG_TYPE_IMPORT_KEY</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a48f291a1928fa7e0eef89b2b0f3b7c06" kindref="member">KEYSTORE_PSA_S_MSG_TYPE</ref>(5U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="66" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_crypto_key_key_store___p_s_a__s_8h_1a105dd85a8e219cb561bd7332ee9d951d" prot="public" static="no">
+        <name>KEYSTORE_PSA_S_MSG_TYPE_PURGE_KEY</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a48f291a1928fa7e0eef89b2b0f3b7c06" kindref="member">KEYSTORE_PSA_S_MSG_TYPE</ref>(6U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="67" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_crypto_key_key_store___p_s_a__s_8h_1af4404b827d695950117ba37a8e93ef20" prot="public" static="no">
+        <name>KEYSTORE_PSA_S_MSG_TYPE_GET_KEY_ATTRIBUTES</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a48f291a1928fa7e0eef89b2b0f3b7c06" kindref="member">KEYSTORE_PSA_S_MSG_TYPE</ref>(7U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="68" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_crypto_key_key_store___p_s_a__s_8h_1af682d3facfdd32ea0331cb93eb143f08" prot="public" static="no">
+        <name>KEYSTORE_PSA_S_MSG_TYPE_RESET_KEY_ATTRIBUTES</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a48f291a1928fa7e0eef89b2b0f3b7c06" kindref="member">KEYSTORE_PSA_S_MSG_TYPE</ref>(8U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="69" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_crypto_key_key_store___p_s_a__s_8h_1a644f54c24e64850d7e1d6c664e3d4c5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>psa_status_t</type>
+        <definition>psa_status_t KeyStore_s_handlePsaMsg</definition>
+        <argsstring>(psa_msg_t *msg)</argsstring>
+        <name>KeyStore_s_handlePsaMsg</name>
+        <param>
+          <type>psa_msg_t *</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Handles PSA messages for KeyStore secure driver. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This function should be called by secure partition thread only.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to PSA message</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>PSA_SUCCESS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>PSA_ERROR_PROGRAMMER_ERROR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if any args point to secure addresses. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="140" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_crypto_key_key_store___p_s_a__s_8h_1a002b280b112f4f33c6ad28b0ff01f6ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void KeyStore_s_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>KeyStore_s_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initializes the KeyStore secure driver. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This function should be called by secure partition thread only. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="147" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_crypto_key_key_store___p_s_a__s_8h_1ad52fb7c108ab0df723f0456588aeb158" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>psa_status_t</type>
+        <definition>psa_status_t KeyStore_s_copyKeyAttributesFromClient</definition>
+        <argsstring>(struct psa_client_key_attributes_s *clientKeyAttr, int32_t clientId, psa_key_attributes_t *keyAttributes)</argsstring>
+        <name>KeyStore_s_copyKeyAttributesFromClient</name>
+        <param>
+          <type>struct psa_client_key_attributes_s *</type>
+          <declname>clientKeyAttr</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>clientId</declname>
+        </param>
+        <param>
+          <type>psa_key_attributes_t *</type>
+          <declname>keyAttributes</declname>
+        </param>
+        <briefdescription>
+<para>Gets key attributes from client key attributes. Follows tfm_crypto_key_attributes_from_client() </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">clientKeyAttr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Client key attributes, address location must be verified to be in non-secure memory by calling functions </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">clientId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Partition ID of the calling client </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">keyAttributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Key attributes, no address verification necessary as this is always in secure side</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Always return <ref refid="_crypto_key_key_store___p_s_a_8h_1a17395988afbd6faee27eacf0d2c8f1d9" kindref="member">KEYSTORE_PSA_STATUS_SUCCESS</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="160" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_crypto_key_key_store___p_s_a__s_8h_1a87302fa225bccbbb10f215acf144bb58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void KeyStore_s_copyKeyIDFromClient</definition>
+        <argsstring>(KeyStore_PSA_KeyFileId *keyID, int32_t clientId, uint32_t *clientKeyID)</argsstring>
+        <name>KeyStore_s_copyKeyIDFromClient</name>
+        <param>
+          <type><ref refid="group__attributes_1ga54486a82cbcbaf04f23408c4181d39ec" kindref="member">KeyStore_PSA_KeyFileId</ref> *</type>
+          <declname>keyID</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>clientId</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>clientKeyID</declname>
+        </param>
+        <briefdescription>
+<para>Copies client key ID from non-secure side to secure side. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">keyID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Key ID, no address verification necessary as this is always in secure side </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">clientKeyID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Client key ID, address location must be verified to be in non-secure memory by calling functions </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">clientId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Client ID, partition ID from PSA call </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h" line="172" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Secure Crypto Service. </para>    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para><para><anchor id="_crypto_key_key_store___p_s_a__s_8h_1ti_drivers_cryptoutils_cryptokey_CryptoKeyKeyStore_PSA_s_Overview"/><heading level="1">Overview</heading>
+</para><para>The Secure KeyStore driver is used to access all KeyStore functions when using the TF-M. </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2022-2024,<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>-<sp/>http://www.ti.com</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">/*!*****************************************************************************</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/><sp/>@file<sp/><sp/><sp/><sp/><sp/><sp/><sp/>CryptoKeyKeyStore_PSA_s.h</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*<sp/><sp/>@brief<sp/><sp/><sp/><sp/><sp/><sp/>Secure<sp/>Crypto<sp/>Service</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_cryptoutils_cryptokey_CryptoKeyKeyStore_PSA_s_Overview</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Overview</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>The<sp/>Secure<sp/>KeyStore<sp/>driver<sp/>is<sp/>used<sp/>to<sp/>access<sp/>all<sp/>KeyStore<sp/>functions</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>when<sp/>using<sp/>the<sp/>TF-M.</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*******************************************************************************</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ti_drivers_cryptoutils_cryptokey_CryptoKeyKeyStore_PSA_s__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_drivers_cryptoutils_cryptokey_CryptoKeyKeyStore_PSA_s__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_crypto_c_c26_x4__s_8h" kindref="compound">ti/drivers/crypto/CryptoCC26X4_s.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_crypto_key_key_store___p_s_a_8h" kindref="compound">ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;third_party/tfm/interface/include/psa/crypto.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;third_party/tfm/interface/include/psa/service.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>For<sp/>client<sp/>side<sp/>key<sp/>attribute<sp/>structure<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;third_party/tfm/interface/include/psa/crypto_client_struct.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/>*<sp/>Crypto<sp/>Key<sp/>Store<sp/>secure<sp/>message<sp/>types</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="_crypto_key_key_store___p_s_a__s_8h_1ad1c2c892950e6ae158ea7f9e116e6786" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>KEYSTORE_PSA_S_MSG_TYPE_GET_KEY<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KEYSTORE_PSA_S_MSG_TYPE(0U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="_crypto_key_key_store___p_s_a__s_8h_1a742cf9cd0fd18999e320b90915ff1ed1" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>KEYSTORE_PSA_S_MSG_TYPE_GENERATE_KEY<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KEYSTORE_PSA_S_MSG_TYPE(1U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="_crypto_key_key_store___p_s_a__s_8h_1aa757e66127ed9cadd4a45aebdff3138e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>KEYSTORE_PSA_S_MSG_TYPE_EXPORT_PUBLIC_KEY<sp/><sp/><sp/><sp/>KEYSTORE_PSA_S_MSG_TYPE(2U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="_crypto_key_key_store___p_s_a__s_8h_1a7f20558bf05295f581d199e633afb351" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>KEYSTORE_PSA_S_MSG_TYPE_EXPORT_KEY<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KEYSTORE_PSA_S_MSG_TYPE(3U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="_crypto_key_key_store___p_s_a__s_8h_1a7fef9e7995ba6a825aa0b0454d831a2b" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>KEYSTORE_PSA_S_MSG_TYPE_DESTROY_KEY<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KEYSTORE_PSA_S_MSG_TYPE(4U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="_crypto_key_key_store___p_s_a__s_8h_1a8f3ce1d6f9124525d9ee0cebf7285772" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>KEYSTORE_PSA_S_MSG_TYPE_IMPORT_KEY<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KEYSTORE_PSA_S_MSG_TYPE(5U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="_crypto_key_key_store___p_s_a__s_8h_1a105dd85a8e219cb561bd7332ee9d951d" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>KEYSTORE_PSA_S_MSG_TYPE_PURGE_KEY<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>KEYSTORE_PSA_S_MSG_TYPE(6U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="_crypto_key_key_store___p_s_a__s_8h_1af4404b827d695950117ba37a8e93ef20" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>KEYSTORE_PSA_S_MSG_TYPE_GET_KEY_ATTRIBUTES<sp/><sp/><sp/>KEYSTORE_PSA_S_MSG_TYPE(7U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69" refid="_crypto_key_key_store___p_s_a__s_8h_1af682d3facfdd32ea0331cb93eb143f08" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>KEYSTORE_PSA_S_MSG_TYPE_RESET_KEY_ATTRIBUTES<sp/>KEYSTORE_PSA_S_MSG_TYPE(8U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/>*<sp/>============<sp/>KeyStore<sp/>driver<sp/>Secure<sp/>Message<sp/>Structs<sp/>=========</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/>*<sp/>These<sp/>secure<sp/>message<sp/>structs<sp/>correspond<sp/>to<sp/>the<sp/>secure<sp/>message<sp/>types<sp/>defined</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/>*<sp/>above.<sp/>Together,<sp/>they<sp/>are<sp/>used<sp/>by<sp/>non-secure<sp/>client<sp/>to<sp/>make<sp/>PSA<sp/>calls<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/>*<sp/>KeyStore<sp/>secure<sp/>service.<sp/>There<sp/>is<sp/>a<sp/>single<sp/>input<sp/>vector<sp/>for<sp/>the<sp/>PSA<sp/>call</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/>*<sp/>which<sp/>is<sp/>a<sp/>pointer<sp/>to<sp/>secure<sp/>message<sp/>struct.<sp/>If<sp/>the<sp/>underlying<sp/>function</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/>*<sp/>has<sp/>a<sp/>return<sp/>value,<sp/>there<sp/>is<sp/>a<sp/>single<sp/>output<sp/>vector<sp/>which<sp/>is<sp/>a<sp/>pointer<sp/>to</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/>*<sp/>storage<sp/>for<sp/>the<sp/>return<sp/>value.</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="struct_key_store__s___get_key_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="82" refid="struct_key_store__s___get_key_msg_1a6a7abc69ba24780d6e6a48bb9f39ebba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_key_store__s___get_key_msg_1a6a7abc69ba24780d6e6a48bb9f39ebba" kindref="member">key</ref>;</highlight></codeline>
+<codeline lineno="83" refid="struct_key_store__s___get_key_msg_1addd9342b999c684a1eb950427ab0bd93" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>*<ref refid="struct_key_store__s___get_key_msg_1addd9342b999c684a1eb950427ab0bd93" kindref="member">data</ref>;</highlight></codeline>
+<codeline lineno="84" refid="struct_key_store__s___get_key_msg_1a59bc4625ccfa0008806c498b31454e2a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="struct_key_store__s___get_key_msg_1a59bc4625ccfa0008806c498b31454e2a" kindref="member">dataSize</ref>;</highlight></codeline>
+<codeline lineno="85" refid="struct_key_store__s___get_key_msg_1a68b980893b1d09e48c89409a5626dfc9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>*<ref refid="struct_key_store__s___get_key_msg_1a68b980893b1d09e48c89409a5626dfc9" kindref="member">dataLength</ref>;</highlight></codeline>
+<codeline lineno="86" refid="struct_key_store__s___get_key_msg_1afb8c0eacf4ec6a96cdd2dec892596266" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_crypto_key_key_store___p_s_a_8h_1affb3aa48f4e8a24ca3cfea0d79bb5ec6" kindref="member">KeyStore_PSA_Algorithm</ref><sp/><ref refid="struct_key_store__s___get_key_msg_1afb8c0eacf4ec6a96cdd2dec892596266" kindref="member">alg</ref>;</highlight></codeline>
+<codeline lineno="87" refid="struct_key_store__s___get_key_msg_1a9e57c3f883668af2b156e35e85bf34e1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_crypto_key_key_store___p_s_a_8h_1ae56fe7b014c6118a37cd85c6952c9e95" kindref="member">KeyStore_PSA_KeyUsage</ref><sp/><ref refid="struct_key_store__s___get_key_msg_1a9e57c3f883668af2b156e35e85bf34e1" kindref="member">usage</ref>;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal">}<sp/><ref refid="struct_key_store__s___get_key_msg" kindref="compound">KeyStore_s_GetKeyMsg</ref>;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="struct_key_store__s___generate_key_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="92" refid="struct_key_store__s___generate_key_msg_1aa46b0b55f980c9fe9cca1540153b65e2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">psa_client_key_attributes_s<sp/>*<ref refid="struct_key_store__s___generate_key_msg_1aa46b0b55f980c9fe9cca1540153b65e2" kindref="member">attributes</ref>;</highlight></codeline>
+<codeline lineno="93" refid="struct_key_store__s___generate_key_msg_1ab5cd2f81b0d5275e7026dffda75983bb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__attributes_1ga54486a82cbcbaf04f23408c4181d39ec" kindref="member">KeyStore_PSA_KeyFileId</ref><sp/>*<ref refid="struct_key_store__s___generate_key_msg_1ab5cd2f81b0d5275e7026dffda75983bb" kindref="member">key</ref>;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal">}<sp/><ref refid="struct_key_store__s___generate_key_msg" kindref="compound">KeyStore_s_GenerateKeyMsg</ref>;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Msg<sp/>for<sp/>KeyStore_PSA_exportKey()<sp/>and<sp/>KeyStore_PSA_exportPublicKey()<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97" refid="struct_key_store__s___export_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="99" refid="struct_key_store__s___export_msg_1a1afa9de5f8b359769bd9d9bd540a2b71" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_key_store__s___export_msg_1a1afa9de5f8b359769bd9d9bd540a2b71" kindref="member">key</ref>;</highlight></codeline>
+<codeline lineno="100" refid="struct_key_store__s___export_msg_1a902c2c11f392e15bdc61e6f2d7b3aaf2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>*<ref refid="struct_key_store__s___export_msg_1a902c2c11f392e15bdc61e6f2d7b3aaf2" kindref="member">data</ref>;</highlight></codeline>
+<codeline lineno="101" refid="struct_key_store__s___export_msg_1a6716c7bb44b6d6ebd1a7f2141c87815c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="struct_key_store__s___export_msg_1a6716c7bb44b6d6ebd1a7f2141c87815c" kindref="member">dataSize</ref>;</highlight></codeline>
+<codeline lineno="102" refid="struct_key_store__s___export_msg_1af0806eefef2e7c889ffa67709772d15c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>*<ref refid="struct_key_store__s___export_msg_1af0806eefef2e7c889ffa67709772d15c" kindref="member">dataLength</ref>;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal">}<sp/><ref refid="struct_key_store__s___export_msg" kindref="compound">KeyStore_s_ExportMsg</ref>;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="struct_key_store__s___import_key_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="107" refid="struct_key_store__s___import_key_msg_1a49f7989473b051cff5a9aa300371d268" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">psa_client_key_attributes_s<sp/>*<ref refid="struct_key_store__s___import_key_msg_1a49f7989473b051cff5a9aa300371d268" kindref="member">attributes</ref>;</highlight></codeline>
+<codeline lineno="108" refid="struct_key_store__s___import_key_msg_1a0b16b7bc994c64b10c15b00236874499" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>*<ref refid="struct_key_store__s___import_key_msg_1a0b16b7bc994c64b10c15b00236874499" kindref="member">data</ref>;</highlight></codeline>
+<codeline lineno="109" refid="struct_key_store__s___import_key_msg_1ae359aeda87f668c23e7338985c6dad81" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="struct_key_store__s___import_key_msg_1ae359aeda87f668c23e7338985c6dad81" kindref="member">dataLength</ref>;</highlight></codeline>
+<codeline lineno="110" refid="struct_key_store__s___import_key_msg_1a29403aa49f7a60144846f73b63731b9b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>*<ref refid="struct_key_store__s___import_key_msg_1a29403aa49f7a60144846f73b63731b9b" kindref="member">key</ref>;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal">}<sp/><ref refid="struct_key_store__s___import_key_msg" kindref="compound">KeyStore_s_ImportKeyMsg</ref>;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Msg<sp/>for<sp/>KeyStore_PSA_destroyKey()<sp/>and<sp/>KeyStore_PSA_purgeKey()<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114" refid="struct_key_store__s___destroy_purge_key_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="116" refid="struct_key_store__s___destroy_purge_key_msg_1a73d76088a2ce903bfb0ee631f9f60487" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_key_store__s___destroy_purge_key_msg_1a73d76088a2ce903bfb0ee631f9f60487" kindref="member">key</ref>;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal">}<sp/><ref refid="struct_key_store__s___destroy_purge_key_msg" kindref="compound">KeyStore_s_DestroyPurgeKeyMsg</ref>;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119" refid="struct_key_store__s___get_key_attributes_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="121" refid="struct_key_store__s___get_key_attributes_msg_1ad7d8a96abf7eaa0d286e482f1e5c5625" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_key_store__s___get_key_attributes_msg_1ad7d8a96abf7eaa0d286e482f1e5c5625" kindref="member">key</ref>;</highlight></codeline>
+<codeline lineno="122" refid="struct_key_store__s___get_key_attributes_msg_1a08f4ffacc568b700a2ac6ff6a658db97" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">psa_client_key_attributes_s<sp/>*<ref refid="struct_key_store__s___get_key_attributes_msg_1a08f4ffacc568b700a2ac6ff6a658db97" kindref="member">attributes</ref>;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal">}<sp/><ref refid="struct_key_store__s___get_key_attributes_msg" kindref="compound">KeyStore_s_GetKeyAttributesMsg</ref>;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125" refid="struct_key_store__s___reset_key_attributes_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="127" refid="struct_key_store__s___reset_key_attributes_msg_1ade5010cf332e1601540bdb8d48d148de" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">psa_client_key_attributes_s<sp/>*<ref refid="struct_key_store__s___reset_key_attributes_msg_1ade5010cf332e1601540bdb8d48d148de" kindref="member">attributes</ref>;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal">}<sp/><ref refid="struct_key_store__s___reset_key_attributes_msg" kindref="compound">KeyStore_s_ResetKeyAttributesMsg</ref>;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal">psa_status_t<sp/><ref refid="_crypto_key_key_store___p_s_a__s_8h_1a644f54c24e64850d7e1d6c664e3d4c5b" kindref="member">KeyStore_s_handlePsaMsg</ref>(psa_msg_t<sp/>*msg);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_crypto_key_key_store___p_s_a__s_8h_1a002b280b112f4f33c6ad28b0ff01f6ee" kindref="member">KeyStore_s_init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal">psa_status_t<sp/><ref refid="_crypto_key_key_store___p_s_a__s_8h_1ad52fb7c108ab0df723f0456588aeb158" kindref="member">KeyStore_s_copyKeyAttributesFromClient</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>psa_client_key_attributes_s<sp/>*clientKeyAttr,</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32_t<sp/>clientId,</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>psa_key_attributes_t<sp/>*keyAttributes);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_crypto_key_key_store___p_s_a__s_8h_1a87302fa225bccbbb10f215acf144bb58" kindref="member">KeyStore_s_copyKeyIDFromClient</ref>(<ref refid="group__attributes_1ga54486a82cbcbaf04f23408c4181d39ec" kindref="member">KeyStore_PSA_KeyFileId</ref><sp/>*keyID,<sp/>int32_t<sp/>clientId,<sp/>uint32_t<sp/>*clientKeyID);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_drivers_cryptoutils_cryptokey_CryptoKeyKeyStore_PSA_s__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_s.h"/>
+  </compounddef>
+</doxygen>

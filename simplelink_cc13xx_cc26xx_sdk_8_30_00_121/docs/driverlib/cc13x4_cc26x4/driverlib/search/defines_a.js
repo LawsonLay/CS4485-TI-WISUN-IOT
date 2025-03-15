@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['rom_5fapi_5fflash_5ftable',['ROM_API_FLASH_TABLE',['../rom_8h.html#a460f51bd87fa48761858dfefaf8f2580',1,'rom.h']]],
+  ['rom_5fapi_5ftable',['ROM_API_TABLE',['../rom_8h.html#a1c55d330b862f5464ef463feb42c0c31',1,'rom.h']]],
+  ['rom_5fflashdisablesectorsforwrite',['ROM_FlashDisableSectorsForWrite',['../rom_8h.html#ac1d1f8225f9e8345f0cc37587a8694ac',1,'rom.h']]],
+  ['rom_5fflashefusereadrow',['ROM_FlashEfuseReadRow',['../rom_8h.html#ae288d894fa5b41cc57d56925bba4c1c3',1,'rom.h']]],
+  ['rom_5fflashpowermodeget',['ROM_FlashPowerModeGet',['../rom_8h.html#a8bc77d56a80245109efd65cddd944622',1,'rom.h']]],
+  ['rom_5fflashpowermodeset',['ROM_FlashPowerModeSet',['../rom_8h.html#a138041e15bbbd27f36a3edcb879e09b3',1,'rom.h']]],
+  ['rom_5fflashprogram',['ROM_FlashProgram',['../rom_8h.html#abec53a3b73cc07e9f7f4344431b1e361',1,'rom.h']]],
+  ['rom_5fflashprogram4x',['ROM_FlashProgram4X',['../rom_8h.html#a2f1af4f43013a48680c042be0f29159b',1,'rom.h']]],
+  ['rom_5fflashprotectionget',['ROM_FlashProtectionGet',['../rom_8h.html#acf5122e578901e218572a792d86b6ccd',1,'rom.h']]],
+  ['rom_5fflashprotectionsave',['ROM_FlashProtectionSave',['../rom_8h.html#a69ae65398f196bc101bfd57e9cbb0d89',1,'rom.h']]],
+  ['rom_5fflashprotectionset',['ROM_FlashProtectionSet',['../rom_8h.html#af6e39da0bccb999cdb545868b6ddbfb2',1,'rom.h']]],
+  ['rom_5fflashsectorerase',['ROM_FlashSectorErase',['../rom_8h.html#a743cd2c69132fdb0798de83094ad81ba',1,'rom.h']]],
+  ['rom_5fhapi_5ftable_5faddr',['ROM_HAPI_TABLE_ADDR',['../rom_8h.html#a0e13a7c4fe1726264ebb7bfe1f76247e',1,'rom.h']]],
+  ['rom_5fversion',['ROM_VERSION',['../rom_8h.html#a0a87395d06abaeedd7e6c759b194f3e7',1,'rom.h']]],
+  ['rotate',['ROTATE',['../sw__chacha_8c.html#a0c6257aa90a00e0744a9cb67d1ec6ce3',1,'sw_chacha.c']]],
+  ['rotl16',['ROTL16',['../sw__ecrypt-portable_8h.html#a5d6e840a695123c0e7a9c3e521c08b16',1,'sw_ecrypt-portable.h']]],
+  ['rotl32',['ROTL32',['../sw__ecrypt-portable_8h.html#a453d6c05303385256d9893904b125483',1,'sw_ecrypt-portable.h']]],
+  ['rotl64',['ROTL64',['../sw__ecrypt-portable_8h.html#adbf40bd680f2fbd941095600ac73a88d',1,'sw_ecrypt-portable.h']]],
+  ['rotl8',['ROTL8',['../sw__ecrypt-portable_8h.html#ae43dbcd15a6bd16fd6eedd945ac5611b',1,'sw_ecrypt-portable.h']]],
+  ['rotr16',['ROTR16',['../sw__ecrypt-portable_8h.html#ab8c3b7b2b266d18464d6bb7d760f39db',1,'sw_ecrypt-portable.h']]],
+  ['rotr32',['ROTR32',['../sw__ecrypt-portable_8h.html#a8e72efbf8b605d1ae9b5b3d7cd5642f6',1,'sw_ecrypt-portable.h']]],
+  ['rotr64',['ROTR64',['../sw__ecrypt-portable_8h.html#a3721df74aa1812d2a89b914bed00a05c',1,'sw_ecrypt-portable.h']]],
+  ['rotr8',['ROTR8',['../sw__ecrypt-portable_8h.html#a3a5904184dcbc816140fbd1e0113a4e8',1,'sw_ecrypt-portable.h']]],
+  ['rtc_5fcv_5fto_5fms',['RTC_CV_TO_MS',['../osc_8c.html#a84e2ef2892213ad4a4f275252801369a',1,'osc.c']]],
+  ['rtc_5fcv_5fto_5fus',['RTC_CV_TO_US',['../osc_8c.html#a6abf7e6bb075a2cba1441a8c27ba2528',1,'osc.c']]]
+];

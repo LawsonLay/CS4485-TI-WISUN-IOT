@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using the AUX RAM as RAM &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User&#39;s Guide
+ 7.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using the Cache as RAM" href="cache-as-ram.html" />
+    <link rel="prev" title="Flash Vector Table" href="memory_management.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug memory aux-as-ram";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/ti154stack-index-cc13xx_cc26xx.html">TI 15.4-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ti154stack-guide/memory-index.html">Memory overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="memory_map.html">Memory Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory_management.html">Flash Vector Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory_management.html#customer-configuration-ccfg-table">Customer Configuration (CCFG) Table</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Using the AUX RAM as RAM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modifying-the-application">Modifying the application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cache-as-ram.html">Using the Cache as RAM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/migration-guide-cc13xx_cc26xx.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack/api-reference.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ti154stack-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ti154stack-guide/memory-index.html">Memory overview</a> &raquo;</li>
+      <li>Using the AUX RAM as RAM</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="using-the-aux-ram-as-ram">
+<span id="using-the-aux-as-ram"></span><h1>Using the AUX RAM as RAM<a class="headerlink" href="#using-the-aux-ram-as-ram" title="Permalink to this headline">¶</a></h1>
+<p>For variants other than the CC13x1x3 or CC26x1x3, you can use this memory as RAM for your
+application if it does not use the Sensor Controller. However, access to this
+memory is significantly slower than access to the SRAM. This may lead to
+increased power consumption and slower program execution. Additionally, if using
+the AUX RAM as RAM it is important that you test <strong>thoroughly</strong>. Certain objects,
+when put in AUX RAM can cause the application to crash. One should test for each
+object they want to store in AUX RAM.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The Application Processor (AP) can do other tasks while the data is being
+transferred to AUX RAM, but if the bus buffer gets full during back to back
+writes, it will stall the AP until there is free space in the buffer. After
+you write a series of data to AUX RAM you should implement a singe read access
+to make sure all the data has been written. The read access will stall the AP
+until all the data has been transferred to AUX RAM.</p>
+</div>
+<div class="section" id="modifying-the-application">
+<h2>Modifying the application<a class="headerlink" href="#modifying-the-application" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Open the project properties and add the symbol <code class="docutils literal notranslate"><span class="pre">AUX_AS_RAM=1</span></code> to the linker options:</p></li>
+</ol>
+<ul class="simple">
+<li><p>In CCS, right click on the Project → select Properties → Build → ARM Linker → Advanced Options → Command File Preprocessing. Click on the small <strong>Add…</strong> button at the top right of the box <em>Pre-define preprocessor macro _name_to_value_</em> and type the symbol <code class="docutils literal notranslate"><span class="pre">AUX_AS_RAM=1</span></code>.</p></li>
+<li><p>In IAR, right click on the Project → Options → Linker. Locate the box <em>Configuration file symbol definitions</em> and type the symbol <code class="docutils literal notranslate"><span class="pre">AUX_AS_RAM=1</span></code>.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Modify the linker command/configuration file. Each toolchain has different options, pragmas and syntax, therefore check the steps below for the three supported toolchains: TI ARMCL, TI ARM Clang and IAR.</p></li>
+</ol>
+<p><strong>TI ARMCL:</strong></p>
+<ul>
+<li><p>In the linker command file <code class="docutils literal notranslate"><span class="pre">cc26xx_app.cmd</span></code>, define the AUX_RAM
+memory area:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#ifdef AUX_AS_RAM
+#define AUX_RAM_BASE            0x400E0000
+#define AUX_RAM_SIZE            0x800
+#endif /* AUX_AS_RAM */
+</pre></div>
+</div>
+</li>
+<li><p>Create a AUX_RAM memory section in <code class="docutils literal notranslate"><span class="pre">MEMORY{}</span></code></p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#ifdef AUX_AS_RAM
+AUX_RAM (RWX) : origin = AUX_RAM_BASE, length = AUX_RAM_SIZE
+#endif /* AUX_AS_RAM */
+</pre></div>
+</div>
+</div></blockquote>
+<ul>
+<li><p>Add sections of memory or code to AUX_RAM in <code class="docutils literal notranslate"><span class="pre">SECTIONS{}</span></code></p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-number">Listing 23. </span><span class="caption-text">Move object files into AUX_RAM. Example from simple_peripheral (<code class="docutils literal notranslate"><span class="pre">cc26xx_app.cmd</span></code>).</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#ifdef AUX_AS_RAM
+  reorganized_into_auxram
+  {
+    simple_peripheral.obj(.data)
+    devinfoservice.obj(.data)
+    simple_gatt_profile.obj(.data)
+    icall.obj(.data)
+    board.obj(.bss)
+    } &gt; AUX_RAM
+#endif/* AUX_AS_RAM */
+</pre></div>
+</div>
+</div>
+</li>
+</ul>
+<p>The .obj files are listed in the FlashROM folder of the app project.
+They are also listed with size in the .map file. A detailed
+description of the linker command file and memory sections is given
+in this article <a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/sdto_cgt_Linker-Command-File-Primer.html">Linker Command File Primer</a>.</p>
+<p>If you want more control over what is stored in AUX_RAM, individual
+variables can be stored there with the <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">DATA_SECTION</span></code> command.
+Please note that this is only possible for global variables.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-number">Listing 24. </span><span class="caption-text">Move the global <em>display handle</em> variable into a new  AUX RAM section called <code class="docutils literal notranslate"><span class="pre">my_section</span></code>.</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Display Interface</span>
+<span class="cp">#pragma DATA_SECTION(dispHandle, &quot;my_section&quot;)</span>
+<span class="n">Display_Handle</span><span class="w"> </span><span class="n">dispHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>You can find <code class="docutils literal notranslate"><span class="pre">my_section</span></code> in the map-file. Here you will find the names of the
+objects included in <code class="docutils literal notranslate"><span class="pre">my_section</span></code>. In this case, the object is
+<code class="docutils literal notranslate"><span class="pre">simple_peripheral.obj</span> <span class="pre">(my_section)</span></code>.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-number">Listing 25. </span><span class="caption-text">In the linker command file (<code class="docutils literal notranslate"><span class="pre">cc26xx_app.cmd</span></code>), add the section to AUX_RAM.</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#ifdef AUX_AS_RAM
+  reorganized_into_auxram
+  {
+    simple_peripheral.obj(my_section)
+  } &gt; AUX_RAM
+#endif /* AUX_AS_RAM */
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>When making alterations only to the linker command file, please make sure to
+press <em>Rebuild</em>, not just <em>Build</em>.
+(CCS will not recognize that you have made changes to the project before you
+press <em>Rebuild</em>.)</p>
+</div>
+<p><strong>TI ARM Clang:</strong></p>
+<p>The linker command file is very similar to the TI ARMCL toolchain. For additional details, check chapter 5 of the <a class="reference external" href="https://software-dl.ti.com/codegen/docs/tiarmclang/rel1_0_0_sts/tiarmclang_ug/tiarmclang-portfolio/index.html">TI ARM Clang User’s Guide</a>.</p>
+<ul>
+<li><p>In the linker command file <code class="docutils literal notranslate"><span class="pre">cc26xx_app.cmd</span></code>, define the AUX_RAM memory area:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#ifdef AUX_AS_RAM
+#define AUX_RAM_BASE            0x400E0000
+#define AUX_RAM_SIZE            0x800
+#endif /* AUX_AS_RAM */
+</pre></div>
+</div>
+</li>
+<li><p>Create a AUX_RAM memory section in <code class="docutils literal notranslate"><span class="pre">MEMORY{}</span></code></p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#ifdef AUX_AS_RAM
+AUX_RAM (RWX) : origin = AUX_RAM_BASE, length = AUX_RAM_SIZE
+#endif /* AUX_AS_RAM */
+</pre></div>
+</div>
+</div></blockquote>
+<ul>
+<li><p>Add sections of memory or code to AUX_RAM in <code class="docutils literal notranslate"><span class="pre">SECTIONS{}</span></code></p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">Listing 26. </span><span class="caption-text">Move object files into AUX_RAM. Example from simple_peripheral (<code class="docutils literal notranslate"><span class="pre">cc26xx_app.cmd</span></code>).</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#ifdef AUX_AS_RAM
+  reorganized_into_auxram
+  {
+    simple_peripheral.o(.data)
+    devinfoservice.o(.data)
+    simple_gatt_profile.o(.data)
+    icall.o(.data)
+    board.o(.bss)
+    } &gt; AUX_RAM
+#endif/* AUX_AS_RAM */
+</pre></div>
+</div>
+</div>
+</li>
+</ul>
+<p>The .o files are listed in the FlashROM folder of the app project.
+They are also listed with size in the .map file. A detailed description of the
+linker command file and memory sections is given in this article <a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/sdto_cgt_Linker-Command-File-Primer.html">Linker Command File Primer</a>.</p>
+<p>If you want more control over what is stored in AUX_RAM, individual
+variables can be stored there with the <code class="docutils literal notranslate"><span class="pre">__attribute__((section(&quot;section_name&quot;)))</span></code> command.
+Please note that this is only possible for global variables.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-number">Listing 27. </span><span class="caption-text">Move the global <em>display handle</em> variable into a new  AUX RAM section called <code class="docutils literal notranslate"><span class="pre">my_section</span></code>.</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Display Interface</span>
+<span class="n">__attribute__</span><span class="p">((</span><span class="n">section</span><span class="p">(</span><span class="s">&quot;my_section&quot;</span><span class="p">)))</span><span class="w"></span>
+<span class="n">Display_Handle</span><span class="w"> </span><span class="n">dispHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>You can find <code class="docutils literal notranslate"><span class="pre">my_section</span></code> in the map-file. Here you will find the names of the
+objects included in <code class="docutils literal notranslate"><span class="pre">my_section</span></code>. In this case, the object is
+<code class="docutils literal notranslate"><span class="pre">simple_peripheral.o</span> <span class="pre">(my_section)</span></code>.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-number">Listing 28. </span><span class="caption-text">In the linker command file (<code class="docutils literal notranslate"><span class="pre">cc26xx_app.cmd</span></code>), add the section to AUX_RAM.</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#ifdef AUX_AS_RAM
+  reorganized_into_auxram
+  {
+    simple_peripheral.o(my_section)
+  } &gt; AUX_RAM
+#endif /* AUX_AS_RAM */
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>When making alterations only to the linker command file, please make sure to
+press <em>Rebuild</em>, not just <em>Build</em>.
+(CCS will not recognize that you have made changes to the project before you
+press <em>Rebuild</em>.)</p>
+</div>
+<p><strong>IAR:</strong></p>
+<ul>
+<li><p>Open the linker configuration file <code class="docutils literal notranslate"><span class="pre">cc26xx_app.icf</span></code>. Under <code class="docutils literal notranslate"><span class="pre">Memory</span> <span class="pre">Definitions</span></code>, add</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>////////////////////////////////////////////////////////////////////////////////
+// AUX_RAM
+//
+if ( isdefinedsymbol(AUX_AS_RAM) )
+{
+  define symbol AUX_RAM_START        = 0x400E0000;
+  define symbol AUX_RAM_SIZE         = 0x800;
+  define symbol AUX_RAM_END          = AUX_RAM_START + AUX_RAM_SIZE;
+}
+</pre></div>
+</div>
+</li>
+<li><p>Under <code class="docutils literal notranslate"><span class="pre">Memory</span> <span class="pre">Regions</span></code>, add</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if ( isdefinedsymbol(AUX_AS_RAM) )
+{
+  define region AUX_RAM               = mem:[from AUX_RAM_START to AUX_RAM_END];
+}
+</pre></div>
+</div>
+</li>
+<li><p>Under <code class="docutils literal notranslate"><span class="pre">Memory</span> <span class="pre">Placement</span></code>, add</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-number">Listing 29. </span><span class="caption-text">Move object files into AUX_RAM. Example from simple_peripheral (<code class="docutils literal notranslate"><span class="pre">cc26xx_app.icf</span></code>).</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if ( isdefinedsymbol(AUX_AS_RAM) )
+{
+  // AUX_RAM
+  define block AUXDATA { section .data object simple_peripheral.o,
+                         section .data object devinfoservice.o,
+                         section .data object simple_gatt_profile,
+                         section .data object icall.o,
+                         section .data object board.o};
+  place in AUX_RAM { block AUXDATA };
+}
+</pre></div>
+</div>
+</div>
+</li>
+</ul>
+<p>The .o-files are listed in the .map file. For more information on the linker
+configuration file, please see <a class="reference external" href="http://ftp.iar.se/WWWfiles/arm/webic/doc/EWARM_DevelopmentGuide.ENU.pdf">IAR C/C++ Development Guide</a>.</p>
+<p>If you want more control over what is stored in AUX_RAM, individual
+variables can be stored there with the <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">location</span></code> command.
+Please note that this is only possible for global variables.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-number">Listing 30. </span><span class="caption-text">Move the global <em>display handle</em> variable into a new Cache RAM section called <code class="docutils literal notranslate"><span class="pre">my_section</span></code>.</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Display Interface</span>
+<span class="cp">#pragma location=&quot;my_section&quot;</span>
+<span class="n">Display_Handle</span><span class="w"> </span><span class="n">dispHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>You can find <code class="docutils literal notranslate"><span class="pre">my_section</span></code> in the map-file. Here you will find the names of the
+objects included in <code class="docutils literal notranslate"><span class="pre">my_section</span></code>. In this case, the object is
+<code class="docutils literal notranslate"><span class="pre">simple_peripheral.o</span> <span class="pre">(my_section)</span></code>.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-number">Listing 31. </span><span class="caption-text">In the linker configuration file (<code class="docutils literal notranslate"><span class="pre">cc26xx_app.cmd</span></code>), add the section to AUX_RAM.</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if ( isdefinedsymbol(AUX_AS_RAM) )
+{
+  // AUX_RAM
+  define block AUXDATA { section my_section object simple_peripheral.o };
+  place in AUX_RAM { block AUXDATA };
+}
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="memory_management.html" class="btn btn-neutral float-left" title="Flash Vector Table" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cache-as-ram.html" class="btn btn-neutral float-right" title="Using the Cache as RAM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

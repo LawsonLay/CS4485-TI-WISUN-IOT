@@ -1,0 +1,184 @@
+Clock accuracies and Bluetooth LE
+---------------------------------
+
+The |CORESPEC| defines two clock accuracies, the "Active clock accuracy"
+(|CORESPEC| Vol 6, Part B, §4.2.1) and the "Sleep clock accuracy"
+(|CORESPEC| Vol 6, Part B, §4.2.1).
+In general, the HF XTAL (high frequency crystal oscillator) is used as active
+clock and the LF XTAL (low frequency crystal oscillator) is used as sleep
+clock. Tuning of the HF XTAL and LF XTAL is discussed in the 
+`HW Configuration Guide <https://www.ti.com/lit/swra640>`_.
+
+The |CORESPEC| require the active clock to have a drift less than or equal
+to ±50 ppm and there is no way (nor need) to specify its accuracy to the
+|BLE5_STACK|.
+
+The |CORESPEC| require the sleep clock to have a drift less than or equal
+to ±500 ppm. The accuracy of this clock has a real impact on the timing of
+the radio operations. This is why its accuracy should be communicated to
+the |BLE5_STACK| using the function :ble_api:`HCI_EXT_SetSCACmd`.
+
+As mentioned before, the accuracy of the sleep clock has an impact on the
+timing of the radio operations. This effect is called window widening and is
+described in details in the |CORESPEC| Vol 6, Part B, §4.2.4.
+
+ *The Link Layer is expecting to receive a packet within a certain window
+ (extending from receiveWindowStart to receiveWindowEnd) or at a certain time
+ (in which case receiveWindowStart and receiveWindowEnd are both that time)
+ but, because of active clock accuracies and sleep clock accuracies there is
+ uncertainty as to the exact timing of that window at the sending Link Layer.
+ The recipient should therefore adjust its listening time to allow for this
+ uncertainty. The increase in listening time is called the window widening.
+ Assuming the clock inaccuracies are purely given in parts per million (ppm),
+ it is calculated as follows:*
+
+   .. math::
+
+     \textrm{transmitterAllowance} = (\textrm{txCA} / \textrm{1000000}) * (\textrm{receiveWindowEnd} - \textrm{timeOfLastSync}) + \textrm{J us}
+
+ *where J shall be 2 when the active clock applies and 16 when the sleep clock
+ applies and the other parameters are specified in Table 4.1. of* |CORESPEC|
+ *Vol 6, Part B, §4.2.4.*
+
+The connection parameters can be chosen independently of the clock accuracy
+– absolutely all the combinations of clock accuracy and connection parameters
+are allowed. As can be observed in the formula, for a given clock accuracy,
+the listening window length is proportional to the effective connection
+interval. At a certain point this might have a significant impact on the
+energy consumption.
+
+.. _using-32-khz-crystal-less-mode:
+
+Using 32-kHz Crystal-Less Mode
+------------------------------
+
+|STACKVER| includes support for operating the |DEVICE| in a 32-kHz
+crystal-less mode for peripheral and broadcaster (beacon) role configurations.
+By using the internal low-frequency RC oscillator (RCOSC_LF), the 32-kHz crystal
+can be removed from the board layout.
+
+The `Running Bluetooth Low Energy on CC2640 Without 32 kHz Crystal <http://www.ti.com/lit/pdf/swra499>`_
+application note provides details on the tradeoffs of such configuration.
+
+There are a few steps that must be taken to enable 32-kHz crystal-less mode.
+Please refer to below sections based on the type of project.
+
+ * SysConfig enabled projects
+ * BIM projects (bim_onchip and bim_offchip)
+ * non-SysConfig enabled projects
+
+
+SysConfig enabled projects
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Bluetooth LE examples should be configured to use RCOSC_LF using the SysConfig
+:ref:`sysconfig-advanced-settings`.
+
+For OAD projects, make sure to also configure the BIM to use RCOSC_LF (see below).
+
+BIM projects
+^^^^^^^^^^^^
+
+Review the comments in the file `Application`\`ccfg_app.c` and add the following
+code at the end of the file.
+
+.. code-block:: c
+ :caption: Set CCFG to use RCOSC_LF as LF clock source
+ :name: Select RCOSC as LF clock source
+
+ #define SET_CCFG_MODE_CONF_SCLK_LF_OPTION       0x3
+
+Non-SysConfig enabled projects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. note::
+   Certain projects provide a build target already enabling the following.
+   In that case we recommend to leverage it.
+
+For any peripheral project, the following change is required in order to enable 
+RCOSC_LF.
+You will find more detail regarding this feature in the aforementioned application note.
+
+#. Include ```rcosc_calibration.c``, ``rcosc_calibration.h`` and
+   ``ccfg_app_ble_rcosc.c`` files which are located at
+   *<SDK\_INSTALL\_DIR>\\source\\ti\\ble5stack\\common\\cc26xx\\rcosc*
+
+#. Exclude ccfg_app_ble.c from build.
+
+#. Add USE_RCOSC to the ``.opt`` file containing the application defines.
+
+#. Add the following code to your peripheral project.c
+
+   .. code-block:: c
+      :caption: RCOSC calibration include
+      :name: include RCOSC_calibration
+
+      #ifdef USE_RCOSC
+      #include "rcosc_calibration.h"
+      #endif //USE_RCOSC
+
+#. Add the following code to your peripheralproject_init function in peripheral project.c
+
+   .. code-block:: c
+      :caption: RCOSC calibration enable
+      :name: enable RCOSC_calibration
+
+      #ifdef USE_RCOSC
+      RCOSC_enableCalibration();
+      #endif // USE_RCOSC
+
+#. If using a custom board file, enable the RCOSC in the power policy.
+   When using SysConfig to generate a board file, be sure to select
+   ``Calibrate RCOSC_LF`` in the TI Drivers -> Power settings menu in SysConfig.
+
+#. Constrain the temperature variation to be less than 1°C/sec. If the
+   temperature is to change faster than 1°C/sec, then a short
+   calibration interval must be used.
+   Calibration interval can be tuned in rcosc_calibration.h
+
+   .. code-block:: c
+      :caption: RCOSCLF calibration interval
+      :name: RCOSCLF calibration interval setup
+
+      // 1000 ms
+      #define RCOSC_CALIBRATION_PERIOD   1000
+
+.. note::
+   Use of the internal RCOSC_LF requires a sleep clock accuracy (SCA) of 500 ppm.
+
+Initial Board Bring Up
+----------------------
+
+When powering up a custom board with the |DEVICE| for the first time, it is
+recommended to follow the Board Bring-Up section on `CC13xx/CC26xx Hardware 
+Configuration and PCB Design Considerations`_. After confirming that the board 
+is being powered correctly by the battery or power supply and can be identified 
+by the JTAG tool, programming the device with a minimal SW application to verify 
+stability is also suggested.
+
+TI recommends using the simple_peripheral sample application for initial board
+bring up with modifications to the ``ti_drivers_config.c`` file to:
+
+#. Disable all GPIO pin access
+#. Select the correct RF front end setting (done by SysConfig)
+
+
+The TI |STACK| does not require any GPIO pins to be configured in order to
+establish and maintain a BLE connection. Ensure that ``Display_DISABLE_ALL``
+is defined in the application Predefined Symbols so that diagnostic logging
+data is not routed to any GPIO pin. If your custom board uses a different device
+configuration, such as the 32 kHz crystal-less RCOSC_LF configuration, be sure
+to make these device changes to the project. With this minimal application
+configuration you should be able to establish a BLE connection
+(e.g., with a smart phone or BTool) to your board at the expected range.
+If you are not able to complete this step, then it is likely there is a
+misconfiguration of the RF front end or you have other board related or layout
+issues.
+
+After confirming that your board can maintain a BLE connection, you can now
+validate that your BLE application functions as expected on the custom board.
+Again, it is suggested to enable your GPIO pins one at a time in the board file
+and comment-out access to other GPIO pins in your application. If you do
+encounter a CPU exception (HWI abort) during this phase it is likely that a
+GPIO pin is incorrectly mapped in your custom board file or your application is
+attempting to access a GPIO pin that does not exist in your device package type.

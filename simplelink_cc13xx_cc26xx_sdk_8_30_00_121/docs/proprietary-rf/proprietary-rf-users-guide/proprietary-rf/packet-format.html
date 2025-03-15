@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Packet Format &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User&#39;s Guide
+ 7.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Migrating from CC1101" href="cc1101-migration.html" />
+    <link rel="prev" title="Proprietary Mode" href="../proprietary-rf-guide/proprietary-rf-index-cc13xx_cc26xx.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug proprietary-rf packet-format";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/examples-cc13xx_cc26xx.html">Examples User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/custom-hardware.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/nortos-index.html">noRTOS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/rf-core-index.html">RF Core</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../proprietary-rf-guide/physical-rf-layer-cc13xx_cc26xx.html">Physical Layer (PHY)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="operation_modes.html">Operation Modes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-index-cc13xx_cc26xx.html">Proprietary Mode</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Packet Format</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#preamble">Preamble</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sync-word">Sync Word</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#crc-calculation">CRC Calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overrides">Overrides</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cc1101-migration.html">Migrating from CC1101</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../proprietary-rf-guide/ieee-rf-index-cc13xx_cc26xx.html">IEEE 802.15.4 Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tx-power.html">TX Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manchester-encoding.html">Manchester Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packet-format-debugging.html">Packet format debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time-synchronization.html">Time synchronization over the air</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-bim-index.html">BIM Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-mcuboot-index.html">MCUBoot Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/sysconfig-index.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/glossary-cc13xx_cc26xx.html">Terms and acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../proprietary-rf-guide/physical-rf-layer-cc13xx_cc26xx.html">Physical Layer (PHY)</a> &raquo;</li>
+          <li><a href="../proprietary-rf-guide/proprietary-rf-index-cc13xx_cc26xx.html">Proprietary Mode</a> &raquo;</li>
+      <li>Packet Format</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="packet-format">
+<h1>Packet Format<a class="headerlink" href="#packet-format" title="Permalink to this headline">¶</a></h1>
+<p>Messages on the proprietary PHY layer always have the following structure:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Preamble</dt>
+<dd class="field-odd"><p>A series of alternating 0 and 1, used for automatic gain control.</p>
+</dd>
+<dt class="field-even">Sync Word</dt>
+<dd class="field-even"><p>Determines the actual start of the message.</p>
+</dd>
+<dt class="field-odd">Header</dt>
+<dd class="field-odd"><p>May contain length and address information for the receiver (optional).</p>
+</dd>
+<dt class="field-even">Payload</dt>
+<dd class="field-even"><p>The message data.</p>
+</dd>
+<dt class="field-odd">CRC</dt>
+<dd class="field-odd"><p>Verifier for message integrity (optional).</p>
+</dd>
+</dl>
+<p>The below image shows an example for a proprietary packet with a 2-byte sync
+word and 2 bytes payload.  The binary modulator signal represents either a
+positive or a negative frequency deviation from the chosen center frequency,
+because we are using a binary FSK modulation.</p>
+<img alt="../_images/aafig-ed8bcd477714b861129d3f8ea801fd536df5da0f.png" src="../_images/aafig-ed8bcd477714b861129d3f8ea801fd536df5da0f.png" />
+<p>The RF core contains a flexible packet engine that can process two
+customizable packet formats:</p>
+<ol class="arabic simple">
+<li><p>A <strong>simple packet format</strong></p></li>
+<li><p>An <strong>advanced packet format</strong></p></li>
+</ol>
+<p>Table <a class="reference internal" href="#tab-packet-format-comparison"><span class="std std-numref">Table 10.</span></a> compares both variants. The
+advanced packet format is a superset of the simple one: all features of the
+simple format are available and it is possible to achieve the same
+configuration, but the corresponding advanced radio operation commands are
+larger and can be more time-consuming to configure. SmartRF Studio exports
+only RF operations for the simple packet format.</p>
+<span id="tab-packet-format-comparison"></span><table class="docutils align-default" id="id3">
+<caption><span class="caption-number">Table 10. </span><span class="caption-text">Comparison of the simple and advanced packet format.</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 36%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Simple packet format</p></th>
+<th class="head"><p>Advanced packet format</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Compatible radio
+operation commands</p></td>
+<td><ul class="simple">
+<li><p>CMD_PROP_TX</p></li>
+<li><p>CMD_PROP_RX</p></li>
+<li><p>CMD_PROP_RX_SNIFF</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>CMD_PROP_TX_ADV</p></li>
+<li><p><a class="reference internal" href="../rf-core/rf-commands-reference/cmd_prop_rx_adv.html"><span class="doc">CMD_PROP_RX_ADV</span></a></p></li>
+<li><p>CMD_PROP_RX_ADV_SNIFF</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Preamble</p></td>
+<td><ul class="simple">
+<li><p>1 bit, 4 bits or 1 .. 30 bytes</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>1 bit, 4 bits or 1 .. 30 bytes</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Sync word</p></td>
+<td><ul class="simple">
+<li><p>8 .. 32 bits</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>8 .. 32 bits</p></li>
+<li><p>up to two sync words for <a class="reference internal" href="../rf-core/rf-commands-reference/cmd_prop_rx_adv.html"><span class="doc">CMD_PROP_RX_ADV</span></a></p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Header</p></td>
+<td><ul class="simple">
+<li><p>optional</p></li>
+<li><p>may contain either length, address
+or both in fixed order</p></li>
+<li><p>cannot contain unused entries</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>optional</p></li>
+<li><p>may contain either length, address or both in arbitrary
+order</p></li>
+<li><p>size can be 0..32 bits</p></li>
+<li><p>may contain unused data</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Length information</p></td>
+<td><ul class="simple">
+<li><p>is part of the header</p></li>
+<li><p>is always 8 bits long if enabled</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>is part of the header</p></li>
+<li><p>can be 1..16 bits long if enabled</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Address information</p></td>
+<td><ul class="simple">
+<li><p>is part of the header</p></li>
+<li><p>size is fixed to 1 byte</p></li>
+<li><p>filter for up to 2 addresses</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>location is either in or after the header</p></li>
+<li><p>size is variable, up to 8 bytes</p></li>
+<li><p>filter for up to 32 addresses</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Payload</p></td>
+<td><ul class="simple">
+<li><p>fixed or variable length, up to 255 bytes</p></li>
+<li><p>unlimited length possible</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>fixed or variable length, up to 65535 bytes</p></li>
+<li><p>unlimited length possible</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>CRC</p></td>
+<td><ul class="simple">
+<li><p>optional</p></li>
+<li><p>calculated over payload and header
+if header is enabled</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>optional</p></li>
+<li><p>calculated over payload, header (optional) and sync word
+(optional)</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="preamble">
+<h2>Preamble<a class="headerlink" href="#preamble" title="Permalink to this headline">¶</a></h2>
+<p>The preamble in the proprietary PHY consists of an alternating bit pattern
+<code class="docutils literal notranslate"><span class="pre">0101...</span></code> and is used to determine the amplifier gain. Unlike in some older
+TI devices, it is not needed for bit synchronization.</p>
+<p>The preamble configuration is done in the setup command and is used for both
+TX and RX operations.  The length can be set between 1 and 30 bytes using the
+<code class="docutils literal notranslate"><span class="pre">nPreamBytes</span></code> field.  Additionally, 1 bit can be programmed by <code class="docutils literal notranslate"><span class="pre">nPreamBytes</span>
+<span class="pre">=</span> <span class="pre">0</span></code> and 4 bits can be programmed by <code class="docutils literal notranslate"><span class="pre">nPreamBytes</span> <span class="pre">=</span> <span class="pre">31</span></code>.  The <code class="docutils literal notranslate"><span class="pre">preamMode</span></code>
+field controls the preamble pattern. Either <code class="docutils literal notranslate"><span class="pre">0101..</span></code> or <code class="docutils literal notranslate"><span class="pre">1010..</span></code> is
+possible:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">rfc_CMD_PROP_RADIO_DIV_SETUP_t</span><span class="w"> </span><span class="n">RF_cmdPropRadioDivSetup</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">.</span><span class="n">preamConf</span><span class="p">.</span><span class="n">nPreamBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="c1">// 4 bytes</span>
+<span class="w">    </span><span class="p">.</span><span class="n">preamConf</span><span class="p">.</span><span class="n">preamMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">   </span><span class="c1">// 0101...</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sync-word">
+<h2>Sync Word<a class="headerlink" href="#sync-word" title="Permalink to this headline">¶</a></h2>
+<p>The sync word is used by the packet engine to detect the packet start. For
+best performance, it must satisfy multiple criteria:</p>
+<ul class="simple">
+<li><p>Its auto-correlation must have one high peak and only flat side lobes.</p></li>
+<li><p>It must be long enough to be unique. 4 bytes are recommended.</p></li>
+</ul>
+<p><a class="reference internal" href="#fig-rf-autocorrelation"><span class="std std-numref">Figure 31.</span></a> compares the auto correlation of the
+default TI sync word 0x930B51DE and the bad sync word 0xAAAAAAAA.</p>
+<div class="figure align-default" id="id4">
+<span id="fig-rf-autocorrelation"></span><img alt="../_images/rf-autocorrelation.png" src="../_images/rf-autocorrelation.png" />
+<p class="caption"><span class="caption-number">Figure 31. </span><span class="caption-text">Auto correlation of the sync word 0x930B51DE which is the default sync word
+for TI devices since CC1101.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>Reducing the sync word length to less than 4 bytes and choosing a bad sync
+word will likely have a negative impact on the packet error rate. It should be
+only changed for a good reason and with the above correlation analysis.</p>
+</div>
+<div class="section" id="crc-calculation">
+<h2>CRC Calculation<a class="headerlink" href="#crc-calculation" title="Permalink to this headline">¶</a></h2>
+<p>When transmitting a packet, a checksum of the header and payload is appended
+to each packet. The receiver then calculates its own checksum and compares
+it to the received one.  When both match, the packet was received correctly.
+Otherwise, it must have been corrupted during transmission. The CC13xx and CC26xx
+family implements a checksum based on <a class="reference external" href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check">CRC</a>. Whether the packet header shall be considered for
+CRC calculation, can be specified for each TX and RX command.</p>
+<p>The default CRC configuration on the CC13xx and CC26xx family in proprietary mode is
+similar to older devices in the CC1xxxx family:</p>
+<ul class="simple">
+<li><p>CRC-16</p></li>
+<li><p>Polynom : x^16 + x^15 + x^2 + 1 (0x8005)</p></li>
+<li><p>Initialization: 0xFFFF</p></li>
+<li><p>no input byte reversal</p></li>
+<li><p>no output byte reversal</p></li>
+<li><p>no XOR</p></li>
+</ul>
+<p>An equivalent implementation in C can be found in the design note <a class="reference external" href="http://www.ti.com/lit/swra111">DN502</a></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define CRC16_POLY 0x8005</span>
+<span class="n">UINT16</span><span class="w"> </span><span class="nf">culCalcCRC</span><span class="p">(</span><span class="n">BYTE</span><span class="w"> </span><span class="n">crcData</span><span class="p">,</span><span class="w"> </span><span class="n">UINT16</span><span class="w"> </span><span class="n">crcReg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">UINT8</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(((</span><span class="n">crcReg</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x8000</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">(</span><span class="n">crcData</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x80</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">crcReg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">crcReg</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">CRC16_POLY</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">crcReg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">crcReg</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">crcData</span><span class="w"> </span><span class="o">&lt;&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">crcReg</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="c1">// culCalcCRC</span>
+
+
+<span class="c1">//----------------------------------------------------------------</span>
+<span class="c1">// Example of Usage</span>
+
+<span class="cp">#define CRC_INIT 0xFFFF</span>
+<span class="n">UINT8</span><span class="w"> </span><span class="n">txBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span><span class="w"></span>
+<span class="n">UINT16</span><span class="w"> </span><span class="n">checksum</span><span class="p">;</span><span class="w"></span>
+<span class="n">UINT8</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">checksum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CRC_INIT</span><span class="p">;</span><span class="w"> </span><span class="c1">// Init value for CRC calculation</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">checksum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">culCalcCRC</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">checksum</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="overrides">
+<h2>Overrides<a class="headerlink" href="#overrides" title="Permalink to this headline">¶</a></h2>
+<p>Preamble, sync and CRC settings are set through the RF commands APIs. In addition some settings are available through overrides. The overrides should be placed at the end of the override list but before the last (uint32_t)0xFFFFFFFF.</p>
+<div class="section" id="id2">
+<h3>Preamble<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>If a different preamble than 0x55 or 0xAA is need, the following override can be used:</p>
+<blockquote>
+<div><p>//Preamble: 0x33
+(uint32_t) 0x33330043</p>
+<p>//Preamble: 0xCC
+(uint32_t) 0xCCCC0043</p>
+</div></blockquote>
+<div class="section" id="sync-word-qualifier">
+<h4>Sync Word Qualifier<a class="headerlink" href="#sync-word-qualifier" title="Permalink to this headline">¶</a></h4>
+<p>The sync word is selectable to have a length from 8 bits to 32 bits. This is set
+in <code class="docutils literal notranslate"><span class="pre">CMD_PROP_RADIO_DIV_SETUP.nSwBits</span></code>.</p>
+<p>The sync word threshold could be set with the following override:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">HW_REG_OVERRIDE</span><span class="p">(</span><span class="mh">0x5114</span><span class="p">,</span><span class="mi">0</span><span class="n">xYYZZ</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where YY and ZZ is the threshold for the two correlators. For simplicity the two
+thresholds can be set equal. Higher value is stricter. The default sync
+threshold is given by:</p>
+<div class="math">
+<p><img src="../_images/math/64f865e699ac75c349e382cfd5785e49ff596c44.svg" alt="\textrm{Sync Threshold} = \frac{30*\textrm{nSwBits}}{32} + 9"/></p>
+</div><p>For the nominal 50 kbps setting given in SmartRF Studio the correlator based sync word search is followed by a strict sync word search meaning that all bit have to be equal. If a different patch is used or Manchester is selected the strict sync word search may be turned off and a stricter threshold has to be set to avoid false sync.</p>
+</div>
+</div>
+<div class="section" id="crc-polynomial">
+<h3>CRC polynomial<a class="headerlink" href="#crc-polynomial" title="Permalink to this headline">¶</a></h3>
+<p><strong>Change CRC length</strong> :</p>
+<p>The default CRC length is 16 bits (CRC-16)</p>
+<p>Example: How to use an 8 bits CRC instead:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">overrides</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">//...</span>
+<span class="w">        </span><span class="cm">/* Override numCrcBits = 0x08 */</span><span class="w"></span>
+<span class="w">        </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="w"> </span><span class="mh">0x00088113</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="c1">//...</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The new length is the 2 MSB bytes (0x0008) and 0x8113 is the address where the length is placed.</p>
+<p><strong>Change CRC polynomial</strong></p>
+<p>The default polynomial:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">crcPoly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x80050000</span><span class="w"> </span><span class="p">(</span><span class="o">=</span><span class="w"> </span><span class="mh">0x8005</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">16</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">15</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CRC</span><span class="mi">-16</span><span class="o">-</span><span class="n">IBM</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">normal</span><span class="w"> </span><span class="n">form</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Example: How to use polynomial 0x07 (= x^8 + x^2 + x + 1 = CRC-8-CCITT in normal form) instead, for 8-bit CRC generation:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">overrides</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">//...</span>
+<span class="w">        </span><span class="cm">/* Override CRC polynomial = x^8 + x^2 + x + 1 = 0x07 (PHAPOLY1 = 0x07000000) */</span><span class="w"></span>
+<span class="w">        </span><span class="n">HW32_ARRAY_OVERRIDE</span><span class="p">(</span><span class="mh">0x2004</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"></span>
+<span class="w">        </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="w"> </span><span class="mh">0x07000000</span><span class="p">,</span><span class="w">    </span><span class="c1">// Polynomial is stored in the MSBs of the 32 bits hardware register</span>
+<span class="w">        </span><span class="c1">//..</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Example for 16 bit CRC:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">overrides</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="c1">// Configure new CRC-16 polynom</span>
+<span class="w">    </span><span class="n">HW32_ARRAY_OVERRIDE</span><span class="p">(</span><span class="mh">0x2004</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// The CRC-16 polynome: CRC-16-CCITT normal form, 0x1021 is x^16 + x^12 + x^5 + 1</span>
+<span class="w">    </span><span class="mh">0x10210000</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Example for 4 bit CRC with init value 1111b:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">overrides</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="c1">// Set 4 bit CRC</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="mh">0x00048113</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Set CRC polynomial to x^4 + x + 1 (address)</span>
+<span class="w">    </span><span class="n">HW32_ARRAY_OVERRIDE</span><span class="p">(</span><span class="mh">0x2004</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Set CRC polynomial to x^4 + x + 1 (value)</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="mh">0x30000000</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Set CRC initialization to 0b1111 (address)</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="mh">0xC0040051</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Set CRC initialization to 0b1111 (value)</span>
+<span class="w">    </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="mh">0xF0000000</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Change CRC init value</strong> :</p>
+<p>Default initial value:</p>
+<p>radioPar.crcInit = 0xFFFF0000 (i.e. 0xFFFF for 16-bit CRC, because the most significant bits are used)
+Example: How to use 8-bit init value 0xFF instead:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">overrides</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">//...</span>
+<span class="w">        </span><span class="cm">/* Override crcInit = 0xFF000000 */</span><span class="w"></span>
+<span class="w">        </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="w"> </span><span class="mh">0xC0040051</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="w"> </span><span class="mh">0xFF000000</span><span class="p">,</span><span class="w">    </span><span class="c1">// Init value is stored in MSBs of a 32-bit value</span>
+<span class="w">        </span><span class="c1">//...</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Change CRC xor value</strong> (used to XOR CRC value after calculation)</p>
+<p>With PROP + GenFSK default we have:</p>
+<p>radioPar.crcXor = 0x00000000 (i.e. 0x0000 for 16-bits CRC, i.e. no XORing is done, because the most significant bits are used)
+Example override: How to use 8-bits XOR value 0xFF instead (if XOR value of 0x00 is desired, there’s no need to override this):</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">overrides</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">//...</span>
+<span class="w">        </span><span class="cm">/* Override crcXor = 0xFF000000 */</span><span class="w"></span>
+<span class="w">        </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="w"> </span><span class="mh">0xc0040061</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="w"> </span><span class="mh">0xFF000000</span><span class="p">,</span><span class="w">    </span><span class="c1">// XOR value is stored in MSBs of a 32-bit value</span>
+<span class="w">        </span><span class="c1">//...</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../proprietary-rf-guide/proprietary-rf-index-cc13xx_cc26xx.html" class="btn btn-neutral float-left" title="Proprietary Mode" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cc1101-migration.html" class="btn btn-neutral float-right" title="Migrating from CC1101" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

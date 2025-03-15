@@ -1,0 +1,60 @@
+.. _sec-oad-ext-flash-image-header:
+
+OAD External Flash Image Header
+===============================
+
+The OAD external flash image header is an extension of the core image header
+with added information that enables external flash OAD.
+
+The external flash image header is placed in a table at the beginning of
+external flash and will occupy one page per entry.
+
+The BIM will iterate through the external flash image header table to determine
+which image is ready to load based on the external flash image header.  Once
+the target image is selected, the external flash image header will point to the
+image's address in internal flash so that the BIM can copy the image to
+internal flash.
+
+For an illustration, see the figure below, further illustration of the full
+external flash layout is covered in :ref:`sec-ext-flash-layout`.
+
+    .. ditaa::
+        :--no-separation:
+        :name: ext_flash_layout
+
+                         +--------------------+ <- N x EFL_PAGE_SIZE
+                         | EFL Image Header N |
+                         | c777               |
+                         +--------------------+
+                         |        ... c777    |
+          Image headers  +--------------------+ <- 3 x EFL_PAGE_SIZE
+          are added and  | EFL Image Header 2 |
+        searched upwards | c777               |
+                ^        +--------------------+ <- 2 x EFL_PAGE_SIZE
+                |        | EFL Image Header 1 |
+                |        | c777               |
+                |        +--------------------+ <- EFL_PAGE_SIZE
+                |        | EFL Image Header 0 |
+                |        | c777               |
+        --------+--------+--------------------+ <- 0x00000000
+
+Additional Fields in External Flash Image Header
+------------------------------------------------
+
+As mentioned above the external flash image header is an exact copy of the core
+image header that is part of the OAD image with the following additional
+fields. These fields are used by the BIM and user application.
+
+.. _tbl-efl-image-header-description-table:
+.. table:: Description of the External Flash image header.
+
+    +--------------------------------+-------------------+-----------------------------------------------------+
+    | Field                          | Size (in bytes)   | Description                                         |
+    +================================+===================+=====================================================+
+    | External Flash Address         | 4                 | Address of the image in external flash              |
+    +--------------------------------+-------------------+-----------------------------------------------------+
+    | Counter/Timestamp              | 4                 | Timestamp used by application to mark download time |
+    +--------------------------------+-------------------+-----------------------------------------------------+
+
+The external flash image header header structure is defined in the
+``ExtImageInfo_t`` structure within ``ext_flash_layout.h``.

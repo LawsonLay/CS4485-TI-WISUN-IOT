@@ -1,0 +1,40 @@
+GATT_ClientCharCfgUpdated
+-------------------------
+:Opcode: 0x0580
+:Event Description: A GATT Client Characteristic Configuration has been updated.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:attributeHandle: Handle of the CCC
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:value: New Value of the CCC.
+
+ :Size: 2 byte(s)
+ :Range: 
+
+

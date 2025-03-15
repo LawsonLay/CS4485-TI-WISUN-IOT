@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="union_e_c_d_h___operation" kind="union" language="C++" prot="public">
+    <compoundname>ECDH_Operation</compoundname>
+    <includes refid="_e_c_d_h_8h" local="no">ECDH.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="union_e_c_d_h___operation_1a8ea2131537f172ed34e83779420dc4b4" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_e_c_d_h___operation_generate_public_key" kindref="compound">ECDH_OperationGeneratePublicKey</ref> *</type>
+        <definition>ECDH_OperationGeneratePublicKey* ECDH_Operation::generatePublicKey</definition>
+        <argsstring></argsstring>
+        <name>generatePublicKey</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to an <ref refid="struct_e_c_d_h___operation_generate_public_key" kindref="compound">ECDH_OperationGeneratePublicKey</ref> struct </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDH.h" line="684" column="1" bodyfile="source/ti/drivers/ECDH.h" bodystart="684" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="union_e_c_d_h___operation_1a8a20982b0df1ae92824e6d2b1726506e" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_e_c_d_h___operation_compute_shared_secret" kindref="compound">ECDH_OperationComputeSharedSecret</ref> *</type>
+        <definition>ECDH_OperationComputeSharedSecret* ECDH_Operation::computeSharedSecret</definition>
+        <argsstring></argsstring>
+        <name>computeSharedSecret</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to an <ref refid="struct_e_c_d_h___operation_compute_shared_secret" kindref="compound">ECDH_OperationComputeSharedSecret</ref> struct </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDH.h" line="685" column="1" bodyfile="source/ti/drivers/ECDH.h" bodystart="685" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Union containing pointers to all supported operation structs. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="772">
+        <label>CryptoKey</label>
+        <link refid="struct_crypto_key"/>
+        <childnode refid="773" relation="usage">
+          <edgelabel>plaintext</edgelabel>
+        </childnode>
+        <childnode refid="774" relation="usage">
+          <edgelabel>keyStore</edgelabel>
+        </childnode>
+      </node>
+      <node id="770">
+        <label>ECDH_OperationGeneratePublicKey</label>
+        <link refid="struct_e_c_d_h___operation_generate_public_key"/>
+        <childnode refid="771" relation="usage">
+          <edgelabel>curve</edgelabel>
+        </childnode>
+        <childnode refid="772" relation="usage">
+          <edgelabel>myPrivateKey</edgelabel>
+          <edgelabel>myPublicKey</edgelabel>
+        </childnode>
+      </node>
+      <node id="769">
+        <label>ECDH_Operation</label>
+        <link refid="union_e_c_d_h___operation"/>
+        <childnode refid="770" relation="usage">
+          <edgelabel>generatePublicKey</edgelabel>
+        </childnode>
+        <childnode refid="775" relation="usage">
+          <edgelabel>computeSharedSecret</edgelabel>
+        </childnode>
+      </node>
+      <node id="771">
+        <label>ECCParams_CurveParams</label>
+        <link refid="struct_e_c_c_params___curve_params"/>
+      </node>
+      <node id="773">
+        <label>CryptoKey_Plaintext</label>
+        <link refid="struct_crypto_key___plaintext"/>
+      </node>
+      <node id="775">
+        <label>ECDH_OperationComputeSharedSecret</label>
+        <link refid="struct_e_c_d_h___operation_compute_shared_secret"/>
+        <childnode refid="771" relation="usage">
+          <edgelabel>curve</edgelabel>
+        </childnode>
+        <childnode refid="772" relation="usage">
+          <edgelabel>theirPublicKey</edgelabel>
+          <edgelabel>myPrivateKey</edgelabel>
+          <edgelabel>sharedSecret</edgelabel>
+        </childnode>
+      </node>
+      <node id="774">
+        <label>CryptoKey_KeyStore</label>
+        <link refid="struct_crypto_key___key_store"/>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/ECDH.h" line="683" column="1" bodyfile="source/ti/drivers/ECDH.h" bodystart="682" bodyend="688"/>
+    <listofallmembers>
+      <member refid="union_e_c_d_h___operation_1a8a20982b0df1ae92824e6d2b1726506e" prot="public" virt="non-virtual"><scope>ECDH_Operation</scope><name>computeSharedSecret</name></member>
+      <member refid="union_e_c_d_h___operation_1a8ea2131537f172ed34e83779420dc4b4" prot="public" virt="non-virtual"><scope>ECDH_Operation</scope><name>generatePublicKey</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

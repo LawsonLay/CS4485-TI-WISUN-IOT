@@ -1,0 +1,203 @@
+.. _sec-oad-bim-on-chip:
+
+BIM for On-Chip OAD (Split Image)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This section describes the behavior of the BIM for on-chip OAD where
+the split image approach is used. This approach requires the application and
+protocol stack to be separately executable images. As with off-chip OAD, it is
+BIM's responsibility to locate which image should be run. In an on-chip OAD
+system there are only two image types that can be executed safely:
+
+ - Persistent application (0x00): Permanently resident application that
+   implements OAD profile
+ - User application (0x01): OAD upgradeable application that implements OAD
+   reset service and user functionality
+
+For more information about OAD image types, refer to the
+:ref:`sec-oad-image-header` section of this chapter. The roles and
+responsibilities of each application in an on-chip system is defined in the
+:ref:`oad-process` section.
+
+In summary, the applications are responsible for storing a candidate image in
+internal flash, performing all OAD procedures and protocols, setting the BIM
+variable, and resetting the device when appropriate. The BIM variable is a
+shared RAM variable that allows the application to indicate which image should
+be selected by the BIM before resetting. This is described in
+:ref:`sect-ram-argument`.
+
+Based on the BIM var and the fields in the image header, the BIM will decide
+which image is most fit to run. The following will
+describe the process by which the BIM selects an image.
+
+.. _fig-bim-on-chip-split-image-flowchart:
+.. figure:: resources/bim_sequence_diagram_onchip_splitimage.png
+    :scale: 100 %
+    :align: center
+
+    Functional Overview of On-chip BIM (split image)
+
+.. The above image was generated with the following UML
+
+.. .. uml::
+    :caption: Sequence diagram for on-chip BIM image selection process
+    :align: center
+
+    @startuml
+    (*)  --> "Device Boot"
+    If "BIM Var is set?" then
+        --> [Yes] "Set image type, flash page variable based on BIM var"
+        --> "Read OAD Image ID field from current flash page"
+        If "Image ID found?" then
+            --> [Yes] "Read remaining image header"
+            If "Image header compatible/valid?" then
+                --> [Yes] "Perform additional image validation/copy"
+                If "Image is ready to run" then
+                    --> [Yes] "Jump to Image"
+                    -->(*)
+                else
+                    --> [No] "Change image type, reset flash page"
+                Endif
+            else
+                --> [No] "Increase flash page number"
+            Endif
+        else
+            --> [No] If "Reached the end of flash?" then
+                If "Max number of search iterations?"
+                    --> [Yes] "Low power mode"
+                    --> "Low power mode"
+                else
+                    --> [No] "Change image type, reset flash page"
+                    --> "Read OAD Image ID field from current flash page"
+                Endif
+            else
+                --> [No] "Increase flash page number"
+                --> "Read OAD Image ID field from current flash page"
+            Endif
+        Endif
+
+    else
+        --> [No] "Set image type to user application, flash page to 0"
+        --> "Read OAD Image ID field from current flash page"
+    Endif
+    @enduml
+
+    Functional Overview of On-chip BIM (split image)
+
+The image above is described in words below. In order to determine which
+image is best to run, BIM takes the following measures:
+
+    1. At startup, the BIM checks the BIM variable and sets active flash page or
+        image type based on :ref:`sect-ram-argument`. If BIM variable is unset
+        it will default to flash page of 0 and image type of user application.
+
+    2. BIM checks to make sure the max search iterations have not been exceeded
+
+    3. BIM looks for a valid image header in internal flash by reading the first
+       8 bytes to find the valid image Identification value.
+
+        - If a valid image header is found, BIM will read the entire image
+          header
+        - If a header is not found, increment the flash page and search again
+          (jump to step #2)
+
+    4. Checks that the header and BIM version are compatible with the current
+       BIM
+
+        - Also checks that the if the image needs copy, it must be a stack image.
+        - If this check fails, increase the flash page number and search again
+          (jump to step #2). If user application, change image type to
+          persistent application before searching again
+
+    5. If a CRC has not been calculated on the image, calculate one and update
+       CRC status field.
+
+        - If pending copy (stack image), do not update the CRC field yet, this
+          will be done after copy
+
+    6. Check for security. (if not persistent application)
+
+        - Ensure image is from a trusted peer by running ECDSA sign/verify
+          algorithm on the image.
+        - If security check fails, increment the flash page and search again
+          (jump to step #2)
+
+    7. Check if the image needs to be copied (stack image)
+
+        - Copy image, calculate CRC to ensure copy succeeded. Update copy status
+          and CRC status fields accordingly.
+        - If succeeded, set image type to persistent application and set flash
+          page number to 0.
+        - If failed, continue searching.
+
+    8. Continue this process until an image is found or the max iterations is
+       performed.
+
+        - If a valid image is found, jump to it
+        - If no valid image is found and the max iterations have been performed,
+          go to low power mode.
+
+
+.. note::
+
+    The execution flow described by the text and diagrams above is assuming
+    security is on. If using an unsecured BIM configuration, the process is the
+    same with the exception that there is no check for security.
+
+
+.. _sect-ram-argument:
+
+Application Execution switching using RAM
+"""""""""""""""""""""""""""""""""""""""""
+On devices which have RAM retention capability between resets, execution
+switching between application can be done using RAM variables.
+For example, on the |DEVICE|, execution switching between User and Persistent
+Applications will be done by writing to a RAM variable stored at
+a known RAM location. This location will be used explicitly for application
+switching only. The value will be retained between resets.
+
+
+The RAM variable called 'BIM Argument' is two bytes long with values as defined
+in :ref:`tbl-bim-argument`. The byte 0 value defines the meaning of
+the byte 1 content. In |SDK|, there are two valid values for byte 0: '0' and '1'.
+Values 2-255 are reserved for future use. If BIM encounters a byte0 value
+greater than 1, it will consider if invalid, will try to find the
+default application starting from flash page '0', by reading image header.
+
+.. _tbl-bim-argument:
+.. table:: Description of the BIM Argument variable.
+
+    +--------------+-------------------+-----------------------------------------------------+
+    | Byte 0 Value | Byte 1 Value      | Description                                         |
+    +==============+===================+=====================================================+
+    | 0            | 0                 | Default value after hard reset.                     |
+    +              +                   +                                                     +
+    |              |                   | The 'argument variable' contents are invalid, BIM   |
+    +              +                   +                                                     +
+    |              |                   | needs to find a valid on-chip user application and  |
+    +              +                   +                                                     +
+    |              |                   | execute it.                                         |
+    +              +                   +                                                     +
+    |              |                   | If BIM cannot find the valid User Application,      |
+    +              +                   +                                                     +
+    |              |                   | then it will try to find a valid Persistent App     |
+    +              +                   +                                                     +
+    |              |                   | and execute.                                        |
+    +              +                   +                                                     +
+    |              |                   | If it is unable to find either application it will  |
+    +              +                   +                                                     +
+    |              |                   | put the device to low power sleep mode.             |
+    +--------------+-------------------+-----------------------------------------------------+
+    | 0            | Flash page number | Byte 1 contains the application start address BIM   |
+    +              +                   +                                                     +
+    |              |                   | needs to jump to on resuming execution after a soft |
+    +              +                   +                                                     +
+    |              |                   | reset. The address will be in terms of flash page   |
+    +              +                   +                                                     +
+    |              |                   | number.                                             |
+    +--------------+-------------------+-----------------------------------------------------+
+    | 1            | Image Type        | Version required to support image format            |
+    +--------------+-------------------+-----------------------------------------------------+
+    | 2-255        | N/A               | Version of Image Header contained in image          |
+    +--------------+-------------------+-----------------------------------------------------+
+

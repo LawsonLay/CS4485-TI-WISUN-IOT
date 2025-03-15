@@ -1,0 +1,46 @@
+***********************************
+L2CAP Extension Vendor Specific API
+***********************************
+
+L2CAP Extension Commands
+========================
+
+All L2CAP commands have the following format (this is also displayed for each command description):
+
+============================= ============ ==============================================================
+Name                          Size (bytes) Description
+----------------------------- ------------ --------------------------------------------------------------
+Opcode                        2
+connectionHandle, CID, or PSM 2            Connection Handle, Channel ID, or Protocol/Service Multiplexer
+Command PDU                   Variable     Command Parameters
+============================= ============ ==============================================================
+
+For the command parameters, please see the corresponding command description below.
+
+Note: The connection handle of 0xFFFE is considered as the loopback connection. All message sent to this connection will be looped back to the local host.
+
+LE Protocol/Service Multiplexer (PSM) values are separated into two ranges:
+- Fixed (0x0001 – 0x007F): Values in the first range are assigned by the Bluetooth
+SIG and indicate protocols.
+- Dynamic (0x0080 – 0x00FF): Values in the second rage are dynamically allocated
+and used in conjunction with services defined in the GATT server.
+
+.. include:: /BLE_Vendor_Specific_HCI_Guide/l2cap_cmd_extracted.rst
+
+L2CAP Extension Events
+======================
+
+All L2CAP event have the following format (this is also displayed for each event description):
+
+================= ============ =============================
+Name              Size (bytes) Description
+----------------- ------------ -----------------------------
+Opcode            2            PDU operation code
+Status            1            Event Status
+Connection Handle 2            Connection handle of the link
+Event PDU         Variable     Event parameters
+================= ============ =============================
+
+For the event parameters, please see the corresponding section below.
+
+.. include:: /BLE_Vendor_Specific_HCI_Guide/l2cap_event_extracted.rst

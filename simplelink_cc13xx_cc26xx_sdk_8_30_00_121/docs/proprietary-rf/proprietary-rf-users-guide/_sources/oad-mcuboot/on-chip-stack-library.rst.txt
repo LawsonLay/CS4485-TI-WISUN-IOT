@@ -1,0 +1,138 @@
+.. _sec-oad-mcuboot-on-chip-stack-library:
+
+MCUboot for On-Chip OAD (Stack Library)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This section describes the behavior of the MCUboot for on-chip OAD 
+where the combined image approach is used. This approach requires 
+two full application and stack library pairs on the target device. 
+In an on-chip OAD system, there are only two image types that can 
+be executed safely:
+
+ - Persistent application (version 1.0.0): Permanently resident application that
+   implements OAD profile
+ - User application (version higher than): OAD upgradeable application that implements OAD
+   reset service and user functionality
+
+For more information about OAD image header, refer to the
+:ref:`sec-mcuboot-oad-image-header` section of this chapter. The roles and
+responsibilities of each application in an on-chip system is defined in the
+:ref:`sec-mcuboot-oad-process` section.
+
+In summary, the user application is responsible for updating the image version
+number flash field in the OAD image header, and resetting the device when
+appropriate; while the persistent application will be resposible of storing the
+new image.
+
+Based on the image version number field in the image header, MCUboot will decide
+which image is most fit to run. :numref:`mcuboot_oad_diagram` describes TI's
+software solution using MCUboot process.
+
+.. _mcuboot_oad_diagram:
+.. uml::
+  :caption: MCUboot OAD sequence diagram.
+  :align: center
+
+  @startuml
+
+    participant oaddist as "OAD Distributor"
+    participant pers as "Persistent Application"
+    participant user as "User Application"
+    participant mcubl as "MCUboot Secure Booloader"    
+
+    user --> oaddist : Advertising
+    oaddist --> user : Connection Indication
+    oaddist <--> user : Service Discovery
+    
+    rnote over oaddist
+      Discover Reset Service 
+      and Characteristics
+    end note
+    
+    oaddist --> user : Request OAD transfer\ntrigger reset
+
+    user -> user : Change the image version number\nto 0 in flash
+    user -> user : Reset
+    user -> mcubl : After reset, OAD target goes\ninto MCUboot Secure Bootloader
+
+    mcubl -> mcubl : Detect the version number in\nPersistent Application is\nhigher than User Application
+
+    rnote over mcubl
+      MCUboot Secure Bootloader
+      validates the image
+    end note
+
+    mcubl -> pers : Boot into Persistent Application
+
+    pers --> oaddist : Advertising
+    oaddist --> pers : Connection Indication
+    oaddist <--> pers : Service Discovery   
+
+    rnote over oaddist
+      Discover OAD Service 
+      and Characteristics
+    end note
+
+    oaddist --> pers : Get OAD block size
+    pers --> oaddist : OAD block size rsp
+    oaddist --> pers : Send Image Identity
+    pers --> oaddist : Image Identity Success
+
+    rnote over pers
+      The Persistent Application
+      does not check the image identity
+      as this will is checked by
+      the MCUboot Secure Bootloader
+    end note
+
+    group Start Transfering New Image
+      oaddist --> pers : OAD start
+      pers --> oaddist : Notify on OAD_IMG_BLOCK \ncharacteristic
+      ...
+      ... Repeat until finishing transfering new image ...
+      ...
+    end
+    
+    oaddist --> pers : OAD Enable
+    pers -> pers : Reset
+
+    pers -> mcubl : After reset, OAD target goes\ninto MCUboot Secure Bootloader
+    mcubl -> mcubl : Detect the version number in\nUser Application is\nhigher than Persistent Application   
+    
+    rnote over mcubl
+      MCUboot Secure Bootloader
+      validates the new image
+    end note
+
+    mcubl -> user : Jump to new User Application image
+
+  @enduml
+
+
+In order to determine which image is best to run, MCUboot takes the following
+measures:
+
+#. At startup, MCUboot checks to identify image header on Primary slot
+
+    - check magic number (ih_magic) 0x96F3B83D.
+
+#. Then MCUboot further checks to identify image header on Secondary slot
+
+    - check magic number (ih_magic) 0x96F3B83D.
+
+#. Compare versions (ih_ver) and select Primary if Primary version >= Secondary
+   version
+
+#. MCUboot will now go to certain flash addresses based on the flash layout specified
+   in the ``flash_map_backend.h`` file in search for a valid Image Identification value.
+   This is done in the following way:
+
+    - Read the version number in the image header, then check for its validity
+      (integrity check, signature verification etc.)
+    - If the image is invalid MCUboot erases its memory slot and starts to 
+      validate the other image. After a successful validation of the selected 
+      image the bootloader chain-loads it.
+
+.. note::
+
+    |STACK| currently supports the `Direct XIP <https://docs.mcuboot.com/design.html#direct-xip>`_ and overwrite strategies.

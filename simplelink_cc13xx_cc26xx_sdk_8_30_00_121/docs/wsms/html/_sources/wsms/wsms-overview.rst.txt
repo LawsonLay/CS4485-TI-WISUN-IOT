@@ -1,0 +1,46 @@
+Overview
+--------
+
+The Wireless Solar Management System (WSMS) examples can be used to demonstrate
+IPv6-based mesh networks using TI's SimpleLink Connectivity devices.
+
+The ipv6base and ipv6node examples are a pair of applications demonstrating a
+basic CoAP client-server model on WSMS. The ipv6base example is configured to
+work as a Network Co-Processor, and acts as the CoAP client, while the ipv6node
+is a standalone embedded application acting as a server. 
+
+WSMS is optimized for networks of 50 nodes or fewer. For larger networks, consider
+using TI Wi-SUN FAN Stack. If using WSMS with larger network there is a risk of
+network congestion and long data latency.
+
+WSMS is optimized for networks with few hops (no more than 4 hops). For networks
+with more required hops, the recommendation is to se TI Wi-SUN FAN instead. 
+
+6LoWPAN, RPL, IPv6, ICMPv6 and UDP layers have been adapted from
+`ARM mbed-os nanostack`_. You can find documentation about all these layers in
+the TI Wi-SUN FAN Stack User's Guide.
+
+
+WSMS vs TI Wi-SUN FAN Stack
+---------------------------
+
+The Wireless Solar Management System (WSMS) is similar to TI Wi-SUN FAN Stack in
+that 6LoWPAN, RPL, IPv6, ICMPv6 and UDP layers have been adapted from
+`ARM mbed-os nanostack`_. However WSMS does not adhere to the Wi-SUN FAN spec
+and can not be certified with the Wi-SUN Alliance.
+
+Here are a list of featured that are enabled in WSMS:
+
+* Rapid join: In WSMS examples timers are optimized for rapid join times. This
+  may affect data latency in particular for networks of more than 50 nodes.
+* Low latency Multicast Protocol: Multicast frames are optimized for lowest
+  possible latency. In most cases, multicast frame latency average in the order
+  of milliseconds. If a large number of multicast messages is sent, this might
+  cause a "multicast storm", i.e. the network is flooded by multicast messages.
+  There is a highers risk of this happening the more hops in the network, and
+  the more multicast messages are sent.
+* Disconnect detection time is set to 300 s
+
+You can find a more detailed description of these features in the TI Wi-SUN FAN
+Stack User's Guide. Please note that it's not possible to disable these features
+in WSMS.

@@ -1,0 +1,289 @@
+BLE5-Stack 2.01.01 (SDK 3.40) to BLE5-Stack 2.02.01 (SDK 5.10)
+==============================================================
+
+This section will describe a way to migrate a project from BLE5-Stack 2.01.01 to
+a BLE5-Stack 2.02.01 project.
+
+The best way to migrate is to open a new project from the new SDK and transfer 
+your changes and application code over to the new example. 
+
+Porting Simple Peripheral
+-------------------------
+
+This section of the migration guide will focus on porting Simple Peripheral 
+from BLE5-Stack 2.01.01 to BLE5-Stack 2.02.01. The recommended approach is to 
+start with a BLE5-Stack 2.02.01 project that contains the same base functionality
+as the porting target project and merge in any custom functionality.
+
+#. Choose a BLE5-Stack 2.02.01 example project that contains your target
+   project's base functionality.
+
+#. Transfer all modified application files from BLE5-Stack 2.01.01 into the
+   BLE5-Stack 2.02.01 example project.
+
+   In this example, the following files from BLE5-Stack 2.01.01 were moved into
+   Simple Peripheral BLE5-Stack 2.02.01 example:
+
+      - ``simple_peripheral.c``
+      - ``simple_peripheral.h``
+
+#. Add the pointer ``&pRandomAddress``  as argument in the last parameter in 
+   GAP_DeviceInit call. This is needed to correctly set a random static address
+   if configured.
+
+    .. code-block:: c
+      :caption: Added section to handle HCI Events for rejection of peer device Connection parameter update request.
+      :linenos:
+
+        GAP_DeviceInit(GAP_PROFILE_PERIPHERAL, selfEntity, addrMode, &pRandomAddress);
+
+#. Add the following code section in ``simple_peripheral.c`` at the end of 
+   SimplePeripheral_processGapMessage before the ``default:`` case:
+
+    .. code-block:: c
+      :caption: Added section to handle HCI Events for rejection of peer device Connection parameter update request.
+      :linenos:
+
+        #if defined ( NOTIFY_PARAM_UPDATE_RJCT )
+            case GAP_LINK_PARAM_UPDATE_REJECT_EVENT:
+            {
+              linkDBInfo_t linkInfo;
+              gapLinkUpdateEvent_t *pPkt = (gapLinkUpdateEvent_t *)pMsg;
+
+              // Get the address from the connection handle
+              linkDB_GetInfo(pPkt->connectionHandle, &linkInfo);
+
+              // Display the address of the connection update failure
+              Display_printf(dispHandle, SP_ROW_STATUS_2, 0,
+                             "Peer Device's Update Request Rejected 0x%x: %s", pPkt->opcode,
+                             Util_convertBdAddr2Str(linkInfo.addr));
+
+              break;
+            }
+        #endif
+
+#. Modify ``main.c`` in the BLE5-Stack 2.02.01 example if additional tasks were
+   added in the BLE5-Stack 2.01.01 project.
+
+#. Move any profiles and services that the application is using to the BLE5-Stack
+   2.02.01 project.
+
+#. Transfer the Sysconfig settings either visually through the GUI or open both 
+   the old and the new project .syscfg files and copy-paste the desired settings.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|.
+
+#. Refer to the Core SDK release notes for additional information and the TI-RTOS
+   examples included with |SDK|.
+
+   For additional information on how BLE5-Stack 2.01.02 uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+
+Porting Simple Central
+-------------------------
+
+This section of the migration guide will focus on porting Simple Central 
+from BLE5-Stack 2.01.01 to the BLE5-Stack 2.02.01. The recommended approach is 
+to start with a BLE5-Stack 2.02.01 project that contains the same base 
+functionality as theporting target project and merge in any custom functionality.
+
+#. Choose a BLE5-Stack 2.02.01 example project that contains your target
+   project's base functionality.
+
+#. Transfer all modified application files from BLE5-Stack 2.01.01 into the
+   BLE5-Stack 2.02.01 example project.
+
+   In this example, the following files from BLE5-Stack 2.01.01 were moved into
+   Simple Central BLE5-Stack 2.02.01 example:
+
+      - ``simple_central.c``
+      - ``simple_central.h``
+
+#. Add the pointer ``&pRandomAddress``  as argument in the last parameter in 
+   GAP_DeviceInit call. This is needed to correctly set a random static address
+   if configured.
+
+    .. code-block:: c
+      :caption: Added section to handle HCI Events for rejection of peer device Connection parameter update request.
+      :linenos:
+
+        GAP_DeviceInit(GAP_PROFILE_CENTRAL, selfEntity, addrMode, &pRandomAddress);
+
+#. Modify ``connRec_t`` definition in ``simple_central.c`` such that the ``addr`` and
+   ``charHandle`` are of type ``uint16_t`` as shown below:
+   
+    .. code-block:: c
+      :caption: Changed data type of addr and charHandle
+      :linenos:
+
+        // Connected device information
+        typedef struct
+        {
+          uint16_t connHandle;        // Connection Handle
+          uint16_t  addr[B_ADDR_LEN];  // Peer Device Address
+          uint16_t  charHandle;        // Characteristic Handle
+          Clock_Struct *pRssiClock;   // pointer to clock struct
+        } connRec_t;
+
+#. Remove the ``DEFAULT_DEV_DISC_BY_SVC_UUID`` definition in ``simple_central.c`` as this
+   is now modified through SysConfig.
+
+#. Modify ``main.c`` in the BLE5-Stack 2.02.01 example if additional tasks were
+   added in the BLE5-Stack 2.01.01 project.
+
+#. Move any profiles and services that the application is using to the BLE5-Stack
+   2.02.01 project.
+
+#. Transfer the Sysconfig settings either visually through the GUI or open both 
+   the old and the new project .syscfg files and copy-paste the desired settings.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|.
+
+#. Refer to the Core SDK release notes for additional information and the TI-RTOS
+   examples included with |SDK|.
+
+   For additional information on how BLE5-Stack 2.01.02 uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+RTLS Examples
+-------------
+
+Please refer to the RTLS Toolbox chapter for up-to-date status and information 
+about the RTLS offering. In this section a few application code related changes 
+are listed for your information, but there are more code changes than listed.
+
+* Time-of-Flight (TOF) removed from RTLS Toolbox.
+
+* Extensive code changes to RTLSCtrl which also includes removal of ToF 
+  functionality. Please manually compare files from old and new SDK for more 
+  details.
+
+* Host Test Example:
+
+    * Added handling for channel map changes 
+      (``HCI_BLE_CHANNEL_MAP_UPDATE_EVENT``).
+    * Added compilation options for Constant Tone Extension (``RTLS_CTE_TEST``).
+
+* RTLS API ``rtls_ctrl_api.h`` changes
+
+    * ``RTLSCtrl_sendDebugEvent`` renamed to ``RTLSCtrl_sendDebugEvt``.
+    * ``RTLSCtrl_processDataSent`` renamed to ``RTLSCtrl_dataSentEvt``.
+    * ``RTLSCtrl_processRtlsPacket`` renamed to ``RTLSCtrl_rtlsPacketEvt``.
+    * ``RTLSCtrl_syncEventNotify`` renamed to ``RTLSCtrl_syncNotifyEvt``.
+
+* Updates to rtls_master.c
+
+    * Added handling for ``RM_EVT_CONN_EVT`` that will call new function 
+      ``RTLSMaster_processConnEvt()``.
+    * Functionality from ``RTLSMaster_connEvtCB`` is moved to 
+      ``RTLSMaster_processConnEvt``.
+    * Added handling for ``HCI_BLE_CHANNEL_MAP_UPDATE_EVENT``.
+    * Updated handling for ``GAP_LINK_PARAM_UPDATE_EVENT``.
+    * Testing of dynamic change of the channel map added 
+      (``RTLS_TEST_CHAN_MAP_DYNAMIC_CHANGE``).
+    * ``DEFAULT_MAX_SCAN_RES`` changed from 8 to 16.
+
+* Updates to rtls_slave
+
+    * Minor changes to ``RTLSPassive_cmStartReq``.
+    * AssertHandler added to ubStack_taskFxn.
+    * Small code updates in ``micro_ble_cm.c`` and ``micro_ble_cm.h``
+
+* Updates to rtls_passive
+
+    * Only changes related to RTLS API name changes.
+
+* Changes in AoA Driver:
+
+    * ``AOA_NUM_ANTENNAS`` redefined to ``BOOSTXL_AOA_NUM_ANT``.
+    * ``RF_PriorityCoexDefault`` added to ``AOA_rfEnableRam``.
+    * Define ``AOA_NUM_ANTENNAS`` changed to ``BOOSTXL_AOA_NUM_ANT``.
+    * The ``AoA_IQSample_t`` struct split into two structs.
+      ``AoA_IQSample_Ext_t`` and  ``AoA_IQSample_t``. This affect code and 
+      functions that use it (ex. ``AOA_getPairAngles``).
+    * Changes in ``AOA_getPairAngles`` parameter.
+    * Changes in ``AOA_postProcess`` parameter.
+    * Minor updates in ``AOA_getRfIqSamples``.
+
+A Few Noteworthy Changes from BLE5-Stack 2.01.01 to BLE5-Stack 2.02.01
+-------------------------------------------------------------------------
+
+You can follow the guide above without addressing these updates, they are listed
+for your information only. All fine grained details might not be mentioned, 
+please refer to the specific example you need to port and to a compare between 
+the old and new project files. Please refer to the BLE5-Stack Release Notes for 
+all the details.
+
+* Handling added in application code for HCI Events for rejection of peer 
+  device Connection parameter update request (``NOTIFY_PARAM_UPDATE_RJCT``).
+
+* Define ``NVOCMP_NWSAMEITEM`` (set to avoid re-writing the same NV item) and 
+  define ``FLASH_ROM_BUILD`` added to project.
+
+* Define ``DEFAULT_DEV_DISC_BY_SVC_UUID`` is now controlled in the checkbox
+  SysConfig->Observer Configuration->Discover Devices By Service UUID. This is 
+  used in multi_role and the simple_central example.
+
+* Privacy Override Offset (``privOverrideOffset``) and CoEx configuration 
+  (``coexUseCaseConfig``) added to ``llUserCfg_t``. Configured in 
+  ``ble_user_config_stack.c``.
+
+* Updated code in osal_icall_ble.c to match the extended number of 
+  parameters in ``GATTServApp_Init()`` and ``GAPBondMgr_Init()``. Parameters 
+  ``cfg_GATTServApp_att_delayed_req`` and 
+  ``cfg_GATTServApp_gatt_no_service_changed`` are added.
+
+* GAP Scanner has now the ability to select only to scan on specified channels 
+  rather all 3 channels.
+
+* Non Volatile On-Chip Multi Page (NVOCMP) Driver now allow the user to check 
+  when the next compaction will takes place and receive low voltage detection 
+  notifications.
+
+* GAPBondMgr can be configured to delete a bond even while the device is in an 
+  active connection.
+
+* The BLE stack library files (OneLib.a and StackWrapper.a) required by
+  the linker are not directly provided by the .projectspec (CCS) or the
+  .ipcf (IAR). From now on, the file ti_utils_build_linker.cmd.genlibs,
+  generated by SysConfig, includes the libraries required to link the 
+  application based on the configurations chosen.
+
+* Connectionless-AoA is now supported. For more information, refer to 
+  :ref:`sec-aoa`.
+
+* Periodic Advertisements are now supported. For more information, refer to
+  :ref:`gap_periodic_advertising`.
+
+* TI clang compiler support was added to BLE projects. See 
+  :ref:`get-started-ble5-develop` for a list of projects supported. This change
+  required some modifications to code (i.e. passing in "" to functions
+  that do not receive any input). When porting, no change is required if the 
+  legacy compiler is used.
+
+* Improvements were made to the BLE5 Stack's scheduling of events. For details,
+  see :ref:`sec-connection-fairness`.
+
+* A new define was added to gapbondmgr.h. ``GAPBOND_AUTHEN_PAIRING_ONLY`` is
+  used to enforce authenticated pairing. Additional checks were added to the
+  GAPBondMgr to ensure proper IO capabilities are set when when authenticated
+  pairing is used. Refer to :ref:`authentication-pairing-only`.
+
+* The Project Zero data_service.c profile 's *String Characterisitc Value* has 
+  been modified to support encrpyted reads/writes. Additionally, in 
+  simple_gatt_profile.c, *Simple Profile Characteristic 4 Properties* were 
+  modified to support writes in addition to the original notify support 
+  (i.e. ``` simpleProfileChar4Props = GATT_PROP_WRITE | GATT_PROP_NOTIFY;)```)
+
+* Agama 704 device support has been added to SDK.
+
+* Examples for Agama 704 devices have been added to SDK.
+
+* Agama 704 devices included in SysConfig.

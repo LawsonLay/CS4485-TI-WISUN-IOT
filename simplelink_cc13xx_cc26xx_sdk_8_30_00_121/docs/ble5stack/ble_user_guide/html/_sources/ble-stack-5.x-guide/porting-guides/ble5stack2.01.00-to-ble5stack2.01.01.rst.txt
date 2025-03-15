@@ -1,0 +1,49 @@
+BLE5-Stack 2.01.00 (SDK 3.30) to BLE5-Stack 2.01.01 (SDK 3.40)
+==============================================================
+
+This section will describe a way to migrate a project from BLE5-Stack 2.01.00 to
+a BLE5-Stack 2.01.01 project.
+
+The changes you need to address to port your project:
+
+#. API changes (affecting RTLS example projects ``rtls_master/passive/slave``):
+
+    +-------------------------------------------+-----------------------------------------------------------------------+
+    | What is affected                          | How to update                                                         |
+    +===========================================+=======================================================================+
+    | ``RTLSAoa_processAoaResults()``           | Function arguments: Change input order, add new and delete obsolete   |
+    +-------------------------------------------+-----------------------------------------------------------------------+
+    | ``rtlsAoaConfigReq_t``                    | Remove struct member ``antArraySwitch``, and rename member            |
+    |                                           | ``pAntArray`` renamed to ``pAntPattern``                              |
+    +-------------------------------------------+-----------------------------------------------------------------------+
+    | ``RTLSCtrl_aoaResultEvt()``               | Function arguments: Change input order, add new and delete obsolete   |
+    +-------------------------------------------+-----------------------------------------------------------------------+
+    | ``RTLSCtrl_connResultEvt()``              | Function arguments: Add new argument ``connHandle``                   |
+    +-------------------------------------------+-----------------------------------------------------------------------+
+    | ``RTLSCtrl_initAntenna()``                | Function arguments: Add new argument ``pinState``                     |
+    +-------------------------------------------+-----------------------------------------------------------------------+
+    | ``RTLSCtrl_processDataSent()``            | Function arguments: Add new argument ``connHandle``                   |
+    +-------------------------------------------+-----------------------------------------------------------------------+
+    | ``RTLSCtrl_sendRtlsRemoteCmd()``          | Function arguments: Add new argument ``connHandle``                   |
+    +-------------------------------------------+-----------------------------------------------------------------------+
+    | ``RTLSCtrl_syncEventNotify()``            | Function arguments: Add new argument ``connHandle``                   |
+    +-------------------------------------------+-----------------------------------------------------------------------+
+    | ``RTLSCtrl_updateConnStateAndSyncEvt()``  | Name: Rename to ``RTLSCtrl_updateConnState()``                        |
+    |                                           | Function arguments: Add new argument ``connHandle``                   |
+    +-------------------------------------------+-----------------------------------------------------------------------+
+    | ``RTLSSrv_initAntArray()``                | Function arguments: Only call with argument ``mainAntenna``           |
+    +-------------------------------------------+-----------------------------------------------------------------------+
+
+#. New link layer antenna structure ``cteAntProp_t``, declared in ``ble_user_config.c``, and is now used to control
+   antenna switching. Edit this structure to run on custom AoA boards. See the :ref:`sec-aoa` section of the
+   BLE5 User's Guide and the `Simplelink Academy`_ AoA lab for more information.
+
+#. There are new values to use in the TX power back-off table. This table is declared in the ``txPwrBackoffVal_t``
+   structure in ``ble_user_config.c``. The new defined values can be found in ``hci.h``.
+
+#. The OAD example projects ``simple_peripheral_oad_onchip`` and ``simple_peripheral_oad_offchip`` include RCOSC
+   calibration files (``rcosc_calibration.c`` and ``rcosc_calibration.h``).
+
+#. The crystal-less BAW wireless MCU, CC2652RB, is now supported by SysConfig in the example projects.
+
+#. XDCtools updated from version 3.60.00.24_core to 3.60.02.34_core.

@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_a_d_c_buf_c_c26_x2___params_extension" kind="struct" language="C++" prot="public">
+    <compoundname>ADCBufCC26X2_ParamsExtension</compoundname>
+    <includes refid="_a_d_c_buf_c_c26_x2_8h" local="no">ADCBufCC26X2.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_a_d_c_buf_c_c26_x2___params_extension_1a99dff88970f0f740f3a8e3954b5ec9db" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_d_c_buf_c_c26_x2_8h_1a017a4e439a51475975a86d669de3d246" kindref="member">ADCBufCC26X2_Sampling_Duration</ref></type>
+        <definition>ADCBufCC26X2_Sampling_Duration ADCBufCC26X2_ParamsExtension::samplingDuration</definition>
+        <argsstring></argsstring>
+        <name>samplingDuration</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Amount of time the ADC spends sampling the analogue input </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/adcbuf/ADCBufCC26X2.h" line="519" column="1" bodyfile="source/ti/drivers/adcbuf/ADCBufCC26X2.h" bodystart="519" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_a_d_c_buf_c_c26_x2___params_extension_1a89e72a1be7acd6e49d15cc1bdfa9118c" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_d_c_buf_c_c26_x2_8h_1a8350116bf32245b3128dc5018e53ed69" kindref="member">ADCBufCC26X2_Sampling_Mode</ref></type>
+        <definition>ADCBufCC26X2_Sampling_Mode ADCBufCC26X2_ParamsExtension::samplingMode</definition>
+        <argsstring></argsstring>
+        <name>samplingMode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Specifies whether the ADC spends a fixed amount of time sampling or the entire time since the last conversion </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/adcbuf/ADCBufCC26X2.h" line="522" column="1" bodyfile="source/ti/drivers/adcbuf/ADCBufCC26X2.h" bodystart="522" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_a_d_c_buf_c_c26_x2___params_extension_1a2cb19f2b44f9ec65ea0f9bdb4696a962" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_d_c_buf_c_c26_x2_8h_1a323aa032b8eac0638162f08b4ba49db3" kindref="member">ADCBufCC26X2_Reference_Source</ref></type>
+        <definition>ADCBufCC26X2_Reference_Source ADCBufCC26X2_ParamsExtension::refSource</definition>
+        <argsstring></argsstring>
+        <name>refSource</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Specifies whether the internal reference of the ADC is sourced from the battery voltage or a fixed internal source </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/adcbuf/ADCBufCC26X2.h" line="525" column="1" bodyfile="source/ti/drivers/adcbuf/ADCBufCC26X2.h" bodystart="525" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_a_d_c_buf_c_c26_x2___params_extension_1a3328f3f34f211c5a2bdc81048ac602e8" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ADCBufCC26X2_ParamsExtension::inputScalingEnabled</definition>
+        <argsstring></argsstring>
+        <name>inputScalingEnabled</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Disable input scaling. Input scaling scales an external analogue signal between 0 and 4.3V to an internal signal of 0 to ~1.4785V. Since the largest permissible input to any pin is VDDS, the maximum range of the ADC is effectively less than 3.8V and continues to shrink as the battery voltage drops. With input scaling disabled, the external analogue signal is passed on directly to the internal electronics. Signals larger than ~1.4785V will damage the device with input scaling disabled.</para><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Input scaling status </para></entry><entry thead="yes"><para>Maximum permissible ADC input voltage  </para></entry></row>
+<row>
+<entry thead="no"><para>Enabled </para></entry><entry thead="no"><para>VDDS (Battery voltage level) </para></entry></row>
+<row>
+<entry thead="no"><para>Disabled </para></entry><entry thead="no"><para>1.4785V </para></entry></row>
+</table>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/adcbuf/ADCBufCC26X2.h" line="541" column="1" bodyfile="source/ti/drivers/adcbuf/ADCBufCC26X2.h" bodystart="541" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>CC26X2 specific extension to <ref refid="struct_a_d_c_buf___params" kindref="compound">ADCBuf_Params</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<para>To use non-default CC26X2 specific parameters when calling <ref refid="_a_d_c_buf_8h_1a292e0e615d57d93c2f87f7e915e7027b" kindref="member">ADCBuf_open()</ref>, a pointer to an instance of this struct must be specified in <ref refid="struct_a_d_c_buf___params_1a72c7ec51318ec2f8fcf5d2ff37de33e3" kindref="member">ADCBuf_Params::custom</ref>. Alternatively, these values can be set using the control function after calling <ref refid="_a_d_c_buf_8h_1a292e0e615d57d93c2f87f7e915e7027b" kindref="member">ADCBuf_open()</ref>. </para>    </detaileddescription>
+    <location file="source/ti/drivers/adcbuf/ADCBufCC26X2.h" line="517" column="1" bodyfile="source/ti/drivers/adcbuf/ADCBufCC26X2.h" bodystart="516" bodyend="542"/>
+    <listofallmembers>
+      <member refid="struct_a_d_c_buf_c_c26_x2___params_extension_1a3328f3f34f211c5a2bdc81048ac602e8" prot="public" virt="non-virtual"><scope>ADCBufCC26X2_ParamsExtension</scope><name>inputScalingEnabled</name></member>
+      <member refid="struct_a_d_c_buf_c_c26_x2___params_extension_1a2cb19f2b44f9ec65ea0f9bdb4696a962" prot="public" virt="non-virtual"><scope>ADCBufCC26X2_ParamsExtension</scope><name>refSource</name></member>
+      <member refid="struct_a_d_c_buf_c_c26_x2___params_extension_1a99dff88970f0f740f3a8e3954b5ec9db" prot="public" virt="non-virtual"><scope>ADCBufCC26X2_ParamsExtension</scope><name>samplingDuration</name></member>
+      <member refid="struct_a_d_c_buf_c_c26_x2___params_extension_1a89e72a1be7acd6e49d15cc1bdfa9118c" prot="public" virt="non-virtual"><scope>ADCBufCC26X2_ParamsExtension</scope><name>samplingMode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

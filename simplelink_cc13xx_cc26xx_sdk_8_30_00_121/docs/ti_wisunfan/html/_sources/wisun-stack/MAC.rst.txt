@@ -1,0 +1,63 @@
+MAC and Frequency Hopping
+-------------------------
+
+The |SPEC| implements a frequency-hopping configuration where the network devices
+hop on different frequencies. |STACK| supports an unslotted channel-hopping
+feature based on the directed frame exchange (DFE) mode of the `Wi-SUN
+FAN specification`_ v1.0. (For users familiar with TI 15.4-Stack, the same FH
+mode is implemented in this stack.)
+
+Channel hopping is a feature by which a node shall hop or move to different
+channels (frequency bands). The channel hopping behavior has two advantages:
+
+- Increased network throughput by promoting simultaneous data transfer over
+  multiple channels between different pair of nodes
+- Increased reliability in noisy channel conditions by exploiting the channel
+  diversity.
+
+According to |SPEC|, only non sleepy nodes are allowed. Each node shall maintain
+its broadcast schedule as well as a unicast schedule.
+
+- The broadcast mechanism is used to send data to multiple recipients.
+- The unicast mechanism is used to send data to one unique recipient.
+
+
+Broadcast Channel Hopping Schedule
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The node will transmit its broadcast data during its broadcast schedule and its
+neighbors who are already tracking this node are expected to listing in its
+channel during the broadcast slot. The broadcast hopping pattern and some terms
+are shown below.
+
+.. figure:: resources/fig-broadcast-sequence.png
+    :name: fig-broadcast-sequence
+    :width: 300px
+    :align: center
+
+    Broadcast Channel Hopping Sequence
+
+
+Unicast Channel Hopping Schedule
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+During the broadcast interval, the nodes shall follow their own receiver-directed
+unicast channel hopping schedules. It's not necessary for the unicast channel
+hop slots to be synchronized.
+
+The unicast schedules are always receiver directed in the sense that a node
+shall transmit the frame in the receiver’s channel using CSMA/CA. This is
+illustrated in :numref:`fig-unicast-sequence`. As you can see, each node
+maintains its own hopping pattern.
+
+The |SPEC| describes the mechanisms for how a device can synchronize itself to
+the receiver node in order to successfully transmit a unicast packet to it. These
+mechanisms rely on exchange of appropriate information called :term:`Information
+elements` (IEs). IEs can be exchanged either during the joining of the network
+or during the network operation time.
+
+.. _fig-unicast-sequence:
+.. figure:: resources/fig-unicast-sequence.png
+    :align: center
+
+    Unicast Hopping Sequence

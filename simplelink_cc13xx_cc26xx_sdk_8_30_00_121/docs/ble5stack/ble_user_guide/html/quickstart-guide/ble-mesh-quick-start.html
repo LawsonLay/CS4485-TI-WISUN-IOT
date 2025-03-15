@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TI Bluetooth Mesh Quick Start Guide &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Overview" href="../ble-mesh/overview.html" />
+    <link rel="prev" title="Bluetooth Mesh" href="../ble-mesh/index.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug quickstart-guide ble-mesh-quick-start";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">TI Bluetooth Mesh Quick Start Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-bluetooth-mesh-projects-with-ccs">Using Bluetooth Mesh Projects with CCS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#import-project-to-ccs-using-resource-explorer">Import Project to CCS Using Resource Explorer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-and-download-project">Build and Download Project</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bluetooth-qualification">Bluetooth Qualification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-mesh/overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-mesh/ti-zephyr-overview.html">TI Bluetooth Mesh and the Zephyr Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-mesh/developing-a-ble-mesh-application.html">Developing a Bluetooth Mesh Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-mesh/sysconfig-walkthrough.html">BLE Mesh SysConfig Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-mesh/ble-mesh-oad.html">TI Bluetooth Mesh and OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-mesh/ble-mesh-erpc.html">TI Bluetooth Mesh Host PC Tool</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-mesh/index.html">Bluetooth Mesh</a> &raquo;</li>
+      <li>TI Bluetooth Mesh Quick Start Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="ti-bluetooth-mesh-quick-start-guide">
+<span id="ble-mesh-quick-start"></span><h1>TI Bluetooth Mesh Quick Start Guide<a class="headerlink" href="#ti-bluetooth-mesh-quick-start-guide" title="Permalink to this headline">¶</a></h1>
+<p>This section serves as a road map for users developing applications
+and products using the TI SimpleLink CC13xx or CC26xx wireless MCU platform for
+Bluetooth Mesh applications. Whether a seasoned developer or just getting
+started, TI has created a variety of resources to simplify development on the
+CC13xx or CC26xx platform. These resources will enhance your experience with the TI
+SimpleLink TI BLE5-Stack from the out-of-the-box demo to production.</p>
+<p>To download the CC13xx or CC26xx SDK, please visit the download page:
+<a class="reference external" href="http://www.ti.com/tool/SIMPLELINK-CC13XX-CC26XX-SDK">http://www.ti.com/tool/SIMPLELINK-CC13XX-CC26XX-SDK</a>.</p>
+<div class="section" id="using-bluetooth-mesh-projects-with-ccs">
+<h2>Using Bluetooth Mesh Projects with CCS<a class="headerlink" href="#using-bluetooth-mesh-projects-with-ccs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="import-project-to-ccs-using-resource-explorer">
+<h3>Import Project to CCS Using Resource Explorer<a class="headerlink" href="#import-project-to-ccs-using-resource-explorer" title="Permalink to this headline">¶</a></h3>
+<p>A quick and easy way to start working with the SDK is to use the TI Resource
+Explorer in CCS.</p>
+<p>This section describes how to import and build an existing project and
+references the <code class="docutils literal notranslate"><span class="pre">simple_mesh_node</span></code> project.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Bluetooth Mesh is supported on all CC13xx/CC26xx devices. Currently, not all
+example projects are available in the SDK. In this case, start out with any
+<a class="reference external" href="../../../../../examples/rtos/CC26X2R1_LAUNCHXL/ble5stack/simple_mesh_node/README.html">simple_mesh_node</a> example and refer to the following
+<a class="reference external" href="https://e2e.ti.com/support/wireless-connectivity/bluetooth-group/bluetooth/f/bluetooth-forum/1000102/cc1352r-lpstk-bluetooth-mesh-support-project">e2e post</a> for further instructions.</p>
+</div>
+<ol class="arabic">
+<li><p>Open the CCS IDE from the Start Menu.</p></li>
+<li><p>Create a workspace.</p>
+<blockquote>
+<div><div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Ensure that the CCS workspace path does not contain a whitespace.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Import a CCS Project using Resource Explorer</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Open Resource Explorer (if not open already): View -&gt; Resource Explorer</p></li>
+<li><p>Navigate to the CCS folder for your chosen example:
+Software → <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> → Examples → Development Tools →
+CC13xx or CC26xx LaunchPad → BLE5-Stack → simple_mesh_node → TI-RTOS →
+CCS Compiler → simple_mesh_node</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Select the CCS Logo button to import project into Project Explorer</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The import process will also install the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> if a local version does
+not exist. You must accept the End User License Agreement to proceed.</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/eula.png" src="../_images/eula.png" />
+<p class="caption"><span class="caption-number">Figure 140. </span><span class="caption-text">Install <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>After the installation finishes, you must reopen CCS before importing
+the project.</p>
+</div>
+<ul class="simple">
+<li><p>If everything is successful, the project should appear in Resource
+Explorer: simple_mesh_node_CC26X2R1_LAUNCHXL_tirtos_ccs.</p></li>
+</ul>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/mesh_css_project_explorer_after_import.png"><img alt="../_images/mesh_css_project_explorer_after_import.png" src="../_images/mesh_css_project_explorer_after_import.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Figure 141. </span><span class="caption-text">Project Imported into CCS</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="build-and-download-project">
+<h3>Build and Download Project<a class="headerlink" href="#build-and-download-project" title="Permalink to this headline">¶</a></h3>
+<p>To build &amp; download simple mesh node:</p>
+<ol class="arabic">
+<li><p>Build the project.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Select <strong>Project -&gt; Build All</strong> to build the project.</p></li>
+<li><p>As part of the prebuild process, SysConfig will run and generate code
+based on the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> in the workspace. For more information on
+SysConfig, see the SysConfig chapter of the User’s Guide.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Load the project</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Select <strong>Run</strong> -&gt; <strong>Debug</strong> to download the application to the device</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p>Before beginning execution, open a terminal window with the following settings:</p>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-number">Table 32. </span><span class="caption-text">Simple Mesh Node UART Settings</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 53%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>UART Param</p></th>
+<th class="head"><p>Default Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Baud Rate</p></td>
+<td><p>115200</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data length</p></td>
+<td><p>8 bits</p></td>
+</tr>
+<tr class="row-even"><td><p>Parity</p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stop bits</p></td>
+<td><p>1 bit</p></td>
+</tr>
+<tr class="row-even"><td><p>Flow Control</p></td>
+<td><p>None</p></td>
+</tr>
+</tbody>
+</table>
+<p>When the debugging session opens, click the green start button to start
+execution. Continue on to the <a class="reference external" href="../../../../../examples/rtos/CC26X2R1_LAUNCHXL/ble5stack/simple_mesh_node/README.html">simple_mesh_node</a> example README for information
+about using the example.</p>
+<p><strong>Troubleshooting Help</strong></p>
+<p>While working with your application, you may run into issues that require
+the use of a debugger. See the <em>Debugging</em> chapter in the TI BLE5-Stack
+User’s Guide for guidance.</p>
+</div>
+</div>
+<div class="section" id="bluetooth-qualification">
+<span id="mesh-bluetooth-qualification"></span><h2>Bluetooth Qualification<a class="headerlink" href="#bluetooth-qualification" title="Permalink to this headline">¶</a></h2>
+<p>Texas Instruments experts have written the
+<a class="reference external" href="https://www.ti.com/lit/swra601">How to Certify Your Bluetooth Product</a>
+guide to assist you through this process.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ble-mesh/index.html" class="btn btn-neutral float-left" title="Bluetooth Mesh" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ble-mesh/overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

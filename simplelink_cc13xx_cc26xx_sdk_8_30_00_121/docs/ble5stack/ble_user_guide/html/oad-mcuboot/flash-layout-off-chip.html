@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flash Layout for Off-Chip OAD &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Post-Build Script imgtool" href="imgtool.html" />
+    <link rel="prev" title="Flash Layout for On-Chip OAD" href="flash-layout-on-chip-stack-library.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug oad-mcuboot flash-layout-off-chip";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oad-types.html">OAD Storage &amp; Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mcuboot.html">MCUboot Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="on-chip-stack-library.html">MCUboot for On-Chip OAD (Stack Library)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image-header.html">MCUboot OAD Image Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-on-chip-stack-library.html">Flash Layout for On-Chip OAD</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Flash Layout for Off-Chip OAD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements-and-constraints-for-off-chip-oad">Requirements and Constraints for Off-chip OAD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#internal-flash-memory-layout">Internal Flash Memory Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#external-flash-memory-layout">External Flash Memory Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="imgtool.html">Post-Build Script imgtool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-application.html">OAD Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html">BLE-Stack OAD Profile</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a> &raquo;</li>
+      <li>Flash Layout for Off-Chip OAD</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="flash-layout-for-off-chip-oad">
+<span id="sec-oad-mcuboot-flash-layout-off-chip"></span><h1>Flash Layout for Off-Chip OAD<a class="headerlink" href="#flash-layout-for-off-chip-oad" title="Permalink to this headline">¶</a></h1>
+<p>This section will describe the method for placing images in internal and
+external flash when using off-chip OAD.</p>
+<p>Internal flash refers to the flash memory inside the CC13xx or CC26xx and external
+flash refers to an external SPI flash memory connected to the CC13xx or CC26xx via SPI.</p>
+<p>See requirements below for off-chip OAD.</p>
+<div class="section" id="requirements-and-constraints-for-off-chip-oad">
+<h2>Requirements and Constraints for Off-chip OAD<a class="headerlink" href="#requirements-and-constraints-for-off-chip-oad" title="Permalink to this headline">¶</a></h2>
+<p>In order to perform an Off-chip OAD the target system must have:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>An off-chip flash storage as large as the application size + one
+external flash page to store the external flash image header. (default example
+will use 1MB of external flash)</p></li>
+<li><p>A serial connection (SPI) is used to communicate with the off-chip flash
+component.</p></li>
+<li><p>Free GPIO pins to interface to the external memory (i.e. 4 wires for SPI)</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>The following software limitations exist on the external flash:</dt><dd><ul class="simple">
+<li><p>Only the secondary slot is stored on the external flash.</p></li>
+<li><p>The OAD images’ headers shall be stored in the first 1 MBytes of the external
+flash addressable space.</p></li>
+<li><p>The total size of the stored images should not exceed 4 GBytes.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Off-chip OAD using the BLE5-Stack has only be tested using a 1 MBytes
+external flash. The out-of-the-box software do not allow larger
+external flash size.</p>
+</div>
+</div>
+<div class="section" id="internal-flash-memory-layout">
+<span id="sect-mcuboot-off-chip-bim-memory-layout"></span><h2>Internal Flash Memory Layout<a class="headerlink" href="#internal-flash-memory-layout" title="Permalink to this headline">¶</a></h2>
+<p>The internal flash of the device contains the active user application and MCUboot.
+Off-chip OAD maximizes the available flash space to the user
+application because of its ability to store the incoming image in external flash
+during the download process.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using security, the BIM may use a second page depending on the
+page size of the device. Consult the BIM’s linker file for more information.</p>
+</div>
+<img alt="../_images/ditaa-0fe585d78dbb21bdb49696374885c61add8cee34.png" id="fig-mcuboot-off-chip-oad-target-memory-partition" src="../_images/ditaa-0fe585d78dbb21bdb49696374885c61add8cee34.png" />
+<p>The user application pictured above is responsible for the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Implementing the protocol stack specific implementation of the OAD
+transport</p></li>
+<li><p>Finding a suitable location in external flash for the image and storing
+its image header in the table.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="external-flash-memory-layout">
+<span id="sec-mcuboot-ext-flash-layout"></span><h2>External Flash Memory Layout<a class="headerlink" href="#external-flash-memory-layout" title="Permalink to this headline">¶</a></h2>
+<p>The off-chip flash memory on the CC13xx or CC26xx LaunchPad contains the secondary slot of the user applications.
+The memory map layout of the external flash is defined in <code class="code docutils literal notranslate"><span class="pre">flash_map_backend.h</span></code>.
+The size of the image in external flash can be determined
+once the image header vector is sent over the air.</p>
+<p>The application will round up as necessary according to the equation below:</p>
+<div class="math">
+<p><img src="../_images/math/6a148b770c617fbec9cdc2d7e0f32e291064b356.svg" alt="\textrm{numExtFlashPages} = \frac{imageLen + (imageLen \bmod EFL\_PAGE\_SIZE)}{EFL\_PAGE\_SIZE}"/></p>
+</div><p>The memory partition of the application for Off-chip OAD is depicted in
+below.</p>
+<img alt="../_images/ditaa-591bc8f42dd9f762ccb68ff27b5bc1dc53683650.png" id="ext-flash-layout-mcuboot" src="../_images/ditaa-591bc8f42dd9f762ccb68ff27b5bc1dc53683650.png" />
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The convention is that image header sector 0 is reserved for the
+<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-Factory-Image"><span class="xref std std-term">Factory Image</span></a>. This region should be reserved for known good images
+as the BIM will revert to the factory image if there are no
+acceptable images in internal or external flash (user section).</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="flash-layout-on-chip-stack-library.html" class="btn btn-neutral float-left" title="Flash Layout for On-Chip OAD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="imgtool.html" class="btn btn-neutral float-right" title="Post-Build Script imgtool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

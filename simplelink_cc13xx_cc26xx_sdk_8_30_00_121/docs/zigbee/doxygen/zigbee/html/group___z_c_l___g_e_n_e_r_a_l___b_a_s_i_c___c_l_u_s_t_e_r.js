@@ -1,0 +1,25 @@
+var group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r =
+[
+    [ "ATTRID_BASIC_ALARM_MASK", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga92480ff648b09f869f97ec5dcb2890a0", null ],
+    [ "ATTRID_BASIC_APPLICATION_VERSION", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#gac333ee0f6993c14bb260d9bbccf0361a", null ],
+    [ "ATTRID_BASIC_DATE_CODE", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#gab43cdcf6422b05fd7c6a4ad75aacbad5", null ],
+    [ "ATTRID_BASIC_DEVICE_ENABLED", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga771cff65728297f887ed6ff5dd784397", null ],
+    [ "ATTRID_BASIC_DISABLE_LOCAL_CONFIG", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#gaf24492fb7e42da8660d09a3a0cebee6c", null ],
+    [ "ATTRID_BASIC_GENERIC_DEVICE_CLASS", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga9327136f6fa5b8df4426294aefdbb1fa", null ],
+    [ "ATTRID_BASIC_GENERIC_DEVICE_TYPE", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#gaf7898b4f6029fc207b83f9af07fb768b", null ],
+    [ "ATTRID_BASIC_HW_VERSION", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga2c4a42782ec24e362be000c6f917d09e", null ],
+    [ "ATTRID_BASIC_LOCATION_DESCRIPTION", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#gaa2938c70c812d0130d1fd3cb8ebe2e47", null ],
+    [ "ATTRID_BASIC_MANUFACTURER_NAME", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#gaf14b1a9942fe36e0b267e1daf0df17d4", null ],
+    [ "ATTRID_BASIC_MANUFACTURER_VERSION_DETAILS", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga28853e39293f8e5c40eb0bd3325ac3b1", null ],
+    [ "ATTRID_BASIC_MODEL_IDENTIFIER", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#gab915638d9dc9ef69101f5261a4020c98", null ],
+    [ "ATTRID_BASIC_PHYSICAL_ENVIRONMENT", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga45bf6a0ccb24303e3dfce3afdecc0b03", null ],
+    [ "ATTRID_BASIC_POWER_SOURCE", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga6adb230c977c3af5309fdbb32c3548c5", null ],
+    [ "ATTRID_BASIC_PRODUCT_CODE", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga8f381d4da59fd639239641d7d5ddee99", null ],
+    [ "ATTRID_BASIC_PRODUCT_LABEL", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga1e7afcd24361205a19c157e10c67e2c7", null ],
+    [ "ATTRID_BASIC_PRODUCT_URL", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga677470a1f5571604b54c740a33d02ffe", null ],
+    [ "ATTRID_BASIC_SERIAL_NUMBER", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga653620ab644fa06fcf57c3fbf37ec0bd", null ],
+    [ "ATTRID_BASIC_STACK_VERSION", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga9f0e4333c3dd3dd7fa98d6ba589d7ae2", null ],
+    [ "ATTRID_BASIC_SW_BUILD_ID", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#gaa7bf2620794718a87ab4b374f6b284dd", null ],
+    [ "ATTRID_BASIC_ZCL_VERSION", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga62103fd307e36805ca1de9d6c0b1ecd1", null ],
+    [ "COMMAND_BASIC_RESET_TO_FACTORY_DEFAULTS", "group___z_c_l___g_e_n_e_r_a_l___b_a_s_i_c___c_l_u_s_t_e_r.html#ga8556b0df59d83e2ca3956107ef046979", null ]
+];

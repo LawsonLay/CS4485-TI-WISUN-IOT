@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User&#39;s Guide
+ 7.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Boot Image Manager (BIM)" href="bim.html" />
+    <link rel="prev" title="Over-the-Air Download (OAD)" href="../ti154stack-guide/oad-secure-index.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug oad-secure intro";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ti154stack-guide/ti154stack-index-cc13xx_cc26xx.html">TI 15.4-Stack</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/ti154stack-overview-cc13xx_cc26xx.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/ti154stack-overview-cc13xx_cc26xx.html#architecture-choices">Architecture Choices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/ti154stack-overview-cc13xx_cc26xx.html#data-rate-and-phy">Data Rate and PHY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/application-overview.html">Application Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/example-applications.html">Example Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/common-user-interface.html">Common User Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/secure-commissioning.html">Secure Commissioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/beacon-mode.html">Beacon Enabled Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/non-beacon-mode.html">Non-Beacon Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/frequency-hopping-mode.html">Frequency-Hopping Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/arib-regulation-type.html">ARIB Regulation Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/configuring-stack.html">Configuring Stack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack/creating-custom-applications.html">Creating Custom Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../ti154stack-guide/oad-secure-index.html">Over-the-Air Download (OAD)</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#oad-topology-overview">OAD Topology Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bim.html">Boot Image Manager (BIM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bim-off-chip.html">BIM for Off-Chip OAD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bim-on-chip-stack-library.html">BIM for On-Chip OAD (Stack Library)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="image-header.html">OAD Image Header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ext-flash-image-header.html">OAD External Flash Image Header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash-layout-off-chip.html">Flash Layout for Off-Chip OAD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash-layout-on-chip-stack-library.html">Flash Layout for On-Chip OAD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ti154stack/oad-transport.html">TI 15.4-Stack OAD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ti154stack/oad-turbo-oad.html">Turbo OAD Protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools.html">OAD Image Tool</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/migration-guide-cc13xx_cc26xx.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack/api-reference.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ti154stack-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ti154stack-guide/ti154stack-index-cc13xx_cc26xx.html">TI 15.4-Stack</a> &raquo;</li>
+          <li><a href="../ti154stack-guide/oad-secure-index.html">Over-the-Air Download (OAD)</a> &raquo;</li>
+      <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="introduction">
+<span id="sec-oad"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This chapter serves as a guide to the Texas Instruments Over-the-Air Download
+(<a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-OAD"><span class="xref std std-term">OAD</span></a>) ecosystem including the custom over the air specification,
+application architecture, drivers, and middleware. OAD is a device
+firmware upgrade method that allows the firmware image running on a device to be
+updated over the air while providing power loss protection.</p>
+<p>The guide will cover the principles of the OAD process, the out of
+the box examples included in the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>, and the process for adding OAD
+to an existing project.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Updating the device firmware over serial (UART or SPI) connection from a
+host MCU using the CC26xx embedded ROM Serial Bootloader (SBL) is covered in
+application note CC2538/CC26xx Bootloader Interface (SWRA466).</p>
+</div>
+<p>The OAD guide chapter will cover:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Boot Image Manager (<a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-BIM"><span class="xref std std-term">BIM</span></a>) and the device startup procedure. See
+<a class="reference internal" href="bim.html#sec-oad-bim"><span class="std std-ref">Boot Image Manager (BIM)</span></a></p></li>
+<li><p>OAD image header and how it is populated. See <a class="reference internal" href="image-header.html#sec-oad-image-header"><span class="std std-ref">OAD Image Header</span></a></p></li>
+<li><p>OAD theory of operation and architecture</p></li>
+<li><p>Flash layout for OAD applications</p></li>
+<li><p>Protocol stack specific examples of OAD</p></li>
+<li><p>How to add OAD to an existing sample application.</p></li>
+</ul>
+</div></blockquote>
+<p>The supported development kit for OAD is the CC13xx or CC26xx LaunchPad. To follow the
+procedures listed in this guide, two CC13xx or CC26xx LaunchPad development kits are required.
+The flow of this document will follow the boot process of the device from
+<a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-BIM"><span class="xref std std-term">BIM</span></a> to the user application, explaining the concepts as they come up.</p>
+<div class="section" id="oad-topology-overview">
+<span id="sec-oad-topology"></span><h2>OAD Topology Overview<a class="headerlink" href="#oad-topology-overview" title="Permalink to this headline">¶</a></h2>
+<p>Two wireless devices are required to perform an OAD.
+The terms for the devices involved in an OAD exchange are listed below:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-OAD-Target"><span class="xref std std-term">OAD Target</span></a></p></li>
+<li><p><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-OAD-Distributor"><span class="xref std std-term">OAD Distributor</span></a></p></li>
+</ul>
+</div></blockquote>
+<p>The OAD target is the device that receives the incoming image over the
+air. The OAD target is responsible for implementing the protocol stack
+specific transport layer that is used for sending and receiving OAD image data.</p>
+<p>The OAD distributor is responsible for fragmenting the new firmware image
+into protocol stack specific packets and sending them over the air.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The OAD distributor may take any form. Below it is illustrated as a TI
+development kit connected to an associated PC tool, but it can also be a
+mobile device or another TI embedded device that implements the protocol
+specific transport.</p>
+</div>
+<p><a class="reference internal" href="#fig-oad-downloader-and-target"><span class="std std-numref">Figure 81.</span></a> shows a graphical relationship of the
+devices required for an OAD transfer.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-oad-downloader-and-target"></span><img alt="../_images/oad_topology.png" src="../_images/oad_topology.png" />
+<p class="caption"><span class="caption-number">Figure 81. </span><span class="caption-text">OAD Distributor and OAD Target</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ti154stack-guide/oad-secure-index.html" class="btn btn-neutral float-left" title="Over-the-Air Download (OAD)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bim.html" class="btn btn-neutral float-right" title="Boot Image Manager (BIM)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

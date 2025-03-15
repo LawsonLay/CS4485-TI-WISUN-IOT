@@ -1,0 +1,129 @@
+
+.. _sec-dmm-scheduling:
+
+RF Command Scheduling
+=====================
+
+RF command scheduling affects only those commands that are submitted through
+:rflib_api:`RF_scheduleCmd`. In the case of :rflib_api:`RF_postCmd`, the DMM
+redefines this to point to the :rflib_api:`RF_scheduleCmd` API using default
+parameters. The actual scheduling behavior is defined by the
+:ref:`policy<sec-dmm-policy>` table entry for the current stack state
+combination. When an application updates its state via the
+:dmm_api:`DMMPolicy_updateStackState` API, the DMM policy manager will
+evaluate and decide if the system state need to change. If the system state
+changes, the policy manager will update the DMM scheduler with the new policy.
+
+When a stack wants to schedule an RF command, the DMM scheduler will process
+the command based on the scheduling parameters and the active DMM policy:
+
+:Scheduling parameters:
+
+    - stack activity info
+    - start time and trigger policy
+    - end time and trigger *(optional)*
+    - duration *(optional)*
+    - delay policy
+
+:Active DMM policy:
+
+    - priority weight for applicable stack activities
+
+The resulting priority for each stack is then calculated as follows:
+
+
+.. math::
+
+    \text{Final priority} =
+    \begin{cases}
+        \text{Global priority} + \text{Weight},& \text{if scheduled stack activity is applicable in the active policy}\\
+        \text{Global priority},& \text{otherwise}
+
+    \end{cases}
+
+
+
+When :rflib_api:`RF_scheduleCmd` or :rflib_api:`RF_postCmd` is called the RF
+driver calls a scheduling hook into DMM. The DMM scheduler tries to schedule
+the command into the RF queue based on the start time, disregarding the actual
+end time of the command. If there is a conflict with another command at the
+scheduled start time, a conflict resolution hook is invoked to rule on the
+conflict based on the current policy.
+
+In cases where the submitted command is using the ``TRIG_NOW`` start trigger,
+the command will always be inserted in front of the queue, behind any already
+submitted ``TRIG_NOW`` commands, assuming it takes priority. If the command
+for any reason cannot be scheduled, for example in case of a conflict with a
+higher priority stack, it is rejected.
+
+A scheduling conflict occurs when a command from stack A is running and stack
+B is scheduling a command at the same time. To resolve the conflict the delay
+policy of the scheduled command is checked first. Regardless of the final
+priority, if the scheduled command is delayable it will be delayed until
+either the running command completes or the delay runs out. If the delay
+policy is not delayable, then the priority is checked. The running command is
+preempted if it has a lower priority. If the scheduled command is removed from
+the RF queue if it has a lower priority. Assuming the command is not IEEE or
+Proprietary RX command, an RF callback with the
+:rflib_api:`RF_EventCmdPreempted` event is posted to the stack.
+
+.. warning::
+
+    The current scheduler implementation is baseline that has limitations. The
+    DMM scheduler will evolve in the coming releases to cover these
+    limitations along with improvements.
+
+
+The flowchart below shows the complete DMM scheduling flow starting from
+interception of a RF command.
+
+.. uml::
+    :caption: Scheduling flow for a newly posted command.
+    :align: center
+
+    @startuml
+
+    :Command is scheduled;
+
+    :Invoke scheduling hook;
+
+    :Update RF command parameters\naccording to current DMM state;
+
+    if (A command is running?) then (yes)
+        if (Is there a conflict in time?) then (yes)
+
+            :Invoke conflict resolution hook;
+
+            if (Running command has higher priority?) then (yes)
+                if (Is the new command time critical) then (no)
+
+                    :Schedule command at\nthe end of the queue;
+                    stop
+
+                else (yes)
+
+                    :Reject command;
+                    stop
+
+                endif
+            else (no)
+
+                :Abort the running command;
+                :Insert into queue based on start time;
+                stop
+
+            endif
+        else (no)
+        endif
+    else (no)
+    endif
+
+    if (Is the new command "TRIG_NOW"?) then (no)
+        :Insert into queue based on start time;
+        stop
+    else (yes)
+        :Insert command in front of queue\nbased on priority, behind other "TRIG NOW"\ncommands of same or higher priority;
+        stop
+    endif
+
+    @enduml

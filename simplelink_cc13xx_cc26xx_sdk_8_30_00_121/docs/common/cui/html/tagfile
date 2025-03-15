@@ -1,0 +1,813 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<tagfile>
+  <compound kind="file">
+    <name>cui.h</name>
+    <path>C:/.conan/a5e737/1/source/ti/common/cui/</path>
+    <filename>cui_8h</filename>
+    <class kind="struct">CUI_params_t</class>
+    <class kind="struct">CUI_clientParams_t</class>
+    <class kind="struct">CUI_cursorInfo_t</class>
+    <class kind="struct">CUI_menuItem_t</class>
+    <class kind="struct">CUI_menu_s</class>
+    <class kind="struct">CUI_list_s</class>
+    <member kind="define">
+      <type>#define</type>
+      <name>MAX_CLIENTS</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a0a8f91f93d75a07f0ae45077db45b3eb</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>MAX_CLIENT_NAME_LEN</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a019862dfd4a2b73f703e6f4e026c3cc7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>MAX_REGISTERED_MENUS</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a79534bf268d6c4d27fbbe3fe783cee14</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>MAX_MENU_LINE_LEN</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a88247e32831bcc894e81fc15c42b8906</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>MAX_STATUS_LINE_LABEL_LEN</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a0f194b3c2c1e3244037c2fbda3027e36</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>MAX_STATUS_LINE_VALUE_LEN</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>acc277ff12a793aa0c5fba7229dbfc699</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_MAIN_MENU</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a70777c2111f47b923313790f2853bd0f</anchor>
+      <arglist>(_menuSymbol, _pMenuTitle, _numItems, _pMenuUpdateFn)</arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_SUB_MENU</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a12e13e4f0349a24dec221590319348f6</anchor>
+      <arglist>(_menuSymbol, _pMenuTitle, _numItems, _pUpperMenu)</arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_MENU_ITEM_SUBMENU</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a50e207ed637bbb704b125a310c2d0bf8</anchor>
+      <arglist>(_pSubMenu)</arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_MENU_ITEM_ACTION</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a8a3a7bf2d2a146ac384e65b62e0e1a5e</anchor>
+      <arglist>(_pItemDesc, _pFnAction)</arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_MENU_ITEM_INT_ACTION</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a3ba6deecdbfb08a495002dab6216243d</anchor>
+      <arglist>(_pItemDesc, _pFnIntercept)</arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_MENU_ITEM_LIST_ACTION</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ab4d5de958adf6de937587bd746dc5369</anchor>
+      <arglist>(_pItemDesc, _maxListItems, _pFnListAction)</arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_MENU_ITEM_HELP</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a6556de408312a414972734f94aa4c862</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_MENU_ITEM_BACK</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad29ada1cdf1e0b444a7b16b953b487bc</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_MAIN_MENU_END</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a0098db8a0b87ef6727a5a38529a59950</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_SUB_MENU_END</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ab05b7def4c22fe64bcf4200ed9809d1a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_MENU_ACTION_BACK_DESC</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a503c6625e41777a9141f99f0d92fd9c6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_MENU_ACTION_HELP_DESC</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a5686e00e75be6912491215e7d9f8fa9b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_IS_INPUT_NUM</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a8fbe1856db024320f5fe80814c25e1eb</anchor>
+      <arglist>(_input)</arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_IS_INPUT_ALPHA</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a0e7db7a9ef18dd29c3e6c05e094066e5</anchor>
+      <arglist>(_input)</arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_IS_INPUT_ALPHA_NUM</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ab45dea8c73e3ac96d2fbdffff7c2958d</anchor>
+      <arglist>(_input)</arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_IS_INPUT_HEX</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>af0ca9baf24ab386b8916f39bbd25f3b9</anchor>
+      <arglist>(_input)</arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_IS_INPUT_BINARY</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a1b07b556b2613b836c43ece5c1badcc5</anchor>
+      <arglist>(_input)</arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_ITEM_PREVIEW</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a05ad45b7a726d193ee73fec1b7aacf6c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_ITEM_INTERCEPT_START</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a76fc2da5c8a665f310750cead3b5f862</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_ITEM_INTERCEPT_STOP</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a929ed9c83d6a46ff398daa0a95a1e873</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_ITEM_INTERCEPT_CANCEL</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a39e2a6d54e26087e5b12ffcbd25ee2b9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_INPUT_UP</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad135aaeb07e319b61dab8aff3479cacf</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_INPUT_DOWN</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a60dbc42e3bf1b434ee8c206586dc929b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_INPUT_RIGHT</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a29557f58557240e8f494fc32d188c57f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_INPUT_LEFT</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>acb4b0c7925ed15b702e7766b800fb31b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_INPUT_BACK</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ae7da8ceb506ece8abcd412695e513726</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_INPUT_EXECUTE</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a867fb5bf26897f8a0d90c1095b28b210</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_INPUT_ESC</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>afd0e4dba562b79719b18523ccda9c2a1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_COLOR_RESET</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ab4bc8ca14939d8f05f2cf7348cc38e81</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_COLOR_RED</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a9447eb519dad5dd15dc6a6b9aadbce71</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_COLOR_GREEN</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a1797386fafa486f505af19be96449748</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_COLOR_YELLOW</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>afa90ea23a1a9ae0373c9502741b494e9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_COLOR_BLUE</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a46fd8105086e87884e0b773be1bc1c29</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_COLOR_MAGENTA</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a5bf416509062badf9b44a7be4b566dad</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_COLOR_CYAN</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a826a65b380f037a60475420b6b86976d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_COLOR_WHITE</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad3c42160cad2444aa54a9e0e6249450c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_DEBUG_MSG_START</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a86d378085f9898985e1ae6298725e8d3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>CUI_DEBUG_MSG_END</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a70783fda07533dca465eb1d216e3da6e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>enum CUI_retVal</type>
+      <name>CUI_retVal_t</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a23b3c09dbdfa2b2d37374ccb4a3a0ea9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>uint32_t</type>
+      <name>CUI_clientHandle_t</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ade18acc875b26ca6ecee3c2478ff83a3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>CUI_pFnClientMenuUpdate_t</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>aa233bd58dadd00bfd9c6b873482c93a1</anchor>
+      <arglist>)(void)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>CUI_pFnAction_t</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a7b20be48b79c0a24f901267469cac378</anchor>
+      <arglist>)(const int32_t _itemEntry)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>CUI_pFnIntercept_t</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a0f26a0d6658884d7262be04f70152121</anchor>
+      <arglist>)(const char _input, char *_lines[3], CUI_cursorInfo_t *_curInfo)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>void(*</type>
+      <name>CUI_pFnListAction_t</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a34a9fea2a92d04a908d6e9a0fe09875a</anchor>
+      <arglist>)(const uint32_t _listIndex, char *_lines[3], bool _selected)</arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct CUI_menu_s</type>
+      <name>CUI_menu_t</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a103f26fd22c11e3bd5c3235b78680e54</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>struct CUI_list_s</type>
+      <name>CUI_list_t</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a1446bf241ecfc4199d01de9a2c27fef8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>enum CUI_menuItems</type>
+      <name>CUI_itemType_t</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a184164eae06723dab2f5bfb9c731612d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumeration">
+      <type></type>
+      <name>CUI_retVal</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_SUCCESS</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082a791b590588509335ba8233d5c1f6da5f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_FAILURE</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082a21d1eee491e2e91578ca66a697d927ee</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_INVALID_CB</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082a80f1980c6e87f832c54ebb93dcb8ee4c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_RESOURCE_ALREADY_ACQUIRED</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082a447ca5d9500674fb952596dc0680cb6c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_RESOURCE_NOT_ACQUIRED</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082ab7b60c33076b5130697639eae1c7e9f1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_MODULE_UNINITIALIZED</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082abecabb5e99ed92e69d9e38bb83488b3a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_INVALID_CLIENT_HANDLE</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082a1a1d48fe52473e0910552cdcbd1fce8a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_MAX_CLIENTS_REACHED</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082a4a1c586b89c173187fcf64f4df95b8c3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_NO_ASYNC_LINES_RELEASED</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082a74d98431542a6b0ae431e279dcc67f76</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_INVALID_LINE_ID</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082aebc5b1c28e7eab3631c823df1777d4a4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_UNKOWN_VALUE_TYPE</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082ac2dfb6f12135c621b6a9a4a1fa22bcdb</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_UART_FAILURE</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082a33c1a6f05114a6125aee577f987dfe67</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_INVALID_PARAM</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082a318008ac95312dfa8e9b7762894dd03f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_MAX_MENUS_REACHED</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082acf18e7fc15fe39d84cf511a44e5dd215</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_PREV_WRITE_UNFINISHED</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082a210a80880930dafbebc248de32383de8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_MISSING_UART_UPDATE_FN</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082a852f329cf89f3d8ae28d4b950b4a6e40</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_NOT_MANAGING_UART</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad344ae0b9d2fdbb65b272976a33d1082ae28a4c19f2fe58351d69e04556f3fc0b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumeration">
+      <type></type>
+      <name>CUI_menuItems</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a5b73af37f4ce97f1e39d99d387763051</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_MENU_ITEM_TYPE_SUBMENU</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a5b73af37f4ce97f1e39d99d387763051a8db01b4c7d67ed03a6c5e645be252577</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_MENU_ITEM_TYPE_ACTION</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a5b73af37f4ce97f1e39d99d387763051a0cfe16cb9c615d7991a98b5a53e4c490</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_MENU_ITEM_TYPE_INTERCEPT</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a5b73af37f4ce97f1e39d99d387763051ab6609fffcbc95f378668794ffad9b8cd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>CUI_MENU_ITEM_TYPE_LIST</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a5b73af37f4ce97f1e39d99d387763051ad60619477f058da7155e8586d50bbdea</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>CUI_retVal_t</type>
+      <name>CUI_init</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a963806e0784146b81383bd7818b74b3b</anchor>
+      <arglist>(CUI_params_t *_pParams)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>CUI_paramsInit</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad36347b9333ba6acf438a9addcc75392</anchor>
+      <arglist>(CUI_params_t *_pParams)</arglist>
+    </member>
+    <member kind="function">
+      <type>CUI_clientHandle_t</type>
+      <name>CUI_clientOpen</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad906b41778c533a38354bccbd32598b8</anchor>
+      <arglist>(CUI_clientParams_t *_pParams)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>CUI_clientParamsInit</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a42f35e4db56609b72749882b0d3f8478</anchor>
+      <arglist>(CUI_clientParams_t *_pClientParams)</arglist>
+    </member>
+    <member kind="function">
+      <type>CUI_retVal_t</type>
+      <name>CUI_close</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a6c989d319bfceaedc1e074720bfc987f</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>CUI_retVal_t</type>
+      <name>CUI_registerMenu</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>aeef2723418a661618b06eb9f2e213921</anchor>
+      <arglist>(const CUI_clientHandle_t _clientHandle, CUI_menu_t *_pMenu)</arglist>
+    </member>
+    <member kind="function">
+      <type>CUI_retVal_t</type>
+      <name>CUI_deRegisterMenu</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>ad73ac970e62cd799016bbd3a65680f57</anchor>
+      <arglist>(const CUI_clientHandle_t _clientHandle, CUI_menu_t *_pMenu)</arglist>
+    </member>
+    <member kind="function">
+      <type>CUI_retVal_t</type>
+      <name>CUI_updateMultiMenuTitle</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a099093fab10c4e87d892d20603c7e409</anchor>
+      <arglist>(const char *_pTitle)</arglist>
+    </member>
+    <member kind="function">
+      <type>CUI_retVal_t</type>
+      <name>CUI_menuNav</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a286763ceb6edba81a3c2a9fcf15982ca</anchor>
+      <arglist>(const CUI_clientHandle_t _clientHandle, CUI_menu_t *_pMenu, const uint32_t _itemIndex)</arglist>
+    </member>
+    <member kind="function">
+      <type>CUI_retVal_t</type>
+      <name>CUI_processMenuUpdate</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a4e4912c7f7b20fdbec820abca6f079db</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>CUI_retVal_t</type>
+      <name>CUI_statusLineResourceRequest</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a1fa34e294cf64bfe9aebc415860ee63a</anchor>
+      <arglist>(const CUI_clientHandle_t _clientHandle, const char _pLabel[MAX_STATUS_LINE_LABEL_LEN], const bool _refreshInd, uint32_t *_pLineId)</arglist>
+    </member>
+    <member kind="function">
+      <type>CUI_retVal_t</type>
+      <name>CUI_statusLinePrintf</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>acb686b1bc2a87a45c2167aef67648bce</anchor>
+      <arglist>(const CUI_clientHandle_t _clientHandle, const uint32_t _lineId, const char *format,...)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>CUI_wrappedIncrement</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a4b6adb39d67b5dfbabcf710874dd8b73</anchor>
+      <arglist>(size_t *_pValue, int32_t _incAmt, size_t _maxValue)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>CUI_assert</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>afc3b9f34d30392ee05f4fb02d6c0db6c</anchor>
+      <arglist>(const char *_assertMsg, const bool _spinLock)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>CUI_menuActionBack</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>a103866a282a9a22045dcbb7e31c052fe</anchor>
+      <arglist>(const int32_t _itemEntry)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>CUI_menuActionHelp</name>
+      <anchorfile>cui_8h.html</anchorfile>
+      <anchor>afc40552ae5fcefd1eb5aaf608db0969f</anchor>
+      <arglist>(const char _input, char *_pLines[3], CUI_cursorInfo_t *_pCurInfo)</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>CUI_clientParams_t</name>
+    <filename>struct_c_u_i__client_params__t.html</filename>
+    <member kind="variable">
+      <type>char</type>
+      <name>clientName</name>
+      <anchorfile>struct_c_u_i__client_params__t.html</anchorfile>
+      <anchor>a7aa9fbcaf497fbf05859f1d8b4033447</anchor>
+      <arglist>[MAX_CLIENT_NAME_LEN]</arglist>
+    </member>
+    <member kind="variable">
+      <type>uint8_t</type>
+      <name>maxStatusLines</name>
+      <anchorfile>struct_c_u_i__client_params__t.html</anchorfile>
+      <anchor>a8b8987930463e7fba839824cd2fba6aa</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>CUI_cursorInfo_t</name>
+    <filename>struct_c_u_i__cursor_info__t.html</filename>
+    <member kind="variable">
+      <type>int16_t</type>
+      <name>row</name>
+      <anchorfile>struct_c_u_i__cursor_info__t.html</anchorfile>
+      <anchor>aeb50282dba35a62bbd9f6417f75ee042</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int16_t</type>
+      <name>col</name>
+      <anchorfile>struct_c_u_i__cursor_info__t.html</anchorfile>
+      <anchor>a9d9c9b9345063e218d425989650d89e2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>CUI_list_s</name>
+    <filename>struct_c_u_i__list__s.html</filename>
+    <member kind="variable">
+      <type>CUI_pFnListAction_t</type>
+      <name>pFnListAction</name>
+      <anchorfile>struct_c_u_i__list__s.html</anchorfile>
+      <anchor>a7b83f00bd88364e9de69f7e66713db78</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>uint16_t</type>
+      <name>maxListItems</name>
+      <anchorfile>struct_c_u_i__list__s.html</anchorfile>
+      <anchor>abc92d212c743d83794c28fdd7dfc0d6a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>uint16_t</type>
+      <name>currListIndex</name>
+      <anchorfile>struct_c_u_i__list__s.html</anchorfile>
+      <anchor>ad6e073b4bf2c87a114dde35ddc1269cc</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>CUI_menu_s</name>
+    <filename>struct_c_u_i__menu__s.html</filename>
+    <member kind="variable">
+      <type>CUI_pFnClientMenuUpdate_t</type>
+      <name>uartUpdateFn</name>
+      <anchorfile>struct_c_u_i__menu__s.html</anchorfile>
+      <anchor>a7ad0bc8622e8ba9c4fff00452a5c3fdc</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>pTitle</name>
+      <anchorfile>struct_c_u_i__menu__s.html</anchorfile>
+      <anchor>aae961d3fd0c37bc40214663862461645</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>uint8_t</type>
+      <name>numItems</name>
+      <anchorfile>struct_c_u_i__menu__s.html</anchorfile>
+      <anchor>ac7ecfd288598645446c31872c0067942</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>CUI_menu_t *</type>
+      <name>pUpper</name>
+      <anchorfile>struct_c_u_i__menu__s.html</anchorfile>
+      <anchor>acf5460ea4cf9708c78e5f0891adafe94</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>CUI_menuItem_t</type>
+      <name>menuItems</name>
+      <anchorfile>struct_c_u_i__menu__s.html</anchorfile>
+      <anchor>a9b794067bc259f3150c5fca137c38dc3</anchor>
+      <arglist>[]</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>CUI_menuItem_t</name>
+    <filename>struct_c_u_i__menu_item__t.html</filename>
+    <member kind="variable">
+      <type>char *</type>
+      <name>pDesc</name>
+      <anchorfile>struct_c_u_i__menu_item__t.html</anchorfile>
+      <anchor>a1a2077a56a088bd55a71055e0c3a8f24</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>CUI_itemType_t</type>
+      <name>itemType</name>
+      <anchorfile>struct_c_u_i__menu_item__t.html</anchorfile>
+      <anchor>ad59a04cf30ef248735cb27bd3616cfb4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>interceptActive</name>
+      <anchorfile>struct_c_u_i__menu_item__t.html</anchorfile>
+      <anchor>acd8a723e008af4180023315a4c44f536</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>CUI_menu_t *</type>
+      <name>pSubMenu</name>
+      <anchorfile>struct_c_u_i__menu_item__t.html</anchorfile>
+      <anchor>a8487c0fdad1434724cc5e28034fbf22e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>CUI_pFnAction_t</type>
+      <name>pFnAction</name>
+      <anchorfile>struct_c_u_i__menu_item__t.html</anchorfile>
+      <anchor>a215814478aed9431be740a2081f51979</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>CUI_pFnIntercept_t</type>
+      <name>pFnIntercept</name>
+      <anchorfile>struct_c_u_i__menu_item__t.html</anchorfile>
+      <anchor>a59a8aab8151be7be91b6f3da5e880b2c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>CUI_list_t *</type>
+      <name>pList</name>
+      <anchorfile>struct_c_u_i__menu_item__t.html</anchorfile>
+      <anchor>aebbf1435777058f485e7f1301f76f8d6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>union CUI_menuItem_t::@0</type>
+      <name>item</name>
+      <anchorfile>struct_c_u_i__menu_item__t.html</anchorfile>
+      <anchor>ad45a3ddf3841cddabd2e4fac0e39e9fb</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>CUI_params_t</name>
+    <filename>struct_c_u_i__params__t.html</filename>
+    <member kind="variable">
+      <type>bool</type>
+      <name>manageUart</name>
+      <anchorfile>struct_c_u_i__params__t.html</anchorfile>
+      <anchor>a04dfd07cf06d5d534b7f045b930f7f06</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="page">
+    <name>index</name>
+    <title>CUI API Documentation</title>
+    <filename>index</filename>
+  </compound>
+</tagfile>

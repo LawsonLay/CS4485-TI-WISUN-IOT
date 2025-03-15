@@ -1,0 +1,30 @@
+Proprietary Mode
+================
+
+The proprietary physical layer (PHY) is the most common physical layer for
+Sub-1 GHz radio communication, but is also supported on 2.4 GHz. It is
+available on the CC13x0, CC13x2, CC26x2, and CC2640R2 devices. The CC1310 and
+CC1312 devices supports only Sub-1 GHz while the CC2640R2, CC2650, and CC26x2
+devices can only operate at 2.4 GHz. The CC1350 and CC1352 devices can operate
+in both frequency bands.
+
+`SmartRF Studio`_ is TI's tool for evaluating proprietary RF physical layers
+without  having to write any code. In SmartRF Studio, you can easily evaluate
+different PHYs. You will also find characterized settings for all supported
+modes of operation for each individual device.
+
+For CC13x0, CC2650, and CC2640R2, when you have used `SmartRF Studio`_ to find your 
+preferred PHY, you can export the RF driver settings (``smartrf_settings.c/h``) 
+into your software project. Step-by-step instructions for doing this is found 
+in `Simplelink Academy`_.
+
+For CC13x2 and CC26x2, you can use SysConfig to implement the settings you
+tested with SmartRF Studio, see :ref:`Adding RF Settings
+<sysconfig-radio-configuration>` for more details.
+
+
+.. toctree::
+   :maxdepth: 2
+
+   /proprietary-rf/packet-format
+   /proprietary-rf/cc1101-migration

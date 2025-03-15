@@ -1,0 +1,895 @@
+.. _ram_allocation_cc13xx_cc26xx:
+
+RAM
+===
+
+There is 80 kB of RAM available in the |DEVICE1|, 144 kB in |DEVICE7|, and
+32 kB in |LITEDEVICE|. The various sections of RAM and their associated linker 
+files are as follows.
+
+.. THOR
+  There is 80 kB of RAM available in the CC2672x3, |DEVICE1|, 144 kB in |DEVICE7|,
+  32 kB in |LITEDEVICE|, and 256 kB in |DEVICE1M|. The various sections of RAM
+  and their associated linker files are as follows.
+
+-  **CSTACK**: This the system callstack used by the C main function and HWIs.
+   See :ref:`sec-memory-management-system-stack` for more information
+
+-  **RAM Reset Vector Table**: This table holds entries for all supported
+   reset vectors. It is initialized from the flash reset vector table at boot
+   time and is used to plug interrupt table entries at runtime. See
+   :ref:`sec-ram-vector-table` for more information.
+
+-  **ROM Reserved RAM**: When building a configuration that links to code in
+   ROM certain sections of RAM must be reserved for the static allocations
+   performed in ROM. If the active configuration doesn't use
+   ROM, these sections may be used for other purposes.
+
+-  **HEAP**: See :ref:`dynamic_memory_allocation` for
+   information about heaps. 
+
+For projects where the stack project builds a **library**:
+
+-  **Application and Stack statically allocated data**: This includes any
+   initialized and uninitialized variables used by the application or stack.
+   (.data,.bss)
+
+.. _sec-ram-vector-table:
+
+RAM Vector Table
+^^^^^^^^^^^^^^^^
+
+.. ifconfig:: device in ['cc13x0', 'cc2640']
+
+  This table is initialized at kernel boot time with the contents of 
+  the flash vector table. The location of this table is controlled by 
+  ``m3Hwi.vectorTableAddress`` within
+  the |TIRTOS| config file (`*.cfg`), it defaults to address 0x20000000.
+  The VTOR register will point to this table, which allows the creation of
+  dynamic interrupts at runtime. This table will contain entries for all 50
+  supported interrupts.
+
+.. ifconfig:: device == 'cc13xx_cc26xx'
+
+  This table is initialized at kernel boot time with the contents of 
+  the flash vector table. The location of this table is controlled by SysConfig
+  in the ``TI RTOS`` configuration settings, it defaults to address 0x20000000.
+  The VTOR register will point to this table, which allows the creation of
+  dynamic interrupts at runtime. This table will contain entries for all 50
+  supported interrupts.
+
+.. _sec-memory-management-system-stack:
+
+System Stack
+^^^^^^^^^^^^
+
+As described in :ref:`sec-rtos-overview-tasks`, each task has its own runtime
+stack for context switching. Another runtime stack is used by the RTOS for
+main(), HWIs, and SWIs. This system stack is allocated in the
+application linker file to be placed at the end of the RAM of the
+application.
+
+For IAR, this RTOS system stack is defined by the CSTACK symbol in the ``.icf``
+file. To change the size of the CSTACK, adjust the STACK_SIZE symbol value (see
+highlighted line).
+
+.. THOR
+  .. note::
+
+          The following does not apply to |DEVICE1M|. |DEVICE1M| system stack is configured using
+          :ref:`sysconfig-sysconfig` tool.
+
+.. code-block:: c
+   :emphasize-lines: 3
+
+	////////////////////////////////////////////////////////////////////////////////
+	// Stack
+	define symbol STACK_SIZE            = 0x400;
+	define symbol STACK_START           = RAM_END + 1;
+	define symbol STACK_END             = STACK_START - STACK_SIZE;
+	//
+	define symbol STACK_TOP             = RAM_END + 1;
+	export symbol STACK_TOP;
+
+.. code-block:: c
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // Memory Placement
+  ////////////////////////////////////////////////////////////////////////////////
+
+  //...
+
+	// Runtime Stack
+	define block CSTACK with alignment = 8, size = STACK_SIZE { section .stack };
+
+  //...
+
+	define block END_OF_RAM with fixed order {
+                                        block HEAP_END,
+                                        block CSTACK
+                                      };
+
+  place at end of RAM { block END_OF_RAM };
+
+.. ifconfig:: device in ['cc13x0', 'cc2640']
+  
+  For CCS the RTOS system stack is defined by the ``Program.stack`` parameter in
+  the RTOS configuration file (the ``.cfg`` file):
+
+  .. code-block:: js
+
+    /* ================ Program configuration ================ */
+
+    // ...
+    Program.stack = 1024;
+
+  and placed by the linker in the RAM space of the application (``.cmd`` file):
+
+  .. code-block:: none
+
+	/* Create global constant that points to top of stack */
+	/* CCS: Change stack size under Project Properties */
+	__STACK_TOP = __stack + __STACK_SIZE;
+
+.. ifconfig:: device == 'cc13xx_cc26xx'
+  
+  For CCS, the :term:`RTOS` system stack size is defined in the linker file as
+  shown below::
+
+        --stack_size=1024   /* C stack is also used for ISR stack */
+
+.. _dynamic_memory_allocation:
+
+Dynamic Memory Allocation
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. THOR
+  .. note::
+
+          The following does not apply to |DEVICE1M|. |DEVICE1M| system stack is configured using
+          :ref:`sysconfig-sysconfig` tool.
+
+The system uses a single heap for dynamic memory allocation. This heap is shared
+between |TIRTOS|, the protocol stack, and the application.
+
+.. ifconfig:: device in ['cc13x0', 'cc2640']
+
+  The RTOS configuration file that configures the heap depends on the project's
+  build configuration. The RTOS configuration file ends with ``.cfg``, e.g.
+  ``ble_release.cfg``. Using the RTOS configuration file above the heap can be
+  configured in one of three ways. Regardless of the underlying heap
+  implementation, the APIs to access the heap are common.
+
+.. ifconfig:: device == 'cc13xx_cc26xx'
+
+  The heap configuration is configured via SysConfig inside ``TI-RTOS`` |rarr|
+  ``BIOS`` |rarr| ``Default Heap Settings``. Using SysConfig, the heap can be
+  configured in a few ways. Regardless of the underlying heap
+  implementation, the APIs to access the heap are common.
+
+* |TIRTOS| HeapMem - The flexible heap implementation offered by
+  the |TIRTOS| kernel. HeapMem supports creating variable sized blocks as well
+  as freeing blocks. It is implemented by ``rtos_heapmem.h`` when using RTOS in
+  ROM and by direct calls when using RTOS in flash. 
+
+* |TIRTOS| HeapMem with HeapTrack - The most flexible heap implementation
+  offered by the |TIRTOS| kernel. HeapMem supports creating variable sized
+  blocks as well as freeing blocks. It is implemented by ``rtos_heaptrack.h``
+  when using RTOS in ROM and by direct calls when using RTOS in flash.
+  On top of the functionality offered by HeapMem, HeapTrack offers additional
+  debugging capability, at the cost of runtime performance. To enable HeapTrack,
+  select the ``Use HeapTrack with system default heap`` option in SysConfig.
+
+.. ifconfig:: device in ['cc13x0', 'cc2640']
+
+  See the following section for details on using the HeapMem
+  module in ROM with the stack.
+
+  HeapMem with |TIRTOS| in ROM
+  ----------------------------
+  
+  When using any HeapMem based configuration combined with |TIRTOS| in ROM, the
+  heap will be implemented by HeapCallback module. HeapCallback will call
+  a user defined function whenever a dynamic memory operation is required. The
+  user defined functions are located in the following files.
+
+  * ``rtos_heapmem.h`` -- HeapMem
+  * ``rtos_heaptrack.h`` -- HeapMem + HeapTrack
+
+  This is required because the HeapMem implementation in ROM uses the GateMutex
+  module, which prevents ``malloc()`` from being called in a :term:`hwi` or
+  :term:`swi`. In order to allow safe use of the heap a GateHWI must be used. To
+  work around this, the HeapCallback implementation will wrap any access to the
+  heap in a HWI lock. See the following example from ``rtos_heapmem.h``.
+
+    .. code-block:: c
+
+      /* Protect since HeapMem_allocUnprotected does not */
+      hwikey = (uint_least16_t)Hwi_disable();
+
+      /* Using the default system heap for this example */
+      tmp = HeapMem_allocUnprotected(stackHeap, size, FORCED_ALIGNEMENT);
+
+      // ..
+
+      /* restore the hwi mutex */
+      Hwi_restore(hwikey);
+
+    .. note::
+      Note that the legacy OSAL heap always protects heap operations with a HWI
+      lock.
+
+  When using a flash based kernel, the HeapMem module is configured to use a
+  GateHWI, see the following excerpt from ``ble_debug.cfg``.
+
+    .. code-block:: js
+
+      Program.global.stackHeap = HeapMem.create(heapMemParams);
+      var GateHwi = xdc.useModule('ti.sysbios.gates.GateHwi');
+      HeapMem.common$.gate = GateHwi.create();
+      Memory.defaultHeapInstance = Program.global.stackHeap;
+
+.. _sec-configuring-the-heap:
+
+Configuring the Heap
+^^^^^^^^^^^^^^^^^^^^
+.. THOR
+  .. note::
+
+          The following does not apply to |DEVICE1M|. |DEVICE1M| system stack is configured using
+          :ref:`sysconfig-sysconfig` tool.
+
+.. ifconfig:: device in ['cc13x0', 'cc2640']
+
+  The active heap configuration is set via the ``HEAPMGR_CONFIG`` variable. If
+  auto heapsizing is not used, the size of the heap is controlled via
+  ``HEAPMGR_SIZE``.The location of both the ``HEAPMGR_CONFIG`` and
+  ``HEAPMGR_SIZE`` variables are dependent on the project's current build
+  configuration. These variables are defined in the app's ``.cfg`` file.
+
+  The system will default to using the OSAL heap with auto heap size. The table
+  below shows the possible configurations of the heap along with their associated
+  values of ``HEAPMGR_CONFIG`` and ``HEAPMGR_SIZE``.
+
+
+  +--------------------+------------------------------------------+------------------------------------+
+  | ``HEAPMGR_CONFIG`` | Active Heap Configuration                | Heap Size                          |
+  +--------------------+------------------------------------------+------------------------------------+
+  | 0x00               | OSAL HeapMgr, static heap size           | Set by ``HEAPMGR_SIZE``            |
+  +--------------------+------------------------------------------+------------------------------------+
+  | 0x80               | OSAL HeapMgr, automatic heap size        | Automatically determined by the    |
+  |                    |                                          | amount of free space available at  |
+  |                    |                                          | link time between heapStart and    |
+  |                    |                                          | heapEnd symbols                    |
+  +--------------------+------------------------------------------+------------------------------------+
+  | 0x01               | HeapMem, static heap size                | Set by ``HEAPMGR_SIZE``            |
+  +--------------------+------------------------------------------+------------------------------------+
+  | 0x81               | HeapMem, automatic heap size             | Automatically determined by the    |
+  |                    |                                          | amount of free space available at  |
+  |                    |                                          | link time between heapStart and    |
+  |                    |                                          | heapEnd symbols                    |
+  +--------------------+------------------------------------------+------------------------------------+
+  | 0x02               | HeapMem + HeapTrack, static heap size    | Set by ``HEAPMGR_SIZE``            |
+  +--------------------+------------------------------------------+------------------------------------+
+  | 0x82               | HeapMem + HeapTrack, automatic heap size | Automatically determined by the    |
+  |                    |                                          | amount of free space available at  |
+  |                    |                                          | link time between heapStart and    |
+  |                    |                                          | heapEnd symbols                    |
+  +--------------------+------------------------------------------+------------------------------------+
+
+  .. warning::
+      If autoheap size is to be used, ``heapStart`` and ``heapEnd`` symbols must
+      be defined in the linker file. See your application's map file for the
+      location of these sections in the StackLibrary configuration.
+
+      - ``heapStart`` -- Placed at end of static allocation section
+      - ``heapEnd`` -- Placed right before beginning of CSTACK section
+
+  See the snippet below from  the app's ``.cfg`` to see how to change the
+  active heap configuration. Change the variable in the highlighted line to one of
+  the values supported in the table above.
+
+    .. code-block:: js
+      :linenos:
+      :emphasize-lines: 2
+
+      var Memory = xdc.useModule('xdc.runtime.Memory');
+      var HEAPMGR_CONFIG = 0x00;  //set to OSAL HeapMgr, static heap size
+      var HEAPMGR_SIZE   = 8000; //only valid if static size is used. This is the
+                                  //size of the buffer allocated for Heap.
+
+.. ifconfig:: device == 'cc13xx_cc26xx'
+
+  The heap configuration is configured via SysConfig inside ``TI-RTOS`` |rarr|
+  ``BIOS`` |rarr| ``Default Heap Settings``.
+
+  For more information regarding configuration options, please refer to
+  Section 7.4 Heap Implementations of the |TI-RTOS_UG|.
+
+.. hint::
+  When using static heap size, it's a good idea to review the heap size thoroughly.
+
+Cache
+^^^^^
+
+The cache is an |CACHE_SIZE| section of the device's RAM reserved for the
+processor. The cache module temporarily stores data that has been read from the
+Flash, so that frequently used data is not fetched from Flash on each access.
+This reduces the number of CPU wait-states and saves power. When the cache is
+not used, it is not powered. This is true for Standby and Idle states where the
+cache is not in use.
+
+.. _section-cache-as-ram:
+
+Using the Cache as RAM
+""""""""""""""""""""""
+
+The cache can be disabled temporarily or permanently and used as RAM instead.
+A disabled cache will result in a slower execution time for software because all
+data needs to be fetched from flash. This increases the device power
+consumption. If you want to temporarily disable the chache for extra RAM at
+runtime, jump ahead to the :ref:`section-cache-as-ram-dynamic-gpram` section. If
+you want to permanently allocate cache for RAM usage, see the
+:ref:`section-cache-as-ram-configure-cache` section.
+
+If your application needs more memory, or if you need more space in SRAM, the
+cache can be re-purposed as RAM. This will allow the linker to store parts of
+the compiled application in this section of the RAM. This section will be
+referred to as the general purpose RAM (:term:`GPRAM`). This will cause the
+program to run at a slightly reduced speed, and it will increase the device
+power consumption in sleep. This is because the :term:`GPRAM`, contrary to a
+cache, will have to be powered even when the device is sleeping. The current
+consumption in standby mode with and without cache retained is listed in the
+|device| datasheet. How this will affect the device power consumption will
+depend on application. For some applications the added power consumption will be
+very small, but for processing intensive application it will be slightly higher.
+Please verify your application current consumption by using the method described
+in the
+`Measuring CC13xx and CC26xx current consumption (SWRA478) <http://www.ti.com/lit/pdf/swra478>`_.
+
+.. _section-cache-as-ram-configure-cache:
+
+Configure the Cache as GPRAM
+----------------------------
+
+In order to enable using the cache as RAM, two things need to be done. Firstly, the
+program must be told to retain the cache\/GPRAM when it's being used. Secondly,
+the linker must be told to allocate the memory region used as cache to GPRAM,
+and what parts of code to store in the GPRAM. This is done in the linker
+command\/configuration file. The syntax for the linker command\/configuration
+file is slightly different in CCS and IAR. To read more about the CCS linker
+command file, see the article |LINKERPRIMER|.
+To read more about the IAR linker, see `IAR C/C++ Development Guide <http://ftp.
+iar.se/WWWfiles/arm/webic/doc/EWARM_DevelopmentGuide.ENU.pdf>`_.
+
+**If you want to use the cache as RAM in a project, follow these steps:**
+
+  .. note::
+    The steps will be different for CCS users and IAR users. The steps will
+    also differ depending on what example project your project is based on. For
+    the example projects found in the |STACK| folder, only step 1-5 will be
+    required.
+
+  1. In the syscfg file, go to *TI Devices* |rarr| *Device Configuration* and
+  select *Disable Flash Cache*
+
+  2. In ``main()``, add the following code:
+
+    .. code-block:: c
+      :caption: Retain cache in sleep.
+
+      #ifdef CACHE_AS_RAM
+      // retain cache during standby
+      Power_setConstraint(PowerCC26XX_SB_VIMS_CACHE_RETAIN);
+      Power_setConstraint(PowerCC26XX_NEED_FLASH_IN_IDLE);
+      #else
+      // Enable iCache pre-fetching
+      VIMSConfigure(VIMS_BASE, TRUE, TRUE);
+      // Enable cache
+      VIMSModeSet(VIMS_BASE, VIMS_MODE_ENABLED);
+      #endif //CACHE_AS_RAM
+
+    .. important::
+      Please make sure your program is not using :term:`VIMS` while using cache as RAM.
+
+  In the same file, include the following files: 
+
+    .. code-block:: c
+
+      /* Power Driver */
+      #include <ti/drivers/Power.h>
+      #include <ti/drivers/power/PowerCC26XX.h>
+      /* Header files required to enable instruction fetch cache */
+      #include <ti/devices/cc26x0r2/inc/hw_memmap.h>
+      #include <ti/devices/cc26x0r2/driverlib/vims.h>
+
+  3. Go to the **compiler** predefines and add ``CACHE_AS_RAM``. 
+
+  4. The GPRAM memory area must be defined in the linker command file. This
+  syntax is different for the CCS and IAR linker. IAR specific instructions
+  will follow the CCS specific instructions.
+
+  In CCS, the linker command file ends with ``.cmd`` (e.g.
+  ``cc13x2_cc26x2_app.cmd``).
+
+    .. code-block:: none
+      :caption: CCS Linker File. Under ``Memory Sizes``, add defines for GPRAM
+                start and length.
+
+        /*******************************************************************************
+         * Memory Sizes
+         */
+        #define FLASH_BASE   0x00000000
+        #define GPRAM_BASE   0x11000000
+        #define RAM_BASE     0x20000000
+        #define ROM_BASE     0x10000000
+
+        #define FLASH_SIZE   0x00058000
+        #define GPRAM_SIZE   0x00002000
+        #define RAM_SIZE     0x00014000
+        #define ROM_SIZE     0x00040000
+
+    .. code-block:: c
+      :caption: Add GPRAM under ``Memory Definitions``.
+
+        /*******************************************************************************
+         * GPRAM
+         */
+
+        #ifdef CACHE_AS_RAM
+          #define GPRAM_START GPRAM_BASE
+          #define GPRAM_END   (GPRAM_START + GPRAM_SIZE - 1)
+        #endif /* CACHE_AS_RAM */
+
+    .. code-block:: none
+      :caption: In ``MEMORY{}``, allocate room for GPRAM.
+
+          #ifdef CACHE_AS_RAM
+            GPRAM(RWX) : origin = GPRAM_START, length = GPRAM_SIZE
+          #endif /* CACHE_AS_RAM */
+
+    .. _mm_cacheasram_ccs_code:
+
+    .. code-block:: none
+      :caption: In ``SECTIONS{}``, move .bss from SRAM to GPRAM.
+
+        GROUP > SRAM
+        {
+          .data
+          #ifndef CACHE_AS_RAM
+          .bss
+          #endif /* CACHE_AS_RAM */
+          .vtable
+          .vtable_ram
+          vtable_ram
+          .sysmem
+          .nonretenvar
+          
+        } LOAD_END(heapStart)
+
+        .stack            :   >  SRAM (HIGH) LOAD_START(heapEnd)
+
+        #ifdef CACHE_AS_RAM
+        .bss :
+        {
+          *(.bss)
+        } > GPRAM
+        #endif /* CACHE_AS_RAM */
+
+    Rebuild your application. This will move :term:`.bss` from SRAM to GPRAM and
+    place the auto-heap size start after. Other objects can also be moved. See
+    :ref:`using-the-aux-as-ram` for an example of this.
+
+    In IAR, the linker configuration file ends with ``.icf`` (e.g.
+    ``cc26xx_app.icf``).
+
+    .. code-block:: none
+      :caption: IAR Linker File. Add defines for GPRAM start and length under
+                ``Memory Definitions``.
+
+        //////////////////////////////////////////////////////////////////////////////
+        // GPRAM
+        //
+        if ( isdefinedsymbol(CACHE_AS_RAM) )
+        {
+          define symbol GPRAM_START           = 0x11000000;
+          define symbol GPRAM_SIZE            = 0x2000;
+          define symbol GPRAM_END             = GPRAM_START + GPRAM_SIZE;
+        }
+
+    .. code-block:: none
+      :caption: Under ``Memory Regions``, allocate room for GPRAM.
+
+        if ( isdefinedsymbol(CACHE_AS_RAM) )
+        {
+          define region GPRAM               = mem:[from GPRAM_START to GPRAM_END];
+        }
+
+    .. _mm_cacheasram_iar_code:
+
+    .. code-block:: none
+      :caption: Under ``Memory Placement``, move .bss from SRAM to GPRAM.
+
+        if ( isdefinedsymbol(CACHE_AS_RAM) )
+        {
+          // GPRAM
+          define block GPDATA { section .bss };
+          place in GPRAM { block GPDATA } except { object ll.o };
+        }
+
+    Rebuild your application. This will move :term:`.bss` from SRAM to GPRAM. Other
+    objects can also be moved. See :ref:`using-the-aux-as-ram` for an example
+    of this.
+
+.. _section-cache-as-ram-dynamic-gpram:
+
+Dynamic GPRAM
+-------------
+
+.. Add description how to enable cache as GPRAM at run time
+
+In this mode, the cache will be temporarily used as RAM. At all other
+times, the cache will operate as normal. The current consumption changes are
+described in the :ref:`section-cache-as-ram-configure-cache` section.
+
+An example use-case is a device that sometimes receives or sends a data stream
+with a high throughput. When the device is not streaming, it can use the cache
+as usual. When the device receives the signal to start streaming, the device
+disables the cache and uses the GPRAM to store a buffer for the stream. When the
+device receives the command to stop streaming, the memory is freed and the cache
+is re-enabled.
+
+To use the :term:`GPRAM` to dynamically store a data buffer, follow these steps:
+
+  1. In order to use this functionality, the following files should be
+     included:
+
+  .. code-block:: c
+
+      #include <ti/sysbios/family/arm/m3/Hwi.h>
+      #include <ti/drivers/Power.h>
+      #include <ti/drivers/power/PowerCC26XX.h>
+      #include <ti/devices/cc13x2_cc26x2/driverlib/vims.h>
+
+  2. In the application, make sure you disable the cache when before you start
+  using the memory area. Use :term:`VIMS` and the power driver.
+
+  .. code-block:: c
+
+      /*********************************************************************
+      * @fn      SimplePeripheral_disableCache
+      *
+      * @brief   Disables the instruction cache and sets power constaints
+      *          This prevents the device from sleeping while streaming
+      *
+      * @param   None.
+      *
+      * @return  None.
+      */
+      static void SimplePeripheral_disableCache()
+      {
+          uint_least16_t hwiKey = Hwi_disable();
+          Power_setConstraint(PowerCC26XX_SB_VIMS_CACHE_RETAIN);
+          Power_setConstraint(PowerCC26XX_NEED_FLASH_IN_IDLE);
+          VIMSModeSafeSet(VIMS_BASE, VIMS_MODE_DISABLED, true);
+          Hwi_restore(hwiKey);
+      }
+
+  3. Make sure to re-enable the cache after you are finished using it.
+
+  .. code-block:: c
+
+      /*********************************************************************
+      * @fn      SimplePeripheral_enableCache
+      *
+      * @brief   Enables the instruction cache and releases power constaints
+      *          Allows device to sleep again
+      *
+      * @param   None.
+      *
+      * @return  None.
+      */
+      static void SimplePeripheral_enableCache()
+      {
+          uint_least16_t hwiKey = Hwi_disable();
+          Power_releaseConstraint(PowerCC26XX_SB_VIMS_CACHE_RETAIN);
+          Power_releaseConstraint(PowerCC26XX_NEED_FLASH_IN_IDLE);
+          VIMSModeSafeSet(VIMS_BASE, VIMS_MODE_ENABLED, true);
+          Hwi_restore(hwiKey);
+      }
+
+  4. We will use the ``GPRAM_BASE`` define from ``hw_memmap.h``.
+  ``hw_memmap.h`` contains defines for the base addresses of the memories and
+  peripherals on the |device|.
+
+  .. code-block:: c
+
+      #define GPRAM_BASE   0x11000000
+
+  In the application file, initialize the buffer:
+
+  .. code-block:: c
+
+      // Initialize buffer
+      static int16_t *gpram_buffer = NULL;
+
+      // Disable instruction cache to use for the buffer
+      SimplePeripheral_disableCache();
+      gpram_buffer = (int16_t *)GPRAM_BASE;
+
+  5. Use the buffer:
+
+  .. code-block:: c
+
+      if (gpram_buffer)
+      {
+          // Use buffer
+          gpram_buffer[0] = 0;
+          gpram_buffer[0]++;
+      }
+
+  Remember to free the memory and re-enable the cache when the buffer is no
+  longer in use.
+
+  .. code-block:: c
+
+      //Buffer no longer needed
+      if (gpram_buffer)
+      {
+          gpram_buffer = NULL;
+      }
+      SimplePeripheral_enableCache();
+
+AUX RAM
+^^^^^^^
+
+The AUX RAM is a |AUXRAM_SIZE| memory area belonging to the
+:ref:`sensor-controller`. This is not available on |LITEDEVICE| devices.
+
+.. _using-the-aux-as-ram:
+
+Using the AUX RAM as RAM
+""""""""""""""""""""""""
+For variants other than the |LITEDEVICE|, you can use this memory as RAM for
+your application if the Sensor Controller is not used. However, access to this
+memory is significantly slower than access to the SRAM. This may lead to 
+increased power consumption and slower program execution. Additionally, if using
+the AUX RAM as RAM it is important that you test **thoroughly**. Certain
+objects, when put in AUX RAM can cause the application to crash. One should test
+for each object they want to store in AUX RAM.
+
+.. important::
+
+  The user application can do other tasks while the data is being
+  transferred to AUX RAM, but if the bus buffer gets full during back to back
+  writes, it will stall the AP until there is free space in the buffer. After
+  you write a series of data to AUX RAM you should implement a singe read access
+  to make sure all the data has been written. The read access will stall the AP
+  until all the data has been transferred to AUX RAM.
+
+Modifying the application
+"""""""""""""""""""""""""
+
+1. Open the project properties and add the symbol ``AUX_AS_RAM=1`` to the linker options: 
+
+- In CCS, right click on the Project |rarr| select Properties |rarr| Build |rarr| ARM Linker |rarr| Advanced Options |rarr| Command File Preprocessing. Click on the small **Add...** button at the top right of the box *Pre-define preprocessor macro _name_to_value_* and type the symbol ``AUX_AS_RAM=1``.
+
+- In IAR, right click on the Project |rarr| Options |rarr| Linker. Locate the box *Configuration file symbol definitions* and type the symbol ``AUX_AS_RAM=1``.
+
+2. Modify the linker command/configuration file. Each toolchain has different options, pragmas and syntax, therefore check the steps below for the three supported toolchains: TI ARMCL, TI ARM Clang and IAR. 
+
+**TI ARMCL:**
+
+- In the linker command file ``cc26xx_app.cmd``, define the AUX_RAM
+  memory area:
+
+  .. code-block:: none
+
+    #ifdef AUX_AS_RAM
+    #define AUX_RAM_BASE            0x400E0000
+    #define AUX_RAM_SIZE            0x800
+    #endif /* AUX_AS_RAM */
+
+-  Create a AUX_RAM memory section in ``MEMORY{}``
+
+  .. code-block:: none
+
+    #ifdef AUX_AS_RAM
+    AUX_RAM (RWX) : origin = AUX_RAM_BASE, length = AUX_RAM_SIZE
+    #endif /* AUX_AS_RAM */
+
+- Add sections of memory or code to AUX\_RAM in ``SECTIONS{}``
+
+  .. code-block:: none
+    :caption: Move object files into AUX\_RAM. Example from simple_peripheral (``cc26xx_app.cmd``).
+
+    #ifdef AUX_AS_RAM
+      reorganized_into_auxram
+      {
+        simple_peripheral.obj(.data)
+        devinfoservice.obj(.data)
+        simple_gatt_profile.obj(.data)
+        icall.obj(.data)
+        board.obj(.bss)
+        } > AUX_RAM
+    #endif/* AUX_AS_RAM */
+
+The .obj files are listed in the FlashROM folder of the app project.
+They are also listed with size in the .map file. A detailed
+description of the linker command file and memory sections is given
+in this article |LINKERPRIMER|.
+
+If you want more control over what is stored in AUX\_RAM, individual
+variables can be stored there with the ``#pragma DATA_SECTION`` command.
+Please note that this is only possible for global variables.
+
+  .. code-block:: c
+    :caption: Move the global *display handle* variable into a new  AUX RAM section called ``my_section``.
+
+    // Display Interface
+    #pragma DATA_SECTION(dispHandle, "my_section")
+    Display_Handle dispHandle = NULL;
+
+You can find ``my_section`` in the map-file. Here you will find the names of the
+objects included in ``my_section``. In this case, the object is
+``simple_peripheral.obj (my_section)``.
+
+  .. code-block:: none
+    :caption: In the linker command file (``cc26xx_app.cmd``), add the section to AUX_RAM.
+
+    #ifdef AUX_AS_RAM
+      reorganized_into_auxram
+      {
+        simple_peripheral.obj(my_section)
+      } > AUX_RAM
+    #endif /* AUX_AS_RAM */
+
+.. important::
+
+  When making alterations only to the linker command file, please make sure to
+  press *Rebuild*, not just *Build*.
+  (CCS will not recognize that you have made changes to the project before you
+  press *Rebuild*.)
+
+**TI ARM Clang:**
+
+The linker command file is very similar to the TI ARMCL toolchain. For additional details, check chapter 5 of the `TI ARM Clang User's Guide <https://software-dl.ti.com/codegen/docs/tiarmclang/rel1_0_0_sts/tiarmclang_ug/tiarmclang-portfolio/index.html>`_.
+
+- In the linker command file ``cc26xx_app.cmd``, define the AUX_RAM memory area:
+
+  .. code-block:: none
+
+    #ifdef AUX_AS_RAM
+    #define AUX_RAM_BASE            0x400E0000
+    #define AUX_RAM_SIZE            0x800
+    #endif /* AUX_AS_RAM */
+
+-  Create a AUX_RAM memory section in ``MEMORY{}``
+
+  .. code-block:: none
+
+    #ifdef AUX_AS_RAM
+    AUX_RAM (RWX) : origin = AUX_RAM_BASE, length = AUX_RAM_SIZE
+    #endif /* AUX_AS_RAM */
+
+- Add sections of memory or code to AUX\_RAM in ``SECTIONS{}``
+
+  .. code-block:: none
+    :caption: Move object files into AUX\_RAM. Example from simple_peripheral (``cc26xx_app.cmd``).
+
+    #ifdef AUX_AS_RAM
+      reorganized_into_auxram
+      {
+        simple_peripheral.o(.data)
+        devinfoservice.o(.data)
+        simple_gatt_profile.o(.data)
+        icall.o(.data)
+        board.o(.bss)
+        } > AUX_RAM
+    #endif/* AUX_AS_RAM */
+
+The .o files are listed in the FlashROM folder of the app project.
+They are also listed with size in the .map file. A detailed description of the
+linker command file and memory sections is given in this article |LINKERPRIMER|.
+
+If you want more control over what is stored in AUX\_RAM, individual
+variables can be stored there with the ``__attribute__((section("section_name")))`` command.
+Please note that this is only possible for global variables.
+
+  .. code-block:: c
+    :caption: Move the global *display handle* variable into a new  AUX RAM section called ``my_section``.
+
+    // Display Interface
+    __attribute__((section("my_section")))
+    Display_Handle dispHandle = NULL;
+
+You can find ``my_section`` in the map-file. Here you will find the names of the
+objects included in ``my_section``. In this case, the object is
+``simple_peripheral.o (my_section)``.
+
+  .. code-block:: none
+    :caption: In the linker command file (``cc26xx_app.cmd``), add the section to AUX_RAM.
+
+    #ifdef AUX_AS_RAM
+      reorganized_into_auxram
+      {
+        simple_peripheral.o(my_section)
+      } > AUX_RAM
+    #endif /* AUX_AS_RAM */
+
+.. important::
+
+  When making alterations only to the linker command file, please make sure to
+  press *Rebuild*, not just *Build*.
+  (CCS will not recognize that you have made changes to the project before you
+  press *Rebuild*.)
+
+
+**IAR:** 
+
+- Open the linker configuration file ``cc26xx_app.icf``. Under ``Memory Definitions``, add
+
+  .. code-block:: none
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // AUX_RAM
+    //
+    if ( isdefinedsymbol(AUX_AS_RAM) )
+    {
+      define symbol AUX_RAM_START        = 0x400E0000;
+      define symbol AUX_RAM_SIZE         = 0x800;
+      define symbol AUX_RAM_END          = AUX_RAM_START + AUX_RAM_SIZE;
+    }
+
+- Under ``Memory Regions``, add
+
+  .. code-block:: none
+
+    if ( isdefinedsymbol(AUX_AS_RAM) )
+    {
+      define region AUX_RAM               = mem:[from AUX_RAM_START to AUX_RAM_END];
+    }
+
+- Under ``Memory Placement``, add
+
+  .. code-block:: none
+    :caption: Move object files into AUX\_RAM. Example from simple_peripheral (``cc26xx_app.icf``).
+
+    if ( isdefinedsymbol(AUX_AS_RAM) )
+    {
+      // AUX_RAM
+      define block AUXDATA { section .data object simple_peripheral.o,
+                             section .data object devinfoservice.o,
+                             section .data object simple_gatt_profile,
+                             section .data object icall.o,
+                             section .data object board.o};
+      place in AUX_RAM { block AUXDATA };
+    }
+
+The .o-files are listed in the .map file. For more information on the linker
+configuration file, please see `IAR C/C++ Development Guide <http://ftp.iar.se/WWWfiles/arm/webic/doc/EWARM_DevelopmentGuide.ENU.pdf>`_.
+
+If you want more control over what is stored in AUX\_RAM, individual
+variables can be stored there with the ``#pragma location`` command.
+Please note that this is only possible for global variables.
+
+  .. code-block:: c
+    :caption: Move the global *display handle* variable into a new Cache RAM section called ``my_section``.
+
+    // Display Interface
+    #pragma location="my_section"
+    Display_Handle dispHandle = NULL;
+
+You can find ``my_section`` in the map-file. Here you will find the names of the
+objects included in ``my_section``. In this case, the object is
+``simple_peripheral.o (my_section)``.
+
+  .. code-block:: none
+    :caption: In the linker configuration file (``cc26xx_app.cmd``), add the section to AUX_RAM.
+
+    if ( isdefinedsymbol(AUX_AS_RAM) )
+    {
+      // AUX_RAM
+      define block AUXDATA { section my_section object simple_peripheral.o };
+      place in AUX_RAM { block AUXDATA };
+    }

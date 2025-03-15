@@ -1,0 +1,34 @@
+.. _sec-oad-index:
+
+Over-the-Air Download (OAD)
+###########################
+
+The following sections aim to describe the lower layers of OAD software that are
+common across all protocol stack implementations. This includes the OAD image
+header, the flash layout, Boot Image Manager, and the oad\_image\_tool.
+
+.. warning::
+
+    The |STACK| OAD does not implement or perform any security or
+    authentication mechanisms as part of the firmware update process.
+    System developers should take measures to adequately authenticate peer
+    devices and only accept and/or apply firmware images transferred from
+    trusted sources via OAD. 
+
+    When using the Secure OAD feature along with recommended parameters,
+    firmware images are authenticated on the device using ECDSA signature
+    validation algorithms to ensure image authenticity prior to updating the
+    running firmware image.
+
+.. toctree::
+    /oad-secure/intro
+    /oad-secure/bim
+    /oad-secure/bim-off-chip
+    /oad-secure/bim-on-chip-stack-library
+    /oad-secure/image-header
+    /oad-secure/ext-flash-image-header
+    /oad-secure/flash-layout-off-chip
+    /oad-secure/flash-layout-on-chip-stack-library
+    /ti154stack/oad-transport
+    /ti154stack/oad-turbo-oad
+    /oad-secure/tools

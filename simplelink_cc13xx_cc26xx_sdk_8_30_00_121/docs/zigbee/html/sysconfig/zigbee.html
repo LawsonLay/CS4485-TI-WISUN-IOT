@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zigbee Configuration &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User&#39;s Guide
+ 8.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Disable SysConfig" href="sysconfig-disable.html" />
+    <link rel="prev" title="Configure The Board Files with SysConfig" href="sysconfig-board.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug sysconfig zigbee";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../zigbee-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+
+          </a>
+              <div class="version">
+                8.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/overview.html">SimpleLink CC13xx/CC26xx SDK Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/developing_zigbee_applications.html">Developing Zigbee Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/zigbee-ota-index.html">Zigbee Over-The-Air Firmware Upgrade</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/packet_sniffer.html">Packet Sniffer</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../zigbee-guide/sysconfig-index.html">System Configuration (SysConfig)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html">Get started with SysConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysconfig-board.html">Configure The Board Files with SysConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysconfig-board.html#reserve-peripheral-s">Reserve Peripheral(s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysconfig-board.html#hardware-view">Hardware View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysconfig-board.html#migrating-board-variant">Migrating Board Variant</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Zigbee Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#open-an-example-project">Open An Example Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zigbee-settings">Zigbee Settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#device-type-and-power-management-configuration">Device Type and Power Management Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#touchlink-commissioning-endpoint">Touchlink Commissioning Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#radio-configuration">Radio Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#network-configuration">Network Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#security-configuration">Security Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-configuration">Advanced Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#adjust-your-application">Adjust Your Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#application-builder">Application Builder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#application-name-and-zigbee-device-type">Application Name and Zigbee Device Type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mandatory-clusters">Mandatory Clusters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-clusters">Additional Clusters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bdb-reporting">BDB Reporting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-settings">Advanced Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#over-the-air-upgrade-client-endpoint">Over-The-Air Upgrade Client Endpoint</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sysconfig-disable.html">Disable SysConfig</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/migration_guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/glossary.html">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../zigbee-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../zigbee-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../zigbee-guide/sysconfig-index.html">System Configuration (SysConfig)</a> &raquo;</li>
+      <li>Zigbee Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="zigbee-configuration">
+<span id="sysconfig-zigbee-configuration"></span><h1>Zigbee Configuration<a class="headerlink" href="#zigbee-configuration" title="Permalink to this headline">¶</a></h1>
+<p>These instructions cover all Z-Stack sample applications.
+Configurables differ between standard Zigbee device types (ie. Coordinator,
+Router, End Device, ZNP) and Green Power Devices (GPD).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SysConfig will only make changes to selected files, listed in the
+<em>Generated Files</em> view. Any required changes to your application files
+must be done on your own.</p>
+</div>
+<div class="section" id="open-an-example-project">
+<h2>Open An Example Project<a class="headerlink" href="#open-an-example-project" title="Permalink to this headline">¶</a></h2>
+<p>Open the stand-alone SysConfig tool or import a SysConfig-enabled example project
+(found in the <code class="docutils literal notranslate"><span class="pre">{SDK_INSTALL_DIR}/examples/rtos/&lt;board&gt;/zstack</span></code> folder) and open the
+<code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file with the <em>System Configuration Editor</em>.</p>
+</div>
+<div class="section" id="zigbee-settings">
+<h2>Zigbee Settings<a class="headerlink" href="#zigbee-settings" title="Permalink to this headline">¶</a></h2>
+<p>In the <em>RF STACKS</em> → <em>Z-Stack</em> view, you can configure Zigbee stack parameters.
+Parameters are explained in the tooltip that appears when you hover over it but
+further explanations are provided in the <a class="reference internal" href="../zigbee/z-stack-overview.html#z-stack-overview"><span class="std std-ref">Z-Stack Overview</span></a> and
+<a class="reference internal" href="zigbee-migration.html#sec-migrate-zigbee-specific"><span class="std std-ref">4. Migrate Configuration Header File</span></a> sections.
+Zigbee stack settings are stored in <code class="docutils literal notranslate"><span class="pre">default/sysconfig/ti_zstack_config.h</span></code>
+(which appears after building the project).</p>
+<p>Here is an example of what you would see for a coordinator example:</p>
+<div class="figure align-center">
+<img alt="../_images/syscfg_settings_zigbee.png" src="../_images/syscfg_settings_zigbee.png" />
+</div>
+<div class="section" id="device-type-and-power-management-configuration">
+<h3>Device Type and Power Management Configuration<a class="headerlink" href="#device-type-and-power-management-configuration" title="Permalink to this headline">¶</a></h3>
+<p><strong>Standard Zigbee Device</strong></p>
+<p>The <em>Device Type</em> (Coordinator, Router, End Device, Network Processor)
+is pre-determined for each example project and cannot be changed.
+The <em>Power Mode of Operation</em> (see <a class="reference internal" href="../zigbee/z-stack-overview.html#z-stack-overview-logical-device-end-device"><span class="std std-ref">End Device</span></a>)
+and multiple poll period (see <a class="reference internal" href="../zigbee/z-stack-overview.html#sec-child-management"><span class="std std-ref">Child Management</span></a>)
+are only configurable for End Device and ZNP projects.</p>
+<p><strong>Green Power Device</strong></p>
+<p>The device type is <em>Green Power Device</em>.  The <a class="reference internal" href="../zigbee/gpd_application_overview.html#sec-gpd-configuration"><span class="std std-ref">Green Power Device Configuration</span></a> section
+shows all of the definitions which are configured with this project type.</p>
+</div>
+<div class="section" id="touchlink-commissioning-endpoint">
+<span id="sysconfig-zigbee-touchlink-configuration"></span><h3>Touchlink Commissioning Endpoint<a class="headerlink" href="#touchlink-commissioning-endpoint" title="Permalink to this headline">¶</a></h3>
+<p><strong>Standard Zigbee Device</strong></p>
+<p>Allows the ability to enable Touchlink Commissioning of a ZED or ZR role for either
+the Initiator or Target modes (see <a class="reference internal" href="../zigbee/z-stack-overview.html#z-stack-overview-touchlink-commissioning"><span class="std std-ref">Touchlink Commissioning</span></a>)</p>
+</div>
+<div class="section" id="radio-configuration">
+<span id="sysconfig-zigbee-radio-configuration"></span><h3>Radio Configuration<a class="headerlink" href="#radio-configuration" title="Permalink to this headline">¶</a></h3>
+<p><strong>Standard Zigbee Device</strong></p>
+<p>The basic Radio parameters to consider for the Zigbee stack include primary and
+secondary channel mask selection (<a class="reference internal" href="../zigbee/z-stack-overview.html#z-stack-overview-configuring-channel"><span class="std std-ref">Configuring Channel</span></a>).
+This is also where the TX power output can be selected and the internal Power
+Amplifier (PA) is enabled if applicable (<a class="reference internal" href="../zigbee/power_configuration.html#power-config"><span class="std std-ref">Power Configuration</span></a>).</p>
+<p><strong>Green Power Device</strong></p>
+<p>Configure the channel which the GPD will operate on and the TX power it will use.</p>
+</div>
+<div class="section" id="network-configuration">
+<h3>Network Configuration<a class="headerlink" href="#network-configuration" title="Permalink to this headline">¶</a></h3>
+<p><strong>Standard Zigbee Device</strong></p>
+<p>The network configurations involve basic Zigbee network settings, such as the PAN ID
+(<a class="reference internal" href="../zigbee/z-stack-overview.html#z-stack-overview-configuring-pan-id-and-network-joining"><span class="std std-ref">Configuring the PAN ID and Network to Join</span></a>), extended PAN ID
+(<a class="reference internal" href="../zigbee/z-stack-overview.html#extended-pan-id"><span class="std std-ref">Extended PAN IDs</span></a>), default network and TC link keys (<a class="reference internal" href="../zigbee/z-stack-overview.html#z-stack-overview-security"><span class="std std-ref">Security</span></a>),
+and End Device Timeout (<a class="reference internal" href="../zigbee/z-stack-overview.html#sec-child-management"><span class="std std-ref">Child Management</span></a>).
+Joining devices can also select the distributed global link key (<a class="reference internal" href="../zigbee/z-stack-overview.html#sec-distributed-security-network"><span class="std std-ref">Distributed Security Network</span></a>)
+whereas routing devices have a maximum device list option (<a class="reference internal" href="../zigbee/network_configuration.html#network-config"><span class="std std-ref">Network Configurations</span></a>). Routing devices
+can select the number of devices allowed to directly associate and coordinators
+can determine the maximum number of TCLK entries stored (<a class="reference internal" href="../zigbee/z-stack-overview.html#sec-tc-joining"><span class="std std-ref">For Trust Center (TC) Devices</span></a>).</p>
+<p><strong>Green Power Device</strong></p>
+<p>Green Power Device Type determines what function the GPD embodies in the network (eg. switch, temperature sensor, etc).
+Green Power Device ID Type determines how the GPD identifies itself (eg. Configurable GPD ID, IEEE address).
+If Configurable GPD ID is selected, the developer may choose a 32-bit ID which the GPD will use
+(<a class="reference internal" href="../zigbee/z-stack-overview.html#sec-green-power-device"><span class="std std-ref">Green Power Device</span></a>).</p>
+</div>
+<div class="section" id="security-configuration">
+<h3>Security Configuration<a class="headerlink" href="#security-configuration" title="Permalink to this headline">¶</a></h3>
+<p><strong>Green Power Device</strong></p>
+<p>Security settings which are specific towards Green Power devices, such as level and
+key type, and key, which are further discussed in <a class="reference internal" href="../zigbee/z-stack-overview.html#sec-green-power-security"><span class="std std-ref">Green Power Security</span></a>.</p>
+</div>
+<div class="section" id="advanced-configuration">
+<h3>Advanced Configuration<a class="headerlink" href="#advanced-configuration" title="Permalink to this headline">¶</a></h3>
+<p><strong>Standard Zigbee Device</strong></p>
+<p>The advanced configuration parameters require in-depth knowledge of the
+Zigbee network operation. They are separated into different sections for joining
+(<a class="reference internal" href="../zigbee/z-stack-overview.html#z-stack-overview-miscellaneous"><span class="std std-ref">Miscellaneous</span></a>), routing
+(<a class="reference internal" href="../zigbee/z-stack-overview.html#z-stack-overview-routing-protocol"><span class="std std-ref">Routing Protocol</span></a>), data polling
+(<a class="reference internal" href="../zigbee/z-stack-overview.html#z-stack-overview-portable-devices"><span class="std std-ref">Portable Devices</span></a>), packet sending
+(<a class="reference internal" href="../zigbee/z-stack-overview.html#z-stack-overview-end-toend-ack"><span class="std std-ref">End-to-End Acknowledgements</span></a>), and maximum table sizes
+(<a class="reference internal" href="../zigbee/z-stack-overview.html#z-stack-overview-network-address-assignment"><span class="std std-ref">Network Address Assignment</span></a>).  Several of these settings
+are also explained in <a class="reference internal" href="../zigbee/network_configuration.html#network-config"><span class="std std-ref">Network Configurations</span></a>.</p>
+<p><strong>Green Power Device</strong></p>
+<p>Data Frame Retries determines how many times the GPD will transmit each packet.
+Auto-commissioning determines whether the GPD will set the auto-commissioning bit in the packets
+(<a class="reference internal" href="../zigbee/z-stack-overview.html#sec-green-power-commissioning"><span class="std std-ref">Commissioning a Green Power Device</span></a>). Radio Receive After Transmit determines whether the GPD
+should expect to receive a packet after transmitting. Sequence Number Capability determines
+whether the GPD will use sequential MAC sequence numbers (<a class="reference internal" href="../zigbee/z-stack-overview.html#sec-green-power-data-frames"><span class="std std-ref">Green Power Data Frames (GPDF)</span></a>).</p>
+</div>
+</div>
+<div class="section" id="adjust-your-application">
+<h2>Adjust Your Application<a class="headerlink" href="#adjust-your-application" title="Permalink to this headline">¶</a></h2>
+<p>When you have finished adjusting the parameters, save the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file.</p>
+<p>You can preview the files which will be generated by clicking the <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> symbol. In this example,
+<code class="docutils literal notranslate"><span class="pre">ti_devices_config.c</span></code>, <code class="docutils literal notranslate"><span class="pre">ti_drivers_config.c/h</span></code>, and <code class="docutils literal notranslate"><span class="pre">ti_zstack_config.h</span></code> were generated respectively
+by the  <em>TI DEVICES</em>, <em>TI DRIVERS</em>, and <em>RF STACKS</em> → <em>Z-Stack</em> views.</p>
+<div class="figure align-center">
+<img alt="../_images/show_generated_zigbee.png" src="../_images/show_generated_zigbee.png" />
+</div>
+<p>If you are using the System Configuration stand-alone tool, you will have to
+import every generated file to your IDE.  For the SysConfig <a class="reference internal" href="../zigbee-guide/glossary.html#term-CCS"><span class="xref std std-term">CCS</span></a> plug-in,
+you can generate all the files by building your project. After the build has
+completed, you will find the generated files in the output folder of your project,
+called <code class="docutils literal notranslate"><span class="pre">default/syscfg</span></code>.  All parameters configured in the Zigbee view of
+SysConfig will result in a #define in <code class="docutils literal notranslate"><span class="pre">ti_zstack_config.h</span></code> alongside other macros
+which are not included in SysConfig.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Whenever you re-build the project, SysConfig will re-generate the files.
+Because of this, any changes made directly to <code class="docutils literal notranslate"><span class="pre">ti_zstack_config.h</span></code> will be overwritten.</p>
+</div>
+</div>
+<div class="section" id="application-builder">
+<span id="sysconfig-zigbee-application-builder"></span><h2>Application Builder<a class="headerlink" href="#application-builder" title="Permalink to this headline">¶</a></h2>
+<p>The Zigbee Application Builder is an extension of SysConfig whose
+purpose is to kick-start development of a Zigbee application using TI’s Z-Stack.
+It is designed to save developers time with setting up the specific ZCL characteristics
+of the Zigbee application endpoint so that they can quickly begin adding unique
+functionality to the application itself.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please refer to ZCL Specification documentation from the Zigbee
+Alliance when attempting to determine what qualifications are necessary
+to pass Zigbee endpoint certification.</p>
+</div>
+<p>To start the <em>SampleApp</em> example which features the Zigbee Application Builder,
+import the following project into CCS or IAR:
+<code class="docutils literal notranslate"><span class="pre">examples/rtos/&lt;development</span> <span class="pre">board&gt;/zstack/&lt;zc/zed/zr&gt;_sampleapp</span></code></p>
+<p>The Zigbee Application Builder can be located in SysConfig through <em>RF STACKS</em>
+→ <em>Z-Stack</em> → <em>Zigbee Application Endpoint</em>.  After building the project,
+additional <code class="code docutils literal notranslate"><span class="pre">zcl_config.c/h</span></code> files will be created alongside the other
+generated files.  These replace the <code class="code docutils literal notranslate"><span class="pre">zcl_sample*_data.c</span></code> file that exists
+in other Z-Stack example projects.  For instructions on further developing
+applications using these generated settings, refer to
+<a class="reference internal" href="../zigbee/application_overview.html#sec-custom-application-builder-functionality"><span class="std std-ref">Customizing Application Builder Functionality</span></a>.</p>
+<div class="figure align-center">
+<img alt="../_images/zigbee_application_builder_main.png" src="../_images/zigbee_application_builder_main.png" />
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, it is not possible to add multiple Zigbee Application Endpoints
+in SysConfig.  If a developer wishes to combine two certifiable Zigbee device
+types into one application, it is recommended that they reference a separate
+SampleApp project from which the second device type is selected inside the
+SysConfig Application Builder.  That way the generated <code class="code docutils literal notranslate"><span class="pre">zcl_config.c/h</span></code>
+files from this second project can easily be transferred as application files
+for the first project.</p>
+</div>
+<div class="section" id="application-name-and-zigbee-device-type">
+<h3>Application Name and Zigbee Device Type<a class="headerlink" href="#application-name-and-zigbee-device-type" title="Permalink to this headline">¶</a></h3>
+<p>The application name must be alphanumeric, starting with a letter, and can include
+spaces.  It is used as a starting point for most of the variables
+(ex. <code class="code docutils literal notranslate"><span class="pre">SAMPLEAPP_ENDPOINT</span></code>) and functions
+(ex. <code class="code docutils literal notranslate"><span class="pre">sampleApp_ResetAttributesToDefaultValues</span></code>) declared in
+<code class="code docutils literal notranslate"><span class="pre">zcl_config.h</span></code> and <code class="code docutils literal notranslate"><span class="pre">zcl_config.c</span></code>.</p>
+<p>The Zigbee device type drop-down menu establishes the default settings for the
+other Application Builder SysConfig submodules.  The options provided are common
+devices which can be certified with Zigbee 3.0 clusters.  Developers are given
+the option to configure additional attributes, commands, or clusters as seen fit
+for their application.  By selecting <em>Generic</em> it is possible to use a blank
+configuration, in which case only the <em>Basic</em> and <em>Identify</em> server clusters
+are used as they are mandatory for certification.  Any further clusters would be
+added under the <strong>Additional Clusters</strong> menu.</p>
+</div>
+<div class="section" id="mandatory-clusters">
+<h3>Mandatory Clusters<a class="headerlink" href="#mandatory-clusters" title="Permalink to this headline">¶</a></h3>
+<p>These include the server and client clusters and their corresponding
+attributes/commands required to pass Zigbee endpoint certification.  It is
+therefore highly recommended that no mandatory clusters, attributes, or commands
+be removed.  It is still possible to add
+<strong>Optional Attributes &amp; Commands Generated/Received</strong> to the mandatory clusters
+generated, however these do not need to be supported for certification.</p>
+</div>
+<div class="section" id="additional-clusters">
+<h3>Additional Clusters<a class="headerlink" href="#additional-clusters" title="Permalink to this headline">¶</a></h3>
+<p>Additional clusters required for the end application which exist outside of the
+default configuration of the <em>Zigbee Device Type</em> selected can be added here.
+After a cluster is chosen, the
+<strong>Mandatory/Optional Attributes &amp; Commands Generated/Received</strong> submodules will
+appear to allow for further modifications.  There are some optional
+additional clusters recommended per device type by the Zigbee Alliance, but these
+do not have to be supported for the device to become certified.</p>
+</div>
+<div class="section" id="bdb-reporting">
+<h3>BDB Reporting<a class="headerlink" href="#bdb-reporting" title="Permalink to this headline">¶</a></h3>
+<p>Whenever a cluster which supports BDB Reporting (ex. <em>OnOff</em> or
+<em>TemperatureMeasurement</em>) is selected, this submodule appears.
+<em>Max Analog Attribute Size</em> represents the most bytes for which an analog
+attribute can be reported.  This value affects the <em>Reportable Change</em> range,
+which specifies the minimum amount of change in the attribute’s value required
+to trigger the sending of a report so long as this event occurs inside the
+<em>Maximum/Minimum Reporting Interval</em> window.  If the <em>Minimum Reporting Interval</em>
+time has not yet been surpassed since the last report then the action will be
+delayed until this requirement is fulfilled.  The value can be set at <em>0x0000</em> to
+disable the minimum limit.  If the <em>Maximum Reporting Interval</em> time occurs since
+the last report then one will be sent automatically.  If set to <em>0x0000</em> then
+periodic reporting will be disabled.</p>
+<div class="figure align-center">
+<img alt="../_images/zigbee_application_builder_advanced.png" src="../_images/zigbee_application_builder_advanced.png" />
+</div>
+</div>
+<div class="section" id="advanced-settings">
+<h3>Advanced Settings<a class="headerlink" href="#advanced-settings" title="Permalink to this headline">¶</a></h3>
+<p><em>Endpoint</em> specifies the endpoint used within the node.  <em>0x00</em> is not allowed as
+it is reserved for the Zigbee Device Object (ZDO) and values between <em>0xF1</em> and
+<em>0xFE</em> are not recommended unless approved by the Zigbee Alliance.
+<em>Device Version</em> is a 4-bit value that specifies the version of the device
+description supported on this endpoint and <em>Flags</em> contain any
+manufacturer-specific values, both of which are displayed in the simple descriptor.</p>
+</div>
+<div class="section" id="over-the-air-upgrade-client-endpoint">
+<h3>Over-The-Air Upgrade Client Endpoint<a class="headerlink" href="#over-the-air-upgrade-client-endpoint" title="Permalink to this headline">¶</a></h3>
+<p>For developers wishing to build upon the <em>SampleApp</em> example to include
+over-the-air download capabilities, an <em>Over-The-Air Upgrade Client Endpoint</em>
+module is also provided inside SysConfig.  This serves the same purpose as the
+<em>Zigbee Application Endpoint</em> but pertains to the OTA endpoint instead of the
+application itself.  Besides enabling functionality through selecting
+<em>OTA Client Enabled</em>, specific values for <em>Current File Version</em> and
+<em>Manufacturer ID</em> can be configured.  <em>Type ID</em> cannot be altered as it is
+pre-determined by the project version imported and SimpleLink device being used.
+For further information on integrating OTA into an application, please refer to
+<a class="reference internal" href="../zigbee/ota_upgrade.html#sec-adding-client-functionality"><span class="std std-ref">Adding Client Functionality to an Application</span></a>.</p>
+<div class="figure align-center">
+<img alt="../_images/zigbee_application_builder_ota.png" src="../_images/zigbee_application_builder_ota.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sysconfig-board.html" class="btn btn-neutral float-left" title="Configure The Board Files with SysConfig" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sysconfig-disable.html" class="btn btn-neutral float-right" title="Disable SysConfig" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2005-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

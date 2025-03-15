@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="structDMMPolicy__Policy" kind="struct" language="C++" prot="public">
+    <compoundname>DMMPolicy_Policy</compoundname>
+    <includes refid="dmm__policy_8h" local="no">dmm_policy.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structDMMPolicy__Policy_1aacff31b4101d050f71980b8dcfaa9e88" prot="public" static="no" mutable="no">
+        <type><ref refid="structDMMPolicy__State" kindref="compound">DMMPolicy_State</ref></type>
+        <definition>DMMPolicy_State DMMPolicy_Policy::appState[2]</definition>
+        <argsstring>[2]</argsstring>
+        <name>appState</name>
+        <briefdescription>
+<para>structure used to define a DMM policy </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="254" column="1" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="254" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structDMMPolicy__Policy_1a7c896397bbe027896589d5cbb95de854" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DMMPolicy_Policy::balancedMode</definition>
+        <argsstring></argsstring>
+        <name>balancedMode</name>
+        <briefdescription>
+<para>0x0 = no ratio mode, 0x0000xxyy = stack 1:stack 2 = xx:yy, 0x80xxxyyy = Hi Pri Stack xxx ms min on yyy ms max off. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="255" column="1" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="255" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure used to decide the policy for a particular stack state. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="15">
+        <label>DMMPolicy_State</label>
+        <link refid="structDMMPolicy__State"/>
+      </node>
+      <node id="14">
+        <label>DMMPolicy_Policy</label>
+        <link refid="structDMMPolicy__Policy"/>
+        <childnode refid="15" relation="usage">
+          <edgelabel>appState</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/dmm/dmm_policy.h" line="253" column="1" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="252" bodyend="256"/>
+    <listofallmembers>
+      <member refid="structDMMPolicy__Policy_1aacff31b4101d050f71980b8dcfaa9e88" prot="public" virt="non-virtual"><scope>DMMPolicy_Policy</scope><name>appState</name></member>
+      <member refid="structDMMPolicy__Policy_1a7c896397bbe027896589d5cbb95de854" prot="public" virt="non-virtual"><scope>DMMPolicy_Policy</scope><name>balancedMode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

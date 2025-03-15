@@ -1,0 +1,19 @@
+  LL goes through the first two connections to find if there is collision.
+
+                                            +-------+
+                                            | Conn 3|
+                   +-------+          +-----+-+     |         +-------+
+                   | Conn 1|          | Conn 2|     |         | Conn n|
+                   | cGRE  |          | cGRE  | cAAA|   ..... | cAAA  |
+                   |       |          |       |     |         |       |
+  -----------------+-------+----------+-------+-----+---------+-------+---------
+                   <------------------>
+                      connDiff
+
+  /--------------------------------\
+  | cFFF Not scheduled connections |
+  +--------------------------------+
+  |cGRE Connections in comparison  |
+  +--------------------------------+
+  | cAAA Unchecked connections     |
+  \--------------------------------/

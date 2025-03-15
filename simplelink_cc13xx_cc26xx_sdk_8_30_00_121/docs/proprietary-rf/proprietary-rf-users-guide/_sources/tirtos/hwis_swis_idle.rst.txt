@@ -1,0 +1,115 @@
+
+.. _sec-tirtos-threading-modules:
+
+Threading Modules
+-----------------
+
+The TI-RTOS kernel manages four distinct context levels of thread execution as
+shown in :numref:`fig-tirtos-threads` The list of thread modules are shown below in
+a descending order in terms of priority.
+
+* A :term:`Hwi` or Hardware interrupt
+
+* A :term:`Swi` or Software interrupt
+
+* Tasks
+
+* The :term:`Idle Task` for background idle functions
+
+.. _fig-tirtos-threads:
+.. figure:: resources/fig-tirtos-threads.jpg
+    :name: tirtos_threads
+    :align: center
+
+    TI-RTOS Execution Threads
+
+This section describes these four execution threads and various structures used
+throughout the TI-RTOS for messaging and synchronization.
+
+Hardware Interrupts (Hwi)
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hwi threads (also called Interrupt Service Routines or ISRs) are the threads
+with the highest priority in a TI-RTOS application. Hwi threads are used to
+perform time critical tasks that are subject to hard deadlines. They are
+triggered in response to external asynchronous events (interrupts) that occur in
+the real-time environment. Hwi threads always run to completion but can be
+preempted temporarily by Hwi threads triggered by other interrupts, if enabled.
+Specific information on the nesting, vectoring, and functionality of interrupts
+can be found in the |TRM|.
+
+Generally, interrupt service routines are kept short as not to affect the
+hard real-time system requirements. Also, as Hwis must run to completion, no
+blocking APIs may be called from within this context.
+
+TI-RTOS drivers that require interrupts will initialize the required interrupts
+for the assigned peripheral.
+
+.. note::
+
+    :ref:`sec-debugging` provides an example of using GPIOs and Hwis.
+    While the SDK includes a peripheral driver library to abstract hardware
+    register access, it is suggested to use the thread-safe TI-RTOS drivers.
+
+The Hwi module for the |DEVICE| also supports :term:`Zero-latency interrupts`.
+These interrupts do not go through the TI-RTOS Hwi dispatcher and therefore are
+more responsive than standard interrupts, however this feature prohibits its
+interrupt service routine from invoking any TI-RTOS kernel APIs directly. It is
+up to the ISR to preserve its own context to prevent it from interfering with
+the kernel's scheduler.
+
+Software Interrupts (Swi)
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Patterned after hardware interrupts (:term:`Hwi`), software interrupt threads
+provide additional priority levels between Hwi threads and Task threads. Unlike
+Hwis, which are triggered by hardware interrupts, Swis are triggered
+programmatically by calling certain Swi module APIs. Swis handle threads
+subject to time constraints that preclude them from being run as tasks, but
+whose deadlines are not as severe as those of hardware ISRs. Like Hwis, Swi
+threads always run to completion. Swis allow Hwis to defer less critical
+processing to a lower-priority thread, minimizing the time the CPU spends
+inside an interrupt service routine, where other Hwis can be disabled. Swis
+require only enough space to save the context for each Swi interrupt priority
+level, while Tasks use a separate stack for each thread.
+
+Similar with Hwis, Swis should be kept to short and may not include any
+blocking API calls. This allows high priority tasks such as the wireless
+protocol stack to execute as needed. It is suggested to ``_post()`` some
+TI-RTOS synchronization primitive to allow for further post processing from
+within a Task context. See :numref:`fig-preemption-scenario` to illustrate such
+a use-case.
+
+.. _fig-preemption-scenario:
+.. figure:: resources/fig-preemption-scenario.jpg
+    :align: center
+
+    Preemption Scenario
+
+The commonly used Clock module operates from within a Swi context. It is
+important that functions called by a Clock object do not invoke blocking APIs
+and are rather short in execution.
+
+Task
+^^^^
+
+Task threads have higher priority than the background (Idle) thread and lower
+priority than software interrupts. Tasks differ from software interrupts in
+that they can wait (block) during execution until necessary resources are
+available. Tasks require a separate stack for each thread. TI-RTOS provides a
+number of mechanisms that can be used for inter-task communication and
+synchronization. These include Semaphores, Event, Message queues, and
+Mailboxes.
+
+Idle Task
+^^^^^^^^^
+Idle threads execute at the lowest priority in a TI-RTOS application and are
+executed one after another in a continuous loop (the Idle Loop). After main
+returns, a TI-RTOS application calls the startup routine for each TI-RTOS module
+and then falls into the Idle Loop. Each thread must wait for all others to
+finish executing before it is called again. The Idle Loop runs continuously
+except when it is preempted by higher-priority threads. Only functions that do
+not have hard deadlines should be executed in the Idle Loop.
+
+For |DEVICE| devices, the Idle Task allows the Power Policy Manager to enter
+the lowest allowable power savings.

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data Rate and PHY" href="PHY.html" />
+    <link rel="prev" title="TI Wi-SUN FAN Stack" href="../wisun-guide/wisun-index.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug wisun-stack wisun-stack-overview";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../wisun-guide/index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../wisun-guide/wisun-index.html">TI Wi-SUN FAN Stack</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-a-fan">What is a FAN?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-choices">Architecture Choices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-profiles">Network Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PHY.html">Data Rate and PHY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MAC.html">MAC and Frequency Hopping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="join_process.html">Join Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networklayer.html">EAPOL Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networklayer.html#lowpan-layer">6LoWPAN Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networklayer.html#ipv6-layer">IPv6 Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networklayer.html#routing-layer-rpl">Routing Layer (RPL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arib-regulation-type.html">JP/EU Certification Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/advanced-wisun-features.html">Advanced TI Wi-SUN FAN Stack Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/network-management.html">Wi-SUN Network Topology Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/NWP_interface.html">TI Wi-SUN FAN NWP Interface Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/wisun-oad-index.html">MCUBoot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/migration-guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../wisun-guide/index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../wisun-guide/index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../wisun-guide/wisun-index.html">TI Wi-SUN FAN Stack</a> &raquo;</li>
+      <li>Overview</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>Wi-SUN is a wireless communication standard aiming to enable large-scale IOT
+networks in a mesh structure. The network typically consists of line powered
+routers and gateways, and battery powered end nodes. The Wi-SUN FAN Specification is given by the
+<a class="reference external" href="https://wi-sun.org/">Wi-SUN Alliance</a>.</p>
+<p>In TI Wi-SUN FAN Stack, the 6LoWPAN, RPL, IPv6, ICMPv6 and UDP layers have been adapted from
+open source components. An overview of the SW components is given in
+<a class="reference internal" href="#fig-wisun-block-diagram"><span class="std std-numref">Figure 20.</span></a></p>
+<div class="figure align-center" id="id2">
+<span id="fig-wisun-block-diagram"></span><a class="reference internal image-reference" href="../_images/block-diagram.png"><img alt="../_images/block-diagram.png" src="../_images/block-diagram.png" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-number">Figure 20. </span><span class="caption-text">TI Wi-SUN FAN Stack Overview</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="what-is-a-fan">
+<h1>What is a FAN?<a class="headerlink" href="#what-is-a-fan" title="Permalink to this headline">¶</a></h1>
+<p>FAN - field area network is a network type aiming for connectivity on a larger
+scale. Example uses are within a smart city. To achieve this, the FAN consists
+of multiple smaller personal area networks (PANs). The FAN can connect to a Wide
+area network (WAN) in order to grow the scale even more.</p>
+<p>Within each PAN, nodes assume one of three operational roles (set via the local
+administrative policy):</p>
+<ul class="simple">
+<li><p>Each PAN contains a <strong>Border Router</strong> providing WAN connectivity to the PAN.
+The Border Router maintains source routing tables for all nodes within its PAN,
+provides node authentication and key management services, and disseminates PAN
+wide information such as broadcast schedules.</p></li>
+<li><p><strong>Router node</strong>, which provides upward and downward packet forwarding (within
+a PAN). A Router also provides services for relaying security and address
+management protocols.</p></li>
+<li><p><strong>Leaf nodes</strong> provide minimum capabilities: discovering and joining a PAN,
+send/receive IPv6 packets, etc. (Leaf node role is not implemented in TI Wi-SUN
+FAN.)</p></li>
+</ul>
+<p>The node roles and network leves are visualized in <a class="reference internal" href="#fig-pan-fan"><span class="std std-numref">Figure 21.</span></a></p>
+<div class="figure align-center" id="id3">
+<span id="fig-pan-fan"></span><img alt="../_images/nw_topology_wisun.png" src="../_images/nw_topology_wisun.png" />
+<p class="caption"><span class="caption-number">Figure 21. </span><span class="caption-text">FAN Overview</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="architecture-choices">
+<span id="sec-wisun-architecture"></span><h1>Architecture Choices<a class="headerlink" href="#architecture-choices" title="Permalink to this headline">¶</a></h1>
+<p>TI Wi-SUN FAN Stack can be used in two separate architectures based on the end product
+application. <a class="reference internal" href="#fig-wisun-device-configuration"><span class="std std-numref">Figure 22.</span></a> shows the two different
+system architectures enabled by TI Wi-SUN FAN Stack.</p>
+<div class="figure align-center" id="id4">
+<span id="fig-wisun-device-configuration"></span><a class="reference internal image-reference" href="../_images/fig-device-configuration.png"><img alt="../_images/fig-device-configuration.png" src="../_images/fig-device-configuration.png" style="width: 350px;" /></a>
+<p class="caption"><span class="caption-number">Figure 22. </span><span class="caption-text">NWP and Embedded Configurations</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>A co-processor is shown in <a class="reference internal" href="#fig-wisun-device-configuration"><span class="std std-numref">Figure 22.</span></a> (left). The
+protocol stack runs on the device while the application is executed on an
+external MPU or MCU. The application interfaces with the device using the
+network protocol interface (NWP) over a serial universal asynchronous
+receiver/transmitter (UART) connection. This configuration is useful for
+cases where the application image is large. If the application is run from a
+host device, it will not be limited by the flash size of the device. The NWP
+interface is documented in the <a class="reference internal" href="../wisun-guide/NWP_interface.html#chap-wisun-nwp-guide"><span class="std std-ref">TI Wi-SUN FAN NWP Interface Guide</span></a>.</p></li>
+<li><p>A single device is shown in <a class="reference internal" href="#fig-wisun-device-configuration"><span class="std std-numref">Figure 22.</span></a> (right).
+The application and protocol stack are both implemented on the embedded device
+as a true single-chip solution.This configuration is the simplest and most
+common for network nodes.</p></li>
+</ul>
+<p>Please see the <a class="reference internal" href="../wisun-guide/example-applications.html#sec-wisun-examples"><span class="std std-ref">Example Application Guide</span></a> for availability of the modes on
+specific part numbers.</p>
+</div>
+<div class="section" id="network-profiles">
+<h1>Network Profiles<a class="headerlink" href="#network-profiles" title="Permalink to this headline">¶</a></h1>
+<p>The TI Wi-SUN FAN Stack supports three network profiles to optimize network performance that can be
+selected in <cite>SysConfig</cite> -&gt; <cite>TI Wi-SUN FAN</cite> -&gt; <cite>Advanced</cite>.</p>
+<ol class="arabic simple">
+<li><p>Maximize responsiveness</p></li>
+<li><p>Balanced mode</p></li>
+<li><p>Maximize scalability</p></li>
+</ol>
+<p>When selecting a network profile the internal network timing and behavior is adjusted
+to meet the requirements of the network size. The following settings are set to the
+recommended value for the selected network profile in SysConfig.</p>
+<ul class="simple">
+<li><p><strong>Rapid join:</strong> Calibrated settings for an expedited join process are used for
+<cite>Maximize responsiveness</cite> networks.</p></li>
+<li><p><strong>MPL low latency:</strong> Latency optimizations for multicast forwarding. Since this feature
+is not Wi-SUN compliant, it is not used by default in all three network profiles.</p></li>
+<li><p><strong>Disconnection detection times:</strong> The time it takes for a Router Node (RN) to recognize
+a disconnection from the Border Router (BR) and vice versa. Appropriate values for
+disconnection detection times are used based on the selected network profile. These
+values directly affect trade off between responsiveness vs scalability.</p></li>
+</ul>
+<p>The modification of these settings is possible but not recommended and could result in
+reduced performance.</p>
+<p>We recommend starting by using the <cite>Maximize responsiveness</cite> profile. This profile
+configures the network for rapid join time, rapid disconnection detection, rapid
+PAN timeout and rapid DIO updates. If you experience data overflow, we recommend switching
+to the <cite>Balanced mode</cite> profile which will allow longer timeouts for the initial key
+transmission and increases the disconnection detection time, the PAN timeout and the DIO
+message intervals. If you expand your network to the point where you need to further
+minimize data overflow, you can switch to the <cite>Maximize scalability</cite> profile which will
+configure even longer intervals to further reduce network traffic and allow slower responses.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../wisun-guide/wisun-index.html" class="btn btn-neutral float-left" title="TI Wi-SUN FAN Stack" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="PHY.html" class="btn btn-neutral float-right" title="Data Rate and PHY" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

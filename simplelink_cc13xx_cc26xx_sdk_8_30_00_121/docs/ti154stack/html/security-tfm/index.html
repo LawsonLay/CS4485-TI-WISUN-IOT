@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security Features of CC13x4 and CC26x4 Devices &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User&#39;s Guide
+ 7.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Trusted Firmware-M Implementation Overview" href="tfm_architecture.html" />
+    <link rel="prev" title="EnergyTrace User Guide" href="../energy-trace/energy-trace.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug security-tfm index";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/ti154stack-index-cc13xx_cc26xx.html">TI 15.4-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Security Features of CC13x4 and CC26x4 Devices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#debugging-tfm-examples">Debugging TFM-examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building-and-running">Building and Running</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-single-step-over-non-secure-psa-api">Debug single-step over non-secure PSA API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#runtime-object-view-rov">Runtime Object View (ROV)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tfm_architecture.html">Trusted Firmware-M Implementation Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="key-storage.html">Key Storage Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="key-storage.html#key-storage-implementation">Key Storage Implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="key-storage.html#adding-key-storage-to-custom-project">Adding Key Storage to Custom Project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="secure-migration-guide.html">Migrating to a secure environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="secure-migration-guide.html#migrating-from-tfm-v1-1-to-v1-8">Migrating from TFM v1.1 to v1.8</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/migration-guide-cc13xx_cc26xx.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack/api-reference.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ti154stack-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Security Features of CC13x4 and CC26x4 Devices</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="security-features-of-device1m-and-devices">
+<h1>Security Features of CC13x4 and CC26x4 Devices<a class="headerlink" href="#security-features-of-device1m-and-devices" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Table of contents</p>
+<div class="section" id="debugging-tfm-examples">
+<h2>Debugging TFM-examples<a class="headerlink" href="#debugging-tfm-examples" title="Permalink to this headline">¶</a></h2>
+<p>The Trusted Firmware M examples can be debugged using code composer studio. There are a few details
+that need to be taken care of which are covered in this section.</p>
+<div class="section" id="building-and-running">
+<h3>Building and Running<a class="headerlink" href="#building-and-running" title="Permalink to this headline">¶</a></h3>
+<p>These examples need the secure image provided in the SDK to be flashed along with the
+application executable themselves.</p>
+<p>The secure image(<code class="docutils literal notranslate"><span class="pre">tfm_s.axf</span></code> or <code class="docutils literal notranslate"><span class="pre">tfm_s.hex</span></code>) is found in the path
+<code class="docutils literal notranslate"><span class="pre">SDK_ROOT\tfm_s\build\cc26x4\production_full\Release\outputs</span></code>.
+This secure image and the generated application <code class="docutils literal notranslate"><span class="pre">.out</span></code> file can be flashed in any order
+using <a class="reference external" href="https://www.ti.com/tool/uniflash">UniFlash</a>. They can be flashed in any order.</p>
+</div>
+<div class="section" id="debugging">
+<h3>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h3>
+<p>To debug the Trusted Firmware M examples, symbols from both the non secure application and the secure
+image must be loaded. You can do the following in <a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-CCS"><span class="xref std std-term">CCS</span></a>.</p>
+<ol class="arabic simple">
+<li><p>Launch the <a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-CCS"><span class="xref std std-term">CCS</span></a> debug session.</p></li>
+<li><p>Select Tools -&gt; Debugger Options -&gt; Auto Run and Launch Options. Disable Auto Run Option “On a program load or restart”.
+Set “Remember My Settings” to allow this setting to persist for subsequent debug sessions.</p></li>
+</ol>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/autorun_options.png"><img alt="../_images/autorun_options.png" src="../_images/autorun_options.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-number">Figure 172. </span><span class="caption-text">Autorun and Launch Options</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Exit and relaunch the debug session. Execution should be paused at _c_int00(). Steps 2 &amp; 3 can be skipped for subsequent debug sessions.</p></li>
+</ol>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/execution_paused.png"><img alt="../_images/execution_paused.png" src="../_images/execution_paused.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Figure 173. </span><span class="caption-text">Execution paused at _c_int00()</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Select Run -&gt; Load -&gt; Load Program. Select <code class="docutils literal notranslate"><span class="pre">tfm_s.axf</span></code>. This will overwrite the non secure application symbols.</p></li>
+</ol>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/load_secure_image_menu.png"><img alt="../_images/load_secure_image_menu.png" src="../_images/load_secure_image_menu.png" style="width: 800px;" /></a>
+</div>
+<div class="figure align-center" id="id4">
+<a class="reference internal image-reference" href="../_images/load_secure_image.png"><img alt="../_images/load_secure_image.png" src="../_images/load_secure_image.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Figure 174. </span><span class="caption-text">Load Secure Image</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Add the non secure application symbols.</p></li>
+</ol>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/add_symbols.png"><img alt="../_images/add_symbols.png" src="../_images/add_symbols.png" style="width: 800px;" /></a>
+</div>
+<div class="figure align-center" id="id5">
+<a class="reference internal image-reference" href="../_images/add_non_secure_symbols.png"><img alt="../_images/add_non_secure_symbols.png" src="../_images/add_non_secure_symbols.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Figure 175. </span><span class="caption-text">Add Non-Secure Image Symbols</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Set breakpoints if desired and resume execution to run the example.</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Due to a known issue in the symbol management of <a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-CCS"><span class="xref std std-term">CCS</span></a>, you may be disallowed from placing a breakpoint in the
+application. In this case, load the non secure application symbols first, then add the secure image symbols.
+This sequence of loading non secure symbols and adding secure image symbols, forces <a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-CCS"><span class="xref std std-term">CCS</span></a> to use the correct symbol manager.</p>
+</div>
+</div>
+<div class="section" id="debug-single-step-over-non-secure-psa-api">
+<h3>Debug single-step over non-secure PSA API<a class="headerlink" href="#debug-single-step-over-non-secure-psa-api" title="Permalink to this headline">¶</a></h3>
+<p>When using the <a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-CCS"><span class="xref std std-term">CCS</span></a> Debugger to single-step in your non-secure program,
+special care must be taken when stepping over the following PSA API
+functions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>psa_connect()</p></li>
+<li><p>psa_call()</p></li>
+<li><p>psa_close()</p></li>
+</ul>
+</div></blockquote>
+<p>These functions must be executed with interrupts enabled. They depend
+on the Secure Partition Environment’s PendSV interrupt handler being invoked.
+The PendSV interrupt is used by the secure library to context switch into the
+Secure Partition.</p>
+<p>By default, the <a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-CCS"><span class="xref std std-term">CCS</span></a> debugger is configured to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Disable interrupts while single-stepping at the <em>assembly</em> level, causing PSA
+functions to misbehave if you step over them at the <em>assembly</em> level</p></li>
+<li><p>Not disable interrupts when single-stepping at the <em>C source code</em> level,
+safely permitting the user to step over PSA functions at the <em>C source level</em></p></li>
+</ul>
+</div></blockquote>
+<p>The single-step behavior of the debugger can be modified by the following steps.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Tools &gt; Debugger Options &gt; Program/Memory Load Options</p></li>
+<li><p>Disable interrupts</p></li>
+<li><p>When assembly stepping &gt; Select</p></li>
+<li><p>When source stepping &gt; Unselect</p></li>
+<li><p>When running &gt; Unselect</p></li>
+</ol>
+</div></blockquote>
+<div class="figure align-center" id="id6">
+<a class="reference internal image-reference" href="../_images/tfm_program_load_options.png"><img alt="../_images/tfm_program_load_options.png" src="../_images/tfm_program_load_options.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-number">Figure 176. </span><span class="caption-text">Disable interrupts when assembly stepping</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>In many cases, it is simplest to set a breakpoint after the PSA API and then
+run to the breakpoint.</p>
+</div>
+<div class="section" id="runtime-object-view-rov">
+<h3>Runtime Object View (ROV)<a class="headerlink" href="#runtime-object-view-rov" title="Permalink to this headline">¶</a></h3>
+<p>Runtime Object View can be used with the Trusted Firmware M examples just like you would use with
+any other non-secure examples.
+It must be noted that the ROV session opens up with the latest symbols or program that is loaded.
+Adding the symbols does not affect the ROV context.
+For example, loading  the secure image symbols after starting the debug session will result in ROV starting up in the secure image context.</p>
+<div class="figure align-center" id="id7">
+<a class="reference internal image-reference" href="../_images/secure_image_ROV.png"><img alt="../_images/secure_image_ROV.png" src="../_images/secure_image_ROV.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-number">Figure 177. </span><span class="caption-text">ROV when secure image symbols are loaded last</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<p>To open the ROV in the context of the non-secure application. Load the non-secure application symbols.</p>
+<div class="figure align-center" id="id8">
+<a class="reference internal image-reference" href="../_images/non_secure_app_ROV.png"><img alt="../_images/non_secure_app_ROV.png" src="../_images/non_secure_app_ROV.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-number">Figure 178. </span><span class="caption-text">ROV when non-secure application symbols are loaded last</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tfm_architecture.html">Trusted Firmware-M Implementation Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tfm_architecture.html#arm-trustzone-overview">ARM TrustZone Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tfm_architecture.html#trusted-firmware-m-tf-m">Trusted Firmware-M (TF-M)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tfm_architecture.html#available-crypto-functions">Available Crypto Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tfm_architecture.html#secure-partitions-overview">Secure Partitions Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tfm_architecture.html#secure-non-secure-software-architecture">Secure/Non-secure Software Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tfm_architecture.html#secure-non-secure-software-operation">Secure/Non-Secure Software Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tfm_architecture.html#secure-bootloader">Secure Bootloader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="key-storage.html">Key Storage Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key-storage.html#key-storage-implementation">Key Storage Implementation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="key-storage.html#tf-m-enabled-key-storage-implementation">TF-M Enabled Key Storage Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="key-storage.html#adding-key-storage-to-custom-project">Adding Key Storage to Custom Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="secure-migration-guide.html">Migrating to a secure environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="secure-migration-guide.html#project-migration">Project migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secure-migration-guide.html#enable-trusted-firmware-m-on-an-existing-project">Enable Trusted Firmware-M on an existing project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="secure-migration-guide.html#migrating-from-tfm-v1-1-to-v1-8">Migrating from TFM v1.1 to v1.8</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../energy-trace/energy-trace.html" class="btn btn-neutral float-left" title="EnergyTrace User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tfm_architecture.html" class="btn btn-neutral float-right" title="Trusted Firmware-M Implementation Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

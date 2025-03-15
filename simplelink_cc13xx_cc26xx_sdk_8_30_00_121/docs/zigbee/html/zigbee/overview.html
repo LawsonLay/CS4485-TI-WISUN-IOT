@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SimpleLink CC13xx/CC26xx SDK Overview &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User&#39;s Guide
+ 8.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Developing Zigbee Applications" href="developing_zigbee_applications.html" />
+    <link rel="prev" title="TI-RTOS to TI-RTOS7 Migration" href="../tirtos/bios7_migration.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug zigbee overview";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../zigbee-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+
+          </a>
+              <div class="version">
+                8.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SimpleLink CC13xx/CC26xx SDK Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-to-the-sdk">Introduction to the SimpleLink CC13xx/CC26xx SDK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#solution-platform">Solution Platform</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#end-production-development-architecture-choices">End Production Development Architecture Choices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#protocol-stack-and-application-configurations">Protocol Stack and Application Configurations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developing_zigbee_applications.html">Developing Zigbee Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/zigbee-ota-index.html">Zigbee Over-The-Air Firmware Upgrade</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packet_sniffer.html">Packet Sniffer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/migration_guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/glossary.html">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../zigbee-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../zigbee-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>SimpleLink CC13xx/CC26xx SDK Overview</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="sdk-overview">
+<h1><a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> Overview<a class="headerlink" href="#sdk-overview" title="Permalink to this headline">¶</a></h1>
+<p>The SimpleLink™ CC13xx and CC26xx Software Development Kit provides a
+complete package for the development of Bluetooth LE, Sub-1 GHz, Zigbee, Thread,
+and IEEE™ 802.15.4 based applications for the CC13xx or CC26xx
+wireless microcontroller.</p>
+<div class="section" id="introduction-to-the-sdk">
+<h2>Introduction to the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a><a class="headerlink" href="#introduction-to-the-sdk" title="Permalink to this headline">¶</a></h2>
+<p>TI’s royalty-free <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> is a complete software platform for developing
+applications that require low-power, security, reliability, and mesh
+networking. The CC13xx and CC26xx devices are part of the SimpleLink™ MCU
+platform which consists of Wi-Fi®, Bluetooth® Low Energy, Sub-1 GHz,
+Thread, Zigbee, IEEE 802.15.4 and host MCUs, which all share a common, easy-to-use
+development environment and rich tool set. A one-time integration of the
+SimpleLink™ platform enables you to add any combination of the
+portfolio’s devices into your design, allowing 100 percent code reuse when
+your design requirements change. For more information, visit the
+<a class="reference external" href="http://www.ti.com/lsds/ti/wireless-connectivity/simplelink-solutions/overview.page">SimpleLink™ Solutions Overview</a>.</p>
+<div class="section" id="solution-platform">
+<h3>Solution Platform<a class="headerlink" href="#solution-platform" title="Permalink to this headline">¶</a></h3>
+<p>This section describes the various components that are installed with the
+<a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>, the directory structure of the protocol stack, and any tools required
+for development.</p>
+<p>The following components are included in the solution platform:</p>
+<ul class="simple">
+<li><p>Real-time operating system (<a class="reference internal" href="../zigbee-guide/glossary.html#term-RTOS"><span class="xref std std-term">RTOS</span></a>) with the TI-RTOS7™ SYS/BIOS
+kernel, optimized power management support, and peripheral drivers.</p></li>
+<li><p>The driverLib provides a register abstraction layer that is used by software
+and drivers to control the CC13xx or CC26xx MCU.</p></li>
+<li><p>TI-Drivers are a set of RTOS aware drivers designed to allow seemless use of
+CC13xx or CC26xx peripherals inside your application.</p></li>
+<li><p>Example applications make the beginning stages of development easier. Example
+applications are provided for the CC13xx or CC26xx platform</p></li>
+</ul>
+<div class="section" id="directory-structure">
+<span id="sec-directory-structure"></span><h4>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h4>
+<p>The <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> directory structure is broken down into a few major directories at
+the root to allow easy differentiation between documentation, examples, kernel
+source, and other source code. From the root directory, the sub-directories
+are:</p>
+<dl class="field-list simple">
+<dt class="field-odd">docs</dt>
+<dd class="field-odd"><p>Contains HTML and PDF documentation for the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>.</p>
+</dd>
+<dt class="field-even">examples</dt>
+<dd class="field-even"><p>Contains the example projects and example source for this <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>.</p>
+</dd>
+<dt class="field-odd">kernel</dt>
+<dd class="field-odd"><p>Contains the source and build tools for the kernels supported by this
+<a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>.</p>
+</dd>
+<dt class="field-even">source</dt>
+<dd class="field-even"><p>Contains the source code for the larger components of the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>. A
+more detailed description of this directory follows.</p>
+</dd>
+<dt class="field-odd">tools</dt>
+<dd class="field-odd"><p>Scripts and definition files used by the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>. Contains scripts
+referenced by the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> documentation.</p>
+</dd>
+<dt class="field-even">tfm_s</dt>
+<dd class="field-even"><p>Resources pertaining to crypto drivers stored in secure memory and
+secure key storage features of the Cortex-M33, as only available on
+CC13x4 and CC26x4 devices.</p>
+</dd>
+</dl>
+<p>The source directory is split into major categories based on where the source
+code came from. All of the source code within the <code class="docutils literal notranslate"><span class="pre">source\third_party</span></code> directory
+comes from vendors other than Texas Instruments. All of the source code within
+the <code class="docutils literal notranslate"><span class="pre">source\ti</span></code> directory comes from Texas Instruments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">ti\boards</dt>
+<dd class="field-odd"><p>Contains the board hardware configurations.</p>
+</dd>
+<dt class="field-even">ti\devices</dt>
+<dd class="field-even"><p>Contains the board support source code.</p>
+</dd>
+<dt class="field-odd">ti\display</dt>
+<dd class="field-odd"><p>Contains the source code for the display libraries.</p>
+</dd>
+<dt class="field-even">ti\drivers</dt>
+<dd class="field-even"><p>Contains the source code for the TI-RTOS7 drivers.</p>
+</dd>
+<dt class="field-odd">ti\grlib</dt>
+<dd class="field-odd"><p>Contains the source code for the graphics libraries.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="section" id="end-production-development-architecture-choices">
+<h2>End Production Development Architecture Choices<a class="headerlink" href="#end-production-development-architecture-choices" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="protocol-stack-and-application-configurations">
+<span id="sec-protocol-stack-application-configuration"></span><h3>Protocol Stack and Application Configurations<a class="headerlink" href="#protocol-stack-and-application-configurations" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="#fig-device-configuration"><span class="std std-numref">Figure 21.</span></a> shows the two different system architectures
+enabled by Z-Stack.</p>
+<ul class="simple">
+<li><p>A single device is shown in <a class="reference internal" href="#fig-device-configuration"><span class="std std-numref">Figure 21.</span></a> (left). The
+application and protocol stack are both implemented on the CC13xx or CC26xx as a true
+single-chip solution. This configuration is the simplest and most common when
+using the CC13xx or CC26xx for network nodes and also using the CC13xx or CC26xx as a
+personal area network (PAN) coordinator node. This configuration is the
+most cost-effective technique and provides the best power performance.</p></li>
+<li><p>A coprocessor is shown in <a class="reference internal" href="#fig-device-configuration"><span class="std std-numref">Figure 21.</span></a> (right). The
+protocol stack runs on the CC13xx or CC26xx while the application is executed on an
+external MPU or MCU. The application interfaces with the CC13xx or CC26xx using the
+network protocol interface (NPI) over a serial universal asynchronous
+receiver/transmitter (UART) connection. The description of the API
+interface is provided in the <a class="reference external" href="./znp_interface.html">ZNP Interface Guide</a>
+and further ZNP usage is described in <a class="reference internal" href="znp_interface.html#znp-interface"><span class="std std-ref">Zigbee Network Processor (ZNP) Interface</span></a>.
+This configuration is useful for applications that require long-range
+wireless connectivity or peripheral applications, which execute on another
+device (such as an external MCU) or on a
+PC without the requirement to implement the complexities associated with a
+wireless networking protocol. As well for implementing the Feature rich
+gateway applications e.g. on Linux host.
+In these cases, the application can be developed
+externally on a host processor while running Z-Stack on the CC13xx or CC26xx, which
+provides ease of development and quickly adds Zigbee wireless
+connectivity to existing products.</p></li>
+</ul>
+<div class="figure align-center" id="id5">
+<span id="fig-device-configuration"></span><img alt="../_images/fig-single-device-znp-configuration.png" src="../_images/fig-single-device-znp-configuration.png" />
+<p class="caption"><span class="caption-number">Figure 21. </span><span class="caption-text">Single Device and ZNP Configuration</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tirtos/bios7_migration.html" class="btn btn-neutral float-left" title="TI-RTOS to TI-RTOS7 Migration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="developing_zigbee_applications.html" class="btn btn-neutral float-right" title="Developing Zigbee Applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2005-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

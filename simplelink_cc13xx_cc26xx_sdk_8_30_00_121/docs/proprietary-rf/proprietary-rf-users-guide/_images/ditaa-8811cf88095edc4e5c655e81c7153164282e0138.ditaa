@@ -1,0 +1,47 @@
+                                                         Internal Flash
++--------------------------------+ --------------->  +-------------------+ <- DEVICE_SIZE
+| {d}                            |                   |       CCFG  cRED  |
+| o BIM is linked at end of flash|                   +-------------------+
+| o CCFG is linked with BIM      |                   |       BIM         |
++--------------------------------+ --\               | cRED              |
+                                     |               |                   |
+                                     |               |                   |
+                                     |               |                   |
+                                     |               |                   |
+                                     |               +-------------------+
+                                     |               |       BIM         |
+                                     |               | Interrupt Vectors |
+                                     |               | c777              |
+                                     \------------>  +-------------------+ <- DEVICE_SIZE - BIM_SIZE
+                                                     |    Persistent     |
+                                                     |    Application    |
+                                                     |       c7AF        |
+                                                     |                   |
+                                                     +-------------------+
+                                                     | Persistent App    |
+                                                     | Interrupt Vectors |
+                                                     | c777              |
+                                                     +-------------------+
+                                                     | OAD Image Header  |
+                                                     | c333              |
+                                                     +-------------------+ <- OAD_TGT_FLASH_START
+                                                     |       Stack       |
+                                                     |                   |
+                                                     |       c7AF        |
+                                                     |                   |
+                                                     +-------------------+
+                                                     | OAD Image Header  |
+                                                     | c333              |
+                                                     +-------------------+ <- ICALL_STACK0_START
+                                                     |        User       |
+                                                     |    Application    |
+                                                     |       c7AF        |
+                                                     |                   |
+                                                     +-------------------+
+                                                     | User App          |
+                                                     | Interrupt Vectors |
+                                                     | c777              |
+                                                     +-------------------+
+                                                     | OAD Image Header  |
+                                                     | c333              |
+                                                     +-------------------+ <- 0x00000000

@@ -1,0 +1,491 @@
+L2CAP_CmdReject
+---------------
+:Opcode: 0x0481
+:Event Description: The Command Reject is sent in response to a command with an unknown command code or when sending the corresponding response is inappropriate
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link.
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:reason: Reason for rejection.
+
+ :Size: 2 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x0000                CMD_NOT_UNDERSTOOD
+         0x0001                SIGNAL_MTU_EXCEED
+         0x0002                REJECT_INVALID_CID
+         ===================== ========================================================
+
+:signalingMTU: 
+
+ :Condition: ( CmdRejectReason==0x0001)
+ :Size: 2 byte(s)
+ :Range: 
+
+:localCID: 
+
+ :Condition: ( CmdRejectReason==0x0002)
+ :Size: 2 byte(s)
+ :Range: 
+
+:remoteCID: 
+
+ :Condition: ( CmdRejectReason==0x0002)
+ :Size: 2 byte(s)
+ :Range: 
+
+
+L2CAP_ConnectReq
+----------------
+:Opcode: 0x0494
+:Event Description: This Connection Request event is sent to the application since the application has wished to perform its own security verification (configured at PSM registration). After receiving a Connection Request, the application must respond back with a Connection Response (L2CAP_ConnectRsp) command indicating the outcome of the connection request.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:id: Identifier to match responses with requests (i.e., id to send back with L2CAP Connect Response command)
+
+ :Condition: ( bStatus==0x00)
+ :Size: 1 byte(s)
+ :Range: 
+
+:PSM: Local PSM receiving connect request
+
+ :Condition: ( bStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:sourceCID: Represents CID on device sending connect request and receiving connect response (i.e., peer CID)
+
+ :Condition: ( bStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:MTU: Specifies maximum SDU size that can be received on this channel on the peer device
+
+ :Condition: ( bStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:MPS: Specifies maximum payload size that can be received on this channel on the peer device
+
+ :Condition: ( bStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:initialCredits: Indicates number of LE-frames that peer device can receive on this channel
+
+ :Condition: ( bStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+
+L2CAP_ConnParamUpdateRsp
+------------------------
+:Opcode: 0x0493
+:Event Description: This Connection Parameter Update Response is sent from the LE master device to the LE slave device. This response is sent by the master Host when it receives a Connection Parameter Update Request packet.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:result: Result of the update.
+
+ :Condition: ( bStatus==0x00)
+ :Size: 2 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x0000                CONN_PARAMS_ACCEPTED
+         0x0001                CONN_PARAMS_REJECTED
+         ===================== ========================================================
+
+
+L2CAP_ChannelEstablished
+------------------------
+:Opcode: 0x04E0
+:Event Description: This Channel Established Event is generated when a Connection Oriented Channel has been established with the peer device. If result is successful (0x0000) then all other fields of the event will be present and can be accessed.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:result: 
+
+ :Condition: ( bStatus==0x00)
+ :Size: 2 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x0000                L2CAP_CONN_SUCCESS
+         0x0001                Reserved
+         0x0002                L2CAP_CONN_PSM_NOT_SUPPORTED
+         0x0003                Reserved
+         0x0004                L2CAP_CONN_NO_RESOURCES
+         0x0005                L2CAP_CONN_INSUFFICIENT_AUTHEN
+         0x0006                L2CAP_CONN_INSUFFICIENT_AUTHOR
+         0x0007                L2CAP_CONN_INSUFFICIENT_KEY_SIZE
+         0x0008                L2CAP_CONN_INSUFFICIENT_ENCRYPT
+         0x0009                L2CAP_CONN_INVALID_SRC_CID
+         0x000A                L2CAP_CONN_SRC_CID_ALREADY_ALLOC
+         ===================== ========================================================
+
+:PSM: Local PSM that channel belongs to
+
+ :Condition: ( bStatus==0x00 resultValue==0x0000)
+ :Size: 2 byte(s)
+ :Range: 
+
+:CID: Local Channel ID
+
+ :Condition: ( bStatus==0x00 resultValue==0x0000)
+ :Size: 2 byte(s)
+ :Range: 
+
+:MTU: Maximum SDU size that can be received by the local device on this channel
+
+ :Condition: ( bStatus==0x00 resultValue==0x0000)
+ :Size: 2 byte(s)
+ :Range: 
+
+:MPS: Maximum payload size that can be received by the local device
+
+ :Condition: ( bStatus==0x00 resultValue==0x0000)
+ :Size: 2 byte(s)
+ :Range: 
+
+:credits: Number of LE-frames that the local device can send
+
+ :Condition: ( bStatus==0x00 resultValue==0x0000)
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCID: Remote Channel ID
+
+ :Condition: ( bStatus==0x00 resultValue==0x0000)
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerMTU: Maximum SDU size that can be received by the peer device
+
+ :Condition: ( bStatus==0x00 resultValue==0x0000)
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerMPS: Maximum payload size that can be received by the peer device
+
+ :Condition: ( bStatus==0x00 resultValue==0x0000)
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCredits: Number of LE-frames that the peer device can send
+
+ :Condition: ( bStatus==0x00 resultValue==0x0000)
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCreditThreshold: Low threshold for the peer credit count
+
+ :Condition: ( bStatus==0x00 resultValue==0x0000)
+ :Size: 2 byte(s)
+ :Range: 
+
+
+L2CAP_ChannelTerminated
+-----------------------
+:Opcode: 0x04E1
+:Event Description: This Channel Terminated Event is generated when a Connection Oriented Channel has been terminated between the local and the peer device.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:CID: Local Channel ID
+
+ :Condition: ( bStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCID: Remote Channel ID
+
+ :Condition: ( bStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:reason: Reason Channel was termianted
+
+ :Condition: ( bStatus==0x00)
+ :Size: 2 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x0000                L2CAP_TERM_LINK_DOWN
+         0x0001                L2CAP_TERM_BY_PSM
+         0x0002                L2CAP_TERM_BY_PEER_PSM
+         0x0003                L2CAP_TERM_MAX_CREDIT_EXCEED
+         0x0004                L2CAP_TERM_SDU_LEN_EXCEED
+         0x0005                L2CAP_TERM_PSM_MTU_EXCEED
+         0x0006                L2CAP_TERM_RX_PKT_NO_CREDIT
+         0x0007                L2CAP_TERM_RX_ERROR
+         0x0008                L2CAP_TERM_TX_ERROR
+         0x0009                L2CAP_TERM_MEM_ALLOC_ERROR
+         ===================== ========================================================
+
+
+L2CAP_OutOfCredit
+-----------------
+:Opcode: 0x04E2
+:Event Description: This Out Of Credit Event is generated when a Connection Oriented Channel runs out of credits needed to transmit an SDU to the peer device.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:CID: Local Channel ID
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCID: Remote Channel ID
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:creditsNeeded: Number of credits needed to transmit the remaining part of the current SDU
+
+ :Size: 2 byte(s)
+ :Range: 
+
+
+L2CAP_PeerCreditThreshold
+-------------------------
+:Opcode: 0x04E3
+:Event Description: This Peer Credit Threshold Event is generated when an L2CAP Connection Oriented Channel reaches a low threshold specified for the peer credit count (configured at PSM registration).
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:CID: Local Channel ID
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCID: Remote Channel ID
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCreditThreshold: Low threshold for the peer credit count
+
+ :Size: 2 byte(s)
+ :Range: 
+
+
+L2CAP_SendSduDone
+-----------------
+:Opcode: 0x04E4
+:Event Description: This Send SDU Done Event is generated when the transmission of an SDU is completed on a Connection Oriented Channel established with the peer device.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:CID: Local Channel ID
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:credits: Remaining local credits
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCID: Remote Channel ID
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCredits: Remaining peer credits
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:totalLen: Total length of the SDU being transmitted
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:txLen: Total number of octets transmitted
+
+ :Size: 2 byte(s)
+ :Range: 
+
+
+L2CAP_SendData
+--------------
+:Opcode: 0x04F0
+:Event Description: This Data Event is generated when an SDU is received on a Connection Oriented Channel from the peer device.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:CID: Local Channel ID
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:len: Total length of the SDU being received
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:SDU: Received SDU
+
+ :Size: payloadLen byte(s)
+ :Range: 
+
+

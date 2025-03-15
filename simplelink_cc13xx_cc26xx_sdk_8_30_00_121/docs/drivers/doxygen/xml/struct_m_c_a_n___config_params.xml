@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_m_c_a_n___config_params" kind="struct" language="C++" prot="public">
+    <compoundname>MCAN_ConfigParams</compoundname>
+    <includes refid="_m_c_a_n_8h" local="no">MCAN.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_m_c_a_n___config_params_1a3fc88ce579da88ea0009612f8f553f48" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MCAN_ConfigParams::monEnable</definition>
+        <argsstring></argsstring>
+        <name>monEnable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Bus Monitoring Mode <linebreak/>
+ 0 = Bus Monitoring Mode is disabled <linebreak/>
+ 1 = Bus Monitoring Mode is enabled </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/third_party/mcan/MCAN.h" line="564" column="1" bodyfile="source/third_party/mcan/MCAN.h" bodystart="564" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_m_c_a_n___config_params_1a06ad594e3a8284faf3bb5396b3f1dd60" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MCAN_ConfigParams::asmEnable</definition>
+        <argsstring></argsstring>
+        <name>asmEnable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Restricted Operation Mode <linebreak/>
+ 0 = Normal CAN operation <linebreak/>
+ 1 = Restricted Operation Mode active <linebreak/>
+ This mode should not be combined with test modes. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/third_party/mcan/MCAN.h" line="569" column="1" bodyfile="source/third_party/mcan/MCAN.h" bodystart="569" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_m_c_a_n___config_params_1a19325bb757de6f67e007f2ba7b001ffc" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MCAN_ConfigParams::tsPrescaler</definition>
+        <argsstring></argsstring>
+        <name>tsPrescaler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Timestamp Counter Prescaler. This prescaler is only used when tsSelect is MCAN_TSCC_COUNTER_USE_TCP which means the internal timestamp counter source is selected. Interpreted by M_CAN as the value in this field + 1. Range:[0x0-0xF] </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/third_party/mcan/MCAN.h" line="575" column="1" bodyfile="source/third_party/mcan/MCAN.h" bodystart="575" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_m_c_a_n___config_params_1a71821a72b45fd102de45030874a39d94" prot="public" static="no" mutable="no">
+        <type><ref refid="_m_c_a_n_8h_1af6a587291234694473f819017f6a8f70" kindref="member">MCAN_TSCCTimestampSel</ref></type>
+        <definition>MCAN_TSCCTimestampSel MCAN_ConfigParams::tsSelect</definition>
+        <argsstring></argsstring>
+        <name>tsSelect</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Timestamp source selection. Refer enum MCAN_TSCCTimestampSel </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/third_party/mcan/MCAN.h" line="582" column="1" bodyfile="source/third_party/mcan/MCAN.h" bodystart="582" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_m_c_a_n___config_params_1aead6d2b3c634c7ad38b1e640f582ab51" prot="public" static="no" mutable="no">
+        <type><ref refid="_m_c_a_n_8h_1a7530a147909f8ec15ca493a656f662c4" kindref="member">MCAN_TimeOutSelect</ref></type>
+        <definition>MCAN_TimeOutSelect MCAN_ConfigParams::timeoutSelect</definition>
+        <argsstring></argsstring>
+        <name>timeoutSelect</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Time-out counter source select. Refer enum MCAN_TimeOutSelect. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/third_party/mcan/MCAN.h" line="586" column="1" bodyfile="source/third_party/mcan/MCAN.h" bodystart="586" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_m_c_a_n___config_params_1a2be3699f998413677f9d02ee0d6b9eca" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MCAN_ConfigParams::timeoutPreload</definition>
+        <argsstring></argsstring>
+        <name>timeoutPreload</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Start value of the Timeout Counter (down-counter). The Timeout Counter is decremented in multiples of CAN bit times [1-16] depending on the configuration of the tsPrescaler. Range:[0x0-0xFFFF] </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/third_party/mcan/MCAN.h" line="590" column="1" bodyfile="source/third_party/mcan/MCAN.h" bodystart="590" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_m_c_a_n___config_params_1a51874a6004307237da86f28776c11ed1" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MCAN_ConfigParams::timeoutCntEnable</definition>
+        <argsstring></argsstring>
+        <name>timeoutCntEnable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Time-out Counter Enable <linebreak/>
+ 0 = Timeout Counter is disabled <linebreak/>
+ 1 = Timeout Counter is enabled </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/third_party/mcan/MCAN.h" line="596" column="1" bodyfile="source/third_party/mcan/MCAN.h" bodystart="596" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_m_c_a_n___config_params_1ada3c844f969d8ddf7ba915f477ffc3c4" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_m_c_a_n___global_filt_config" kindref="compound">MCAN_GlobalFiltConfig</ref></type>
+        <definition>MCAN_GlobalFiltConfig MCAN_ConfigParams::filterConfig</definition>
+        <argsstring></argsstring>
+        <name>filterConfig</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Global Filter Configuration parameters. Refer struct <ref refid="struct_m_c_a_n___global_filt_config" kindref="compound">MCAN_GlobalFiltConfig</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/third_party/mcan/MCAN.h" line="601" column="1" bodyfile="source/third_party/mcan/MCAN.h" bodystart="601" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure for MCAN configuration parameters. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1327">
+        <label>MCAN_GlobalFiltConfig</label>
+        <link refid="struct_m_c_a_n___global_filt_config"/>
+      </node>
+      <node id="1326">
+        <label>MCAN_ConfigParams</label>
+        <link refid="struct_m_c_a_n___config_params"/>
+        <childnode refid="1327" relation="usage">
+          <edgelabel>filterConfig</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="source/third_party/mcan/MCAN.h" line="563" column="1" bodyfile="source/third_party/mcan/MCAN.h" bodystart="562" bodyend="605"/>
+    <listofallmembers>
+      <member refid="struct_m_c_a_n___config_params_1a06ad594e3a8284faf3bb5396b3f1dd60" prot="public" virt="non-virtual"><scope>MCAN_ConfigParams</scope><name>asmEnable</name></member>
+      <member refid="struct_m_c_a_n___config_params_1ada3c844f969d8ddf7ba915f477ffc3c4" prot="public" virt="non-virtual"><scope>MCAN_ConfigParams</scope><name>filterConfig</name></member>
+      <member refid="struct_m_c_a_n___config_params_1a3fc88ce579da88ea0009612f8f553f48" prot="public" virt="non-virtual"><scope>MCAN_ConfigParams</scope><name>monEnable</name></member>
+      <member refid="struct_m_c_a_n___config_params_1a51874a6004307237da86f28776c11ed1" prot="public" virt="non-virtual"><scope>MCAN_ConfigParams</scope><name>timeoutCntEnable</name></member>
+      <member refid="struct_m_c_a_n___config_params_1a2be3699f998413677f9d02ee0d6b9eca" prot="public" virt="non-virtual"><scope>MCAN_ConfigParams</scope><name>timeoutPreload</name></member>
+      <member refid="struct_m_c_a_n___config_params_1aead6d2b3c634c7ad38b1e640f582ab51" prot="public" virt="non-virtual"><scope>MCAN_ConfigParams</scope><name>timeoutSelect</name></member>
+      <member refid="struct_m_c_a_n___config_params_1a19325bb757de6f67e007f2ba7b001ffc" prot="public" virt="non-virtual"><scope>MCAN_ConfigParams</scope><name>tsPrescaler</name></member>
+      <member refid="struct_m_c_a_n___config_params_1a71821a72b45fd102de45030874a39d94" prot="public" virt="non-virtual"><scope>MCAN_ConfigParams</scope><name>tsSelect</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,19 @@
+Execution flow of MCUBoot Based Proprietary RF OAD
+--------------------------------------------------
+
+This section briefly describes how the MCUBoot and the Client application work together
+to enable OAD functionality.
+
+When using the MCUBoot, there is no need for a peristent app, since
+the slots for incoming image and existing image are predefined.
+
+The functional flow of an On-chip Flash OAD process is shown in the diagram.
+
+.. _fig-proprf-mcuboot-flow:
+.. figure:: mcuboot_flow.png
+      :align: center
+
+.. note::
+    Proprietary RF OAD uses the overwrite method of managing images on Flash.
+    The newly updated image is overwritten onto the primary slot and then executed from
+    the primary slot.

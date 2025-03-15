@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SysConfig Migration &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User&#39;s Guide
+ 7.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API References" href="../ti154stack/api-reference.html" />
+    <link rel="prev" title="Running Software Examples on the CC13x1x3 or CC26x1x3" href="../cc13xx_cc26xx/software-on-cc13x1x-26x1x.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug sysconfig ti154stack-migration";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/ti154stack-index-cc13xx_cc26xx.html">TI 15.4-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ti154stack-guide/migration-guide-cc13xx_cc26xx.html">Migration Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../ti154stack-guide/migration-guide-cc13xx_cc26xx.html#updating-from-previous-sdks">Updating from previous SDKs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../ti154stack-guide/migration-guide-cc13xx_cc26xx.html#porting-guides">Porting Guides</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../ti154stack-guide/migration-guide-cc13xx_cc26xx.html#migration-guides">Migration Guides</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/gpio-porting-guide.html">GPIO++ Driver Porting Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/uart_to_uart2.html">UART to UART2 Porting Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tirtos/bios7_migration.html">TI-RTOS to TI-RTOS7 Migration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/devices_without_launchpads.html">Devices without LaunchPads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/cc13x2-cc26x2-to-cc13x4-26x4.html">Migrate Your CC13x2 or CC26x2 Project to CC13x4 or CC26x4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/software-on-cc13x4-26x4.html">Migrate software examples from CC13x4 to CC26x4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/software-on-cc13x4-26x4-rgz-devices.html">CC13x4 and CC26x4 RGZ Variants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/software-on-cc2652xSIP-cc2651RSIPA.html">Running Software Examples on CC2652XSIP and CC2651RSIPA devices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/software-on-cc2652p.html">Running Software Examples on CC2652P</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/software-on-cc13x2x7-26x2x7.html">Running Software Examples on the CC13x2x7 or CC26x2x7</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cc13xx_cc26xx/software-on-cc13x1x-26x1x.html">Running Software Examples on the CC13x1x3 or CC26x1x3</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SysConfig Migration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack/api-reference.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ti154stack-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ti154stack-guide/migration-guide-cc13xx_cc26xx.html">Migration Guide</a> &raquo;</li>
+      <li>SysConfig Migration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="sysconfig-migration">
+<h1>SysConfig Migration<a class="headerlink" href="#sysconfig-migration" title="Permalink to this headline">¶</a></h1>
+<p>If you have an existing CC13xx or CC26xx software project and you want to start
+developing with SysConfig, follow the steps below. This guide assumes you
+have a stack project from the SimpleLink CC13xx or CC26xx 2.40 SDK or newer. If this
+is not the case, please look at the Stack Porting Guides to see how to update
+to SimpleLink CC13xx or CC26xx 2.40 SDK.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are starting development with a fresh project, you don’t need to
+migrate from non-SysConfig to SysConfig-enabled project. In <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> v. 2.40 and
+later, SysConfig-enabled projects are found in the syscfg_preview folder.</p>
+</div>
+<div class="section" id="add-a-syscfg-file-to-your-project">
+<h2>1. Add a .syscfg File to Your Project<a class="headerlink" href="#add-a-syscfg-file-to-your-project" title="Permalink to this headline">¶</a></h2>
+<p>In this guide, we will start with a TI 15.4-Stack project, then apply necessary changes
+to start using SysConfig.</p>
+<p>You can use the standalone SysConfig tool to make this file. Please see the
+<a class="reference external" href="http://www.ti.com/tool/download/SYSCONFIG">SysConfig Standalone Installer Download Page</a>.</p>
+<ul class="simple">
+<li><p>Choose the “Start a new Design” option. Choose your device, part and package.
+For the <code class="docutils literal notranslate"><span class="pre">product</span></code> path, add the following for your SDK:
+<code class="docutils literal notranslate"><span class="pre">{SDK_INSTALL_DIR}\.metadata\product.json</span></code>.</p></li>
+<li><p>Add an RF stack according to your existing project (TI 15.4-Stack). Add any TI
+Drivers configuration that your project requires. If applicable, add one or
+more Radio Configuration. You can find guidelines for configuring each of these
+in the <a class="reference internal" href="getting-started.html#sysconfig-sysconfig"><span class="std std-ref">Get started with SysConfig</span></a> chapter.</p></li>
+<li><p>Save the file and add it to your project.</p></li>
+</ul>
+<p>If you are using <a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-CCS"><span class="xref std std-term">CCS</span></a>, you can add the file by dragging it into your CCS
+workspace. When you add the file, the following dialog box will appear and allow
+you to add SysConfig to your project:</p>
+<div class="figure align-center">
+<img alt="../_images/enable_dialog.png" src="../_images/enable_dialog.png" />
+</div>
+<p>If you are using <a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#term-IAR"><span class="xref std std-term">IAR</span></a>, follow the steps in <a class="reference internal" href="getting-started.html#sysconfig-use-iar"><span class="std std-ref">Using SysConfig with IAR Workbench</span></a> before you
+add the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file. The steps for adding the file are as follows:</p>
+<ul class="simple">
+<li><p>Include the .syscfg file you want to use in the project (right click on the
+project → Add Files → Navigate to the .syscfg file and add it).</p></li>
+<li><p>Create a custom build step: Right click on project → Options →
+Custom Build → Populate the following:</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 66%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Option</p></td>
+<td><p>Populate with the following:</p></td>
+</tr>
+<tr class="row-even"><td><p>File Name Extensions</p></td>
+<td><p>.syscfg</p></td>
+</tr>
+<tr class="row-odd"><td><p>Command Line</p></td>
+<td><p>$SYSCONFIG_ROOT$/nw/nw.exe
+$SYSCONFIG_ROOT$/dist/cli.js -o $PROJ_DIR$ -s “$
+COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/.metadata/product.json”
+–compiler iar $FILE_PATH$</p></td>
+</tr>
+<tr class="row-even"><td><p>Output files (one per line)</p></td>
+<td><p>SysConfig_Generated_Files.ipcf</p></td>
+</tr>
+<tr class="row-odd"><td><p>Run this tool before all other tools</p></td>
+<td><p>Checked</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="add-sysconfig-options">
+<h2>2. Add SysConfig Options<a class="headerlink" href="#add-sysconfig-options" title="Permalink to this headline">¶</a></h2>
+<p>If you are using CCS, open the Project Properties and do the following:</p>
+<ul class="simple">
+<li><p>In System Configuration Tool → Basic Options → Name of the board file
+(-b, –board), set it to <code class="docutils literal notranslate"><span class="pre">/ti/boards/.meta/&lt;BOARD_NAME&gt;</span></code>. (E.g., if you are
+using a CC1312R LaunchPad, set the name to
+<code class="docutils literal notranslate"><span class="pre">/ti/boards/.meta/CC1312R1_LAUNCHXL</span></code>). It is not necessary to set the name of
+the device.</p></li>
+<li><p>In System Configuration Tool → Basic Options → Root system config
+meta data file in a product or SDK (-s, –product), add
+<code class="docutils literal notranslate"><span class="pre">${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/.metadata/product.json</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="remove-board-files-from-your-project">
+<h2>3. Remove Board Files From Your Project<a class="headerlink" href="#remove-board-files-from-your-project" title="Permalink to this headline">¶</a></h2>
+<p>These are not needed as the board configuration is done in SysConfig. E.g. if
+you are using a <a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC1352R1">CC1352R LaunchPad</a>, delete the <code class="docutils literal notranslate"><span class="pre">Board.h</span></code>,
+<code class="docutils literal notranslate"><span class="pre">CC1352R1_LAUNCHXL.h</span></code>, and <code class="docutils literal notranslate"><span class="pre">CC1352R1_LAUNCHXL.c</span></code> from the project. If your
+project contains board files ending with <code class="docutils literal notranslate"><span class="pre">*_fxns.c</span></code> or <code class="docutils literal notranslate"><span class="pre">*.cmd</span></code>, don’t
+delete them.</p>
+<p>You can see how to configure your board files and TI driver instances with
+SysConfig in <a class="reference internal" href="sysconfig-board.html#sysconfig-board-files"><span class="std std-ref">Configure The Board Files with SysConfig</span></a>. If you’re not exactly sure what
+peripherals are on your board and you have a TI development board, you can check
+the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file from an existing syscfg project for your board. E.g.
+if you’re using a <a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC26x2R1">CC26X2R LaunchPad</a> board, you can check the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file
+in one of the projects in <code class="docutils literal notranslate"><span class="pre">${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}</span>
+<span class="pre">/examples/rtos/CC26X2R1_LAUNCHXL</span></code>.</p>
+</div>
+<div class="section" id="migrate-configuration-header-file">
+<h2>4. Migrate Configuration Header File<a class="headerlink" href="#migrate-configuration-header-file" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">config.h</span></code> contains build configuration settings. The values of these defines
+depend on the saved SysConfig GUI settings. SysConfig should already come with
+the standard defaults for both TI-Driver and 15.4-Stack configurations.  Once all
+values have been defined inside of SysConfig, be sure to delete
+<code class="docutils literal notranslate"><span class="pre">Application/subg/config.h</span></code> from the main project
+directory.  When you have eventually built the project with SysConfig enabled,
+you will find the SysConfig-built version of <code class="docutils literal notranslate"><span class="pre">config.h</span></code> in the output
+<code class="docutils literal notranslate"><span class="pre">sysconfig</span></code> folder of the project.  Below is a list of the correspondence between
+SysConfig configurable name and <code class="docutils literal notranslate"><span class="pre">config.h</span></code> define names.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 38%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Submodule</strong></p></th>
+<th class="head"><p><strong>Configuration</strong></p></th>
+<th class="head"><p><strong>Definition</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Frequency Band</p></td>
+<td><p>Sub-1 GHz Frequency &amp; Modulation (Phy ID)</p></td>
+<td><p>CONFIG_PHY_ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>Frequency Band</p></td>
+<td><p>Channel Page</p></td>
+<td><p>CONFIG_CHANNEL_PAGE</p></td>
+</tr>
+<tr class="row-even"><td><p>Mode of Operation</p></td>
+<td><p>Mac Beacon Order</p></td>
+<td><p>CONFIG_MAC_BEACON_ORDER</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mode of Operation</p></td>
+<td><p>Mac Super Frame Order</p></td>
+<td><p>CONFIG_MAC_SUPERFRAME_ORDER</p></td>
+</tr>
+<tr class="row-even"><td><p>Network</p></td>
+<td><p>Net Name</p></td>
+<td><p>CONFIG_FH_NETNAME</p></td>
+</tr>
+<tr class="row-odd"><td><p>Network</p></td>
+<td><p>FH Channel Mask</p></td>
+<td><p>CONFIG_FH_CHANNEL_MASK</p></td>
+</tr>
+<tr class="row-even"><td><p>Network</p></td>
+<td><p>FH Async Channel Mask</p></td>
+<td><p>FH_ASYNC_CHANNEL_MASK</p></td>
+</tr>
+<tr class="row-odd"><td><p>Network</p></td>
+<td><p>FH Coordinator Short Address</p></td>
+<td><p>CONFIG_COORD_SHORT_ADDR</p></td>
+</tr>
+<tr class="row-even"><td><p>Network</p></td>
+<td><p>Max Devices</p></td>
+<td><p>CONFIG_MAX_DEVICES</p></td>
+</tr>
+<tr class="row-odd"><td><p>Network</p></td>
+<td><p>Channel Mask</p></td>
+<td><p>CONFIG_CHANNEL_MASK</p></td>
+</tr>
+<tr class="row-even"><td><p>Network</p></td>
+<td><p>Pan ID</p></td>
+<td><p>CONFIG_PAN_ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>Power</p></td>
+<td><p>Transmit Power (dBm)</p></td>
+<td><p>CONFIG_TRANSMIT_POWER</p></td>
+</tr>
+<tr class="row-even"><td><p>Application</p></td>
+<td><p>Security</p></td>
+<td><p>CONFIG_SECURE</p></td>
+</tr>
+<tr class="row-odd"><td><p>Application</p></td>
+<td><p>PSK (LSB -&gt; MSB)</p></td>
+<td><p>KEY_TABLE_DEFAULT_KEY</p></td>
+</tr>
+<tr class="row-even"><td><p>Application</p></td>
+<td><p>Scan Duration (ms)</p></td>
+<td><p>CONFIG_SCAN_DURATION</p></td>
+</tr>
+<tr class="row-odd"><td><p>Application</p></td>
+<td><p>Tracking Time Delay</p></td>
+<td><p>TRACKING_DELAY_TIME</p></td>
+</tr>
+<tr class="row-even"><td><p>Application</p></td>
+<td><p>Polling Interval (ms)</p></td>
+<td><p>CONFIG_POLLING_INTERVAL</p></td>
+</tr>
+<tr class="row-odd"><td><p>Application</p></td>
+<td><p>Reporting Interval (ms)</p></td>
+<td><p>CONFIG_REPORTING_INTERVAL</p></td>
+</tr>
+<tr class="row-even"><td><p>MAC</p></td>
+<td><p>Min BackOff Exponent</p></td>
+<td><p>CONFIG_MIN_BE</p></td>
+</tr>
+<tr class="row-odd"><td><p>MAC</p></td>
+<td><p>Max BackOff Exponent</p></td>
+<td><p>CONFIG_MAX_BE</p></td>
+</tr>
+<tr class="row-even"><td><p>MAC</p></td>
+<td><p>Max CSMCA BackOffs</p></td>
+<td><p>CONFIG_MAC_MAX_CSMA_BACKOFFS</p></td>
+</tr>
+<tr class="row-odd"><td><p>MAC</p></td>
+<td><p>Max Retries</p></td>
+<td><p>CONFIG_MAX_RETRIES</p></td>
+</tr>
+<tr class="row-even"><td><p>MAC</p></td>
+<td><p>Number of Non-Sleepy FH Neighbors</p></td>
+<td><p>FH_NUM_NON_SLEEPY_HOPPING_NEIGHBORS</p></td>
+</tr>
+<tr class="row-odd"><td><p>MAC</p></td>
+<td><p>Number of Non-Sleepy Fixed Neighbors</p></td>
+<td><p>FH_NUM_NON_SLEEPY_FIXED_CHANNEL_NEIGHBORS</p></td>
+</tr>
+<tr class="row-even"><td><p>MAC</p></td>
+<td><p>Broadcast Interval (ms)</p></td>
+<td><p>FH_BROADCAST_INTERVAL</p></td>
+</tr>
+<tr class="row-odd"><td><p>MAC</p></td>
+<td><p>Dwell Time</p></td>
+<td><p>CONFIG_DWELL_TIME</p></td>
+</tr>
+<tr class="row-even"><td><p>Test Mode</p></td>
+<td><p>Certification Test Mode</p></td>
+<td><p>CERTIFICATION_TEST_MODE</p></td>
+</tr>
+<tr class="row-odd"><td><p>Test Mode</p></td>
+<td><p>Power Test Profile</p></td>
+<td><p>POWER_TEST_PROFILE</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, manually changing the CCS/IAR project creation files (projectspec/ewp,
+etc.) could have unseen side effects.  An easier path may be to import one
+of the 15.4-Stack SysConfig examples and migrate your application accordingly.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../cc13xx_cc26xx/software-on-cc13x1x-26x1x.html" class="btn btn-neutral float-left" title="Running Software Examples on the CC13x1x3 or CC26x1x3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ti154stack/api-reference.html" class="btn btn-neutral float-right" title="API References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

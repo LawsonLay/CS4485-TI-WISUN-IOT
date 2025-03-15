@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_e_c_d_s_a___operation_sign" kind="struct" language="C++" prot="public">
+    <compoundname>ECDSA_OperationSign</compoundname>
+    <includes refid="_e_c_d_s_a_8h" local="no">ECDSA.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_e_c_d_s_a___operation_sign_1a97e0246929c089092394c70e526847ae" prot="public" static="no" mutable="no">
+        <type><ref refid="_e_c_d_s_a_8h_1acbeddeb9ec24f98c63b1cd6b622f644b" kindref="member">ECDSA_CurveType</ref></type>
+        <definition>ECDSA_CurveType ECDSA_OperationSign::curveType</definition>
+        <argsstring></argsstring>
+        <name>curveType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>An ECDSA_CurveType value indicating which EC curve to use for the operation </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDSA.h" line="672" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="672" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_c_d_s_a___operation_sign_1addbb81fadade3018c2b487249418f525" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_e_c_c_params___curve_params" kindref="compound">ECCParams_CurveParams</ref> *</type>
+        <definition>const ECCParams_CurveParams* ECDSA_OperationSign::curve</definition>
+        <argsstring></argsstring>
+        <name>curve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to the elliptic curve parameters </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDSA.h" line="674" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="674" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_c_d_s_a___operation_sign_1a843fb01b09db7fdf743ae969b0f39f04" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> *</type>
+        <definition>const CryptoKey* ECDSA_OperationSign::myPrivateKey</definition>
+        <argsstring></argsstring>
+        <name>myPrivateKey</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to the private ECC key that will sign the hash of the message </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDSA.h" line="675" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="675" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_c_d_s_a___operation_sign_1a505593c925c3a064608f93f04c4545b1" prot="public" static="no" mutable="no">
+        <type>const uint8_t *</type>
+        <definition>const uint8_t* ECDSA_OperationSign::hash</definition>
+        <argsstring></argsstring>
+        <name>hash</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to the hash of the message in octet string format. Must be the same length as the other curve parameters. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDSA.h" line="678" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="678" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_c_d_s_a___operation_sign_1a138c214cef2a16aa07169106f3ccfcce" prot="public" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* ECDSA_OperationSign::r</definition>
+        <argsstring></argsstring>
+        <name>r</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to the buffer the r component of the signature will be written to. Formatted in octet string format. Must be of the same length as other params of the curve used. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDSA.h" line="682" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="682" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_c_d_s_a___operation_sign_1a257f3e84f91abca240eea1f1c074d805" prot="public" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* ECDSA_OperationSign::s</definition>
+        <argsstring></argsstring>
+        <name>s</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to the buffer the s component of the signature will be written to. Must be of the same length as other params of the curve used. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ECDSA.h" line="688" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="688" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct containing the parameters required for signing a message. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="874">
+        <label>ECDSA_OperationSign</label>
+        <link refid="struct_e_c_d_s_a___operation_sign"/>
+        <childnode refid="875" relation="usage">
+          <edgelabel>curve</edgelabel>
+        </childnode>
+        <childnode refid="876" relation="usage">
+          <edgelabel>myPrivateKey</edgelabel>
+        </childnode>
+      </node>
+      <node id="876">
+        <label>CryptoKey</label>
+        <link refid="struct_crypto_key"/>
+        <childnode refid="877" relation="usage">
+          <edgelabel>plaintext</edgelabel>
+        </childnode>
+        <childnode refid="878" relation="usage">
+          <edgelabel>keyStore</edgelabel>
+        </childnode>
+      </node>
+      <node id="875">
+        <label>ECCParams_CurveParams</label>
+        <link refid="struct_e_c_c_params___curve_params"/>
+      </node>
+      <node id="877">
+        <label>CryptoKey_Plaintext</label>
+        <link refid="struct_crypto_key___plaintext"/>
+      </node>
+      <node id="878">
+        <label>CryptoKey_KeyStore</label>
+        <link refid="struct_crypto_key___key_store"/>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/ECDSA.h" line="670" column="1" bodyfile="source/ti/drivers/ECDSA.h" bodystart="669" bodyend="693"/>
+    <listofallmembers>
+      <member refid="struct_e_c_d_s_a___operation_sign_1addbb81fadade3018c2b487249418f525" prot="public" virt="non-virtual"><scope>ECDSA_OperationSign</scope><name>curve</name></member>
+      <member refid="struct_e_c_d_s_a___operation_sign_1a97e0246929c089092394c70e526847ae" prot="public" virt="non-virtual"><scope>ECDSA_OperationSign</scope><name>curveType</name></member>
+      <member refid="struct_e_c_d_s_a___operation_sign_1a505593c925c3a064608f93f04c4545b1" prot="public" virt="non-virtual"><scope>ECDSA_OperationSign</scope><name>hash</name></member>
+      <member refid="struct_e_c_d_s_a___operation_sign_1a843fb01b09db7fdf743ae969b0f39f04" prot="public" virt="non-virtual"><scope>ECDSA_OperationSign</scope><name>myPrivateKey</name></member>
+      <member refid="struct_e_c_d_s_a___operation_sign_1a138c214cef2a16aa07169106f3ccfcce" prot="public" virt="non-virtual"><scope>ECDSA_OperationSign</scope><name>r</name></member>
+      <member refid="struct_e_c_d_s_a___operation_sign_1a257f3e84f91abca240eea1f1c074d805" prot="public" virt="non-virtual"><scope>ECDSA_OperationSign</scope><name>s</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

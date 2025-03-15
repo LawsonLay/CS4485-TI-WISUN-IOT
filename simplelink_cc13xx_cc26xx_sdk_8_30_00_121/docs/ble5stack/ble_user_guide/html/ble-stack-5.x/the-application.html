@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Compiler and Linker Options" href="compiler_and_linker_options.html" />
+    <link rel="prev" title="Developing a Bluetooth LE Application" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-stack-5.x the-application";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#application-layer">Application Layer</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main-initialization">Main initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#icall">ICall</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icall-stack-protocol-service">ICall BLE5-Stack Protocol Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icall-primitive-service">ICall Primitive Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#messaging-and-thread-synchronization">Messaging and Thread Synchronization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#heap-allocation-and-management">Heap Allocation and Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icall-initialization-and-registration">ICall Initialization and Registration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icall-thread-synchronization">ICall Thread Synchronization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-icall-usage">Example ICall Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icall-translation-and-include">ICall Translation and Include</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#simple-peripheral-task">Simple Peripheral Task</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#application-initialization-function">Application Initialization Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#event-processing-in-the-task-function">Event Processing in the Task Function</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-additional-icall-enabled-tasks">Creating Additional ICall Enabled Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#intertask-messages">Intertask Messages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-ti-rtos7-events-module">Using TI-RTOS7 Events Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#processing-queued-application-messages">Processing Queued Application Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#processing-stack-events-from-the-icall-message-queue">Processing Stack Events from the ICall Message Queue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#callbacks">Callbacks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#memory-management">Memory Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#compiler-and-linker-options">Compiler and Linker Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#production-test-mode-and-direct-test-mode">Production Test Mode and Direct Test Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#bluetooth-le-network-processor">Bluetooth LE Network Processor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#running-the-sdk-on-custom-hardware">Running the SDK on Custom Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#optimizing-memory-usage">Optimizing Memory Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a> &raquo;</li>
+      <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="introduction">
+<span id="the-application"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This section describes the application portion of the
+simple_peripheral project, which includes the following:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#start-up-in-main"><span class="std std-ref">Main initialization</span></a></p></li>
+<li><p><a class="reference internal" href="#icall"><span class="std std-ref">ICall</span></a></p></li>
+<li><p><a class="reference internal" href="#sbp-task"><span class="std std-ref">Simple Peripheral Task</span></a></p></li>
+<li><p><a class="reference internal" href="#intertask-messages"><span class="std std-ref">Intertask Messages</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="main-initialization">
+<span id="start-up-in-main"></span><h1>Main initialization<a class="headerlink" href="#main-initialization" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">main</span></code> function is contained in source file main.c located in the
+IDE Start-up folder. This function is the starting point at run time.
+The purpose of main is to bring up the target with interrupts disabled,
+drivers initialized, power management on, TI-RTOS7 tasks created or
+constructed, and start the SYS/BIOS kernel scheduler with interrupts enabled.
+The <code class="docutils literal notranslate"><span class="pre">main</span></code> function does not return. Main.c exists in the application
+project; in other words main.c will be allocated within flash reserved for
+the application.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">Listing 170. </span><span class="caption-text">A basic main function.</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="cm">/* Register Application callback to trap asserts raised in the Stack */</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="n">RegisterAssertCback</span><span class="p">(</span><span class="n">AssertHandler</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="n">Board_initGeneral</span><span class="p">();</span><span class="w"></span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="c1">// Enable iCache prefetching</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="n">VIMSConfigure</span><span class="p">(</span><span class="n">VIMS_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">TRUE</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">    </span><span class="c1">// Enable cache</span>
+<span class="linenos">11</span><span class="w">    </span><span class="n">VIMSModeSet</span><span class="p">(</span><span class="n">VIMS_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">VIMS_MODE_ENABLED</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">    </span><span class="cp">#if !defined( POWER_SAVING )</span>
+<span class="linenos">14</span><span class="w">    </span><span class="cm">/* Set constraints for Standby, powerdown and idle mode */</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">    </span><span class="c1">// PowerCC26XX_SB_DISALLOW may be redundant</span>
+<span class="linenos">16</span><span class="w">    </span><span class="n">Power_setConstraint</span><span class="p">(</span><span class="n">PowerCC26XX_SB_DISALLOW</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">    </span><span class="n">Power_setConstraint</span><span class="p">(</span><span class="n">PowerCC26XX_IDLE_PD_DISALLOW</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">    </span><span class="cp">#endif </span><span class="c1">// POWER_SAVING</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="w">    </span><span class="cm">/* Update User Configuration of the stack */</span><span class="w"></span>
+<span class="linenos">21</span><span class="w">    </span><span class="n">user0Cfg</span><span class="p">.</span><span class="n">appServiceInfo</span><span class="o">-&gt;</span><span class="n">timerTickPeriod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Clock_tickPeriod</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">22</span><span class="w">    </span><span class="n">user0Cfg</span><span class="p">.</span><span class="n">appServiceInfo</span><span class="o">-&gt;</span><span class="n">timerMaxMillisecond</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">ICall_getMaxMSecs</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="w">    </span><span class="cm">/* Initialize ICall module */</span><span class="w"></span>
+<span class="linenos">25</span><span class="w">    </span><span class="n">ICall_init</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="w">    </span><span class="cm">/* Start tasks of external images - Priority 5 */</span><span class="w"></span>
+<span class="linenos">28</span><span class="w">    </span><span class="n">ICall_createRemoteTasks</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="w">    </span><span class="n">SimplePeripheral_createTask</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">31</span>
+<span class="linenos">32</span><span class="w">    </span><span class="cm">/* enable interrupts and start SYS/BIOS */</span><span class="w"></span>
+<span class="linenos">33</span><span class="w">    </span><span class="n">BIOS_start</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">36</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>See <a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html#sec-tirtos-overview"><span class="std std-ref">TI-RTOS7 (RTOS Kernel) Overview</span></a> for how the application is
+constructed through TI-RTOS7.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ICall module must be initialized by <a class="reference external" href="../../doxygen/ble/html/group___i_call.html#ga7ff723a346156b189a6700cb2cc297c8">ICall_init()</a> and the
+stack task is created via <a class="reference external" href="../../doxygen/ble/html/group___i_call.html#ga9c6d55cb8b177a15796006d20f8634d6">ICall_createRemoteTasks()</a>.</p>
+</div>
+</div>
+<div class="section" id="icall">
+<span id="id2"></span><h1>ICall<a class="headerlink" href="#icall" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id3">
+<h2>Introduction<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>Indirect Call Framework (ICall) is a module that provides a
+mechanism for the application to interface with the Bluetooth low
+energy protocol stack services (that is, BLE5-Stack APIs) as well as certain
+primitive services provided by TI-RTOS7 (for example, thread synchronization).
+ICall allows the application and protocol stack to operate efficiently,
+communicate, and share resources in a unified TI-RTOS7 environment.</p>
+<p>The central component of the ICall architecture is the API translation,
+which facilitates the application program interface between the
+application and the BLE5-Stack. Although most ICall interactions are abstracted
+within the BLE5-Stack APIs (for example, GAP, HCI, and so forth), the application
+developer must understand the underlying architecture for the BLE5-Stack
+to operate properly in the multithreaded RTOS environment.</p>
+<p>The ICall module source code is provided in the ICall and ICall
+BLE IDE folders in the application project. The figure below shows an example
+of the application calling the stack API <code class="docutils literal notranslate"><span class="pre">GATT_Notification</span></code>.</p>
+<img alt="../_images/ditaa-22506e72cb9d36aacac889e158653924a5ade334.png" src="../_images/ditaa-22506e72cb9d36aacac889e158653924a5ade334.png" />
+</div>
+<div class="section" id="icall-stack-protocol-service">
+<h2>ICall BLE5-Stack Protocol Service<a class="headerlink" href="#icall-stack-protocol-service" title="Permalink to this headline">¶</a></h2>
+<p>As the figure above shows, the ICall core use case involves messaging
+between a server entity (that is, the BLE5-Stack
+task) and a client entity (for example, the application task).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ICall framework is not the GATT server and client
+architecture, as defined by the Bluetooth Low Energy protocol.</p>
+</div>
+<p>The reasoning for this architecture is as follows:</p>
+<ul class="simple">
+<li><p>To enable independent updating of the application and Bluetooth Low
+Energy protocol stack</p></li>
+<li><p>To maintain API consistency as software is ported from legacy
+platforms (that is, OSAL for the CC254x) to TI-RTOS7 of the CC13xx or CC26xx.</p></li>
+</ul>
+<p>The ICall BLE5-Stack service serves as the application interface to BLE5-Stack APIs.
+When a BLE5-Stack API is called by the application internally, the ICall module
+routes (that is, dispatches) the command to the BLE5-Stack and routes
+messages from the BLE5-Stack to the application when appropriate.</p>
+<p>Because the ICall module is part of the application project, the
+application task can access ICall with direct function calls.
+Because the BLE5-Stack executes at the highest priority, the application task
+blocks until the response is received. Certain protocol stack APIs may
+respond immediately, but the application thread blocks as the API is
+dispatched to the BLE5-Stack through ICall. Other BLE5-Stack APIs may also
+respond asynchronously to the application through ICall
+(for example, event updates) with the response sent to the event handler of
+the application task.</p>
+</div>
+<div class="section" id="icall-primitive-service">
+<h2>ICall Primitive Service<a class="headerlink" href="#icall-primitive-service" title="Permalink to this headline">¶</a></h2>
+<p>ICall includes a primitive service that abstracts various operating
+system-related functions. Due to shared resources and to maintain
+interprocess communication, the application must use the following
+ICall primitive service functions:</p>
+<ul class="simple">
+<li><p>Messaging and Thread Synchronization</p></li>
+<li><p>Heap Allocation and Management</p></li>
+</ul>
+<p>Some of these are abstracted to Util functions (see the relevant
+module in <a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html#sec-tirtos-overview"><span class="std std-ref">TI-RTOS7 (RTOS Kernel) Overview</span></a>). The ICall primitive service is
+implemented as part of <code class="docutils literal notranslate"><span class="pre">icall.c</span></code>.</p>
+</div>
+<div class="section" id="messaging-and-thread-synchronization">
+<h2>Messaging and Thread Synchronization<a class="headerlink" href="#messaging-and-thread-synchronization" title="Permalink to this headline">¶</a></h2>
+<p>The Messaging and Thread Synchronization functions provided by ICall
+enable an application to communicate with the BLE5-Stack in the
+multithreaded TI-RTOS7 environment.</p>
+<p>In ICall, messaging between two tasks occurs by sending a block of
+message from one thread to the other through a message queue. The
+sender allocates a memory block, writes the content of the message
+into the memory block, and then sends (that is, enqueues) the memory
+block to the recipient. Notification of message delivery occurs
+using an event flag. The receiver wakes up on the event flag post,
+copies the message memory block (or blocks), processes the message,
+and returns (frees) the memory block to the heap.</p>
+<p>The stack uses ICall for notifying and sending messages to the
+application. ICall delivers these service messages, the application
+task receives them, and the messages are processed in the context
+of the application.</p>
+</div>
+<div class="section" id="heap-allocation-and-management">
+<h2>Heap Allocation and Management<a class="headerlink" href="#heap-allocation-and-management" title="Permalink to this headline">¶</a></h2>
+<p>ICall provides the application with global heap APIs for dynamic
+memory allocation. See <a class="reference internal" href="../ble-stack-common/ram_allocation-cc13xx_cc26xx.html#dynamic-memory-allocation"><span class="std std-ref">Dynamic Memory Allocation</span></a> for more details on
+managing dynamic memory. ICall uses this heap for all protocol stack messaging
+and to obtain memory for other ICall services. TI recommends that the
+application uses these ICall APIs to allocate dynamic memory.</p>
+</div>
+<div class="section" id="icall-initialization-and-registration">
+<span id="the-application-icall-initialization-and-registration"></span><h2>ICall Initialization and Registration<a class="headerlink" href="#icall-initialization-and-registration" title="Permalink to this headline">¶</a></h2>
+<p>To instantiate and initialize the ICall service, the application
+must call the functions in in the snippet below in main() before starting the
+TI-RTOS7 kernel scheduler:</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-number">Listing 171. </span><span class="caption-text">Required code to utilize ICall.</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cm">/* Initialize ICall module */</span><span class="w"></span>
+<span class="linenos">2</span><span class="n">ICall_init</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="cm">/* Start tasks of external images - Priority 5 */</span><span class="w"></span>
+<span class="linenos">5</span><span class="n">ICall_createRemoteTasks</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>Calling <a class="reference external" href="../../doxygen/ble/html/group___i_call.html#ga7ff723a346156b189a6700cb2cc297c8">ICall_init()</a> initializes the ICall primitive service (for
+example, heap manager) and framework. Calling
+<a class="reference external" href="../../doxygen/ble/html/group___i_call.html#ga9c6d55cb8b177a15796006d20f8634d6">ICall_createRemoteTasks()</a> creates but does not start the BLE5-Stack
+task. Before using ICall protocol
+services, the server and client must enroll and register with ICall.
+The server enrolls a service, which is defined at build time.
+Service function handler registration uses a globally defined unique
+identifier for each service. For example, Bluetooth Low Energy uses
+<code class="xref c c-type docutils literal notranslate"><span class="pre">ICALL_SERVICE_CLASS_BLE</span></code> for receiving BLE5-Stack task messages through
+ICall.</p>
+<p>To enroll the BLE5-Stack service (server) with ICall in osal_icall_ble.c,
+see the snippet below:</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-number">Listing 172. </span><span class="caption-text">ICall Enrollment</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cm">/* Enroll the service that this stack represents */</span><span class="w"></span>
+<span class="linenos">2</span><span class="n">ICall_enrollService</span><span class="p">(</span><span class="n">ICALL_SERVICE_CLASS_BLE</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">entity</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">syncHandle</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>The registration mechanism is used by the client to send and/or
+receive messages through the ICall dispatcher.</p>
+<p>For a client (for example, application task) to use the BLE5-Stack APIs,
+the client must first register its task with
+ICall. This registration usually occurs in the task initialization
+function of the application. The snippet below is an example
+from <code class="docutils literal notranslate"><span class="pre">SimplePeripheral_init</span></code> in simple_peripheral.c</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-number">Listing 173. </span><span class="caption-text">ICall Registration</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">// Register the current thread as an ICall dispatcher application</span>
+<span class="linenos">2</span><span class="c1">// so that the application can send and receive messages.</span>
+<span class="linenos">3</span><span class="n">ICall_registerApp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">selfEntity</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">syncEvent</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>The application supplies the selfEntity and syncEvent inputs. These inputs
+are initialized for the task of the client (for example,
+application) when the <a class="reference external" href="../../doxygen/ble/html/group___i_call.html#gafb784c4b16f296dde58784198fffcb32">ICall_registerApp()</a> returns are initialized.
+These objects are subsequently used by ICall to facilitate messaging
+between the application and server tasks. The syncEvent argument
+represents the Events Module handle for signaling and the selfEntity represents
+the destination message queue of the task. Each task registering
+with ICall has unique syncEvent and selfEntity identifiers.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>BLE5-Stack APIs defined in <code class="docutils literal notranslate"><span class="pre">icall_ble_api.h</span></code> and other ICall primitive
+services are not available before ICall registration.</p>
+</div>
+</div>
+<div class="section" id="icall-thread-synchronization">
+<span id="sec-the-application-icall-thread-sync"></span><h2>ICall Thread Synchronization<a class="headerlink" href="#icall-thread-synchronization" title="Permalink to this headline">¶</a></h2>
+<p>The ICall module uses TI-RTOS7 Events Module for thread synchronization
+instead of Semaphores.</p>
+<p>To allow a client or a server thread to block until it receives a message,
+ICall provides the API functions which blocks until the semaphore
+associated with the caller TI-RTOS7 thread is posted.</p>
+<blockquote id="icall-blocking">
+<div><div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-number">Listing 174. </span><span class="caption-text">ICall Blocking/Pending Calls</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">UInt</span><span class="w"> </span><span class="nf">Event_pend</span><span class="p">(</span><span class="n">Event_Handle</span><span class="w"> </span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">UInt</span><span class="w"> </span><span class="n">andMask</span><span class="p">,</span><span class="w"> </span><span class="n">UInt</span><span class="w"> </span><span class="n">orMask</span><span class="p">,</span><span class="w"> </span><span class="n">UInt32</span><span class="w"> </span><span class="n">timeout</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">handle</span></code> is the constructed Event_Handle instance. <code class="docutils literal notranslate"><span class="pre">andMask</span></code> and
+<code class="docutils literal notranslate"><span class="pre">orMask</span></code> are for the user to select which Event flags to block/
+pend on. <code class="docutils literal notranslate"><span class="pre">timeout</span></code> is a time-out period in milliseconds. If not
+already returned after this time-out period, the function returns with
+events consumed.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Event_pend</span></code> blocks the current task until the desired Events
+are posted. Allowing an application or a server thread to block/yield
+the processor resource to other lower priority threads or conserve
+energy by shutting down power and/or clock domains when possible.</p>
+<p>There are a total of 32 events. These can be defined for application
+specific purposes. Note that there is an event specifically for ICall
+Messages and Queues.</p>
+<p>The Event associated with a TI-RTOS7 thread is signaled/posted by when
+<code class="docutils literal notranslate"><span class="pre">Event_post</span></code> is called with the desired flags.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Event_post</span></code> is used so an application or a server can add
+its own event to unblock <code class="docutils literal notranslate"><span class="pre">Event_pend</span></code> and synchronize the
+thread with appropriate flags. <code class="docutils literal notranslate"><span class="pre">Event_post</span></code> constructed
+Event_Handle instance, as well as an eventFlag mask to select the
+desired flags.</p>
+<blockquote id="icall-signal">
+<div><div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-number">Listing 175. </span><span class="caption-text">ICall Signaling/Posting Call</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">Void</span><span class="w"> </span><span class="nf">Event_post</span><span class="p">(</span><span class="n">Event_Handle</span><span class="w"> </span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">UInt</span><span class="w"> </span><span class="n">eventMask</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>The Event handle associated with the thread is obtained through
+either <a class="reference external" href="../../doxygen/ble/html/group___i_call.html#ga44ce88b15c14378f8a89dd499f2d8733">ICall_enrollService()</a> call or <a class="reference external" href="../../doxygen/ble/html/group___i_call.html#gafb784c4b16f296dde58784198fffcb32">ICall_registerApp()</a> call.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call an ICall function from a stack callback. This
+action can cause ICall to abort (with <a class="reference external" href="../../doxygen/ble/html/group___i_call.html#ga6082711af06912704c6c3c50e3fd01f1">ICall_abort()</a>) and break the
+system.</p>
+</div>
+<p>For more information on the TI-RTOS7 Events Module, see
+<a class="reference internal" href="../tirtos/synchronization.html#sec-rtos-overview-event"><span class="std std-ref">Event</span></a>.</p>
+</div>
+<div class="section" id="example-icall-usage">
+<h2>Example ICall Usage<a class="headerlink" href="#example-icall-usage" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#icall-messaging-example"><span class="std std-numref">Figure 105.</span></a> shows an example command being sent from the
+application to the BLE5-Stack through the ICall framework with a corresponding
+return value passed back to the application.</p>
+<p><a class="reference external" href="../../doxygen/ble/html/group___i_call.html#ga7ff723a346156b189a6700cb2cc297c8">ICall_init()</a> initializes the ICall module instance and
+<a class="reference external" href="../../doxygen/ble/html/group___i_call.html#ga9c6d55cb8b177a15796006d20f8634d6">ICall_createRemoteTasks()</a> creates a task per external image with an
+entry function at a known address.</p>
+<p>After initializing ICall, the application task registers with ICall
+through <a class="reference external" href="../../doxygen/ble/html/group___i_call.html#gafb784c4b16f296dde58784198fffcb32">ICall_registerApp()</a>.</p>
+<p>After the SYS/BIOS scheduler starts and the application task runs,
+the application sends a protocol command defined in <code class="docutils literal notranslate"><span class="pre">ble_dispatch_JT.c</span></code>
+such as <a class="reference external" href="../../doxygen/ble/html/group___g_a_p.html#ga6ccd05371d6e24dab8d6a9ea66fd0df0">GAP_GetParamValue()</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Although the protocol command is declared in <code class="docutils literal notranslate"><span class="pre">gap.h</span></code> and defined
+on the BLE5-Stack side via <code class="docutils literal notranslate"><span class="pre">ble_dispatch_JT.c</span></code>, the declaration
+<strong>MUST</strong> be overridden by <code class="docutils literal notranslate"><span class="pre">icall_api.h</span></code>.</p>
+</div>
+<p>The protocol command is not executed in the thread of the application
+but is encapsulated in an ICall message and routed to the BLE5-Stack task
+via the ICall framework. This command
+is sent to the ICall dispatcher where it is dispatched and executed
+in the BLE5-Stack context. The application thread
+meanwhile blocks until the corresponding command status message is received.
+The BLE5-Stack finishes executing the command,
+then sends a command status message response is through ICall back to
+the application thread. An example diagram of this exchange can be seen
+in <a class="reference internal" href="#icall-messaging-example"><span class="std std-numref">Figure 105.</span></a></p>
+<div class="figure align-center" id="id11">
+<span id="icall-messaging-example"></span><p class="plantuml">
+<img src="../_images/plantuml-ae7f7821d20ddd304c4361a6295cb9f768fe8f47.png" alt="&#64;startuml
+participant App
+participant &quot;ICall&quot;
+participant &quot;BLE Stack&quot;
+  App -&gt; &quot;ICall&quot; : ICall_Init
+  App -&gt; &quot;ICall&quot; : ICall_createRemoteTasks
+  App -&gt; &quot;ICall&quot; : ICall_registerApp
+  App -&gt; &quot;ICall&quot; : GAP_GetParamValue
+  ICall -&gt; ICall : icall_directAPI(...)
+
+  ICall -&gt; &quot;BLE Stack&quot; : ICall_sendServiceMsg\n(BLE Primitive Service)
+
+rnote over &quot;BLE Stack&quot;
+    Stack Executes
+    GAP_GetParamValue
+end note
+
+activate App
+
+rnote over App
+   App Task Blocks
+end note
+
+  &quot;BLE Stack&quot; -&gt; &quot;ICall&quot; : osal_service_complete(sendGapCmdStatus)
+
+deactivate &quot;App&quot;
+
+  ICall -&gt; App : return
+
+&#64;enduml
+
+
+ICall Messaging Example"/>
+</p>
+<p class="caption"><span class="caption-number">Figure 105. </span><span class="caption-text">ICall Messaging Example</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="icall-translation-and-include">
+<span id="sec-the-application-icall-lite"></span><h2>ICall Translation and Include<a class="headerlink" href="#icall-translation-and-include" title="Permalink to this headline">¶</a></h2>
+<p>Effectively, <code class="docutils literal notranslate"><span class="pre">icall_ble_api.h</span></code> defines all the ICall/Stack API
+while keeping their original function prototypes. This redefinition is done to
+utilize a different message format for the dispatcher to handle.</p>
+<p>In order for the redefinition to take effect correctly,
+<code class="docutils literal notranslate"><span class="pre">icall_ble_api.h</span></code> <strong>MUST</strong> be the last file to be included in
+the source file. This ensures that the redefinition correctly occurs.
+If <code class="docutils literal notranslate"><span class="pre">icall_ble_api.h</span></code> is not the last file to be included, it’s possible
+that original definitions could be used due to <code class="docutils literal notranslate"><span class="pre">gapbondmgr.h</span></code>,
+<code class="docutils literal notranslate"><span class="pre">gapgattserver.h</span></code>, or any other ICall/Stack API being included in
+another header file.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For any source file utilizing ICall/Stack API, <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;icall_ble_api.h&quot;</span></code>
+must be the last include statement. Erratic runtime behavior or
+link time errors may result.</p>
+</div>
+<p>The ICall translation layer is where the stack parses API calls from the app,
+defined in <code class="docutils literal notranslate"><span class="pre">icall_lite_translation.c</span></code> in the BLE5-Stack project.
+All messages will be processed with <code class="docutils literal notranslate"><span class="pre">icall_liteTranslation</span></code> in the
+BLE-Stack context.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Only Tasks/Threads registered with ICall via
+<a class="reference external" href="../../doxygen/ble/html/group___i_call.html#gafb784c4b16f296dde58784198fffcb32">ICall_registerApp()</a> should use ICall/Stack API.</p>
+<p>Application will abort if an unknown task uses ICall/Stack API.</p>
+</div>
+<p><strong>APIs that are not in ``icall_ble_api.h`` should not be called by the
+application. This file should be treated as the high level stack header
+definition</strong></p>
+</div>
+</div>
+<div class="section" id="simple-peripheral-task">
+<span id="sbp-task"></span><h1>Simple Peripheral Task<a class="headerlink" href="#simple-peripheral-task" title="Permalink to this headline">¶</a></h1>
+<p>Simple Peripheral Task, or the application task, is the lowest priority task in
+the system. The code for this task is in simple_peripheral.c and
+simple_peripheral in the Application IDE folder.</p>
+<div class="section" id="application-initialization-function">
+<h2>Application Initialization Function<a class="headerlink" href="#application-initialization-function" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html#sec-tirtos-overview"><span class="std std-ref">TI-RTOS7 (RTOS Kernel) Overview</span></a> describes how a task is constructed. After the task
+is constructed and the SYS/BIOS kernel scheduler is started, the function that
+was passed during task construction is run when the task is ready (for example,
+<code class="docutils literal notranslate"><span class="pre">SimplePeripheral_taskFxn</span></code>). This function must first call an application
+initialization function.</p>
+<blockquote id="sbp-general-task">
+<div><div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">Listing 176. </span><span class="caption-text">simple_peripheral Task Function Pseudocode</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">SimplePeripheral_taskFxn</span><span class="p">(</span><span class="n">UArg</span><span class="w"> </span><span class="n">a0</span><span class="p">,</span><span class="w"> </span><span class="n">UArg</span><span class="w"> </span><span class="n">a1</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="c1">// Initialize application</span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="n">SimplePeripheral_init</span><span class="p">();</span><span class="w"></span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="c1">//Application main loop</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">11</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>This initialization function (<code class="docutils literal notranslate"><span class="pre">SimplePeripheral_init</span></code>) configures
+several services for the task and sets several hardware and software
+configuration settings and parameters. The following list contains
+some common examples:</p>
+<ul class="simple">
+<li><p>Initializing the GATT client</p></li>
+<li><p>Registering for callbacks in various profiles</p></li>
+<li><p>Setting up the Bond Manager</p></li>
+<li><p>Setting up the GAP layer</p></li>
+<li><p>Configuring hardware modules such as LCD or SPI.</p></li>
+</ul>
+<p>For more information on these examples, see their respective
+sections in this guide.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the application initialization function,
+<a class="reference external" href="../../doxygen/ble/html/group___i_call.html#gafb784c4b16f296dde58784198fffcb32">ICall_registerApp()</a> must be called before any stack API is called.</p>
+</div>
+</div>
+<div class="section" id="event-processing-in-the-task-function">
+<h2>Event Processing in the Task Function<a class="headerlink" href="#event-processing-in-the-task-function" title="Permalink to this headline">¶</a></h2>
+<p>simple_peripheral implements an event driven task function.
+The task function enters an infinite loop so that it
+continuously processes as an independent task and does not run to
+completion. In this infinite loop, the task remains blocked and
+waits until proper events flags signal a new reason for processing:</p>
+<blockquote id="icall-pend-wait-example">
+<div><div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">Listing 177. </span><span class="caption-text">ICall task remains blocked and waits until signaled for processing.</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">// Waits for an event to be posted associated with the calling thread.</span>
+<span class="linenos">2</span><span class="c1">// Note that an event associated with a thread is posted when a</span>
+<span class="linenos">3</span><span class="c1">// message is queued to the message receive queue of the thread</span>
+<span class="linenos">4</span><span class="n">events</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Event_pend</span><span class="p">(</span><span class="n">syncEvent</span><span class="p">,</span><span class="w"> </span><span class="n">Event_Id_NONE</span><span class="p">,</span><span class="w"> </span><span class="n">SBP_ALL_EVENTS</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">5</span><span class="w">                    </span><span class="n">ICALL_TIMEOUT_FOREVER</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>When an event or other stimulus occurs and is processed, the task
+waits for event flags and remains in a blocked state until there
+is another reason to process.</p>
+</div>
+</div>
+<div class="section" id="creating-additional-icall-enabled-tasks">
+<span id="sec-creating-custom-ble-application-creating-additional-tasks"></span><h1>Creating Additional ICall Enabled Tasks<a class="headerlink" href="#creating-additional-icall-enabled-tasks" title="Permalink to this headline">¶</a></h1>
+<p>The objective of this section is to familiarize the programmer with the
+process of adding an RTOS task that can communicate with the BLE5-Stack. Tasks that
+call functions within the BLE5-Stack must follow a few additional steps
+to register with ICall. These details are covered below:</p>
+<ol class="arabic simple">
+<li><p>Follow all the steps detailed in <a class="reference internal" href="../ble-stack-tirtos/tasks.html#sec-rtos-overview-tasks"><span class="std std-ref">Tasks</span></a> to create a
+TI-RTOS task.</p></li>
+<li><p>Open SysConfig -&gt; BLE -&gt; Advanced Settings -&gt; ICALL and add one to the “Max
+Number of Icall Enabled Tasks” entry.</p></li>
+<li><p>Modify the task’s init function to register with ICall
+(explained in <a class="reference internal" href="#the-application-icall-initialization-and-registration"><span class="std std-ref">ICall Initialization and Registration</span></a>)</p></li>
+</ol>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">Listing 178. </span><span class="caption-text">ICall Registration for custom task</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">// ******************************************************************</span>
+<span class="linenos">2</span><span class="c1">// N0 STACK API CALLS CAN OCCUR BEFORE THIS CALL TO ICall_registerApp</span>
+<span class="linenos">3</span><span class="c1">// ******************************************************************</span>
+<span class="linenos">4</span><span class="c1">// Register the current thread as an ICall dispatcher application</span>
+<span class="linenos">5</span><span class="c1">// so that the application can send and receive messages.</span>
+<span class="linenos">6</span><span class="n">ICall_registerApp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">selfEntity</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">syncEvent</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Modify the task’s main function to pend on <code class="docutils literal notranslate"><span class="pre">syncEvent</span></code>
+(explained in <a class="reference internal" href="#sec-the-application-icall-thread-sync"><span class="std std-ref">ICall Thread Synchronization</span></a>)</p></li>
+</ol>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-number">Listing 179. </span><span class="caption-text">ICall Wait</span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">NotificationTask_taskFxn</span><span class="p">(</span><span class="n">UArg</span><span class="w"> </span><span class="n">a0</span><span class="p">,</span><span class="w"> </span><span class="n">UArg</span><span class="w"> </span><span class="n">a1</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="c1">// Initialize application</span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="n">NotificationTask_init</span><span class="p">();</span><span class="w"></span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="c1">// Application main loop</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">      </span><span class="c1">// Waits for an event to be posted associated with the calling thread.</span>
+<span class="linenos">10</span><span class="w">      </span><span class="c1">// Note that an event associated with a thread is posted when a</span>
+<span class="linenos">11</span><span class="w">      </span><span class="c1">// message is queued to the message receive queue of the thread</span>
+<span class="linenos">12</span><span class="w">      </span><span class="n">events</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Event_pend</span><span class="p">(</span><span class="n">syncEvent</span><span class="p">,</span><span class="w"> </span><span class="n">Event_Id_NONE</span><span class="p">,</span><span class="w"> </span><span class="n">SP_ALL_EVENTS</span><span class="p">,</span><span class="w"> </span><span class="n">ICALL_TIMEOUT_FOREVER</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="w">      </span><span class="c1">//...</span>
+<span class="linenos">15</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">16</span><span class="w">  </span><span class="c1">// ...</span>
+<span class="linenos">17</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="intertask-messages">
+<span id="id4"></span><h1>Intertask Messages<a class="headerlink" href="#intertask-messages" title="Permalink to this headline">¶</a></h1>
+<p>These messages are passed from another task (such as the BLE5-Stack Service)
+through ICall to the application task.</p>
+<p>Some possible examples are as follows:</p>
+<ul class="simple">
+<li><p>A confirmation sent from the protocol stack in acknowledgment of a
+successful over-the-air indication</p></li>
+<li><p>An event corresponding to an HCI command (see <a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html#ble-api-reference"><span class="std std-ref">BLE Stack API Reference</span></a> for
+HCI command documentation and corresponding events)</p></li>
+<li><p>A response to a GATT client operation (see <a class="reference internal" href="gatt.html#using-the-gatt-layer-directly"><span class="std std-ref">Using the GATT Layer Directly</span></a>)</p></li>
+</ul>
+<div class="section" id="using-ti-rtos7-events-module">
+<h2>Using TI-RTOS7 Events Module<a class="headerlink" href="#using-ti-rtos7-events-module" title="Permalink to this headline">¶</a></h2>
+<p>All BLE5-Stack 2.2.11.00 projects use the TI-RTOS7 Event module acquire ICall stack
+message event. Usage is described in
+<a class="reference internal" href="#sec-the-application-icall-thread-sync"><span class="std std-ref">ICall Thread Synchronization</span></a> and more documentation on the
+Event module can be found in the <a class="reference external" href="../../../../tirtos7/Bios_User_Guide.pdf">TI-RTOS7 Kernel (SYS/BIOS) User’s Guide</a>.</p>
+</div>
+<div class="section" id="processing-queued-application-messages">
+<h2>Processing Queued Application Messages<a class="headerlink" href="#processing-queued-application-messages" title="Permalink to this headline">¶</a></h2>
+<p>Application messages enqueued using the <a class="reference external" href="../../doxygen/ble/html/group___util.html#gada1270148b25421486d6a0f6e001a3b5">Util_enqueueMsg()</a> function are
+dequeued for processing in the order in which they occurred. The application
+should dequeue and free messages when <code class="docutils literal notranslate"><span class="pre">UTIL_QUEUE_EVENT_ID</span></code> events are posted.</p>
+<p>The code snippet below shows how simple_peripheral
+processes application messages.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-number">Listing 180. </span><span class="caption-text">Queued messages are processed in the order they occurred.</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="cp">#define SBP_QUEUE_EVT   UTIL_QUEUE_EVENT_ID </span><span class="c1">// Event_Id_30</span>
+</span><span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1">// If TI-RTOS7 queue is not empty, process app message.</span>
+<span class="hll"><span class="linenos"> 4</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">events</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">SBP_QUEUE_EVT</span><span class="p">)</span><span class="w"></span>
+</span><span class="linenos"> 5</span><span class="p">{</span><span class="w"></span>
+<span class="hll"><span class="linenos"> 6</span><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Queue_empty</span><span class="p">(</span><span class="n">appMsgQueue</span><span class="p">))</span><span class="w"></span>
+</span><span class="linenos"> 7</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="hll"><span class="linenos"> 8</span><span class="w">        </span><span class="n">sbpEvt_t</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">sbpEvt_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">Util_dequeueMsg</span><span class="p">(</span><span class="n">appMsgQueue</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos"> 9</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">            </span><span class="c1">// Process message.</span>
+<span class="linenos">12</span><span class="w">            </span><span class="n">SimpleBLEPeripheral_processAppMsg</span><span class="p">(</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="w">            </span><span class="c1">// Free the space from the message.</span>
+<span class="hll"><span class="linenos">15</span><span class="w">            </span><span class="n">ICall_free</span><span class="p">(</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos">16</span><span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">18</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Messages originating from the application message queue should be free’d
+using <code class="docutils literal notranslate"><span class="pre">ICall_free()</span></code>.</p>
+</div>
+</div>
+<div class="section" id="processing-stack-events-from-the-icall-message-queue">
+<h2>Processing Stack Events from the ICall Message Queue<a class="headerlink" href="#processing-stack-events-from-the-icall-message-queue" title="Permalink to this headline">¶</a></h2>
+<p>The the stack will often asynchronously signal the application by placing a
+message the application’s ICall message queue. This includes event types
+defined in <code class="docutils literal notranslate"><span class="pre">bcomdef.h</span></code> under “BLE OSAL GAP GLOBAL Events”.</p>
+<p>The application thread receives these messages as below:</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-number">Listing 181. </span><span class="caption-text">App receives event from ICall message queue.</span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">SimplePeripheral_taskFxn</span><span class="p">(</span><span class="n">UArg</span><span class="w"> </span><span class="n">a0</span><span class="p">,</span><span class="w"> </span><span class="n">UArg</span><span class="w"> </span><span class="n">a1</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="c1">// Initialize application</span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="n">SimplePeripheral_init</span><span class="p">();</span><span class="w"></span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="c1">// Application main loop</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">events</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="w">    </span><span class="c1">// Waits for an event to be posted associated with the calling thread.</span>
+<span class="linenos">12</span><span class="w">    </span><span class="c1">// Note that an event associated with a thread is posted when a</span>
+<span class="linenos">13</span><span class="w">    </span><span class="c1">// message is queued to the message receive queue of the thread</span>
+<span class="linenos">14</span><span class="w">    </span><span class="n">events</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Event_pend</span><span class="p">(</span><span class="n">syncEvent</span><span class="p">,</span><span class="w"> </span><span class="n">Event_Id_NONE</span><span class="p">,</span><span class="w"> </span><span class="n">SP_ALL_EVENTS</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">                        </span><span class="n">ICALL_TIMEOUT_FOREVER</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">events</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">19</span><span class="w">      </span><span class="n">ICall_EntityID</span><span class="w"> </span><span class="n">dest</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">      </span><span class="n">ICall_ServiceEnum</span><span class="w"> </span><span class="n">src</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">21</span><span class="w">      </span><span class="n">ICall_HciExtEvt</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="w">      </span><span class="c1">// Fetch any available messages that might have been sent from the stack</span>
+<span class="linenos">24</span><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ICall_fetchServiceMsg</span><span class="p">(</span><span class="o">&amp;</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dest</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">25</span><span class="w">                                </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">pMsg</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ICALL_ERRNO_SUCCESS</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">26</span><span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">27</span><span class="w">        </span><span class="n">uint8</span><span class="w"> </span><span class="n">safeToDealloc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRUE</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">src</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ICALL_SERVICE_CLASS_BLE</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">dest</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">selfEntity</span><span class="p">))</span><span class="w"></span>
+<span class="linenos">30</span><span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">31</span><span class="w">          </span><span class="n">ICall_Stack_Event</span><span class="w"> </span><span class="o">*</span><span class="n">pEvt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ICall_Stack_Event</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">pMsg</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="w">          </span><span class="c1">// Check for BLE stack events first</span>
+<span class="hll"><span class="linenos">34</span><span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pEvt</span><span class="o">-&gt;</span><span class="n">signature</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mh">0xffff</span><span class="p">)</span><span class="w"></span>
+</span><span class="linenos">35</span><span class="w">          </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">36</span><span class="w">            </span><span class="c1">// Process inter-task message</span>
+<span class="hll"><span class="linenos">37</span><span class="w">            </span><span class="n">safeToDealloc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SimplePeripheral_processStackMsg</span><span class="p">((</span><span class="n">ICall_Hdr</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos">38</span><span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">39</span><span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">40</span><span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">41</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">42</span><span class="w">  </span><span class="c1">// ...</span>
+<span class="linenos">43</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>This message is consumed by the application’s <code class="docutils literal notranslate"><span class="pre">_processStackMsg(...)</span></code>
+function. Ususally this involves building a case statement based on message
+type and processing based on that. An example is shown below:</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id18">
+<div class="code-block-caption"><span class="caption-number">Listing 182. </span><span class="caption-text">Processing message from stack</span><a class="headerlink" href="#id18" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">SimplePeripheral_processStackMsg</span><span class="p">(</span><span class="n">ICall_Hdr</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">event</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">GAP_MSG_EVENT</span><span class="p">:</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="c1">// Process GAP_MSG_EVENT</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">GATT_MSG_EVENT</span><span class="p">:</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">        </span><span class="c1">// Process GATT message</span>
+<span class="linenos">11</span><span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">HCI_GAP_EVENT_EVENT</span><span class="p">:</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">        </span><span class="c1">// Process HCI message</span>
+<span class="linenos">15</span><span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">        </span><span class="k">default</span><span class="o">:</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">        </span><span class="c1">// do nothing</span>
+<span class="linenos">19</span><span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="w">    </span><span class="c1">// ...</span>
+<span class="linenos">23</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>Messages <strong>that originate from the ICall Message Queue</strong> should be free’d
+using <code class="docutils literal notranslate"><span class="pre">ICall_freeMsg()</span></code>. Messages coming from the ICall message queue
+are received using <code class="docutils literal notranslate"><span class="pre">ICall_fetchServiceMsg</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">ICall_freeMsg()</span></code> on messages that are not from the ICall message
+queue can cause memory corruption. Only use <code class="docutils literal notranslate"><span class="pre">ICall_freeMsg()</span></code> on
+messages that have be fetched using <code class="docutils literal notranslate"><span class="pre">ICall_fetchServiceMsg</span></code>.</p>
+</div>
+</div>
+<div class="section" id="callbacks">
+<h2>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this headline">¶</a></h2>
+<p>The application code also includes various callbacks to protocol
+stack layers, profiles, and TI-RTO7S modules. To ensure thread safety,
+processing must be minimized in the actual callback and the bulk of
+the processing should occur in the application context. Two
+functions are defined per callback. One is the callback itself, which
+is called upon by another module or task. The second is the function
+to handle the event generated by the callback in the application context.
+Consider the characteristic change callback, which is called when a
+characteristic change occurs.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>No blocking TI-RTOS7 function calls or protocol stack APIs
+should be performed in a callback function. Such function calls may
+result in an abort or undefined behavior. Always perform protocol
+stack and TI-RTOS7 blocking calls from the application task context.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<blockquote>
+<div><p>All callbacks are called in the context of the calling task or module
+(for example, the stack task). To minimize processing in the calling
+context, this function should enqueue an event that the application pends on.</p>
+</div></blockquote>
+<div class="literal-block-wrapper docutils container" id="id19">
+<div class="code-block-caption"><span class="caption-number">Listing 183. </span><span class="caption-text">simple_peripheral char value change callback.</span><a class="headerlink" href="#id19" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">SimplePeripheral_charValueChangeCB</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">paramId</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos">3</span><span class="w">  </span><span class="n">SimplePeripheral_enqueueMsg</span><span class="p">(</span><span class="n">SP_CHAR_CHANGE_EVT</span><span class="p">,</span><span class="w"> </span><span class="n">pValue</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">4</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code snippet above shows the callback function that is sent to
+the application via <code class="docutils literal notranslate"><span class="pre">SimplePeripheral_simpleProfileCBs</span></code> and
+<code class="docutils literal notranslate"><span class="pre">SimpleProfile_RegisterAppCBs</span></code>. The callback simply places a message in the
+queue to signal the application to wake up. Once the callback’s context returns
+and its parent task goes to sleep, the application wakes up due to the enqueue
+from the callback. The code snippet below is called when the event is popped
+from the application queue and processed.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id20">
+<div class="code-block-caption"><span class="caption-number">Listing 184. </span><span class="caption-text">simple_peripheral char value change event.</span><a class="headerlink" href="#id20" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">SimplePeripheral_processCharValueChangeEvt</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">paramId</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos">3</span><span class="w">  </span><span class="c1">//...</span>
+<span class="linenos">4</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html" class="btn btn-neutral float-left" title="Developing a Bluetooth LE Application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="compiler_and_linker_options.html" class="btn btn-neutral float-right" title="Compiler and Linker Options" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,506 @@
+.. |ZB_USERS_GUIDE| replace:: :docs_root:`Z-Stack User's Guide <zigbee/zigbee-users-guide.html>`
+.. |ZB_ZCLIGHT_README| replace:: :docs_root:`Light Coordinator Example <../examples/rtos/CC26X2R1_LAUNCHXL/zstack/zc_light/README.html>`
+.. |ZB_ZEDSW_README| replace:: :docs_root:`Switch End Device Example <../examples/rtos/CC26X2R1_LAUNCHXL/zstack/zed_sw/README.html>`
+
+.. _quick-start-zstack:
+
+|ZIGBEE_STACK| Quick Start Guide
+********************************
+
+This section serves as a roadmap for users developing applications and products
+using the TI SimpleLink\ |trade| |DEVICE| Wireless MCU platform using |ZIGBEE_STACK|.
+Whether a seasoned developer or just getting started, TI has created a variety
+of resources to simplify development on the |DEVICE| platform. These resources
+will enhance your experience with the |ZIGBEE_STACK| software from the
+example applications to production. 
+
+:numref:`fig_zstack_suggested_workflow` shows the suggested workflow for getting 
+started with TI's SimpleLink |ZIGBEE_STACK| development environment.
+
+.. _fig_zstack_suggested_workflow:
+.. figure:: resources/zigbee/zstack-suggestedworkflow.png
+    :align: center
+
+    Suggested Workflow
+
+.. _quick-start-zstack-ccs:
+
+Using |ZIGBEE_STACK| Projects with CCS
+======================================
+
+Importing |ZIGBEE_STACK| projects into CCS will also import a ``README.html`` that
+details the example application design, steps on running the example, and how
+each example works.
+
+Projects that contain Zigbee over-the-air (OTA) upgrade will also 
+import the Boot Image Manager (BIM) into the workspace. For more information on OTA 
+and the BIM see the |ZB_USERS_GUIDE|.
+
+For more details on |ZIGBEE_STACK| example applications please see the 
+*Application Overview* section of the |ZB_USERS_GUIDE|.
+
+Import Project Using Resource Explorer
+--------------------------------------
+
+A quick and easy way to start working with the SDK is to use the TI Resource 
+Explorer in CCS.
+
+This section describes how to import and build an existing project and
+references the zc_light project. All of |ZIGBEE_STACK| projects included
+in the development kit have a similar structure.
+
+#. Open the CCS IDE from the Start Menu.
+#. Create a workspace.
+
+    .. attention::
+
+        Ensure that the CCS workspace path does not contain a whitespace.
+
+#. Import a CCS Project using Resource Explorer
+
+    -   Open Resource Explorer (if not open already) **View** |rarr| **Resource
+        Explorer** |rarr| Software |rarr| |SDK| |rarr| Examples |rarr|
+        Development Tools |rarr| |DEVICE| LaunchPad |rarr| Z-Stack |rarr|
+        zc_light |rarr| TI-RTOS |rarr| CCS Compiler |rarr| zc_light
+
+#.  Select the CCS Logo button to import project into Project Explorer
+
+    .. attention::
+
+        The import process will also install the |SDK| if a local version does
+        not exist. You must accept the End User License Agreement to proceeed.
+
+        .. _fig-zstack-resource-explorer-eula:
+        .. figure:: resources/eula.png
+            :align: center
+
+            Install |SDK|
+
+        After the installation finishes, you must reopen CCS before importing
+        the project.
+
+    - If everything is successful, the project should appear in Resource
+      Explorer.
+
+Import Project Using Import Wizard
+----------------------------------
+
+#. Open CCS
+#. Choose **Project** |rarr| **Import** CCS Projects from the menu.
+#. Select the Browse button in the Import CCS Projects dialog and select the the directory
+   ``<SDK_INSTALL_DIR>/examples``
+
+    .. _fig-zstack-ccs-import-wizard:
+    .. figure:: resources/tidrivers/ccs-import-wizard.jpg
+        :align: center
+
+        CCS Import Wizard
+
+#. CCS will automatically discover compatible examples.
+#. Select the |ZIGBEE_STACK| Example Project you would like to use. In this example,
+   |ZB_ZCLIGHT_README| is chosen. Click Finish to import the zc_light project.
+
+Build and Download Project
+--------------------------
+
+#. Build the zc_light project.
+
+    - Set the zc_light project as the active project. Make sure the Debug project
+      configuration is used.
+    - Select **Project** |rarr| **Rebuild** to build the project.
+
+#. Set to erase all Flash memory
+
+    - Navigate to **Project** |rarr| **Properties** |rarr| **Debug** |rarr| 
+      **Flash Settings** and select *All Unprotected Sectors* under 
+      *Erase Settings during Program Load*
+    - This will ensure the NV memory from previous project builds is reset.
+    
+#. Load the zc_light project onto the device
+
+    - Select **Run** |rarr| **Debug** to download the zc_light application.
+    - Once the debugging session starts, click the red stop button
+        
+Before beginning execution, open a **PuTTY** terminal window with the following settings:
+
+  +-----------------+-----------------+
+  | UART Param      | Default Values  |
+  +=================+=================+
+  | Baud Rate       | 115200          |
+  +-----------------+-----------------+
+  | Data length     | 8 bits          |
+  +-----------------+-----------------+
+  | Parity          | None            |
+  +-----------------+-----------------+
+  | Stop bits       | 1 bit           |
+  +-----------------+-----------------+
+  | Flow Control    | None            |
+  +-----------------+-----------------+
+        
+When the debugging session opens, click the Green start button to start
+execution. Continue on to the ``README.html`` for information about using the
+example application.
+
+.. _sec-useful-ccs-settings:
+
+Useful CCS IDE Settings
+-----------------------
+
+The CCS provides a large number of configurable settings that can be used to
+customize the IDE and individual projects. The following examples do not alter
+the generated program code, but they can improve the developer's experience
+when working with CCS projects. The CCS can reduce project compilation time by
+taking advantage of multiple processor cores on the development computer.
+
+To use this feature, navigate to **Project** |rarr| **Properties** |rarr| 
+**Build** |rarr| **Builder** and select Enable parallel build, as shown in 
+:numref:`fig-properties-light`.
+
+.. _fig-properties-light:
+.. figure:: resources/zigbee/fig-properties-light.png
+    :align: center
+
+    Project Properties for zc_light
+
+Decreasing the **Build** |rarr| **ARM Compiler** |rarr| **Optimization** level to 
+*Interprocedure* will also reduce compile times but may increase the code
+flash requirements.  CCS users can control the amount of information that is 
+displayed in the Console portion of the screen during project compilation and 
+linking, ranging from *Verbose* to *Super quiet*. To change this setting, navigate 
+to **Window** |rarr| **Preferences** |rarr| **Code Composer Studio** |rarr| **Build** 
+and select an entry from the Console verbosity level drop-down, as shown in
+:numref:`fig-ccs-console-verbosity`
+
+.. _fig-ccs-console-verbosity:
+.. figure:: resources/zigbee/fig-ccs-console-verbosity.png
+    :align: center
+
+    Console Verbosity Level Preferences
+
+.. _sec-accessing-preprocessor-symbols-ccs:
+
+
+Accessing Preprocessor Symbols
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Throughout this document and in the source code, various C preprocessor symbols
+may need to be defined or modified at the project level. Preprocessor symbols
+(also known as Predefined Symbols) are used to enable and disable features and
+set operational values to be considered when the program is compiled. The
+preprocessor symbols are split between project specific preprocessor symbols
+and configuration header preprocessor symbols.
+
+.. _sec-configuration-preprocessor-symbols-ccs:
+
+Project Specific Preprocessor Symbols
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Configurations for a given example project are stored in CCS's predefined
+symbols setting for that project.
+
+In CCS, preprocessor symbols are accessed in the **Project** |rarr| **Properties**
+|rarr| **CCS Build** |rarr| **ARM Compiler** |rarr| **Predefined Symbols**. 
+To add, delete, or edit a preprocessor symbol, use one of the icons shown in the 
+red box in :numref:`fig-ccs-predefined-symbols`.
+
+.. _fig-ccs-predefined-symbols:
+.. figure:: resources/zigbee/fig-ccs-predefined-symbols.png
+    :align: center
+
+    Predefined Symbols Pane
+
+A list of the preprocessor symbols which can be added or removed is located in
+|ZB_USERS_GUIDE|: *Developing Zigbee Applications* |rarr| *Application Overview*
+
+Other compile options taken from preinclude header files can be accessed by 
+opening the appropriate Project Properties.  Right click on the project in the 
+Project Explorer and selecting **Properties**, then navigating to **CCS Build** |rarr| 
+**ARM Compiler** |rarr| **Include Options**. To add, delete, or edit a
+preincluded files, use one of the icons shown in the red box in
+:numref:`fig-ccs-preincluded-files`.
+
+.. _fig-ccs-preincluded-files:
+.. figure:: resources/zigbee/fig-ccs-preincluded-files.png
+    :align: center
+
+    Include Options Pane
+
+
+.. _quick-start-zstack-iar:        
+
+Using |ZIGBEE_STACK| Projects with IAR
+======================================
+
+When building with IAR, it is recommended to enable all build messages. This
+can be done by right-clicking in the Build window and selecting "All" as shown
+below:
+
+    .. _fig-zstack-iar-enable-build-messages:
+    .. figure:: resources/iar_enable_build_messages.png
+        :align: center
+
+        Enable All Build Messages
+
+Before starting to work with any of the |ZIGBEE_STACK| projects in the SDK, you need
+to load a set of variables that will be set for your current workspace.
+
+1. Select Tools -> Configure Custom Argument Variables
+
+    .. _fig-zstack-iar-configure-argvars:
+    .. figure:: resources/iar-configure-argvars.jpg
+        :align: center
+
+        Configure Custom Argument Variables
+
+2. Select the Global tab, then click Import..
+
+    .. _fig-zstack-iar-import-argvars:
+    .. figure:: resources/iar-import-argvars.jpg
+        :align: center
+
+        Import Global Argument Variables
+
+3. Import the custom argvars from the SDK. The argvars are stored in a SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars file, which is located in the
+tools/iar directory of the SDK
+(``<SDK_INSTALL_PATH>/tools/iar/SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars``)
+
+    .. _fig-zstack-iar-custom-argvars:
+    .. figure:: resources/iar-custom-argvars.jpg
+        :align: center
+
+        Custom Argvars Location
+
+4. You can open
+(``<SDK_INSTALL_PATH>/tools/iar/SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars``)
+in a text editor if you need to modify the default path argument variables.
+
+    .. _fig-zstack-iar-default-argvars:
+    .. figure:: resources/iar-default-argvars.jpg
+        :align: center
+
+        Default Path Argument Variables
+
+5. Restart IAR
+
+Import Project Using Workspace
+------------------------------
+This section describes how to open and build an existing project and references
+the zc_light project. 
+
+#. Open the IAR Embedded Workbench IDE from the Start Menu.
+#. Open an IAR workspace project: **File** |rarr| **Open** |rarr| **Workspace**
+   and select <SDK\_INSTALL\_DIR>\\examples\\rtos\\\ *DEVICE* \ \_LAUNCHXL\\zstack\\zc_light\\tirtos\\iar\\zc_light\_\ *DEVICE* \ .eww
+
+    .. note:: After selecting, IAR will open a workspace from a template and save
+        it in a new folder.  It is important to create this IAR workspace folder directly
+        inside the <SDK\_INSTALL\_DIR> in order for the project to build properly.  Do
+        not use spaces in the folder name.
+
+This workspace file is for the zc_light project. When selected, the
+files associated with the workspace become visible in the Workspace pane on the
+left side of the screen.
+
+.. _sec-compiling-linking-iar:
+
+Build and Download Project
+--------------------------
+
+#. Build the zc_light project.
+
+    - Set the zc_light project as the active project. Make sure the Debug project
+      configuration is used.
+    - Select **Project** |rarr| **Make** to build the project.
+
+#. Erase all Flash memory
+
+	- Navigate to **Project** |rarr| **Download** |rarr| **Erase memory**
+	- This will delete the NV memory from previous project builds.
+    
+#. Load the zc_light project
+
+    - First choose **Project** |rarr| **Options** |rarr| **Runtime Checking** |rarr|
+      **Debugger** |rarr| **Driver** from **Emulator** to **TI XDS** if debugging
+      with **Project** |rarr| **Download and Debug**
+    - To download without debugging: Select **Project** |rarr| **Download** |rarr|
+      **Download Active Application**
+    - When the download process is complete, you will see a message that the
+      .out file was downloaded to flash memory in the Debug Log. 
+
+Before beginning execution, open a **PuTTY** terminal window with the following settings:
+
+  +-----------------+-----------------+
+  | UART Param      | Default Values  |
+  +=================+=================+
+  | Baud Rate       | 115200          |
+  +-----------------+-----------------+
+  | Data length     | 8 bits          |
+  +-----------------+-----------------+
+  | Parity          | None            |
+  +-----------------+-----------------+
+  | Stop bits       | 1 bit           |
+  +-----------------+-----------------+
+  | Flow Control    | None            |
+  +-----------------+-----------------+
+    
+When the debugging session opens, click the start button to start execution.
+See the ``README.html`` for information about using the example application.
+
+
+Useful IAR IDE Settings
+-----------------------
+
+.. _sec-accessing-preprocessor-symbols-iar:
+
+
+Accessing Preprocessor Symbols
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Throughout this document and in the source code, various C preprocessor symbols
+may need to be defined or modified at the project level. Preprocessor symbols
+(also known as Predefined Symbols) are used to enable and disable features and
+set operational values to be considered when the program is compiled. The
+preprocessor symbols are split between project specific preprocessor symbols
+and configuration header preprocessor symbols.
+
+.. _sec-configuration-preprocessor-symbols-iar:
+
+Project Specific Preprocessor Symbols
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Configurations for a given example project are stored in IAR's *Extra Options*
+in the *Project Options* menu for that project. These are accessed by opening 
+the project options by going **Project** |rarr| **Options**, in the options pane, go to
+**C/C++ Compiler** in the **Extra Options** tab as shown in 
+:numref:`fig-iar-extra-options-symbols`.
+
+.. _fig-iar-extra-options-symbols:
+.. figure:: resources/zigbee/fig-iar-extra-options-symbols.png
+    :align: center
+
+    Extra Options to Define Preprocessor Symbols
+
+The preprocessor symbols are added in a new line and are preceded by `-D`.  For example:
+to add the compile flag *ZCL_READ*, ``-DZCL_READ`` must be added as an extra option.
+
+A list of the preprocessor symbols which can be added or removed is located in
+|ZB_USERS_GUIDE|: *Developing Zigbee Applications* |rarr| *Application Overview*
+
+The precompile files can be accessed by the same way as the preprocessor symbols in 
+:numref:`fig-iar-extra-options-symbols`
+
+.. _quick-start-demo:
+
+Running the Demo
+================
+
+The **Light & Switch Example** refers to the example applications
+included as part of the |ZIGBEE_STACK|. This is the first place where developers
+new to |ZIGBEE_STACK| should start. These examples help developers to quickly get 
+familiar with |ZIGBEE_STACK| and with development tools such as CCS. 
+
+The |ZIGBEE_STACK| example applications can be modified, built, downloaded, and
+debugged from the desktop version of CCS. With the **Light & Switch** Example running on two separate
+LaunchPads, you can quickly create a Zigbee network. The first LaunchPad\ |trade| will
+run the |ZB_ZCLIGHT_README|. The second LaunchPad will run the |ZB_ZEDSW_README|.
+With this configuration, the switch will control the light.
+
+Use CCS to import and build the two example applications. 
+See :ref:`quick-start-zstack-ccs` for instructions on importing, compiling and building
+|ZIGBEE_STACK| examples. Refer to the example readmes referenced above for instructions
+on running the example applications. To view all
+example application readmes, refer to the |ZB_USERS_GUIDE|.
+
+.. _quick-start-learn:
+
+Learning more about |ZIGBEE_STACK|
+==================================
+
+Resources contained in the Learn track of :numref:`fig_zstack_suggested_workflow` are
+intended for users who are new to TI-RTOS. These modules
+demonstrate how to create custom applications with TI's Real
+Time Operation System (TI-RTOS) which |ZIGBEE_STACK| is based on.
+
+|SLA| contains Z-Stack modules to help users learn the fundamentals of |ZIGBEE_STACK| and how
+to develop a custom Zigbee product. TI-RTOS modules demonstrate the rich debug environment and
+peripheral driver capability provided by the RTOS.  It also provides a comprehensive set of 
+other training tools that allow users from beginners to experienced developers to learn about 
+the SimpleLink MCU Platform.
+
+`TI-RTOS Kernel Workshop <https://training.ti.com/ti-rtos-kernel-workshop>`_
+teaches users who are new to TI-RTOS or any RTOS programming in
+general about TI-RTOS kernel implementation. Modules within the kernel training
+greatly expand the information presented in the TI-RTOS overview section of the 
+|ZB_USERS_GUIDE|.
+
+Learn how the TI-RTOS provides the most optimal power management and design
+flexibility with the 
+`TI-RTOS Power Manager Overview <https://training.ti.com/ti-rtos-power-manager-overview>`_.
+
+.. _quick-start-develop:
+
+Developing a new |ZIGBEE_STACK| Based Application
+=================================================
+
+The develop track of :numref:`fig_zstack_suggested_workflow` is intended for
+programmers who are ready to start developing an end product using the
+|DEVICE|.  To begin:
+
+#.  **Download and install the SDK**.
+    The |SDK| contains the TI-RTOS kernel, peripheral drivers and stacks
+    needed with the |ZIGBEE_STACK|.
+
+#.  **Begin Development with an Integrated Development Environment (IDE).**
+    An IDE can be set up to make it easier to
+    browse through the relevant projects and view code. All embedded software
+    for the |DEVICE| is developed using TI's Code Composer Studio on a Windows
+    7\ |reg| or later PC. To begin development in CCS, jump to:
+    :ref:`quick-start-zstack-ccs`.
+
+#.  **Complete the Project Zero SimpleLink Academy Lab**
+    The |ZIGBEE_STACK| |SLA| includes a Project Zero Lab which helps introduce
+    users to the |SDK| and Zigbee basics through step-by-step instructions for
+    programming LaunchPads, setting up a Zigbee Network, and sniffing OTA messages.
+
+#.  **Get Familiar with the Z-Stack User's Guide.**
+    The |ZB_USERS_GUIDE| is meant to be used alongside the
+    |ZIGBEE_STACK| when developing an end product. It contains documentation on the
+    stack architecture, APIs, and suggestions for developing applications.
+
+#.  **Select an Example Project.**
+    |ZIGBEE_STACK| includes a basic set of projects to use as a starting point
+    for development of your custom application. To view examples applications
+    available in |ZIGBEE_STACK|, refer to the |ZB_USERS_GUIDE|.
+
+#.  **Troubleshooting Help.**
+    While developing your custom application, you may run into issues that
+    require the use of packet sniffer software or IDE debugger. 
+    The Debugging chapter of the |ZB_USERS_GUIDE| provides
+    help with configuring your debugger and understanding common problems while the
+    Packet Sniffer chapter explains how to run software for recording OTA activity. 
+
+.. _quick-start-enhance:
+
+Enhance Your Project
+====================
+
+The enhance track of :numref:`fig_zstack_suggested_workflow` is intended to take your
+product to the next level by leveraging TI's web-based collateral. Additional
+resources found in these pages include application-specific source code
+examples and complete sub-system designs. Examples of system designs with 
+complete hardware and software examples using the |DEVICE| are contained in 
+`TI Designs <http://www.ti.com/lsds/ti/tools-software/tidesigns.page>`_.
+
+The `Zigbee Resource Guide <http://www.nxtbook.com/nxtbooks/webcom/zigbee_rg2017/>`_ 
+is a magazine-style guide with products, applications, and solutions for end-users.
+
+.. _quick-start-support:
+
+Getting Support
+===============
+
+The support track is intended to provide you additional help and resources
+that aren’t contained in the previous tracks.
+
+`E2E™ <http://e2e.ti.com/>`_ is a support community providing answers to questions relating 
+to the |ZIGBEE_STACK| and the |DEVICE|. You can browse questions from other developers or ask your
+own questions if you run into issues developing with the |ZIGBEE_STACK|.

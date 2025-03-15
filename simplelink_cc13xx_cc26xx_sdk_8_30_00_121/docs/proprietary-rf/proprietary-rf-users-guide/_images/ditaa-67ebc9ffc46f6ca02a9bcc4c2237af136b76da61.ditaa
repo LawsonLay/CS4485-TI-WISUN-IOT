@@ -1,0 +1,15 @@
+                 +--------------------+ <- N x EFL_PAGE_SIZE
+                 | EFL Image Header N |
+                 | c777               |
+                 +--------------------+
+                 |        ... c777    |
+  Image headers  +--------------------+ <- 3 x EFL_PAGE_SIZE
+  are added and  | EFL Image Header 2 |
+searched upwards | c777               |
+        ^        +--------------------+ <- 2 x EFL_PAGE_SIZE
+        |        | EFL Image Header 1 |
+        |        | c777               |
+        |        +--------------------+ <- EFL_PAGE_SIZE
+        |        | EFL Image Header 0 |
+        |        | c777               |
+--------+--------+--------------------+ <- 0x00000000

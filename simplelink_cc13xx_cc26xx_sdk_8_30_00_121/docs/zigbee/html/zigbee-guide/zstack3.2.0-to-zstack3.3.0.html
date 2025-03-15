@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Z-Stack 3.2.0 to Z-Stack 3.3.0 &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User&#39;s Guide
+ 8.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Z-Stack 3.1.0 to Z-Stack 3.2.0" href="zstack3.1.0-to-zstack3.2.0.html" />
+    <link rel="prev" title="Z-Stack 3.4.0 to Z-Stack 3.5.0" href="zstack3.4.0-to-zstack3.5.0.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug zigbee-guide zstack3.2.0-to-zstack3.3.0";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+
+          </a>
+              <div class="version">
+                8.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/overview.html">SimpleLink CC13xx/CC26xx SDK Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/developing_zigbee_applications.html">Developing Zigbee Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zigbee-ota-index.html">Zigbee Over-The-Air Firmware Upgrade</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/packet_sniffer.html">Packet Sniffer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="migration_guide.html">Migration Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="migration_guide.html#updating-from-previous-sdks">Updating from previous SDKs</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="migration_guide.html#porting-guides">Porting Guides</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="zstack3.6.0-to-zstack4.3.0.html">Z-Stack 3.6.0+ to Z-Stack 4.3.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zstack3.4.0-to-zstack3.5.0.html">Z-Stack 3.4.0 to Z-Stack 3.5.0</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Z-Stack 3.2.0 to Z-Stack 3.3.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zstack3.1.0-to-zstack3.2.0.html">Z-Stack 3.1.0 to Z-Stack 3.2.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zstack3.0.x-to-zstack3.1.0.html">Z-Stack 3.0.x to Z-Stack 3.1.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zstack1.2.2a-cc253x-to-zstack3.1.0.html">Z-Stack 1.2.2a (CC253x) to Z-Stack 3.1.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zstack1.2.2a-cc26x0-to-zstack3.1.0.html">Z-Stack 1.2.2a (CC26x0) to Z-Stack 3.1.0</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="migration_guide.html#migration-guides">Migration Guides</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="migration_guide.html">Migration Guide</a> &raquo;</li>
+      <li>Z-Stack 3.2.0 to Z-Stack 3.3.0</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="z-stack-3-2-0-to-z-stack-3-3-0">
+<span id="sec-zstack3-2-0-to-stack3-3-0"></span><h1>Z-Stack 3.2.0 to Z-Stack 3.3.0<a class="headerlink" href="#z-stack-3-2-0-to-z-stack-3-3-0" title="Permalink to this headline">¶</a></h1>
+<p>This section will describe a way to migrate a project from Z-Stack 3.2.0 to
+a Z-Stack 3.3.0 project.</p>
+<p>For this guide, <em>samplelight</em> from Z-Stack 3.2.0 will be ported
+over to Z-Stack 3.3.0.  The two releases have major differences mostly
+pertaining to:</p>
+<ul class="simple">
+<li><p>Bug fixes listed in the Zigbee Release Notes</p></li>
+<li><p>Merging of the CC13X2 and CC26X2 SDKs</p></li>
+<li><p>ICall deprecation and replacement with OSALPort</p></li>
+<li><p>Re-organization of the directory structure</p></li>
+</ul>
+<p>The recommended approach is to start with a Z-Stack 3.3.0 project that contains
+the same base application as the porting target project and merge any custom functionality</p>
+<ol class="arabic simple">
+<li><p>Choose a Z-Stack 3.3.0 example project that contains your target project’s base
+functionality.  For reference and use in this example, <em>zc_light</em> from
+C:\ti\simplelink_cc13xx_cc26xx_sdk_x_xx_xx_xx\examples\rtos\CC13xx or CC26xx_LAUNCHXL\zstack
+is chosen as a starting point.</p></li>
+<li><p>No changes are required for the Z-Stack 3.3.0 <code class="docutils literal notranslate"><span class="pre">zcl_samplelight_data.c</span></code> or
+<code class="docutils literal notranslate"><span class="pre">zcl_samplelight.h</span></code> files unless clusters, attributes, or simple descriptors were
+added or altered in the Z-Stack 3.2.0 project.  However, please note that
+<code class="docutils literal notranslate"><span class="pre">ZCL_CLUSTER_ID_GEN_BASIC</span></code> and <code class="docutils literal notranslate"><span class="pre">ZCL_CLUSTER_ID_GEN_SCENES</span></code> attribute records
+have been added whereas <code class="docutils literal notranslate"><span class="pre">ZCL_CLUSTER_ID_HA_DIAGNOSTIC</span></code> has been removed.
+Some global functions for attribute updates which can be accessed by the application
+have also been added.</p></li>
+</ol>
+<p>The following items specifically concern <code class="docutils literal notranslate"><span class="pre">zcl_samplelight.c</span></code>:</p>
+<ol class="arabic">
+<li><p>All ICall local variables have been replaced with</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Semaphore used to post events to the application thread</span>
+<span class="k">static</span><span class="w"> </span><span class="n">Semaphore_Handle</span><span class="w"> </span><span class="n">appSemHandle</span><span class="p">;</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="n">Semaphore_Struct</span><span class="w"> </span><span class="n">appSem</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/* App service ID used for messaging with stack service task */</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">appServiceTaskId</span><span class="p">;</span><span class="w"></span>
+<span class="cm">/* App service task events, set by the stack service task when sending a message */</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">appServiceTaskEvents</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The following have been redefined:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">appServiceTaskID</span></code> replaces <code class="docutils literal notranslate"><span class="pre">zclSampleLight_Entity</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">appServiceTaskEvents</span></code> replaces <code class="docutils literal notranslate"><span class="pre">events</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">appSemHandle</span></code> replaces <code class="docutils literal notranslate"><span class="pre">sem</span></code></p></li>
+</ul>
+</li>
+<li><p>Local functions have been added and will be discussed by the points below.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_RemoveAppNvmData</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="nf">zclSampleLight_SceneStoreCB</span><span class="p">(</span><span class="n">zclSceneReq_t</span><span class="w"> </span><span class="o">*</span><span class="n">pReq</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w">  </span><span class="nf">zclSampleLight_SceneRecallCB</span><span class="p">(</span><span class="n">zclSceneReq_t</span><span class="w"> </span><span class="o">*</span><span class="n">pReq</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">ZStatus_t</span><span class="w"> </span><span class="nf">zclSampleLight_ReadWriteAttrCB</span><span class="p">(</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">clusterId</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">attrId</span><span class="p">,</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">oper</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                  </span><span class="n">uint8</span><span class="w"> </span><span class="o">*</span><span class="n">pValue</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="o">*</span><span class="n">pLen</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>#. <code class="docutils literal notranslate"><span class="pre">zclSampleLight_task</span></code> is replaced with the generic <code class="docutils literal notranslate"><span class="pre">sampleApp_task</span></code>. Changes to
+<code class="docutils literal notranslate"><span class="pre">main.c</span></code> of the Application → Startup folder must also be applied.</p>
+<ol class="arabic">
+<li><p><code class="docutils literal notranslate"><span class="pre">ICall_registerApp(&amp;zclSampleLight_Entity,</span> <span class="pre">&amp;sem);</span></code> has been removed from
+<code class="docutils literal notranslate"><span class="pre">zclSampleLight_initialization(void)</span></code> and the following OSALPort registration code
+is now included:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Semaphore_Params</span><span class="w"> </span><span class="n">semParam</span><span class="p">;</span><span class="w"></span>
+<span class="n">Semaphore_Params_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">semParam</span><span class="p">);</span><span class="w"></span>
+<span class="n">semParam</span><span class="p">.</span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ti_sysbios_knl_Semaphore_Mode_BINARY</span><span class="p">;</span><span class="w"></span>
+<span class="n">Semaphore_construct</span><span class="p">(</span><span class="o">&amp;</span><span class="n">appSem</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">semParam</span><span class="p">);</span><span class="w"></span>
+<span class="n">appSemHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Semaphore_handle</span><span class="p">(</span><span class="o">&amp;</span><span class="n">appSem</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">appServiceTaskId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OsalPort_registerTask</span><span class="p">(</span><span class="n">Task_self</span><span class="p">(),</span><span class="w"> </span><span class="n">appSemHandle</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">appServiceTaskEvents</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zclSampleLight_RemoveAppNvmData();</span></code> is added to the <code class="docutils literal notranslate"><span class="pre">if(key</span> <span class="pre">==</span> <span class="pre">KEY_RIGHT)</span></code> statement
+of <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">void</span> <span class="pre">zclSampleLight_initialization(void)</span></code> and is declared as follows:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*********************************************************************</span>
+<span class="cm">     * @fn          zclSampleLight_RemoveAppNvmData</span>
+<span class="cm">     *</span>
+<span class="cm">     * @brief       Callback when Application performs reset to Factory New Reset.</span>
+<span class="cm">     *              Application must restore the application to default values</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param       none</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return      none</span>
+<span class="cm">    */</span><span class="w"></span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_RemoveAppNvmData</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cp">#ifdef ZCL_GROUPS</span>
+<span class="w">        </span><span class="n">uint8</span><span class="w"> </span><span class="n">numGroups</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">uint16</span><span class="w"> </span><span class="n">groupList</span><span class="p">[</span><span class="n">APS_MAX_GROUPS</span><span class="p">];</span><span class="w"></span>
+<span class="w">        </span><span class="n">uint8</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">numGroups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aps_FindAllGroupsForEndpoint</span><span class="p">(</span><span class="w"> </span><span class="n">SAMPLELIGHT_ENDPOINT</span><span class="p">,</span><span class="w"> </span><span class="n">groupList</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numGroups</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cp">#if defined ( ZCL_SCENES )</span>
+<span class="w">            </span><span class="n">zclGeneral_RemoveAllScenes</span><span class="p">(</span><span class="w"> </span><span class="n">SAMPLELIGHT_ENDPOINT</span><span class="p">,</span><span class="w"> </span><span class="n">groupList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="cp">#endif</span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="n">aps_RemoveAllGroup</span><span class="p">(</span><span class="w"> </span><span class="n">SAMPLELIGHT_ENDPOINT</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="cp">#endif</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zclSampleLight_process_loop</span></code> now uses OSALPort instead of ICall to receive messages.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_process_loop</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* Forever loop */</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="p">(;;)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">zstackmsg_genericReq_t</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/* Wait for response message */</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">Semaphore_pend</span><span class="p">(</span><span class="n">appSemHandle</span><span class="p">,</span><span class="w"> </span><span class="n">BIOS_WAIT_FOREVER</span><span class="w"> </span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="cm">/* Retrieve the response message */</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="p">((</span><span class="n">pMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">zstackmsg_genericReq_t</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">OsalPort_msgReceive</span><span class="p">(</span><span class="w"> </span><span class="n">appServiceTaskId</span><span class="w"> </span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">zclSampleLight_processZStackMsgs</span><span class="p">(</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+
+<span class="cp">#ifdef PER_TEST</span>
+<span class="w">                    </span><span class="n">per_interface_processZStackMsg</span><span class="p">(</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#endif</span>
+
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">pMsg</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">OsalPort_msgDeallocate</span><span class="p">((</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Global variables for cluster attributes, like <code class="docutils literal notranslate"><span class="pre">zclSampleLight_OnOff</span></code> and `` zclSampleLight_LevelCurrentLevel``
+have been replaced with attribute functions as reflected in <code class="docutils literal notranslate"><span class="pre">zcl_samplelight_data.c</span></code> and <code class="docutils literal notranslate"><span class="pre">zcl_samplelight.h</span></code>.</p></li>
+<li><p>Scene and attribute callbacks have been added:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/******************************************************************************</span>
+<span class="cm">     *</span>
+<span class="cm">     *  Functions for processing ZCL Foundation incoming Command/Response messages</span>
+<span class="cm">     *</span>
+<span class="cm">     *****************************************************************************/</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/*********************************************************************</span>
+<span class="cm">     * @fn      zclSampleLight_SceneRecallCB</span>
+<span class="cm">     *</span>
+<span class="cm">     * @brief   Callback from the ZCL Scenes Cluster Library</span>
+<span class="cm">     *          to recall a set of attributes from a stored scene.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param   none</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return  none</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_SceneRecallCB</span><span class="p">(</span><span class="w"> </span><span class="n">zclSceneReq_t</span><span class="w"> </span><span class="o">*</span><span class="n">pReq</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">zclGeneral_Scene_extField_t</span><span class="w"> </span><span class="n">extField</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">uint8</span><span class="w"> </span><span class="o">*</span><span class="n">pBuf</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">uint8</span><span class="w"> </span><span class="n">extLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">pBuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pReq</span><span class="o">-&gt;</span><span class="n">scene</span><span class="o">-&gt;</span><span class="n">extField</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">extField</span><span class="p">.</span><span class="n">AttrLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pBuf</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">         </span><span class="k">while</span><span class="p">(</span><span class="n">extLen</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ZCL_GEN_SCENE_EXT_LEN</span><span class="p">)</span><span class="w"></span>
+<span class="w">         </span><span class="p">{</span><span class="w"></span>
+<span class="w">             </span><span class="c1">//Parse ExtField</span>
+<span class="w">             </span><span class="n">extField</span><span class="p">.</span><span class="n">ClusterID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BUILD_UINT16</span><span class="p">(</span><span class="n">pBuf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">pBuf</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+<span class="w">             </span><span class="n">extField</span><span class="p">.</span><span class="n">AttrLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pBuf</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="w"></span>
+<span class="w">             </span><span class="n">extField</span><span class="p">.</span><span class="n">AttrBuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pBuf</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">             </span><span class="k">if</span><span class="p">(</span><span class="n">extField</span><span class="p">.</span><span class="n">AttrLen</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0xFF</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">extField</span><span class="p">.</span><span class="n">ClusterID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0xFFFF</span><span class="p">)</span><span class="w"></span>
+<span class="w">             </span><span class="p">{</span><span class="w"></span>
+<span class="w">                 </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">             </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">             </span><span class="c1">//If On/Off then retrieve the attribute</span>
+<span class="w">             </span><span class="k">if</span><span class="p">(</span><span class="n">extField</span><span class="p">.</span><span class="n">ClusterID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ZCL_CLUSTER_ID_GEN_ON_OFF</span><span class="p">)</span><span class="w"></span>
+<span class="w">             </span><span class="p">{</span><span class="w"></span>
+<span class="w">                 </span><span class="n">uint8</span><span class="w"> </span><span class="n">tempState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">extField</span><span class="p">.</span><span class="n">AttrBuf</span><span class="p">;</span><span class="w"></span>
+<span class="w">                 </span><span class="n">zclSampleLight_updateOnOffAttribute</span><span class="p">(</span><span class="n">tempState</span><span class="p">);</span><span class="w"></span>
+<span class="w">             </span><span class="p">}</span><span class="w"></span>
+<span class="w">             </span><span class="c1">//If Level Control then retrieve the attribute</span>
+<span class="w">             </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">extField</span><span class="p">.</span><span class="n">ClusterID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ZCL_CLUSTER_ID_GEN_LEVEL_CONTROL</span><span class="p">)</span><span class="w"></span>
+<span class="w">             </span><span class="p">{</span><span class="w"></span>
+<span class="w">                 </span><span class="n">uint8</span><span class="w"> </span><span class="n">tempState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">extField</span><span class="p">.</span><span class="n">AttrBuf</span><span class="p">;</span><span class="w"></span>
+<span class="w">                 </span><span class="n">zclSampleLight_updateCurrentLevelAttribute</span><span class="p">(</span><span class="n">tempState</span><span class="p">);</span><span class="w"></span>
+<span class="w">             </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">             </span><span class="c1">//Move to the next extension field (increase pointer by clusterId, Attribute len field, and attribute)</span>
+<span class="w">             </span><span class="n">pBuf</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">uint16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">uint8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">extField</span><span class="p">.</span><span class="n">AttrLen</span><span class="p">;</span><span class="w"></span>
+<span class="w">             </span><span class="n">extLen</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">uint16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">uint8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">extField</span><span class="p">.</span><span class="n">AttrLen</span><span class="p">;</span><span class="w">  </span><span class="c1">//increase ExtField</span>
+<span class="w">         </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">//Update scene attributes</span>
+<span class="w">        </span><span class="n">zclSampleLight_ScenesValid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRUE</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">zclSampleLight_ScenesCurrentGroup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pReq</span><span class="o">-&gt;</span><span class="n">scene</span><span class="o">-&gt;</span><span class="n">groupID</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">zclSampleLight_ScenesCurrentScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pReq</span><span class="o">-&gt;</span><span class="n">scene</span><span class="o">-&gt;</span><span class="n">ID</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">zclSampleLight_UpdateLedState</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/*********************************************************************</span>
+<span class="cm">     * @fn      zclSampleLight_SceneStoreCB</span>
+<span class="cm">     *</span>
+<span class="cm">     * @brief   Callback from the ZCL Scenes Cluster Library</span>
+<span class="cm">     *          to store a set of attributes to a specific scene.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param   none</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return  none</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="nf">zclSampleLight_SceneStoreCB</span><span class="p">(</span><span class="w"> </span><span class="n">zclSceneReq_t</span><span class="w"> </span><span class="o">*</span><span class="n">pReq</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">zclGeneral_Scene_extField_t</span><span class="w"> </span><span class="n">extField</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">uint8</span><span class="w"> </span><span class="o">*</span><span class="n">pBuf</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">uint8</span><span class="w"> </span><span class="n">extLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">uint8</span><span class="w"> </span><span class="n">sceneChanged</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FALSE</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">pBuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pReq</span><span class="o">-&gt;</span><span class="n">scene</span><span class="o">-&gt;</span><span class="n">extField</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">extField</span><span class="p">.</span><span class="n">AttrLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pBuf</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="n">extLen</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ZCL_GEN_SCENE_EXT_LEN</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">//Parse ExtField</span>
+<span class="w">            </span><span class="n">extField</span><span class="p">.</span><span class="n">ClusterID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BUILD_UINT16</span><span class="p">(</span><span class="n">pBuf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">pBuf</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+<span class="w">            </span><span class="n">extField</span><span class="p">.</span><span class="n">AttrLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pBuf</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="n">extField</span><span class="p">.</span><span class="n">AttrBuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pBuf</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">extField</span><span class="p">.</span><span class="n">AttrLen</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0xFF</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">extField</span><span class="p">.</span><span class="n">ClusterID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">0xFFFF</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1">//If On/Off then store attribute</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">extField</span><span class="p">.</span><span class="n">ClusterID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ZCL_CLUSTER_ID_GEN_ON_OFF</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">uint8</span><span class="w"> </span><span class="n">tempState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zclSampleLight_getOnOffAttribute</span><span class="p">();</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">extField</span><span class="p">.</span><span class="n">AttrBuf</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">tempState</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">sceneChanged</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRUE</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="o">*</span><span class="n">extField</span><span class="p">.</span><span class="n">AttrBuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempState</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="c1">//If Level Control then store attribute</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">extField</span><span class="p">.</span><span class="n">ClusterID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ZCL_CLUSTER_ID_GEN_LEVEL_CONTROL</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">uint8</span><span class="w"> </span><span class="n">tempState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zclSampleLight_getCurrentLevelAttribute</span><span class="p">();</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">extField</span><span class="p">.</span><span class="n">AttrBuf</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">tempState</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">sceneChanged</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRUE</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="o">*</span><span class="n">extField</span><span class="p">.</span><span class="n">AttrBuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempState</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1">//Move to the next extension field (increase pointer by clusterId, Attribute len field, and attribute)</span>
+<span class="w">            </span><span class="n">pBuf</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">uint16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">uint8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">extField</span><span class="p">.</span><span class="n">AttrLen</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">extLen</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">uint16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">uint8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">extField</span><span class="p">.</span><span class="n">AttrLen</span><span class="p">;</span><span class="w">  </span><span class="c1">//increase ExtField</span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">//Update scene attributes</span>
+<span class="w">        </span><span class="n">zclSampleLight_ScenesValid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRUE</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">zclSampleLight_ScenesCurrentGroup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pReq</span><span class="o">-&gt;</span><span class="n">scene</span><span class="o">-&gt;</span><span class="n">groupID</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">zclSampleLight_ScenesCurrentScene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pReq</span><span class="o">-&gt;</span><span class="n">scene</span><span class="o">-&gt;</span><span class="n">ID</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">sceneChanged</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/*********************************************************************</span>
+<span class="cm">     * @fn      zclSampleLight_ReadWriteAttrCB</span>
+<span class="cm">     *</span>
+<span class="cm">     * @brief   Handle ATTRID_SCENES_COUNT, ATTRID_ON_OFF and ATTRID_LEVEL_CURRENT_LEVEL.</span>
+<span class="cm">     *          Only to be called if any of the attributes change.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param   clusterId - cluster that attribute belongs to</span>
+<span class="cm">     * @param   attrId - attribute to be read or written</span>
+<span class="cm">     * @param   oper - ZCL_OPER_LEN, ZCL_OPER_READ, or ZCL_OPER_WRITE</span>
+<span class="cm">     * @param   pValue - pointer to attribute value, OTA endian</span>
+<span class="cm">     * @param   pLen - length of attribute value read, native endian</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return  status</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="n">ZStatus_t</span><span class="w"> </span><span class="nf">zclSampleLight_ReadWriteAttrCB</span><span class="p">(</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">clusterId</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">attrId</span><span class="p">,</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">oper</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                             </span><span class="n">uint8</span><span class="w"> </span><span class="o">*</span><span class="n">pValue</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="o">*</span><span class="n">pLen</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">clusterId</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ZCL_CLUSTER_ID_GEN_SCENES</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">attrId</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ATTRID_SCENES_COUNT</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">               </span><span class="k">return</span><span class="w"> </span><span class="n">zclGeneral_ReadSceneCountCB</span><span class="p">(</span><span class="n">clusterId</span><span class="p">,</span><span class="n">attrId</span><span class="p">,</span><span class="n">oper</span><span class="p">,</span><span class="n">pValue</span><span class="p">,</span><span class="n">pLen</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ZSuccess</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">zclSampleLight_SceneStoreCB</span></code> and <code class="docutils literal notranslate"><span class="pre">zclSampleLight_SceneRecallCB</span></code> are added to the
+<code class="docutils literal notranslate"><span class="pre">zclSampleLight_CmdCallbacks</span></code> table.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gp_[Get/Set]CommissioningMode</span></code> is renamed <code class="docutils literal notranslate"><span class="pre">gp_[Get/Set]SinkCommissioningMode</span></code>,
+changes are only required if <code class="docutils literal notranslate"><span class="pre">ENABLE_GREENPOWER_COMBO_BASIC</span></code> is defined.</p></li>
+<li><p>Add any other Z-Stack 3.2.0 application changes to the Z-Stack 3.3.0 file if not
+pertaining to the items listed above.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Difference comparison software is recommended for discerning all differences
+between software stacks.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="zstack3.4.0-to-zstack3.5.0.html" class="btn btn-neutral float-left" title="Z-Stack 3.4.0 to Z-Stack 3.5.0" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="zstack3.1.0-to-zstack3.2.0.html" class="btn btn-neutral float-right" title="Z-Stack 3.1.0 to Z-Stack 3.2.0" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2005-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

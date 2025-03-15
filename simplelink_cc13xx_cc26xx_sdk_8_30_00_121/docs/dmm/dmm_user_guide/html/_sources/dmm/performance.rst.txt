@@ -1,0 +1,422 @@
+
+.. _sec-dmm-performance:
+
+System Performance and Limitations
+==================================
+
+The typical use case for DMM is a smart phone being used to interface with a
+multi-protocol TI device, such as a |DEVICE| device, and an application on the
+smart phone to control or configure the device or a network of devices.
+Typically the BLE connection is not used for streaming content, but only
+intermittent information exchange.
+
+
+DMM Current Limitations
+-----------------------
+
+The current DMM implementation has the following limitations:
+
+- The DMM only supports 2 simultaneous stacks.
+
+- The DMM scheduler does NOT pause a stack regardless of the policy settings.
+  When a policy enters a pause state, an application callback is invoked to
+  notify the stack that it should pause its activity. The pause policy should
+  only be used if the application callback has been implemented and registered
+  with DMM.
+
+- The DMM has only been tested/characterized with the stack and role combinations
+  covered by the examples provided in the |SDK|.
+
+- The DMM does not perform arbitration of peripherals or hardware other than the
+  RF Core. The high level applications must be written in such a way that
+  conflicting access to peripherals is avoided.
+
+- The DMM BLE examples are tested for up to four concurrent BLE connections.
+  Please note that connecting to multiple peers over BLE requires more resources
+  (SRAM, radio time).
+
+Protocol Stack Limitations
+--------------------------
+
+The DMM will attempt to maximize the time domain utilization of the radio
+while still respecting the constraints of the protocol stacks that are using
+it. However, unlike CPU scheduling RF commands cannot resume once they have
+been canceled or preempted. Combining two protocol stacks means that there
+must be application defined limits of the parameters that can be used by each
+stack based on what the application needs to operate. Time-synchronous
+protocols such as BLE further increase these limitations.
+
+For example, assuming a low-priority BLE connection in connected state, the
+application must make sure that the BLE-Stack is able to operate within the
+supervision timeout of the connection(s) to avoid disconnecting from the peer
+device(s).
+
+TI has characterized a subset of possible protocol stack combinations. TI does
+*not* guarantee proper operations for other stack combinations. Below is a
+list of the characterized stack combinations:
+
+- BLE5 Peripheral + TI 15.4 Collector (all modes)
+
+- BLE5 Peripheral + TI 15.4 Sensor (all modes)
+
+- BLE5 Peripheral + Zigbee Coordinator
+
+- BLE5 Peripheral + Zigbee Router
+
+- BLE5 Peripheral + Zigbee End Device
+
+The TI-characterized use cases are available as example projects in the |SDK|.
+While only a limited subset has been characterized by TI, possible protocol stack
+combinations are not limited to these.
+
+Before using DMM to combine two arbitrary protocol stacks, a basic analysis
+should be done to determine the feasibility of said combination:
+
+- Do both stacks support DMM, i.e. implement the DMM RF mapping table?
+
+- If two instances of one stack are needed, does the stack support multiple
+  instances?
+
+- What are the radio requirements of the stack application? Is there enough
+  free radio time to accommodate both stacks?
+
+- How will the stacks handle being rejected radio access? What level of
+  rejection is acceptable?
+
+Following the initial feasibility analysis, the use case of each stack should
+be considered to determine what application states exist for each stack. An initial
+policy table should then be created based on the defined application states.
+
+In order to optimize the DMM performance for a given set of stacks, the
+individual stack parameters also need to be tweaked to improve the
+co-existence of the two stacks. An example of this would be the connection
+interval and supervision timeout of a BLE5 connection, or the report interval of
+a 15.4-Stack Sensor example.
+
+Bit Rate and Transmission Time
+------------------------------
+
+When choosing a PHY for your stack, the bit rate of that PHY will directly
+impact the feasibility of the DMM system. The bit rate is proportional to the
+amount of time required to complete the transmissions, which means a lower bit
+rate requires the DMM device to use the radio more to complete the
+transmission.
+
+In some cases it can be useful to calculate the amount of radio time is
+required to complete a transmission of a given length based on the selected
+PHY. This could for instance help to decide how long intervals need to be.
+
+Calculating the transmission time requires you to know the PHY protocol data
+unit (PPDU), which is PHY dependent. In most cases, this includes knowing the
+preamble length, syncword length, PHY header length, packet length and CRC
+length. The transmission time is then calculated as the PPDU divided by the
+bit rate.
+
+.. math::
+
+    \text{PPDU}\ [\text{bit}] &= \text{preamble length} + \text{syncword length} + \text{PHY header length} + \text{packet length} + \text{CRC length}\\
+    \text{transmission time}\ [\text{s}] &= \text{PPDU} / \text{bit rate}
+
+End-to-End Stack Reliance and Latency
+-------------------------------------
+
+When looking at a given DMM stack combination, it is important to consider
+the DMM impact on the network's end-to-end reliance and latency. These factors
+vary between protocols, stacks and even roles within a stack. Many protocols
+such as BLE and Zigbee features for example retry logic to prevent data loss due
+to network instability. The same applies to the TI 15.4-Stack offering.
+
+These features mean that even in the DMM use-case, where for example a BLE 
+peripheral could be starved radio access and suffer in terms if throughput,
+the end-to-end reliance should remain stable and the packet loss at 0% (as long
+as the connection is maintained).
+
+While retries might solve potential packet losses when running a DMM
+system, they will also introduce a (potential) end-to-end latency depending on 
+how many times a packet has to be retried in order to be successful. Please note
+this latency increase is the same for all packet loss reasons, it is not 
+particular to using DMM.
+
+While, as mentioned above, many protocols and stacks include features to 
+mitigate network issues, it can still be important to consider impact of these
+in the complete system. In cases where a protocol or stack do not support
+any such logic, the user is responsible for resending data in case of a DMM
+preemption or packet loss.
+
+Estimating Throughput
+---------------------
+
+Knowing the bit rate and transmission times of the stacks in use, simple
+calculations can be made to estimate the theoretical throughput for a given
+stack. 
+
+.. note::
+  The following section provides equations to calculate a theoretical estimation
+  of the expected throughput. The real-life scenario numbers could be varying 
+  depending on factors not included in the theoretical equations.
+
+  Internal testing shows that the equations below yields results in line with 
+  what is measured with an error margin of roughly 2 %. As such, they 
+  can be considered a good way to get an initial overview of how well a certain 
+  DMM system might perform.
+
+The following section will assume two stacks, stack A and stack B, are
+being coordinated by DMM.
+
+The Simple Estimate
+^^^^^^^^^^^^^^^^^^^
+
+A simplified average throughput estimation, :math:`T`, for stack A, assumed to be
+operating at maximum throughput, could be defined as follows:
+
+.. math::
+
+  RBW_B [\text{percent}] &= \frac{RTT_B [\text{s}]}{PI_B [\text{s}]}\\
+  T_A &= 1 - \sum RBW_B(n)
+
+This assumes that stack B is only sending periodic messages and thus takes up a
+given part of the available radio bandwidth (:math:`RBW`) given in percent. The
+radio bandwidth requirement for a particular type of packet is given by the
+round trip time (:math:`RTT`) of that packet type divided by the packet interval
+(:math:`PI`).
+
+.. note::
+  :math:`PI` assumes the packet is set to a higher priority than the running
+  stack A command. If the packet is not of higher priority then there will be no
+  impact to the throughput of stack A.
+
+The average throughput of stack A is defined as the ratio of the throughput of
+the standalone application and the theoretically available radio bandwidth in the
+DMM use-case. The available radio bandwidth is the remaining radio bandwidth
+after subtracting the sum of the bandwidth requirement for each packet type in
+stack B that is of a higher priority than stack A.
+
+This simple estimate has some limitations as it assumes non-absolute scheduling.
+Non-absolute scheduling corresponds to radio commands that could be delayed by
+the DMM scheduler as they have no given fixed time to be sent out. In a real
+use-case, it is likely that both stacks use absolute timing to some degree of
+the commands.
+
+The Absolute Timing Case
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+In the case of an absolute time conflict between two stacks, there would be an
+unrecoverable loss of bandwidth that we need to factor into the equation of the
+radio bandwidth. For this the following assumptions is made:
+
+1) Stack A, in order to maximize throughput, would resume operations as soon as possible after getting interrupted by an absolute command from stack B
+2) There is an equal chance that stack A is interrupted at any given time of the operation
+
+With these assumptions made, the round trip time of stack A's interrupted packet
+is factored in:
+
+.. math::
+
+  &RBW_B = \frac{RTT_B + \frac{RTT_A}{2}}{PI_B}
+
+The new definition of radio bandwidth assumes that stack A would maximize
+for throughput. This might not always be the case due to power consumption
+restrictions. For many protocols, such as BLE, communication is performed on a
+periodic event basis which allow for lower power consumption of the devices.
+
+The Periodic Event Case
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Taking BLE as an example, data exchange is limited to the periodic connection
+events only. To get an estimate in this case, we redefine the radio bandwidth as
+number of missed events (:math:`ME`) for stack A divided by the total number of
+events (:math:`TE`) that would occur during a conflicting stack B packet. Again,
+the assumption that only non-absolute scheduling is used which means that
+stack B would never interrupt an ongoing event:
+
+.. math::
+
+  ME_A &= \frac{RTT_B}{PI_A} \\
+  TE_A &= \frac{PI_B}{PI_A} \\
+  RBW_B &= \frac{\lceil ME_A \rceil}{TE_A} \\
+
+.. note::
+  The use of :math:`\lceil x \rceil` and :math:`\lfloor x \rfloor` refers to
+  the ceiling and floor functions respectively. In this case the ceil
+  value of :math:`ME` is used. This means that any partially missed event is
+  counted against the maximum bandwidth.
+
+As previously noted, non-absolute timing might not always be an option and the
+absolute time would ideally have to be factored in as well. This is however a
+bit more complicated in the periodic event case as the following needs to be
+considered:
+
+1) Stack B finishes the operation before the next periodic event of stack A.
+2) Stack B finish just after stack A has missed the event.
+
+By calculating the probability (:math:`P`) of case one and two occurring, the
+average bandwidth cost could be estimated. This is then used to calculate the
+average time lost (:math:`ATL`) where the :math:`C1` and :math:`C2` subscript
+refers to the cases mentioned above:
+
+.. math::
+
+  ATL_{C1} &= PI_A * \lfloor ME_A \rfloor + \frac{PI_A - (RTT_B \% PI_A)}{2} \\
+  ATL_{C2} &= PI_A * \lceil ME_A \rceil + \frac{RTT_B \% PI_A}{2} \\
+  P_{C2} &= \frac{RTT_B \% PI_A}{PI_A} \\
+  ATL_A &= P_{C2} * ATL_{C2} + (1 - P_{C2}) * ATL_{C1} \\
+
+In the case of :math:`ATL_{C1}` partially missed events, :math:`ME_A`, are not
+counted towards the time lost. Since stack B is assumed to be finished before 
+stack A's next event, only the events that are guaranteed to fall inside the 
+period where stack B is active would be missed. For :math:`ATL_{C2}`, the 
+partially missed events is counted towards the time lost. This since stack B is
+assumed to finish after the start of the next stack A event.
+
+As the final average time lost, :math:`ATL_A`, is the same as the time not
+available for stack A, the radio bandwidth is given by:
+
+.. math::
+
+  &RBW_B = \frac{ATL_A}{PI_B}
+
+The expected throughput is then given by our first equation:
+
+.. math::
+
+  &T_A = 1 - \sum RBW_B(n)
+
+.. note::
+  As :math:`PI_A` gets smaller, the difference between the non-absolute and
+  absolute versions of the radio bandwidth equation approaches each other.
+
+.. warning::
+  All of the equations above are theoretical and some simplification to a stack's
+  assumed scheduling behavior has been made. In reality there are more
+  limitations then possible to mention as the ultimate behavior depends on the
+  actual behavior of the stacks used as well as the DMM priorities defined in
+  the system.
+
+  Because of this, they should *ONLY* serve as a guideline for what could be
+  expected by a certain stack combination.
+
+Example
+^^^^^^^
+
+Assume stack A is working alongside a stack B that sends two type of packets:
+* 20 byte long packets sent out once every second. 
+* 200 byte long packets sent out once every 10 seconds.
+
+Depending on the scheduling nature of stack A and stack B, different 
+equations would be used. These examples showcase the "simple estimate" and the 
+"periodic event case". In the "periodic event case" examples are given for
+both non-absolute and absolute stack B scheduling. In all cases, stack B is
+considered to be of higher priority having a bit rate of 50 kbps.
+
+In the "simple estimate" example, stack A is assumed to constantly be working
+to send data out, effectively filling up any remaining bandwidth. It is also
+assumed that stack B is using non-absolute scheduling:
+
+.. math::
+
+  RTT_{B[packet 1]} &= \frac{20*8}{50000} [\text{s}] \\
+  RTT_{B[packet 2]} &= \frac{200*8}{50000} [\text{s}] \\
+  RBW_{B[packet 1]} &= \frac{RTT_{B[packet 1]}}{1} \\
+  RBW_{B[packet 2]} &= \frac{RTT_{B[packet 2]}}{10} \\
+
+  T_A &= 1-(RBW_{B[packet 1]} + RBW_{B[packet 2]}) \\
+  T_A &= 1 - 0.0064 \approxeq 99.4\%
+
+For the "periodic event case" examples, it is assumed that stack A is instead
+the BLE stack with a connection event interval set to 100 ms. In the first
+example it is assumed that stack B is using non-absolute scheduling:
+
+.. math::
+
+  PI_{B[packet 1]} &= 1 \\
+  ME_{A[packet 1]} &= \frac{RTT_{B[packet 1]}}{0.1} = 0.032 \\
+  TE_{A[packet 1]} &= \frac{PI_{B[packet 1]}}{0.1} = 10 \\
+
+  PI_{B[packet 2]} &= 10 \\
+  ME_{A[packet 2]} &= \frac{RTT_{B[packet 2]}}{0.1} = 0.32 \\
+  TE_{A[packet 2]} &= \frac{PI_{B[packet 2]}}{0.1} = 100 \\
+
+  RBW_{B[packet 1]} &= \frac{\lceil ME_{A[packet 1]} \rceil}{TE_{A[packet 1]}} = 0.1\\
+  RBW_{B[packet 2]} &= \frac{\lceil ME_{A[packet 2]} \rceil}{TE_{A[packet 2]}} = 0.01\\
+
+  T_A &= 1 - 0.11 \approxeq 89\%
+
+The second "periodic event case" example assumes that stack B is using absolute
+scheduling. Stack A is assumed to be the same as in the first "periodic event 
+case":
+
+.. math::
+
+  ME_{A[packet 1]} &= \frac{RTT_{B[packet 1]}}{0.1} = 0.032 \\
+  ATL_{C1[packet 1]} &= PI_A*\lfloor ME_A \rfloor + \frac{0.1 - (RTT_{B[packet 1]}\%0.1)}{2} = 0.0484 \\
+  ATL_{C2[packet 1]} &= PI_A*\lceil ME_A \rceil + \frac{RTT_{B[packet 1]}\%0.1}{2} = 0.1016 \\
+  P_{C2[packet1]} &= \frac{RTT_{B[packet 1]}\%0.1}{0.1} = 0.032 \\
+
+  ME_{A[packet 2]} &= \frac{RTT_{B[packet 2]}}{0.1} = 0.32 \\
+  ATL_{C1[packet 2]} &= 0.1*\lfloor ME_A \rfloor + \frac{0.1 - (RTT_{B[packet 2]}\%0.1)}{2} = 0.034 \\
+  ATL_{C2[packet 2]} &= 0.1*\lceil ME_A \rceil + \frac{RTT_{B[packet 2]}\%0.1}{2} = 0.116 \\
+  P_{C2[packet 2]} &= \frac{RTT_{B[packet 2]}\%0.1}{0.1} = 0.32 \\
+
+  ATL_{A[packet 1]} &= P_{C2[packet 1]}*ATL_{C2[packet 1]} + (1-P_{C2[packet1]})*ATL_{C1[packet 1]} = 0.050102 \\
+  ATL_{A[packet 2]} &= P_{C2[packet 2]}*ATL_{C2[packet 2]} + (1-P_{C2[packet2]})*ATL_{C1[packet 2]} = 0.06024 \\
+
+  RBW_{B[packet 1]} &= \frac{ATL_{A[packet 1]}}{1} = 0.050102 \\
+  RBW_{B[packet 2]} &= \frac{ATL_{B[packet 2]}}{10} = 0.006024 \\
+
+  T_A &= 1 - 0.056126 \approxeq 94.4\%
+
+In all the examples, it is clear that stack B is not interfering to much 
+with stack A as it does not use up much of the radio bandwidth. It can however be
+seen that the expected throughput goes down as the assumption on how stack A
+access the radio changes from freely polling the radio to be bound to a given 
+interval.
+
+Long Range Mode (LRM) PHY Considerations
+----------------------------------------
+
+When a stack operates with the :term:`SimpleLink LRM` PHY, the radio timing
+often increases significantly as the bit rate is much lower. For example, the
+TI 15.4 default sensor data + MAC Ack require approximately 200 ms of radio
+time to complete.
+
+If the stack operating in LRM is considered lower priority in the context of
+DMM, this has to be taking into considerations when setting up the radio
+interval of the high priority stack to avoid starving the stack using LRM.
+
+A practical example is when combining TI 15.4 together with the BLE-Stack,
+where the advertising and connection interval must be chosen to allow
+time slots big enough for the TI 15.4-Stack to operate.
+
+
+Adjusting the BLE Connection Interval
+-------------------------------------
+
+The BLE peripheral is not able to directly control the connection interval; it
+may, however, request a connection parameter update to the central device.
+
+For more information about the connection parameter update process, refer to
+the Generic Access Profile (GAP) Section in the |BLE5_UG|. In
+the GAP chapter there is a section that covers the connection parameter update
+process and the APIs needed to perform one.
+
+
+Multiple BLE Connections
+------------------------
+
+The maximum number of BLE connections can be set in SysConfig -> RF STACKS ->
+BLE -> General Configuration -> Max Number of Connections. DMM examples are
+tested with up to four BLE connections.
+
+In the |BLE5_UG| you can read more about how the BLE-Stack
+handles and prioritizes multiple connections. Please see the Link Layer chapter.
+
+It is recommended to set the ``Max Number of Connections`` as low as possible.
+This is because the BLE-Stack will allocate a unique Rx/Tx packet buffer per
+connection from the ICall heap. Per default this buffer is around 1 kB. You can
+read about these buffers in the |BLE5_UG|, in the Link Layer
+Buffers section.
+
+If you choose to use multiple BLE connections, please remember that each
+connection takes the same amount of resources as the first one. The DMM
+scheduler will have to schedule twice as many BLE connection events etc. Please
+consider how this will affect the other RF protocol stack running in your project.

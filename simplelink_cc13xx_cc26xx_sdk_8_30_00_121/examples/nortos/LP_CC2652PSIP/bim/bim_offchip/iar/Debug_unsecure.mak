@@ -1,0 +1,8 @@
+CFLAGS += -DBOOT_LOADER \
+    -DxFLASH_DEVICE_ERASE \
+    -DxSECURITY \
+    -DDEBUG_BIM
+
+LFLAGS += 
+
+

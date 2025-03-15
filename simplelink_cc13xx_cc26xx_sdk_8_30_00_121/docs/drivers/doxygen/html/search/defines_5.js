@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['fapi_5fstatus_5faddress_5falign_5ferror',['FAPI_STATUS_ADDRESS_ALIGN_ERROR',['../_flash_c_c26_x4__ns_8h.html#a78e4e78e6e095f136c3ba1c24ddacd74',1,'FlashCC26X4_ns.h']]],
+  ['fapi_5fstatus_5faddress_5ferror',['FAPI_STATUS_ADDRESS_ERROR',['../_flash_c_c26_x4__ns_8h.html#aeebd047aab907390b464d1eccfe71f1a',1,'FlashCC26X4_ns.h']]],
+  ['fapi_5fstatus_5fbank_5fnum_5ferror',['FAPI_STATUS_BANK_NUM_ERROR',['../_flash_c_c26_x4__ns_8h.html#a1a49674f1f9451f319d78ca7581a0405',1,'FlashCC26X4_ns.h']]],
+  ['fapi_5fstatus_5ffsm_5fbusy',['FAPI_STATUS_FSM_BUSY',['../_flash_c_c26_x4__ns_8h.html#ac803ba38608b907c9a37edbaea6f60d5',1,'FlashCC26X4_ns.h']]],
+  ['fapi_5fstatus_5ffsm_5ferror',['FAPI_STATUS_FSM_ERROR',['../_flash_c_c26_x4__ns_8h.html#a58b3728c010c8de7007a1a625c61b5e4',1,'FlashCC26X4_ns.h']]],
+  ['fapi_5fstatus_5ffsm_5fready',['FAPI_STATUS_FSM_READY',['../_flash_c_c26_x4__ns_8h.html#a6dc7f17a0e39cb30c6b27926ae88e2a6',1,'FlashCC26X4_ns.h']]],
+  ['fapi_5fstatus_5fincorrect_5fdatabuffer_5flength',['FAPI_STATUS_INCORRECT_DATABUFFER_LENGTH',['../_flash_c_c26_x4__ns_8h.html#a7d203641570dd4058f88fae7ca494584',1,'FlashCC26X4_ns.h']]],
+  ['fapi_5fstatus_5fnosupport_5ferror',['FAPI_STATUS_NOSUPPORT_ERROR',['../_flash_c_c26_x4__ns_8h.html#a1b0f4ed91254c5de6af25204d2496e08',1,'FlashCC26X4_ns.h']]],
+  ['fapi_5fstatus_5fsuccess',['FAPI_STATUS_SUCCESS',['../_flash_c_c26_x4__ns_8h.html#a2873808d6fc3c3627b7b882f5d8416d9',1,'FlashCC26X4_ns.h']]],
+  ['fapi_5fstatus_5funprotect_5ferror',['FAPI_STATUS_UNPROTECT_ERROR',['../_flash_c_c26_x4__ns_8h.html#ac8d3cee2ad642a8e7a8155112cc25953',1,'FlashCC26X4_ns.h']]],
+  ['flash_5fsp_5fmsg_5ftype_5fflash_5fsize_5fget',['FLASH_SP_MSG_TYPE_FLASH_SIZE_GET',['../_flash_c_c26_x4__s_8h.html#a1abd26b1490472eeff89ef40490ad81d',1,'FlashCC26X4_s.h']]],
+  ['flash_5fsp_5fmsg_5ftype_5fprogram',['FLASH_SP_MSG_TYPE_PROGRAM',['../_flash_c_c26_x4__s_8h.html#a3cf9f59b0f853dbc30190fb218bf3263',1,'FlashCC26X4_s.h']]],
+  ['flash_5fsp_5fmsg_5ftype_5fprogram_5f4x',['FLASH_SP_MSG_TYPE_PROGRAM_4X',['../_flash_c_c26_x4__s_8h.html#a4c14c3caf24b934dfc4e3b13b7b80d6e',1,'FlashCC26X4_s.h']]],
+  ['flash_5fsp_5fmsg_5ftype_5fprotection_5fget',['FLASH_SP_MSG_TYPE_PROTECTION_GET',['../_flash_c_c26_x4__s_8h.html#ad83761c4c18ed8061c69e7a336a49da8',1,'FlashCC26X4_s.h']]],
+  ['flash_5fsp_5fmsg_5ftype_5fsector_5ferase',['FLASH_SP_MSG_TYPE_SECTOR_ERASE',['../_flash_c_c26_x4__s_8h.html#a85d4526251697e4ef2e544417ed9efd6',1,'FlashCC26X4_s.h']]],
+  ['flash_5fsp_5fmsg_5ftype_5fsector_5fsize_5fget',['FLASH_SP_MSG_TYPE_SECTOR_SIZE_GET',['../_flash_c_c26_x4__s_8h.html#a69477514e6f180fcdff1fe1530c91f0e',1,'FlashCC26X4_s.h']]],
+  ['fletcher_5fchecksum_5falgorithm',['FLETCHER_CHECKSUM_ALGORITHM',['../_crypto_key_key_store___p_s_a__helpers_8h.html#a703ce867305e26993e25dd5259eb2ef0',1,'CryptoKeyKeyStore_PSA_helpers.h']]]
+];

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running Software Examples on the CC13x1x3 or CC26x1x3 &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User&#39;s Guide
+ 7.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SysConfig Migration" href="../sysconfig/proprietary-rf-migration.html" />
+    <link rel="prev" title="Running Software Examples on the CC13x2x7 or CC26x2x7" href="software-on-cc13x2x7-26x2x7.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug cc13xx_cc26xx software-on-cc13x1x-26x1x";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/examples-cc13xx_cc26xx.html">Examples User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/custom-hardware.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/nortos-index.html">noRTOS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/rf-core-index.html">RF Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/physical-rf-layer-cc13xx_cc26xx.html">Physical Layer (PHY)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-bim-index.html">BIM Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-mcuboot-index.html">MCUBoot Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/sysconfig-index.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html">Migration Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html#porting-guides">Porting Guides</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html#id2">Migration Guides</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="devices_without_launchpads.html">Devices without LaunchPads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cc13x2-cc26x2-to-cc13x4-26x4.html">Migrate Your CC13x2 or CC26x2 Project to CC13x4 or CC26x4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x4-26x4.html">Migrate software examples from CC13x4 to CC26x4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x4-26x4-rgz-devices.html">CC13x4 and CC26x4 RGZ Variants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc2652xSIP-cc2651RSIPA.html">Running Software Examples on CC2652XSIP and CC2651RSIPA devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc2652p.html">Running Software Examples on CC2652P</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x2x7-26x2x7.html">Running Software Examples on the CC13x2x7 or CC26x2x7</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Running Software Examples on the CC13x1x3 or CC26x1x3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#porting-software-examples-for-the-litedevice">Porting Software Examples for the CC13x1x3 or CC26x1x3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cc1311r3">CC1311R3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">CC2651R3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-a-different-package-variant">Using a different package variant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#moving-from-launchpad-to-custom-board">Moving From LaunchPad to Custom Board</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../sysconfig/proprietary-rf-migration.html">SysConfig Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio-porting-guide.html">GPIO++ Driver Porting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart_to_uart2.html">UART to UART2 Porting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tirtos/bios7_migration.html">TI-RTOS to TI-RTOS7 Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../proprietary-rf/cc1101-migration.html">Migrating from CC1101</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/glossary-cc13xx_cc26xx.html">Terms and acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html">Migration Guides</a> &raquo;</li>
+      <li>Running Software Examples on the CC13x1x3 or CC26x1x3</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="running-software-examples-on-the-litedevice">
+<span id="sec-litedevice"></span><h1>Running Software Examples on the CC13x1x3 or CC26x1x3<a class="headerlink" href="#running-software-examples-on-the-litedevice" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="porting-software-examples-for-the-litedevice">
+<h2>Porting Software Examples for the CC13x1x3 or CC26x1x3<a class="headerlink" href="#porting-software-examples-for-the-litedevice" title="Permalink to this headline">¶</a></h2>
+<p>The CC13x1x3 or CC26x1x3 devices are pin compatible with their respective CC13x2x1 or CC26x2x1 devices
+but with only one UART and SSI, 32KB + 8KB GP cache SRAM (with parity
+removed), and 40 kB of ROM.  The following features  and peripherals have
+also been removed entirely:</p>
+<ul class="simple">
+<li><p>IEEE 754-compliant single-precision Floating Point Unit (FPU)</p></li>
+<li><p>Memory Protection Unit (MPU)</p></li>
+<li><p>AES 256-bit crypto accelerator</p></li>
+<li><p>ECC and RSA Public Key Hardware Accelerator</p></li>
+<li><p>SHA2 Accelerator</p></li>
+<li><p>Sensor Controller with 4KB of SRAM</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>CC13x1x3 or CC26x1x3 devices offer a software implementation of the AES,
+ECC, RSA, and SHA2 functions with a similar API as the one available
+on CC13x2x1 or CC26x2x1. Refer to the <a class="reference external" href="../../../drivers/tidriversAPIs.html">TI Drivers API Reference</a> for additional details.</p>
+</div>
+<p>It is not possible to use the <a class="reference internal" href="../sysconfig/sysconfig-board.html#sec-sysconfig-migrate-device"><span class="std std-ref">Hardware View</span></a> tool to
+change the device types of projects using CC13x2x1 or CC26x2x1 to CC13x1x3 or CC26x1x3.
+Developers are strongly encouraged to import a project which contains the
+correct settings for their target device and port the stack application
+accordingly.  Example projects can be found from the following location:
+<code class="docutils literal notranslate"><span class="pre">&lt;SDK_DIR&gt;\\examples\\rtos\\&lt;LaunchPad</span> <span class="pre">variant&gt;\\&lt;stack&gt;\\&lt;application&gt;\\tirtos\\&lt;ccs/iar&gt;</span></code></p>
+</div>
+<div class="section" id="cc1311r3">
+<h2>CC1311R3<a class="headerlink" href="#cc1311r3" title="Permalink to this headline">¶</a></h2>
+<p>For <a class="reference internal" href="#cc1311r3">CC1311R3</a> development, the recommended approach is to start with a
+software project from the <a class="reference external" href="https://www.ti.com/tool/LP-CC1311P3">CC1311P3 LaunchPad</a> folder. The main difference
+between the <a class="reference internal" href="#cc1311r3">CC1311R3</a> and <a class="reference external" href="https://www.ti.com/product/CC1311P3">CC1311P3</a> devices is the high PA on the <a class="reference external" href="https://www.ti.com/product/CC1311P3">CC1311P3</a>.
+You can read details about this in the device data sheets.</p>
+<div class="section" id="software-development">
+<h3>Software Development<a class="headerlink" href="#software-development" title="Permalink to this headline">¶</a></h3>
+<p>For software development, use a <a class="reference external" href="https://www.ti.com/tool/LP-CC1311P3">CC1311P3 LaunchPad</a> example project.</p>
+</div>
+<div class="section" id="cc1311r3-evaluation">
+<h3>CC1311R3 Evaluation<a class="headerlink" href="#cc1311r3-evaluation" title="Permalink to this headline">¶</a></h3>
+<p>When you have <a class="reference internal" href="#cc1311r3">CC1311R3</a> devices that you want to test, you can follow this
+guide. If you are using a custom board, you can disregard this guide and instead
+look at the <a class="reference internal" href="../proprietary-rf-guide/custom-hardware.html#sec-custom-hardware"><span class="std std-ref">Custom Hardware</span></a> section.</p>
+<p>Please follow the steps below to migrate a CC1311P3 LaunchPad software example
+to CC1311R3. The assumption here is that you have a <a class="reference internal" href="#cc1311r3">CC1311R3</a> device mounted
+on a LaunchPad. <a class="reference internal" href="#cc1311r3">CC1311R3</a> is pin compatible with <a class="reference external" href="https://www.ti.com/product/CC1312R">CC1312R</a> and <a class="reference external" href="https://www.ti.com/product/CC1312R7">CC1312R7</a>
+devices, so a <a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC1312R1">CC1312R LaunchPad</a> or <a class="reference external" href="https://www.ti.com/tool/LP-CC1312R7">CC1312R7 LaunchPad</a> should be used.</p>
+<div class="section" id="proprietary-rf-and-drivers-examples">
+<h4>Proprietary RF and Drivers Examples<a class="headerlink" href="#proprietary-rf-and-drivers-examples" title="Permalink to this headline">¶</a></h4>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">prop_rf</span></code> and <code class="docutils literal notranslate"><span class="pre">drivers</span></code> folder examples, you can use this method or
+the one described under “TI 15.4-Stack Examples”</p>
+</div>
+<ol class="arabic">
+<li><p>Import or open your <code class="docutils literal notranslate"><span class="pre">LP_CC1311P3</span></code> example in your IDE. Open the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code>
+file.</p></li>
+<li><p>Press the SWITCH button.</p>
+<div class="figure align-center">
+<img alt="../_images/sysconfig-cc1311p3.png" src="../_images/sysconfig-cc1311p3.png" />
+</div>
+</li>
+<li><p>Press the dropdown menu for New Value for Board. Select None.</p></li>
+<li><p>Press the dropdown menu for New Value for Device. Select the CC1311R3.</p>
+<div class="figure align-center">
+<img alt="../_images/sysconfig-cc1311r3.png" src="../_images/sysconfig-cc1311r3.png" />
+</div>
+</li>
+<li><p>Press Confirm. Save your Sysconfig file. It will now try to migrate your
+project.</p></li>
+<li><p>You will likely get some errors from SysConfig and even build errors. In each
+case try to resolve them or <code class="docutils literal notranslate"><span class="pre">Accept</span></code> them.</p></li>
+<li><p>If you get a build error referring to the antenna switch callback, open
+SysConfig -&gt; TI DRIVERS -&gt; RF and make sure the number of antenna switch pins
+is set to 0.</p>
+<div class="figure align-center">
+<img alt="../_images/sysconfig-antenna-switch.png" src="../_images/sysconfig-antenna-switch.png" />
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="ti-15-4-stack-examples">
+<h4>TI 15.4-Stack Examples<a class="headerlink" href="#ti-15-4-stack-examples" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>First, navigate to the board metadata folder located in:
+<code class="docutils literal notranslate"><span class="pre">&lt;SDK_DIR&gt;\\source\\ti\\boards\\.meta</span></code>. Note: This folder is hidden by
+default on Windows OS. If you do not see this directory, please show
+“Hidden Items” to view the folder. You can do this by going to the View tab in
+Windows Explorer and checking the “Hidden items” check box inside the
+“Show/Hide” panel.</p></li>
+<li><p>In the same directory, make a copy of the board file corresponding to your
+LaunchPad board. E.g. if you are using a <a class="reference internal" href="#cc1311r3">CC1311R3</a> on a <a class="reference external" href="https://www.ti.com/tool/LP-CC1312R7">CC1312R7 LaunchPad</a>,
+make a copy of <code class="docutils literal notranslate"><span class="pre">LP_CC1312R7.syscfg.json</span></code>. Rename the file to
+<code class="docutils literal notranslate"><span class="pre">LP_CC1311R3.syscfg.json</span></code>. This file is used by the SysConfig tool and
+specifies board related configuration metadata.</p></li>
+<li><p>Open the newly created <code class="docutils literal notranslate"><span class="pre">LP_CC1311R3.syscfg.json</span></code> file and change
+the following fields to point to the <strong>LP_CC1311R3</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Change the <em>name</em> field to <code class="docutils literal notranslate"><span class="pre">&quot;LP_CC1311R3&quot;</span></code></p></li>
+<li><p>Change the <em>displayName</em> field to <code class="docutils literal notranslate"><span class="pre">&quot;CC1311R3</span> <span class="pre">LaunchPad&quot;</span></code></p></li>
+<li><p>Change the <em>device</em> field to <code class="docutils literal notranslate"><span class="pre">&quot;CC1311R3RGZ&quot;</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Import a <a class="reference external" href="https://www.ti.com/tool/LP-CC1311P3">CC1311P3 LaunchPad</a> project into CCS or IAR.</p></li>
+<li><p>Open the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file with a text editor. Make the following edit to
+replace <code class="docutils literal notranslate"><span class="pre">LP_CC1311P3</span></code> with <code class="docutils literal notranslate"><span class="pre">LP_CC1311R3</span></code> in the first line. This will tell
+SysConfig of the new board type to be used.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-number">Listing 47. </span><span class="caption-text">Replace SysConfig board type</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="w"> </span><span class="n">EVEN</span><span class="w"> </span><span class="n">IF</span><span class="w"> </span><span class="n">ADVISED</span><span class="w"> </span><span class="n">OF</span><span class="w"> </span><span class="n">THE</span><span class="w"> </span><span class="n">POSSIBILITY</span><span class="w"> </span><span class="n">OF</span><span class="w"> </span><span class="n">SUCH</span><span class="w"> </span><span class="n">DAMAGE</span><span class="p">.</span><span class="w"></span>
+<span class="o">*/</span><span class="w"></span>
+<span class="c1">// @cliArgs --board /ti/boards/LP_CC1311R3 --rtos tirtos7</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Clean and build the project to confirm that no errors exist</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>CC2651R3<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://www.ti.com/tool/LP-CC2651P3">CC2651P3 LaunchPad</a> is highly recommended for evaluating CC13x1x3 or CC26x1x3
+solutions.  As the <a class="reference external" href="https://www.ti.com/product/CC2651R3">CC2651R3</a> is pin compatible with <a class="reference external" href="https://www.ti.com/product/CC2652R">CC2652R</a> or
+<a class="reference external" href="https://www.ti.com/product/CC2652R7">CC2652R7</a> variants, either of these LaunchPad options must be considered
+as candidates for swapping the on-board device.  Yet the <a class="reference external" href="https://www.ti.com/product/CC2651R3">CC2651R3</a> is
+functionally identical to the <a class="reference external" href="https://www.ti.com/product/CC2651P3">CC2651P3</a> device for non-PA operation and
+thus <a class="reference external" href="https://www.ti.com/product/CC2651P3">CC2651P3</a> software examples should be referenced after making the
+following changes.</p>
+<ul>
+<li><p>First, navigate to the board metadata folder located in:
+<code class="docutils literal notranslate"><span class="pre">&lt;SDK_DIR&gt;\\source\\ti\\boards\\.meta</span></code>. Note: This folder is hidden by
+default on Windows OS. If you do not see this directory, please show
+“Hidden Items” to view the folder. You can do this by going to the View tab in
+Windows Explorer and checking the “Hidden items” check box inside the
+“Show/Hide” panel.</p></li>
+<li><p>In the same directory, make a copy of <strong>LP_CC2652R7.syscfg.json</strong> and rename
+it to <strong>LP_CC2651R3.syscfg.json</strong>. This file is used by the SysConfig tool
+and specifies board related configuration metadata.</p></li>
+<li><p>Open the newly created <strong>LP_CC2651R3.syscfg.json</strong> file and change
+the following fields to point to the <strong>LP_CC2651R3</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Change the <em>name</em> field to <code class="docutils literal notranslate"><span class="pre">&quot;LP_CC2651R3&quot;</span></code></p></li>
+<li><p>Change the <em>displayName</em> field to <code class="docutils literal notranslate"><span class="pre">&quot;CC2651R3</span> <span class="pre">LaunchPad&quot;</span></code></p></li>
+<li><p>Change the <em>device</em> field to <code class="docutils literal notranslate"><span class="pre">&quot;CC2651R3RGZ&quot;</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Import a CC2651P3 project into CCS or IAR</p></li>
+<li><p>Open the <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file with a text editor. Make the following edit to
+replace <code class="docutils literal notranslate"><span class="pre">LP_CC2651P3</span></code> with <code class="docutils literal notranslate"><span class="pre">LP_CC2651R3</span></code> in the first line. This will tell
+SysConfig of the new board type to be used.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-number">Listing 48. </span><span class="caption-text">Replace SysConfig board type</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>* EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+<span class="gd">-// @cliArgs --board /ti/boards/LP_CC2651P3 --rtos tirtos</span>
+<span class="gi">+// @cliArgs --board /ti/boards/LP_CC2651R3 --rtos tirtos</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Clean and build the project to confirm that no errors exist</p></li>
+</ul>
+<p>If a CC13x1x3 or CC26x1x3 hardware is not available, developers could
+begin evaluation using CC13x2x1 or CC26x2x1 LaunchPads and devices.  However,
+the following should be accounted for when starting development using
+CC13x2x1 or CC26x2x1 projects with the intent of migrating to the CC13x1x3 or CC26x1x3:</p>
+<ul class="simple">
+<li><p>RAM_SIZE defined in cc26x2lp.cmd should be reduced from 0x14000
+to 0x8000 to account for the SRAM reduction.  FLASH_SIZE should
+likewise be reduced from 0x52000 to 0x42000 since the BLE and
+15.4 stacks will be moved from ROM to Flash to account for the
+decrease in ROM.  This is a worst-case scenario as additional
+flash requirements range from ~28 to 63 kB based on application.
+FLASH_LAST_BASE should remain the same as it will still contain
+the CCFG and BIM (if applicable).</p></li>
+<li><p>Follow all <a class="reference internal" href="../memory/cache-as-ram.html#section-cache-as-ram"><span class="std std-ref">Using the Cache as RAM</span></a> instructions and disable
+NVOCMP_GPRAM in nvocmp.c (only pertaining to projects using the
+multi-page NV driver).  Be aware that the program will need to
+run at a slightly reduced speed which will increase the device
+power consumption in sleep as noted in the User’s Guide.  This
+difference can be further investigated using the Power Consumption
+→ Power Modes table in the device datasheet</p></li>
+</ul>
+<p>Beyond these feasible software changes, it should be noted that
+additional radio patches are required for the CC13x1x3 or CC26x1x3 that cannot
+be emulated with a CC13x2x1 or CC26x2x1 device.  These changes are not expected
+to have a significant effect on radio performance and are thus
+inconsequential for initial evaluations.</p>
+<p>The on-board devices can be swapped for the desired variant since they
+are pin compatible.  As mentioned previously, the correct
+example project must be selected for the specific device being used.</p>
+</div>
+<div class="section" id="using-a-different-package-variant">
+<h2>Using a different package variant<a class="headerlink" href="#using-a-different-package-variant" title="Permalink to this headline">¶</a></h2>
+<p>The CC13x1x3 or CC26x1x3 devices are available with two RoHS-compliant package variants.</p>
+<ul class="simple">
+<li><p>7-mm × 7-mm RGZ VQFN48 (31 GPIOs)</p></li>
+<li><p>5-mm × 5-mm RKP VQFN40 (23 GPIOs)</p></li>
+</ul>
+<p>See the datasheet for all the package options and IO descriptions.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/lit/ds/symlink/cc1311r3.pdf">CC1311R3 Datasheet</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/ds/symlink/cc2651r3.pdf">CC2651R3 Datasheet</a></p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Only the 7-mm × 7-mm RGZ VQFN48 (31 GPIOs) variant of the
+CC13x1x3 or CC26x1x3 devices are pin compatible with their respective CC13x2x1 or CC26x2x1.</p>
+</div>
+<p>The different package variants are binary compatible as long as the software
+does not access a non-existing IO on the considered package.
+For the 5x5 package, the available IOs are between IOID_0 and IOID_22.  The
+<a class="reference internal" href="../sysconfig/sysconfig-board.html#sec-sysconfig-migrate-device"><span class="std std-ref">Hardware View</span></a> instructions should be used to change
+from the RGZ package to the RKP, which will also require selecting
+<strong>Use Custom Board</strong> as directed in <a class="reference internal" href="../proprietary-rf-guide/custom-hardware.html#sec-custom-hardware"><span class="std std-ref">Custom Hardware</span></a> since the
+CC13xx or CC26xx LaunchPad hardware uses the RGZ variant.</p>
+</div>
+<div class="section" id="moving-from-launchpad-to-custom-board">
+<h2>Moving From LaunchPad to Custom Board<a class="headerlink" href="#moving-from-launchpad-to-custom-board" title="Permalink to this headline">¶</a></h2>
+<p>You can find instructions on how to design and configure a custom board in the
+<a class="reference internal" href="../proprietary-rf-guide/custom-hardware.html#sec-custom-hardware"><span class="std std-ref">Custom Hardware</span></a> chapter.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="software-on-cc13x2x7-26x2x7.html" class="btn btn-neutral float-left" title="Running Software Examples on the CC13x2x7 or CC26x2x7" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../sysconfig/proprietary-rf-migration.html" class="btn btn-neutral float-right" title="SysConfig Migration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

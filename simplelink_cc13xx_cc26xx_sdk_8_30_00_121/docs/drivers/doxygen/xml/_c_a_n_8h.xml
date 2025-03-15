@@ -1,0 +1,2018 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_c_a_n_8h" kind="file" language="C++">
+    <compoundname>CAN.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includes refid="_struct_ring_buf_8h" local="no">ti/drivers/utils/StructRingBuf.h</includes>
+    <includes local="no">ti/devices/DeviceFamily.h</includes>
+    <includes refid="_m_c_a_n_8h" local="no">third_party/mcan/MCAN.h</includes>
+    <includedby refid="_c_a_n_m_c_a_n_8h" local="no">CANMCAN.h</includedby>
+    <incdepgraph>
+      <node id="528">
+        <label>stdbool.h</label>
+      </node>
+      <node id="525">
+        <label>stdint.h</label>
+      </node>
+      <node id="526">
+        <label>stddef.h</label>
+      </node>
+      <node id="530">
+        <label>ti/devices/DeviceFamily.h</label>
+      </node>
+      <node id="529">
+        <label>string.h</label>
+      </node>
+      <node id="527">
+        <label>ti/drivers/utils/StructRingBuf.h</label>
+        <link refid="_struct_ring_buf_8h"/>
+        <childnode refid="525" relation="include">
+        </childnode>
+        <childnode refid="526" relation="include">
+        </childnode>
+        <childnode refid="528" relation="include">
+        </childnode>
+        <childnode refid="529" relation="include">
+        </childnode>
+      </node>
+      <node id="524">
+        <label>CAN.h</label>
+        <link refid="_c_a_n_8h"/>
+        <childnode refid="525" relation="include">
+        </childnode>
+        <childnode refid="526" relation="include">
+        </childnode>
+        <childnode refid="527" relation="include">
+        </childnode>
+        <childnode refid="530" relation="include">
+        </childnode>
+        <childnode refid="531" relation="include">
+        </childnode>
+      </node>
+      <node id="532">
+        <label>third_party/mcan/inc/MCAN_reg.h</label>
+        <link refid="_m_c_a_n__reg_8h"/>
+      </node>
+      <node id="531">
+        <label>third_party/mcan/MCAN.h</label>
+        <link refid="_m_c_a_n_8h"/>
+        <childnode refid="525" relation="include">
+        </childnode>
+        <childnode refid="526" relation="include">
+        </childnode>
+        <childnode refid="532" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="534">
+        <label>CANMCAN.h</label>
+        <link refid="_c_a_n_m_c_a_n_8h"/>
+      </node>
+      <node id="533">
+        <label>CAN.h</label>
+        <link refid="_c_a_n_8h"/>
+        <childnode refid="534" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_c_a_n___msg_ram_config" prot="public">CAN_MsgRamConfig</innerclass>
+    <innerclass refid="struct_c_a_n___data_bit_rate_timing_raw" prot="public">CAN_DataBitRateTimingRaw</innerclass>
+    <innerclass refid="struct_c_a_n___bit_rate_timing_raw" prot="public">CAN_BitRateTimingRaw</innerclass>
+    <innerclass refid="struct_c_a_n___params" prot="public">CAN_Params</innerclass>
+    <innerclass refid="struct_c_a_n___object" prot="public">CAN_Object</innerclass>
+    <innerclass refid="struct_c_a_n___h_w_attrs" prot="public">CAN_HWAttrs</innerclass>
+    <innerclass refid="struct_c_a_n___config__" prot="public">CAN_Config_</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group___c_a_n___s_t_a_t_u_s_1gaec519b2472a0cb3c778a1e2cffd7de5d" prot="public" static="no">
+        <name>CAN_STATUS_SUCCESS</name>
+        <initializer>((int_fast16_t)0)</initializer>
+        <briefdescription>
+<para>Successful status code. </para>        </briefdescription>
+        <detaileddescription>
+<para>Functions return CAN_STATUS_SUCCESS if the function was executed successfully. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="357" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="357" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___s_t_a_t_u_s_1gaf97bc85f9b1ce1bd427ab76347994217" prot="public" static="no">
+        <name>CAN_STATUS_ERROR</name>
+        <initializer>((int_fast16_t)-1)</initializer>
+        <briefdescription>
+<para>Generic error status code. </para>        </briefdescription>
+        <detaileddescription>
+<para>Functions return CAN_STATUS_ERROR if the function was not executed successfully and no more pertinent error code could be returned. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="365" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="365" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___s_t_a_t_u_s_1ga03e296bed4b1621253ec798624282c52" prot="public" static="no">
+        <name>CAN_STATUS_NOT_SUPPORTED</name>
+        <initializer>((int_fast16_t)-2)</initializer>
+        <briefdescription>
+<para>Not supported status code. </para>        </briefdescription>
+        <detaileddescription>
+<para>Functions return CAN_STATUS_NOT_SUPPORTED if the function is not supported either by the target hardware or the driver implementation. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="373" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="373" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___s_t_a_t_u_s_1gabb3a4c95249453a5277851bdaeb4dc94" prot="public" static="no">
+        <name>CAN_STATUS_TX_BUF_FULL</name>
+        <initializer>((int_fast16_t)-3)</initializer>
+        <briefdescription>
+<para>Tx buffer full status code. </para>        </briefdescription>
+        <detaileddescription>
+<para>Functions return CAN_STATUS_TXBUF_FULL if the Tx buffers are full. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="380" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="380" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___s_t_a_t_u_s_1ga00aea7977da7791f2828a61329b6ca62" prot="public" static="no">
+        <name>CAN_STATUS_NO_RX_MSG_AVAIL</name>
+        <initializer>((int_fast16_t)-4)</initializer>
+        <briefdescription>
+<para>No received message available status code. </para>        </briefdescription>
+        <detaileddescription>
+<para>Functions return CAN_STATUS_NO_RX_MSG_AVAIL if there are no messages available in the Rx message ring buffer. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="388" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="388" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___s_t_a_t_u_s_1gadc760edfc496bb0c17a37dea54039e3f" prot="public" static="no">
+        <name>CAN_STATUS_NO_TX_EVENT_AVAIL</name>
+        <initializer>((int_fast16_t)-5)</initializer>
+        <briefdescription>
+<para>No Tx event available status code. </para>        </briefdescription>
+        <detaileddescription>
+<para>Functions return CAN_STATUS_NO_TX_EVENT_AVAIL if there are no Tx events available in the Tx Event FIFO. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="396" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="396" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga5aee970eec46cc8a1cbc21be1c3da321" prot="public" static="no">
+        <name>CAN_EVENT_SPI_XFER_ERROR</name>
+        <initializer>(0x800U)</initializer>
+        <briefdescription>
+<para>A SPI transfer error occurred. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This error is only relevant for SPI-backed external CAN controllers.</para></simplesect>
+If a SPI transfer error occurs, the CAN driver behavior is undefined and message transmit and receive may be unreliable. This error is an indication that further debug of the system HW &amp; SW is required. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="413" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="413" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga792207c71ee25d47ec1550e7dcaf5ab7" prot="public" static="no">
+        <name>CAN_EVENT_BIT_ERR_UNCORRECTED</name>
+        <initializer>(0x400U)</initializer>
+        <briefdescription>
+<para>An uncorrected bit error occurred. </para>        </briefdescription>
+        <detaileddescription>
+<para>If an uncorrected bit error occurs, the driver should be closed and re-opened to attempt recovery. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="421" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="421" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga6b23e75721cbe2be44c31d4b32d0f6a1" prot="public" static="no">
+        <name>CAN_EVENT_RX_RING_BUFFER_FULL</name>
+        <initializer>(0x200U)</initializer>
+        <briefdescription>
+<para>The driver&apos;s Rx ring buffer was full. </para>        </briefdescription>
+        <detaileddescription>
+<para>The driver&apos;s Rx ring buffer was full resulting in a message being discarded. The application must call <ref refid="_c_a_n_8h_1a515269a858d44d1ed043ccd37f3eedcb" kindref="member">CAN_read()</ref> in a more timely manner in response to CAN_EVENT_RX_DATA_AVAIL or the size of the Rx ring buffer should be increased. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="431" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="431" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1gad9bad54e02a163b9335e16dbdc6776b7" prot="public" static="no">
+        <name>CAN_EVENT_RX_FIFO_MSG_LOST</name>
+        <initializer>(0x100U)</initializer>
+        <briefdescription>
+<para>A message was lost for hardware Rx FIFO. </para>        </briefdescription>
+        <detaileddescription>
+<para>See event data for FIFO number. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="438" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="438" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1gaf4f75d571122632b29b34266118df5e2" prot="public" static="no">
+        <name>CAN_EVENT_ERR_PASSIVE</name>
+        <initializer>(0x80U)</initializer>
+        <briefdescription>
+<para>State change to error passive. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="443" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="443" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga9d5b4622bdc27d5a89bff6352ef7c48d" prot="public" static="no">
+        <name>CAN_EVENT_ERR_ACTIVE</name>
+        <initializer>(0x40U)</initializer>
+        <briefdescription>
+<para>State change to error active. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="448" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="448" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga8e5b6dc28c6ca51a811b88c2b9fad496" prot="public" static="no">
+        <name>CAN_EVENT_BUS_OFF</name>
+        <initializer>(0x20U)</initializer>
+        <briefdescription>
+<para>State change to bus off. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="453" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="453" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1gada6d79a9a3439bc1e19ead78bb15f719" prot="public" static="no">
+        <name>CAN_EVENT_BUS_ON</name>
+        <initializer>(0x10U)</initializer>
+        <briefdescription>
+<para>State change to bus on. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="458" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="458" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1gab82008e494c5fc6c4811170e000f15ac" prot="public" static="no">
+        <name>CAN_EVENT_TX_EVENT_LOST</name>
+        <initializer>(0x08U)</initializer>
+        <briefdescription>
+<para>A CAN message transmission event was lost. </para>        </briefdescription>
+        <detaileddescription>
+<para>This event is used as an indication that the Tx Event was lost due to the Tx Event FIFO being full. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="466" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="466" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga773b3d0a875e164686fa3ba89d575725" prot="public" static="no">
+        <name>CAN_EVENT_TX_EVENT_AVAIL</name>
+        <initializer>(0x04U)</initializer>
+        <briefdescription>
+<para>A CAN message transmission event is available. </para>        </briefdescription>
+        <detaileddescription>
+<para>This event is used as an indication that a new entry to the Tx Event FIFO occurred due to the transmission of a message with Event FIFO Control (EFC) bit set. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="475" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="475" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga108a81cd6b5bbb73c81080f429c3a867" prot="public" static="no">
+        <name>CAN_EVENT_TX_FINISHED</name>
+        <initializer>(0x02U)</initializer>
+        <briefdescription>
+<para>A CAN message transmission was completed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="480" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="480" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga7b6db1c1518135c8d1631a961ceb6e47" prot="public" static="no">
+        <name>CAN_EVENT_RX_DATA_AVAIL</name>
+        <initializer>(0x01U)</initializer>
+        <briefdescription>
+<para>Received CAN message data is available. </para>        </briefdescription>
+        <detaileddescription>
+<para>This event is used as an indication that <ref refid="_c_a_n_8h_1a515269a858d44d1ed043ccd37f3eedcb" kindref="member">CAN_read()</ref> can be called to read the received message(s). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="488" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="488" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga052e53fa79e9316c88231e17229fba19" prot="public" static="no">
+        <name>CAN_DLC_0B</name>
+        <initializer>((uint32_t)0U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="497" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="497" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga4140dcfdb86d89a391d5acf8eb05b911" prot="public" static="no">
+        <name>CAN_DLC_1B</name>
+        <initializer>((uint32_t)1U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="498" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="498" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga261587f2747d0c28d634e78e4c03e3a6" prot="public" static="no">
+        <name>CAN_DLC_2B</name>
+        <initializer>((uint32_t)2U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="499" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="499" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga73362aae3c14f34f6c04fa00b8587bfc" prot="public" static="no">
+        <name>CAN_DLC_3B</name>
+        <initializer>((uint32_t)3U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="500" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="500" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga111f3f02b68d9307d7afb69a6fef1fbf" prot="public" static="no">
+        <name>CAN_DLC_4B</name>
+        <initializer>((uint32_t)4U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="501" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="501" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga7d271cf9799472051e80008380662efd" prot="public" static="no">
+        <name>CAN_DLC_5B</name>
+        <initializer>((uint32_t)5U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="502" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="502" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1gaff8ef8a309506b53c203151f003d77ef" prot="public" static="no">
+        <name>CAN_DLC_6B</name>
+        <initializer>((uint32_t)6U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="503" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="503" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga162fdb43ae966193f8a765c5fd6d798d" prot="public" static="no">
+        <name>CAN_DLC_7B</name>
+        <initializer>((uint32_t)7U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="504" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="504" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga1b025ba8a7f17e9c77a1efbd8ca240d8" prot="public" static="no">
+        <name>CAN_DLC_8B</name>
+        <initializer>((uint32_t)8U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="505" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="505" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga1062f460db0fe000a315d56df5e33bcb" prot="public" static="no">
+        <name>CAN_DLC_12B</name>
+        <initializer>((uint32_t)9U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Equivalent to CAN_DLC_8B for classic CAN </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="506" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="506" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga32409cb6c9d015b3ecae524a290a20ee" prot="public" static="no">
+        <name>CAN_DLC_16B</name>
+        <initializer>((uint32_t)10U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Equivalent to CAN_DLC_8B for classic CAN </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="507" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="507" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga3f2237d2c78d31ee6fa3b50b22ba97d5" prot="public" static="no">
+        <name>CAN_DLC_20B</name>
+        <initializer>((uint32_t)11U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Equivalent to CAN_DLC_8B for classic CAN </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="508" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="508" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1gac6cbf524106c85bc00b90fc173c573b5" prot="public" static="no">
+        <name>CAN_DLC_24B</name>
+        <initializer>((uint32_t)12U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Equivalent to CAN_DLC_8B for classic CAN </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="509" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="509" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1gae5bbd2f4663e83765033ce0691ab137f" prot="public" static="no">
+        <name>CAN_DLC_32B</name>
+        <initializer>((uint32_t)13U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Equivalent to CAN_DLC_8B for classic CAN </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="510" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="510" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga373898d8122525b9e35a84dcca58abee" prot="public" static="no">
+        <name>CAN_DLC_48B</name>
+        <initializer>((uint32_t)14U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Equivalent to CAN_DLC_8B for classic CAN </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="511" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="511" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___d_l_c_1ga36d05d20d54c1602c8f53b23dd12b842" prot="public" static="no">
+        <name>CAN_DLC_64B</name>
+        <initializer>((uint32_t)15U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Equivalent to CAN_DLC_8B for classic CAN </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="512" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="512" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___f_e_c_1gae76fdd5aaef8272b3a395ff173b7de6c" prot="public" static="no">
+        <name>CAN_FEC_DISABLE_FILTER</name>
+        <initializer>((uint32_t)0U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="531" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="531" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___f_e_c_1gae8a4569aef9c12b6f3cfc7bacc4573b2" prot="public" static="no">
+        <name>CAN_FEC_STORE_RXFIFO0</name>
+        <initializer>((uint32_t)1U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="532" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="532" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___f_e_c_1ga88a35c0e4eb09d0f42637309a9f41621" prot="public" static="no">
+        <name>CAN_FEC_STORE_RXFIFO1</name>
+        <initializer>((uint32_t)2U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="533" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="533" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___f_e_c_1ga15e3e16d185de52c0093fa49c09b43fb" prot="public" static="no">
+        <name>CAN_FEC_REJECT_ID</name>
+        <initializer>((uint32_t)3U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="534" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="534" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___f_e_c_1gafe90bce702d871dfe3c638e96951b658" prot="public" static="no">
+        <name>CAN_FEC_SET_PRIO</name>
+        <initializer>((uint32_t)4U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="535" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="535" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___f_e_c_1ga3bd065ccc4141b4d946988ccc82a010e" prot="public" static="no">
+        <name>CAN_FEC_SET_PRIO_STORE_RXFIFO0</name>
+        <initializer>((uint32_t)5U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="536" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="536" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___f_e_c_1ga8aa1f099d70fe67c779f82c3bb1928be" prot="public" static="no">
+        <name>CAN_FEC_SET_PRIO_STORE_RXFIFO1</name>
+        <initializer>((uint32_t)6U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="537" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="537" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___f_e_c_1ga62ba101b4434f8b1169c4f6ca1fc6423" prot="public" static="no">
+        <name>CAN_FEC_STORE_RXBUF</name>
+        <initializer>((uint32_t)7U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="538" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="538" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___f_i_l_t_e_r___t_y_p_e_1ga02fd3a61a95fd97242c3e2b3b37e15f5" prot="public" static="no">
+        <name>CAN_FILTER_RANGE</name>
+        <initializer>((uint32_t)0U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="550" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="550" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___f_i_l_t_e_r___t_y_p_e_1gae9661fdc40f3f402cd7d273105271303" prot="public" static="no">
+        <name>CAN_FILTER_DUAL_ID</name>
+        <initializer>((uint32_t)1U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="551" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="551" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___f_i_l_t_e_r___t_y_p_e_1gaf14edc6fbe8165c2dda302d136686028" prot="public" static="no">
+        <name>CAN_FILTER_WITH_MASK</name>
+        <initializer>((uint32_t)2U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="552" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="552" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___f_i_l_t_e_r___t_y_p_e_1gae5f65d2b17cf93b5f23eabfbf7be7bbc" prot="public" static="no">
+        <name>CAN_FILTER_DISABLE</name>
+        <initializer>((uint32_t)3U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="553" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="553" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_c_a_n_8h_1a7d6743d2652302188c93f47db5dcfc45" prot="public" static="no">
+        <type><ref refid="struct_m_c_a_n___rx_buf_element" kindref="compound">MCAN_RxBufElement</ref></type>
+        <definition>typedef MCAN_RxBufElement CAN_RxBufElement</definition>
+        <argsstring></argsstring>
+        <name>CAN_RxBufElement</name>
+        <briefdescription>
+<para>A CAN Rx buffer element struct for <ref refid="_c_a_n_8h_1a515269a858d44d1ed043ccd37f3eedcb" kindref="member">CAN_read()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="559" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="559" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_c_a_n_8h_1a6fa90475d917c858125b0556d79e4ca6" prot="public" static="no">
+        <type><ref refid="struct_m_c_a_n___tx_buf_element" kindref="compound">MCAN_TxBufElement</ref></type>
+        <definition>typedef MCAN_TxBufElement CAN_TxBufElement</definition>
+        <argsstring></argsstring>
+        <name>CAN_TxBufElement</name>
+        <briefdescription>
+<para>A CAN Tx buffer element struct for <ref refid="_c_a_n_8h_1ab670eb9a60e4f12c2eab6df7c2fa87e5" kindref="member">CAN_write()</ref> and <ref refid="_c_a_n_8h_1a5faff3ed36a87d3459a2870f4e622d25" kindref="member">CAN_writeBuffer()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="564" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="564" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_c_a_n_8h_1a8772b52f18edb856a269966c547f87dd" prot="public" static="no">
+        <type><ref refid="struct_m_c_a_n___tx_event_fifo_element" kindref="compound">MCAN_TxEventFifoElement</ref></type>
+        <definition>typedef MCAN_TxEventFifoElement CAN_TxEventElement</definition>
+        <argsstring></argsstring>
+        <name>CAN_TxEventElement</name>
+        <briefdescription>
+<para>A CAN Tx Event element struct for <ref refid="_c_a_n_8h_1a52e9349d952c4ab8ee874cf337ba61d5" kindref="member">CAN_readTxEvent()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="569" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="569" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_c_a_n_8h_1aece4fe229807a6b7aa852376122f7bd2" prot="public" static="no">
+        <type><ref refid="struct_m_c_a_n___bit_timing_params" kindref="compound">MCAN_BitTimingParams</ref></type>
+        <definition>typedef MCAN_BitTimingParams CAN_BitTimingParams</definition>
+        <argsstring></argsstring>
+        <name>CAN_BitTimingParams</name>
+        <briefdescription>
+<para>A CAN bit timing struct for <ref refid="_c_a_n_8h_1a537b65f6cef1a7bf274e7550bb355d37" kindref="member">CAN_getBitTiming()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="574" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="574" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" prot="public" static="no">
+        <type>struct <ref refid="struct_c_a_n___config__" kindref="compound">CAN_Config_</ref> *</type>
+        <definition>typedef struct CAN_Config_* CAN_Handle</definition>
+        <argsstring></argsstring>
+        <name>CAN_Handle</name>
+        <briefdescription>
+<para>A handle that is returned from a <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> call. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="579" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="579" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_c_a_n_8h_1ae049aa077771ab029cf97e6d9c17d136" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* CAN_EventCbk) (CAN_Handle handle, uint32_t event, uint32_t data, void *userArg)</definition>
+        <argsstring>)(CAN_Handle handle, uint32_t event, uint32_t data, void *userArg)</argsstring>
+        <name>CAN_EventCbk</name>
+        <briefdescription>
+<para>The definition of a callback function used by the CAN driver. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>The callback can occur in task or interrupt context.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref> returned from <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="group___c_a_n___e_v_e_n_t" kindref="compound">CAN events</ref> that has occurred. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data is event dependent:<itemizedlist>
+<listitem><para><ref refid="group___c_a_n___e_v_e_n_t_1ga7b6db1c1518135c8d1631a961ceb6e47" kindref="member">CAN_EVENT_RX_DATA_AVAIL</ref>: number of Rx buffers available to read.</para></listitem><listitem><para><ref refid="group___c_a_n___e_v_e_n_t_1gad9bad54e02a163b9335e16dbdc6776b7" kindref="member">CAN_EVENT_RX_FIFO_MSG_LOST</ref>: FIFO number.</para></listitem><listitem><para><ref refid="group___c_a_n___e_v_e_n_t_1ga6b23e75721cbe2be44c31d4b32d0f6a1" kindref="member">CAN_EVENT_RX_RING_BUFFER_FULL</ref>: number of times the Rx ring buffer became full resulting in message loss.</para></listitem><listitem><para>CAN_EVENT_TX_FINISHED: mask of buffers for which transmission has occurred. Bits remain set until a new transmission is requested for the corresponding Tx buffer.</para></listitem><listitem><para>CAN_EVENT_TX_EVENT_AVAIL: the number of Tx Event elements currently available in the Tx Event FIFO.</para></listitem><listitem><para>CAN_EVENT_SPI_XFER_ERROR: SPI transfer status code.</para></listitem><listitem><para>other: unused </para></listitem></itemizedlist>
+</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">userArg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A user supplied argument specified in <ref refid="struct_c_a_n___params" kindref="compound">CAN_Params</ref>. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="606" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="606" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_c_a_n_8h_1a2adcb3cde9a6e999f9434e4689a917b9" prot="public" static="no">
+        <type>struct <ref refid="struct_c_a_n___config__" kindref="compound">CAN_Config_</ref></type>
+        <definition>typedef struct CAN_Config_  CAN_Config</definition>
+        <argsstring></argsstring>
+        <name>CAN_Config</name>
+        <briefdescription>
+<para>CAN Global configuration. </para>        </briefdescription>
+        <detaileddescription>
+<para>The CAN_Config structure contains a set of pointers used to characterize the CAN driver implementation. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="810" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_c_a_n_8h_1ae353719375f08244685082e2a8440aad" prot="public" static="no" mutable="no">
+        <type>const <ref refid="_c_a_n_8h_1a2adcb3cde9a6e999f9434e4689a917b9" kindref="member">CAN_Config</ref></type>
+        <definition>const CAN_Config CAN_config[]</definition>
+        <argsstring>[]</argsstring>
+        <name>CAN_config</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="812" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_c_a_n_8h_1addc4ab88f49cb2522ada61da8baced5d" prot="public" static="no" mutable="no">
+        <type>const uint_least8_t</type>
+        <definition>const uint_least8_t CAN_count</definition>
+        <argsstring></argsstring>
+        <name>CAN_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="813" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_c_a_n_8h_1ace7de72cc97ae2a35d63c3a4a4772a31" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CAN_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>CAN_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>This function initializes the CAN module. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para>The CAN_config structure must exist and be persistent before this function can be called. This function must also be called before any other CAN driver APIs. This function call does not modify any peripheral registers.</para></simplesect>
+<simplesect kind="see"><para><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="825" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_c_a_n_8h_1a9a7a7042e4948d4e04b9cb5205c50acf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CAN_Params_init</definition>
+        <argsstring>(CAN_Params *params)</argsstring>
+        <name>CAN_Params_init</name>
+        <param>
+          <type><ref refid="struct_c_a_n___params" kindref="compound">CAN_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the <ref refid="struct_c_a_n___params" kindref="compound">CAN_Params</ref> struct to its default values. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An pointer to <ref refid="struct_c_a_n___params" kindref="compound">CAN_Params</ref> structure for initialization</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Defaults values are: msgRamConfig = NULL bitTiming = NULL tsPrescaler = 24U eventCbk = NULL eventMask = 0U userArg = NULL</para><para><simplesect kind="see"><para><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="843" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref></type>
+        <definition>CAN_Handle CAN_open</definition>
+        <argsstring>(uint_least8_t index, CAN_Params *params)</argsstring>
+        <name>CAN_open</name>
+        <param>
+          <type>uint_least8_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_c_a_n___params" kindref="compound">CAN_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Initializes a CAN driver instance and returns a handle. </para>        </briefdescription>
+        <detaileddescription>
+<para>Initializes a CAN driver instance, configures the CAN device in normal operational mode, and returns a handle. Since the MCAN IP is highly configurable, the message RAM configuration and raw bit timings may be provided in the parameter block. Raw bit timings are required to use transmitter delay compensation. Invalid message RAM configuration or bit timing parameters will cause this function to fail.</para><para><simplesect kind="note"><para>For devices with an integrated CAN controller, a power contraint to prohibit standby will be set to allow the controller and its clock source to remain powered to receive CAN messages from the external transceiver. The power constrain will be released when <ref refid="_c_a_n_8h_1abfc2ccd7bffde7724a17ab6c7e69f5cf" kindref="member">CAN_close()</ref> is called.</para></simplesect>
+<simplesect kind="pre"><para>CAN controller has been initialized using <ref refid="_c_a_n_8h_1ace7de72cc97ae2a35d63c3a4a4772a31" kindref="member">CAN_init()</ref></para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Logical peripheral number for the CAN indexed into the <ref refid="_c_a_n_8h_1ae353719375f08244685082e2a8440aad" kindref="member">CAN_config</ref> table </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a parameter block, if NULL it will use default values.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A <ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref> on success, otherwise, NULL upon error or if it has been opened already.</para></simplesect>
+<simplesect kind="pre"><para><ref refid="_c_a_n_8h_1ace7de72cc97ae2a35d63c3a4a4772a31" kindref="member">CAN_init()</ref></para></simplesect>
+<simplesect kind="see"><para><ref refid="_c_a_n_8h_1abfc2ccd7bffde7724a17ab6c7e69f5cf" kindref="member">CAN_close()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="875" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_c_a_n_8h_1abfc2ccd7bffde7724a17ab6c7e69f5cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CAN_close</definition>
+        <argsstring>(CAN_Handle handle)</argsstring>
+        <name>CAN_close</name>
+        <param>
+          <type><ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Closes a CAN peripheral specified by <emphasis>handle</emphasis>. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref> returned from <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>None. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="886" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_c_a_n_8h_1a515269a858d44d1ed043ccd37f3eedcb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t CAN_read</definition>
+        <argsstring>(CAN_Handle handle, CAN_RxBufElement *elem)</argsstring>
+        <name>CAN_read</name>
+        <param>
+          <type><ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="_c_a_n_8h_1a7d6743d2652302188c93f47db5dcfc45" kindref="member">CAN_RxBufElement</ref> *</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+<para>Reads a received CAN message. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref> returned from <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to a <ref refid="_c_a_n_8h_1a7d6743d2652302188c93f47db5dcfc45" kindref="member">CAN_RxBufElement</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_SUCCESS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_NO_RX_MSG_AVAIL</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if no messages are available. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="899" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_c_a_n_8h_1ab670eb9a60e4f12c2eab6df7c2fa87e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t CAN_write</definition>
+        <argsstring>(CAN_Handle handle, const CAN_TxBufElement *elem)</argsstring>
+        <name>CAN_write</name>
+        <param>
+          <type><ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>const <ref refid="_c_a_n_8h_1a6fa90475d917c858125b0556d79e4ca6" kindref="member">CAN_TxBufElement</ref> *</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+<para>Sends CAN message using the Tx FIFO/Queue. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref> returned from <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to a <ref refid="_c_a_n_8h_1a6fa90475d917c858125b0556d79e4ca6" kindref="member">CAN_TxBufElement</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_SUCCESS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_ERROR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if no Tx FIFO/Queue is configured. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_TX_BUF_FULL</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the Tx buffer is full. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="913" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_c_a_n_8h_1a5faff3ed36a87d3459a2870f4e622d25" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t CAN_writeBuffer</definition>
+        <argsstring>(CAN_Handle handle, uint32_t bufIdx, const CAN_TxBufElement *elem)</argsstring>
+        <name>CAN_writeBuffer</name>
+        <param>
+          <type><ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>bufIdx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="_c_a_n_8h_1a6fa90475d917c858125b0556d79e4ca6" kindref="member">CAN_TxBufElement</ref> *</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+<para>Sends CAN message using a dedicated Tx Buffer. </para>        </briefdescription>
+        <detaileddescription>
+<para>Dedicated Tx buffers are intended for message transmission under complete control of the application. A custom message RAM config with dedicated Tx buffer(s) must be provided during <ref refid="_c_a_n_8h_1ace7de72cc97ae2a35d63c3a4a4772a31" kindref="member">CAN_init</ref> in order to utilize this function.</para><para><simplesect kind="note"><para>The default message RAM configuration uses a Tx Queue in which the message with the highest priority in the queue is transmitted first. If a custom message RAM configuration with Tx FIFO is used, messages are transmitted out in the order they are placed in the FIFO. Adding a dedicated Tx buffer to the custom configuration and calling this function can allow a new higher priority message to be transmitted before the Tx FIFO is empty.</para></simplesect>
+<simplesect kind="pre"><para><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref> returned from <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bufIdx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the dedicated Tx buffer. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to a <ref refid="_c_a_n_8h_1a6fa90475d917c858125b0556d79e4ca6" kindref="member">CAN_TxBufElement</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_SUCCESS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_ERROR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the Tx buffer index is invalid or the buffer already has a Tx request pending. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="941" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_c_a_n_8h_1a52e9349d952c4ab8ee874cf337ba61d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t CAN_readTxEvent</definition>
+        <argsstring>(CAN_Handle handle, CAN_TxEventElement *elem)</argsstring>
+        <name>CAN_readTxEvent</name>
+        <param>
+          <type><ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="_c_a_n_8h_1a8772b52f18edb856a269966c547f87dd" kindref="member">CAN_TxEventElement</ref> *</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+<para>Reads the next available CAN Tx Event FIFO element. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref> returned from <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to a <ref refid="_c_a_n_8h_1a8772b52f18edb856a269966c547f87dd" kindref="member">CAN_TxEventElement</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_SUCCESS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_ERROR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if no Tx Event FIFO is configured. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_NO_TX_EVENT_AVAIL</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if no Tx Event is available. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="955" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_c_a_n_8h_1a537b65f6cef1a7bf274e7550bb355d37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CAN_getBitTiming</definition>
+        <argsstring>(CAN_Handle handle, CAN_BitTimingParams *bitTiming, uint32_t *clkFreq)</argsstring>
+        <name>CAN_getBitTiming</name>
+        <param>
+          <type><ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="_c_a_n_8h_1aece4fe229807a6b7aa852376122f7bd2" kindref="member">CAN_BitTimingParams</ref> *</type>
+          <declname>bitTiming</declname>
+        </param>
+        <param>
+          <type>uint32_t *</type>
+          <declname>clkFreq</declname>
+        </param>
+        <briefdescription>
+<para>Get the CAN bit timings and functional clock frequency. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> has to be called first.</para></simplesect>
+<simplesect kind="note"><para>Add 1 to the bit timing values to obtain the functional values.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref> returned from <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bitTiming</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to a <ref refid="_c_a_n_8h_1aece4fe229807a6b7aa852376122f7bd2" kindref="member">CAN_BitTimingParams</ref> struct. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>clkFreq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to the CAN functional clock frequency in kHz. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="968" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_c_a_n_8h_1a4438793696220749713ccde080099b3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t CAN_enableLoopbackExt</definition>
+        <argsstring>(CAN_Handle handle)</argsstring>
+        <name>CAN_enableLoopbackExt</name>
+        <param>
+          <type><ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Enables external loopback test mode. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref> returned from <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_SUCCESS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_NOT_SUPPORTED</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if this feature is not supported.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_c_a_n_8h_1ac6206b975391c4b0e19b54097b12d785" kindref="member">CAN_enableLoopbackInt()</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_c_a_n_8h_1ac9aa9243ed8fe0d17141bf56c94cffbf" kindref="member">CAN_disableLoopback()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="984" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_c_a_n_8h_1ac6206b975391c4b0e19b54097b12d785" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t CAN_enableLoopbackInt</definition>
+        <argsstring>(CAN_Handle handle)</argsstring>
+        <name>CAN_enableLoopbackInt</name>
+        <param>
+          <type><ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Enables internal loopback test mode. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref> returned from <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="pre"><para><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref></para></simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_SUCCESS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_NOT_SUPPORTED</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if this feature is not supported.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_c_a_n_8h_1a4438793696220749713ccde080099b3d" kindref="member">CAN_enableLoopbackExt()</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_c_a_n_8h_1ac9aa9243ed8fe0d17141bf56c94cffbf" kindref="member">CAN_disableLoopback()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="999" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_c_a_n_8h_1ac9aa9243ed8fe0d17141bf56c94cffbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t CAN_disableLoopback</definition>
+        <argsstring>(CAN_Handle handle)</argsstring>
+        <name>CAN_disableLoopback</name>
+        <param>
+          <type><ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Disables loopback test mode. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> has to be called first. </para></simplesect>
+<simplesect kind="pre"><para><ref refid="_c_a_n_8h_1a4438793696220749713ccde080099b3d" kindref="member">CAN_enableLoopbackExt()</ref> or <ref refid="_c_a_n_8h_1ac6206b975391c4b0e19b54097b12d785" kindref="member">CAN_enableLoopbackInt()</ref></para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref> returned from <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_SUCCESS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>CAN_STATUS_NOT_SUPPORTED</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if this feature is not supported. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="1012" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Controller Area Network (CAN) Driver Interface. </para>    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para><para><anchor id="_c_a_n_8h_1ti_drivers_CAN_Overview"/><heading level="1">Overview</heading>
+</para><para>The Controller Area Network (CAN) driver is a single instance driver that provides a simple interface to transmit and receive messages on a CAN bus. Messages are broadcast to the entire CAN network and each device is responsible for filtering and handling the received messages as necessary. The application is responsible for interpreting the received data.</para><para><heading level="1">Power Management</heading>
+</para><para>For devices with an integrated CAN controller, the CAN driver sets a power constraint when the driver is opened to prevent the device from entering standby when all tasks are blocked. This is required to allow the CAN controller and its clock source to remain powered to receive CAN messages from the external CAN transceiver. When the driver is closed, the power constraint is released. The application should close the CAN driver whenever the CAN transceiver enters sleep mode and re-open the CAN driver when the CAN transceiver wakes from sleep mode.</para><para><hruler/>
+ <anchor id="_c_a_n_8h_1ti_drivers_CAN_Usage"/><heading level="1">Usage</heading>
+</para><para>To use the CAN driver to send and receive messages over the CAN bus, the application calls the following APIs:<itemizedlist>
+<listitem><para><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>: Open the CAN driver instance and configure the CAN controller, placing it in normal operational mode.</para></listitem><listitem><para><ref refid="_c_a_n_8h_1ab670eb9a60e4f12c2eab6df7c2fa87e5" kindref="member">CAN_write()</ref>: Transmit a message using the Tx FIFO/Queue. This is the typical method of transmission.</para></listitem><listitem><para><ref refid="_c_a_n_8h_1a5faff3ed36a87d3459a2870f4e622d25" kindref="member">CAN_writeBuffer()</ref>: Transmit a message using a dedicated Tx Buffer. This method of transmission requires a custom message RAM configuration and should only be used if there is an application-specific need that cannot be met by using the Tx FIFO/Queue.</para></listitem><listitem><para><ref refid="_c_a_n_8h_1a515269a858d44d1ed043ccd37f3eedcb" kindref="member">CAN_read()</ref>: Receive a message. This should be called in a task context and triggered by the event callback when CAN_EVENT_RX_DATA_AVAIL occurs.</para></listitem><listitem><para><ref refid="_c_a_n_8h_1abfc2ccd7bffde7724a17ab6c7e69f5cf" kindref="member">CAN_close()</ref>: Close the CAN driver instance and reset the CAN controller, placing it in standby operational mode.</para></listitem></itemizedlist>
+</para><para><anchor id="_c_a_n_8h_1ti_drivers_CAN_Synopsis"/><heading level="2">Synopsis</heading>
+</para><para>The following code example initializes the CAN driver with the default configuration, transmits a CAN FD message, and waits to read any received messages.</para><para><programlisting><codeline><highlight class="normal">//<sp/>Payload<sp/>data<sp/>size<sp/>indexed<sp/>by<sp/>Data<sp/>Length<sp/>Code<sp/>(DLC)<sp/>field.</highlight></codeline>
+<codeline><highlight class="normal">static<sp/>const<sp/>uint32_t<sp/>dlcToDataSize[16]<sp/>=<sp/>{0,<sp/>1,<sp/>2,<sp/>3,<sp/>4,<sp/>5,<sp/>6,<sp/>7,<sp/>8,<sp/>12,<sp/>16,<sp/>20,<sp/>24,<sp/>32,<sp/>48,<sp/>64};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Rx<sp/>semaphore.</highlight></codeline>
+<codeline><highlight class="normal">static<sp/>SemaphoreP_Handle<sp/>rxSemHandle;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">void<sp/>eventCallback(CAN_Handle<sp/>handle,<sp/>uint32_t<sp/>event,<sp/>uint32_t<sp/>data,<sp/>void<sp/>*userArg)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>if<sp/>(event<sp/>==<sp/>CAN_EVENT_RX_DATA_AVAIL)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SemaphoreP_post(rxSemHandle);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>more<sp/>events<sp/>here<sp/>if<sp/>enabled<sp/>via<sp/>the<sp/>event<sp/>mask...</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">void<sp/>thread(arg0,<sp/>arg1)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>int_fast16_t<sp/>status;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>CAN_RxBufElement<sp/>rxElem;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>CAN_TxBufElement<sp/>txElem;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/>Initialize<sp/>driver(s).</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>CAN_init();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/>Create<sp/>callback<sp/>semaphore.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>SemaphoreP_Params<sp/>semParams;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>SemaphoreP_Params_init(&amp;semParams);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>semParams.mode<sp/><sp/><sp/><sp/>=<sp/>SemaphoreP_Mode_BINARY;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>callbackSemHandle<sp/>=<sp/>SemaphoreP_create(0,<sp/>&amp;(semParams));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>if<sp/>(callbackSemHandle<sp/>==<sp/>NULL)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>SemaphoreP_create()<sp/>failed.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(1)<sp/>{}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/>Open<sp/>CAN<sp/>driver<sp/>with<sp/>default<sp/>configuration.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>CAN_Params_init(&amp;canParams);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>canParams.eventCbk<sp/><sp/>=<sp/>eventCallback;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/>Setup<sp/>event<sp/>mask<sp/>for<sp/>events<sp/>the<sp/>application<sp/>is<sp/>interested<sp/>in<sp/>receiving</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/>the<sp/>callback<sp/>for.<sp/>Typically,<sp/>only<sp/>the<sp/>CAN_EVENT_RX_DATA_AVAIL<sp/>is<sp/>required.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>canParams.eventMask<sp/>=<sp/>CAN_EVENT_RX_DATA_AVAIL;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>canHandle<sp/>=<sp/>CAN_open(CONFIG_CAN_0,<sp/>&amp;canParams);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>if<sp/>(canHandle<sp/>==<sp/>NULL)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>CAN_open()<sp/>failed.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(1)<sp/>{}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/>Setup<sp/>Tx<sp/>buffer<sp/>element:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/><sp/><sp/>CAN<sp/>FD<sp/>without<sp/>Bit<sp/>Rate<sp/>Switching</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/><sp/><sp/>Extended<sp/>Message<sp/>ID<sp/>=<sp/>0x12345678</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/><sp/><sp/>Data<sp/>Length<sp/>of<sp/>64-bytes</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/><sp/><sp/>Message<sp/>marker<sp/>=<sp/>5</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>txElem.id<sp/><sp/>=<sp/>0x12345678U;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>txElem.rtr<sp/>=<sp/>0U;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>txElem.xtd<sp/>=<sp/>1U;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>txElem.esi<sp/>=<sp/>0U;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>txElem.brs<sp/>=<sp/>1U;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>txElem.dlc<sp/>=<sp/>CAN_DLC_64B;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>txElem.fdf<sp/>=<sp/>1U;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>txElem.efc<sp/>=<sp/>0U;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>txElem.mm<sp/><sp/>=<sp/>5U;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/>Fill<sp/>data<sp/>payload<sp/>with<sp/>incrementing<sp/>values.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>for<sp/>(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>dlcToDataSize[txElem.dlc];<sp/>i++)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>txElem.data[i]<sp/>=<sp/>i;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>//<sp/>Transmit<sp/>message.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>CAN_write(canHandle,<sp/>&amp;txElem);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>while<sp/>(1)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Wait<sp/>for<sp/>Rx<sp/>data<sp/>available<sp/>event.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SemaphoreP_pend(rxSemHandle,<sp/>(uint32_t)SemaphoreP_WAIT_FOREVER);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Read<sp/>all<sp/>available<sp/>messages.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(CAN_read(canHandle,<sp/>&amp;rxElem)<sp/>==<sp/>CAN_STATUS_SUCCESS)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Process<sp/>received<sp/>message.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para><para>More details on usage are provided in the following subsections.</para><para><anchor id="_c_a_n_8h_1ti_drivers_CAN_Examples"/><heading level="2">Examples</heading>
+</para><para><itemizedlist>
+<listitem><para><ref refid="_c_a_n_8h_1ti_drivers_CAN_Synopsis" kindref="member">Usage Synopsis</ref></para></listitem><listitem><para><ref refid="_c_a_n_8h_1ti_drivers_CAN_Example_initMsgRam" kindref="member">Initialize with custom message RAM configuration</ref></para></listitem><listitem><para><ref refid="_c_a_n_8h_1ti_drivers_CAN_Example_initRawBitRate" kindref="member">Initialize with raw bit rate timing</ref></para></listitem></itemizedlist>
+</para><para><heading level="2">Initializing the CAN Driver</heading>
+</para><para><ref refid="_c_a_n_8h_1ace7de72cc97ae2a35d63c3a4a4772a31" kindref="member">CAN_init()</ref> must be called before any other CAN APIs. This function initializes common driver resources and calls the device-specific initialization function to configure the bit rate and message RAM.</para><para><heading level="2">Opening the CAN Driver</heading>
+</para><para>After initializing the CAN driver by calling <ref refid="_c_a_n_8h_1ace7de72cc97ae2a35d63c3a4a4772a31" kindref="member">CAN_init()</ref>, the application can open a CAN instance by calling <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>. This function takes an index into the <computeroutput>CAN_config</computeroutput>[] array, and a CAN parameters data structure. The CAN instance is specified by the index of the CAN in <computeroutput>CAN_config</computeroutput>[]. Calling <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> a second time with the same index previously passed to <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref> will result in an error. You can, though, re-use the index if the instance is closed via <ref refid="_c_a_n_8h_1abfc2ccd7bffde7724a17ab6c7e69f5cf" kindref="member">CAN_close()</ref>.</para><para>If no <ref refid="struct_c_a_n___params" kindref="compound">CAN_Params</ref> structure is passed to <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>, default values are used. If the open call is successful, it returns a non-NULL value. The CAN driver APIs are non-blocking; there is no configurable return behavior.</para><para><anchor id="_c_a_n_8h_1ti_drivers_CAN_Example_initMsgRam"/> Example initializing the CAN driver with a custom message RAM configuration to receive only filtered message IDs:</para><para><simplesect kind="note"><para>CAN driver SysConfig must be setup with &apos;Reject Non-Matching Messages&apos; enabled.</para></simplesect>
+<programlisting><codeline><highlight class="normal">#define<sp/>STD_MSG_FILTER_NUM<sp/>2U</highlight></codeline>
+<codeline><highlight class="normal">#define<sp/>EXT_MSG_FILTER_NUM<sp/>1U</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">static<sp/>MCAN_StdMsgIDFilterElement<sp/>stdMsgIDFilter[STD_MSG_FILTER_NUM]<sp/>=</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{{.sfid1<sp/>=<sp/>0x555,<sp/>.sfid2<sp/>=<sp/>0x444,<sp/>.sfec<sp/>=<sp/>CAN_FEC_STORE_RXFIFO0,<sp/>.sft<sp/>=<sp/>CAN_FILTER_DUAL_ID},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>{.sfid1<sp/>=<sp/>0x123,<sp/>.sfid2<sp/>=<sp/>0U,<sp/>.sfec<sp/>=<sp/>CAN_FEC_STORE_RXBUF,<sp/>.sft<sp/>=<sp/>0U}};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">static<sp/>MCAN_ExtMsgIDFilterElement<sp/>extMsgIDFilter[EXT_MSG_FILTER_NUM]<sp/>=</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{{.efid1<sp/>=<sp/>0x1234578,<sp/>.efid2<sp/>=<sp/>0x1234600,<sp/>.efec<sp/>=<sp/>CAN_FEC_STORE_RXFIFO1,<sp/>.eft<sp/>=<sp/>CAN_FILTER_RANGE}};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">const<sp/>CAN_MsgRamConfig<sp/>msgRamConfig<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.stdFilterNum<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>STD_MSG_FILTER_NUM,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.extFilterNum<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>EXT_MSG_FILTER_NUM,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.stdMsgIDFilterList<sp/>=<sp/>&amp;stdMsgIDFilter[0],</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.extMsgIDFilterList<sp/>=<sp/>&amp;extMsgIDFilter[0],</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.rxFifoNum[0]<sp/>=<sp/>10U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.rxFifoNum[1]<sp/>=<sp/>2U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.rxBufNum<sp/><sp/><sp/><sp/><sp/>=<sp/>1U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.txBufNum<sp/><sp/><sp/><sp/><sp/>=<sp/>1U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.txFifoQNum<sp/><sp/><sp/>=<sp/>5U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.txFifoQMode<sp/><sp/>=<sp/>1U,</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">int_fast16_t<sp/>status;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Initialize<sp/>driver(s).</highlight></codeline>
+<codeline><highlight class="normal">CAN_init();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Open<sp/>CAN<sp/>driver<sp/>with<sp/>custom<sp/>message<sp/>filters.</highlight></codeline>
+<codeline><highlight class="normal">CAN_Params_init(&amp;canParams);</highlight></codeline>
+<codeline><highlight class="normal">canParams.msgRamConfig<sp/>=<sp/>&amp;msgRamConfig;</highlight></codeline>
+<codeline><highlight class="normal">canParams.eventCbk<sp/><sp/>=<sp/>eventCallback;</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Setup<sp/>event<sp/>mask<sp/>for<sp/>events<sp/>the<sp/>application<sp/>is<sp/>interested<sp/>in<sp/>receiving</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>the<sp/>callback<sp/>for.<sp/>Typically,<sp/>only<sp/>the<sp/>CAN_EVENT_RX_DATA_AVAIL<sp/>is<sp/>required.</highlight></codeline>
+<codeline><highlight class="normal">canParams.eventMask<sp/>=<sp/>CAN_EVENT_RX_DATA_AVAIL;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">canHandle<sp/>=<sp/>CAN_open(CONFIG_CAN_0,<sp/>&amp;canParams);</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(canHandle<sp/>==<sp/>NULL)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>CAN_open()<sp/>failed.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>while<sp/>(1)<sp/>{}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para><para><anchor id="_c_a_n_8h_1ti_drivers_CAN_Example_initRawBitRate"/> Example initializing the CAN driver with a specific raw bit rate timing: <simplesect kind="note"><para>For this example, CAN driver SysConfig should be setup with &apos;CAN FD Operation&apos; and &apos;Bit Rate Switching&apos; enabled. The nominal and data bit rates selected in SysConfig will be ignored since raw bit rate timing parameters are provided to <ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open()</ref>.</para></simplesect>
+<programlisting><codeline><highlight class="normal">const<sp/>CAN_DataBitRateTimingRaw<sp/>rawDataBitRateTiming<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>1Mbps<sp/>with<sp/>40MHz<sp/>clk<sp/>and<sp/>80%<sp/>sample<sp/>point<sp/>((40E6<sp/>/<sp/>2)<sp/>/<sp/>(15<sp/>+<sp/>4<sp/>+<sp/>1)<sp/>=<sp/>1E6)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Add<sp/>1<sp/>to<sp/>each<sp/>programmed<sp/>bit<sp/>time<sp/>to<sp/>get<sp/>functional<sp/>value<sp/>and<sp/>+1<sp/>for<sp/>for<sp/>prop<sp/>segment</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.dbrp<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.dtSeg1<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>14U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.dtSeg2<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>3U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.dsjw<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>3U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.tdcOffset<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>14U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.tdcFilterWinLen<sp/>=<sp/>0U</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">const<sp/>CAN_BitRateTimingRaw<sp/>rawBitTiming<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>500kbps<sp/>nominal<sp/>with<sp/>40MHz<sp/>clk<sp/>and<sp/>87.5%<sp/>sample<sp/>point<sp/>((40E6<sp/>/<sp/>1)<sp/>/<sp/>(69<sp/>+<sp/>10<sp/>+<sp/>1)<sp/>=<sp/>500E3)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Add<sp/>1<sp/>to<sp/>each<sp/>programmed<sp/>bit<sp/>time<sp/>to<sp/>get<sp/>functional<sp/>value<sp/>and<sp/>+1<sp/>for<sp/>for<sp/>prop<sp/>segment</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.nbrp<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.ntSeg1<sp/><sp/><sp/><sp/><sp/>=<sp/>68U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.ntSeg2<sp/><sp/><sp/><sp/><sp/>=<sp/>9U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.nsjw<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>9U,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.dataTiming<sp/>=<sp/>&amp;rawDataBitRateTiming</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">int_fast16_t<sp/>status;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Initialize<sp/>driver(s).</highlight></codeline>
+<codeline><highlight class="normal">CAN_init();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Open<sp/>CAN<sp/>with<sp/>specific<sp/>raw<sp/>bit<sp/>timing.</highlight></codeline>
+<codeline><highlight class="normal">CAN_Params_init(&amp;canParams);</highlight></codeline>
+<codeline><highlight class="normal">canParams.bitTiming<sp/>=<sp/>&amp;rawBitTiming;</highlight></codeline>
+<codeline><highlight class="normal">canParams.eventCbk<sp/><sp/>=<sp/>eventCallback;</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Setup<sp/>event<sp/>mask<sp/>for<sp/>events<sp/>the<sp/>application<sp/>is<sp/>interested<sp/>in<sp/>receiving</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>the<sp/>callback<sp/>for.<sp/>Typically,<sp/>only<sp/>the<sp/>CAN_EVENT_RX_DATA_AVAIL<sp/>is<sp/>required.</highlight></codeline>
+<codeline><highlight class="normal">canParams.eventMask<sp/>=<sp/>CAN_EVENT_RX_DATA_AVAIL;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">canHandle<sp/>=<sp/>CAN_open(CONFIG_CAN_0,<sp/>&amp;canParams);</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(canHandle<sp/>==<sp/>NULL)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>CAN_open()<sp/>failed.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>while<sp/>(1)<sp/>{}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para><para><heading level="2">CAN Message RAM Configuration</heading>
+</para><para>The default message RAM configuration is as follows:<itemizedlist>
+<listitem><para>No Rx filters.</para></listitem><listitem><para>Tx Queue (message with lowest ID in the queue will be transmitted first) with a fixed device-specific number of Tx buffers.</para></listitem><listitem><para>No Tx event FIFO.</para></listitem><listitem><para>Fixed device-specific number of Rx FIFO0 buffers.</para></listitem><listitem><para>No Rx FIFO1 buffers.</para></listitem><listitem><para>No dedicated Rx buffers.</para></listitem></itemizedlist>
+</para><para>The number of default Tx and Rx buffers varies depending on the size of the device&apos;s message RAM. Check the doxygen for the device-specific CAN implementation to find the message RAM size. If using a custom message RAM configuration, utilize the entire space by maximizing the number of Rx/Tx buffers for optimal performance.</para><para><heading level="2">CAN Write Behavior</heading>
+</para><para><ref refid="_c_a_n_8h_1ab670eb9a60e4f12c2eab6df7c2fa87e5" kindref="member">CAN_write()</ref> will return immediately after the message is loaded into the CAN controller&apos;s message RAM and pending transfer; it does not wait for the CAN message to be transmitted on the bus before returning. The CAN controller will automatically handle transmission retries in the event of a failure.</para><para><heading level="2">CAN Read Behavior</heading>
+</para><para>When a message is received in Rx FIFO0/1 or a dedicated Rx buffer, the CAN driver&apos;s IRQ handler automatically reads the Rx buffer element from the CAN controller&apos;s message RAM and stores it in a ring buffer whose size is configurable in SysConfig. When <ref refid="_c_a_n_8h_1a515269a858d44d1ed043ccd37f3eedcb" kindref="member">CAN_read()</ref> is called, the Rx buffer element is copied from the ring buffer to the application. If the ring buffer becomes full, any new messages received will be lost until the application frees space in the ring buffer by calling <ref refid="_c_a_n_8h_1a515269a858d44d1ed043ccd37f3eedcb" kindref="member">CAN_read()</ref>. </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2023-2024,<sp/>Texas<sp/>Instruments<sp/>Incorporated</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">/*!*****************************************************************************</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*<sp/><sp/>@file<sp/><sp/><sp/><sp/><sp/><sp/><sp/>CAN.h</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*<sp/><sp/>@brief<sp/><sp/><sp/><sp/><sp/><sp/>Controller<sp/>Area<sp/>Network<sp/>(CAN)<sp/>Driver<sp/>Interface</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_CAN_Overview</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Overview</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>Controller<sp/>Area<sp/>Network<sp/>(CAN)<sp/>driver<sp/>is<sp/>a<sp/>single<sp/>instance<sp/>driver</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*<sp/><sp/>that<sp/>provides<sp/>a<sp/>simple<sp/>interface<sp/>to<sp/>transmit<sp/>and<sp/>receive<sp/>messages<sp/>on<sp/>a<sp/>CAN<sp/>bus.</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/><sp/>Messages<sp/>are<sp/>broadcast<sp/>to<sp/>the<sp/>entire<sp/>CAN<sp/>network<sp/>and<sp/>each<sp/>device<sp/>is<sp/>responsible</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*<sp/><sp/>for<sp/>filtering<sp/>and<sp/>handling<sp/>the<sp/>received<sp/>messages<sp/>as<sp/>necessary.</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>application<sp/>is<sp/>responsible<sp/>for<sp/>interpreting<sp/>the<sp/>received<sp/>data.</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Power<sp/>Management</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/>*<sp/><sp/>For<sp/>devices<sp/>with<sp/>an<sp/>integrated<sp/>CAN<sp/>controller,<sp/>the<sp/>CAN<sp/>driver<sp/>sets<sp/>a<sp/>power</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/>*<sp/><sp/>constraint<sp/>when<sp/>the<sp/>driver<sp/>is<sp/>opened<sp/>to<sp/>prevent<sp/>the<sp/>device<sp/>from<sp/>entering</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/>*<sp/><sp/>standby<sp/>when<sp/>all<sp/>tasks<sp/>are<sp/>blocked.<sp/>This<sp/>is<sp/>required<sp/>to<sp/>allow<sp/>the<sp/>CAN</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/>*<sp/><sp/>controller<sp/>and<sp/>its<sp/>clock<sp/>source<sp/>to<sp/>remain<sp/>powered<sp/>to<sp/>receive<sp/>CAN<sp/>messages</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/>*<sp/><sp/>from<sp/>the<sp/>external<sp/>CAN<sp/>transceiver.<sp/>When<sp/>the<sp/>driver<sp/>is<sp/>closed,<sp/>the<sp/>power</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/>*<sp/><sp/>constraint<sp/>is<sp/>released.<sp/>The<sp/>application<sp/>should<sp/>close<sp/>the<sp/>CAN<sp/>driver<sp/>whenever</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/>*<sp/><sp/>the<sp/>CAN<sp/>transceiver<sp/>enters<sp/>sleep<sp/>mode<sp/>and<sp/>re-open<sp/>the<sp/>CAN<sp/>driver<sp/>when<sp/>the<sp/>CAN</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/>*<sp/><sp/>transceiver<sp/>wakes<sp/>from<sp/>sleep<sp/>mode.</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/>*<sp/><sp/>&lt;hr&gt;</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_CAN_Usage</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Usage</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/>*<sp/><sp/>To<sp/>use<sp/>the<sp/>CAN<sp/>driver<sp/>to<sp/>send<sp/>and<sp/>receive<sp/>messages<sp/>over<sp/>the<sp/>CAN<sp/>bus,<sp/>the</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/>*<sp/><sp/>application<sp/>calls<sp/>the<sp/>following<sp/>APIs:</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>CAN_open():<sp/>Open<sp/>the<sp/>CAN<sp/>driver<sp/>instance<sp/>and<sp/>configure<sp/>the<sp/>CAN</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>controller,<sp/>placing<sp/>it<sp/>in<sp/>normal<sp/>operational<sp/>mode.</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>CAN_write():<sp/>Transmit<sp/>a<sp/>message<sp/>using<sp/>the<sp/>Tx<sp/>FIFO/Queue.<sp/>This<sp/>is<sp/>the</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>typical<sp/>method<sp/>of<sp/>transmission.</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>CAN_writeBuffer():<sp/>Transmit<sp/>a<sp/>message<sp/>using<sp/>a<sp/>dedicated<sp/>Tx<sp/>Buffer.<sp/>This</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>method<sp/>of<sp/>transmission<sp/>requires<sp/>a<sp/>custom<sp/>message<sp/>RAM<sp/>configuration<sp/>and</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>should<sp/>only<sp/>be<sp/>used<sp/>if<sp/>there<sp/>is<sp/>an<sp/>application-specific<sp/>need<sp/>that<sp/>cannot</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>be<sp/>met<sp/>by<sp/>using<sp/>the<sp/>Tx<sp/>FIFO/Queue.</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>CAN_read():<sp/>Receive<sp/>a<sp/>message.<sp/>This<sp/>should<sp/>be<sp/>called<sp/>in<sp/>a<sp/>task<sp/>context</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>and<sp/>triggered<sp/>by<sp/>the<sp/>event<sp/>callback<sp/>when<sp/>CAN_EVENT_RX_DATA_AVAIL<sp/>occurs.</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>CAN_close():<sp/>Close<sp/>the<sp/>CAN<sp/>driver<sp/>instance<sp/>and<sp/>reset<sp/>the<sp/>CAN<sp/>controller,</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>placing<sp/>it<sp/>in<sp/>standby<sp/>operational<sp/>mode.</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_CAN_Synopsis</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Synopsis</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>following<sp/>code<sp/>example<sp/>initializes<sp/>the<sp/>CAN<sp/>driver<sp/>with<sp/>the<sp/>default</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/>*<sp/><sp/>configuration,<sp/>transmits<sp/>a<sp/>CAN<sp/>FD<sp/>message,<sp/>and<sp/>waits<sp/>to<sp/>read<sp/>any<sp/>received</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/>*<sp/><sp/>messages.</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Payload<sp/>data<sp/>size<sp/>indexed<sp/>by<sp/>Data<sp/>Length<sp/>Code<sp/>(DLC)<sp/>field.</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/>*<sp/><sp/>static<sp/>const<sp/>uint32_t<sp/>dlcToDataSize[16]<sp/>=<sp/>{0,<sp/>1,<sp/>2,<sp/>3,<sp/>4,<sp/>5,<sp/>6,<sp/>7,<sp/>8,<sp/>12,<sp/>16,<sp/>20,<sp/>24,<sp/>32,<sp/>48,<sp/>64};</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Rx<sp/>semaphore.</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/>*<sp/><sp/>static<sp/>SemaphoreP_Handle<sp/>rxSemHandle;</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*<sp/><sp/>void<sp/>eventCallback(CAN_Handle<sp/>handle,<sp/>uint32_t<sp/>event,<sp/>uint32_t<sp/>data,<sp/>void<sp/>*userArg)</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/>*<sp/><sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(event<sp/>==<sp/>CAN_EVENT_RX_DATA_AVAIL)</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SemaphoreP_post(rxSemHandle);</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>more<sp/>events<sp/>here<sp/>if<sp/>enabled<sp/>via<sp/>the<sp/>event<sp/>mask...</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*<sp/><sp/>void<sp/>thread(arg0,<sp/>arg1)</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/>*<sp/><sp/>{</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>int_fast16_t<sp/>status;</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>CAN_RxBufElement<sp/>rxElem;</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>CAN_TxBufElement<sp/>txElem;</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/>Initialize<sp/>driver(s).</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>CAN_init();</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/>Create<sp/>callback<sp/>semaphore.</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>SemaphoreP_Params<sp/>semParams;</highlight></codeline>
+<codeline lineno="107"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>SemaphoreP_Params_init(&amp;semParams);</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>semParams.mode<sp/><sp/><sp/><sp/>=<sp/>SemaphoreP_Mode_BINARY;</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>callbackSemHandle<sp/>=<sp/>SemaphoreP_create(0,<sp/>&amp;(semParams));</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>if<sp/>(callbackSemHandle<sp/>==<sp/>NULL)</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>SemaphoreP_create()<sp/>failed.</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(1)<sp/>{}</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/>Open<sp/>CAN<sp/>driver<sp/>with<sp/>default<sp/>configuration.</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>CAN_Params_init(&amp;canParams);</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>canParams.eventCbk<sp/><sp/>=<sp/>eventCallback;</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/>Setup<sp/>event<sp/>mask<sp/>for<sp/>events<sp/>the<sp/>application<sp/>is<sp/>interested<sp/>in<sp/>receiving</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/>the<sp/>callback<sp/>for.<sp/>Typically,<sp/>only<sp/>the<sp/>CAN_EVENT_RX_DATA_AVAIL<sp/>is<sp/>required.</highlight></codeline>
+<codeline lineno="122"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>canParams.eventMask<sp/>=<sp/>CAN_EVENT_RX_DATA_AVAIL;</highlight></codeline>
+<codeline lineno="123"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="124"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>canHandle<sp/>=<sp/>CAN_open(CONFIG_CAN_0,<sp/>&amp;canParams);</highlight></codeline>
+<codeline lineno="125"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>if<sp/>(canHandle<sp/>==<sp/>NULL)</highlight></codeline>
+<codeline lineno="126"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="127"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>CAN_open()<sp/>failed.</highlight></codeline>
+<codeline lineno="128"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(1)<sp/>{}</highlight></codeline>
+<codeline lineno="129"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/>Setup<sp/>Tx<sp/>buffer<sp/>element:</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/><sp/><sp/>CAN<sp/>FD<sp/>without<sp/>Bit<sp/>Rate<sp/>Switching</highlight></codeline>
+<codeline lineno="133"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/><sp/><sp/>Extended<sp/>Message<sp/>ID<sp/>=<sp/>0x12345678</highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/><sp/><sp/>Data<sp/>Length<sp/>of<sp/>64-bytes</highlight></codeline>
+<codeline lineno="135"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/><sp/><sp/>Message<sp/>marker<sp/>=<sp/>5</highlight></codeline>
+<codeline lineno="136"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>txElem.id<sp/><sp/>=<sp/>0x12345678U;</highlight></codeline>
+<codeline lineno="137"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>txElem.rtr<sp/>=<sp/>0U;</highlight></codeline>
+<codeline lineno="138"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>txElem.xtd<sp/>=<sp/>1U;</highlight></codeline>
+<codeline lineno="139"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>txElem.esi<sp/>=<sp/>0U;</highlight></codeline>
+<codeline lineno="140"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>txElem.brs<sp/>=<sp/>1U;</highlight></codeline>
+<codeline lineno="141"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>txElem.dlc<sp/>=<sp/>CAN_DLC_64B;</highlight></codeline>
+<codeline lineno="142"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>txElem.fdf<sp/>=<sp/>1U;</highlight></codeline>
+<codeline lineno="143"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>txElem.efc<sp/>=<sp/>0U;</highlight></codeline>
+<codeline lineno="144"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>txElem.mm<sp/><sp/>=<sp/>5U;</highlight></codeline>
+<codeline lineno="145"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="146"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/>Fill<sp/>data<sp/>payload<sp/>with<sp/>incrementing<sp/>values.</highlight></codeline>
+<codeline lineno="147"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>for<sp/>(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>dlcToDataSize[txElem.dlc];<sp/>i++)</highlight></codeline>
+<codeline lineno="148"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="149"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>txElem.data[i]<sp/>=<sp/>i;</highlight></codeline>
+<codeline lineno="150"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="151"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="152"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/>Transmit<sp/>message.</highlight></codeline>
+<codeline lineno="153"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>CAN_write(canHandle,<sp/>&amp;txElem);</highlight></codeline>
+<codeline lineno="154"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="155"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>while<sp/>(1)</highlight></codeline>
+<codeline lineno="156"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="157"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Wait<sp/>for<sp/>Rx<sp/>data<sp/>available<sp/>event.</highlight></codeline>
+<codeline lineno="158"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SemaphoreP_pend(rxSemHandle,<sp/>(uint32_t)SemaphoreP_WAIT_FOREVER);</highlight></codeline>
+<codeline lineno="159"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="160"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Read<sp/>all<sp/>available<sp/>messages.</highlight></codeline>
+<codeline lineno="161"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(CAN_read(canHandle,<sp/>&amp;rxElem)<sp/>==<sp/>CAN_STATUS_SUCCESS)</highlight></codeline>
+<codeline lineno="162"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="163"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Process<sp/>received<sp/>message.</highlight></codeline>
+<codeline lineno="164"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="165"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="166"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="167"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="168"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="169"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="170"><highlight class="comment"><sp/>*<sp/><sp/>More<sp/>details<sp/>on<sp/>usage<sp/>are<sp/>provided<sp/>in<sp/>the<sp/>following<sp/>subsections.</highlight></codeline>
+<codeline lineno="171"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="172"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_CAN_Examples</highlight></codeline>
+<codeline lineno="173"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Examples<sp/>#</highlight></codeline>
+<codeline lineno="174"><highlight class="comment"><sp/>*<sp/><sp/>*<sp/>@ref<sp/>ti_drivers_CAN_Synopsis<sp/>&quot;Usage<sp/>Synopsis&quot;</highlight></codeline>
+<codeline lineno="175"><highlight class="comment"><sp/>*<sp/><sp/>*<sp/>@ref<sp/>ti_drivers_CAN_Example_initMsgRam<sp/>&quot;Initialize<sp/>with<sp/>custom<sp/>message<sp/>RAM<sp/>configuration&quot;</highlight></codeline>
+<codeline lineno="176"><highlight class="comment"><sp/>*<sp/><sp/>*<sp/>@ref<sp/>ti_drivers_CAN_Example_initRawBitRate<sp/>&quot;Initialize<sp/>with<sp/>raw<sp/>bit<sp/>rate<sp/>timing&quot;</highlight></codeline>
+<codeline lineno="177"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="178"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Initializing<sp/>the<sp/>CAN<sp/>Driver</highlight></codeline>
+<codeline lineno="179"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="180"><highlight class="comment"><sp/>*<sp/><sp/>CAN_init()<sp/>must<sp/>be<sp/>called<sp/>before<sp/>any<sp/>other<sp/>CAN<sp/>APIs.<sp/><sp/>This<sp/>function</highlight></codeline>
+<codeline lineno="181"><highlight class="comment"><sp/>*<sp/><sp/>initializes<sp/>common<sp/>driver<sp/>resources<sp/>and<sp/>calls<sp/>the<sp/>device-specific</highlight></codeline>
+<codeline lineno="182"><highlight class="comment"><sp/>*<sp/><sp/>initialization<sp/>function<sp/>to<sp/>configure<sp/>the<sp/>bit<sp/>rate<sp/>and<sp/>message<sp/>RAM.</highlight></codeline>
+<codeline lineno="183"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="184"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Opening<sp/>the<sp/>CAN<sp/>Driver</highlight></codeline>
+<codeline lineno="185"><highlight class="comment"><sp/>*<sp/><sp/>After<sp/>initializing<sp/>the<sp/>CAN<sp/>driver<sp/>by<sp/>calling<sp/>CAN_init(),<sp/>the<sp/>application</highlight></codeline>
+<codeline lineno="186"><highlight class="comment"><sp/>*<sp/><sp/>can<sp/>open<sp/>a<sp/>CAN<sp/>instance<sp/>by<sp/>calling<sp/>CAN_open().<sp/><sp/>This<sp/>function</highlight></codeline>
+<codeline lineno="187"><highlight class="comment"><sp/>*<sp/><sp/>takes<sp/>an<sp/>index<sp/>into<sp/>the<sp/>@p<sp/>CAN_config[]<sp/>array,<sp/>and<sp/>a<sp/>CAN<sp/>parameters<sp/>data</highlight></codeline>
+<codeline lineno="188"><highlight class="comment"><sp/>*<sp/><sp/>structure.<sp/>The<sp/>CAN<sp/>instance<sp/>is<sp/>specified<sp/>by<sp/>the<sp/>index<sp/>of<sp/>the<sp/>CAN<sp/>in</highlight></codeline>
+<codeline lineno="189"><highlight class="comment"><sp/>*<sp/><sp/>@p<sp/>CAN_config[].<sp/>Calling<sp/>CAN_open()<sp/>a<sp/>second<sp/>time<sp/>with<sp/>the<sp/>same<sp/>index</highlight></codeline>
+<codeline lineno="190"><highlight class="comment"><sp/>*<sp/><sp/>previously<sp/>passed<sp/>to<sp/>CAN_open()<sp/>will<sp/>result<sp/>in<sp/>an<sp/>error.<sp/><sp/>You<sp/>can,</highlight></codeline>
+<codeline lineno="191"><highlight class="comment"><sp/>*<sp/><sp/>though,<sp/>re-use<sp/>the<sp/>index<sp/>if<sp/>the<sp/>instance<sp/>is<sp/>closed<sp/>via<sp/>CAN_close().</highlight></codeline>
+<codeline lineno="192"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="193"><highlight class="comment"><sp/>*<sp/><sp/>If<sp/>no<sp/>#CAN_Params<sp/>structure<sp/>is<sp/>passed<sp/>to<sp/>CAN_open(),<sp/>default<sp/>values<sp/>are</highlight></codeline>
+<codeline lineno="194"><highlight class="comment"><sp/>*<sp/><sp/>used.<sp/>If<sp/>the<sp/>open<sp/>call<sp/>is<sp/>successful,<sp/>it<sp/>returns<sp/>a<sp/>non-NULL<sp/>value.</highlight></codeline>
+<codeline lineno="195"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>CAN<sp/>driver<sp/>APIs<sp/>are<sp/>non-blocking;<sp/>there<sp/>is<sp/>no<sp/>configurable<sp/>return<sp/>behavior.</highlight></codeline>
+<codeline lineno="196"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="197"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_CAN_Example_initMsgRam</highlight></codeline>
+<codeline lineno="198"><highlight class="comment"><sp/>*<sp/><sp/>Example<sp/>initializing<sp/>the<sp/>CAN<sp/>driver<sp/>with<sp/>a<sp/>custom<sp/>message<sp/>RAM<sp/>configuration</highlight></codeline>
+<codeline lineno="199"><highlight class="comment"><sp/>*<sp/><sp/>to<sp/>receive<sp/>only<sp/>filtered<sp/>message<sp/>IDs:</highlight></codeline>
+<codeline lineno="200"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="201"><highlight class="comment"><sp/>*<sp/><sp/>@note<sp/>CAN<sp/>driver<sp/>SysConfig<sp/>must<sp/>be<sp/>setup<sp/>with<sp/>&apos;Reject<sp/>Non-Matching<sp/>Messages&apos;<sp/>enabled.</highlight></codeline>
+<codeline lineno="202"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="203"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="204"><highlight class="comment"><sp/>*<sp/><sp/>#define<sp/>STD_MSG_FILTER_NUM<sp/>2U</highlight></codeline>
+<codeline lineno="205"><highlight class="comment"><sp/>*<sp/><sp/>#define<sp/>EXT_MSG_FILTER_NUM<sp/>1U</highlight></codeline>
+<codeline lineno="206"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="207"><highlight class="comment"><sp/>*<sp/><sp/>static<sp/>MCAN_StdMsgIDFilterElement<sp/>stdMsgIDFilter[STD_MSG_FILTER_NUM]<sp/>=</highlight></codeline>
+<codeline lineno="208"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>{{.sfid1<sp/>=<sp/>0x555,<sp/>.sfid2<sp/>=<sp/>0x444,<sp/>.sfec<sp/>=<sp/>CAN_FEC_STORE_RXFIFO0,<sp/>.sft<sp/>=<sp/>CAN_FILTER_DUAL_ID},</highlight></codeline>
+<codeline lineno="209"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>{.sfid1<sp/>=<sp/>0x123,<sp/>.sfid2<sp/>=<sp/>0U,<sp/>.sfec<sp/>=<sp/>CAN_FEC_STORE_RXBUF,<sp/>.sft<sp/>=<sp/>0U}};</highlight></codeline>
+<codeline lineno="210"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="211"><highlight class="comment"><sp/>*<sp/><sp/>static<sp/>MCAN_ExtMsgIDFilterElement<sp/>extMsgIDFilter[EXT_MSG_FILTER_NUM]<sp/>=</highlight></codeline>
+<codeline lineno="212"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>{{.efid1<sp/>=<sp/>0x1234578,<sp/>.efid2<sp/>=<sp/>0x1234600,<sp/>.efec<sp/>=<sp/>CAN_FEC_STORE_RXFIFO1,<sp/>.eft<sp/>=<sp/>CAN_FILTER_RANGE}};</highlight></codeline>
+<codeline lineno="213"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="214"><highlight class="comment"><sp/>*<sp/><sp/>const<sp/>CAN_MsgRamConfig<sp/>msgRamConfig<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="215"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.stdFilterNum<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>STD_MSG_FILTER_NUM,</highlight></codeline>
+<codeline lineno="216"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.extFilterNum<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>EXT_MSG_FILTER_NUM,</highlight></codeline>
+<codeline lineno="217"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.stdMsgIDFilterList<sp/>=<sp/>&amp;stdMsgIDFilter[0],</highlight></codeline>
+<codeline lineno="218"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.extMsgIDFilterList<sp/>=<sp/>&amp;extMsgIDFilter[0],</highlight></codeline>
+<codeline lineno="219"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="220"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.rxFifoNum[0]<sp/>=<sp/>10U,</highlight></codeline>
+<codeline lineno="221"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.rxFifoNum[1]<sp/>=<sp/>2U,</highlight></codeline>
+<codeline lineno="222"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.rxBufNum<sp/><sp/><sp/><sp/><sp/>=<sp/>1U,</highlight></codeline>
+<codeline lineno="223"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.txBufNum<sp/><sp/><sp/><sp/><sp/>=<sp/>1U,</highlight></codeline>
+<codeline lineno="224"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.txFifoQNum<sp/><sp/><sp/>=<sp/>5U,</highlight></codeline>
+<codeline lineno="225"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.txFifoQMode<sp/><sp/>=<sp/>1U,</highlight></codeline>
+<codeline lineno="226"><highlight class="comment"><sp/>*<sp/><sp/>};</highlight></codeline>
+<codeline lineno="227"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="228"><highlight class="comment"><sp/>*<sp/><sp/>int_fast16_t<sp/>status;</highlight></codeline>
+<codeline lineno="229"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="230"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Initialize<sp/>driver(s).</highlight></codeline>
+<codeline lineno="231"><highlight class="comment"><sp/>*<sp/><sp/>CAN_init();</highlight></codeline>
+<codeline lineno="232"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="233"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Open<sp/>CAN<sp/>driver<sp/>with<sp/>custom<sp/>message<sp/>filters.</highlight></codeline>
+<codeline lineno="234"><highlight class="comment"><sp/>*<sp/><sp/>CAN_Params_init(&amp;canParams);</highlight></codeline>
+<codeline lineno="235"><highlight class="comment"><sp/>*<sp/><sp/>canParams.msgRamConfig<sp/>=<sp/>&amp;msgRamConfig;</highlight></codeline>
+<codeline lineno="236"><highlight class="comment"><sp/>*<sp/><sp/>canParams.eventCbk<sp/><sp/>=<sp/>eventCallback;</highlight></codeline>
+<codeline lineno="237"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Setup<sp/>event<sp/>mask<sp/>for<sp/>events<sp/>the<sp/>application<sp/>is<sp/>interested<sp/>in<sp/>receiving</highlight></codeline>
+<codeline lineno="238"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>the<sp/>callback<sp/>for.<sp/>Typically,<sp/>only<sp/>the<sp/>CAN_EVENT_RX_DATA_AVAIL<sp/>is<sp/>required.</highlight></codeline>
+<codeline lineno="239"><highlight class="comment"><sp/>*<sp/><sp/>canParams.eventMask<sp/>=<sp/>CAN_EVENT_RX_DATA_AVAIL;</highlight></codeline>
+<codeline lineno="240"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="241"><highlight class="comment"><sp/>*<sp/><sp/>canHandle<sp/>=<sp/>CAN_open(CONFIG_CAN_0,<sp/>&amp;canParams);</highlight></codeline>
+<codeline lineno="242"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(canHandle<sp/>==<sp/>NULL)</highlight></codeline>
+<codeline lineno="243"><highlight class="comment"><sp/>*<sp/><sp/>{</highlight></codeline>
+<codeline lineno="244"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>CAN_open()<sp/>failed.</highlight></codeline>
+<codeline lineno="245"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(1)<sp/>{}</highlight></codeline>
+<codeline lineno="246"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="247"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="248"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="249"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_CAN_Example_initRawBitRate</highlight></codeline>
+<codeline lineno="250"><highlight class="comment"><sp/>*<sp/><sp/>Example<sp/>initializing<sp/>the<sp/>CAN<sp/>driver<sp/>with<sp/>a<sp/>specific<sp/>raw<sp/>bit<sp/>rate<sp/>timing:</highlight></codeline>
+<codeline lineno="251"><highlight class="comment"><sp/>*<sp/><sp/>@note<sp/>For<sp/>this<sp/>example,<sp/>CAN<sp/>driver<sp/>SysConfig<sp/>should<sp/>be<sp/>setup<sp/>with<sp/>&apos;CAN<sp/>FD</highlight></codeline>
+<codeline lineno="252"><highlight class="comment"><sp/>*<sp/><sp/>Operation&apos;<sp/>and<sp/>&apos;Bit<sp/>Rate<sp/>Switching&apos;<sp/>enabled.<sp/>The<sp/>nominal<sp/>and<sp/>data<sp/>bit<sp/>rates</highlight></codeline>
+<codeline lineno="253"><highlight class="comment"><sp/>*<sp/><sp/>selected<sp/>in<sp/>SysConfig<sp/>will<sp/>be<sp/>ignored<sp/>since<sp/>raw<sp/>bit<sp/>rate<sp/>timing<sp/>parameters</highlight></codeline>
+<codeline lineno="254"><highlight class="comment"><sp/>*<sp/><sp/>are<sp/>provided<sp/>to<sp/>CAN_open().</highlight></codeline>
+<codeline lineno="255"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="256"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="257"><highlight class="comment"><sp/>*<sp/><sp/>const<sp/>CAN_DataBitRateTimingRaw<sp/>rawDataBitRateTiming<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="258"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>1Mbps<sp/>with<sp/>40MHz<sp/>clk<sp/>and<sp/>80%<sp/>sample<sp/>point<sp/>((40E6<sp/>/<sp/>2)<sp/>/<sp/>(15<sp/>+<sp/>4<sp/>+<sp/>1)<sp/>=<sp/>1E6)</highlight></codeline>
+<codeline lineno="259"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Add<sp/>1<sp/>to<sp/>each<sp/>programmed<sp/>bit<sp/>time<sp/>to<sp/>get<sp/>functional<sp/>value<sp/>and<sp/>+1<sp/>for<sp/>for<sp/>prop<sp/>segment</highlight></codeline>
+<codeline lineno="260"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.dbrp<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1U,</highlight></codeline>
+<codeline lineno="261"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.dtSeg1<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>14U,</highlight></codeline>
+<codeline lineno="262"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.dtSeg2<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>3U,</highlight></codeline>
+<codeline lineno="263"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.dsjw<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>3U,</highlight></codeline>
+<codeline lineno="264"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.tdcOffset<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>14U,</highlight></codeline>
+<codeline lineno="265"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.tdcFilterWinLen<sp/>=<sp/>0U</highlight></codeline>
+<codeline lineno="266"><highlight class="comment"><sp/>*<sp/><sp/>};</highlight></codeline>
+<codeline lineno="267"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="268"><highlight class="comment"><sp/>*<sp/><sp/>const<sp/>CAN_BitRateTimingRaw<sp/>rawBitTiming<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="269"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>500kbps<sp/>nominal<sp/>with<sp/>40MHz<sp/>clk<sp/>and<sp/>87.5%<sp/>sample<sp/>point<sp/>((40E6<sp/>/<sp/>1)<sp/>/<sp/>(69<sp/>+<sp/>10<sp/>+<sp/>1)<sp/>=<sp/>500E3)</highlight></codeline>
+<codeline lineno="270"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Add<sp/>1<sp/>to<sp/>each<sp/>programmed<sp/>bit<sp/>time<sp/>to<sp/>get<sp/>functional<sp/>value<sp/>and<sp/>+1<sp/>for<sp/>for<sp/>prop<sp/>segment</highlight></codeline>
+<codeline lineno="271"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.nbrp<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0U,</highlight></codeline>
+<codeline lineno="272"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.ntSeg1<sp/><sp/><sp/><sp/><sp/>=<sp/>68U,</highlight></codeline>
+<codeline lineno="273"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.ntSeg2<sp/><sp/><sp/><sp/><sp/>=<sp/>9U,</highlight></codeline>
+<codeline lineno="274"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.nsjw<sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>9U,</highlight></codeline>
+<codeline lineno="275"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>.dataTiming<sp/>=<sp/>&amp;rawDataBitRateTiming</highlight></codeline>
+<codeline lineno="276"><highlight class="comment"><sp/>*<sp/><sp/>};</highlight></codeline>
+<codeline lineno="277"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="278"><highlight class="comment"><sp/>*<sp/><sp/>int_fast16_t<sp/>status;</highlight></codeline>
+<codeline lineno="279"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="280"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Initialize<sp/>driver(s).</highlight></codeline>
+<codeline lineno="281"><highlight class="comment"><sp/>*<sp/><sp/>CAN_init();</highlight></codeline>
+<codeline lineno="282"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="283"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Open<sp/>CAN<sp/>with<sp/>specific<sp/>raw<sp/>bit<sp/>timing.</highlight></codeline>
+<codeline lineno="284"><highlight class="comment"><sp/>*<sp/><sp/>CAN_Params_init(&amp;canParams);</highlight></codeline>
+<codeline lineno="285"><highlight class="comment"><sp/>*<sp/><sp/>canParams.bitTiming<sp/>=<sp/>&amp;rawBitTiming;</highlight></codeline>
+<codeline lineno="286"><highlight class="comment"><sp/>*<sp/><sp/>canParams.eventCbk<sp/><sp/>=<sp/>eventCallback;</highlight></codeline>
+<codeline lineno="287"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Setup<sp/>event<sp/>mask<sp/>for<sp/>events<sp/>the<sp/>application<sp/>is<sp/>interested<sp/>in<sp/>receiving</highlight></codeline>
+<codeline lineno="288"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>the<sp/>callback<sp/>for.<sp/>Typically,<sp/>only<sp/>the<sp/>CAN_EVENT_RX_DATA_AVAIL<sp/>is<sp/>required.</highlight></codeline>
+<codeline lineno="289"><highlight class="comment"><sp/>*<sp/><sp/>canParams.eventMask<sp/>=<sp/>CAN_EVENT_RX_DATA_AVAIL;</highlight></codeline>
+<codeline lineno="290"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="291"><highlight class="comment"><sp/>*<sp/><sp/>canHandle<sp/>=<sp/>CAN_open(CONFIG_CAN_0,<sp/>&amp;canParams);</highlight></codeline>
+<codeline lineno="292"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(canHandle<sp/>==<sp/>NULL)</highlight></codeline>
+<codeline lineno="293"><highlight class="comment"><sp/>*<sp/><sp/>{</highlight></codeline>
+<codeline lineno="294"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>CAN_open()<sp/>failed.</highlight></codeline>
+<codeline lineno="295"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(1)<sp/>{}</highlight></codeline>
+<codeline lineno="296"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="297"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="298"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="299"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>CAN<sp/>Message<sp/>RAM<sp/>Configuration</highlight></codeline>
+<codeline lineno="300"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="301"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>default<sp/>message<sp/>RAM<sp/>configuration<sp/>is<sp/>as<sp/>follows:</highlight></codeline>
+<codeline lineno="302"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>No<sp/>Rx<sp/>filters.</highlight></codeline>
+<codeline lineno="303"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>Tx<sp/>Queue<sp/>(message<sp/>with<sp/>lowest<sp/>ID<sp/>in<sp/>the<sp/>queue<sp/>will<sp/>be<sp/>transmitted<sp/>first)</highlight></codeline>
+<codeline lineno="304"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>with<sp/>a<sp/>fixed<sp/>device-specific<sp/>number<sp/>of<sp/>Tx<sp/>buffers.</highlight></codeline>
+<codeline lineno="305"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>No<sp/>Tx<sp/>event<sp/>FIFO.</highlight></codeline>
+<codeline lineno="306"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>Fixed<sp/>device-specific<sp/>number<sp/>of<sp/>Rx<sp/>FIFO0<sp/>buffers.</highlight></codeline>
+<codeline lineno="307"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>No<sp/>Rx<sp/>FIFO1<sp/>buffers.</highlight></codeline>
+<codeline lineno="308"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>No<sp/>dedicated<sp/>Rx<sp/>buffers.</highlight></codeline>
+<codeline lineno="309"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="310"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>number<sp/>of<sp/>default<sp/>Tx<sp/>and<sp/>Rx<sp/>buffers<sp/>varies<sp/>depending<sp/>on<sp/>the<sp/>size<sp/>of<sp/>the</highlight></codeline>
+<codeline lineno="311"><highlight class="comment"><sp/>*<sp/><sp/>device&apos;s<sp/>message<sp/>RAM.<sp/>Check<sp/>the<sp/>doxygen<sp/>for<sp/>the<sp/>device-specific<sp/>CAN</highlight></codeline>
+<codeline lineno="312"><highlight class="comment"><sp/>*<sp/><sp/>implementation<sp/>to<sp/>find<sp/>the<sp/>message<sp/>RAM<sp/>size.<sp/>If<sp/>using<sp/>a<sp/>custom<sp/>message<sp/>RAM</highlight></codeline>
+<codeline lineno="313"><highlight class="comment"><sp/>*<sp/><sp/>configuration,<sp/>utilize<sp/>the<sp/>entire<sp/>space<sp/>by<sp/>maximizing<sp/>the<sp/>number<sp/>of<sp/>Rx/Tx</highlight></codeline>
+<codeline lineno="314"><highlight class="comment"><sp/>*<sp/><sp/>buffers<sp/>for<sp/>optimal<sp/>performance.</highlight></codeline>
+<codeline lineno="315"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="316"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>CAN<sp/>Write<sp/>Behavior</highlight></codeline>
+<codeline lineno="317"><highlight class="comment"><sp/>*<sp/><sp/>CAN_write()<sp/>will<sp/>return<sp/>immediately<sp/>after<sp/>the<sp/>message<sp/>is<sp/>loaded<sp/>into<sp/>the<sp/>CAN</highlight></codeline>
+<codeline lineno="318"><highlight class="comment"><sp/>*<sp/><sp/>controller&apos;s<sp/>message<sp/>RAM<sp/>and<sp/>pending<sp/>transfer;<sp/>it<sp/>does<sp/>not<sp/>wait<sp/>for<sp/>the<sp/>CAN</highlight></codeline>
+<codeline lineno="319"><highlight class="comment"><sp/>*<sp/><sp/>message<sp/>to<sp/>be<sp/>transmitted<sp/>on<sp/>the<sp/>bus<sp/>before<sp/>returning.<sp/>The<sp/>CAN<sp/>controller<sp/>will</highlight></codeline>
+<codeline lineno="320"><highlight class="comment"><sp/>*<sp/><sp/>automatically<sp/>handle<sp/>transmission<sp/>retries<sp/>in<sp/>the<sp/>event<sp/>of<sp/>a<sp/>failure.</highlight></codeline>
+<codeline lineno="321"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="322"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>CAN<sp/>Read<sp/>Behavior</highlight></codeline>
+<codeline lineno="323"><highlight class="comment"><sp/>*<sp/><sp/>When<sp/>a<sp/>message<sp/>is<sp/>received<sp/>in<sp/>Rx<sp/>FIFO0/1<sp/>or<sp/>a<sp/>dedicated<sp/>Rx<sp/>buffer,<sp/>the<sp/>CAN</highlight></codeline>
+<codeline lineno="324"><highlight class="comment"><sp/>*<sp/><sp/>driver&apos;s<sp/>IRQ<sp/>handler<sp/>automatically<sp/>reads<sp/>the<sp/>Rx<sp/>buffer<sp/>element<sp/>from<sp/>the<sp/>CAN</highlight></codeline>
+<codeline lineno="325"><highlight class="comment"><sp/>*<sp/><sp/>controller&apos;s<sp/>message<sp/>RAM<sp/>and<sp/>stores<sp/>it<sp/>in<sp/>a<sp/>ring<sp/>buffer<sp/>whose<sp/>size<sp/>is</highlight></codeline>
+<codeline lineno="326"><highlight class="comment"><sp/>*<sp/><sp/>configurable<sp/>in<sp/>SysConfig.<sp/>When<sp/>CAN_read()<sp/>is<sp/>called,<sp/>the<sp/>Rx<sp/>buffer<sp/>element</highlight></codeline>
+<codeline lineno="327"><highlight class="comment"><sp/>*<sp/><sp/>is<sp/>copied<sp/>from<sp/>the<sp/>ring<sp/>buffer<sp/>to<sp/>the<sp/>application.<sp/>If<sp/>the<sp/>ring<sp/>buffer<sp/>becomes</highlight></codeline>
+<codeline lineno="328"><highlight class="comment"><sp/>*<sp/><sp/>full,<sp/>any<sp/>new<sp/>messages<sp/>received<sp/>will<sp/>be<sp/>lost<sp/>until<sp/>the<sp/>application<sp/>frees</highlight></codeline>
+<codeline lineno="329"><highlight class="comment"><sp/>*<sp/><sp/>space<sp/>in<sp/>the<sp/>ring<sp/>buffer<sp/>by<sp/>calling<sp/>CAN_read().</highlight></codeline>
+<codeline lineno="330"><highlight class="comment"><sp/>*******************************************************************************</highlight></codeline>
+<codeline lineno="331"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ti_drivers_can__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_drivers_can__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="334"><highlight class="normal"></highlight></codeline>
+<codeline lineno="335"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="336"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="337"><highlight class="normal"></highlight></codeline>
+<codeline lineno="338"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_struct_ring_buf_8h" kindref="compound">ti/drivers/utils/StructRingBuf.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="339"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ti/devices/DeviceFamily.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="340"><highlight class="normal"></highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_m_c_a_n_8h" kindref="compound">third_party/mcan/MCAN.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"></highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="346"><highlight class="normal"></highlight></codeline>
+<codeline lineno="357" refid="group___c_a_n___s_t_a_t_u_s_1gaec519b2472a0cb3c778a1e2cffd7de5d" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_STATUS_SUCCESS<sp/>((int_fast16_t)0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="358"><highlight class="normal"></highlight></codeline>
+<codeline lineno="365" refid="group___c_a_n___s_t_a_t_u_s_1gaf97bc85f9b1ce1bd427ab76347994217" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_STATUS_ERROR<sp/>((int_fast16_t)-1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="366"><highlight class="normal"></highlight></codeline>
+<codeline lineno="373" refid="group___c_a_n___s_t_a_t_u_s_1ga03e296bed4b1621253ec798624282c52" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_STATUS_NOT_SUPPORTED<sp/>((int_fast16_t)-2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="374"><highlight class="normal"></highlight></codeline>
+<codeline lineno="380" refid="group___c_a_n___s_t_a_t_u_s_1gabb3a4c95249453a5277851bdaeb4dc94" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_STATUS_TX_BUF_FULL<sp/>((int_fast16_t)-3)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="381"><highlight class="normal"></highlight></codeline>
+<codeline lineno="388" refid="group___c_a_n___s_t_a_t_u_s_1ga00aea7977da7791f2828a61329b6ca62" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_STATUS_NO_RX_MSG_AVAIL<sp/>((int_fast16_t)-4)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="389"><highlight class="normal"></highlight></codeline>
+<codeline lineno="396" refid="group___c_a_n___s_t_a_t_u_s_1gadc760edfc496bb0c17a37dea54039e3f" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_STATUS_NO_TX_EVENT_AVAIL<sp/>((int_fast16_t)-5)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="397"><highlight class="normal"></highlight></codeline>
+<codeline lineno="413" refid="group___c_a_n___e_v_e_n_t_1ga5aee970eec46cc8a1cbc21be1c3da321" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_EVENT_SPI_XFER_ERROR<sp/>(0x800U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="414"><highlight class="normal"></highlight></codeline>
+<codeline lineno="421" refid="group___c_a_n___e_v_e_n_t_1ga792207c71ee25d47ec1550e7dcaf5ab7" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_EVENT_BIT_ERR_UNCORRECTED<sp/>(0x400U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="422"><highlight class="normal"></highlight></codeline>
+<codeline lineno="431" refid="group___c_a_n___e_v_e_n_t_1ga6b23e75721cbe2be44c31d4b32d0f6a1" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_EVENT_RX_RING_BUFFER_FULL<sp/>(0x200U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="432"><highlight class="normal"></highlight></codeline>
+<codeline lineno="438" refid="group___c_a_n___e_v_e_n_t_1gad9bad54e02a163b9335e16dbdc6776b7" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_EVENT_RX_FIFO_MSG_LOST<sp/>(0x100U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="439"><highlight class="normal"></highlight></codeline>
+<codeline lineno="443" refid="group___c_a_n___e_v_e_n_t_1gaf4f75d571122632b29b34266118df5e2" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_EVENT_ERR_PASSIVE<sp/>(0x80U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="444"><highlight class="normal"></highlight></codeline>
+<codeline lineno="448" refid="group___c_a_n___e_v_e_n_t_1ga9d5b4622bdc27d5a89bff6352ef7c48d" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_EVENT_ERR_ACTIVE<sp/>(0x40U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="449"><highlight class="normal"></highlight></codeline>
+<codeline lineno="453" refid="group___c_a_n___e_v_e_n_t_1ga8e5b6dc28c6ca51a811b88c2b9fad496" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_EVENT_BUS_OFF<sp/>(0x20U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="454"><highlight class="normal"></highlight></codeline>
+<codeline lineno="458" refid="group___c_a_n___e_v_e_n_t_1gada6d79a9a3439bc1e19ead78bb15f719" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_EVENT_BUS_ON<sp/>(0x10U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="459"><highlight class="normal"></highlight></codeline>
+<codeline lineno="466" refid="group___c_a_n___e_v_e_n_t_1gab82008e494c5fc6c4811170e000f15ac" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_EVENT_TX_EVENT_LOST<sp/>(0x08U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="467"><highlight class="normal"></highlight></codeline>
+<codeline lineno="475" refid="group___c_a_n___e_v_e_n_t_1ga773b3d0a875e164686fa3ba89d575725" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_EVENT_TX_EVENT_AVAIL<sp/>(0x04U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="476"><highlight class="normal"></highlight></codeline>
+<codeline lineno="480" refid="group___c_a_n___e_v_e_n_t_1ga108a81cd6b5bbb73c81080f429c3a867" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_EVENT_TX_FINISHED<sp/>(0x02U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="481"><highlight class="normal"></highlight></codeline>
+<codeline lineno="488" refid="group___c_a_n___e_v_e_n_t_1ga7b6db1c1518135c8d1631a961ceb6e47" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_EVENT_RX_DATA_AVAIL<sp/>(0x01U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="489"><highlight class="normal"></highlight></codeline>
+<codeline lineno="497" refid="group___c_a_n___d_l_c_1ga052e53fa79e9316c88231e17229fba19" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_DLC_0B<sp/><sp/>((uint32_t)0U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="498" refid="group___c_a_n___d_l_c_1ga4140dcfdb86d89a391d5acf8eb05b911" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_DLC_1B<sp/><sp/>((uint32_t)1U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="499" refid="group___c_a_n___d_l_c_1ga261587f2747d0c28d634e78e4c03e3a6" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_DLC_2B<sp/><sp/>((uint32_t)2U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="500" refid="group___c_a_n___d_l_c_1ga73362aae3c14f34f6c04fa00b8587bfc" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_DLC_3B<sp/><sp/>((uint32_t)3U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="501" refid="group___c_a_n___d_l_c_1ga111f3f02b68d9307d7afb69a6fef1fbf" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_DLC_4B<sp/><sp/>((uint32_t)4U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="502" refid="group___c_a_n___d_l_c_1ga7d271cf9799472051e80008380662efd" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_DLC_5B<sp/><sp/>((uint32_t)5U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="503" refid="group___c_a_n___d_l_c_1gaff8ef8a309506b53c203151f003d77ef" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_DLC_6B<sp/><sp/>((uint32_t)6U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="504" refid="group___c_a_n___d_l_c_1ga162fdb43ae966193f8a765c5fd6d798d" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_DLC_7B<sp/><sp/>((uint32_t)7U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="505" refid="group___c_a_n___d_l_c_1ga1b025ba8a7f17e9c77a1efbd8ca240d8" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_DLC_8B<sp/><sp/>((uint32_t)8U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="506" refid="group___c_a_n___d_l_c_1ga1062f460db0fe000a315d56df5e33bcb" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_DLC_12B<sp/>((uint32_t)9U)<sp/><sp/></highlight></codeline>
+<codeline lineno="507" refid="group___c_a_n___d_l_c_1ga32409cb6c9d015b3ecae524a290a20ee" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_DLC_16B<sp/>((uint32_t)10U)<sp/></highlight></codeline>
+<codeline lineno="508" refid="group___c_a_n___d_l_c_1ga3f2237d2c78d31ee6fa3b50b22ba97d5" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_DLC_20B<sp/>((uint32_t)11U)<sp/></highlight></codeline>
+<codeline lineno="509" refid="group___c_a_n___d_l_c_1gac6cbf524106c85bc00b90fc173c573b5" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_DLC_24B<sp/>((uint32_t)12U)<sp/></highlight></codeline>
+<codeline lineno="510" refid="group___c_a_n___d_l_c_1gae5bbd2f4663e83765033ce0691ab137f" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_DLC_32B<sp/>((uint32_t)13U)<sp/></highlight></codeline>
+<codeline lineno="511" refid="group___c_a_n___d_l_c_1ga373898d8122525b9e35a84dcca58abee" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_DLC_48B<sp/>((uint32_t)14U)<sp/></highlight></codeline>
+<codeline lineno="512" refid="group___c_a_n___d_l_c_1ga36d05d20d54c1602c8f53b23dd12b842" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_DLC_64B<sp/>((uint32_t)15U)<sp/></highlight></codeline>
+<codeline lineno="531" refid="group___c_a_n___f_e_c_1gae76fdd5aaef8272b3a395ff173b7de6c" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_FEC_DISABLE_FILTER<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((uint32_t)0U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="532" refid="group___c_a_n___f_e_c_1gae8a4569aef9c12b6f3cfc7bacc4573b2" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_FEC_STORE_RXFIFO0<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((uint32_t)1U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="533" refid="group___c_a_n___f_e_c_1ga88a35c0e4eb09d0f42637309a9f41621" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_FEC_STORE_RXFIFO1<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((uint32_t)2U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="534" refid="group___c_a_n___f_e_c_1ga15e3e16d185de52c0093fa49c09b43fb" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_FEC_REJECT_ID<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((uint32_t)3U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="535" refid="group___c_a_n___f_e_c_1gafe90bce702d871dfe3c638e96951b658" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_FEC_SET_PRIO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((uint32_t)4U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="536" refid="group___c_a_n___f_e_c_1ga3bd065ccc4141b4d946988ccc82a010e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_FEC_SET_PRIO_STORE_RXFIFO0<sp/>((uint32_t)5U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="537" refid="group___c_a_n___f_e_c_1ga8aa1f099d70fe67c779f82c3bb1928be" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_FEC_SET_PRIO_STORE_RXFIFO1<sp/>((uint32_t)6U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="538" refid="group___c_a_n___f_e_c_1ga62ba101b4434f8b1169c4f6ca1fc6423" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_FEC_STORE_RXBUF<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((uint32_t)7U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="539"><highlight class="normal"></highlight></codeline>
+<codeline lineno="550" refid="group___c_a_n___f_i_l_t_e_r___t_y_p_e_1ga02fd3a61a95fd97242c3e2b3b37e15f5" refkind="member"><highlight class="preprocessor">#define<sp/>CAN_FILTER_RANGE<sp/><sp/><sp/><sp/><sp/>((uint32_t)0U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="551" refid="group___c_a_n___f_i_l_t_e_r___t_y_p_e_1gae9661fdc40f3f402cd7d273105271303" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_FILTER_DUAL_ID<sp/><sp/><sp/>((uint32_t)1U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="552" refid="group___c_a_n___f_i_l_t_e_r___t_y_p_e_1gaf14edc6fbe8165c2dda302d136686028" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_FILTER_WITH_MASK<sp/>((uint32_t)2U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="553" refid="group___c_a_n___f_i_l_t_e_r___t_y_p_e_1gae5f65d2b17cf93b5f23eabfbf7be7bbc" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CAN_FILTER_DISABLE<sp/><sp/><sp/>((uint32_t)3U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="554"><highlight class="normal"></highlight></codeline>
+<codeline lineno="559" refid="_c_a_n_8h_1a7d6743d2652302188c93f47db5dcfc45" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="struct_m_c_a_n___rx_buf_element" kindref="compound">MCAN_RxBufElement</ref><sp/><ref refid="_c_a_n_8h_1a7d6743d2652302188c93f47db5dcfc45" kindref="member">CAN_RxBufElement</ref>;</highlight></codeline>
+<codeline lineno="560"><highlight class="normal"></highlight></codeline>
+<codeline lineno="564" refid="_c_a_n_8h_1a6fa90475d917c858125b0556d79e4ca6" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="struct_m_c_a_n___tx_buf_element" kindref="compound">MCAN_TxBufElement</ref><sp/><ref refid="_c_a_n_8h_1a6fa90475d917c858125b0556d79e4ca6" kindref="member">CAN_TxBufElement</ref>;</highlight></codeline>
+<codeline lineno="565"><highlight class="normal"></highlight></codeline>
+<codeline lineno="569" refid="_c_a_n_8h_1a8772b52f18edb856a269966c547f87dd" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="struct_m_c_a_n___tx_event_fifo_element" kindref="compound">MCAN_TxEventFifoElement</ref><sp/><ref refid="_c_a_n_8h_1a8772b52f18edb856a269966c547f87dd" kindref="member">CAN_TxEventElement</ref>;</highlight></codeline>
+<codeline lineno="570"><highlight class="normal"></highlight></codeline>
+<codeline lineno="574" refid="_c_a_n_8h_1aece4fe229807a6b7aa852376122f7bd2" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="struct_m_c_a_n___bit_timing_params" kindref="compound">MCAN_BitTimingParams</ref><sp/><ref refid="_c_a_n_8h_1aece4fe229807a6b7aa852376122f7bd2" kindref="member">CAN_BitTimingParams</ref>;</highlight></codeline>
+<codeline lineno="575"><highlight class="normal"></highlight></codeline>
+<codeline lineno="579" refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_c_a_n___config__" kindref="compound">CAN_Config_</ref><sp/>*<ref refid="_c_a_n_8h_1a04c6849a36f49970a418d45e72c9b516" kindref="member">CAN_Handle</ref>;</highlight></codeline>
+<codeline lineno="580"><highlight class="normal"></highlight></codeline>
+<codeline lineno="606" refid="_c_a_n_8h_1ae049aa077771ab029cf97e6d9c17d136" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="_c_a_n_8h_1ae049aa077771ab029cf97e6d9c17d136" kindref="member">CAN_EventCbk</ref>)(CAN_Handle<sp/>handle,<sp/>uint32_t<sp/>event,<sp/>uint32_t<sp/>data,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*userArg);</highlight></codeline>
+<codeline lineno="607"><highlight class="normal"></highlight></codeline>
+<codeline lineno="619" refid="struct_c_a_n___msg_ram_config" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="620"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="621" refid="struct_c_a_n___msg_ram_config_1ac6d266db26fa4627eba2d02577e87c3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___msg_ram_config_1ac6d266db26fa4627eba2d02577e87c3f" kindref="member">stdFilterNum</ref>;</highlight></codeline>
+<codeline lineno="623" refid="struct_c_a_n___msg_ram_config_1aed0e8c13675b3a37176391fc928ef334" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___msg_ram_config_1aed0e8c13675b3a37176391fc928ef334" kindref="member">extFilterNum</ref>;</highlight></codeline>
+<codeline lineno="625" refid="struct_c_a_n___msg_ram_config_1abe766805b28ff7f667ca4a89b1d9cbec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_m_c_a_n___std_msg_i_d_filter_element" kindref="compound">MCAN_StdMsgIDFilterElement</ref><sp/>*<ref refid="struct_c_a_n___msg_ram_config_1abe766805b28ff7f667ca4a89b1d9cbec" kindref="member">stdMsgIDFilterList</ref>;</highlight></codeline>
+<codeline lineno="627" refid="struct_c_a_n___msg_ram_config_1ab48688b318142901640523e45713824c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_m_c_a_n___ext_msg_i_d_filter_element" kindref="compound">MCAN_ExtMsgIDFilterElement</ref><sp/>*<ref refid="struct_c_a_n___msg_ram_config_1ab48688b318142901640523e45713824c" kindref="member">extMsgIDFilterList</ref>;</highlight></codeline>
+<codeline lineno="630"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="631"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Note:<sp/>All<sp/>Rx<sp/>and<sp/>Tx<sp/>buffer<sp/>elements<sp/>include<sp/>a<sp/>64-byte<sp/>payload<sp/>if<sp/>CAN<sp/>FD</highlight></codeline>
+<codeline lineno="632"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>is<sp/>enabled.<sp/>Otherwise,<sp/>they<sp/>include<sp/>an<sp/>8-byte<sp/>payload.</highlight></codeline>
+<codeline lineno="633"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="634"><highlight class="normal"></highlight></codeline>
+<codeline lineno="635" refid="struct_c_a_n___msg_ram_config_1abeb52a075ededaaad3cb98d2715ace13" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>rxFifoNum[2];</highlight></codeline>
+<codeline lineno="637" refid="struct_c_a_n___msg_ram_config_1a14c9aa2bd982732105df658f96a0fda3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___msg_ram_config_1a14c9aa2bd982732105df658f96a0fda3" kindref="member">rxBufNum</ref>;</highlight></codeline>
+<codeline lineno="640" refid="struct_c_a_n___msg_ram_config_1a682c1af86302622de9bae1112f5c4cc9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___msg_ram_config_1a682c1af86302622de9bae1112f5c4cc9" kindref="member">txBufNum</ref>;</highlight></codeline>
+<codeline lineno="642" refid="struct_c_a_n___msg_ram_config_1a5b7ab410cc0dd5ef103785deb2133d0c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___msg_ram_config_1a5b7ab410cc0dd5ef103785deb2133d0c" kindref="member">txFifoQNum</ref>;</highlight></codeline>
+<codeline lineno="644" refid="struct_c_a_n___msg_ram_config_1ad19476107cb39566f10ca5ccec8e68c9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___msg_ram_config_1ad19476107cb39566f10ca5ccec8e68c9" kindref="member">txFifoQMode</ref>;</highlight></codeline>
+<codeline lineno="647" refid="struct_c_a_n___msg_ram_config_1aafd102e5f3acdbd1a6efbd3a7029512b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___msg_ram_config_1aafd102e5f3acdbd1a6efbd3a7029512b" kindref="member">txEventFifoNum</ref>;</highlight></codeline>
+<codeline lineno="649"><highlight class="normal">}<sp/><ref refid="struct_c_a_n___msg_ram_config" kindref="compound">CAN_MsgRamConfig</ref>;</highlight></codeline>
+<codeline lineno="650"><highlight class="normal"></highlight></codeline>
+<codeline lineno="657" refid="struct_c_a_n___data_bit_rate_timing_raw" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="658"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="659" refid="struct_c_a_n___data_bit_rate_timing_raw_1ae6a44ddc44286ab32df97b7c4a0b8a80" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___data_bit_rate_timing_raw_1ae6a44ddc44286ab32df97b7c4a0b8a80" kindref="member">dbrp</ref>;</highlight></codeline>
+<codeline lineno="665" refid="struct_c_a_n___data_bit_rate_timing_raw_1ad2cdef4f53bee4076523f678b1be7b73" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___data_bit_rate_timing_raw_1ad2cdef4f53bee4076523f678b1be7b73" kindref="member">dtSeg1</ref>;</highlight></codeline>
+<codeline lineno="669" refid="struct_c_a_n___data_bit_rate_timing_raw_1a7f3676ab28d0121ea4a83734e91d4fbe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___data_bit_rate_timing_raw_1a7f3676ab28d0121ea4a83734e91d4fbe" kindref="member">dtSeg2</ref>;</highlight></codeline>
+<codeline lineno="673" refid="struct_c_a_n___data_bit_rate_timing_raw_1a9e36a32ca585f1b61a7adbcdf75ff37b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___data_bit_rate_timing_raw_1a9e36a32ca585f1b61a7adbcdf75ff37b" kindref="member">dsjw</ref>;</highlight></codeline>
+<codeline lineno="677" refid="struct_c_a_n___data_bit_rate_timing_raw_1a599126b2c9a8b49da9e2a7f62425083f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___data_bit_rate_timing_raw_1a599126b2c9a8b49da9e2a7f62425083f" kindref="member">tdcOffset</ref>;</highlight></codeline>
+<codeline lineno="683" refid="struct_c_a_n___data_bit_rate_timing_raw_1a064df63b7fbc27e665c800d314cad04f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___data_bit_rate_timing_raw_1a064df63b7fbc27e665c800d314cad04f" kindref="member">tdcFilterWinLen</ref>;</highlight></codeline>
+<codeline lineno="691"><highlight class="normal">}<sp/><ref refid="struct_c_a_n___data_bit_rate_timing_raw" kindref="compound">CAN_DataBitRateTimingRaw</ref>;</highlight></codeline>
+<codeline lineno="692"><highlight class="normal"></highlight></codeline>
+<codeline lineno="699" refid="struct_c_a_n___bit_rate_timing_raw" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="700"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="701" refid="struct_c_a_n___bit_rate_timing_raw_1a203d950ef871c3f4b0cd4bbda8c55d43" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___bit_rate_timing_raw_1a203d950ef871c3f4b0cd4bbda8c55d43" kindref="member">nbrp</ref>;</highlight></codeline>
+<codeline lineno="706" refid="struct_c_a_n___bit_rate_timing_raw_1a648d32469c2de3e4ea0bfc04d57c3224" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___bit_rate_timing_raw_1a648d32469c2de3e4ea0bfc04d57c3224" kindref="member">ntSeg1</ref>;</highlight></codeline>
+<codeline lineno="710" refid="struct_c_a_n___bit_rate_timing_raw_1a021484219e767f0fe69ace098192224c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___bit_rate_timing_raw_1a021484219e767f0fe69ace098192224c" kindref="member">ntSeg2</ref>;</highlight></codeline>
+<codeline lineno="714" refid="struct_c_a_n___bit_rate_timing_raw_1a2b364b466d40d5c8bde6794e1070f689" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___bit_rate_timing_raw_1a2b364b466d40d5c8bde6794e1070f689" kindref="member">nsjw</ref>;</highlight></codeline>
+<codeline lineno="720" refid="struct_c_a_n___bit_rate_timing_raw_1a85e3c466a055cba5c142e2442c0dfb4a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_c_a_n___data_bit_rate_timing_raw" kindref="compound">CAN_DataBitRateTimingRaw</ref><sp/>*<ref refid="struct_c_a_n___bit_rate_timing_raw_1a85e3c466a055cba5c142e2442c0dfb4a" kindref="member">dataTiming</ref>;</highlight></codeline>
+<codeline lineno="724"><highlight class="normal">}<sp/><ref refid="struct_c_a_n___bit_rate_timing_raw" kindref="compound">CAN_BitRateTimingRaw</ref>;</highlight></codeline>
+<codeline lineno="725"><highlight class="normal"></highlight></codeline>
+<codeline lineno="734" refid="struct_c_a_n___params" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="735"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="736" refid="struct_c_a_n___params_1adfdcdab06c83822b230336ebb73bafcc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_c_a_n___msg_ram_config" kindref="compound">CAN_MsgRamConfig</ref><sp/>*<ref refid="struct_c_a_n___params_1adfdcdab06c83822b230336ebb73bafcc" kindref="member">msgRamConfig</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="737" refid="struct_c_a_n___params_1a8dd6305c88faef8db4b239808b342b33" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_c_a_n___bit_rate_timing_raw" kindref="compound">CAN_BitRateTimingRaw</ref><sp/>*<ref refid="struct_c_a_n___params_1a8dd6305c88faef8db4b239808b342b33" kindref="member">bitTiming</ref>;<sp/></highlight></codeline>
+<codeline lineno="738" refid="struct_c_a_n___params_1adc7dc7e56a0f12a1a9080d86465f075f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___params_1adc7dc7e56a0f12a1a9080d86465f075f" kindref="member">tsPrescaler</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="739" refid="struct_c_a_n___params_1aba28ed842beae4822e8aead77d26b32d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_c_a_n_8h_1ae049aa077771ab029cf97e6d9c17d136" kindref="member">CAN_EventCbk</ref><sp/><ref refid="struct_c_a_n___params_1aba28ed842beae4822e8aead77d26b32d" kindref="member">eventCbk</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="740" refid="struct_c_a_n___params_1a0812b59dfabcaa4febcd9b88d926f27c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___params_1a0812b59dfabcaa4febcd9b88d926f27c" kindref="member">eventMask</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="741" refid="struct_c_a_n___params_1a4cde1e7c274959b22295c092634383f8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="struct_c_a_n___params_1a4cde1e7c274959b22295c092634383f8" kindref="member">userArg</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="742"><highlight class="normal">}<sp/><ref refid="struct_c_a_n___params" kindref="compound">CAN_Params</ref>;</highlight></codeline>
+<codeline lineno="743"><highlight class="normal"></highlight></codeline>
+<codeline lineno="749" refid="struct_c_a_n___object" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="750"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="751" refid="struct_c_a_n___object_1a899f9c058706218e600844fd19bc6b64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_c_a_n_8h_1ae049aa077771ab029cf97e6d9c17d136" kindref="member">CAN_EventCbk</ref><sp/><ref refid="struct_c_a_n___object_1a899f9c058706218e600844fd19bc6b64" kindref="member">eventCbk</ref>;<sp/></highlight></codeline>
+<codeline lineno="752" refid="struct_c_a_n___object_1acc348e935c580120fcb5536b864bb4bb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___object_1acc348e935c580120fcb5536b864bb4bb" kindref="member">eventMask</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="753" refid="struct_c_a_n___object_1a15619dd2a9370ef2c443c2e08fb95198" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="struct_c_a_n___object_1a15619dd2a9370ef2c443c2e08fb95198" kindref="member">userArg</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="754" refid="struct_c_a_n___object_1aef742b0e36e8df0133194e1f6cdf9e81" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___object_1aef742b0e36e8df0133194e1f6cdf9e81" kindref="member">intMask</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="756" refid="struct_c_a_n___object_1a77e43780583a2def40ebe1c7ac8d907d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___object_1a77e43780583a2def40ebe1c7ac8d907d" kindref="member">txBufNum</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="757" refid="struct_c_a_n___object_1aae691b2416885c6c8664a522e052c865" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___object_1aae691b2416885c6c8664a522e052c865" kindref="member">txFifoQNum</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="758" refid="struct_c_a_n___object_1a519c5fc69a19c6fa8f285b832316dea3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___object_1a519c5fc69a19c6fa8f285b832316dea3" kindref="member">txEventFifoNum</ref>;<sp/></highlight></codeline>
+<codeline lineno="759" refid="struct_c_a_n___object_1a4d0d13c9ce267fca832107c4c692970a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___object_1a4d0d13c9ce267fca832107c4c692970a" kindref="member">rxBufNum</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="760" refid="struct_c_a_n___object_1a8087e0e5af69510b9ecead66250bacf3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>rxFifoNum[2];<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="762" refid="struct_c_a_n___object_1a53e3fb8c5da29e2778a06146484d9870" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_struct_ring_buf___object" kindref="compound">StructRingBuf_Object</ref><sp/><ref refid="struct_c_a_n___object_1a53e3fb8c5da29e2778a06146484d9870" kindref="member">rxStructRingBuf</ref>;<sp/></highlight></codeline>
+<codeline lineno="763" refid="struct_c_a_n___object_1a566bb838a70db8989978c28a2eda6447" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_struct_ring_buf___object" kindref="compound">StructRingBuf_Object</ref><sp/><ref refid="struct_c_a_n___object_1a566bb838a70db8989978c28a2eda6447" kindref="member">txStructRingBuf</ref>;<sp/></highlight></codeline>
+<codeline lineno="765" refid="struct_c_a_n___object_1a4d3db01e3b06aae0db0a9fd263a88460" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_c_a_n___object_1a4d3db01e3b06aae0db0a9fd263a88460" kindref="member">isOpen</ref>;</highlight></codeline>
+<codeline lineno="766"><highlight class="normal">}<sp/><ref refid="struct_c_a_n___object" kindref="compound">CAN_Object</ref>;</highlight></codeline>
+<codeline lineno="767"><highlight class="normal"></highlight></codeline>
+<codeline lineno="775" refid="struct_c_a_n___h_w_attrs" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="776"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="777" refid="struct_c_a_n___h_w_attrs_1a1d77bf5a65f9480e6b1afb8514279a33" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_c_a_n___h_w_attrs_1a1d77bf5a65f9480e6b1afb8514279a33" kindref="member">enableCANFD</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="778" refid="struct_c_a_n___h_w_attrs_1a0409913ddab089d822b364e0f276f4ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_c_a_n___h_w_attrs_1a0409913ddab089d822b364e0f276f4ff" kindref="member">enableBRS</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="779" refid="struct_c_a_n___h_w_attrs_1a7c3937df299236d7d488ca5f702f3f62" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_c_a_n___h_w_attrs_1a7c3937df299236d7d488ca5f702f3f62" kindref="member">rejectNonMatchingMsgs</ref>;<sp/></highlight></codeline>
+<codeline lineno="780" refid="struct_c_a_n___h_w_attrs_1a3a272656afc073a0a46a9447b046637e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___h_w_attrs_1a3a272656afc073a0a46a9447b046637e" kindref="member">nominalBitRate</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="781" refid="struct_c_a_n___h_w_attrs_1afc2d3e560ce6a31f6f414e9cdbfd5745" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___h_w_attrs_1afc2d3e560ce6a31f6f414e9cdbfd5745" kindref="member">dataBitRate</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="783" refid="struct_c_a_n___h_w_attrs_1ad6180f69c96d54459ff407394b3a0559" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="struct_c_a_n___h_w_attrs_1ad6180f69c96d54459ff407394b3a0559" kindref="member">rxRingBufPtr</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="784" refid="struct_c_a_n___h_w_attrs_1a4e4f800ee3aae02c206317d7c6148fd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="struct_c_a_n___h_w_attrs_1a4e4f800ee3aae02c206317d7c6148fd9" kindref="member">txRingBufPtr</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="785" refid="struct_c_a_n___h_w_attrs_1a3f838bf3f8525a6c9ad245094e51eae8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="struct_c_a_n___h_w_attrs_1a3f838bf3f8525a6c9ad245094e51eae8" kindref="member">rxRingBufSize</ref>;<sp/></highlight></codeline>
+<codeline lineno="786" refid="struct_c_a_n___h_w_attrs_1a1ecfc2fa06d7fbc0cc94d7471f5fcc20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="struct_c_a_n___h_w_attrs_1a1ecfc2fa06d7fbc0cc94d7471f5fcc20" kindref="member">txRingBufSize</ref>;<sp/></highlight></codeline>
+<codeline lineno="787"><highlight class="preprocessor">#if<sp/>(DeviceFamily_PARENT<sp/>==<sp/>DeviceFamily_PARENT_CC27XX)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="788" refid="struct_c_a_n___h_w_attrs_1a38ab33ebc204513c3922cd5723383b3d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___h_w_attrs_1a38ab33ebc204513c3922cd5723383b3d" kindref="member">intPriority</ref>;<sp/></highlight></codeline>
+<codeline lineno="789" refid="struct_c_a_n___h_w_attrs_1ad88054874a044f100544054ec3f52d47" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___h_w_attrs_1ad88054874a044f100544054ec3f52d47" kindref="member">rxPinMux</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="790" refid="struct_c_a_n___h_w_attrs_1a18c434e34bc0fcc7db37a8b60b40de66" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_c_a_n___h_w_attrs_1a18c434e34bc0fcc7db37a8b60b40de66" kindref="member">txPinMux</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="791" refid="struct_c_a_n___h_w_attrs_1a7dfc2820778abf62e90c93f86e14e7d0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint_least8_t<sp/><ref refid="struct_c_a_n___h_w_attrs_1a7dfc2820778abf62e90c93f86e14e7d0" kindref="member">rxPin</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="792" refid="struct_c_a_n___h_w_attrs_1a05dfa3f5375867f385c41578141bd5b2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint_least8_t<sp/><ref refid="struct_c_a_n___h_w_attrs_1a05dfa3f5375867f385c41578141bd5b2" kindref="member">txPin</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="793"><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="794"><highlight class="normal">}<sp/><ref refid="struct_c_a_n___h_w_attrs" kindref="compound">CAN_HWAttrs</ref>;</highlight></codeline>
+<codeline lineno="795"><highlight class="normal"></highlight></codeline>
+<codeline lineno="803" refid="struct_c_a_n___config__" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_c_a_n___config__" kindref="compound">CAN_Config_</ref></highlight></codeline>
+<codeline lineno="804"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="806" refid="struct_c_a_n___config___1a798a8ea30b57658aefce6b3e4d95ab8b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_c_a_n___object" kindref="compound">CAN_Object</ref><sp/>*<ref refid="struct_c_a_n___config___1a798a8ea30b57658aefce6b3e4d95ab8b" kindref="member">object</ref>;</highlight></codeline>
+<codeline lineno="807"><highlight class="normal"></highlight></codeline>
+<codeline lineno="809" refid="struct_c_a_n___config___1a91e3f27acfc66f4f66d10afddc0a3c8f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_c_a_n___h_w_attrs" kindref="compound">CAN_HWAttrs</ref><sp/>*<ref refid="struct_c_a_n___config___1a91e3f27acfc66f4f66d10afddc0a3c8f" kindref="member">hwAttrs</ref>;</highlight></codeline>
+<codeline lineno="810"><highlight class="normal">}<sp/><ref refid="_c_a_n_8h_1a2adcb3cde9a6e999f9434e4689a917b9" kindref="member">CAN_Config</ref>;</highlight></codeline>
+<codeline lineno="811"><highlight class="normal"></highlight></codeline>
+<codeline lineno="812"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_c_a_n___config__" kindref="compound">CAN_Config</ref><sp/><ref refid="_c_a_n_8h_1ae353719375f08244685082e2a8440aad" kindref="member">CAN_config</ref>[];</highlight></codeline>
+<codeline lineno="813"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint_least8_t<sp/><ref refid="_c_a_n_8h_1addc4ab88f49cb2522ada61da8baced5d" kindref="member">CAN_count</ref>;</highlight></codeline>
+<codeline lineno="814"><highlight class="normal"></highlight></codeline>
+<codeline lineno="825"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_c_a_n_8h_1ace7de72cc97ae2a35d63c3a4a4772a31" kindref="member">CAN_init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="826"><highlight class="normal"></highlight></codeline>
+<codeline lineno="843"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_c_a_n_8h_1a9a7a7042e4948d4e04b9cb5205c50acf" kindref="member">CAN_Params_init</ref>(<ref refid="struct_c_a_n___params" kindref="compound">CAN_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="844"><highlight class="normal"></highlight></codeline>
+<codeline lineno="875"><highlight class="normal">CAN_Handle<sp/><ref refid="_c_a_n_8h_1ac007ed113727f16540e8b8e5d4e88fe4" kindref="member">CAN_open</ref>(uint_least8_t<sp/>index,<sp/><ref refid="struct_c_a_n___params" kindref="compound">CAN_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="876"><highlight class="normal"></highlight></codeline>
+<codeline lineno="886"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_c_a_n_8h_1abfc2ccd7bffde7724a17ab6c7e69f5cf" kindref="member">CAN_close</ref>(CAN_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="887"><highlight class="normal"></highlight></codeline>
+<codeline lineno="899"><highlight class="normal">int_fast16_t<sp/><ref refid="_c_a_n_8h_1a515269a858d44d1ed043ccd37f3eedcb" kindref="member">CAN_read</ref>(CAN_Handle<sp/>handle,<sp/>CAN_RxBufElement<sp/>*elem);</highlight></codeline>
+<codeline lineno="900"><highlight class="normal"></highlight></codeline>
+<codeline lineno="913"><highlight class="normal">int_fast16_t<sp/><ref refid="_c_a_n_8h_1ab670eb9a60e4f12c2eab6df7c2fa87e5" kindref="member">CAN_write</ref>(CAN_Handle<sp/>handle,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CAN_TxBufElement<sp/>*elem);</highlight></codeline>
+<codeline lineno="914"><highlight class="normal"></highlight></codeline>
+<codeline lineno="941"><highlight class="normal">int_fast16_t<sp/><ref refid="_c_a_n_8h_1a5faff3ed36a87d3459a2870f4e622d25" kindref="member">CAN_writeBuffer</ref>(CAN_Handle<sp/>handle,<sp/>uint32_t<sp/>bufIdx,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CAN_TxBufElement<sp/>*elem);</highlight></codeline>
+<codeline lineno="942"><highlight class="normal"></highlight></codeline>
+<codeline lineno="955"><highlight class="normal">int_fast16_t<sp/><ref refid="_c_a_n_8h_1a52e9349d952c4ab8ee874cf337ba61d5" kindref="member">CAN_readTxEvent</ref>(CAN_Handle<sp/>handle,<sp/>CAN_TxEventElement<sp/>*elem);</highlight></codeline>
+<codeline lineno="956"><highlight class="normal"></highlight></codeline>
+<codeline lineno="968"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_c_a_n_8h_1a537b65f6cef1a7bf274e7550bb355d37" kindref="member">CAN_getBitTiming</ref>(CAN_Handle<sp/>handle,<sp/>CAN_BitTimingParams<sp/>*bitTiming,<sp/>uint32_t<sp/>*clkFreq);</highlight></codeline>
+<codeline lineno="969"><highlight class="normal"></highlight></codeline>
+<codeline lineno="984"><highlight class="normal">int_fast16_t<sp/><ref refid="_c_a_n_8h_1a4438793696220749713ccde080099b3d" kindref="member">CAN_enableLoopbackExt</ref>(CAN_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="985"><highlight class="normal"></highlight></codeline>
+<codeline lineno="999"><highlight class="normal">int_fast16_t<sp/><ref refid="_c_a_n_8h_1ac6206b975391c4b0e19b54097b12d785" kindref="member">CAN_enableLoopbackInt</ref>(CAN_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="1000"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1012"><highlight class="normal">int_fast16_t<sp/><ref refid="_c_a_n_8h_1ac9aa9243ed8fe0d17141bf56c94cffbf" kindref="member">CAN_disableLoopback</ref>(CAN_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="1013"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1014"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1015"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1016"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1017"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1018"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_drivers_can__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/CAN.h"/>
+  </compounddef>
+</doxygen>

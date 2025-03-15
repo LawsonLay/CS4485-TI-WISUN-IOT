@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kernel Configuration &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Power Management" href="power.html" />
+    <link rel="prev" title="FreeRTOS (RTOS Kernel) Overview" href="../ble-stack-5.x-guide/freertos-index.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug freertos config";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Kernel Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#posix-support">POSIX Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#driver-porting-layer-dpl">Driver Porting Layer (DPL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-freertos-with-ccs">Using FreeRTOS with CCS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#freertos-vs-ti-rtos7-modules">FreeRTOS vs. TI-RTOS7 modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#icall-posix">icall_POSIX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="power.html">Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rov.html">Debugging FreeRTOS with Runtime Object View (ROV)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software-timers.html">Software Timers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html">Queues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization.html">Thread Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migrating TI-RTOS examples to use FreeRTOS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a> &raquo;</li>
+      <li>Kernel Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="kernel-configuration">
+<span id="sec-freertos-config"></span><h1>Kernel Configuration<a class="headerlink" href="#kernel-configuration" title="Permalink to this headline">¶</a></h1>
+<p>The FreeRTOS kernel is configured by FreeRTOSConfig.h file which can be found
+in <code class="docutils literal notranslate"><span class="pre">{SDK_INSTALL_DIR}\kernel\freertos\builds\{DEVICE}\release\pregenerated_configuration</span></code>,
+you can change the configuration file so that the kernel will be tailored to your application.
+For more information about kernel configuration, please see <a class="reference external" href="https://www.freertos.org/a00110.html">FreeRTOS Kernel Configuration Overview</a>.</p>
+<p>In the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>, all FreeRTOS application routines are abstracted using the following:</p>
+<ul class="simple">
+<li><p>A POSIX layer, which was designed for use with this <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a></p></li>
+<li><p>A Driver Porting Layer (DPL) for use by the TI Drivers</p></li>
+</ul>
+<p>You can find example FreeRTOS projects that use the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> in the <code class="docutils literal notranslate"><span class="pre">examples/rtos/</span></code>
+folder for all supported IDEs.</p>
+<p>No native FreeRTOS examples are provided in this <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>. If you want to use the native
+FreeRTOS routines without the abstractions provided by the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>, documentation is provided
+on the <a class="reference external" href="https://www.freertos.org">FreeRTOS website</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>At this moment, the only example with FreeRTOS support is <code class="docutils literal notranslate"><span class="pre">multi_role</span></code> inside the SimpleLink_Lowpower_F2 SDK.</p>
+</div>
+</div>
+<div class="section" id="posix-support">
+<h1>POSIX Support<a class="headerlink" href="#posix-support" title="Permalink to this headline">¶</a></h1>
+<p>Portable Operating System Interface (POSIX) is an IEEE industry API standard for
+OS compatibility. The <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> provides support for POSIX APIs on top of
+FreeRTOS (as it does for TI-RTOS7). For a more detailed description of the POSIX
+support in the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>, please refer to the
+<a class="reference external" href="https://dev.ti.com/tirex/explore/node?node=ACzypa9NTyZS--.cZMxD.g__BSEc4rl__LATEST">POSIX Overview Workshop</a></p>
+</div>
+<div class="section" id="driver-porting-layer-dpl">
+<h1>Driver Porting Layer (DPL)<a class="headerlink" href="#driver-porting-layer-dpl" title="Permalink to this headline">¶</a></h1>
+<p>The TI Drivers (e.g. UART2, I2C, Power Management, etc.) are written to be used
+with the Driver Porting Layer (DPL). The <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> includes a DPL
+implementation for both FreeRTOS, TI-RTOS7 and no RTOS.</p>
+<blockquote>
+<div><div class="figure align-center">
+<img alt="../_images/driver_levels_dpl.png" src="../_images/driver_levels_dpl.png" />
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="using-freertos-with-ccs">
+<h1>Using FreeRTOS with CCS<a class="headerlink" href="#using-freertos-with-ccs" title="Permalink to this headline">¶</a></h1>
+<p>FreeRTOS is included within the SDK itself! Unlike past SDKs which required FreeRTOS to be
+defined manually in the linked resources.</p>
+<p>In order to use FreeRTOS within CCS, you must specify the location of the FreeRTOS
+installation. To do this, follow these steps:</p>
+<div class="section" id="freertos-examples">
+<span id="id2"></span><h2>FreeRTOS examples<a class="headerlink" href="#freertos-examples" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned before, only the <code class="docutils literal notranslate"><span class="pre">multi_role</span></code> example supports FreeRTOS and
+it needs to be used with the gcc compiler, therefore please import the
+project located in <code class="docutils literal notranslate"><span class="pre">multi_role/freertos/gcc</span></code>.</p>
+<blockquote>
+<div><div class="figure align-center">
+<img alt="../_images/freertos_project_import.png" src="../_images/freertos_project_import.png" />
+</div>
+</div></blockquote>
+<p>Two projects will get imported:</p>
+<blockquote>
+<div><div class="figure align-center">
+<img alt="../_images/multi_role_freertos_import.png" src="../_images/multi_role_freertos_import.png" />
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="freertos-vs-ti-rtos7-modules">
+<h1>FreeRTOS vs. TI-RTOS7 modules<a class="headerlink" href="#freertos-vs-ti-rtos7-modules" title="Permalink to this headline">¶</a></h1>
+<p>The application and the ICall layer communicate using events to call the
+OS and made context switch. The table below shows the modules that are used by
+TI-RTOS7 in a typical example flow, at the same time explains which modules are
+used by FreeRTOS.</p>
+<span id="tbl-freertos-modules"></span><table class="docutils align-default" id="id3">
+<caption><span class="caption-number">Table 5. </span><span class="caption-text">Replacing modules that supports FreeRTOS in place of TI-RTOS7 modules</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 37%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Example flow</strong></p></td>
+<td><p><strong>TI-RTOS7 modules</strong></p></td>
+<td><p><strong>FreeRTOS modules</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>1. <em>Application Thread</em>
+Listen (pend) on event
+number</p></td>
+<td><p><em>TI-RTOS7</em> Semaphore/Event</p></td>
+<td><p>SemaphoreP (used through DPL layer)
+and mq_send / mq_receive <em>Blocking</em>
+Mqueue (POSIX queues)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2. <em>Stack Thread</em>
+Doing whatever he asked
+to do by the app called</p></td>
+<td><p><em>TI-RTOS7</em> Timers</p></td>
+<td><p>TimersP (used through DPL layer)</p></td>
+</tr>
+<tr class="row-even"><td><p>3. <em>Stack Thread</em>
+Push a message (or number
+of messages) into the
+queue and post an event
+Queue</p></td>
+<td><p><em>TI-RTOS7</em> utility Queue</p></td>
+<td><p>mq_send / mq_receive <em>NON-Blocking</em>
+Mqueue (POSIX queues)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4. <em>Application Thread</em>
+OS wakes the application
+thread and the application
+pulls the message from the
+Non-OS queue</p></td>
+<td><p><em>TI-RTOS7</em> utility Queue</p></td>
+<td><p>mq_send / mq_receive <em>NON-Blocking</em>
+Mqueue (POSIX queues)</p></td>
+</tr>
+<tr class="row-even"><td><p>5. <em>Application Thread</em>
+Listen (pend) on event
+number - cycle has
+completed</p></td>
+<td><p><em>TI-RTOS7</em> event</p></td>
+<td><p>mq_send / mq_receive <em>Blocking</em>
+Mqueue (POSIX queues)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="icall-posix">
+<h1>icall_POSIX<a class="headerlink" href="#icall-posix" title="Permalink to this headline">¶</a></h1>
+<p>The file ICall_POSIX is based on POSIX, DPL and FreeRTOS bare APIs
+calls. This implementation should allow us to support different Operating Systems if
+required. In order to do this, all the <code class="docutils literal notranslate"><span class="pre">#ifdef</span> <span class="pre">FreeRTOS</span></code> on the current ICall_POSIX
+could be changed to support a different OS.</p>
+<p>Here are some of the places where these defines are used (<code class="docutils literal notranslate"><span class="pre">icall_POSIX.c</span></code>):</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-number">Listing 18. </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">ical_POSIX.c</span> <span class="pre">-</span> <span class="pre">Includes</span></code></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="cp">#ifdef FREERTOS</span>
+</span><span class="hll"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;FreeRTOS.h&gt;</span><span class="cp"></span>
+</span><span class="hll"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;task.h&gt;</span><span class="cp"></span>
+</span><span class="hll"><span class="cp">#endif</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">Listing 19. </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">ical_POSIX.c</span> <span class="pre">-</span> <span class="pre">ICall_taskSelf()</span></code></span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Task_Handle</span><span class="w"> </span><span class="nf">ICall_taskSelf</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">Task_Handle</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="hll"><span class="cp">#ifdef FREERTOS</span>
+</span><span class="hll"><span class="w">  </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Task_Handle</span><span class="p">)</span><span class="w"> </span><span class="n">xTaskGetCurrentTaskHandle</span><span class="p">();</span><span class="w"></span>
+</span><span class="hll"><span class="cp">#else</span>
+</span><span class="w">  </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">handler</span><span class="w"> </span><span class="n">need</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">returned</span><span class="w"> </span><span class="n">according</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">chosen</span><span class="w"> </span><span class="n">OS</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<span class="cp">#endif </span><span class="c1">// FREERTOS</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-number">Listing 20. </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">ical_POSIX.c</span></code></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef FREERTOS</span>
+<span class="cp">#if defined(HEAPMGR_CONFIG) &amp;&amp; ((HEAPMGR_CONFIG == 0) || (HEAPMGR_CONFIG == 0x80))</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;rtos_heaposal.h&gt;</span><span class="cp"></span>
+<span class="cp">#elif defined(HEAPMGR_CONFIG) &amp;&amp; ( (HEAPMGR_CONFIG == 1) || (HEAPMGR_CONFIG == 0x81))</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;rtos_heapmem.h&gt;</span><span class="cp"></span>
+<span class="cp">#elif defined(HEAPMGR_CONFIG) &amp;&amp; ( (HEAPMGR_CONFIG == 2) || (HEAPMGR_CONFIG == 0x82))</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;rtos_heaptrack.h&gt;</span><span class="cp"></span>
+<span class="cp">#else</span>
+<span class="hll"><span class="k">static</span><span class="w"> </span><span class="n">ICall_CSState</span><span class="w"> </span><span class="n">ICall_heapCSState</span><span class="p">;</span><span class="w"></span>
+</span><span class="hll"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;rtos_heaposal.h&gt;</span><span class="cp"></span>
+</span><span class="cp">#endif</span>
+<span class="cp">#endif </span><span class="c1">// !FREERTOS</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ble-stack-5.x-guide/freertos-index.html" class="btn btn-neutral float-left" title="FreeRTOS (RTOS Kernel) Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="power.html" class="btn btn-neutral float-right" title="Power Management" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

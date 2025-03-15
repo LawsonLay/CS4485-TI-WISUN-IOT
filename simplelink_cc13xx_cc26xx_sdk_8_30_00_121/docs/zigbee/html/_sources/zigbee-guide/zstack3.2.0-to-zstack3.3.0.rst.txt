@@ -1,0 +1,326 @@
+.. _sec-zstack3.2.0-to-stack3.3.0:
+
+Z-Stack 3.2.0 to Z-Stack 3.3.0
+==============================
+
+This section will describe a way to migrate a project from Z-Stack 3.2.0 to
+a Z-Stack 3.3.0 project.
+
+For this guide, *samplelight* from Z-Stack 3.2.0 will be ported
+over to Z-Stack 3.3.0.  The two releases have major differences mostly
+pertaining to:
+
+-  Bug fixes listed in the Zigbee Release Notes
+
+-  Merging of the CC13X2 and CC26X2 SDKs
+
+-  ICall deprecation and replacement with OSALPort
+
+-  Re-organization of the directory structure
+
+The recommended approach is to start with a Z-Stack 3.3.0 project that contains 
+the same base application as the porting target project and merge any custom functionality
+
+1. Choose a Z-Stack 3.3.0 example project that contains your target project's base 
+   functionality.  For reference and use in this example, *zc_light* from 
+   |SDK_DIR|\ \\examples\\rtos\\\ |DEVICE|\_LAUNCHXL\\zstack
+   is chosen as a starting point.
+
+#. No changes are required for the Z-Stack 3.3.0 ``zcl_samplelight_data.c`` or
+   ``zcl_samplelight.h`` files unless clusters, attributes, or simple descriptors were 
+   added or altered in the Z-Stack 3.2.0 project.  However, please note that 
+   ``ZCL_CLUSTER_ID_GEN_BASIC`` and ``ZCL_CLUSTER_ID_GEN_SCENES`` attribute records 
+   have been added whereas ``ZCL_CLUSTER_ID_HA_DIAGNOSTIC`` has been removed.  
+   Some global functions for attribute updates which can be accessed by the application 
+   have also been added.
+
+The following items specifically concern ``zcl_samplelight.c``:
+
+1. All ICall local variables have been replaced with
+
+    .. code-block:: c
+
+		// Semaphore used to post events to the application thread
+		static Semaphore_Handle appSemHandle;
+		static Semaphore_Struct appSem;
+
+		/* App service ID used for messaging with stack service task */
+		static uint8_t  appServiceTaskId;
+		/* App service task events, set by the stack service task when sending a message */
+		static uint32_t appServiceTaskEvents;
+
+   The following have been redefined:
+
+   - ``appServiceTaskID`` replaces ``zclSampleLight_Entity``
+
+   - ``appServiceTaskEvents`` replaces ``events``
+
+   - ``appSemHandle`` replaces ``sem``
+
+#. Local functions have been added and will be discussed by the points below.
+
+    .. code-block:: c
+
+        static void zclSampleLight_RemoveAppNvmData(void);
+		static uint8 zclSampleLight_SceneStoreCB(zclSceneReq_t *pReq);
+		static void  zclSampleLight_SceneRecallCB(zclSceneReq_t *pReq);
+		ZStatus_t zclSampleLight_ReadWriteAttrCB( uint16 clusterId, uint16 attrId, uint8 oper,
+		                                          uint8 *pValue, uint16 *pLen );
+
+#. ``zclSampleLight_task`` is replaced with the generic ``sampleApp_task``. Changes to 
+``main.c`` of the Application |rarr| Startup folder must also be applied.   
+
+#. ``ICall_registerApp(&zclSampleLight_Entity, &sem);`` has been removed from
+   ``zclSampleLight_initialization(void)`` and the following OSALPort registration code
+   is now included:
+
+    .. code-block:: c
+
+	    Semaphore_Params semParam;
+	    Semaphore_Params_init(&semParam);
+	    semParam.mode = ti_sysbios_knl_Semaphore_Mode_BINARY;
+	    Semaphore_construct(&appSem, 0, &semParam);
+	    appSemHandle = Semaphore_handle(&appSem);
+
+	    appServiceTaskId = OsalPort_registerTask(Task_self(), appSemHandle, &appServiceTaskEvents);
+
+#. ``zclSampleLight_RemoveAppNvmData();`` is added to the ``if(key == KEY_RIGHT)`` statement
+   of ``static void zclSampleLight_initialization(void)`` and is declared as follows:
+
+    .. code-block:: c
+
+	    /*********************************************************************
+		 * @fn          zclSampleLight_RemoveAppNvmData
+		 *
+		 * @brief       Callback when Application performs reset to Factory New Reset.
+		 *              Application must restore the application to default values
+		 *
+		 * @param       none
+		 *
+		 * @return      none
+		*/
+		static void zclSampleLight_RemoveAppNvmData(void)
+		{
+		#ifdef ZCL_GROUPS
+		    uint8 numGroups;
+		    uint16 groupList[APS_MAX_GROUPS];
+		    uint8 i;
+		   
+		    if ( numGroups = aps_FindAllGroupsForEndpoint( SAMPLELIGHT_ENDPOINT, groupList ) )
+		    {
+		      for ( i = 0; i < numGroups; i++ )
+		      {
+		#if defined ( ZCL_SCENES )
+		        zclGeneral_RemoveAllScenes( SAMPLELIGHT_ENDPOINT, groupList[i] );
+		#endif
+		      }
+		      aps_RemoveAllGroup( SAMPLELIGHT_ENDPOINT );
+		    }
+		#endif
+		}
+
+#. ``zclSampleLight_process_loop`` now uses OSALPort instead of ICall to receive messages.
+
+    .. code-block:: c
+
+		static void zclSampleLight_process_loop(void)
+		{
+		    /* Forever loop */
+		    for(;;)
+		    {
+		        zstackmsg_genericReq_t *pMsg = NULL;
+
+		        /* Wait for response message */
+		        if(Semaphore_pend(appSemHandle, BIOS_WAIT_FOREVER ))
+		        {
+		            /* Retrieve the response message */
+		            if((pMsg = (zstackmsg_genericReq_t*) OsalPort_msgReceive( appServiceTaskId )) != NULL)
+		            {
+
+		                    zclSampleLight_processZStackMsgs(pMsg);
+
+		#ifdef PER_TEST
+		                    per_interface_processZStackMsg(pMsg);
+		#endif
+
+		                if(pMsg != NULL)
+		                {
+		                    OsalPort_msgDeallocate((uint8_t*)pMsg);
+		                }
+		            }
+
+#. Global variables for cluster attributes, like ``zclSampleLight_OnOff`` and `` zclSampleLight_LevelCurrentLevel`` 
+   have been replaced with attribute functions as reflected in ``zcl_samplelight_data.c`` and ``zcl_samplelight.h``.
+
+#. Scene and attribute callbacks have been added:
+
+    .. code-block:: c
+
+	    /******************************************************************************
+		 *
+		 *  Functions for processing ZCL Foundation incoming Command/Response messages
+		 *
+		 *****************************************************************************/
+		  
+		/*********************************************************************
+		 * @fn      zclSampleLight_SceneRecallCB
+		 *
+		 * @brief   Callback from the ZCL Scenes Cluster Library
+		 *          to recall a set of attributes from a stored scene.
+		 *
+		 * @param   none
+		 *
+		 * @return  none
+		 */
+		static void zclSampleLight_SceneRecallCB( zclSceneReq_t *pReq )
+		{
+		    zclGeneral_Scene_extField_t extField;
+		    uint8 *pBuf;
+		    uint8 extLen = 0;
+
+		    pBuf = pReq->scene->extField;
+		    extField.AttrLen = pBuf[2];
+
+		     while(extLen < ZCL_GEN_SCENE_EXT_LEN)
+		     {
+		         //Parse ExtField
+		         extField.ClusterID = BUILD_UINT16(pBuf[0],pBuf[1]);
+		         extField.AttrLen = pBuf[2];
+		         extField.AttrBuf = &pBuf[3];
+
+		         if(extField.AttrLen == 0xFF || extField.ClusterID == 0xFFFF)
+		         {
+		             break;
+		         }
+
+		         //If On/Off then retrieve the attribute
+		         if(extField.ClusterID == ZCL_CLUSTER_ID_GEN_ON_OFF)
+		         {
+		             uint8 tempState = *extField.AttrBuf;
+		             zclSampleLight_updateOnOffAttribute(tempState);
+		         }
+		         //If Level Control then retrieve the attribute
+		         else if(extField.ClusterID == ZCL_CLUSTER_ID_GEN_LEVEL_CONTROL)
+		         {
+		             uint8 tempState = *extField.AttrBuf;
+		             zclSampleLight_updateCurrentLevelAttribute(tempState);
+		         }
+
+		         //Move to the next extension field (increase pointer by clusterId, Attribute len field, and attribute)
+		         pBuf += sizeof(uint16) + sizeof(uint8) + extField.AttrLen;
+		         extLen += sizeof(uint16) + sizeof(uint8) + extField.AttrLen;  //increase ExtField
+		     }
+
+		    //Update scene attributes
+		    zclSampleLight_ScenesValid = TRUE;
+		    zclSampleLight_ScenesCurrentGroup = pReq->scene->groupID;
+		    zclSampleLight_ScenesCurrentScene = pReq->scene->ID;
+
+		    zclSampleLight_UpdateLedState();
+
+		}
+
+		/*********************************************************************
+		 * @fn      zclSampleLight_SceneStoreCB
+		 *
+		 * @brief   Callback from the ZCL Scenes Cluster Library
+		 *          to store a set of attributes to a specific scene.
+		 *
+		 * @param   none
+		 *
+		 * @return  none
+		 */
+		static uint8 zclSampleLight_SceneStoreCB( zclSceneReq_t *pReq )
+		{
+		    zclGeneral_Scene_extField_t extField;
+		    uint8 *pBuf;
+		    uint8 extLen = 0;
+		    uint8 sceneChanged = FALSE;
+
+		    pBuf = pReq->scene->extField;
+		    extField.AttrLen = pBuf[2];
+
+		    while(extLen < ZCL_GEN_SCENE_EXT_LEN)
+		    {
+		        //Parse ExtField
+		        extField.ClusterID = BUILD_UINT16(pBuf[0],pBuf[1]);
+		        extField.AttrLen = pBuf[2];
+		        extField.AttrBuf = &pBuf[3];
+
+		        if(extField.AttrLen == 0xFF || extField.ClusterID == 0xFFFF)
+		        {
+		            break;
+		        }
+
+		        //If On/Off then store attribute
+		        if(extField.ClusterID == ZCL_CLUSTER_ID_GEN_ON_OFF)
+		        {
+		            uint8 tempState = zclSampleLight_getOnOffAttribute();
+		            if(*extField.AttrBuf != tempState )
+		            {
+		                sceneChanged = TRUE;
+		            }
+		            *extField.AttrBuf = tempState;
+		        }
+		        //If Level Control then store attribute
+		        else if(extField.ClusterID == ZCL_CLUSTER_ID_GEN_LEVEL_CONTROL)
+		        {
+		            uint8 tempState = zclSampleLight_getCurrentLevelAttribute();
+		            if(*extField.AttrBuf != tempState )
+		            {
+		                sceneChanged = TRUE;
+		            }
+		            *extField.AttrBuf = tempState;
+		        }
+
+		        //Move to the next extension field (increase pointer by clusterId, Attribute len field, and attribute)
+		        pBuf += sizeof(uint16) + sizeof(uint8) + extField.AttrLen;
+		        extLen += sizeof(uint16) + sizeof(uint8) + extField.AttrLen;  //increase ExtField
+		    }
+
+		    //Update scene attributes
+		    zclSampleLight_ScenesValid = TRUE;
+		    zclSampleLight_ScenesCurrentGroup = pReq->scene->groupID;
+		    zclSampleLight_ScenesCurrentScene = pReq->scene->ID;
+
+		    return sceneChanged;
+		}
+
+		/*********************************************************************
+		 * @fn      zclSampleLight_ReadWriteAttrCB
+		 *
+		 * @brief   Handle ATTRID_SCENES_COUNT, ATTRID_ON_OFF and ATTRID_LEVEL_CURRENT_LEVEL.
+		 *          Only to be called if any of the attributes change.
+		 *
+		 * @param   clusterId - cluster that attribute belongs to
+		 * @param   attrId - attribute to be read or written
+		 * @param   oper - ZCL_OPER_LEN, ZCL_OPER_READ, or ZCL_OPER_WRITE
+		 * @param   pValue - pointer to attribute value, OTA endian
+		 * @param   pLen - length of attribute value read, native endian
+		 *
+		 * @return  status
+		 */
+		ZStatus_t zclSampleLight_ReadWriteAttrCB( uint16 clusterId, uint16 attrId, uint8 oper,
+		                                         uint8 *pValue, uint16 *pLen )
+		{
+		    if(clusterId == ZCL_CLUSTER_ID_GEN_SCENES)
+		    {
+		        if(attrId == ATTRID_SCENES_COUNT)
+		        {
+		           return zclGeneral_ReadSceneCountCB(clusterId,attrId,oper,pValue,pLen);
+		        }
+		    }
+		    return ZSuccess;
+		}
+
+   ``zclSampleLight_SceneStoreCB`` and ``zclSampleLight_SceneRecallCB`` are added to the
+   ``zclSampleLight_CmdCallbacks`` table.
+
+#. ``gp_[Get/Set]CommissioningMode`` is renamed ``gp_[Get/Set]SinkCommissioningMode``,
+   changes are only required if ``ENABLE_GREENPOWER_COMBO_BASIC`` is defined.
+
+#. Add any other Z-Stack 3.2.0 application changes to the Z-Stack 3.3.0 file if not
+   pertaining to the items listed above.
+
+.. note:: Difference comparison software is recommended for discerning all differences
+    between software stacks.

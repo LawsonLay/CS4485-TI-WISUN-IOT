@@ -1,0 +1,123 @@
+.. _sec-freertos-software-timers:
+
+Software Timers
+---------------
+
+FreeRTOS includes a mechanism called Software Timers that is very similar to
+what other RTOS call 'Clocks'. In this section we will provide a brief 
+introduction to FreeRTOS Software Timers. For all the details, please visit 
+|FreeRTOS SOFTWARE TIMERS| and the |FreeRTOS API|.
+
+The basics
+^^^^^^^^^^
+
+A Software Timer allows you to execute a function some time in the future. To
+make use of this feature, you will need to:
+
+- Create a software timer
+
+- Define the software timer's callback function (i.e. the function that you
+  want to execute in the future)
+
+- Define the software timer's period (i.e. the point in the future when you
+  want it executed)
+
+.. warning::
+
+  As indicated in |FreeRTOS SOFTWARE TIMERS|, it is imperative that
+  a timer's callback does not attempt to block. That is, it cannot call
+  vTaskDelay(), vTaskDelayUntil(), or specify a non-zero block time when
+  accessing a queue or a semaphore.
+
+You can select a Software Timer to be one-shot or auto-reload during creation. 
+See more details about this in section :ref:`sec-freertos-create-sw-timer-listing` 
+below. You may also want to check the FreeRTOS documentation, specifically 
+|FreeRTOS SOFTWARE TIMERS ONESHOT VS AUTORELOAD| and the description of
+|FreeRTOS xTaskCreate|.
+
+Using Software Timers
+^^^^^^^^^^^^^^^^^^^^^
+
+Please note that Software Timers are not part of the core FreeRTOS kernel.
+In order to use them, you must first take the following two steps:
+
+#. Add the FreeRTOS/Source/timers.c source file to your project, and...
+#. Define a few constants in the FreeRTOSConfig.h header file. 
+
+FreeRTOSConfig.h is part of the freertos_builds project.
+
+See all the details at |FreeRTOS SOFTWARE TIMERS CONFIG|.
+
+Details on Implementation
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+FreeRTOS Software Timers are provided by a timer service (or daemon) task.
+Your application will interact with FreeRTOS Timers through API functions,
+which will allow you to do operations such as create a timer, start and stop 
+a timer, etc. 
+These functions use a standard FreeRTOS queue to send commands to the timer 
+service task. This queue is called the 'timer command queue' and cannot be
+accessed directly. 
+Learn more about this at |FreeRTOS SOFTWARE TIMERS SERVICE TASK|.
+
+.. _sec-freertos-create-sw-timer-listing:
+
+Creating and Starting a Software Timer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In this section we will provide an example of how to create and start a
+Software Timer. See more examples of usage in the |FreeRTOS API|.
+
+.. code-block:: c
+    :linenos:
+    :caption: Create a FreeRTOS Software Timer
+
+    #include <FreeRTOS.h>
+    #include <stdarg.h>
+
+
+    TimerHandle_t xTimer;
+
+    void main( void ) {
+
+        BaseType_t xReturned;
+
+        /* Create and start the timer. Recommended to do before starting the scheduler */
+        xTimer = xTimerCreate(
+                "Timer 1",                      /* Textual name, helpful during debugging! */
+                pdMS_TO_TICKS( 500 ),           /* Timer period: 500 ms */
+                pdTRUE,                         /* Autoreload */
+                ( void * ) 1,                   /* Timer ID. Can be used to identify which
+                                                   timer expired if multiple timers share a
+                                                   timer callback */
+                &vTimerCallback );              /* Function to call when timer expires. When
+                                                   invoked by FreeRTOS, the Timer ID will be 
+                                                   passed as a parameter */
+
+        if(xTimer != NULL)
+        {
+            BaseType_t started;
+            started = xTimerStart(
+                   xTimer,                      /* Handle returned by xTimerCreate */
+                   0);                          /* Time to block in ticks: 0 (Do not block) */
+            if (pdPASS != sarted) {
+                /* Failed to start the timer! */
+            }
+         } else {
+           /* Failed to create the timer! */
+         }
+
+        /* Start the FreeRTOS scheduler */
+        vTaskStartScheduler();
+    }
+
+    /* Timer Callback Function (this may be reused by multiple timers if desired) */
+    void vTimerCallback( TimerHandle_t xTimer )
+    {
+        /* *** Enter your application code here *** */
+        /* Ex. */
+        static uint32_t timer_count__500ms = 0;
+        timer_count__500ms++;
+    }
+
+

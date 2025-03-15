@@ -1,0 +1,39 @@
+                                                        Internal Flash
+    +-----------------------------------+------------------>+-------------------+ <-DEVICE_SIZE
+    | {d}                               |                   |       CCFG  cRED  |
+    | o MCUboot is linked in last page  |                   +-------------------+
+    | o CCFG is linked with MCUBoot     |                   |   MCUBoot         |
+    +-----------------------------------+---\               |   Bootloader      |
+                                            |               |      cRED         |
+                                            |               |                   |
+                                            |               |                   |
+                                            |               |                   |
+                                            |               +-------------------+
+                                            |               |      MCUBoot      |
+                                            |               | Interrupt Vectors |
+                                            |               | c777              |
+                                            \-------------->+-------------------+ <- DEVICE_SIZE - PAGE_SIZE
+                                                            |                   |
+                                                            |                   |
+                                                            |                   |
+                                                            |                   |
+                                                            |                   |
+                                                            |                   |
+                                                            |    User           |
+                                                            |    Application    |
+                                                            |    Version n      |
+                                                            |         c7AF      |
+                                                            |                   |
+                                                            |                   |
+                                                            |                   |
+                                                            |                   |
+                                                            |                   |
+                                                            |                   |
+                                                            +-------------------+
+                                                            |       App         |
+                                                            | Interrupt Vectors |
+                                                            | c777              |
+                                                            +-------------------+
+                                                            | MCUboot Image Hdr |
+                                                            | c333              |
+                                                            +-------------------+ <- 0x00000000

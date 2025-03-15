@@ -1,0 +1,323 @@
+.. WSMS.. DO NOT RENAME OR MOVE THIS FILE FROM THE QUICKSTART GUIDE! THIS GUARANTEES
+   EXTERNAL LINKS TO THIS GUIDE WILL PERSIST IN E2E AND SUCH.
+
+.. |WSMS Stack User's Guide| replace::  :docs_root:`WSMS Stack User's Guide <wsms/wsms-users-guide.html>`
+.. _TI Wi-SUN FAN pySpinel GitHub repo: https://github.com/TexasInstruments/ti-wisunfan-pyspinel
+.. _SimpleLink CC16XX CC26XX SDK: https://www.ti.com/tool/SIMPLELINK-CC13XX-CC26XX-SDK
+
+.. _quick-start-wsms:
+
+Wireless Solar Management System Quick Start Guide
+==================================================
+
+This section serves as a road map for users developing applications
+and products using the TI SimpleLink |PROPRFDEVICE| wireless MCU platform for
+Wireless Solar Management System (WSMS) applications. Whether a seasoned developer or just getting
+started, TI has created a variety of resources to simplify development on the
+|PROPRFDEVICE| platform. These resources will enhance your experience with the
+SimpleLink WSMS from the out-of-the-box demo to production.
+
+.. _quick-start-wsms-ccs:
+
+Using WSMS Projects with CCS
+-------------------------------
+
+Importing WSMS projects into CCS will also import a ``README.md`` that
+details the example application design, steps on running the example, and how
+each example works.
+
+For more details on TI WSMS Stack example application please see the
+|WSMS Stack User's Guide|.
+
+Import Project Using Resource Explorer
+""""""""""""""""""""""""""""""""""""""
+
+A quick and easy way to start working with the SDK is to use the TI Resource
+Explorer in CCS.
+
+This section describes how to import and build an existing project and
+references the *node* project. This project is an example for a WSMS node
+node. All of WSMS projects included in the development kit have a similar
+structure.
+
+#. Open the CCS IDE from the Start Menu.
+#. Create a workspace.
+
+    .. attention::
+
+        Ensure that the CCS workspace path does not contain a whitespace.
+
+#. Import a CCS Project using Resource Explorer
+
+    -   Open Resource Explorer (if not open already) **View** -> **Resource
+        Explorer** - Navigate to the CCS folder for your chosen example:
+        **Software ->** |SDK| **-> Examples ->** \ \{BOARD_NAME\} **->
+        wsms -> wsms_ipv6node -> tirtos7 -> ticlang -> wsms_ipv6node_**
+
+#.  Select the CCS Logo button to import the project into your workspace.
+
+    .. attention::
+
+        The import process will also install the |SDK| if a local version does
+        not exist. You must accept the End User License Agreement to proceeed.
+
+        .. figure:: resources/eula.png
+            :align: center
+
+            Install |SDK|
+
+        After the installation finishes, you must reopen CCS before importing
+        the project.
+
+    - If everything is successful, the project should appear in Resource
+      Explorer.
+
+
+Import Project Using Import Wizard
+""""""""""""""""""""""""""""""""""
+
+#. Open CCS
+#. Choose Project -> Import CCS Projects... from the menu.
+#. Select the Browse button in the Import CCS Projects dialog and select the the
+   directory ``<SDK_INSTALL_DIR>/examples``
+
+    .. _fig-wsms-ccs-import-wizard:
+    .. figure:: resources/tidrivers/ccs-import-wizard.jpg
+        :align: center
+
+        CCS Import Wizard
+
+   CCS discovers all examples supported, regardless of compiler.
+#. Select the WSMS Example Project you would like to use. In this example,
+   ``wsms_ipv6node_LP_EM_CC1354P10_1_tirtos7_ticlang`` is chosen. Click Finish
+   to import the ``wsms_ipv6node_LP_EM_CC1354P10_1_tirtos7_ticlang`` project.
+
+Build and Download Project
+""""""""""""""""""""""""""
+
+To build & download the node project:
+
+#. Build the Node project:
+
+    - Set the Node project as the active project. Make sure the Release project
+      configuration is used.
+    - Select **Project** -> **Rebuild** to build the node project.
+
+#. Load the Node project:
+
+    - Select **Run** -> **Debug** to download the node application.
+    - Once the debugging session starts, click the red stop button
+
+Before beginning execution, open a terminal window with the following settings:
+
+  +-----------------+-----------------+
+  | UART Param      | Default Values  |
+  +=================+=================+
+  | Baud Rate       | 115200          |
+  +-----------------+-----------------+
+  | Data length     | 8 bits          |
+  +-----------------+-----------------+
+  | Parity          | None            |
+  +-----------------+-----------------+
+  | Stop bits       | 1 bit           |
+  +-----------------+-----------------+
+  | Flow Control    | None            |
+  +-----------------+-----------------+
+
+When the debugging session opens, click the Green start button to start
+execution. Continue on to the ``README.md`` for information about using the
+example application.
+
+Using WSMS Projects with IAR
+------------------------------
+
+Importing a WSMS project into IAR will also import a README.md
+that details the example application design, steps on running the example, and
+how each example works.
+
+When building with IAR, it is recommended to enable all build messages. This
+can be done by right-clicking in the Build window and selecting "All" as shown
+below:
+
+    .. figure:: resources/ble5/ble5_iar_enable_build_messages.png
+        :align: center
+
+        Enable All Build Messages
+
+.. warning::
+    Standalone SysConfig tool must be installed in order to use all the IAR projects and
+    its location has to the same as specified by ``SYSCONFIG_ROOT``.
+
+    The SysConfig standalone package can be found here: `SysConfig Standalone Installer Download Page`_.
+
+IAR One-Time Configuration
+""""""""""""""""""""""""""
+
+Below you can see how to add and enable the SDK-global argument variables. This
+is necessary before importing any project.
+
+    .. figure:: resources/iar_custom_argvars_menu.png
+
+        Select Configure Custom Argument Variables from the Tools menu
+
+
+    .. figure:: resources/iar_custom_argvars_empty.png
+
+        Click on Import... with either the Workspace or Global namespace
+        selected. For Global, the imported values will persist for other
+        projects also.
+
+
+    .. figure:: resources/iar_custom_argvars_file.png
+
+        Find the Custom Argument Variables file under ``<SDK root>/tools/iar``
+
+
+    .. figure:: resources/iar_custom_argvars_selected.png
+
+        Success! Change these paths if you have installed in a different location.
+
+.. note::
+    If you have imported the global
+    ``<SDK_INSTALL_DIR>/tools/iar/SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars``,
+    then the examples from the older SDKs will fail to build.
+
+Import Project Using Workspace
+""""""""""""""""""""""""""""""
+
+This section describes how to open and build an existing project and references
+the ``wsms_ipv6node`` project.
+
+#. Open the IAR Embedded Workbench IDE from the Start Menu.
+#. Open an IAR workspace project: **File** -> **Open** -> **Workspace...**
+
+    - For this example, select
+      **<SDK\_INSTALL\_DIR>\\examples\\rtos\\|LP|\\wsms\\wsms_ipv6node\\tirtos7\\iar\\wsms_ipv6node_<LP>tirtos_iar.template.eww**
+
+#. This will prompt you to select a folder location as a workspace for the
+   project. It's important to select an empty folder.
+
+Build and Download Project
+""""""""""""""""""""""""""
+
+To build & download the node project:
+
+#. Build the Node project:
+
+    - Set the Node project as the active project. Make sure the Release project
+      configuration is used.
+    - Select **Build** to build the node project.
+
+#. Load the Node project:
+
+    - Select **Debug** to download the node application.
+    - Once the debugging session starts, click the red stop button
+
+Before beginning execution, open a terminal window with the following settings:
+
+  +-----------------+-----------------+
+  | UART Param      | Default Values  |
+  +=================+=================+
+  | Baud Rate       | 115200          |
+  +-----------------+-----------------+
+  | Data length     | 8 bits          |
+  +-----------------+-----------------+
+  | Parity          | None            |
+  +-----------------+-----------------+
+  | Stop bits       | 1 bit           |
+  +-----------------+-----------------+
+  | Flow Control    | None            |
+  +-----------------+-----------------+
+
+When the debugging session opens, click the start button to start
+execution. Continue on to the ``README.md`` for information about using the
+example application.
+
+
+.. _quick-start-wsms-demo:
+
+Running the Demo
+----------------
+
+For information on running any of the WSMS example applications please refer
+to the ``README.md`` imported with the example application.
+
+When using the example in network processor mode, a host device running TI Wi-SUN
+FAN pySpinel scripts is needed. A description for setting this up is found in
+the `TI Wi-SUN FAN pySpinel GitHub repo`_.
+
+
+.. _quick-start-wsms-develop:
+
+Developing a New WSMS Based Application
+------------------------------------------
+
+The develop track can be summarized with the following steps:
+
+#.  **Download the Simplelink SDK**
+
+    The `SimpleLink CC13XX CC26XX SDK`_ contains the code neccessary to start developing a WSMS
+    application. The stack library code implements the WSMS stack, and the
+    various example projects use the stack library to implement applications.
+    These examples should be considered as starting points for end product design.
+
+#.  **Get Familiar with the User’s Guide**
+
+    This User's Guide is meant to be used alongside the example projects when
+    developing an end product. It contains documentation on the stack
+    architecture, APIs and suggestions for developing applications. To jump to
+    the Table of Contents, click here:  |WSMS Stack User's Guide|.
+
+#.  **Select an Example Project**
+
+    The WSMS includes a basic set of projects to use as a starting point for
+    development of your custom application. TI recommends that users start their
+    development of project with the ipv6 Base and ipv6 Node example
+    applications. For more details on these and all other included projects, see
+    the |WSMS Stack User's Guide|.
+
+#.  **Begin Development with an IDE**
+
+    An Integrated Development Environment (IDE) can be set up to make it easier
+    to browse through the relevant projects and view code. All embedded software
+    is developed using TI's Code Composer Studio on a Windows 10 or later
+    PC.
+
+#.  **Troubleshooting Help**
+
+    While developing your custom application, you may run into issues that
+    require the use of a debugger. The |WSMS Stack User's Guide| provides
+    help with configuring your debugger and understanding common problems. If
+    you are still having problems after reading through the Debugging chapter,
+    see the :ref:`quick-start-wsms-support` track for more options.
+
+
+.. _quick-start-wsms-enhance:
+
+Enhance Your Project
+--------------------
+
+The following resources are intended to take your product to the next level by
+leveraging TI’s web-based collateral. Additional resources found in these pages
+include application-specific source code examples and complete sub-system designs.
+
+#. **TI Designs™** `http://www.ti.com/tidesigns <https://www.ti.com/reference-designs/index.html>`_
+
+   Examples of system designs containing complete hardware and software examples.
+
+#. **Application Notes**
+
+   You can find a number of application notes on each `device page on ti.com
+   <https://www.ti.com/product/CC1354P10#tech-docs>`_.
+
+
+.. _quick-start-wsms-support:
+
+Getting Support
+---------------
+
+- **E2E Forums** `www.e2e.ti.com <https://e2e.ti.com/support/wireless-connectivity/>`_
+
+A support community providing answers to questions relating to the WSMS
+Stack. You can browse questions from other developers or ask your own questions
+if you run into issues developing with WSMS.

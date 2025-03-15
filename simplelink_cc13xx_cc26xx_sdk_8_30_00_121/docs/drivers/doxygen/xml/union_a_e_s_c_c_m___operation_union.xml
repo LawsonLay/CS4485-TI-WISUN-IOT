@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="union_a_e_s_c_c_m___operation_union" kind="union" language="C++" prot="public">
+    <compoundname>AESCCM_OperationUnion</compoundname>
+    <includes refid="_a_e_s_c_c_m_8h" local="no">AESCCM.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="union_a_e_s_c_c_m___operation_union_1aa2888b4c15a5bd2ad52207733881f0d7" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_a_e_s_c_c_m___one_step_operation" kindref="compound">AESCCM_OneStepOperation</ref></type>
+        <definition>AESCCM_OneStepOperation AESCCM_OperationUnion::oneStepOperation</definition>
+        <argsstring></argsstring>
+        <name>oneStepOperation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/AESCCM.h" line="1126" column="1" bodyfile="source/ti/drivers/AESCCM.h" bodystart="1126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="union_a_e_s_c_c_m___operation_union_1a019971667ccb11f1ef95c17f3bd0a654" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_a_e_s_c_c_m___segmented_a_a_d_operation" kindref="compound">AESCCM_SegmentedAADOperation</ref></type>
+        <definition>AESCCM_SegmentedAADOperation AESCCM_OperationUnion::segmentedAADOperation</definition>
+        <argsstring></argsstring>
+        <name>segmentedAADOperation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/AESCCM.h" line="1127" column="1" bodyfile="source/ti/drivers/AESCCM.h" bodystart="1127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="union_a_e_s_c_c_m___operation_union_1a01d7a7f752ae48d982eef35efa95c728" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_a_e_s_c_c_m___segmented_data_operation" kindref="compound">AESCCM_SegmentedDataOperation</ref></type>
+        <definition>AESCCM_SegmentedDataOperation AESCCM_OperationUnion::segmentedDataOperation</definition>
+        <argsstring></argsstring>
+        <name>segmentedDataOperation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/AESCCM.h" line="1128" column="1" bodyfile="source/ti/drivers/AESCCM.h" bodystart="1128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="union_a_e_s_c_c_m___operation_union_1a68d7eac9e5bb0dd46e0a3316edf1963e" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_a_e_s_c_c_m___segmented_finalize_operation" kindref="compound">AESCCM_SegmentedFinalizeOperation</ref></type>
+        <definition>AESCCM_SegmentedFinalizeOperation AESCCM_OperationUnion::segmentedFinalizeOperation</definition>
+        <argsstring></argsstring>
+        <name>segmentedFinalizeOperation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/AESCCM.h" line="1129" column="1" bodyfile="source/ti/drivers/AESCCM.h" bodystart="1129" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Union containing a reference to a one step, segmented AAD, segmented data, or segmented finalize operation. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="172">
+        <label>AESCCM_SegmentedDataOperation</label>
+        <link refid="struct_a_e_s_c_c_m___segmented_data_operation"/>
+      </node>
+      <node id="168">
+        <label>CryptoKey</label>
+        <link refid="struct_crypto_key"/>
+        <childnode refid="169" relation="usage">
+          <edgelabel>plaintext</edgelabel>
+        </childnode>
+        <childnode refid="170" relation="usage">
+          <edgelabel>keyStore</edgelabel>
+        </childnode>
+      </node>
+      <node id="167">
+        <label>AESCCM_OneStepOperation</label>
+        <link refid="struct_a_e_s_c_c_m___one_step_operation"/>
+        <childnode refid="168" relation="usage">
+          <edgelabel>key</edgelabel>
+        </childnode>
+      </node>
+      <node id="171">
+        <label>AESCCM_SegmentedFinalizeOperation</label>
+        <link refid="struct_a_e_s_c_c_m___segmented_finalize_operation"/>
+      </node>
+      <node id="166">
+        <label>AESCCM_OperationUnion</label>
+        <link refid="union_a_e_s_c_c_m___operation_union"/>
+        <childnode refid="167" relation="usage">
+          <edgelabel>oneStepOperation</edgelabel>
+        </childnode>
+        <childnode refid="171" relation="usage">
+          <edgelabel>segmentedFinalizeOperation</edgelabel>
+        </childnode>
+        <childnode refid="172" relation="usage">
+          <edgelabel>segmentedDataOperation</edgelabel>
+        </childnode>
+        <childnode refid="173" relation="usage">
+          <edgelabel>segmentedAADOperation</edgelabel>
+        </childnode>
+      </node>
+      <node id="173">
+        <label>AESCCM_SegmentedAADOperation</label>
+        <link refid="struct_a_e_s_c_c_m___segmented_a_a_d_operation"/>
+      </node>
+      <node id="169">
+        <label>CryptoKey_Plaintext</label>
+        <link refid="struct_crypto_key___plaintext"/>
+      </node>
+      <node id="170">
+        <label>CryptoKey_KeyStore</label>
+        <link refid="struct_crypto_key___key_store"/>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/AESCCM.h" line="1125" column="1" bodyfile="source/ti/drivers/AESCCM.h" bodystart="1124" bodyend="1131"/>
+    <listofallmembers>
+      <member refid="union_a_e_s_c_c_m___operation_union_1aa2888b4c15a5bd2ad52207733881f0d7" prot="public" virt="non-virtual"><scope>AESCCM_OperationUnion</scope><name>oneStepOperation</name></member>
+      <member refid="union_a_e_s_c_c_m___operation_union_1a019971667ccb11f1ef95c17f3bd0a654" prot="public" virt="non-virtual"><scope>AESCCM_OperationUnion</scope><name>segmentedAADOperation</name></member>
+      <member refid="union_a_e_s_c_c_m___operation_union_1a01d7a7f752ae48d982eef35efa95c728" prot="public" virt="non-virtual"><scope>AESCCM_OperationUnion</scope><name>segmentedDataOperation</name></member>
+      <member refid="union_a_e_s_c_c_m___operation_union_1a68d7eac9e5bb0dd46e0a3316edf1963e" prot="public" virt="non-virtual"><scope>AESCCM_OperationUnion</scope><name>segmentedFinalizeOperation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

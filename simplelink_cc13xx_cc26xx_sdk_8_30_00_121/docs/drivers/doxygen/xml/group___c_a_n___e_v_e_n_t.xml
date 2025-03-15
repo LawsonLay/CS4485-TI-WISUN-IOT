@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="group___c_a_n___e_v_e_n_t" kind="group">
+    <compoundname>CAN_EVENT</compoundname>
+    <title>CAN events</title>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga5aee970eec46cc8a1cbc21be1c3da321" prot="public" static="no">
+        <name>CAN_EVENT_SPI_XFER_ERROR</name>
+        <initializer>(0x800U)</initializer>
+        <briefdescription>
+<para>A SPI transfer error occurred. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This error is only relevant for SPI-backed external CAN controllers.</para></simplesect>
+If a SPI transfer error occurs, the CAN driver behavior is undefined and message transmit and receive may be unreliable. This error is an indication that further debug of the system HW &amp; SW is required. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="413" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="413" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga792207c71ee25d47ec1550e7dcaf5ab7" prot="public" static="no">
+        <name>CAN_EVENT_BIT_ERR_UNCORRECTED</name>
+        <initializer>(0x400U)</initializer>
+        <briefdescription>
+<para>An uncorrected bit error occurred. </para>        </briefdescription>
+        <detaileddescription>
+<para>If an uncorrected bit error occurs, the driver should be closed and re-opened to attempt recovery. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="421" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="421" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga6b23e75721cbe2be44c31d4b32d0f6a1" prot="public" static="no">
+        <name>CAN_EVENT_RX_RING_BUFFER_FULL</name>
+        <initializer>(0x200U)</initializer>
+        <briefdescription>
+<para>The driver&apos;s Rx ring buffer was full. </para>        </briefdescription>
+        <detaileddescription>
+<para>The driver&apos;s Rx ring buffer was full resulting in a message being discarded. The application must call <ref refid="_c_a_n_8h_1a515269a858d44d1ed043ccd37f3eedcb" kindref="member">CAN_read()</ref> in a more timely manner in response to CAN_EVENT_RX_DATA_AVAIL or the size of the Rx ring buffer should be increased. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="431" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="431" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1gad9bad54e02a163b9335e16dbdc6776b7" prot="public" static="no">
+        <name>CAN_EVENT_RX_FIFO_MSG_LOST</name>
+        <initializer>(0x100U)</initializer>
+        <briefdescription>
+<para>A message was lost for hardware Rx FIFO. </para>        </briefdescription>
+        <detaileddescription>
+<para>See event data for FIFO number. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="438" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="438" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1gaf4f75d571122632b29b34266118df5e2" prot="public" static="no">
+        <name>CAN_EVENT_ERR_PASSIVE</name>
+        <initializer>(0x80U)</initializer>
+        <briefdescription>
+<para>State change to error passive. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="443" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="443" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga9d5b4622bdc27d5a89bff6352ef7c48d" prot="public" static="no">
+        <name>CAN_EVENT_ERR_ACTIVE</name>
+        <initializer>(0x40U)</initializer>
+        <briefdescription>
+<para>State change to error active. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="448" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="448" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga8e5b6dc28c6ca51a811b88c2b9fad496" prot="public" static="no">
+        <name>CAN_EVENT_BUS_OFF</name>
+        <initializer>(0x20U)</initializer>
+        <briefdescription>
+<para>State change to bus off. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="453" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="453" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1gada6d79a9a3439bc1e19ead78bb15f719" prot="public" static="no">
+        <name>CAN_EVENT_BUS_ON</name>
+        <initializer>(0x10U)</initializer>
+        <briefdescription>
+<para>State change to bus on. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="458" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="458" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1gab82008e494c5fc6c4811170e000f15ac" prot="public" static="no">
+        <name>CAN_EVENT_TX_EVENT_LOST</name>
+        <initializer>(0x08U)</initializer>
+        <briefdescription>
+<para>A CAN message transmission event was lost. </para>        </briefdescription>
+        <detaileddescription>
+<para>This event is used as an indication that the Tx Event was lost due to the Tx Event FIFO being full. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="466" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="466" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga773b3d0a875e164686fa3ba89d575725" prot="public" static="no">
+        <name>CAN_EVENT_TX_EVENT_AVAIL</name>
+        <initializer>(0x04U)</initializer>
+        <briefdescription>
+<para>A CAN message transmission event is available. </para>        </briefdescription>
+        <detaileddescription>
+<para>This event is used as an indication that a new entry to the Tx Event FIFO occurred due to the transmission of a message with Event FIFO Control (EFC) bit set. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="475" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="475" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga108a81cd6b5bbb73c81080f429c3a867" prot="public" static="no">
+        <name>CAN_EVENT_TX_FINISHED</name>
+        <initializer>(0x02U)</initializer>
+        <briefdescription>
+<para>A CAN message transmission was completed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="480" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="480" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___c_a_n___e_v_e_n_t_1ga7b6db1c1518135c8d1631a961ceb6e47" prot="public" static="no">
+        <name>CAN_EVENT_RX_DATA_AVAIL</name>
+        <initializer>(0x01U)</initializer>
+        <briefdescription>
+<para>Received CAN message data is available. </para>        </briefdescription>
+        <detaileddescription>
+<para>This event is used as an indication that <ref refid="_c_a_n_8h_1a515269a858d44d1ed043ccd37f3eedcb" kindref="member">CAN_read()</ref> can be called to read the received message(s). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="488" column="9" bodyfile="source/ti/drivers/CAN.h" bodystart="488" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,176 @@
+.. _FreeRTOS Tasks:
+
+Tasks
+-----
+
+FreeRTOS is structured as a set of independent *Tasks*.
+Each task executes within its own context with no
+coincidental dependency on other tasks within the system or FreeRTOS
+scheduler itself. Additional details can be found in |FreeRTOS TASK|.
+
+Task States
+^^^^^^^^^^^
+
+A task can exist in one of the following states:
+
+- **Running**
+- **Ready**
+- **Blocked**
+- **Suspended**
+
+Additional details can be found in |FreeRTOS TASK STATES|.
+
+Initializing a Task
+^^^^^^^^^^^^^^^^^^^
+
+Each task requires RAM that is used to hold the task state, and used by the
+task as its stack (see |FreeRTOS STACK SIZE|):
+
+- If a task is created using |FreeRTOS xTaskCreate| then the required RAM is
+  automatically allocated from the FreeRTOS heap. 
+- If a task is created using |FreeRTOS xTaskCreateStatic| then the RAM is provided
+  by the application writer, which requires a greater number of parameters,
+  but allows the RAM to be statically allocated at compile time. Additional
+  details can be found on |FreeRTOS STATIC VS DYNAMIC|. 
+
+.. _creating-freertos-task-listing:
+.. code-block:: c
+    :linenos:
+    :caption: Initialize a FreeRTOS task
+    :emphasize-lines: 11-34, 41-47
+
+    #include <FreeRTOS.h>
+    #include <task.h>
+    #include <stdarg.h>
+
+    #define TASK_PRIORITY 1
+    #define TASK_STACK_SIZE 2048 /* bytes */
+
+    TaskHandle_t taskHandle = NULL;
+
+    /* Task function */
+    void taskFunction(void* a0)
+    {
+        /* Local variables. Variables here go onto task stack!! */
+
+        /* Run one-time code when task starts */
+
+        while (1) /* Run loop forever (unless terminated) */
+        {
+            /*
+             * Block on a signal or for a duration. Examples:
+             *  ``xSemaphoreTake()``
+             *  ``xQueueReceive``
+             *  ``vTaskDelay()``
+             *
+             * "Process data"
+             */
+        }
+
+        /* Tasks must not attempt to return from their implementing
+        function or otherwise exit. If it is necessary for a task to
+        exit then have the task call vTaskDelete( NULL ) to ensure
+        its exit is clean. */
+        vTaskDelete( NULL );
+    }
+
+    int main() {
+
+        BaseType_t xReturned;
+
+        /* Create the task, storing the handle. */
+        xReturned = xTaskCreate(
+                taskFxn,                                /* Function that implements the task. */
+                "MY_NEW_TASK",                          /* Text name for the task. */
+                TASK_STACK_SIZE / sizeof(uint32_t),     /* Stack size in words, not bytes. */
+                ( void * ) 1,                           /* Parameter passed into the task. */
+                TASK_PRIORITY,                          /* Priority at which the task is created. */
+                &taskHandle );                                /* Used to pass out the created task's handle. */
+
+        if(xReturned == errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY)
+        {
+            /* Creation of FreeRTOS task failed */
+            while(1);
+        }
+
+        /* Start the FreeRTOS scheduler */
+   		vTaskStartScheduler();
+
+    }
+
+
+The task creation is done in the main() function, before the FreeRTOS Kernel's
+scheduler is started by ``vTaskStartScheduler()``.
+The task executes at its assigned priority level after the scheduler is started
+(see |FreeRTOS PRIORITIES|).
+
+
+A Task Function
+^^^^^^^^^^^^^^^
+
+The type ``TaskFunction_t`` is defined as a function that returns void and takes a
+void pointer as its only parameter. All functions that implement a task should
+be of this type. The parameter can be used to pass information of any type into
+the task - this is demonstrated by several of the |FreeRTOS DEMO APP|.
+
+Task functions should never return so are typically implemented as a continuous
+loop. However, normally it is best to create tasks that are event-driven so as
+not to starve lower priority tasks of processing time (see |FreeRTOS AVOID STARVATION|).
+
+Additional details can be found in |FreeRTOS TASK IMPLEMENTATION|.
+
+.. ifconfig:: doctarget in ['ble2', 'ble3', 'ble5']
+
+  .. _sec-creating-custom-ble-application-creating-additional-freertos-tasks:
+
+  Creating Additional ICall Enabled Tasks
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  The objective of this section is to familiarize the programmer with the
+  process of adding an RTOS task that can communicate with the |STACK|. Tasks that
+  call functions within the |STACK| must follow a few additional steps
+  to register with ICall. These details are covered below:
+
+  1. Follow all the steps detailed in |FreeRTOS TASK| to create an RTOS task.
+
+  2. Open SysConfig -> BLE -> Advanced Settings -> ICALL and add one to the "Max 
+     Number of Icall Enabled Tasks" entry.
+
+  3. Modify the task's init function to register with ICall
+     (explained in :ref:`the-application-icall-initialization-and-registration`)
+
+    .. code-block:: c
+      :linenos:
+      :caption: ICall Registration for custom task
+
+      // ******************************************************************
+      // N0 STACK API CALLS CAN OCCUR BEFORE THIS CALL TO ICall_registerApp
+      // ******************************************************************
+      // Register the current thread as an ICall dispatcher application
+      // so that the application can send and receive messages.
+      ICall_registerApp(&selfEntity, &syncEvent);
+
+  4. Modify the task's main function to pend on ``syncEvent``
+     (explained in :ref:`sec-the-application-icall-thread-sync`)
+
+    .. code-block:: c
+      :linenos:
+      :caption: ICall Wait
+
+      static void NotificationTask_taskFxn(UArg a0, UArg a1)
+      {
+        // Initialize application
+        NotificationTask_init();
+
+        // Application main loop
+        for (;;)
+        {
+            // Waits for an event to be posted associated with the calling thread.
+            // Note that an event associated with a thread is posted when a
+            // message is queued to the message receive queue of the thread
+            events = Event_pend(syncEvent, Event_Id_NONE, SP_ALL_EVENTS, ICALL_TIMEOUT_FOREVER);
+
+            //...
+        }
+        // ...
+      }

@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_g_p_timer_c_c26_x_x___config" kind="struct" language="C++" prot="public">
+    <compoundname>GPTimerCC26XX_Config</compoundname>
+    <includes refid="_g_p_timer_c_c26_x_x_8h" local="no">GPTimerCC26XX.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_g_p_timer_c_c26_x_x___config_1a92658b3b494f165b96a8bb7324ffb737" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_g_p_timer_c_c26_x_x___object" kindref="compound">GPTimerCC26XX_Object</ref> *</type>
+        <definition>GPTimerCC26XX_Object* GPTimerCC26XX_Config::object</definition>
+        <argsstring></argsstring>
+        <name>object</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="406" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="406" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_g_p_timer_c_c26_x_x___config_1a713a6a23b178957ab2f245326f954b2b" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_g_p_timer_c_c26_x_x___h_w_attrs" kindref="compound">GPTimerCC26XX_HWAttrs</ref> *</type>
+        <definition>const GPTimerCC26XX_HWAttrs* GPTimerCC26XX_Config::hwAttrs</definition>
+        <argsstring></argsstring>
+        <name>hwAttrs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="407" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="407" bodyend="-1"/>
+        <referencedby refid="_g_p_timer_c_c26_x_x_8h_1acc37d2af3b532038792452eee5bffa94" compoundref="_g_p_timer_c_c26_x_x_8h" startline="700" endline="703">GPTimerCC26XX_getPinMux</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_g_p_timer_c_c26_x_x___config_1a6d76dc1cbe8a2e7e38a2c6546ea58782" prot="public" static="no" mutable="no">
+        <type><ref refid="_g_p_timer_c_c26_x_x_8h_1aff5462fa33c306f2c8bd29284fd898b0" kindref="member">GPTimerCC26XX_Part</ref></type>
+        <definition>GPTimerCC26XX_Part GPTimerCC26XX_Config::timerPart</definition>
+        <argsstring></argsstring>
+        <name>timerPart</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="408" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="408" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>GPTimer Global configuration. </para>    </briefdescription>
+    <detaileddescription>
+<para>The <ref refid="struct_g_p_timer_c_c26_x_x___config" kindref="compound">GPTimerCC26XX_Config</ref> structure contains a set of pointers used to characterize the GPTimer driver implementation. An example structure is shown below: <programlisting><codeline><highlight class="normal">//<sp/>GPTimer<sp/>configuration<sp/>(used<sp/>as<sp/>GPTimer_Handle<sp/>by<sp/>driver<sp/>and<sp/>application)</highlight></codeline>
+<codeline><highlight class="normal">const<sp/>GPTimerCC26XX_Config<sp/>GPTimerCC26XX_config[CC2650_GPTIMERPARTSCOUNT]<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{<sp/>&amp;gptimerCC26XXObjects[0],<sp/>&amp;gptimerCC26xxHWAttrs[0],<sp/>GPT_A},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{<sp/>&amp;gptimerCC26XXObjects[0],<sp/>&amp;gptimerCC26xxHWAttrs[1],<sp/>GPT_B},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{<sp/>&amp;gptimerCC26XXObjects[1],<sp/>&amp;gptimerCC26xxHWAttrs[2],<sp/>GPT_A},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{<sp/>&amp;gptimerCC26XXObjects[1],<sp/>&amp;gptimerCC26xxHWAttrs[3],<sp/>GPT_B},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{<sp/>&amp;gptimerCC26XXObjects[2],<sp/>&amp;gptimerCC26xxHWAttrs[4],<sp/>GPT_A},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{<sp/>&amp;gptimerCC26XXObjects[2],<sp/>&amp;gptimerCC26xxHWAttrs[5],<sp/>GPT_B},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{<sp/>&amp;gptimerCC26XXObjects[3],<sp/>&amp;gptimerCC26xxHWAttrs[6],<sp/>GPT_A},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{<sp/>&amp;gptimerCC26XXObjects[3],<sp/>&amp;gptimerCC26xxHWAttrs[7],<sp/>GPT_B},</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+</programlisting> </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="1202">
+        <label>GPTimerCC26XX_Object</label>
+        <link refid="struct_g_p_timer_c_c26_x_x___object"/>
+        <childnode refid="1203" relation="usage">
+          <edgelabel>hwi</edgelabel>
+        </childnode>
+        <childnode refid="1200" relation="usage">
+          <edgelabel>hwiCallbackFxn</edgelabel>
+        </childnode>
+      </node>
+      <node id="1200">
+        <label>GPTimerCC26XX_Config</label>
+        <link refid="struct_g_p_timer_c_c26_x_x___config"/>
+        <childnode refid="1201" relation="usage">
+          <edgelabel>hwAttrs</edgelabel>
+        </childnode>
+        <childnode refid="1202" relation="usage">
+          <edgelabel>object</edgelabel>
+        </childnode>
+      </node>
+      <node id="1201">
+        <label>GPTimerCC26XX_HWAttrs</label>
+        <link refid="struct_g_p_timer_c_c26_x_x___h_w_attrs"/>
+      </node>
+      <node id="1203">
+        <label>HwiP_Struct</label>
+        <link refid="union_hwi_p___struct"/>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="405" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="404" bodyend="409"/>
+    <listofallmembers>
+      <member refid="struct_g_p_timer_c_c26_x_x___config_1a713a6a23b178957ab2f245326f954b2b" prot="public" virt="non-virtual"><scope>GPTimerCC26XX_Config</scope><name>hwAttrs</name></member>
+      <member refid="struct_g_p_timer_c_c26_x_x___config_1a92658b3b494f165b96a8bb7324ffb737" prot="public" virt="non-virtual"><scope>GPTimerCC26XX_Config</scope><name>object</name></member>
+      <member refid="struct_g_p_timer_c_c26_x_x___config_1a6d76dc1cbe8a2e7e38a2c6546ea58782" prot="public" virt="non-virtual"><scope>GPTimerCC26XX_Config</scope><name>timerPart</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,450 @@
+.. _updating-from-tirtos-to-sdk:
+
+Upgrading from TI-RTOS 2.21 to Device SDK
+=========================================
+
+This section will cover the migration of applications that are using the TI-RTOS
+cc13xx/cc26xx v2.21.00.06. It is separated into required target code
+changes for all applications and then the three different supported
+development environments for TI-RTOS applications: CCS, IAR and command-line
+makefile projects.
+
+This section will show the migration of an application for a CC1310_LAUNCHXL
+board but the concepts are the same for all |PROPRFDEVICE| boards.
+
+
+Necessary Changes to the .cfg File
+----------------------------------
+
+The .cfg file configures all Real Time Software Component (:term:`RTSC`) packages
+of the application project. It is the central instance of a TI-RTOS project. The
+.cfg file is read by *xs* from the XDCTools package which builds a customized
+version of the kernel and also generates some code and linker command files. The
+TI-RTOS kernel makes heavy use of :term:`RTSC`.
+
+* Remove all references to the ``ti.driver.Config`` module. In |SDK|, only
+  the non-instrumented TI driver library is available.
+
+.. code-block:: RST
+
+    var driversConfig = xdc.useModule('ti.drivers.Config');
+
+* Add the ``Power_idleFunc`` function as an Idle function. This was previously
+  done in ``xdc.useModule('ti.drivers.Config')``.
+
+.. code-block:: RST
+
+    Idle = xdc.useModule('ti.sysbios.knl.Idle');
+    Idle.addFunc('&Power_idleFunc')
+
+* Remove all references to the ``ti.mw.fatfs.FatFS`` module.
+
+.. code-block:: RST
+
+    var FatFS = xdc.useModule('ti.mw.fatfs.FatFS');
+
+* In the SimpleLink SDK, the system stack (ISR stack) is now specified in the
+  linker command file of the application (detailed in a later step). The linker
+  command file is provided with the board files. Set the Program.stack variable to
+  zero.
+
+.. code-block:: RST
+
+    Program.stack = 0;
+
+
+Necessary Changes to the Application Code
+-----------------------------------------
+
+* DriverLib include paths must be changed from
+
+.. code-block:: c
+
+    #include <driverlib/XXX.h>
+
+to
+
+.. code-block:: c
+
+    #include DeviceFamily_constructPath(driverlib/XXX.h)
+
+* Display include paths must be changed from
+
+.. code-block:: c
+
+    #include <ti/mw/Display_XXX.h>
+
+to
+
+.. code-block:: c
+
+    #include <ti/display/Display_XXX.h>
+
+* All calls to ``Board_initXXX()`` have been changed to simply ``XXX_init()``.
+  These changes are not required since there are compatibility macros present, but
+  for completeness, this change is recommended. For example, change the following
+
+.. code-block:: c
+
+    /* Call board init functions */
+    Board_initGeneral();
+    Board_initUART();
+
+to
+
+.. code-block:: c
+
+    /* Call board init functions */
+    Board_initGeneral();
+    UART_init();
+
+* The FatFS package has been removed from the TI-RTOS Configuration file. This
+  configuration setting created some background code. The application is now
+  responsible for making these calls (e.g. add_device()). Use a driver fatfs
+  example in the |SDK| as a guideline to see the changes needed.
+
+
+Necessary Changes to the Board Files
+------------------------------------
+
+The board files (CC1310_LAUNCHXL.c, CC1310_LAUNCHXL.h, CC1310_LAUNCHXL.cmd,
+Board.h, and ccfg.c etc) contain configuration structures for all drivers. They
+have significantly changed from the tirtos 2.21 release. It is highly
+recommended to use the new files from an SDK example (e.g. drivers/empty).
+Then make the necessary changes to the SDK example files as needed.
+
+For example, if you added a new UART in your TI-RTOS for cc13xx/cc26xx
+v2.21.00.06 application, add the UART again in the board files in the SDK example
+project. Make sure to compare your old linker file with the new one. Starting in
+the SimpleLink SDK, the system stack (ISR stack) is now configured in the linker
+file instead of the TI-RTOS configuration (.cfg) file. This allows changes to the
+system stack size without changing the TI-RTOS configuration.
+
+For a summary of the board file changes, please refer to the SimpleLink Core SDK
+Release Notes.
+
+
+Application Changes due to MISRA Updates
+----------------------------------------
+
+There might be some compiler warnings in your application because of type
+mismatches with some of the driver APIs. These are caused by MISRA compliance
+updates that were detailed in the SimpleLink Core SDK Release Notes. This
+should be trivial to fix once you build in the application via the development
+environment changes listed below.
+
+
+Upgrading an Existing TI-RTOS Project to |SDK|
+==============================================
+
+Changes in the Project Configuration Settings and Device-Specific Includes
+--------------------------------------------------------------------------
+
+Both the TI-RTOS configuration and SimpleLink SDK provide low-level
+hardware-specific header files. These were formerly known as
+CC13xxWare/DriverLib. Although there are no functional changes, the structure has
+changed a bit. Here is how the SDK examples and generated code from SmartRF
+Studio is handling device-specific includes across chip families.
+
+Code Composer Studio
+--------------------
+
+These steps assume that CCS has discovered both the TI-RTOS for cc13xx/cc26xx
+v2.21.00.06 and SimpleLink CC13x0 SDK products.
+
+* Import the project into CCS (``Project->Import CCS Project``... and navigate as
+  required) if not already present.
+* Target Content Changes: Please make sure the above target content changes are done.
+* Use SimpleLink SDK instead of TI-RTOS: Select ``Project Properties->General->RTSC``
+  and check/un-check in the following order. If you switch the order, you’ll
+  lose the platform name (``ti.platforms.simplelink:CC1310F128``). If that
+  happens, you can manually re-select it.
+* Check the SimpleLink CC13x0 SDK box
+* Un-check the TI-RTOS for CC13XX and CC26XX v2.21.00.06 box. Note: a warning
+  at the top of the window may appear (show below). This can be ignored.
+* Select an appropriate version of XDCTools. (See the |SDK| release notes for
+  what version number to use.)
+
+.. figure:: resources/ccs_rtsc_products.png
+    :align: center
+
+Note: If TI-RTOS for CC13XX and CC26XX v2.21.00.06 has not been discovered by
+CCS, it will look like this. Please check/un-check in the following order
+
+* Select the SimpleLink CC13x0 SDK box
+* Un-check the unknown 2.21.00.06 box
+* Un-check the unresolved box
+* Select an appropriate version of XDCTools.
+
+.. figure:: resources/ccs_rtsc_products_no_tirtos.png
+    :align: center
+
+    Real Time Software Component (:term:`RTSC`) panel with only SimpleLink SDK installed
+
+* Update XDCTools build options. In ``Project Properties->CCS Build->XDCTools``
+  add ``"${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR_REPOS}"`` to ``Package
+  Repositories`` and set ``" -DDeviceFamily_CC13X0 "`` in the field ``Advanced
+  Options->Additional Compiler Options``. After that, you should see the
+  following options summary:
+
+.. figure:: resources/ccs_xdctools_options.png
+    :align: center
+
+    XDCTools options for the CC13x0 SDK
+
+* Change Compiler Include Paths Options. The following ``Project
+  Properties->Build->ARM Compiler->Include Options`` include paths need to
+  change from
+
+.. code-block:: RST
+
+    "${COM_TI_RTSC_TIRTOSCC13XX_CC26XX_INSTALL_DIR}/products/cc13xxware_2_04_03_17272"
+
+to
+
+.. code-block:: RST
+
+    "${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/kernel/tirtos/packages/ti/sysbios/posix"
+
+Here is what it should look like:
+
+.. figure:: resources/ccs_compiler_paths.png
+    :align: center
+
+    Include paths for the CC13x0 SDK
+
+
+* Change Compiler Predefined Symbols Options. In the ``Project Properties->Build
+  ->Arm Compiler->Predefined Symbols window``, remove ``ccs`` symbol and add
+  ``DeviceFamily_CC13X0``. Here is what it should look like:
+
+.. figure:: resources/ccs_compiler_symbols.png
+    :align: center
+
+    Predefined symbols for the CC13x0 SDK
+
+* Change Linker Libraries. The following ``Project Properties->Build->Arm Linker->File Search Path`` libraries need to change from
+
+.. code-block:: RST
+
+    ${COM_TI_RTSC_TIRTOSCC13XX_CC26XX_INSTALL_DIR}/products/cc13xxware_2_04_03_17272/driverlib/bin/ccs/driverlib.lib
+
+to
+
+.. code-block:: RST
+
+    "${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/display/lib/display.aem3"
+    "${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/mw/lcd/lib/lcd.aem3"
+    "${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/grlib/lib/grlib.aem3"
+    "${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/drivers/rf/lib/rf_multiMode_cc13x0.aem3"
+    "${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/drivers/lib/drivers_cc13x0.aem3"
+    "${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/drivers/pdm/lib/pdm_cc13x0.aem3"
+    "${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/kernel/tirtos/packages/ti/dpl/lib/dpl_cc13x0.aem3"
+    "${COM_TI_SIMPLELINK_CC13X0_SDK_INSTALL_DIR}/source/ti/devices/cc13x0/driverlib/bin/ccs/driverlib.lib"
+
+Here is what it should look like:
+
+.. figure:: resources/ccs_linker_libraries.png
+    :align: center
+
+    Linker paths and libraries for the CC13x0 SDK
+
+* Finally rebuild the CCS project.
+
+
+IAR
+---
+
+A project that was developed with TI-RTOS cc13xx/cc26xx v2.21.00.06 in IAR
+can be migrated with the following steps to work with the new SimpleLink SDK.
+
+* Target Content Changes. Please make sure the above target content changes are done.
+* Configure Custom Argument Variables. Import the
+  ``SDK Install Dir/tools/iar/SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars`` file via
+  ``Tools->Configure Custom Argument Variables`` and make sure that it is enabled.
+
+Here is what it should look like:
+
+.. figure:: resources/iar_import_custom.png
+    :align: center
+
+    Import custom argument variables
+
+* Change Compiler Options. Change the default ``Projects Options->Runtime Checking
+  ->C/C++ Compiler->Extra Options`` specified for a TI-RTOS example
+
+.. code-block:: RST
+
+    -f
+    $PROJ_DIR$/configPkg/compiler.opt.defs
+    --diag_suppress=Pa050
+    -I$CC13XXWARE$
+    -Dewarm
+    --debug
+    --silent
+
+to
+
+.. code-block:: RST
+
+    -f
+    $PROJ_DIR$/configPkg/compiler.opt.defs
+    -I$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/kernel/tirtos/packages/ti/sysbios/posix
+    -I$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source
+    -DDeviceFamily_CC13X0
+    --debug
+    --silent
+    -e
+    --aeabi
+    --thumb
+    --diag_suppress=Pa050
+    -I$PROJ_DIR$
+
+Here is what it should look like:
+
+.. figure:: resources/iar_compiler_extra_options.png
+    :align: center
+
+    Extra compiler options in IAR
+
+* Change Linker Libraries. Change the default ``Projects Options->Runtime Checking
+  ->Linker->Extra Options`` specified for a TI-RTOS example
+
+.. code-block:: RST
+
+    -f
+    $PROJ_DIR$/configPkg/linker.cmd
+    $CC13XXWARE$/driverlib/bin/iar/driverlib.lib
+    --silent
+    --cpu=Cortex-M3
+    --entry=__iar_program_start
+    --redirect
+    _Printf=_PrintfSmall
+    --redirect
+    _Scanf=_ScanfSmall
+
+to
+
+.. code-block:: RST
+
+    -f
+    $PROJ_DIR$/configPkg/linker.cmd
+    $SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/display/lib/display.arm3
+    $SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/mw/lcd/lib/lcd.arm3
+    $SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/grlib/lib/grlib.arm3
+    $SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/drivers/rf/lib/rf_multiMode_cc13x0.arm3
+    $SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/drivers/lib/drivers_cc13x0.arm3
+    $SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/drivers/pdm/lib/pdm_cc13x0.arm3
+    $SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/kernel/tirtos/packages/ti/dpl/lib/dpl_cc13x0.arm3
+    $SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/devices/cc13x0/driverlib/bin/iar/driverlib.lib
+    --silent
+    --cpu=Cortex-M3
+    --redirect
+    _Printf=_PrintfSmall
+    --redirect
+    _Scanf=_ScanfSmall
+
+Here is what it should look like:
+
+.. figure:: resources/iar_linker_extra_options.png
+    :align: center
+
+    Extra linker options in IAR
+
+* Change Linker Libraries. Make sure to update the ``Linker->Config->Linker``
+  configuration file with the new name if the linker file has a new name or
+  location. Here is what it should look like:
+
+.. figure:: resources/iar_linker_file.png
+    :align: center
+
+    Modify linker file in IAR
+
+* Finally rebuild the IAR project.
+
+
+Command Line Makefile Projects
+------------------------------
+
+In this section, all the required changes (besides the target content changes
+listed above) for porting to |SDK| are going to be isolated to the imports.mak
+and makedefs for all compiler tools (TI, GCC and IAR). The basic idea is to
+replace parts of the makedefs file from a tirtos_cc13xx_cc26xx example with parts
+of an example’s makefile from the |SDK|. The SimpleLink SDK product has fewer
+directories (e.g. no TIRTOS_INSTALL_DIR/products directory). This allows for a
+simpler makefile.
+
+This section will focus on the TI compiler (CCS), but the GCC and IAR changes are
+similar.
+
+* Edit ``imports.mak`` at the root directory of the SimpleLink SDK. Update the
+  directories at the top of the ``imports.mak`` as needed in the SimpleLink SDK
+  you are using. Note: If you did not want to build with all compiler tools,
+  leave the assignment open. For example, if you are only using the TI compiler
+  in CCS, you could have the following content:
+
+.. code-block:: RST
+    :linenos:
+
+    XDC_INSTALL_DIR        ?= c:/ti/xdctools_3_32_01_22_core
+
+    CCS_ARMCOMPILER        ?= c:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.0.LTS
+    GCC_ARMCOMPILER        ?=
+    IAR_ARMCOMPILER        ?=
+
+* Edit makedefs in the examples. The top of this file can be replaced with
+  basically the contents of a sysbios example’s makefile (e.g. ``SDK_INSTALL_DIR/
+  examples/rtos/CC1310_LAUNCHXL/sysbios/swi/tirtos/ccs/makefile``). The
+  SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR and linker location need to be adjusted
+  accordingly and the CODEGEN_INSTALL_DIR must be retained and adjusted accordingly.
+  For example, the tirtos_cc13xx_cc26xx_2_21_00_06/examples/TI/CC1310_LAUNCHXL/makedefs
+  can be changed from this:
+
+.. code-block:: RST
+    :linenos:
+
+    CODEGEN_INSTALL_DIR = c:/ti/ccsv6/tools/compiler/ti-cgt-arm_15.12.1.LTS
+
+    CC = "$(CODEGEN_INSTALL_DIR)/bin/armcl"
+    LNK = "$(CODEGEN_INSTALL_DIR)/bin/armcl"
+
+    XDC_INSTALL_DIR := c:/ti/xdctools_3_32_00_06_core
+    TIRTOS_INSTALL_DIR := c:/ti/tirtos_cc13xx_cc26xx_2_21_00_06
+    TIDRIVERS_INSTALL_DIR := $(TIRTOS_INSTALL_DIR)/products/tidrivers_cc13xx_cc26xx_2_21_00_04
+    BIOS_INSTALL_DIR := $(TIRTOS_INSTALL_DIR)/products/bios_6_46_01_37
+    UIA_INSTALL_DIR := $(TIRTOS_INSTALL_DIR)/products/uia_2_01_00_01
+    CC13XXWARE_INSTALL_DIR ?= $(TIRTOS_INSTALL_DIR)/products/cc13xxware_2_04_03_17272
+
+    TIRTOS_PACKAGES_DIR = $(TIRTOS_INSTALL_DIR)/packages
+    TIDRIVERS_PACKAGES_DIR = $(TIDRIVERS_INSTALL_DIR)/packages
+    BIOS_PACKAGES_DIR = $(BIOS_INSTALL_DIR)/packages
+    UIA_PACKAGES_DIR = $(UIA_INSTALL_DIR)/packages
+
+    XDCPATH = $(TIRTOS_PACKAGES_DIR);$(TIDRIVERS_PACKAGES_DIR);$(BIOS_PACKAGES_DIR);$(UIA_PACKAGES_DIR);
+
+    CFLAGS = -I$(CC13XXWARE_INSTALL_DIR) -Dccs -mv7M3 --code_state=16 --abi=eabi -me -g --display_error_number --diag_warning=255 --diag_wrap=off --gen_func_subsections=on --float_support=vfplib
+
+    LFLAGS = -l$(CC13XXWARE_INSTALL_DIR)/driverlib/bin/ccs/driverlib.lib CC1310_LAUNCHXL.cmd -m$(NAME).map --warn_sections --display_error_number --diag_wrap=off --rom_model -i$(CODEGEN_INSTALL_DIR)/lib -llibc.a
+
+to
+
+.. code-block:: RST
+
+    SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR ?= c:/ti/simplelink_cc13x0_sdk_1_00_00_09_eng
+    include $(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/imports.mak
+
+    CODEGEN_INSTALL_DIR = $(CCS_ARMCOMPILER)
+
+    XDCPATH = $(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/source;$(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/kernel/tirtos/packages;
+
+    CC = $(CCS_ARMCOMPILER)/bin/armcl
+    LNK = $(CCS_ARMCOMPILER)/bin/armcl
+
+    XDCTARGET = ti.targets.arm.elf.M3
+    PLATFORM = ti.platforms.simplelink:CC1310F128
+
+    CFLAGS =  -I../..   -DDeviceFamily_CC13X0 -I$(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/kernel/tirtos/packages/ti/sysbios/posix -I$(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/source -mv7M3 --code_state=16 -me -g --display_error_number --diag_warning=255 --diag_wrap=off --gen_func_subsections=on --float_support=vfplib
+
+    LFLAGS =   -l$(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/source/ti/display/lib/display.aem3 -l$(SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR)/source/ti/mw
+
+* Finally rebuild the Makefile project.

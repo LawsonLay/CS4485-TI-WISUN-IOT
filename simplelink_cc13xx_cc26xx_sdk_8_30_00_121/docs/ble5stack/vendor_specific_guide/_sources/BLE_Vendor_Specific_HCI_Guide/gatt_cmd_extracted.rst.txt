@@ -1,0 +1,741 @@
+GATT_ExchangeMTU
+----------------
+:Opcode: 0xFD82
+:Command Description: This sub-procedure is used by a client to set the ATT_MTU to the maximum possible value that can be supported by both devices when the client supports a value greater than the default ATT_MTU for the Attribute Protocol. This sub-procedure shall only be initiated once during a connection.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:clientRxMTU: Attribute client receive MTU size
+
+ :Size: 2 byte(s)
+ :Default: 23
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_ExchangeMTURsp (with SUCCESS or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_DiscAllPrimaryServices
+---------------------------
+:Opcode: 0xFD90
+:Command Description: This sub-procedure is used by a client to discover all the primary services on a server.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_ReadByGrpTypeRsp (with bleProcedureComplete or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_DiscPrimaryServiceByUUID
+-----------------------------
+:Opcode: 0xFD86
+:Command Description: This sub-procedure is used by a client to discover a specific primary service on a server when only the Service UUID is known. The specific primary service may exist multiple times on a server. The primary service being discovered is identified by the service UUID.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:value: Attribute value to find
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 7) byte) value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_FindByTypeValueRsp (with bleProcedureComplete or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_FindIncludedServices
+-------------------------
+:Opcode: 0xFDB0
+:Command Description: This sub-procedure is used by a client to find include service declarations within a service definition on a server. The service specified is identified by the service handle range.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0xFFFF
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_ReadByTypeRsp (with bleProcedureComplete or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_DiscAllChars
+-----------------
+:Opcode: 0xFDB2
+:Command Description: This sub-procedure is used by a client to find all the characteristic declarations within a service definition on a server when only the service handle range is known. The service specified is identified by the service handle range.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0xFFFF
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_ReadByTypeRsp (with bleProcedureComplete or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_DiscCharsByUUID
+--------------------
+:Opcode: 0xFD88
+:Command Description: This sub-procedure is used by a client to discover service characteristics on a server when only the service handle ranges are known and the characteristic UUID is known. The specific service may exist multiple times on a server. The characteristic being discovered is identified by the characteristic UUID.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0xFFFF
+ :Range: Any 2 byte value
+
+:type: 2 or 16 octet UUID
+
+ :Size: input byte(s)
+ :Default: "00:00"
+ :Range: Any 2 or 16 byte value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_ReadByTypeRsp (with bleProcedureComplete or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_DiscAllCharDescs
+---------------------
+:Opcode: 0xFD84
+:Command Description: This sub-procedure is used by a client to find all the characteristic descriptors Attribute Handles and Attribute Types within a characteristic definition when only the characteristic handle range is known. The characteristic specified is identified by the characteristic handle range.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0xFFFF
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_FindInfoRsp (with bleProcedureComplete or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_ReadCharValue
+------------------
+:Opcode: 0xFD8A
+:Command Description: This sub-procedure is used to read a Characteristic Value from a server when the client knows the Characteristic Value Handle. The Read Response returns the Characteristic Value in the Attribute Value parameter.The Read Response only contains a Characteristic Value that is less than or equal to (ATT_MTU - 1) octets in length. If the Characteristic Value is greater than (ATT_MTU - 1) octets in length, GATT_ReadLongCharValue may be used if the rest of the Characteristic Value is required.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be read
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_FindInfoRsp (with bleProcedureComplete or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_ReadUsingCharUUID
+----------------------
+:Opcode: 0xFDB4
+:Command Description: This sub-procedure is used to read a Characteristic Value from a server when the client knows the Characteristic Value Handle. The Read Response returns the Characteristic Value in the Attribute Value parameter. The Read Response only contains a Characteristic Value that is less than or equal to (ATT_MTU - 1) octets in length. If the Characteristic Value is greater than (ATT_MTU - 1) octets in length, GATT_ReadLongCharValue may be used if the rest of the Characteristic Value is required.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Default: 0xFFFF
+ :Range: Any 2 byte value
+
+:type: 2 or 16 octet UUID
+
+ :Size: input byte(s)
+ :Default: "00:00"
+ :Range: Any 2 or 16 byte value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_ReadByTypeRsp (with bleProcedureComplete or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_ReadLongCharValue
+----------------------
+:Opcode: 0xFD8C
+:Command Description: This sub-procedure is used to read a Characteristic Value from a server when the client knows the Characteristic Value Handle and the length of the Characteristic Value is longer than can be sent in a single Read Response Attribute Protocol message.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be read
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:offset: The offset of the first octet to be read
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_ReadBlobRsp (with bleProcedureComplete or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_ReadMultiCharValues
+------------------------
+:Opcode: 0xFD8E
+:Command Description: This sub-procedure is used to read multiple Characteristic Values from a server when the client knows the Characteristic Value Handles. The Attribute Protocol Read Multiple Requests is used with the Set Of Handles parameter set to the Characteristic Value Handles. The ATT_ReadMultiRsp returns the Characteristic Values in the Set Of Values parameter.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handles: A set of two or more two-byte attribute handles
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (4 to (ATT_MTU-1) byte) value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_ReadMultiRsp (with SUCCESS or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_WriteNoRsp
+---------------
+:Opcode: 0xFDB6
+:Command Description: This sub-procedure is used to write a Characteristic Value to a server when the client knows the Characteristic Value Handle and the client does not need an acknowledgment that the write was successfully performed. This sub-procedure only writes the first (ATT_MTU - 3) octets of a Characteristic Value. This sub-procedure can not be used to write a long characteristic; instead GATT_ReadLongCharValue should be used.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be set
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:value: The value to be written to the attribute
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 3) byte) value
+
+**Events Generated**
+
+No response will be sent to the calling application task for this sub-procedure. If the Characteristic Value write request is the wrong size, or has an invalid value as defined by the profile, then the write will not succeed and no error will be generated by the server.
+
+GATT_SignedWriteNoRsp
+---------------------
+:Opcode: 0xFDB8
+:Command Description: This sub-procedure is used to write a Characteristic Value to a server when the client knows the Characteristic Value Handle and the ATT Bearer is not encrypted. This sub-procedure shall only be used if the Characteristic Properties authenticated bit is enabled and the client and server device share a bond as defined in the GAP. This sub-procedure only writes the first (ATT_MTU - 15) octets of an Attribute Value. This sub-procedure cannot be used to write a long Attribute.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be set
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:value: The value to be written to the attribute
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 3) byte) value.
+
+**Events Generated**
+
+No response will be sent to the calling application task for this sub-procedure. If the authenticated Characteristic Value that is written is the wrong size, or has an invalid value as defined by the profile, or the signed value does not authenticate the client, then the write will not succeed and no error will be generated by the server.
+
+GATT_WriteCharValue
+-------------------
+:Opcode: 0xFD92
+:Command Description: This sub-procedure is used write a characteristic value to a server when the client knows the characteristic value handle. This sub-procedure only writes the first (ATT_MTU-3) octets of a characteristic value. This sub-procedure can not be used to write a long attribute; instead the Write Long Characteristic Values sub-procedure should be used.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be set
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:value: The value to be written to the attribute
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 3) byte) value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_WriteRsp (with SUCCESS or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_WriteLongCharValue
+-----------------------
+:Opcode: 0xFD96
+:Command Description: This sub-procedure is used to write a Characteristic Value to a server when the client knows the Characteristic Value Handle but the length of the Characteristic Value is longer than can be sent in a single Write Request Attribute Protocol message.
+
+**Command Parameters**
+
+:Layer: 
+
+ :Size: 1 byte(s)
+ :Value: 9
+
+:Event Opcode: 
+
+ :Size: 2 byte(s)
+ :Value: 0xFD96
+
+:Payload Length: including length of the fields: Connection Handle, Attribute Handle, Offset and Value
+
+ :Size: 2 byte(s)
+ :Value: size(connHandle)+size(attHandle)+size(offset)+size(value)
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:Attribute Handle: The handle of the attribute to be written
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:Offset: The offset of the first octet to be written
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:Value: The value of the attribute to be written. Note: the stack implementation supports the maximum length of 512 octets but this is always bound by the physical interface used to communicate with the device
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any 0 to 512 byte value.
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_PrepareWriteRsp (with bleTimeout status), ATT_ExecuteWriteRsp (with SUCCESS or bleTimeout status), or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_ReadCharDesc
+-----------------
+:Opcode: 0xFDBC
+:Command Description: This sub-procedure is used to read a Characteristic Descriptor from a server when the client knows the Characteristic Descriptors Handle.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be read
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_ReadRsp (with bleProcedureComplete or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_ReadLongCharDesc
+---------------------
+:Opcode: 0xFDBE
+:Command Description: This sub-procedure is used to read a Characteristic Descriptor from a server when the client knows the Characteristic Descriptor Declarations Attribute Handle and the length of the Characteristic Descriptor Declaration is longer than can be sent in a single Read Response Attribute Protocol message.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be read
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:offset: The offset of the first octet to be read
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_ReadBlobRsp (with bleProcedureComplete or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_WriteCharDesc
+------------------
+:Opcode: 0xFDC0
+:Command Description: This sub-procedure is used write a characteristic descriptor to a server when the client knows the characteristic descriptor handle.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be set
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:value: The value to be written to the attribute
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 3) byte) value
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_WriteRsp (with SUCCESS or bleTimeout status) or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_WriteLongCharDesc
+----------------------
+:Opcode: 0xFDC2
+:Command Description: This sub-procedure is used to write a Characteristic Value to a server when the client knows the Characteristic Value Handle but the length of the Characteristic Value is longer than can be sent in a single Write Request Attribute Protocol message.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:handle: The handle of the attribute to be written
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:offset: The offset of the first octet to be written
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:value: The value of the attribute to be written. Note: the stack implementation supports the maximum length of 512 octets but this is always bound by the physical interface used to communicate with the device
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any 0 to 512 byte value.
+
+**Events Generated**
+
+This sub-procedure is complete when either ATT_PrepareWriteRsp (with bleTimeout status), ATT_ExecuteWriteRsp (with SUCCESS or bleTimeout status), or ATT_ErrorRsp (with SUCCESS status) is received by the calling application task.
+
+GATT_Notification
+-----------------
+:Opcode: 0xFD9B
+:Command Description: This sub-procedure is used when a server is configured to notify a characteristic value to a client without expecting any attribute protocol layer acknowledgment that the notification was successfully received.  Note: A notification may be sent at any time and does not invoke a confirmation.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:authenticated: Whether or not an authenticated link is required
+
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  No 
+         0x01                  Yes  
+         ===================== ========================================================
+
+:handle: The handle of the attribute
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:value: The current value of the attribute
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 3) byte) byte value.
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+GATT_Indication
+---------------
+:Opcode: 0xFD9D
+:Command Description: This sub-procedure is used when a server is configured to indicate a characteristic value to a client and expects an attribute protocol layer acknowledgment that the indication was successfully received.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:authenticated: Whether or not an authenticated link is required
+
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  No 
+         0x01                  Yes  
+         ===================== ========================================================
+
+:handle: The handle of the attribute
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:value: The current value of the attribute
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any (0 to (ATT_MTU - 3) byte) value
+
+**Events Generated**
+
+This sub-procedure is complete when ATT_HandleValueCfm (with SUCCESS or bleTimeout status) is received by the calling application task.
+
+GATT_AddService
+---------------
+:Opcode: 0xFDFC
+:Command Description: This command is used to add a new service to the GATT Server on the Network Processor when the GATT Database is implemented on the Application Processor. The GATT_AddAttribute  must be used to add additional attributes to the service. The new service will be automatically registered with the GATT Server if it has no additional attribute to be added. Note: The Command Status Event will have the Start Handle and End Handle for the service registered with the GATT Server. No ATT request is used to perform this command.
+
+**Command Parameters**
+
+:UUID: The type of the service to be added (primary or secondary)
+
+ :Size: 2 byte(s)
+ :Default: 0x2800
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x2800                PrimaryService   
+         0x2801                SecondaryService 
+         ===================== ========================================================
+
+:numAttrs: The number of the attributes in the service (including the service attribute)
+
+ :Size: 2 byte(s)
+ :Default: 1
+ :Range: Any 2 byte value
+
+:encKeySize: The minimum encryption key size (in octets) required by the service.
+
+ :Size: 1 byte(s)
+ :Default: 16
+ :Range: 7-16
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+GATT_DelService
+---------------
+:Opcode: 0xFDFD
+:Command Description: This command is used to delete a service from the GATT Server on the Network Processor when the GATT Database is implemented on the Application Processor.
+
+**Command Parameters**
+
+:handle: The handle of the service to be deleted
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+GATT_AddAttribute
+-----------------
+:Opcode: 0xFDFE
+:Command Description: This command is used to add a new attribute to the service being added to the GATT Server on the Network Processor when the GATT Database is implemented on the Application Processor. The service will be automatically registered with the GATT Server when its last attribute is added. Note: The Command Status Event will have the Start Handle and End Handle for the service registered with the GATT Server.
+
+**Command Parameters**
+
+:UUID: The type of the attribute to be added
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: Any 2 byte value
+
+:permissions: Attribute access permissions
+
+ :Size: 1 byte(s)
+ :Default: 0x01
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  GATT_PERMIT_READ         
+         0x02                  GATT_PERMIT_WRITE        
+         0x04                  GATT_PERMIT_AUTHEN_READ  
+         0x08                  GATT_PERMIT_AUTHEN_WRITE 
+         0x10                  GATT_PERMIT_AUTHOR_READ  
+         0x20                  GATT_PERMIT_AUTHOR_WRITE 
+         0x40                  GATT_PERMIT_ENCRYPT_READ 
+         0x80                  GATT_PERMIT_ENCRYPT_WRITE 
+         0x40                  GATT_PERMIT_ENCRYPT_READ 
+         ===================== ========================================================
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+
+GATT_UpdateMTU
+--------------
+:Opcode: 0xFDFF
+:Command Description: This command is used to notify the stack of an updated MTU size for a given connection.
+
+**Command Parameters**
+
+:handle: The handle of the service to be deleted
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: Any 2 byte value
+
+:MTU: The new MTU
+
+ :Size: 2 byte(s)
+ :Default: 23
+ :Range: 
+
+**Events Generated**
+
+This command only returns the CommandStatus event
+

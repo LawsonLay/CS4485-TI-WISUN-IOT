@@ -1,0 +1,1188 @@
+.. _sec-l2cap:
+
+Logical Link Control and Adaptation Layer Protocol (L2CAP)
+----------------------------------------------------------
+
+The L2CAP layer sits on top of the HCI layer on the host side and
+transfers data between the upper layers of the host (GAP, GATT, SM,
+application) and the link layer. This layer is
+responsible for protocol multiplexing capability, segmentation, and
+reassembly operation for data exchanged between the host and the
+protocol stack. All data from the host or application goes through and is
+encapsulated in an L2CAP packet. L2CAP permits higher-level protocols
+(such as GATT and SM) and applications to transmit and receive upper layer data
+packets (L2CAP service data units, SDU) up to 64KB long. See
+:numref:`l2cap-architectural-blocks` for more information.
+
+.. note::
+    The actual L2CAP payload size is limited by the amount of memory
+    available on the specific device being implemented. L2CAP also permits
+    per-channel flow control and retransmission.
+
+.. _l2cap-architectural-blocks:
+.. figure:: resources/l2cap-architectural-blocks.jpg
+    :align: center
+
+    L2CAP Architectural blocks.
+
+General L2CAP Terminology
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. _general-l2cap-terminology:
+.. table:: General L2CAP Terminology
+
+   +-------------------------------------------------+----------------------------------------------------------------------+
+   |   Term                                          |     Description                                                      |
+   +=================================================+======================================================================+
+   |   L2CAP channel                                 |     The logical connection between two endpoints in peer devices,    |
+   |                                                 |     characterized by their Channel Identifiers (CIDs)                |
+   +-------------------------------------------------+----------------------------------------------------------------------+
+   |   SDU or L2CAP SDU                              |     Service Data Unit: a packet of data that L2CAP exchanges with    |
+   |                                                 |     the upper layer and transports transparently over an L2CAP       |
+   |                                                 |     channel using the procedures specified in this document.         |
+   |                                                 |     This is the raw payload from the host/app, and does not include  |
+   |                                                 |     L2CAP headers.                                                   |
+   +-------------------------------------------------+----------------------------------------------------------------------+
+   |   PDU or L2CAP PDU                              |     Protocol Data Unit: a packet of data containing L2CAP protocol   |
+   |                                                 |     information fields, control information, and/or upper layer      |
+   |                                                 |     information data. This packet includes L2CAP headers.            |
+   |                                                 |     A single SDU may be split across multiple PDUs.                  |
+   +-------------------------------------------------+----------------------------------------------------------------------+
+   |   Maximum Transmission Unit (MTU)               |     The maximum size of payload data, in octets, that the upper      |
+   |                                                 |     layer entity can accept (that is, the MTU corresponds to the     |
+   |                                                 |     maximum SDU size). Note: This is different than ATT\_MTU.        |
+   +-------------------------------------------------+----------------------------------------------------------------------+
+   |   Maximum PDU Payload Size (MPS)                |     The maximum size of payload data in octets that the L2CAP        |
+   |                                                 |     layer entity can accept (that is, the MPS corresponds to the     |
+   |                                                 |     maximum PDU payload size).                                       |
+   +-------------------------------------------------+----------------------------------------------------------------------+
+   |   Credit                                        |     The number of LE-frames that the device can receive.             |
+   |                                                 |     Credits may range between 1 and 65535, and are used as a flow    |
+   |                                                 |     control mechanism between devices.                               |
+   +-------------------------------------------------+----------------------------------------------------------------------+
+   |   L2CAP Basic Header                            |     L2CAP protocol information that is prepended to each PDU.        |
+   |                                                 |     This includes CID and  length                                    |
+   +-------------------------------------------------+----------------------------------------------------------------------+
+   |   Protocol/Service Multiplexer (PSM)            |     A two octet field that is used to define the interpretation of   |
+   |                                                 |     L2CAP channel data. There are both dynamic and fixed PSMs.       |
+   |                                                 |     Fixed PSMs are assigned by the SIG, while dynamic PSMs may       |
+   |                                                 |     be discovered by GATT.                                           |
+   +-------------------------------------------------+----------------------------------------------------------------------+
+   |   Fragmentation/Recombination                   |     Fragmentation is the process of breaking down L2CAP PDUs into    |
+   |                                                 |     smaller pieces for the controller to send out.                   |
+   |                                                 |     Recombination is the process of the controller reassembling      |
+   |                                                 |     fragments into complete L2CAP PDUs.                              |
+   |                                                 |     Fragmentation/Recombination is performed by the controller       |
+   |                                                 |     and is based on the LE Data Length Extension feature.            |
+   |                                                 |     Fragmentation/Recombination operations are transparent to L2CAP. |
+   +-------------------------------------------------+----------------------------------------------------------------------+
+   |   Segmentation/Reassembly                       |     Segmentation is the process of breaking a single L2CAP SDU up    |
+   |                                                 |     multiple L2CAP packets called SDU segments. Reassembly in the    |
+   |                                                 |     inverse of this operation on the receive side. Each segment is   |
+   |                                                 |     encapsulated in a proper L2CAP header. Both segmentation and     |
+   |                                                 |     reassembly is handled by the L2CAP layer and transparent to      |
+   |                                                 |     lower and higher layers.                                         |
+   +-------------------------------------------------+----------------------------------------------------------------------+
+
+.. important::
+
+    The max SDU size supported by the stack is ``L2CAP_SDU_SIZE``.
+
+
+L2CAP Modes of Operation
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The |STACK| supports two different modes of operation of the L2CAP layer.
+
+ * Basic L2CAP Mode
+ * LE Credit Based Flow Control Mode
+
+Note that the L2CAP section is shared for BR/EDR, BR/EDR/LE (dual mode), and
+LE only controller implementations. The |STACK| controller implementation is
+LE only, thus only the modes above are relevant.
+
+.. _l2cap-channels:
+
+L2CAP Channels
+^^^^^^^^^^^^^^
+
+There are three types of channels in L2CAP:
+
+ * Connection-oriented
+ * Connectionless data
+ * L2CAP signaling
+
+Each endpoint of an L2CAP channel is referred to by a channel identifier (CID).
+See the Channel Identifiers section ([Vol 3], Part A, Section 2.1) of
+the |CORESPEC| for more details on L2CAP Channel Identifiers. Connectionless
+channels are not supported over the LE-U controller, and thus are not used by
+the |STACK|.
+
+Channels can be divided into fixed and dynamic channels.
+
+Fixed Channels
+~~~~~~~~~~~~~~
+
+Fixed channels perform a specific L2CAP function, and use CIDs
+between 0x0001 and 0x003F. The characteristics of each fixed channel (such as
+MTU) are defined on a per channel basis.
+
+.. tip::
+
+    Higher level protocols such as ATT may enforce their own MTU, which is
+    different than the L2CAP MTU.
+
+The relevant CIDs that are available for use by the stack or application are
+listed below.
+
+.. _l2cap-cids:
+.. table:: L2CAP CIDs
+
+    +---------------+---------------------------------+--------------------------------------+
+    | CID           | Description                     | Usage                                |
+    +---------------+---------------------------------+--------------------------------------+
+    | 0x0004        | Attribute Protocol (ATT)        | Sending ATT information              |
+    +---------------+---------------------------------+--------------------------------------+
+    | 0x0005        | LE Signaling Channel            | Sending L2CAP commands               |
+    +---------------+---------------------------------+--------------------------------------+
+    | 0x0006        | Security Manager Protocol (SMP) | Sending pairing/security information |
+    +---------------+---------------------------------+--------------------------------------+
+    | 0x0040-0x007F | Dynamically Allocated           | LE Credit Based Flow control packets |
+    +---------------+---------------------------------+--------------------------------------+
+
+For example, data exchanged over the GATT protocol uses channel 0x0004, SMP
+(pairing and security) uses 0x0006, and the LE signaling channel uses 0x0005.
+The ATT, SMP, and signaling channels are not directly accessible via the
+application as they are used by their associated Host layers. Put another way,
+when calling a GATT related API, it handles the necessary encapsulation into
+an L2CAP packet. The signaling channel is used for L2CAP connection parameter
+update procedure, establishing LE credit based connections on the
+dynamic channels, and exchanging credits.
+
+
+Dynamically Allocated Channels
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A dynamically allocated CID is allocated to identify the logical link and the
+local endpoint. The local endpoint must be in the range from 0x0040 to 0xFFFF.
+This endpoint is used in the connection-orientated L2CAP channels described in
+the following section. Credit Based Flow Control mode is used by the L2CAP
+layer for Connection-Oriented Channels. These dynamically assigned channels
+are accessible and managed directly at the application layer. This means that
+the application is responsible for defining its own protocol on top of L2CAP
+CoC. L2CAP channels are bidirectional and are analogous to sockets.
+
+When a channel is dynamically allocated, it must have the following parameters
+set:
+
+ * PSM
+ * MTU
+ * CID
+
+Fixed PSMs are defined by the Bluetooth SIG, these range between 0x0001 and
+0x007F. Dynamic PSMs range between 0x0080 and 0x00FF. PSMs may be fixed on
+GATT server devices, while GATT clients shall obtain PSMs from the GATT
+service.
+
+
+L2CAP Frame types
+^^^^^^^^^^^^^^^^^
+
+There are two frame types that are used by the |STACK|. These are the Basic
+frame which is used by the fixed channels in basic mode, and the LE information
+frame which is used by the dynamic channels in LE credit based flow control
+mode. L2CAP handles framing of the SDU data from the host or application, but
+it is important to keep the protocol overhead of each frame in mind as it will
+affect how much application data ends up in a PDU.
+
+The contents of the L2CAP frames are defined in Vol 3, Part A. The LE
+information frame is defined in section 3.4 and the basic frame is defined in
+section 3.1. The headers sizes are summarized here for reference.
+
+.. _l2cap-frames:
+.. table:: L2CAP Frames and Overhead
+
+    +----------------------+----------------------+----------------------+
+    | L2CAP Frame Type     | Header Size (octets) | Header contents      |
+    +----------------------+----------------------+----------------------+
+    | Basic frame          | 4                    | Length: 2 octets     |
+    |                      |                      | CID: 2 octets        |
+    +----------------------+----------------------+----------------------+
+    | LE Information Frame | 6                    | Length: 2 octets     |
+    |                      |                      | CID: 2 octets        |
+    |                      |                      | SDU length: 2 octets |
+    +----------------------+----------------------+----------------------+
+
+.. _l2cap-fragmentation:
+
+Fragmentation/Recombination
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+From an L2CAP perspective, all packets are delivered to and received from
+the controller as complete packets. This means that fragmentation/recombination
+(if enabled by LE Data Length Extension) is performed by the controller
+and not visible to L2CAP. See :ref:`le_data_length_extension` for more
+information.
+
+When fragmentation is used, larger packets are split
+into multiple link layer packets and reassembled by the link layer
+of the peer device. The picture below shows this
+relationship.
+
+
+.. ditaa::
+   :--no-separation:
+   :--no-shadows:
+
+                               +------------------------------------------+
+       Application             |                   SDU cAAA               |
+                               +------------------------------------------+
+                                                     |
+            -----------------------------------------|----------------------------------------
+                                                     |
+        L2CAP                                        v
+
+               +------------------------------+               +------------------------------+
+               |           PDU_1  cC00        |               |           PDU_n  cC00        |
+               +------------+-----------------+               +------------+-----------------+
+               |Header c156 | SDU_1 cAAA      | ............. |Header c156 | SDU_n cAAA      |
+               +------------+-----------------+               +------------+-----------------+
+                                                     
+
+                        If SDU + L2CAP header is smaller or equals to the MAX_PDU_SIZE,
+                        then in the L2CAP layer there will only be one packet which is
+                        L2CAP header + SDU.
+
+                                                     |
+            -----------------------------------------|----------------------------------------
+                                                     |
+                                                     v
+          
+        Host                                 HCI_sendDataPkt
+
+                                                     |
+            -----------------------------------------|----------------------------------------
+                                                     |
+                                                     v
+
+        Link Layer    Depends on the DLE PDU size to decide whether fragmentation is needed,
+                      and then send packets over the air.                                        
+
+
+.. note::
+  The **DLE PDU** is negotiated by ``LL_LEN_REQ`` and ``LL_LEN_RSP``. DLE PDU is *NOT* the same 
+  as L2CAP PDU. For more information regarding how to change the DLE PDU, see 
+  :ref:`le_data_length_extension`.
+
+
+.. _l2cap-segmentation:
+
+Segmentation/Reassembly
+^^^^^^^^^^^^^^^^^^^^^^^
+
+When operating in Basic Mode, L2CAP will not perform any segmentation or
+reassembly. However, when operating in LE Credit Based Flow Control mode on a
+dynamic channel (CoC) segmentation and reassembly at the L2CAP layer may occur.
+
+
+.. _l2cap-config:
+
+Configuring L2CAP
+^^^^^^^^^^^^^^^^^
+
+.. _l2cap-enable-config:
+
+Build Configuration
+~~~~~~~~~~~~~~~~~~~
+
+The L2CAP CoC dynamic channels by default is not enabled in the projects.
+It can be enabled by the following methods:
+
+.. ifconfig:: device != 'cc2640'
+   
+   **SysConfig tool**: For projects that support SysConfig tool, you can enable
+   L2CAP CoC dynamic channels by checking ``L2CAP Connection Oriented Channels`` box.
+   Please refer to :numref:`fig-ble5-stack-feature` for |STACK| feature overview.
+
+-  **build_config.opt**: For projects that do not support SysConfig tool, you 
+   can enable L2CAP CoC dynamic channels by adding ``-DV41_FEATURES=L2CAP_COC_CFG``
+   to ``build_config.opt`` file.
+
+
+Runtime Configuration
+~~~~~~~~~~~~~~~~~~~~~
+
+.. tip::
+    This is a bit of a misnomer because generally these parameters are set
+    via ``#define`` but they are in fact initialized dynamically at the time
+    of the stack boot. In this case, runtime means that they not fixed by the
+    protocol stack library and may be changed by the user.
+
+.. ifconfig:: doctarget == 'ble3'
+
+   These L2CAP parameters are passed into the |STACK| at initialization via the
+   BLE user config structure (``ble_user_config.h``). These include:
+
+.. ifconfig:: doctarget == 'ble5'
+
+   These L2CAP parameters are passed into the |STACK| at initialization via the
+   ``.opt`` file. These include:   
+
+* ``L2CAP_NUM_PSM`` : Number of Protocol/Service multiplexers
+* ``L2CAP_NUM_CO_CHANNELS`` : Number of allowed dynamic CoCs.
+* ``MAX_PDU_SIZE``: Max PDU buffer size that the controller accepts
+* ``MAX_NUM_PDU``: Number of L2CAP TX PDU buffers in the controller
+
+
+   For more information for how to change the above parameters, please
+   see :ref:`stack_features_configuration`
+
+
+.. _l2cap-mtu:
+
+L2CAP MTU
+^^^^^^^^^
+
+As mentioned in :ref:`general-l2cap-terminology`, the L2CAP MTU is the maximum
+payload that can be processed by the L2CAP layer. The MTU size is the largest
+SDU that L2CAP will accept.
+
+However, the MTU used by L2CAP will vary depending on the mode and channel type
+
+ * Signaling channel will use the ``L2CAP_SIG_MTU_SIZE``
+ * Fixed channel packets are limited by ``MAX_PDU_SIZE - L2CAP_HDR_SIZE``
+ * CoC packets depend on the PSM's MTU and are limited by ``L2CAP_SDU_SIZE``
+
+For fixed channel MTU is defined by a higher level protocol such as ATT.
+On dynamic connection oriented channels, the MTU is bound by the minimum of
+``L2CAP_SDU_SIZE`` and the peer's supported MTU.
+
+.. _l2cap-ram:
+
+RAM Considerations
+~~~~~~~~~~~~~~~~~~
+
+Care must be taken with respect to RAM when enabling these features as they
+will consume heap memory. Additionally, since L2CAP is responsible for
+encapsulating packets from higher layers, the higher level protocols may have
+requirements on how L2CAP is configured.
+
+
+.. table:: L2CAP RAM Usage
+
+    +---------------------------+---------------------------------------------------------------------+----------------------+
+    | L2CAP Frame Type          | Heap Allocation                                                     | Alloc time           |
+    +---------------------------+---------------------------------------------------------------------+----------------------+
+    | ``L2CAP_NUM_PSM``         | sizeof(l2capPsm_t)*L2CAP_NUM_PSM                                    | L2CAP init           |
+    |                           |                                                                     |                      |
+    +---------------------------+---------------------------------------------------------------------+----------------------+
+    | ``L2CAP_NUM_CO_CHANNELS`` | sizeof(l2capChannel_t)* (MAX_NUM_BLE_CONNS + L2CAP_NUM_CO_CHANNELS) | L2CAP Init           |
+    +---------------------------+---------------------------------------------------------------------+----------------------+
+    | ``L2CAP_NUM_CO_CHANNELS`` | sizeof( l2capCoChannel_t )                                          | Channel creation     |
+    +---------------------------+---------------------------------------------------------------------+----------------------+
+    | ``MAX_PDU_SIZE``          | Depends on application usage, can be up to MAX_PDU_SIZE*MAX_NUM_PDU | Runtime              |
+    |                           | in TX case. In the RX case it depends on RX throughput              |                      |
+    +---------------------------+---------------------------------------------------------------------+----------------------+
+    | ``MAX_NUM_PDU``           | See above                                                           | Runtime              |
+    +---------------------------+---------------------------------------------------------------------+----------------------+
+
+The two parameters are only used by dynamic connection oriented channels,
+and do not need to be considered if the feature is not used. ``MAX_PDU_SIZE``
+and ``MAX_NUM_PDU`` as they do affect both the fixed channels used by ATT and
+SM as well as the dynamic connection oriented channels.
+
+When using connection oriented channels, L2CAP will allocate space for each TX
+segment of the SDU before passing to the controller. The size is based on the
+max packet size that is negotiated by the controller.
+
+On RX, L2CAP will allocate the size of the entire SDU on receiving the first
+packet based on the length field in the header.
+
+For signaling commands on the fixed channels, L2CAP will allocate the memory
+for the packet itself, based on ``L2CAP_SIG_MTU_SIZE`` which is the MTU of the
+signaling channel.
+
+.. tip::
+    For data packet payloads, the higher level protocol (ATT, SM, Application)
+    is responsible for allocating using ``L2CAP_bm_alloc(...)``. In the case
+    of ATT and SM, this is done transparent to the user. For CoC SDUs, the user
+    owns the memory associated with the payload.
+
+
+.. _l2cap-flow-ctrl:
+
+Controller to Host Flow Control
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As mentioned above, ``MAX_NUM_PDU`` defines the max number of TX packets that
+can be queued up to the controller at a time. Attempting to send more packets
+will result in a failure code being returned by the high level API and the
+packet not being queued up by the controller.
+
+The application may not know how many packets are queued up at a given time
+so it is best to always check return codes. Additionally, the application
+can increase the efficiency at which is queues packets up by registering
+for flow control notifications from the L2CAP layer.
+
+This can be done with :ble_api:`L2CAP_RegisterFlowCtrlTask`. When enabled,
+the API will notify the application with ``L2CAP_NUM_CTRL_DATA_PKT_EVT`` with
+the number of data packets that are available for sending. This event is
+triggered each time a new buffer becomes available.
+
+Connection Oriented Channels Example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. ifconfig:: device != 'cc23xx'
+
+  The |STACK| provides APIs to create L2CAP CoC channels to transfer
+  bidirectional data between two Bluetooth Low Energy devices supporting this
+  feature. Following are the steps and generic code example which are needed
+  to create L2CAP CoC channels communication using TI |STACK|.
+  
+  #. **Enable L2CAP CoC Feature**, please refer to :ref:`l2cap-enable-config`
+  
+  #. **Register Simplified Protocol/Service Multiplexer (SPSM)**. 
+     :term:`SPSM` registration is needed for both central and peripheral devices.
+      
+      .. code-block:: c
+       :caption: Register SPSM
+       :linenos:
+  
+       #define App_SPSM      0x0080
+          
+       static void application_openL2CAPChanCoc(void)
+       {
+          
+         l2capPsm_t psm;
+         l2capPsmInfo_t psmInfo;
+          
+         if (L2CAP_PsmInfo(App_SPSM, &psmInfo) == INVALIDPARAMETER)
+         {
+           // Prepare the PSM parameters
+           psm.initPeerCredits = 0xFFFF;
+           psm.maxNumChannels = MAX_NUM_BLE_CONNS;
+           psm.mtu = MAX_PDU_SIZE;
+           psm.peerCreditThreshold = 0;
+           psm.pfnVerifySecCB = NULL;
+           psm.psm = App_SPSM;
+           psm.taskId = ICall_getLocalMsgEntityId(ICALL_SERVICE_CLASS_BLE_MSG, selfEntity);
+          
+           // Register SPSM with L2CAP task
+           L2CAP_RegisterPsm(&psm);        
+         }
+         else
+         {
+           // print L2CAP setup failed
+         }
+          
+       }
+  
+      .. tip::
+        This function might be called at the end of the
+        ``GAP_DEVICE_INIT_DONE_EVENT``.
+  
+  #. Central or peripheral device sends **L2CAP LE Credit Based Connection Request**.
+  
+      .. code-block:: c
+       :caption: Sends out L2CAP LE Credit Based Connection Request
+       :linenos:
+       
+  
+       // Send out L2CAP_LE_CREDIT_BASED_CONNECTION_REQ
+       L2CAP_ConnectReq(connHandle, App_SPSM, App_SPSM);
+  
+      .. note::
+          Both central and peripheral device can request to establish L2CAP CoC channels.
+          As long as one of the device requests, the link establishment request will be sent.
+          There is no need to add this part of the code for both devices.
+  
+      .. tip::
+        This function might be called at the end of the
+        ``GAP_LINK_ESTABLISHED_EVENT``.
+  
+  #. Once the L2CAP credit based connection establishment is successful, the |STACK| will 
+     send ``L2CAP_SIGNAL_EVENT`` to the application with opcode 
+     ``L2CAP_CHANNEL_ESTABLISHED_EVT`` for both central and peripheral devices.
+     Therefore, we will **implement a function to handle L2CAP messages**
+     under application process stack message function.
+  
+      .. code-block:: c
+       :caption: Process L2CAP event 
+       :linenos:
+  
+       static uint8_t Application_processStackMsg(ICall_Hdr *pMsg)
+       {
+       
+         switch (pMsg->event)
+         {
+       
+           case L2CAP_SIGNAL_EVENT:
+             Application_processL2CAPSignalEvent((l2capSignalEvent_t *)pMsg);
+             break;
+  
+             ...
+             ...
+  
+  
+      .. code-block:: c
+       :caption: Process L2CAP events 
+       :linenos:
+  
+       // Connected device information.
+       // If this structure already exists, it is sufficient to add the cocCID.
+       typedef struct
+       {
+         uint16_t connHandle;        // Connection Handle
+         uint16_t charHandle;        // Characteristic Handle
+         uint8_t  addr[B_ADDR_LEN];  // Peer Device Address
+         Clock_Struct *pRssiClock;   // pointer to clock struct
+         uint16_t cocCID;            // CID for the L2CAP channel
+       } connRec_t;  
+       
+       /******************************************************************************
+       * @fn          Application_processL2CAPSignalEvent
+       *
+       * @brief       This function is used to handle all the L2CAP signal events.
+       *
+       * @param       pMsg - pointer to the signal that was received
+       *
+       * @return      None.
+       */
+       static void Application_processL2CAPSignalEvent(l2capSignalEvent_t *pMsg)
+       {
+         // Sanity check
+         if (!pMsg)
+         {
+           return;
+         }
+       
+         switch (pMsg->opcode)
+         {
+           case L2CAP_CHANNEL_ESTABLISHED_EVT:
+           {
+             l2capChannelEstEvt_t *pEstEvt = &(pMsg->cmd.channelEstEvt); 
+             
+             if (pMsg->connHandle != LINKDB_CONNHANDLE_INVALID && pMsg->connHandle < MAX_NUM_BLE_CONNS)
+             {
+               // Successfully establish link over L2CAP
+               // Extract the CID and store in the application layer
+               // This will be useful when sending data over L2CAP channels
+               connList[pMsg->connHandle].cocCID = pEstEvt->CID;
+             }
+             else
+             {
+               // Could not establish an L2CAP link
+             }
+           }
+           break;
+       
+           case L2CAP_SEND_SDU_DONE_EVT:
+           {
+             if (pMsg->hdr.status == SUCCESS)
+             {
+              // Successfully sending data over L2CAP
+             }
+             else
+             {
+             }
+           }
+           break;
+       
+           case L2CAP_CHANNEL_TERMINATED_EVT:
+           {
+           }
+           break;
+         }
+       }
+  
+  #. Both peripheral and central devices need to **exchange L2CAP Credits**.
+     After the link is established, devices can distribute credit using the
+     following code snippet.
+  
+      .. code-block:: c
+       :caption: Exchange credits 
+       :linenos:
+  
+       l2capChannelEstEvt_t *pEstEvt = &(pMsg->cmd.channelEstEvt);
+          
+       // Give max credits to the other side
+       L2CAP_FlowCtrlCredit(pEstEvt->CID, 0xFFFF);
+          
+  
+      .. tip::
+        This code can be placed when application receives successful 
+        ``L2CAP_CHANNEL_ESTABLISHED_EVT``.
+  
+  #. **Send data using L2CAP CoC channel**. In order to send data over L2CAP,
+     :ble_api:`L2CAP_SendSDU` is needed. After successfully sending data over
+     the air, the |STACK| will send ``L2CAP_SIGNAL_EVENT`` to application with 
+     opcode ``L2CAP_SEND_SDU_DONE_EVT``.
+  
+      .. code-block:: c
+       :caption: Sending data over L2CAP
+       :linenos:
+  
+       static bStatus_t Application_sendL2capData(void)
+       {
+         l2capPacket_t pkt;
+         bStatus_t status = SUCCESS;
+         uint8_t appData[] = "Example Data!";
+       
+         // Tell L2CAP the desired Channel ID
+         pkt.CID = connList[connIndex].cocCID;
+       
+         // Allocate space for payload
+         pkt.pPayload = L2CAP_bm_alloc(sizeof(appData));
+         
+         // Copy payload data
+         memcpy(pkt.pPayload, appData, sizeof(appData));
+         
+         if (pkt.pPayload != NULL)
+         {
+  
+           pkt.len = (sizeof(appData));
+           status = L2CAP_SendSDU(&pkt);
+         
+           // Check that the packet was sent
+           if (SUCCESS != status)
+           {
+             // If SDU wasn't sent, free
+             BM_free(pkt.pPayload);
+           }
+         }
+         else
+         {
+           status = bleMemAllocError;
+         }
+     
+         return (status);
+       }
+  
+  #. **Process received data over L2CAP**. When device receives data from L2CAP,
+     the |STACK| will send ``L2CAP_DATA_EVENT`` to the application. Therefore, we will
+     handle this under application process stack message function.
+  
+      .. code-block:: c
+       :caption: Received data over L2CAP
+       :linenos:
+  
+       static uint8_t Application_processStackMsg(ICall_Hdr *pMsg)
+       {
+        
+          switch (pMsg->event)
+          {
+            case L2CAP_DATA_EVENT:
+              Application_processL2CAPDataEvent((l2capDataEvent_t *)pMsg);
+              break;   
+  
+              ...
+              ...
+  
+  
+      .. code-block:: c
+       :caption: Extract data received over L2CAP
+       :linenos:            
+  
+       /******************************************************************************
+       * @fn          Application_processL2CAPDataEvent
+       *
+       * @brief       This function is used to handle the L2CAP data extraction.
+       *
+       * @param       pMsg - pointer to the signal that was received
+       *
+       * @return      None.
+       */
+       static void Application_processL2CAPDataEvent(l2capDataEvent_t *pMsg)
+       {
+           if (!pMsg)
+           {
+             // Caller needs to figure out by himself that pMsg is NULL
+             return;
+           }
+  
+           // The data locates under pMsg->pkt.pPayload
+           // Extract the data and do what you want to do
+           // For example:
+           //Display_printf(dispHandle, 19, 0, "L2CAP data Rx: %s", pMsg->pkt.pPayload);
+  
+           // Free the payload (must use BM_free here)
+           BM_free(pMsg->pkt.pPayload);
+       }
+
+.. ifconfig:: device == 'cc23xx'
+
+  The |STACK| provides APIs to create L2CAP CoC channels to transfer
+  bidirectional data between two Bluetooth Low Energy devices supporting this
+  feature. Following are the steps and generic code example which are needed
+  to create L2CAP CoC channels communication using **basic_ble** framework.
+  
+  #. **Enable L2CAP CoC Feature**, please refer to :ref:`l2cap-enable-config`
+    
+  #. **Create file app_l2cap.c and add it to the project --> app folder**. This
+     file will contain most of the changes needed for using L2CAP CoC Channels.
+     Therefore, create a new file app_l2cap.c inside the **app** folder of the
+     **basic_ble** project.
+    
+  #. **Includes**. The new created file should contain the following includes.
+    
+     .. code-block:: c
+       :caption: Includes of app\_l2cap.c
+       :linenos:
+       
+       //*****************************************************************************
+       //! Includes
+       //*****************************************************************************
+       #include <stdio.h>
+       #include <string.h>
+       #include "ti_ble_config.h"
+       #include <ti/bleapp/ble_app_util/inc/bleapputil_api.h>
+       #include <ti/bleapp/menu_module/menu_module.h>
+       #include <app_main.h>
+    
+  #. **Define APP_L2CAP_SPSM**. Since this constant needs to get accessed from
+     several files, this definition should be placed in app_main.h.
+     
+     .. code-block:: c
+       :caption: Define of APP_L2CAP_SPSM in app_main.h.
+       :linenos:
+       
+       //The valid range for SPSM is 0x0080 ~ 0x00FF, 0x0080 is used as an example.
+       #define APP_L2CAP_SPSM      0x0080
+       
+     
+  #. **Event Handlers**. The L2CAP CoC implementation requires the setup and
+     registration of two event handlers with its corresponding masks, one for
+     L2CAP signals and one for L2CAP data.
+     
+     .. code-block:: c
+       :caption: Event Handlers of app\_l2cap.c
+       :linenos:
+       
+       //*****************************************************************************
+       //! Globals
+       //*****************************************************************************
+       
+       static void L2CAP_SIGNAL_EventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData);
+       static void L2CAP_DATA_EventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData);
+       
+       // Events handlers struct, contains the handlers and event masks
+       // of the application data module
+       BLEAppUtil_EventHandler_t data_L2CACAP_SIGNAL_Handler =
+       {
+           .handlerType    = BLEAPPUTIL_L2CAP_SIGNAL_TYPE,
+           .pEventHandler  = L2CAP_SIGNAL_EventHandler,
+           .eventMask      = BLEAPPUTIL_L2CAP_CHANNEL_ESTABLISHED_EVT |
+                             BLEAPPUTIL_L2CAP_CHANNEL_TERMINATED_EVT |
+                             BLEAPPUTIL_L2CAP_SEND_SDU_DONE_EVT
+       };
+       
+       BLEAppUtil_EventHandler_t data_L2CACAP_DATA_Handler =
+       {
+           .handlerType    = BLEAPPUTIL_L2CAP_DATA_TYPE,
+           .pEventHandler  = L2CAP_DATA_EventHandler
+       };
+       
+       ...
+       
+       // Holds the connection ID
+       static uint16_t cocCID;
+       
+       bStatus_t Application_sendL2capData(void);
+     
+     The registration of the event handlers will be done as part of the L2CAP
+     initialization function.
+     
+     .. code-block:: c
+       :caption: L2cap\_start function of app\_l2cap.c
+       :linenos:
+       :emphasize-lines: 19, 20
+       
+       //*****************************************************************************
+       //! Functions
+       //*****************************************************************************
+       
+       /*********************************************************************
+        * @fn      L2cap_start
+        *
+        * @brief   This function is called after stack initialization,
+        *          the purpose of this function is to initialize and
+        *          register the L2CAP CoC functionality.
+        *
+        * @return  SUCCESS, errorInfo
+        */
+       bStatus_t L2cap_start( void )
+       {
+           bStatus_t status = SUCCESS;
+       
+           // Register the handlers
+           status = BLEAppUtil_registerEventHandler( &data_L2CACAP_SIGNAL_Handler );
+           status = BLEAppUtil_registerEventHandler( &data_L2CACAP_DATA_Handler );
+       
+           // ...
+       }
+       
+     
+  #. **L2CAP Initialization**. As briefly mentioned earlier in this chapter,
+     the L2CAP CoC initialization is done with function L2cap_start. This
+     function also setting up and registering the SPSM (Simplified
+     Protocol/Service Multiplexer).
+     
+     .. code-block:: c
+       :caption: Initialize L2CAP in app\_l2cap.c
+       :linenos:
+       :emphasize-lines: 21
+       
+       bStatus_t L2cap_start( void )
+       {
+           // ...
+       
+           // Setup SPSM
+           l2capPsm_t psm;
+           l2capPsmInfo_t psmInfo;
+       
+           if (L2CAP_PsmInfo(APP_L2CAP_SPSM, &psmInfo) == INVALIDPARAMETER)
+           {
+             // Prepare the PSM parameters
+             psm.initPeerCredits = 0xFFFF; //give peer maximum credit
+             psm.maxNumChannels = MAX_NUM_BLE_CONNS;
+             psm.mtu = MAX_PDU_SIZE;
+             psm.peerCreditThreshold = 0;
+             psm.pfnVerifySecCB = NULL;
+             psm.psm = APP_L2CAP_SPSM;
+             psm.taskId = ICall_getLocalMsgEntityId(ICALL_SERVICE_CLASS_BLE_MSG, BLEAppUtil_getSelfEntity());
+       
+             // Register SPSM with L2CAP task
+             status = L2CAP_RegisterPsm(&psm);
+           }
+           else
+           {
+             // L2CAP setup failed
+             status = FAILURE;
+           }
+           
+           // Return status value
+           return( status );
+       }
+     
+     Call **L2cap_start** from the ``App_StackInitDoneHandler`` in file
+     app_main.c.
+     
+     .. code-block:: c
+       :caption: L2cap\_start in app\_main.c
+       :linenos:
+       :emphasize-lines: 5
+       
+       void App_StackInitDoneHandler(gapDeviceInitDoneEvent_t *deviceInitDoneData)
+       {
+           ...
+           
+           status =  L2cap_start();
+           if(status != SUCCESS)
+           {
+               // Call Error Handler
+           }
+           
+  
+  #. Central or peripheral device sends **L2CAP LE Credit Based Connection
+     Request**. This request can be done at the end of the
+     BLEAPPUTIL_LINK_ESTABLISHED_EVENT in app_connection.c.
+     
+     .. code-block:: c
+       :caption: **app\_connection.c** Sends out L2CAP LE Credit Based Connection Request
+       :linenos:
+       :emphasize-lines: 10
+       
+       void Connection_ConnEventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
+       {
+           ...
+           
+           case BLEAPPUTIL_LINK_ESTABLISHED_EVENT:
+           {
+               ...
+               
+               // Send out L2CAP_LE_CREDIT_BASED_CONNECTION_REQ, only one side needs to do this
+               L2CAP_ConnectReq(gapEstMsg->connectionHandle, APP_L2CAP_SPSM, APP_L2CAP_SPSM);
+            
+               break;
+           }
+     
+     .. note::
+       Both central and peripheral device can request to establish L2CAP CoC
+       channels. As long as one of the device requests, the link establishment
+       request will be sent. There is no need to add this part of the code for
+       both devices. In this example the code is added for the central device
+       only.
+     
+     Once the L2CAP credit based connection establishment is successful, the
+     |STACK| will send ``BLEAPPUTIL_L2CAP_SIGNAL_TYPE`` through the application
+     data module with opcode ``BLEAPPUTIL_L2CAP_CHANNEL_ESTABLISHED_EVT`` for
+     both central and peripheral devices.
+     Therefore, we will implement a event handler function to handle L2CAP
+     messages in app_l2cap.c.
+     
+     .. code-block:: c
+       :caption: **app\_l2cap.c** Process L2CAP signal event 
+       :linenos:
+       
+       //*****************************************************************************
+       //! Functions
+       //*****************************************************************************
+       
+       ...
+       
+       /*********************************************************************
+        * @fn      L2CAP_SIGNAL_EventHandler
+        *
+        * @brief   The purpose of this function is to handle L2CAP signal
+        *          events which were registered in
+        *          @ref BLEAppUtil_registerEventHandler
+        *
+        * @param   event - message event.
+        * @param   pMsgData - pointer to message data.
+        *
+        * @return  none
+        */
+       static void L2CAP_SIGNAL_EventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
+       {
+         l2capSignalEvent_t *l2capMsg = ( l2capSignalEvent_t * )pMsgData;
+       
+         switch (event)
+         {
+           case BLEAPPUTIL_L2CAP_CHANNEL_ESTABLISHED_EVT:
+             {
+                 l2capChannelEstEvt_t *pEstEvt = &(l2capMsg->cmd.channelEstEvt);
+       
+                 if (l2capMsg->connHandle != LINKDB_CONNHANDLE_INVALID && l2capMsg->connHandle < MAX_NUM_BLE_CONNS)
+                 {
+                   // Successfully establish link over L2CAP
+                   // Extract the CID and store in the application layer
+                   // This will be useful when sending data over L2CAP channels
+                   cocCID = pEstEvt->CID;
+                 }
+                 else
+                 {
+                   // Could not establish an L2CAP link
+                 }
+       
+                 // Give max credits to the other side
+                 L2CAP_FlowCtrlCredit(pEstEvt->CID, 0xFFFF);
+       
+                 // Send test data
+                 Application_sendL2capData();
+             }
+             break;
+       
+           case BLEAPPUTIL_L2CAP_SEND_SDU_DONE_EVT:
+             {
+                 if (l2capMsg->hdr.status == SUCCESS)
+                 {
+                     // Successfully sending data over L2CAP
+                 }
+             }
+             break;
+       
+           case BLEAPPUTIL_L2CAP_CHANNEL_TERMINATED_EVT:
+             {
+                 // L2CAP channel has been terminated
+                 MenuModule_printf(13, 0, "L2CAP terminated");
+             }
+             break;
+       
+           default:
+             break;
+         }
+       }
+      
+     .. note::
+       Both peripheral and central devices need to **exchange L2CAP Credits**.
+       After the link is established, devices can distribute credit using
+       ``L2CAP_FlowCtrlCredit`` as shown in the listing above.
+  
+  #. **Send data using L2CAP CoC channel**. In order to send data over L2CAP,
+     :ble_api:`L2CAP_SendSDU` is needed. Therefore, we will implement a
+     function `Application_sendL2capData` in app_l2cap.c and executed it for
+     the ``BLEAPPUTIL_L2CAP_CHANNEL_ESTABLISHED_EVT``. After successfully
+     sending data over the air, the |STACK| will send
+     ``BLEAPPUTIL_L2CAP_SIGNAL_TYPE`` through the application data module with
+     opcode ``BLEAPPUTIL_L2CAP_SEND_SDU_DONE_EVT``.
+     
+     .. code-block:: c
+       :caption: Sending data over L2CAP in app\_l2cap.c
+       :linenos:
+       :emphasize-lines: 31
+       
+       //*****************************************************************************
+       //! Functions
+       //*****************************************************************************
+       
+       ...
+       
+       uint8_t appData[] = "Test Data!";
+       
+       bStatus_t Application_sendL2capData(void)
+       {
+         l2capPacket_t pkt;
+         bStatus_t status = SUCCESS;
+       
+         // Tell L2CAP the desired Channel ID
+         pkt.CID = cocCID;
+       
+         // Allocate space for payload
+         pkt.pPayload = L2CAP_bm_alloc(sizeof(appData));
+       
+         /* Copy payload data */
+         memcpy(pkt.pPayload, appData, sizeof(appData));
+       
+         if (pkt.pPayload != NULL)
+         {
+           pkt.len = (sizeof(appData));
+       
+           // Print transmit data to serial terminal, expected data is /0 terminated
+           MenuModule_printf(11, 0, "L2CAP Data TX - %s", pkt.pPayload);
+       
+           // Send packet
+           status = L2CAP_SendSDU(&pkt);
+       
+           // Check that the packet was sent
+           if (SUCCESS != status)
+           {
+             // If SDU wasn't sent, free
+             BM_free(pkt.pPayload);
+           }
+         }
+         else
+         {
+           status = bleMemAllocError;
+         }
+       
+         return (status);
+       }
+     
+     When the device receives data from L2CAP, the |STACK| will send
+     ``BLEAPPUTIL_L2CAP_DATA_TYPE`` to the application data module. Therefore,
+     we will implement a function to handle L2CAP data in app_l2cap.c.
+     
+     .. code-block:: c
+       :caption: Received data over L2CAP
+       :linenos:
+       
+       //*****************************************************************************
+       //! Functions
+       //*****************************************************************************
+       
+       ...
+       
+       /*********************************************************************
+        * @fn      L2CAP_DATA_EventHandler
+        *
+        * @brief   The purpose of this function is to handle L2CAP data
+        *          events that rise from the GAP and were registered in
+        *          @ref BLEAppUtil_RegisterGAPEvent
+        *
+        * @param   event - message event.
+        * @param   pMsgData - pointer to message data.
+        *
+        * @return  none
+        */
+       static void L2CAP_DATA_EventHandler(uint32 event, BLEAppUtil_msgHdr_t *pMsgData)
+       {
+         if (!pMsgData)
+         {
+           // Caller needs to figure out by himself that pMsg is NULL
+           return;
+         }
+       
+         l2capDataEvent_t *l2capDataEventData = ( l2capDataEvent_t * )pMsgData;
+       
+         // Print received data to serial terminal, expected data is /0 terminated
+         MenuModule_printf(12, 0, "L2CAP Data RX - %s", l2capDataEventData->pkt.pPayload);
+       }
+      
+  
+  #. **Close L2CAP CoC channel**. If no longer needed, you can disconnect a
+     L2CAP CoC channel with the following function call, for example after data
+     was sent successfully in function ``Application_sendL2capData``.
+     
+     .. code-block:: c
+       :caption: Close the L2CAP CoC channel in app\_l2cap.c
+       :linenos:
+       :emphasize-lines: 16
+       
+       bStatus_t Application_sendL2capData(void)
+       {
+          // ...
+          
+          // Send packet
+          status = L2CAP_SendSDU(&pkt);
+          
+          // Check that the packet was sent
+          if (SUCCESS != status)
+          {
+              // If SDU wasn't sent, free
+              BM_free(pkt.pPayload);
+          }
+          else
+          {
+               status = L2CAP_DisconnectReq(cocCID);
+          }
+          
+          // ...
+     
+     The disconnect will then trigger the
+     ``BLEAPPUTIL_L2CAP_CHANNEL_TERMINATED_EVT`` in the
+     ``L2CAP_SIGNAL_EventHandler``. Here you could also deregister the SPSM by
+     calling the function ``L2CAP_DeregisterPsm``.
+
+The :numref:`sample-connection-central-peripheral` shows a sample connection
+and data exchange process between central and peripheral device using a L2CAP
+connection-oriented channel in LE Credit Based Flow Control Mode.
+
+.. _sample-connection-central-peripheral:
+.. uml::
+  :caption: L2CAP Connection Oriented Channels Example
+  :align: center
+
+   @startuml
+    participant Central
+    participant Peripheral
+
+    rnote over Central
+    Resgister PSM
+    end note
+
+    rnote over Peripheral
+    Register PSM
+    end note
+
+    == Connection Established  ==
+
+    Central --> Peripheral : L2CAP_ConnectReq()
+    Central -> Central : L2CAP_SIGNAL_EVENT\nL2CAP_CHANNEL_ESTABLISHED_EVT
+    Peripheral -> Peripheral : L2CAP_SIGNAL_EVENT\nL2CAP_CHANNEL_ESTABLISHED_EVT
+
+    Central <--> Peripheral : L2CAP_FlowCtrlCredit()
+
+    group Central device sends data to peripheral device
+      Central --> Peripheral : L2CAP_SendSDU()
+      Central -> Central: L2CAP_SIGNAL_EVENT\nL2CAP_SEND_SDU_DONE_EVT
+      Peripheral-> Peripheral: L2CAP_DATA_EVENT
+      rnote over Peripheral
+        App task process data
+      end note
+    end
+
+    group Peripheral device sends data to central device    
+      Peripheral --> Central : L2CAP_SendSDU()
+      Peripheral -> Peripheral: L2CAP_SIGNAL_EVENT\nL2CAP_SEND_SDU_DONE_EVT
+      Central-> Central: L2CAP_DATA_EVENT
+      rnote over Central
+        App task process data
+      end note
+    end
+
+    Central --> Peripheral : L2CAP_DisconnectReq()
+    Central -> Central : L2CAP_SIGNAL_EVENT\nL2CAP_CHANNEL_TERMINATED_EVT
+    Peripheral -> Peripheral : L2CAP_SIGNAL_EVENT\nL2CAP_CHANNEL_TERMINATED_EVT
+
+    Central <-> Peripheral : L2CAP_DeregisterPsm()
+  @enduml

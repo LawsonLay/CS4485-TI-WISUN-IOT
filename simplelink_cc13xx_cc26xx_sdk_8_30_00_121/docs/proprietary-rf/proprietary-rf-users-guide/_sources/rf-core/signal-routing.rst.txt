@@ -1,0 +1,143 @@
+.. _rf_signal_routing:
+
+Routing RF Core Signals to Physical Pins
+========================================
+
+.. note::
+
+    Please see the |TRM| for further documentation on these signals including
+    limitations on devices and modes.
+
+The various hardware units on the RF core provide 12 internal hardware signals
+that indicate various events. These signals are defined in
+:numref:`tab_rf_unit_signals`.
+
+.. _tab_rf_unit_signals:
+.. table:: Internal signals of different functional units on the RF core.
+
+    ===== ================== =============== ====================
+    Index Signal identifier  Default mapping Description
+    ===== ================== =============== ====================
+    0     CPE_GPO0           RFC_GPO0        Controls an external LNA front-end. High when the LNA must be enabled, otherwise low.
+    1     CPE_GPO1           RFC_GPO1        Controls an external PA. High when the PA must be enabled and otherwise low.
+    2     CPE_GPO2           RFC_GPO2        Goes high when the synthesizer calibration starts and low when the calibration is done.
+    3     CPE_GPO3                           n/a
+    4     MCE_GPO0†                          Binary data signal that goes to the modulator when sending.
+    5     MCE_GPO1†                          Binary data signal that comes from the demodulator when receiving.
+    6     MCE_GPO2                           n/a
+    7     MCE_GPO3                           n/a
+    8     RAT_GPO0           RFC_GPO3        Goes high when a transmission is initiated and low when the transmission is done. Can be used for accurate timing synchronization.
+    9     RAT_GPO1\*                         Goes high when sync word is detected and low either when the packet has been received or reception has been aborted. If the device is in repeat mode, only the first sync word will give an assertion. Requires an additional override ``(uint32_t)0x008F88B3``.
+    10    RAT_GPO2                           General purpose RAT output. Configurable via |CMD_SET_RAT_OUTPUT|.
+    11    RAT_GPO3                           General purpose RAT output. Configurable via |CMD_SET_RAT_OUTPUT|.
+    ===== ================== =============== ====================
+
+MCE_GPO0 and MCE_GPO1†: These signals are only supported when using 2-GFSK
+modulation.
+
+RAT_GPO1\*: See note in :ref:`sec-read-RAT-GPO1`.
+
+Each of those 12 signals can be routed to any physical GPIO pin via the RF
+core doorbell register ``SYSGPOCTL``. The doorbell register provides 4
+outputs: ``RFC_GPO0`` .. ``RFC_GPO3``. This means that at most 4 output
+signals from :numref:`tab_rf_unit_signals` can be used at the same time. The
+signals ``RFC_GPO0`` .. ``RFC_GPO3`` have a default mapping on power up.
+
+In addition, the RF core provides two input signals: ``RFC_GPI0`` and
+``RFC_GPI1``.  These are tied to the radio timer on the RF core and can be
+used, for instance, to trigger an RF operation command. For a usage example,
+please refer to :any:`trig_external`.
+
+Read Before Using CPE_GPO1
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+On `CC2640R2F`_, there is a bug with CPE_GPO1. Please use RAT_GPO0 instead. See
+the `CC26xx Technical Reference Manual`_ for more info.
+
+.. _sec-read-RAT-GPO1:
+
+Read Before Using RAT_GPO1
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+On `CC2640R2F`_, `CC1310`_ and `CC1350`_, this signal is not supported when
+using repeat mode.
+
+The RAT_GPO1 signal is not supported  in these scenarios:
+
+    - when using the sniff command (``CMD_PROP_RX_SNIFF`` or
+      ``CMD_PROP_RX_ADV_SNIFF``) with preamble correlation enabled (``csConf.bEnaCorr = 1``)
+    - when using IEEE 802.15.4 RX commands.
+
+Read Before Using MCE_GPO1
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This signal is only supported when using 2-GFSK modulation.
+
+The data on MCE_GPO1 tells if the received instantaneous signal frequency is
+below or above the expected carrier frequency, sampled at four times
+oversampling of the symbol rate. Note that the signal is inverted compared to
+normal decoding, so a received 0 is represented with a high level and a
+received 1 is represented with a low level. This may be inverted in the IO
+configuration register before it is output on a pin, if necessary.
+
+The signal will contain both the preamble, access address, whitened data and
+CRC. Note that this signal is taken out of the receiver before frequency error
+compensation. This means that you may see either 0's or 1's being narrower
+than expected, and some bits may be lost entirely. There are other steps taken
+in the demodulator as well to improve reception which will not be done on this
+observed signal. This means that if you try to decode a packet based on this
+signal, you will get significantly worse sensitivity and frequency error
+tolerance than with the internal demodulator. Note that the signal on this pin
+will be noise when the receiver is on with no packet to receive (for instance
+before the start of the packet).
+
+
+Routing Internal Signals to the Doorbell Register
+=================================================
+
+The default mapping from :numref:`tab_rf_unit_signals` can be changed by
+writing to the ``SYSGPOCTL`` register. For instance, to map ``RAT_GPO2 => RFC_GPO0`` and
+``MCE_GPO0 => RFC_GPO1``, use the following code snippet::
+
+    #include <ti/devices/DeviceFamily.h>
+    #include DeviceFamily_constructPath(inc/hw_rfc_dbell.h)
+
+    // Map RAT_GPO2 to RFC_GPO0
+    // Map MCE_GPO0 to RFC_GPO1
+    HWREG(RFC_DBELL_BASE + RFC_DBELL_O_SYSGPOCTL) =
+            RFC_DBELL_SYSGPOCTL_GPOCTL0_RATGPO2 | RFC_DBELL_SYSGPOCTL_GPOCTL1_MCEGPO0;
+
+Please note that this can only be done when the RF core is powered up. The
+signal mapping on the RF core is reset on each power-up cycle. In order to
+apply a custom mapping automatically during power-up, apply the register
+change via an override instead::
+
+    #include <ti/devices/DeviceFamily.h>
+    #include DeviceFamily_constructPath(inc/hw_rfc_dbell.h)
+
+    // Overrides for CMD_PROP_RADIO_DIV_SETUP
+    static uint32_t pOverrides[] =
+    {
+        // ...
+		// Set the SYSGPOCTL register
+        HW_REG_OVERRIDE(0x1110, RFC_DBELL_SYSGPOCTL_GPOCTL0_RATGPO2 | RFC_DBELL_SYSGPOCTL_GPOCTL1_MCEGPO0),
+        (uint32_t)0xFFFFFFFF
+    }
+
+Always add new overrides to the end of the override list, just before the (uint32_t)0xFFFFFFFF, as shown above.
+
+Routing Doorbell Signals to GPIO Pins
+=====================================
+
+After the signal mapping has been established on the RF core, the doorbell
+GPIO signal can be routed to a physical pin or vice versa by the help of the
+PIN driver::
+
+    #include <ti/drivers/gpio/GPIOCC26XX.h>
+
+    // Map RFC_GPO0 to IO 23
+    GPIO_setConfigAndMux(IOID_23, GPIO_CFG_NO_DIR, IOC_PORT_RFC_GPO0);
+    // Map IO 26 to RFC_GPI1
+    GPIO_setConfigAndMux(IOID_26, GPIO_CFG_NO_DIR, IOC_PORT_RFC_GPO1);
+
+This mapping is permanent as long as the GPIO driver is initialized correctly.

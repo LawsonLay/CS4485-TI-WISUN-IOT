@@ -1,0 +1,116 @@
+.. _sec-oad-flash-layout-on-chip-split-image:
+
+Flash Layout for On-Chip OAD
+=============================
+
+This section will describe the method for placing placing images in internal
+flash when using on-chip OAD.
+
+
+Constraints and Requirements for On-chip OAD (split image)
+----------------------------------------------------------
+
+In order to perform an On-chip OAD the target system must have:
+
+  - The user application must be sufficiently small in order to fit into the
+    flash layout system described below.
+  - User app functionality is lost while performing OAD. (Persistent app is
+    running)
+  - Stack updates must be maintenance only, cannot change APIs
+  - Stack updates are done in two phases and must erase the user app first
+
+.. _sect-on-chip-memory-layout-split-image:
+
+Internal Flash Memory Layout
+----------------------------
+
+The internal flash of the device contains the active user application, the
+stack, the persistent application, and the BIM. Each application's role is
+defined below
+
++------------------------+---------------------------------------------------------------------+
+| Application Name       | Description                                                         |
++------------------------+---------------------------------------------------------------------+
+| BIM                    | - Locate and jump to the proper image                               |
+|                        | - Copy stack image after update                                     |
+|                        | - Ensure validity and optionally security of image before running.  |
++------------------------+---------------------------------------------------------------------+
+| Persistent application | - Providing lightweight application that implements the OAD profile |
++------------------------+---------------------------------------------------------------------+
+| Stack                  | - BLE protocol stack implementation                                 |
++------------------------+---------------------------------------------------------------------+
+| User app               | - User application                                                  |
+|                        | - Must implement OAD reset service                                  |
++------------------------+---------------------------------------------------------------------+
+
+.. note::
+
+    When using security the BIM may use a second page depending on the
+    page size of the device. Consult the BIM's linker file for more information.
+
+
+.. _fig-off-chip-oad-target-memory-partition:
+.. ditaa::
+    :--no-separation:
+
+                                                             Internal Flash
+    +--------------------------------+ --------------->  +-------------------+ <- DEVICE_SIZE
+    | {d}                            |                   |       CCFG  cRED  |
+    | o BIM is linked at end of flash|                   +-------------------+
+    | o CCFG is linked with BIM      |                   |       BIM         |
+    +--------------------------------+ --\               | cRED              |
+                                         |               |                   |
+                                         |               |                   |
+                                         |               |                   |
+                                         |               |                   |
+                                         |               +-------------------+
+                                         |               |       BIM         |
+                                         |               | Interrupt Vectors |
+                                         |               | c777              |
+                                         \------------>  +-------------------+ <- DEVICE_SIZE - BIM_SIZE
+                                                         |    Persistent     |
+                                                         |    Application    |
+                                                         |       c7AF        |
+                                                         |                   |
+                                                         +-------------------+
+                                                         | Persistent App    |
+                                                         | Interrupt Vectors |
+                                                         | c777              |
+                                                         +-------------------+
+                                                         | OAD Image Header  |
+                                                         | c333              |
+                                                         +-------------------+ <- OAD_TGT_FLASH_START
+                                                         |       Stack       |
+                                                         |                   |
+                                                         |       c7AF        |
+                                                         |                   |
+                                                         +-------------------+
+                                                         | OAD Image Header  |
+                                                         | c333              |
+                                                         +-------------------+ <- ICALL_STACK0_START
+                                                         |        User       |
+                                                         |    Application    |
+                                                         |       c7AF        |
+                                                         |                   |
+                                                         +-------------------+
+                                                         | User App          |
+                                                         | Interrupt Vectors |
+                                                         | c777              |
+                                                         +-------------------+
+                                                         | OAD Image Header  |
+                                                         | c333              |
+                                                         +-------------------+ <- 0x00000000
+
+
+The user application pictured above is responsible for the following:
+
+    - Implementing the protocol stack definition of the OAD reset service
+    - Implementing customer defined behavior
+
+The user persistent pictured above is responsible for the following:
+
+    - Implementing the protocol stack definition of the OAD service
+    - This image is permanently resident on the device
+
+
+

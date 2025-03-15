@@ -1,0 +1,52 @@
+                                                         Internal Flash
++--------------------------------+ --------------->  +-------------------+ <- DEVICE_SIZE
+| {d}                            |                   |       CCFG  cRED  |
+| o BIM is linked at end of flash|                   +-------------------+
+| o CCFG is linked with BIM      |                   |       BIM         |
++--------------------------------+ --\               | cRED              |
+                                     |               |                   |
+                                     |               |                   |
+                                     |               |                   |
+                                     |               |                   |
+                                     |               +-------------------+
+                                     |               |       BIM         |
+                                     |               | Interrupt Vectors |
+                                     |               | c777              |
+                                     \------------>  +-------------------+ <- DEVICE_SIZE - BIM_SIZE
+                                                     |    Persistent     |
+                                                     |    Application    |
+                                                     |                   |
+                                                     |                   |
+                                                     |        c7AF       |
+                                                     |                   |
+                                                     +-------------------+
+                                                     |  Persistent App   |
+                                                     |  Interrupt Vectors|
+                                                     | c777              |
+                                                     +-------------------+
+                                                     |  Persistent App   |
+                                                     | OAD Image Header  |
+                                                     | c333              |
+                                                     +-------------------+<- OAD_IMG_A (HDR_START)
+                                                     |      Avaliable    |
+                                                     |  User Application |
+                                                     |       Space       |
+                                                     |                   |
+                                                     |       c777        |
+                                                     |                   |
+                                                     +-------------------+ <- OAD_IMG_B (FLASH_END)
+                                                     |        User       |
+                                                     |    Application    |
+                                                     |                   |
+                                                     |                   |
+                                                     |       c7AF        |
+                                                     |                   |
+                                                     +-------------------+
+                                                     |  User App         |
+                                                     |  Interrupt Vectors|
+                                                     | c777              |
+                                                     +-------------------+
+                                                     |   User App        |
+                                                     | OAD Image Header  |
+                                                     | c333              |
+                                                     +-------------------+ <- 0x00000000

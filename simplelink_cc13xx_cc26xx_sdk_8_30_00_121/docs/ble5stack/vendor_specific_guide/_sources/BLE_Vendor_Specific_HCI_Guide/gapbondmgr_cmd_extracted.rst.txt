@@ -1,0 +1,1111 @@
+GAPBondMgr_SetParameter
+-----------------------
+:Opcode: 0xFE36
+:Command Description: Set a bond manager parameter
+
+**Command Parameters**
+
+:paramID: Parameter to Set
+
+ :Size: 2 byte(s)
+ :Default: 0x400
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x400                 GAPBOND_PAIRING_MODE
+         0x402                 GAPBOND_MITM_PROTECTION
+         0x403                 GAPBOND_IO_CAPABILITIES
+         0x404                 GAPBOND_OOB_ENABLED
+         0x405                 GAPBOND_OOB_DATA
+         0x406                 GAPBOND_BONDING_ENABLED
+         0x407                 GAPBOND_KEY_DIST_LIST
+         0x408                 GAPBOND_DEFAULT_PASSCODE
+         0x409                 GAPBOND_ERASE_ALLBONDS
+         0x40A                 GAPBOND_AUTO_FAIL_PAIRING
+         0x40B                 GAPBOND_AUTO_FAIL_REASON
+         0x40C                 GAPBOND_KEYSIZE
+         0x40D                 GAPBOND_AUTO_SYNC_WL
+         0x40F                 GAPBOND_BOND_FAIL_ACTION
+         0x410                 GAPBOND_ERASE_SINGLEBOND
+         0x411                 GAPBOND_SECURE_CONNECTION
+         0x412                 GAPBOND_ECCKEY_REGEN_POLICY
+         0x413                 GAPBOND_GAPBOND_ECC_KEYS
+         0x415                 GAPBOND_ERASE_BOND_IN_CONN
+         0x416                 GAPBOND_ALLOW_DEBUG_KEYS
+         0x418                 GAPBOND_LRU_BOND_REPLACEMENT
+         0x41A                 GAPBOND_ERASE_LOCAL_INFO
+         0x41B                 GAPBOND_AUTHEN_PAIRING_ONLY
+         0x41C                 GAPBOND_SAME_IRK_OPTION
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x400)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_PAIRING_MODE: Whether to allow pairing, and if so, whether to initiate pairing.
+
+ :Condition: ( paramID == 0x400)
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  GAPBOND_PAIRING_MODE_NO_PAIRING
+         0x01                  GAPBOND_PAIRING_MODE_WAIT_FOR_REQ
+         0x02                  GAPBOND_PAIRING_MODE_INITIATE
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x402)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_MITM_PROTECTION: Whether to use authenticated pairing
+
+ :Condition: ( paramID == 0x402)
+ :Size: 1 byte(s)
+ :Default: 0x01
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x403)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_IO_CAPABILITIES: The I/O capabilities of the local device
+
+ :Condition: ( paramID == 0x403)
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  GAPBOND_IO_CAP_DISPLAY_ONLY
+         0x01                  GAPBOND_IO_CAP_DISPLAY_YES_NO
+         0x02                  GAPBOND_IO_CAP_KEYBOARD_ONLY
+         0x03                  GAPBOND_IO_CAP_NO_INPUT_NO_OUTPUT
+         0x04                  GAPBOND_IO_CAP_KEYBOARD_DISPLAY
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x404)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_OOB_ENABLED: Whether to use OOB for pairing
+
+ :Condition: ( paramID == 0x404)
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x405)
+ :Size: 1 byte(s)
+ :Value: 16
+
+:GAPBOND_OOB_DATA:  OOB data to use for pairing
+
+ :Condition: ( paramID == 0x405)
+ :Size: 16 byte(s)
+ :Default: "00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00"
+ :Range: Any 16 byte value.
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x406)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_BONDING_ENABLED: Whether to bond after pairing
+
+ :Condition: ( paramID == 0x406)
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x407)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_KEY_DIST_LIST: Key distribution list for pairing
+
+ :Condition: ( paramID == 0x407)
+ :Size: 1 byte(s)
+ :Default: 0x63
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  GAPBOND_KEYDIST_SENCKEY  
+         0x02                  GAPBOND_KEYDIST_SIDKEY   
+         0x04                  GAPBOND_KEYDIST_SSIGN    
+         0x08                  GAPBOND_KEYDIST_SLINK   
+         0x10                  GAPBOND_KEYDIST_MENCKEY 
+         0x20                  GAPBOND_KEYDIST_MIDKEY  
+         0x40                  GAPBOND_KEYDIST_MSIGN   
+         0x80                  GAPBOND_KEYDIST_MLINK   
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x408)
+ :Size: 1 byte(s)
+ :Value: 4
+
+:GAPBOND_DEFAULT_PASSCODE: Default passcode to use for authenticated pairing
+
+ :Condition: ( paramID == 0x408)
+ :Size: 4 byte(s)
+ :Default: 0x00000000
+ :Range: Any 6 digit string
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x409)
+ :Size: 1 byte(s)
+ :Value: 0
+
+:GAPBOND_ERASE_ALLBONDS: Erase all bonds from SNV and remove all bonded devices 
+
+ :Condition: ( paramID == 0x409)
+ :Size: 0 byte(s)
+ :Default: N/A
+ :Range: N/A
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x40A)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_AUTO_FAIL_PAIRING: For test mode only
+
+ :Condition: ( paramID == 0x40A)
+ :Size: 1 byte(s)
+ :Default: For test mode only
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x40B)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_AUTO_FAIL_REASON: For test mode only
+
+ :Condition: ( paramID == 0x40B)
+ :Size: 1 byte(s)
+ :Default: For test mode only
+ :Range: For test mode only
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x40C)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_KEYSIZE:  Key Size used in pairing
+
+ :Condition: ( paramID == 0x40C)
+ :Size: 1 byte(s)
+ :Default: 8
+ :Range: 7-16
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x40D)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_AUTO_SYNC_WL: 
+
+ :Condition: ( paramID == 0x40D)
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x40F)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_BOND_FAIL_ACTION:   The action that the device takes after an unsuccessful bonding attempt
+
+ :Condition: ( paramID == 0x40F)
+ :Size: 1 byte(s)
+ :Default: 0x04
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  GAPBOND_FAIL_NO_ACTION
+         0x01                  GAPBOND_FAIL_INITIATE_PAIRING
+         0x02                  GAPBOND_FAIL_TERMINATE_LINK
+         0x03                  GAPBOND_FAIL_TERMINATE_ERASE_BONDS
+         0x04                  GAPBOND_FAIL_TERMINATE_ERASE_SINGLE_BOND
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x410)
+ :Size: 1 byte(s)
+ :Value: 7
+
+:GAPBOND_ERASE_SINGLEBOND: 
+
+ :Condition: ( paramID == 0x410)
+ :Size: 7 byte(s)
+ :Default: "00:00:00:00:00:00:00"
+ :Range: A 7-byte array where the first byte is the address type and the next 6 are the device address.
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x411)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_SECURE_CONNECTION: Define Secure Connections Usage during Pairing
+
+ :Condition: ( paramID == 0x411)
+ :Size: 1 byte(s)
+ :Default: 0x01
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  GAPBOND_SECURE_CONNECTION_NONE
+         0x01                  GAPBOND_SECURE_CONNECTION_ALLOW
+         0x02                  GAPBOND_SECURE_CONNECTION_ONLY
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x412)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_ECCKEY_REGEN_POLICY: 
+
+ :Condition: ( paramID == 0x412)
+ :Size: 1 byte(s)
+ :Default: 2
+ :Range: 0 - 256
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x413)
+ :Size: 1 byte(s)
+ :Value: 96
+
+:GAPBOND_ECC_KEYS: The private and public keys to use for Secure Connections pairing. Only applicable for Secure Connections. Allows the application to specify the private and public keys to use pairing. When this is set, the keys are used indefinitely even if a regeneration policy was set with GAPBOND_ECCKEY_REGEN_POLICY. To make the Bond Manager stop using these keys, pass a 1 byte value of 0x00. These keys are stored in RAM and are not retained in non-volatile memory. These keys can be defined by the application, or the application can request them using the SM_GetEccKeys command. By default, the keys are generated using GAPBOND_ECCKEY_REGEN_POLICY
+
+ :Condition: ( paramID == 0x413)
+ :Size: 96 byte(s)
+ :Default: "BD:1A:3C:CD:A6:B8:99:58:99:B7:40:EB:7B:60:FF:4A:50:3F:10:D2:E3:B3:C9:74:38:5F:C5:A3:D4:F6:49:3F:E6:9D:35:0E:48:01:03:CC:DB:FD:F4:AC:11:91:F4:EF:B9:A5:F9:E9:A7:83:2C:5E:2C:BE:97:F2:D2:03:B0:20:8B:D2:89:15:D0:8E:1C:74:24:30:ED:8F:C2:45:63:76:5C:15:52:5A:BF:9A:32:63:6D:EB:2A:65:49:9C:80:DC"
+ :Range: Any 96 byte value
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x415)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_ERASE_BOND_IN_CONN: Allows to erase a bond even if there are active connections
+
+ :Condition: ( paramID == 0x415)
+ :Size: 1 byte(s)
+ :Default: False
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x416)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_ALLOW_DEBUG_KEYS: Only applicable for Secure Connections. Allows the application to specify wether reject or allow debug keys receiving as peer's public keys to use in pairing. By default, it is allowed
+
+ :Condition: ( paramID == 0x416)
+ :Size: 1 byte(s)
+ :Default: True
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x418)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_LRU_BOND_REPLACEMENT: Enable / Disable LRU Bond Replacement Scheme. Whether to enable the least recently used bond scheme so that, when a newly bonded device is added and all the entries are full, the least recently used devices bond is deleted to make room.
+
+ :Condition: ( paramID == 0x418)
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x41A)
+ :Size: 1 byte(s)
+ :Value: 0
+
+:GAPBOND_ERASE_LOCAL_INFO: Erase all local information 
+
+ :Condition: ( paramID == 0x41A)
+ :Size: 0 byte(s)
+ :Default: N/A
+ :Range: N/A
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x41B)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_AUTHEN_PAIRING_ONLY: Whether to enforce authenticated pairing
+
+ :Condition: ( paramID == 0x41B)
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:paramDataLen: Size of parameter value
+
+ :Condition: ( paramID == 0x41C)
+ :Size: 1 byte(s)
+ :Value: 1
+
+:GAPBOND_SAME_IRK_OPTION:   The action that the device takes after receiving an IRK that already exists in the resolving list but with different Identity address
+
+ :Condition: ( paramID == 0x41C)
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  GAPBOND_SAME_IRK_UPDATE_BOND_REC
+         0x01                  GAPBOND_SAME_IRK_TERMINATE_LINK
+         ===================== ========================================================
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event.
+
+GAPBondMgr_GetParameter
+-----------------------
+:Opcode: 0xFE37
+:Command Description: Send this command to read a GAP Bond parameter.
+
+**Command Parameters**
+
+:paramID: Parameter to get
+
+ :Size: 2 byte(s)
+ :Default: 0x400
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x400                 GAPBOND_PAIRING_MODE
+         0x402                 GAPBOND_MITM_PROTECTION
+         0x403                 GAPBOND_IO_CAPABILITIES
+         0x404                 GAPBOND_OOB_ENABLED
+         0x405                 GAPBOND_OOB_DATA
+         0x406                 GAPBOND_BONDING_ENABLED
+         0x407                 GAPBOND_KEY_DIST_LIST
+         0x408                 GAPBOND_DEFAULT_PASSCODE
+         0x40A                 GAPBOND_AUTO_FAIL_PAIRING
+         0x40B                 GAPBOND_AUTO_FAIL_REASON
+         0x40C                 GAPBOND_KEYSIZE
+         0x40D                 GAPBOND_AUTO_SYNC_WL
+         0x40E                 GAPBOND_BOND_COUNT
+         0x40F                 GAPBOND_BOND_FAIL_ACTION
+         0x411                 GAPBOND_SECURE_CONNECTION
+         0x413                 GAPBOND_GAPBOND_ECC_KEYS
+         0x415                 GAPBOND_ERASE_BOND_IN_CONN
+         0x416                 GAPBOND_ALLOW_DEBUG_KEYS
+         0x418                 GAPBOND_LRU_BOND_REPLACEMENT
+         0x41B                 GAPBOND_AUTHEN_PAIRING_ONLY
+         0x41C                 GAPBOND_SAME_IRK_OPTION
+         ===================== ========================================================
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event.
+
+**Additional Command Status Return Parameters**
+
+:length: 
+
+ :Size: 1 byte(s)
+ :Range: 
+
+:paramId: 
+
+ :Condition: ( length>0)
+ :Size: 2 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x400                 GAPBOND_PAIRING_MODE
+         0x402                 GAPBOND_MITM_PROTECTION
+         0x403                 GAPBOND_IO_CAPABILITIES
+         0x404                 GAPBOND_OOB_ENABLED
+         0x405                 GAPBOND_OOB_DATA
+         0x406                 GAPBOND_BONDING_ENABLED
+         0x407                 GAPBOND_KEY_DIST_LIST
+         0x408                 GAPBOND_DEFAULT_PASSCODE
+         0x40A                 GAPBOND_AUTO_FAIL_PAIRING
+         0x40B                 GAPBOND_AUTO_FAIL_REASON
+         0x40C                 GAPBOND_KEYSIZE
+         0x40D                 GAPBOND_AUTO_SYNC_WL
+         0x40E                 GAPBOND_BOND_COUNT
+         0x40F                 GAPBOND_BOND_FAIL_ACTION
+         0x411                 GAPBOND_SECURE_CONNECTION
+         0x413                 GAPBOND_GAPBOND_ECC_KEYS
+         0x415                 GAPBOND_ERASE_BOND_IN_CONN
+         0x416                 GAPBOND_ALLOW_DEBUG_KEYS
+         0x418                 GAPBOND_LRU_BOND_REPLACEMENT
+         0x41B                 GAPBOND_AUTHEN_PAIRING_ONLY
+         0x41C                 GAPBOND_SAME_IRK_OPTION
+         ===================== ========================================================
+
+:GAPBOND_PAIRING_MODE: 
+
+ :Condition: ( length>0 paramId==0x400)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  GAPBOND_PAIRING_MODE_NO_PAIRING
+         0x01                  GAPBOND_PAIRING_MODE_WAIT_FOR_REQ
+         0x02                  GAPBOND_PAIRING_MODE_INITIATE
+         ===================== ========================================================
+
+:GAPBOND_MITM_PROTECTION: 
+
+ :Condition: ( length>0 paramId==0x402)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:GAPBOND_IO_CAPABILITIES: 
+
+ :Condition: ( length>0 paramId==0x403)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  GAPBOND_IO_CAP_DISPLAY_ONLY
+         0x01                  GAPBOND_IO_CAP_DISPLAY_YES_NO
+         0x02                  GAPBOND_IO_CAP_KEYBOARD_ONLY
+         0x03                  GAPBOND_IO_CAP_NO_INPUT_NO_OUTPUT
+         0x04                  GAPBOND_IO_CAP_KEYBOARD_DISPLAY
+         ===================== ========================================================
+
+:GAPBOND_OOB_ENABLED: 
+
+ :Condition: ( length>0 paramId==0x404)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:GAPBOND_OOB_DATA: 
+
+ :Condition: ( length>0 paramId==0x405)
+ :Size: 16 byte(s)
+ :Range: 
+
+:GAPBOND_BONDING_ENABLED: 
+
+ :Condition: ( length>0 paramId==0x406)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:GAPBOND_KEY_DIST_LIST: 
+
+ :Condition: ( length>0 paramId==0x407)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  GAPBOND_KEYDIST_SENCKEY  
+         0x02                  GAPBOND_KEYDIST_SIDKEY   
+         0x04                  GAPBOND_KEYDIST_SSIGN    
+         0x08                  GAPBOND_KEYDIST_SLINK   
+         0x10                  GAPBOND_KEYDIST_MENCKEY 
+         0x20                  GAPBOND_KEYDIST_MIDKEY  
+         0x40                  GAPBOND_KEYDIST_MSIGN   
+         0x80                  GAPBOND_KEYDIST_MLINK   
+         ===================== ========================================================
+
+:GAPBOND_DEFAULT_PASSCODE: 
+
+ :Condition: ( length>0 paramId==0x408)
+ :Size: 4 byte(s)
+ :Range: 
+
+:GAPBOND_AUTO_FAIL_PAIRING: 
+
+ :Condition: ( length>0 paramId==0x40A)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:GAPBOND_AUTO_FAIL_REASON: 
+
+ :Condition: ( length>0 paramId==0x40B)
+ :Size: 1 byte(s)
+ :Range: 
+
+:GAPBOND_KEYSIZE: 
+
+ :Condition: ( length>0 paramId==0x40C)
+ :Size: 1 byte(s)
+ :Range: 
+
+:GAPBOND_AUTO_SYNC_WL: 
+
+ :Condition: ( length>0 paramId==0x40D)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:GAPBOND_BOND_COUNT: 
+
+ :Condition: ( length>0 paramId==0x40E)
+ :Size: 1 byte(s)
+ :Range: 
+
+:GAPBOND_BOND_FAIL_ACTION: 
+
+ :Condition: ( length>0 paramId==0x40F)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  GAPBOND_FAIL_NO_ACTION
+         0x01                  GAPBOND_FAIL_INITIATE_PAIRING
+         0x02                  GAPBOND_FAIL_TERMINATE_LINK
+         0x03                  GAPBOND_FAIL_TERMINATE_ERASE_BONDS
+         0x04                  GAPBOND_FAIL_TERMINATE_ERASE_SINGLE_BOND
+         ===================== ========================================================
+
+:GAPBOND_SECURE_CONNECTION: 
+
+ :Condition: ( length>0 paramId==0x411)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  GAPBOND_SECURE_CONNECTION_NONE
+         0x01                  GAPBOND_SECURE_CONNECTION_ALLOW
+         0x02                  GAPBOND_SECURE_CONNECTION_ONLY
+         ===================== ========================================================
+
+:GAPBOND_ECCKEY_REGEN_POLICY: 
+
+ :Condition: ( length>0 paramId==0x412)
+ :Size: 1 byte(s)
+ :Range: 
+
+:GAPBOND_GAPBOND_ECC_KEYS: 
+
+ :Condition: ( length>0 paramId==0x413)
+ :Size: 96 byte(s)
+ :Range: 
+
+:GAPBOND_ERASE_BOND_IN_CONN: 
+
+ :Condition: ( length>0 paramId==0x415)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:GAPBOND_ALLOW_DEBUG_KEYS: 
+
+ :Condition: ( length>0 paramId==0x416)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:GAPBOND_LRU_BOND_REPLACEMENT: 
+
+ :Condition: ( length>0 paramId==0x418)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:GAPBOND_AUTHEN_PAIRING_ONLY: 
+
+ :Condition: ( length>0 paramId==0x41B)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+:GAPBOND_SAME_IRK_OPTION: 
+
+ :Condition: ( length>0 paramId==0x41C)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         False                 
+         True                  
+         ===================== ========================================================
+
+
+GAPBondMgr_ServiceChangeInd
+---------------------------
+:Opcode: 0xFE38
+:Command Description: Set/clear the service change indication in a bond record.
+
+**Command Parameters**
+
+:connectionHandle: Used to Identify the Connection
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: 0 - 0xFFFD or 0xFFFF for all bonded devices in the database
+
+:setParam: "Yes" to set the Service Change indication in the bond record, "No" to clear the indication.
+
+ :Size: 1 byte(s)
+ :Default: 1
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  No 
+         0x01                  Yes  
+         ===================== ========================================================
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event.
+
+GAPBondMgr_Pair
+---------------
+:Opcode: 0xFE48
+:Command Description: This API can be used to initiate pairing in cases where it is not started automatically by the gapbondmgr or to re-pair after the initial pairing has occurred if, for example, the pairing requirements have changed.
+
+**Command Parameters**
+
+:connectionHandle: Connection handle of existing link to start pairing.
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: 0x0000 to 0xFFFD
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event.
+
+GAPBondMgr_FindAddr
+-------------------
+:Opcode: 0xFE49
+:Command Description: Search for an address in the bonding table. If the address is a random private resolvable address, attempt to resolve the random address against all IRK's in bonding table.
+
+**Command Parameters**
+
+:address: The address to search for
+
+ :Size: 6 byte(s)
+ :Default: "AA:AA:AA:AA:AA:AA"
+ :Range: Any 6-byte address
+
+:addrType: The device's identity address type (Public or Random ID).
+
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  PEER_ADDRTYPE_PUBLIC_OR_PUBLIC_ID
+         0x01                  PEER_ADDRTYPE_RANDOM_OR_RANDOM_ID
+         ===================== ========================================================
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event.
+
+**Additional Command Status Return Parameters**
+
+:length: 
+
+ :Size: 1 byte(s)
+ :Range: 
+
+:bondIdx: Index used to identity bond in bond table.
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 1 byte(s)
+ :Range: 
+
+:identityAddressType: Resolved address type if found and successfully resolved.
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  ADDRTYPE_PUBLIC
+         0x01                  ADDRTYPE_RANDOM
+         0x02                  ADDRTYPE_PUBLIC_ID
+         0x03                  ADDRTYPE_RANDOM_ID
+         0xFE                  ADDRTYPE_RANDOM_NR
+         0xFF                  ADDRTYPE_NONE
+         ===================== ========================================================
+
+:identityAddress: Resolved address if found and successfully resolved.
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 6 byte(s)
+ :Range: 
+
+
+GAPBondMgr_PasscodeRsp
+----------------------
+:Opcode: 0xFE4A
+:Command Description: Respond to a passcode request.
+
+**Command Parameters**
+
+:connectionHandle: Connection handle of existing link to start pairing.
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: 0x0000 to 0xFFFD
+
+:status: Pairing Failed Message reason field.
+
+ :Size: 1 byte(s)
+ :Default: 0
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x01                  SMP_PAIRING_FAILED_PASSKEY_ENTRY_FAILED
+         0x02                  SMP_PAIRING_FAILED_OOB_NOT_AVAIL
+         0x03                  SMP_PAIRING_FAILED_AUTH_REQ
+         0x04                  SMP_PAIRING_FAILED_CONFIRM_VALUE
+         0x05                  SMP_PAIRING_FAILED_NOT_SUPPORTED
+         0x06                  SMP_PAIRING_FAILED_ENC_KEY_SIZE
+         0x07                  SMP_PAIRING_FAILED_CMD_NOT_SUPPORTED
+         0x08                  SMP_PAIRING_FAILED_UNSPECIFIED
+         0x09                  SMP_PAIRING_FAILED_REPEATED_ATTEMPTS
+         0x0A                  SMP_PAIRING_FAILED_INVALID_PARAMETERS
+         0x0B                  SMP_PAIRING_FAILED_DHKEY_CHECK_FAILED
+         0x0C                  SMP_PAIRING_FAILED_NUM_COMPARISON_FAILED
+         0x0D                  SMP_PAIRING_FAILED_BREDR_PAIR_IN_PROGRESS
+         0x0E                  SMP_PAIRING_FAILED_CT_KEYDER_NOT_ALLOWED
+         0x0F                  SMP_PAIRING_FAILED_KEY_REJECTED
+         0x10                  Command Disallowed
+         0x11                  Unsupported Feature Or Parameter Value
+         0x12                  Invalid HCI Command Parameters
+         0x17                  bleTimeout
+         ===================== ========================================================
+
+:Passcode: Passcode to use for pairing
+
+ :Size: 4 byte(s)
+ :Default: 0x123456
+ :Range: A 6-digit passcode.
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event.
+
+SM_RegisterTask
+---------------
+:Opcode: 0xFE39
+:Command Description: Register Application task with the SM.
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event.
+
+SM_GetEccKeys
+-------------
+:Opcode: 0xFE3A
+:Command Description: Request ECC keys to be generated by BLE Stack. SM_RegisterTask must be called prior to using this command.
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event.
+
+SM_GetDHKey
+-----------
+:Opcode: 0xFE3B
+:Command Description: Request a Diffie-Hellman Key is generated by the BLE Stack. SM_RegisterTask must be called prior to using this command.
+
+**Command Parameters**
+
+:PrivateKey: ECC Private Key
+
+ :Size: 32 byte(s)
+ :Default: "00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00"
+ :Range: Any 32 byte value
+
+:PublicKey1: Local device's public key X-coordinate.
+
+ :Size: 32 byte(s)
+ :Default: "00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00"
+ :Range: Any 32 byte value
+
+:PublicKey2: Remote device's public key X-coordinate.
+
+ :Size: 32 byte(s)
+ :Default: "00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00"
+ :Range: Any 32 byte value
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event.
+
+SM_GetScConfirmOob
+------------------
+:Opcode: 0xFE3C
+:Command Description: Request a SC Confrim value for the OOB Pairing protocol is generated by the BLE Stack. SM_RegisterTask must be called prior to using this command.
+
+**Command Parameters**
+
+:PublicKey: Local device's public key X-coordinate
+
+ :Size: 32 byte(s)
+ :Default: "00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00"
+ :Range: Any 32 byte value
+
+:oob: Local out of bands to send to a remote device
+
+ :Size: 16 byte(s)
+ :Default: "00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00"
+ :Range: Any 16 byte value
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event.
+
+GAPBondMgr_SCGetLocalOOBParameters
+----------------------------------
+:Opcode: 0xFE4C
+:Command Description: Request a SC Confrim value for the OOB Pairing protocol is generated by the BLE Stack. SM_RegisterTask must be called prior to using this command.
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event.
+
+**Additional Command Status Return Parameters**
+
+:length: 
+
+ :Size: 1 byte(s)
+ :Range: 
+
+:confirm: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 16 byte(s)
+ :Range: 
+
+:random: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 16 byte(s)
+ :Range: 
+
+
+GAPBondMgr_SCSetRemoteOOBParameters
+-----------------------------------
+:Opcode: 0xFE4D
+:Command Description: Command to set remote's OOB parameters
+
+**Command Parameters**
+
+:confirm: Remote's confirm value.
+
+ :Size: 16 byte(s)
+ :Default: "00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00"
+ :Range: Any 16 byte value
+
+:random: Remote's random number.
+
+ :Size: 16 byte(s)
+ :Default: "00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00"
+ :Range: Any 16 byte value
+
+:OOBDataFlag: OOB Authentication data from remote device present.
+
+ :Size: 1 byte(s)
+ :Default: "00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00"
+ :Range: Any 16 byte value
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event.
+
+GAP_SetPrivacyMode
+------------------
+:Opcode: 0xFE3D
+:Command Description: Set the privacy mode for a remote device
+
+**Command Parameters**
+
+:addrType: Configure the device's identity address type.
+
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  PEER_ADDRTYPE_PUBLIC_OR_PUBLIC_ID
+         0x01                  PEER_ADDRTYPE_RANDOM_OR_RANDOM_ID
+         ===================== ========================================================
+
+:Addr: Address of remote device
+
+ :Size: 6 byte(s)
+ :Default: "00:00:00:00:00:00"
+ :Range: Any 6 byte value.
+
+:mode: Privacy mode to use with the remote device.
+
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0                     Network Privacy Mode
+         1                     Device Privacy Mode
+         ===================== ========================================================
+
+**Events Generated**
+
+The host will send the CommandStatus Event to indicate the privacy mode has been set.
+

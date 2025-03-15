@@ -1,0 +1,766 @@
+<HTML>
+<HEAD><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<link href="..//elements/mmap.css" rel="stylesheet" type="text/css">
+<TITLE>CPU_DCB</TITLE>
+</HEAD>
+<BODY class=mmapBody>
+<h2 class="mmapCellTitle">
+  <a name="Top_Tag">CPU_DCB</a>
+</h2>
+<P>Instance: CPU_DCB<BR>
+Component: CPU_DCB<BR>
+Base address: 0xE000EDE0</P>
+<BR>
+<P>Cortex-M&#39;s Debug Control Block</P>
+ <H3 class="mmapRegisterSummaryTitle"><A name="CPU_DCB"></A><A href="CPU_MMAP.html"> TOP</A>:<B>CPU_DCB</B> Register Summary</H3>
+<TABLE cellspacing="0" class="mmapRegisterSummaryTable">
+<TR class="rowTop">
+<TD class="cellTopCol1">
+  <P>Register Name</P>
+</TD>
+<TD class="cellTopCol2">
+  <P>Type</P>
+</TD>
+<TD class="cellTopCol3">
+  <P>Register Width (Bits)</P>
+</TD>
+<TD class="cellTopCol4">
+  <P>Register Reset</P>
+</TD>
+<TD class="cellTopCol5">
+  <P>Address Offset</P>
+</TD>
+<TD class="cellTopCol5">
+  <P>Physical Address</P>
+</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">
+  <P>
+    <A href="#DHCSR" title="Controls halting debug">DHCSR</A>
+  </P>
+</TD>
+<TD class="cellCol2">
+  <P>RW</P>
+</TD>
+<TD class="cellCol3">
+  <P>32</P>
+</TD>
+<TD class="cellCol4">
+  <P>0b0000 0000 0000 00X0 0000 0000 0000 0000</P>
+</TD>
+<TD class="cellCol5">
+  <P>0x0000 0010</P>
+</TD>
+<TD class="cellCol5">
+  <P>0xE000 EDF0</P>
+</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">
+  <P>
+    <A href="#DCRSR" title="With the DCRDR, provides debug access to the general-purpose registers, special-purpose registers, and the FP extension registers. A write to the DCRSR specifies the register to transfer, whether the transfer is a read or write, and starts the transfer">DCRSR</A>
+  </P>
+</TD>
+<TD class="cellCol2">
+  <P>RW</P>
+</TD>
+<TD class="cellCol3">
+  <P>32</P>
+</TD>
+<TD class="cellCol4">
+  <P>0x0000 0000</P>
+</TD>
+<TD class="cellCol5">
+  <P>0x0000 0014</P>
+</TD>
+<TD class="cellCol5">
+  <P>0xE000 EDF4</P>
+</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">
+  <P>
+    <A href="#DCRDR" title="With the DCRSR, provides debug access to the general-purpose registers, special-purpose registers, and the FP Extension registers. If the Main Extension is implemented, it can also be used for message passing between an external debugger and a debug agent running on the PE">DCRDR</A>
+  </P>
+</TD>
+<TD class="cellCol2">
+  <P>RW</P>
+</TD>
+<TD class="cellCol3">
+  <P>32</P>
+</TD>
+<TD class="cellCol4">
+  <P>0x0000 0000</P>
+</TD>
+<TD class="cellCol5">
+  <P>0x0000 0018</P>
+</TD>
+<TD class="cellCol5">
+  <P>0xE000 EDF8</P>
+</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">
+  <P>
+    <A href="#DEMCR" title="Manages vector catch behavior and DebugMonitor handling when debugging">DEMCR</A>
+  </P>
+</TD>
+<TD class="cellCol2">
+  <P>RW</P>
+</TD>
+<TD class="cellCol3">
+  <P>32</P>
+</TD>
+<TD class="cellCol4">
+  <P>0x0000 0000</P>
+</TD>
+<TD class="cellCol5">
+  <P>0x0000 001C</P>
+</TD>
+<TD class="cellCol5">
+  <P>0xE000 EDFC</P>
+</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">
+  <P>
+    <A href="#DAUTHCTRL" title="This register allows the external authentication interface to be">DAUTHCTRL</A>
+  </P>
+</TD>
+<TD class="cellCol2">
+  <P>RW</P>
+</TD>
+<TD class="cellCol3">
+  <P>32</P>
+</TD>
+<TD class="cellCol4">
+  <P>0x0000 0000</P>
+</TD>
+<TD class="cellCol5">
+  <P>0x0000 0024</P>
+</TD>
+<TD class="cellCol5">
+  <P>0xE000 EE04</P>
+</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">
+  <P>
+    <A href="#DSCSR" title="Provides control and status information for Secure debug">DSCSR</A>
+  </P>
+</TD>
+<TD class="cellCol2">
+  <P>RW</P>
+</TD>
+<TD class="cellCol3">
+  <P>32</P>
+</TD>
+<TD class="cellCol4">
+  <P>0x0000 0000</P>
+</TD>
+<TD class="cellCol5">
+  <P>0x0000 0028</P>
+</TD>
+<TD class="cellCol5">
+  <P>0xE000 EE08</P>
+</TD>
+</TR>
+</TABLE>
+<H3 class="mmapRegisterSummaryTitle"><A href="CPU_MMAP.html"> TOP</A>:CPU_DCB Register Descriptions</H3>
+<H3 class="mmapRegisterTitle"><A name="DHCSR"></A><A class="mmapRegisterTitle" href="CPU_MMAP.html">TOP</A>:<A class="mmapRegisterTitle" href="#Top_Tag">CPU_DCB</A>:DHCSR</H3><TABLE cellspacing="0" class="mmapRegisterTable">
+<TR class="row">
+<TD class="cellCol1"><B>Address Offset</B></TD>
+<TD class="cellCol2" colspan="3">0x0000 0010</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Physical Address</TD>
+<TD class="cellCol2">0xE000 EDF0</TD>
+<TD class="cellCol3">Instance</TD>
+<TD class="cellCol4">0xE000 EDF0</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Description</TD>
+<TD class="cellCol2" colspan="3">Controls halting debug</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Type</TD>
+<TD class="cellCol2" colspan="3">RW</TD>
+</TR>
+</TABLE>
+<TABLE cellspacing="0" class="mmapBitfieldTable">
+<TR class="rowTop">
+<TD class="cellTopCol1">Bits</TD>
+<TD class="cellTopCol2">Field Name</TD>
+<TD class="cellTopCol3" colspan="3">Description</TD>
+<TD class="cellTopCol4">Type</TD>
+<TD class="cellTopCol5">Reset</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_RESERVED27">31:27</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED27</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0b0 0000</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_S_RESTART_ST">26</a>
+</TD>
+<TD class="cellBitfieldCol2">S_RESTART_ST</TD>
+<TD class="cellBitfieldCol3" colspan="3">Indicates the PE has processed a request to clear DHCSR.C_HALT to 0. That is, either a write to DHCSR that clears DHCSR.C_HALT from 1 to 0, or an External Restart Request</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_S_RESET_ST">25</a>
+</TD>
+<TD class="cellBitfieldCol2">S_RESET_ST</TD>
+<TD class="cellBitfieldCol3" colspan="3">Indicates whether the PE has been reset since the last read of the DHCSR</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_S_RETIRE_ST">24</a>
+</TD>
+<TD class="cellBitfieldCol2">S_RETIRE_ST</TD>
+<TD class="cellBitfieldCol3" colspan="3">Set to 1 every time the PE retires one of more instructions</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_RESERVED21">23:21</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED21</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0b000</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_S_SDE">20</a>
+</TD>
+<TD class="cellBitfieldCol2">S_SDE</TD>
+<TD class="cellBitfieldCol3" colspan="3">Indicates whether Secure invasive debug is allowed</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_S_LOCKUP">19</a>
+</TD>
+<TD class="cellBitfieldCol2">S_LOCKUP</TD>
+<TD class="cellBitfieldCol3" colspan="3">Indicates whether the PE is in Lockup state</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_S_SLEEP">18</a>
+</TD>
+<TD class="cellBitfieldCol2">S_SLEEP</TD>
+<TD class="cellBitfieldCol3" colspan="3">Indicates whether the PE is sleeping</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_S_HALT">17</a>
+</TD>
+<TD class="cellBitfieldCol2">S_HALT</TD>
+<TD class="cellBitfieldCol3" colspan="3">Indicates whether the PE is in Debug state</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_DBGKEY">31:16</a>
+</TD>
+<TD class="cellBitfieldCol2">DBGKEY</TD>
+<TD class="cellBitfieldCol3" colspan="3">A debugger must write 0xA05F to this field to enable write access to the remaining bits, otherwise the PE ignores the write access</TD>
+<TD class="cellBitfieldCol4">WO</TD>
+<TD class="cellBitfieldCol5">0x0000</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_RESERVED6">15:6</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED6</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0b00 0000 0000</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_C_SNAPSTALL">5</a>
+</TD>
+<TD class="cellBitfieldCol2">C_SNAPSTALL</TD>
+<TD class="cellBitfieldCol3" colspan="3">Allow imprecise entry to Debug state</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_RESERVED4">4</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED4</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_C_MASKINTS">3</a>
+</TD>
+<TD class="cellBitfieldCol2">C_MASKINTS</TD>
+<TD class="cellBitfieldCol3" colspan="3">When debug is enabled, the debugger can write to this bit to mask PendSV, SysTick and external configurable interrupts</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_C_STEP">2</a>
+</TD>
+<TD class="cellBitfieldCol2">C_STEP</TD>
+<TD class="cellBitfieldCol3" colspan="3">Enable single instruction step</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_C_HALT">1</a>
+</TD>
+<TD class="cellBitfieldCol2">C_HALT</TD>
+<TD class="cellBitfieldCol3" colspan="3">PE enter Debug state halt request</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DHCSR_C_DEBUGEN">0</a>
+</TD>
+<TD class="cellBitfieldCol2">C_DEBUGEN</TD>
+<TD class="cellBitfieldCol3" colspan="3">Enable Halting debug</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+</TABLE>
+<H3 class="mmapRegisterTitle"><A name="DCRSR"></A><A class="mmapRegisterTitle" href="CPU_MMAP.html">TOP</A>:<A class="mmapRegisterTitle" href="#Top_Tag">CPU_DCB</A>:DCRSR</H3><TABLE cellspacing="0" class="mmapRegisterTable">
+<TR class="row">
+<TD class="cellCol1"><B>Address Offset</B></TD>
+<TD class="cellCol2" colspan="3">0x0000 0014</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Physical Address</TD>
+<TD class="cellCol2">0xE000 EDF4</TD>
+<TD class="cellCol3">Instance</TD>
+<TD class="cellCol4">0xE000 EDF4</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Description</TD>
+<TD class="cellCol2" colspan="3">With the DCRDR, provides debug access to the general-purpose registers, special-purpose registers, and the FP extension registers. A write to the DCRSR specifies the register to transfer, whether the transfer is a read or write, and starts the transfer</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Type</TD>
+<TD class="cellCol2" colspan="3">RW</TD>
+</TR>
+</TABLE>
+<TABLE cellspacing="0" class="mmapBitfieldTable">
+<TR class="rowTop">
+<TD class="cellTopCol1">Bits</TD>
+<TD class="cellTopCol2">Field Name</TD>
+<TD class="cellTopCol3" colspan="3">Description</TD>
+<TD class="cellTopCol4">Type</TD>
+<TD class="cellTopCol5">Reset</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DCRSR_RESERVED17">31:17</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED17</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0b000 0000 0000 0000</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DCRSR_REGWnR">16</a>
+</TD>
+<TD class="cellBitfieldCol2">REGWnR</TD>
+<TD class="cellBitfieldCol3" colspan="3">Specifies the access type for the transfer</TD>
+<TD class="cellBitfieldCol4">WO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DCRSR_RESERVED7">15:7</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED7</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0b0 0000 0000</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DCRSR_REGSEL">6:0</a>
+</TD>
+<TD class="cellBitfieldCol2">REGSEL</TD>
+<TD class="cellBitfieldCol3" colspan="3">Specifies the general-purpose register, special-purpose register, or FP register to transfer</TD>
+<TD class="cellBitfieldCol4">WO</TD>
+<TD class="cellBitfieldCol5">0b000 0000</TD>
+</TR>
+</TABLE>
+<H3 class="mmapRegisterTitle"><A name="DCRDR"></A><A class="mmapRegisterTitle" href="CPU_MMAP.html">TOP</A>:<A class="mmapRegisterTitle" href="#Top_Tag">CPU_DCB</A>:DCRDR</H3><TABLE cellspacing="0" class="mmapRegisterTable">
+<TR class="row">
+<TD class="cellCol1"><B>Address Offset</B></TD>
+<TD class="cellCol2" colspan="3">0x0000 0018</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Physical Address</TD>
+<TD class="cellCol2">0xE000 EDF8</TD>
+<TD class="cellCol3">Instance</TD>
+<TD class="cellCol4">0xE000 EDF8</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Description</TD>
+<TD class="cellCol2" colspan="3">With the DCRSR, provides debug access to the general-purpose registers, special-purpose registers, and the FP Extension registers. If the Main Extension is implemented, it can also be used for message passing between an external debugger and a debug agent running on the PE</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Type</TD>
+<TD class="cellCol2" colspan="3">RW</TD>
+</TR>
+</TABLE>
+<TABLE cellspacing="0" class="mmapBitfieldTable">
+<TR class="rowTop">
+<TD class="cellTopCol1">Bits</TD>
+<TD class="cellTopCol2">Field Name</TD>
+<TD class="cellTopCol3" colspan="3">Description</TD>
+<TD class="cellTopCol4">Type</TD>
+<TD class="cellTopCol5">Reset</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DCRDR_DBGTMP">31:0</a>
+</TD>
+<TD class="cellBitfieldCol2">DBGTMP</TD>
+<TD class="cellBitfieldCol3" colspan="3">Provides debug access for reading and writing the general-purpose registers, special-purpose registers, and Floating-point Extension registers</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0x0000 0000</TD>
+</TR>
+</TABLE>
+<H3 class="mmapRegisterTitle"><A name="DEMCR"></A><A class="mmapRegisterTitle" href="CPU_MMAP.html">TOP</A>:<A class="mmapRegisterTitle" href="#Top_Tag">CPU_DCB</A>:DEMCR</H3><TABLE cellspacing="0" class="mmapRegisterTable">
+<TR class="row">
+<TD class="cellCol1"><B>Address Offset</B></TD>
+<TD class="cellCol2" colspan="3">0x0000 001C</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Physical Address</TD>
+<TD class="cellCol2">0xE000 EDFC</TD>
+<TD class="cellCol3">Instance</TD>
+<TD class="cellCol4">0xE000 EDFC</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Description</TD>
+<TD class="cellCol2" colspan="3">Manages vector catch behavior and DebugMonitor handling when debugging</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Type</TD>
+<TD class="cellCol2" colspan="3">RW</TD>
+</TR>
+</TABLE>
+<TABLE cellspacing="0" class="mmapBitfieldTable">
+<TR class="rowTop">
+<TD class="cellTopCol1">Bits</TD>
+<TD class="cellTopCol2">Field Name</TD>
+<TD class="cellTopCol3" colspan="3">Description</TD>
+<TD class="cellTopCol4">Type</TD>
+<TD class="cellTopCol5">Reset</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_RESERVED25">31:25</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED25</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0b000 0000</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_TRCENA">24</a>
+</TD>
+<TD class="cellBitfieldCol2">TRCENA</TD>
+<TD class="cellBitfieldCol3" colspan="3">Global enable for all DWT and ITM features</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_RESERVED21">23:21</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED21</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0b000</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_SDME">20</a>
+</TD>
+<TD class="cellBitfieldCol2">SDME</TD>
+<TD class="cellBitfieldCol3" colspan="3">Indicates whether the DebugMonitor targets the Secure or the Non-secure state and whether debug events are allowed in Secure state</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_MON_REQ">19</a>
+</TD>
+<TD class="cellBitfieldCol2">MON_REQ</TD>
+<TD class="cellBitfieldCol3" colspan="3">DebugMonitor semaphore bit</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_MON_STEP">18</a>
+</TD>
+<TD class="cellBitfieldCol2">MON_STEP</TD>
+<TD class="cellBitfieldCol3" colspan="3">Enable DebugMonitor stepping</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_MON_PEND">17</a>
+</TD>
+<TD class="cellBitfieldCol2">MON_PEND</TD>
+<TD class="cellBitfieldCol3" colspan="3">Sets or clears the pending state of the DebugMonitor exception</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_MON_EN">16</a>
+</TD>
+<TD class="cellBitfieldCol2">MON_EN</TD>
+<TD class="cellBitfieldCol3" colspan="3">Enable the DebugMonitor exception</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_RESERVED12">15:12</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED12</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0x0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_VC_SFERR">11</a>
+</TD>
+<TD class="cellBitfieldCol2">VC_SFERR</TD>
+<TD class="cellBitfieldCol3" colspan="3">SecureFault exception halting debug vector catch enable</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_VC_HARDERR">10</a>
+</TD>
+<TD class="cellBitfieldCol2">VC_HARDERR</TD>
+<TD class="cellBitfieldCol3" colspan="3">HardFault exception halting debug vector catch enable</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_VC_INTERR">9</a>
+</TD>
+<TD class="cellBitfieldCol2">VC_INTERR</TD>
+<TD class="cellBitfieldCol3" colspan="3">Enable halting debug vector catch for faults during exception entry and return</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_VC_BUSERR">8</a>
+</TD>
+<TD class="cellBitfieldCol2">VC_BUSERR</TD>
+<TD class="cellBitfieldCol3" colspan="3">BusFault exception halting debug vector catch enable</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_VC_STATERR">7</a>
+</TD>
+<TD class="cellBitfieldCol2">VC_STATERR</TD>
+<TD class="cellBitfieldCol3" colspan="3">Enable halting debug trap on a UsageFault exception caused by a state information error, for example an Undefined Instruction exception</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_VC_CHKERR">6</a>
+</TD>
+<TD class="cellBitfieldCol2">VC_CHKERR</TD>
+<TD class="cellBitfieldCol3" colspan="3">Enable halting debug trap on a UsageFault exception caused by a checking error, for example an alignment check error</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_VC_NOCPERR">5</a>
+</TD>
+<TD class="cellBitfieldCol2">VC_NOCPERR</TD>
+<TD class="cellBitfieldCol3" colspan="3">Enable halting debug trap on a UsageFault caused by an access to a coprocessor</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_VC_MMERR">4</a>
+</TD>
+<TD class="cellBitfieldCol2">VC_MMERR</TD>
+<TD class="cellBitfieldCol3" colspan="3">Enable halting debug trap on a MemManage exception</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_RESERVED1">3:1</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED1</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0b000</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DEMCR_VC_CORERESET">0</a>
+</TD>
+<TD class="cellBitfieldCol2">VC_CORERESET</TD>
+<TD class="cellBitfieldCol3" colspan="3">Enable Reset Vector Catch. This causes a warm reset to halt a running system</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+</TABLE>
+<H3 class="mmapRegisterTitle"><A name="DAUTHCTRL"></A><A class="mmapRegisterTitle" href="CPU_MMAP.html">TOP</A>:<A class="mmapRegisterTitle" href="#Top_Tag">CPU_DCB</A>:DAUTHCTRL</H3><TABLE cellspacing="0" class="mmapRegisterTable">
+<TR class="row">
+<TD class="cellCol1"><B>Address Offset</B></TD>
+<TD class="cellCol2" colspan="3">0x0000 0024</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Physical Address</TD>
+<TD class="cellCol2">0xE000 EE04</TD>
+<TD class="cellCol3">Instance</TD>
+<TD class="cellCol4">0xE000 EE04</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Description</TD>
+<TD class="cellCol2" colspan="3">This register allows the external authentication interface to be<BR>
+overridden from software.</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Type</TD>
+<TD class="cellCol2" colspan="3">RW</TD>
+</TR>
+</TABLE>
+<TABLE cellspacing="0" class="mmapBitfieldTable">
+<TR class="rowTop">
+<TD class="cellTopCol1">Bits</TD>
+<TD class="cellTopCol2">Field Name</TD>
+<TD class="cellTopCol3" colspan="3">Description</TD>
+<TD class="cellTopCol4">Type</TD>
+<TD class="cellTopCol5">Reset</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DAUTHCTRL_RESERVED4">31:4</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED4</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0x000 0000</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DAUTHCTRL_INTSPNIDEN">3</a>
+</TD>
+<TD class="cellBitfieldCol2">INTSPNIDEN</TD>
+<TD class="cellBitfieldCol3" colspan="3">Internal Secure non-invasive debug enable. Overrides the external Secure non-invasive debug authentication interface</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DAUTHCTRL_SPNIDENSEL">2</a>
+</TD>
+<TD class="cellBitfieldCol2">SPNIDENSEL</TD>
+<TD class="cellBitfieldCol3" colspan="3">Secure non-invasive debug enable select. Selects between DAUTHCTRL and the external authentication interface for control of Secure non-invasive debug</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DAUTHCTRL_INTSPIDEN">1</a>
+</TD>
+<TD class="cellBitfieldCol2">INTSPIDEN</TD>
+<TD class="cellBitfieldCol3" colspan="3">Internal Secure invasive debug enable. Overrides the external Secure invasive debug authentication Interfaces.</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DAUTHCTRL_SPIDENSEL">0</a>
+</TD>
+<TD class="cellBitfieldCol2">SPIDENSEL</TD>
+<TD class="cellBitfieldCol3" colspan="3">Secure invasive debug enable select. Selects between DAUTHCTRL and the external authentication interface for control of Secure invasive debug.</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+</TABLE>
+<H3 class="mmapRegisterTitle"><A name="DSCSR"></A><A class="mmapRegisterTitle" href="CPU_MMAP.html">TOP</A>:<A class="mmapRegisterTitle" href="#Top_Tag">CPU_DCB</A>:DSCSR</H3><TABLE cellspacing="0" class="mmapRegisterTable">
+<TR class="row">
+<TD class="cellCol1"><B>Address Offset</B></TD>
+<TD class="cellCol2" colspan="3">0x0000 0028</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Physical Address</TD>
+<TD class="cellCol2">0xE000 EE08</TD>
+<TD class="cellCol3">Instance</TD>
+<TD class="cellCol4">0xE000 EE08</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Description</TD>
+<TD class="cellCol2" colspan="3">Provides control and status information for Secure debug</TD>
+</TR>
+<TR class="row">
+<TD class="cellCol1">Type</TD>
+<TD class="cellCol2" colspan="3">RW</TD>
+</TR>
+</TABLE>
+<TABLE cellspacing="0" class="mmapBitfieldTable">
+<TR class="rowTop">
+<TD class="cellTopCol1">Bits</TD>
+<TD class="cellTopCol2">Field Name</TD>
+<TD class="cellTopCol3" colspan="3">Description</TD>
+<TD class="cellTopCol4">Type</TD>
+<TD class="cellTopCol5">Reset</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DSCSR_RESERVED18">31:18</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED18</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0b00 0000 0000 0000</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DSCSR_CDSKEY">17</a>
+</TD>
+<TD class="cellBitfieldCol2">CDSKEY</TD>
+<TD class="cellBitfieldCol3" colspan="3">Writes to the CDS bit are ignored unless CDSKEY is concurrently written to zero</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DSCSR_CDS">16</a>
+</TD>
+<TD class="cellBitfieldCol2">CDS</TD>
+<TD class="cellBitfieldCol3" colspan="3">This field indicates the current Security state of the processor</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DSCSR_RESERVED2">15:2</a>
+</TD>
+<TD class="cellBitfieldCol2">RESERVED2</TD>
+<TD class="cellBitfieldCol3" colspan="3">Software should not rely on the value of a reserved. Writing any other value than the reset value may result in undefined behavior.</TD>
+<TD class="cellBitfieldCol4">RO</TD>
+<TD class="cellBitfieldCol5">0b00 0000 0000 0000</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DSCSR_SBRSEL">1</a>
+</TD>
+<TD class="cellBitfieldCol2">SBRSEL</TD>
+<TD class="cellBitfieldCol3" colspan="3">If SBRSELEN is 1 this bit selects whether the Non-secure or the Secure version of the memory-mapped Banked registers are accessible to the debugger</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+<TR class="rowBitfield">
+<TD class="cellBitfieldCol1"><a name="DSCSR_SBRSELEN">0</a>
+</TD>
+<TD class="cellBitfieldCol2">SBRSELEN</TD>
+<TD class="cellBitfieldCol3" colspan="3">Controls whether the SBRSEL field or the current Security state of the processor selects which version of the memory-mapped Banked registers are accessed to the debugger</TD>
+<TD class="cellBitfieldCol4">RW</TD>
+<TD class="cellBitfieldCol5">0</TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+<hr><table class="footer"><tr><td>&copy; 2015 - 2016. Texas Instruments | All Rights Reserved</td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,176 @@
+.. _sec-ks-overview: 
+
+Key Storage Overview
+********************
+The following sections provide a high level overview of the |KS|
+functionality available in the |DEVICE1M_AND| family of devices.
+
+|KS| is the storage mechanism by which the Key Store driver will
+retrieve/store keys used for cryptographic operations. This
+functionality is used by the application to import, export, generate
+and/or destroy plain text keys & certificates with an associated
+key identifier. |KS| keys are stored in a secured partition in TF-M 
+enabled projects.
+
+We will discuss how |KS| works as well as how to add |KS|
+to an existing project. |PSA| Internal Trusted Storage (ITS) service
+handles the storage and retrieval of the data in flash and calls TI's CMSIS driver
+to perform any required write, read, or erase operations on internal flash.
+
+Key Storage Implementation
+**************************
+
+.. note::
+    The |KS| module is only available in TF-M Enabled projects.
+
+This implementation requires the KeyStore API to enable its core functionality. The KeyStore API is used interface 
+with the keys stored in the secured/non-secure partition.
+
+The KeyStore API allows application code to store cryptographic keys and use them
+indirectly via a key identifier. The KeyStore API supports the storage of keys generated using
+the following algorithms:
+
+  * AES (128, 192, 256-bit keys)
+  * HMAC (up to 1024-bit keys)
+  * Elliptic Curve (key pairs with size up to SECP512 curve)
+
+The KeyStore API provides the following functionality:
+
+  * Import of keys along with their attributes
+  * Enforcement of policies relating to key usage
+  * Retrieval of key attributes
+  * Generation of random keys
+  * Retrieval of key pre-provisioned keys
+  * Purging of keys cached in RAM.
+  * Export of public keys and any keys designated as exportable when originally created.
+  * Destruction of persistent and volatile keys & certificates.
+
+Types of keys supported by KeyStore:
+
+  * Volatile keys
+  * Persistent keys
+  * Persistent certificates
+
+
+TF-M Enabled Key Storage Implementation
+=======================================
+In the TF-M enabled configuration the keys are stored in the secure partition's secure memory which cannot be access by the application code.
+
+For additional details on the TF-M enabled configuration, please reference :ref:`sec-tfm-overview`.
+section of the User's Guide.
+
+In TF-M enabled projects, the KeyStore API is used to communicate between the non-secure and secure partitions to store and retrieve cryptographic keys. 
+Since memory is not shared between the secure and non-secure partitions, the KeyStore keys cannot be accessed by the non-secure application.
+Both persistent and volatile keys are owned by the partition which called the key import API and pre-provisioned keys have 
+predefined owners. 
+
+
+Adding Key Storage to Custom Project
+************************************
+A few relevant APIs are listed in the following table for future reference:
+
+.. table:: Relevant KeyStore APIs
+
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | KeyStore API                        | Description                                                                       |
+    +=====================================+===================================================================================+
+    | ``KeyStore_PSA_init()``             | Initializes the KeyStore driver                                                   |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | ``KeyStore_PSA_setKeyId()``         | Sets the key ID attribute                                                         |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | ``KeyStore_PSA_setKeyLifetime()``   | Sets the key Lifetime attribute                                                   |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | ``KeyStore_PSA_setKeyType()``       | Sets the key type attribute                                                       |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | ``KeyStore_PSA_setKeyUsageFlags()`` | Sets the key usage flags attribute                                                |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | ``KeyStore_PSA_setKeyAlgorithm()``  | Sets the key algorithm attribute                                                  |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | ``KeyStore_PSA_importKey()``        | Stores a plaintext key in KeyStore                                                |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | ``KeyStore_PSA_initKey()``          | Initializes a ``CryptoKey`` type                                                  |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | ``KeyStore_PSA_initBlankKey()``     | Initializes a blank ``CryptoKey`` type                                            |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | ``KeyStore_PSA_exportKey()``        | Export a key in binary format, if allowed by key properties                       |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | ``KeyStore_PSA_exportPublicKey()``  | Export a public key or the public part of a key pair in binary format             |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | ``KeyStore_PSA_purgeKey()``         | Remove non-essential copies of key material from memory                           |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+    | ``KeyStore_PSA_destroyKey()``       | Destroy a key                                                                     |
+    +-------------------------------------+-----------------------------------------------------------------------------------+
+
+The following code example showcases how to create a KeyStore key and how to import the key after creation.
+
+.. code:: c
+
+    KeyStore_PSA_key_file_id_t keyID;
+    int_fast16_t status;
+    KeyStore_PSA_key_attributes_t attributes = KEYSTORE_PSA_KEY_ATTRIBUTES_INIT;
+
+    KeyStore_PSA_setKeyUsageFlags(&attributes, (KEYSTORE_PSA_KEY_USAGE_DECRYPT | KEYSTORE_PSA_KEY_USAGE_ENCRYPT));
+    KeyStore_PSA_setKeyAlgorithm(&attributes, KEYSTORE_PSA_ALG_CCM);
+    KeyStore_PSA_setKeyType(&attributes, KEYSTORE_PSA_KEY_TYPE_AES);
+    KeyStore_PSA_setKeyLifetime(&attributes, KEYSTORE_PSA_KEY_LIFETIME_PERSISTENT);
+    keyID.key_id = KEYSTORE_PSA_KEY_ID_PERSISTENT_USER_MIN;
+    GET_KEY_ID(keyID, KEYSTORE_PSA_KEY_ID_PERSISTENT_USER_MIN);
+
+    status = KeyStore_PSA_importKey(&attributes,symmetricKeyMaterial, AES_KEY_LENGTH, &keyID);
+
+The code example shown above may be used as a reference for adding |KS| to a project that
+does not currently have |KS| capabilities.
+
+As a reference point, the code example showed below shows how to use AESCCM encryption with a key identifier from
+|KS|.
+
+.. code:: c
+
+    AESCCM_Handle handle;
+    AESCCM_Operation operation;
+    CryptoKey symmetricKey;
+
+    //...
+    
+    CryptoKeyPlaintext_initKey&symmetricKey, symmetricKeyMaterial, AES_KEY_LENGTH);
+
+    //...
+
+    operation.key = symmetricKey;
+    
+    //...
+
+    encryptionResult = AESCCM_oneStepEncrypt(handle, &operation);
+
+The code example shown above may be modified to use |KS| as shown below:
+
+.. code:: c
+
+    AESCCM_Handle handle;
+    AESCCM_Operation operation;
+    KeyStore_PSA_key_file_id_t keyID;
+    int_fast16_t status;
+    KeyStore_PSA_key_attributes_t attributes = KEYSTORE_PSA_KEY_ATTRIBUTES_INIT;
+
+    KeyStore_PSA_setKeyUsageFlags(&attributes, (KEYSTORE_PSA_KEY_USAGE_DECRYPT | KEYSTORE_PSA_KEY_USAGE_ENCRYPT));
+    KeyStore_PSA_setKeyAlgorithm(&attributes, KEYSTORE_PSA_ALG_CCM);
+    KeyStore_PSA_setKeyType(&attributes, KEYSTORE_PSA_KEY_TYPE_AES);
+    KeyStore_PSA_setKeyLifetime(&attributes, KEYSTORE_PSA_KEY_LIFETIME_PERSISTENT);
+    keyID.key_id = KEYSTORE_PSA_KEY_ID_PERSISTENT_USER_MIN;
+    GET_KEY_ID(keyID, KEYSTORE_PSA_KEY_ID_PERSISTENT_USER_MIN);
+
+    status = KeyStore_PSA_importKey(&attributes,symmetricKeyMaterial, AES_KEY_LENGTH, &keyID);
+    KeyStore_PSA_initKey(&symmetricKey, keyID, AES_KEY_LENGTH);
+    
+    //...
+
+    operation.key = symmetricKey;
+    
+    //...
+
+    encryptionResult = AESCCM_oneStepEncrypt(handle, &operation);
+
+
+For more information about the  the KeyStore API please reference the following API references:
+  * :tidrivers_api:`cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h`
+  * :tidrivers_api:`cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_init.h`

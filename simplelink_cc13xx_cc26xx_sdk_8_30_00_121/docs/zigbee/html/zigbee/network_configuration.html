@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Network Configurations &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User&#39;s Guide
+ 8.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Power Configuration" href="power_configuration.html" />
+    <link rel="prev" title="Running the Example Applications" href="example_applications.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug zigbee network_configuration";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../zigbee-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+
+          </a>
+              <div class="version">
+                8.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">SimpleLink CC13xx/CC26xx SDK Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="developing_zigbee_applications.html">Developing Zigbee Applications</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="z-stack-overview.html">Z-Stack Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_overview.html">Application Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpd_application_overview.html">Green Power Application Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flash_memory-cc13xx_cc26xx.html">Flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory_map.html">Memory Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_applications.html">Running the Example Applications</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Network Configurations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#changing-stack-parameters">Changing Stack Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#zigbee-device">Zigbee Device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#network-parameters">Network Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#z-stack-parameters">Z-Stack Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#base-device-behavior">Base Device Behavior</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="power_configuration.html">Power Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="znp_interface.html">Zigbee Network Processor (ZNP) Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mt_interface.html">MT Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="product_certification.html">Product Certification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/zigbee-ota-index.html">Zigbee Over-The-Air Firmware Upgrade</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packet_sniffer.html">Packet Sniffer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/migration_guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/glossary.html">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../zigbee-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../zigbee-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="developing_zigbee_applications.html">Developing Zigbee Applications</a> &raquo;</li>
+      <li>Network Configurations</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="network-configurations">
+<span id="network-config"></span><h1>Network Configurations<a class="headerlink" href="#network-configurations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="changing-stack-parameters">
+<h2>Changing Stack Parameters<a class="headerlink" href="#changing-stack-parameters" title="Permalink to this headline">¶</a></h2>
+<p>The following sections provide the name and description of the most significant variables
+to be considered when designing a mesh network.  They are ordered by project location as
+can be found in an imported Z-Stack project.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be sure to perform a clean build (<strong>Project</strong> → <strong>Clean</strong>) after
+configuring a parameter to ensure that the changes take effect.</p>
+</div>
+</div></blockquote>
+<div class="section" id="zigbee-device">
+<h3>Zigbee Device<a class="headerlink" href="#zigbee-device" title="Permalink to this headline">¶</a></h3>
+<p>Location: Project output folder → <code class="docutils literal notranslate"><span class="pre">default/syscfg/ti_zstack_config.h</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DEFAULT_CHANLIST</span></code>: Set of 2.4-GHz channels that the Zigbee device will first attempt to operate on</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SECONDARY_CHANLIST</span></code>: Set of 2.4-GHz channels to use if <code class="docutils literal notranslate"><span class="pre">DEFAULT_CHANLIST</span></code> is unsuitable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ZDAPP_CONFIG_PAN_ID</span></code>: Default PAN ID the coordinator will use to form the network, setting to 0xFFFF results in a random assignment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NWK_INDIRECT_MSG_TIMEOUT</span></code>: Maximum time that parent will buffer indirect messages for its sleeping end devices</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">APSC_MAX_FRAME_RETRIES</span></code>: Maximum number of APS layer retries after a missed APS ACK</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NWK_MAX_DATA_RETRIES</span></code>: Maximum number of NWK layer retries</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ZMAC_MAX_FRAME_RETRIES</span></code>: Maximum number of MAC frame transmission retries</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MAX_RTG_ENTRIES</span></code>: Maximum number of AODV routing entries, maintained by <code class="docutils literal notranslate"><span class="pre">ROUTE_EXPIRY_TIME</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DEFAULT_KEY</span></code>: Default network security key, if set to all 0x00 then a random key will be generated</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DEFAULT_TC_LINK_KEY</span></code>: Pre-configured Trust Center link key and must remain as default for Zigbee Alliance 3.x compliance</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RFD_RCVC_ALWAYS_ON</span></code>: Determines whether an end device is allowed to enter standby mode for low power operation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">POLL_RATE</span></code>: End device time delay before requesting data from its parent, must be shorter than the <code class="docutils literal notranslate"><span class="pre">END_DEV_TIMEOUT_VALUE</span></code> to avoid being aged out
+and can be disabled by setting the value to 0xFFFFFFFF</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MINIMUM_APP_POLL_RATE</span></code>: Limit to the frequency of end device polls while the application is operational</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TXPOWER</span></code>: Determined output power of the device in dBm</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NWK_MAX_DEVICE_LIST</span></code>: Number of direct children supported by the association table, further maintained by child aging</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ZDSECMGR_TC_DEVICE_MAX</span></code>: Maximum number of unique trust center link keys supported (and therefore Zigbee 3.x devices allowed) in the network</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">END_DEV_TIMEOUT_VALUE</span></code>: Timeout value for child aging as sent by the end device during the NWK association’s end device timeout request</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This file is generated automatically from the project’s .syscfg file. Please see <a class="reference internal" href="../sysconfig/zigbee.html#sysconfig-zigbee-configuration"><span class="std std-ref">Zigbee Configuration</span></a>.</p>
+</div>
+</div>
+<div class="section" id="network-parameters">
+<h3>Network Parameters<a class="headerlink" href="#network-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Location: <code class="docutils literal notranslate"><span class="pre">Stack/nwk/nwk_globals.h</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NWK_LINK_STATUS_PERIOD</span></code>: Interval for which link status reports are broadcast on the network, a jitter mask of <code class="docutils literal notranslate"><span class="pre">LINK_STATUS_JITTER_MASK</span></code> is used</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MAX_NEIGHBOR_ENTRIES</span></code>: Number of neighbors supported by the neighbor table, maintained by <code class="docutils literal notranslate"><span class="pre">NWK_ROUTE_AGE_LIMIT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MAX_RTG_SRC_ENTRIES</span></code>: Number of cached source routes, coordinator MTO-routing specific and should equal the max number of nodes in the the network</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SRC_RTG_EXPIRY_TIME</span></code>: Hop count for concentrator route discoveries, pertains only to coodinator MTO-routing</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="z-stack-parameters">
+<h3>Z-Stack Parameters<a class="headerlink" href="#z-stack-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Location: <code class="docutils literal notranslate"><span class="pre">Stack/sys/zglobals.h</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MAX_MISSING_MAC_ACK_LINK_FAILURE</span></code>: Maximum retries for an end device not receiving ACKs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONCENTRATOR_ENABLE</span></code>: Set to TRUE for coordinator MTO routing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONCENTRATOR_DISCOVERY_TIME</span></code>: MTO RREQ broadcast period in seconds, set to zero to disable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONCENTRATOR_ROUTE_CACHE</span></code>: Source route cache table, setting to TRUE is recommended for applications with allowable RAM space</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NWK_END_DEVICE_LEAVE_TIMEOUT</span></code>: Further time for which a leave request will be queued for children who have unknowingly aged out</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="base-device-behavior">
+<h3>Base Device Behavior<a class="headerlink" href="#base-device-behavior" title="Permalink to this headline">¶</a></h3>
+<p>Location: <code class="docutils literal notranslate"><span class="pre">Stack/bdb/bdb.h</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TCLK_POLL_RATE</span></code>: Poll rate for the Trust Center link key exchange process</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BDB_DEFAULT_TC_LINK_KEY_EXCHANGE_ATTEMPS_MAX</span></code>: Number of times a device will attempt a link key exchange with the trust center</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BDBC_TC_LINK_KEY_EXANGE_TIMEOUT</span></code>: Time before link exchange fails, at which point the device will try again if attempts remain</p></li>
+</ul>
+</div></blockquote>
+<p>Location: <code class="docutils literal notranslate"><span class="pre">Stack/bdb/bdb_interface.h</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BDBC_MIN_COMMISSIONING_TIME</span></code>: Length of time to commission the network for which permit join is enabled, a maximum of 254 seconds is required in accordance with Zigbee 2015 and later specification</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BDB_INSTALL_CODE_USE</span></code>: Defines which method of install code is used if enabled</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BDB_DEFAULT_JOIN_USES_INSTALL_CODE_KEY</span></code>: Enables install codes if set to TRUE</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BDB_DEFAULT_TC_REQUIRE_KEY_EXCHANGE</span></code>: Leave <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> to allow pre-Zigbee 3.x devices to join the network</p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="example_applications.html" class="btn btn-neutral float-left" title="Running the Example Applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="power_configuration.html" class="btn btn-neutral float-right" title="Power Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2005-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

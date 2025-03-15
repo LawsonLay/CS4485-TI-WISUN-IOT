@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Migrating TI-RTOS examples to use FreeRTOS &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="BLE5-Stack" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html" />
+    <link rel="prev" title="Thread Synchronization" href="synchronization.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug freertos migration";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config.html">Kernel Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#posix-support">POSIX Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#driver-porting-layer-dpl">Driver Porting Layer (DPL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#using-freertos-with-ccs">Using FreeRTOS with CCS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#freertos-vs-ti-rtos7-modules">FreeRTOS vs. TI-RTOS7 modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#icall-posix">icall_POSIX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="power.html">Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rov.html">Debugging FreeRTOS with Runtime Object View (ROV)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software-timers.html">Software Timers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html">Queues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization.html">Thread Synchronization</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Migrating TI-RTOS examples to use FreeRTOS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modify-the-project-properties-to-support-freertos">Modify the Project Properties to support FreeRTOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modify-the-application-code-to-support-freertos">Modify the application code to support FreeRTOS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a> &raquo;</li>
+      <li>Migrating TI-RTOS examples to use FreeRTOS</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="migrating-ti-rtos-examples-to-use-freertos">
+<span id="sec-freertos-migration"></span><h1>Migrating TI-RTOS examples to use FreeRTOS<a class="headerlink" href="#migrating-ti-rtos-examples-to-use-freertos" title="Permalink to this headline">¶</a></h1>
+<p>There are significant project setting modifications required to migrate from a
+TI-RTOS example to one that supports FreeRTOS, such as modifying the toolchain,
+adding include paths, and managing predefined symbols. For this reason, the
+recommended approach to port an example from TI-RTOS to FreeRTOS is to create a
+new projectspec file. A projectspec, or project specification file, is used to
+create a new project based on predefined settings. For more information on
+projectspec files, see the <a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/ccs_projectspecs.html">ProjectSpecs in CCS</a>
+page. In this section, we will be using the <code class="docutils literal notranslate"><span class="pre">multi_role</span></code> example as a guide to
+convert the <code class="docutils literal notranslate"><span class="pre">simple_central</span></code> project to FreeRTOS.</p>
+<p>Most embedded applications are built the same way: a main loop that receives
+messages from the iCall or from the application itself. This “loop” is
+implemented and located inside the <code class="docutils literal notranslate"><span class="pre">multi_role</span></code> example so, the developer can
+take the example from there. This means that the majority of the application
+code can be reused with slight modifications.</p>
+<p>In this section, we will be using the <code class="docutils literal notranslate"><span class="pre">multi_role</span></code> FreeRTOS example as a guide
+to convert the <code class="docutils literal notranslate"><span class="pre">simple_central</span></code> project to FreeRTOS. The same can be used to
+convert any BLE application into FreeRTOS + GCC.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you are starting with an example that already enables FreeRTOS (i.e. if
+using <code class="docutils literal notranslate"><span class="pre">multi_role</span></code> imported from <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>), skip the section below and
+jump to <a class="reference internal" href="#sec-freertos-migration-application"><span class="std std-ref">Modify the application code to support FreeRTOS</span></a>.</p>
+</div>
+<div class="section" id="modify-the-project-properties-to-support-freertos">
+<h2>Modify the Project Properties to support FreeRTOS<a class="headerlink" href="#modify-the-project-properties-to-support-freertos" title="Permalink to this headline">¶</a></h2>
+<p>The goal of this section is to inherit the project configuration settings from
+an existing example project that is already setup for FreeRTOS.</p>
+<ol class="arabic">
+<li><p>Setup the new project folders. Create a freertos folder inside the
+<code class="docutils literal notranslate"><span class="pre">simple_central</span></code> project directory located in:
+<code class="docutils literal notranslate"><span class="pre">{SDK_INSTALL_DIR}\examples\rtos\CC26X2R1_LAUNCHXL\ble5stack\simple_central</span></code></p></li>
+<li><p>Create a new projectspec file. Copy the gcc folder from <code class="docutils literal notranslate"><span class="pre">multi_role/freertos/gcc</span></code>
+to <code class="docutils literal notranslate"><span class="pre">simple_central/freertos/gcc</span></code> and rename the projectspec from
+<code class="docutils literal notranslate"><span class="pre">multi_role_CC26X2R1_LAUNCHXL_freertos_gcc.projectspec</span></code> to
+<code class="docutils literal notranslate"><span class="pre">simple_central_CC26X2R1_LAUNCHXL_freertos_gcc.projectspec</span></code>.</p></li>
+<li><p>Ensure the linker file <code class="docutils literal notranslate"><span class="pre">CC26X2R1_LAUNCHXL_FREERTOS.lds</span></code> is copied inside
+<code class="docutils literal notranslate"><span class="pre">simple_central/freertos/gcc</span></code> if not already done.</p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">simple_central_CC26X2R1_LAUNCHXL_freertos_gcc.projectspec</span></code>, find
+and replace all <code class="docutils literal notranslate"><span class="pre">multi_role</span></code> with <code class="docutils literal notranslate"><span class="pre">simple_central</span></code>.</p></li>
+<li><p>By comparing the projectspecs, there will be some files that will need to be
+added or removed.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_central_CC26X2R1_LAUNCHXL_freertos_gcc.projectspec</span></code> new (FreeRTOS + gcc)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_central_CC26X2R1_LAUNCHXL_tirtos_ccs.projectspec</span></code> legacy (TI-RTOS + CCS)</p></li>
+</ul>
+</div></blockquote>
+<p>The following diff below shows files that are used by <code class="docutils literal notranslate"><span class="pre">multi_role</span></code> for its
+peripheral service declarations. Since we are using the <code class="docutils literal notranslate"><span class="pre">simple_central</span></code>
+example, these are not needed and can be removed.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-number">Listing 29. </span><span class="caption-text">Files removed from the new projectspec</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">-&lt;file path=&quot;${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/profiles/dev_info/cc26xx/devinfoservice.c&quot; openOnCreation=&quot;false&quot; excludeFromBuild=&quot;false&quot; action=&quot;link&quot; targetDirectory=&quot;Profiles&quot;&gt;</span>
+<span class="gd">-&lt;/file&gt;</span>
+<span class="gd">-&lt;file path=&quot;${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/profiles/dev_info/devinfoservice.h&quot; openOnCreation=&quot;false&quot; excludeFromBuild=&quot;false&quot; action=&quot;link&quot; targetDirectory=&quot;Profiles&quot;&gt;</span>
+<span class="gd">-&lt;/file&gt;</span>
+<span class="gd">-&lt;file path=&quot;${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/inc/gatt_profile_uuid.h&quot; openOnCreation=&quot;false&quot; excludeFromBuild=&quot;false&quot; action=&quot;link&quot; targetDirectory=&quot;Profiles&quot;&gt;</span>
+<span class="gd">-&lt;/file&gt;</span>
+<span class="gd">-&lt;file path=&quot;${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/host/gatt_uuid.c&quot; openOnCreation=&quot;false&quot; excludeFromBuild=&quot;false&quot; action=&quot;link&quot; targetDirectory=&quot;Profiles&quot;&gt;</span>
+<span class="gd">-&lt;/file&gt;</span>
+<span class="gd">-&lt;file path=&quot;${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/inc/gatt_uuid.h&quot; openOnCreation=&quot;false&quot; excludeFromBuild=&quot;false&quot; action=&quot;link&quot; targetDirectory=&quot;Profiles&quot;&gt;</span>
+<span class="gd">-&lt;/file&gt;</span>
+<span class="gd">-&lt;file path=&quot;${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/host/gattservapp_util.c&quot; openOnCreation=&quot;false&quot; excludeFromBuild=&quot;false&quot; action=&quot;link&quot; targetDirectory=&quot;Profiles&quot;&gt;</span>
+<span class="gd">-&lt;/file&gt;</span>
+<span class="gd">-&lt;file path=&quot;${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/profiles/simple_profile/cc26xx/simple_gatt_profile.c&quot; openOnCreation=&quot;false&quot; excludeFromBuild=&quot;false&quot; action=&quot;link&quot; targetDirectory=&quot;Profiles&quot;&gt;</span>
+<span class="gd">-&lt;/file&gt;</span>
+<span class="gd">-&lt;file path=&quot;${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/ti/ble5stack/profiles/simple_profile/simple_gatt_profile.h&quot; openOnCreation=&quot;false&quot; excludeFromBuild=&quot;false&quot; action=&quot;link&quot; targetDirectory=&quot;Profiles&quot;&gt;</span>
+<span class="gd">-&lt;/file&gt;</span>
+</pre></div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="modify-the-application-code-to-support-freertos">
+<span id="sec-freertos-migration-application"></span><h2>Modify the application code to support FreeRTOS<a class="headerlink" href="#modify-the-application-code-to-support-freertos" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the changes to the application code that are necessary to
+support FreeRTOS. It is recommended to import the <code class="docutils literal notranslate"><span class="pre">multi_role</span></code>
+FreeRTOS project and search for the predefined symbol <code class="docutils literal notranslate"><span class="pre">FREERTOS</span></code>. This will
+reveal the modifications to the <code class="docutils literal notranslate"><span class="pre">multi_role</span></code> application that were done. The
+following steps are provided using the search mentioned in the previous section
+as a guide.</p>
+<p>The diffs below provide an overview of all the differences and changes between
+the legacy (TI-RTOS + CCS) <code class="docutils literal notranslate"><span class="pre">multi_role</span></code> example and the new (FreeRTOS + gcc)
+<code class="docutils literal notranslate"><span class="pre">multi_role</span></code> example. These changes should be applied to the corresponding
+<code class="docutils literal notranslate"><span class="pre">simple_central</span></code> example.</p>
+<ol class="arabic">
+<li><p>Replace all the TI-RTOS calls with DPL/FreeRTOS/POSIX calls in <code class="docutils literal notranslate"><span class="pre">simple_central.c</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-number">Listing 30. </span><span class="caption-text">multi_role FreeRTOS differences - INCLUDES</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+#include &lt;FreeRTOS.h&gt;</span>
+<span class="gi">+#include &lt;task.h&gt;</span>
+<span class="gi">+//#include &lt;pthread.h&gt;</span>
+<span class="gi">+#include &lt;mqueue.h&gt;</span>
+<span class="gi">+#else</span>
+#include &lt;string.h&gt;
+#include &lt;ti/sysbios/knl/Clock.h&gt;
+#include &lt;ti/sysbios/knl/Event.h&gt;
+#include &lt;ti/sysbios/knl/Queue.h&gt;
+#include &lt;ti/sysbios/knl/Task.h&gt;
+<span class="gi">+#endif</span>
+
+#ifdef FREERTOS
+#include &lt;stdarg.h&gt;
+#endif
+
+#include &lt;ti/display/Display.h&gt;
+
+<span class="gi">+#if (!(defined FREERTOS) &amp;&amp; !(defined __TI_COMPILER_VERSION__)) &amp;&amp; !(defined(__clang__))</span>
+#include &lt;intrinsics.h&gt;
+#endif
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-number">Listing 31. </span><span class="caption-text">multi_role FreeRTOS differences - STACK SIZE</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>#ifndef MR_TASK_STACK_SIZE
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+#define MR_TASK_STACK_SIZE                   2048</span>
+<span class="gi">+#else</span>
+#define MR_TASK_STACK_SIZE                   1024
+<span class="gi">+#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">Listing 32. </span><span class="caption-text">multi_role FreeRTOS differences - EVENT QUEUE</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>/*********************************************************************
+* GLOBAL VARIABLES
+*/
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+mqd_t g_EventsQueueID;</span>
+<span class="gi">+#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-number">Listing 33. </span><span class="caption-text">multi_role FreeRTOS differences - ICall_Sync</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>/*********************************************************************
+* LOCAL VARIABLES
+*/
+
+// Entity ID globally used to check for source and/or destination of messages
+static ICall_EntityID selfEntity;
+
+// Event globally used to post local events and pend on system and
+// local events.
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+ICall_SyncHandle syncEvent;</span>
+<span class="gi">+#else</span>
+static ICall_SyncHandle syncEvent;
+<span class="gi">+#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-number">Listing 34. </span><span class="caption-text">multi_role FreeRTOS differences - TASK VARIABLES</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+/*Non blocking queue */</span>
+<span class="gi">+mqd_t g_POSIX_appMsgQueue;</span>
+
+<span class="gi">+#else</span>
+// Queue object used for app messages
+static Queue_Struct appMsg;
+static Queue_Handle appMsgQueue;
+<span class="gi">+#endif</span>
+
+// Task configuration
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+typedef uint32_t * Task_Handle;</span>
+<span class="gi">+TaskHandle_t mrTask = NULL;</span>
+<span class="gi">+#else</span>
+Task_Struct mrTask;
+<span class="gi">+#endif</span>
+
+<span class="gi">+#ifndef FREERTOS</span>
+#if defined __TI_COMPILER_VERSION__
+#pragma DATA_ALIGN(mrTaskStack, 8)
+<span class="gi">+#else</span>
+<span class="gi">+#pragma data_alignment=8</span>
+<span class="gi">+#endif</span>
+<span class="gi">+#ifndef FREERTOS</span>
+uint8_t mrTaskStack[MR_TASK_STACK_SIZE];
+<span class="gi">+#endif</span>
+<span class="gi">+#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-number">Listing 35. </span><span class="caption-text">multi_role FreeRTOS differences - LOCAL FUNCTIONS</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>/*********************************************************************
+* LOCAL FUNCTIONS
+*/
+static void multi_role_init(void);
+static void multi_role_scanInit(void);
+static void multi_role_advertInit(void);
+
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+static void multi_role_taskFxn(void *a0);</span>
+<span class="gi">+#else//TI_RTOS</span>
+static void multi_role_taskFxn(UArg a0, UArg a1);
+<span class="gi">+#endif</span>
+
+//..
+//..
+//..
+
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+static void multi_role_clockHandler(void * arg);</span>
+<span class="gi">+#else</span>
+static void multi_role_clockHandler(UArg arg);
+<span class="gi">+#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-number">Listing 36. </span><span class="caption-text">multi_role FreeRTOS differences - multi_role_createTask</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>/*********************************************************************
+* @fn      multi_role_createTask
+*
+* @brief   Task creation function for multi_role.
+*
+* @param   None.
+*
+* @return  None.
+*/
+
+
+void multi_role_createTask(void)
+{
+
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+    BaseType_t xReturned;</span>
+<span class="gi">+</span>
+<span class="gi">+    /* Create the task, storing the handle. */</span>
+<span class="gi">+    xReturned = xTaskCreate(</span>
+<span class="gi">+            multi_role_taskFxn,                     /* Function that implements the task. */</span>
+<span class="gi">+            &quot;MULTI_ROLE_APP&quot;,                       /* Text name for the task. */</span>
+<span class="gi">+            MR_TASK_STACK_SIZE / sizeof(uint32_t),  /* Stack size in words, not bytes. */</span>
+<span class="gi">+            ( void * ) NULL,                        /* Parameter passed into the task. */</span>
+<span class="gi">+            MR_TASK_PRIORITY,                       /* Priority at which the task is created. */</span>
+<span class="gi">+            &amp;mrTask );                              /* Used to pass out the created task&#39;s handle. */</span>
+<span class="gi">+</span>
+<span class="gi">+    if(xReturned == errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY)</span>
+<span class="gi">+    {</span>
+<span class="gi">+        /* Creation of FreeRTOS task failed */</span>
+<span class="gi">+        while(1);</span>
+<span class="gi">+    }</span>
+<span class="gi">+#else</span>
+      Task_Params taskParams;
+
+      // Configure task
+      Task_Params_init(&amp;taskParams);
+      taskParams.stack = mrTaskStack;
+      taskParams.stackSize = MR_TASK_STACK_SIZE;
+      taskParams.priority = MR_TASK_PRIORITY;
+      Task_construct(&amp;mrTask, multi_role_taskFxn, &amp;taskParams, NULL);
+
+<span class="gi">+#endif</span>
+
+}
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-number">Listing 37. </span><span class="caption-text">multi_role FreeRTOS differences - multi_role_init()</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+  Util_constructQueue(&amp;g_POSIX_appMsgQueue);</span>
+<span class="gi">+#else</span>
+   // Create an RTOS queue for message from profile to be sent to app.
+   appMsgQueue = Util_constructQueue(&amp;appMsg);
+<span class="gi">+#endif</span>
+   // Create one-shot clock for internal periodic events.
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+  Util_constructClock(&amp;clkPeriodic,(void*) multi_role_clockHandler,</span>
+<span class="gi">+                        MR_PERIODIC_EVT_PERIOD, 0, false,</span>
+<span class="gi">+                        (void*)&amp;periodicUpdateData);</span>
+<span class="gi">+#else</span>
+
+   Util_constructClock(&amp;clkPeriodic, multi_role_clockHandler,
+                        MR_PERIODIC_EVT_PERIOD, 0, false,
+                        (UArg)&amp;periodicUpdateData);
+<span class="gi">+#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">simple_central</span></code> does not make use of a periodic timer like the
+one shown above. The above change should be performed to any clock
+constructed in the application using <em>Util_constructClock(</em>) to avoid
+build issues.</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">Listing 38. </span><span class="caption-text">multi_role FreeRTOS differences - multi_role_taskFxn</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>/*********************************************************************
+* @fn      multi_role_taskFxn
+*
+* @brief   Application task entry point for the multi_role.
+*
+* @param   a0, a1 - not used.
+*
+* @return  None.
+*/
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+static void multi_role_taskFxn(void* a0)</span>
+<span class="gi">+#else</span>
+static void multi_role_taskFxn(UArg a0, UArg a1)
+<span class="gi">+#endif</span>
+{
+   // Initialize application
+   multi_role_init();
+
+   // Application main loop
+   for (;;)
+   {
+      uint32_t events;
+
+      // Waits for an event to be posted associated with the calling thread.
+      // Note that an event associated with a thread is posted when a
+      // message is queued to the message receive queue of the thread
+
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+    mq_receive(syncEvent, (char*)&amp;events, sizeof(uint32_t), NULL);</span>
+<span class="gi">+#else</span>
+      events = Event_pend(syncEvent, Event_Id_NONE, MR_ALL_EVENTS,
+                        ICALL_TIMEOUT_FOREVER); // event_31 + event_30
+<span class="gi">+#endif</span>
+
+      if (events)
+
+//..
+//..
+//..
+
+         // If RTOS queue is not empty, process app message.
+      if (events &amp; MR_QUEUE_EVT)
+      {
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+</span>
+<span class="gi">+         mrEvt_t *pMsg;</span>
+<span class="gi">+         do {</span>
+<span class="gi">+             pMsg = (mrEvt_t *)Util_dequeueMsg(g_POSIX_appMsgQueue);</span>
+<span class="gi">+             if (NULL != pMsg)</span>
+<span class="gi">+             {</span>
+<span class="gi">+                 // Process message.</span>
+<span class="gi">+                 multi_role_processAppMsg(pMsg);</span>
+<span class="gi">+</span>
+<span class="gi">+                // Free the space from the message.</span>
+<span class="gi">+                ICall_free(pMsg);</span>
+<span class="gi">+             }</span>
+<span class="gi">+             else</span>
+<span class="gi">+             {</span>
+<span class="gi">+                 break;</span>
+<span class="gi">+             }</span>
+<span class="gi">+           }while(1);</span>
+<span class="gi">+#else</span>
+            while (!Queue_empty(appMsgQueue))
+               {
+                  mrEvt_t *pMsg = (mrEvt_t *)Util_dequeueMsg(appMsgQueue);
+                  if (pMsg)
+                  {
+                  // Process message.
+                  multi_role_processAppMsg(pMsg);
+
+                  // Free the space from the message.
+                  ICall_free(pMsg);
+                  }
+               }
+<span class="gi">+#endif</span>
+      }
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">Listing 39. </span><span class="caption-text">multi_role FreeRTOS differences - multi_role_advertInit</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>   if (addrMode &gt; ADDRMODE_RANDOM)
+   {
+      multi_role_updateRPA();
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+    // Create one-shot clock for RPA check event.</span>
+<span class="gi">+    Util_constructClock(&amp;clkRpaRead, (void*)multi_role_clockHandler,</span>
+<span class="gi">+                        READ_RPA_PERIOD, 0, true,</span>
+<span class="gi">+                        (void*) &amp;argRpaRead);</span>
+<span class="gi">+</span>
+<span class="gi">+#else</span>
+      // Create one-shot clock for RPA check event.
+      Util_constructClock(&amp;clkRpaRead, multi_role_clockHandler,
+                        READ_RPA_PERIOD, 0, true,
+                        (UArg) &amp;argRpaRead);
+<span class="gi">+#endif</span>
+   }
+}
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">Listing 40. </span><span class="caption-text">multi_role FreeRTOS differences - multi_role_enqueueMsg</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>      pMsg-&gt;pData = pData;
+
+      // Enqueue the message.
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+    success = Util_enqueueMsg(g_POSIX_appMsgQueue, syncEvent, (uint8_t *)pMsg);</span>
+<span class="gi">+#else</span>
+      success = Util_enqueueMsg(appMsgQueue, syncEvent, (uint8_t *)pMsg);
+<span class="gi">+#endif</span>
+      return (success) ? SUCCESS : FAILURE;
+   }
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">Listing 41. </span><span class="caption-text">multi_role FreeRTOS differences - multi_role_clockHandler</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>/*********************************************************************
+* @fn      multi_role_clockHandler
+*
+* @brief   Handler function for clock timeouts.
+*
+* @param   arg - event type
+*
+* @return  None.
+*/
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+static void multi_role_clockHandler(void * arg)</span>
+<span class="gi">+#else</span>
+static void multi_role_clockHandler(UArg arg)
+<span class="gi">+#endif</span>
+{
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-number">Listing 42. </span><span class="caption-text">multi_role FreeRTOS differences - multi_role_handleKeys</span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>/*********************************************************************
+* @fn      multi_role_handleKeys
+*
+* @brief   Handles all key events for this device.
+*
+* @param   keys - bit field for key events. Valid entries:
+*                 HAL_KEY_SW_2
+*                 HAL_KEY_SW_1
+*
+* @return  none
+*/
+static void multi_role_handleKeys(uint8_t keys)
+{
+<span class="gi">+#ifndef FREERTOS</span>
+      uint32_t rtnVal = 0;
+<span class="gi">+#endif</span>
+      if (keys &amp; KEY_LEFT)
+   {
+<span class="gi">+#ifndef FREERTOS</span>
+      // Check if the key is still pressed
+      if (PIN_getInputValue(CONFIG_GPIO_BTN1) == 0)
+      {
+<span class="gi">+#endif</span>
+      tbm_buttonLeft();
+<span class="gi">+#ifndef FREERTOS</span>
+      }
+<span class="gi">+#endif</span>
+   }
+   else if (keys &amp; KEY_RIGHT)
+   {
+      // Check if the key is still pressed
+<span class="gi">+#ifndef FREERTOS</span>
+      rtnVal = PIN_getInputValue(CONFIG_GPIO_BTN2);
+      if (rtnVal == 0)
+      {
+<span class="gi">+#endif</span>
+      tbm_buttonRight();
+<span class="gi">+#ifndef FREERTOS</span>
+      }
+<span class="gi">+#endif</span>
+   }
+}
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-number">Listing 43. </span><span class="caption-text">multi_role FreeRTOS differences - multi_role_addConnInfo</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>            // Create a clock object and start
+            connList[i].pUpdateClock
+            = (Clock_Struct*) ICall_malloc(sizeof(Clock_Struct));
+
+            if (connList[i].pUpdateClock)
+            {
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+              Util_constructClock(connList[i].pUpdateClock,</span>
+<span class="gi">+                                              (void*)multi_role_clockHandler,</span>
+<span class="gi">+                                              SEND_PARAM_UPDATE_DELAY, 0, true,</span>
+<span class="gi">+                                              (void*) connList[i].pParamUpdateEventData);</span>
+<span class="gi">+</span>
+<span class="gi">+#else</span>
+               Util_constructClock(connList[i].pUpdateClock,
+                                    multi_role_clockHandler,
+                                 SEND_PARAM_UPDATE_DELAY, 0, true,
+                                 (UArg) connList[i].pParamUpdateEventData);
+<span class="gi">+#endif</span>
+            }
+            else
+            {
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are other clocks (i.e. pRssiClock) defined in the
+<code class="docutils literal notranslate"><span class="pre">simple_central</span></code> project. Make sure to apply the above change to those
+instances as shown in the code snippet below, take note of the new
+<em>scClockEventData_t</em> structure used to pass in arguments. This can be
+taken from <code class="docutils literal notranslate"><span class="pre">multi_role.c</span></code> file and renamed.</p>
+<p>The example below shows the syntax required when passing in parameters to
+the Util_constructClock() function using FreeRTOS. Simply put, logical
+statements made inside the function call will result in a build issue.</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-number">Listing 44. </span><span class="caption-text">simple_central::SimpleCentral_StartRssi() - Clock construction</span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>      if (connList[connIndex].pRssiClock)
+   {
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+    scClockEventData_t locData;</span>
+<span class="gi">+    locData.event = (connIndex &lt;&lt; 8) | SC_EVT_READ_RSSI;</span>
+<span class="gi">+</span>
+<span class="gi">+    // Create one-shot clock for RPA check event.</span>
+<span class="gi">+    Util_constructClock(connList[connIndex].pRssiClock,</span>
+<span class="gi">+                        (void*)SimpleCentral_clockHandler,</span>
+<span class="gi">+                        DEFAULT_RSSI_PERIOD, 0, true,</span>
+<span class="gi">+                        (void*)&amp;locData);</span>
+<span class="gi">+#else</span>
+      Util_constructClock(connList[connIndex].pRssiClock,
+                        SimpleCentral_clockHandler,
+                        DEFAULT_RSSI_PERIOD, 0, true,
+                        (connIndex &lt;&lt; 8) | SC_EVT_READ_RSSI);
+<span class="gi">+#endif</span>
+   }
+</pre></div>
+</div>
+</div>
+<p>While searching for the macro <strong>FREERTOS</strong> in the project, you will find
+changes to other files (i.e. <code class="docutils literal notranslate"><span class="pre">util.c/h</span></code>, <code class="docutils literal notranslate"><span class="pre">icall_user_config.c</span></code>, etc).
+These changes do not need to be applied to the new example because these
+files are inherited directly from the SDK.</p>
+</li>
+<li><p>Modify main_freertos.c</p>
+<div class="literal-block-wrapper docutils container" id="id18">
+<div class="code-block-caption"><span class="caption-number">Listing 45. </span><span class="caption-text">Modifying main.c - include</span><a class="headerlink" href="#id18" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>#include &quot;bcomdef.h&quot;
+<span class="gd">-#include &quot;multi_role.h&quot;</span>
+<span class="gi">+#include &quot;simple_central.h&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id19">
+<div class="code-block-caption"><span class="caption-number">Listing 46. </span><span class="caption-text">Modifying main.c - createTask</span><a class="headerlink" href="#id19" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>/* Kick off application - Priority 1 */
+<span class="gd">-multi_role_createTask();</span>
+<span class="gi">+SimpleCentral_createTask();</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Modify the .syscfg file using a text editor to change the target rtos to
+freertos.</p>
+<div class="literal-block-wrapper docutils container" id="id20">
+<div class="code-block-caption"><span class="caption-number">Listing 47. </span><span class="caption-text">multi_role freertos differences - SysConfig</span><a class="headerlink" href="#id20" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>*/
+<span class="gd">-// @cliArgs --board /ti/boards/CC26X2R1_LAUNCHXL --rtos tirtos</span>
+<span class="gi">+// @cliArgs --board /ti/boards/CC26X2R1_LAUNCHXL --rtos freertos</span>
+
+/*
+*  simple_central.syscfg
+*/
+</pre></div>
+</div>
+</div>
+</li>
+</ol>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p><strong>Workaround for Button Debouncing</strong></p>
+<p>There exists a known issue with FreeRTOS projects in the TI BLE5-Stack (see
+Release Notes for more information). This issue affects only the usage of the
+example application’s two button menu. To workaround this, manually add a
+delay inside board_key.c::Board_keyCallback, as opposed to starting a
+FreeRTOS timer. Below is an example of the modification:</p>
+<div class="literal-block-wrapper docutils container" id="id21">
+<div class="code-block-caption"><span class="caption-number">Listing 48. </span><span class="caption-text">Reworking the Pin debounce timer</span><a class="headerlink" href="#id21" title="Permalink to this code">¶</a></div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span>//define this outside the function
+<span class="gi">+#define CPU_convertMsToDelayCycles(milliseconds) \</span>
+<span class="gi">+   (((uint32_t)(milliseconds)) * (48000 / 3))</span>
+
+//Place the below changes at the end of Board_keyCallback
+         keysPressed |= KEY_RIGHT;
+}
+#endif
+
+<span class="gi">+#ifdef FREERTOS</span>
+<span class="gi">+/* 100 ms delay */</span>
+<span class="gi">+CPUdelay(CPU_convertMsToDelayCycles(100));</span>
+
+<span class="gi">+// Notify the application</span>
+<span class="gi">+(*appKeyChangeHandler)(keysPressed);</span>
+<span class="gi">+#else</span>
+Util_startClock(&amp;keyChangeClock);
+<span class="gi">+#endif</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="synchronization.html" class="btn btn-neutral float-left" title="Thread Synchronization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html" class="btn btn-neutral float-right" title="BLE5-Stack" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

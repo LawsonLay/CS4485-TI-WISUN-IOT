@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_a_e_s_c_t_r___segmented_operation" kind="struct" language="C++" prot="public">
+    <compoundname>AESCTR_SegmentedOperation</compoundname>
+    <includes refid="_a_e_s_c_t_r_8h" local="no">AESCTR.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_a_e_s_c_t_r___segmented_operation_1a87df4934d47561b0baf5331c823bce60" prot="public" static="no" mutable="no">
+        <type>const uint8_t *</type>
+        <definition>const uint8_t* AESCTR_SegmentedOperation::input</definition>
+        <argsstring></argsstring>
+        <name>input</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>Encryption: The plaintext buffer to be encrypted in the CTR operation.</para></listitem><listitem><para>Decryption: The ciphertext to be decrypted. </para></listitem></itemizedlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/AESCTR.h" line="635" column="1" bodyfile="source/ti/drivers/AESCTR.h" bodystart="635" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_a_e_s_c_t_r___segmented_operation_1af53dcde098c68e20f239d88dcf6fffdc" prot="public" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* AESCTR_SegmentedOperation::output</definition>
+        <argsstring></argsstring>
+        <name>output</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>Encryption: The output ciphertext buffer that the encrypted plaintext is copied to.</para></listitem><listitem><para>Decryption: The plaintext derived from the decrypted ciphertext is copied here.</para></listitem></itemizedlist>
+</para><para>Size of the output buffer must be greater than or equal to the inputLength.</para><para>For CC27XX devices with _HSM-suffixed key encoding, the output buffer needs to be 32-bit aligned. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/AESCTR.h" line="640" column="1" bodyfile="source/ti/drivers/AESCTR.h" bodystart="640" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_a_e_s_c_t_r___segmented_operation_1a911b91975f3af78d2975ffd7aab6efd0" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t AESCTR_SegmentedOperation::inputLength</definition>
+        <argsstring></argsstring>
+        <name>inputLength</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Length of the input in bytes. An equal number of bytes will be output by the operation. Must be a non-zero multiple of block size (16-bytes) when calling <ref refid="_a_e_s_c_t_r_8h_1a268380d059ea502beb8d1e9ec98813f2" kindref="member">AESCTR_addData()</ref>. May be zero when calling <ref refid="_a_e_s_c_t_r_8h_1a7993acdb3c9124ac7024b70cca8e2c51" kindref="member">AESCTR_finalize()</ref> to finalize a segmented operation without additional data.</para><para>For CC27XX devices with _HSM-suffixed key encoding, the inputLength must be block-size aligned. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/AESCTR.h" line="653" column="1" bodyfile="source/ti/drivers/AESCTR.h" bodystart="653" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct containing the parameters required for encrypting/decrypting a message using a segmented operation. This struct must be updated for each &quot;add data&quot; and &quot;finalize&quot; step. Modifying the structure and any buffers that it points to while an operation is in progress is prohibited. </para>    </briefdescription>
+    <detaileddescription>
+<para>The driver may access it at any point during the operation. It must remain in scope for the entire duration of the operation. </para>    </detaileddescription>
+    <location file="source/ti/drivers/AESCTR.h" line="634" column="1" bodyfile="source/ti/drivers/AESCTR.h" bodystart="633" bodyend="663"/>
+    <listofallmembers>
+      <member refid="struct_a_e_s_c_t_r___segmented_operation_1a87df4934d47561b0baf5331c823bce60" prot="public" virt="non-virtual"><scope>AESCTR_SegmentedOperation</scope><name>input</name></member>
+      <member refid="struct_a_e_s_c_t_r___segmented_operation_1a911b91975f3af78d2975ffd7aab6efd0" prot="public" virt="non-virtual"><scope>AESCTR_SegmentedOperation</scope><name>inputLength</name></member>
+      <member refid="struct_a_e_s_c_t_r___segmented_operation_1af53dcde098c68e20f239d88dcf6fffdc" prot="public" virt="non-virtual"><scope>AESCTR_SegmentedOperation</scope><name>output</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

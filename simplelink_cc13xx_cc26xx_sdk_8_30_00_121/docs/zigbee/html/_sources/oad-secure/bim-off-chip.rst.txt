@@ -1,0 +1,80 @@
+.. _sec-oad-bim-off-chip:
+
+BIM for Off-Chip OAD
+^^^^^^^^^^^^^^^^^^^^
+
+This section describes the behavior of the :term:`BIM` for off-chip OAD. This
+approach requires an external flash to be connected to the device. As with
+on-chip OAD, it is BIM's responsibility to locate which image should be run.
+
+At steady state, the normal case is that a valid image exists in internal flash
+and no image in the external flash has been marked as needing to be copied. In
+this case, BIM will validate that the image on internal flash and execute it
+by loading the stack pointer and jumping to the image's reset vector location.
+BIM determines the location of the reset vector and stack pointer of the image
+through the OAD image header attached to it.
+
+.. note::
+
+    The execution flow below is assuming security is on. If using an unsecured
+    BIM configuration, the process is the same with the exception that there
+    is no check for security.
+
+The following flowchart describes the process by which the BIM selects an
+image.
+
+.. ifconfig:: device == 'cc2640'
+
+    .. include:: inc_bim-off-chip-flowchart-cc2640.rst
+
+.. ifconfig:: device != 'cc2640'
+
+    .. include:: inc_bim-off-chip-flowchart.rst
+
+The image above is illustrated in words below. In order to determine which
+image is best to run, BIM takes the following measures:
+
+#. At startup, BIM looks for a valid image header in external flash by reading
+   the first 8 bytes to find the valid External Flash Image Identification
+   value.
+
+#. After a valid header is found, it reads the entire header from ext flash
+   and verifies the compatibility of BIM and image header versions. Then it
+   checks if the 'Image copy status' is set to be copied to the on-chip
+   flash(0xFE) and has a valid CRC (CRC status=0xFE).
+
+    - If a compatible header is found, secure versions of the BIM will check
+      the signature of the image using ECDSA verification algorithm.
+
+    - If the CRC flag is not valid (CRC status != 0xFE) then it is rejected.
+
+    - On finding the invalid CRC it moves on to read the next image's header.
+
+#. If a valid image is found, BIM copies the image to on-chip flash, as per
+   the image copy procedure.
+
+    - After the copy, the CRC is calculated and signature is validated again
+      on the internal flash to ensure the copy succeeded.
+
+    - If the copy failed the status byte is updated and the BIM will continue
+      searching external flash.
+
+    - If the copy succeeded, then the BIM will verify the image again and if
+      successful jump directly to the application image, and the search
+      process ends.
+
+#. If BIM reaches the end of the image header region in external flash without
+   finding a valid image, then it will try to find an on-chip image and
+   execute it.
+
+#. If BIM fails to find a valid image internal flash, it will attempt to
+   revert the factory image if there is one present.
+
+#. BIM will put the device to low power mode if it fails to find a valid
+   application image.
+
+.. note::
+
+    An image is considered bad/invalid if it's calculated CRC32 does not match
+    the image's CRC bytes embedded in the image header.
+

@@ -1,0 +1,273 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="group__key__lifetimes" kind="group">
+    <compoundname>key_lifetimes</compoundname>
+    <title>Key lifetimes</title>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__key__lifetimes_1ga67c68b7d1a3dd9775e6436682378c455" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_LIFETIME_VOLATILE</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1a6606ab969b68d63d56d28a8d718fcbb9" kindref="member">KeyStore_PSA_KeyLifetime</ref>)PSA_KEY_LIFETIME_VOLATILE)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The default lifetime for volatile keys.</para><para>A volatile key only exists as long as the identifier to it is not destroyed. The key material is guaranteed to be erased on a power reset.</para><para>A key with this lifetime is stored in RAM.</para><para>Equivalent to <ref refid="group__key__lifetimes_1ga1e44dca17b092b3e83f5b7060327c5bc" kindref="member">KEYSTORE_PSA_KEY_LIFETIME_FROM_PERSISTENCE_AND_LOCATION</ref>(<ref refid="group__key__lifetimes_1ga7e55c5afba380ad7db9e657a0d09db80" kindref="member">KEYSTORE_PSA_KEY_PERSISTENCE_VOLATILE</ref>, <ref refid="group__key__lifetimes_1gabce5406951cf74356a2a53c006c264cc" kindref="member">KEYSTORE_PSA_KEY_LOCATION_LOCAL_STORAGE</ref>) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="809" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="809" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1ga0f9d5620a69b0815445736338f370355" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_LIFETIME_PERSISTENT</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1a6606ab969b68d63d56d28a8d718fcbb9" kindref="member">KeyStore_PSA_KeyLifetime</ref>)PSA_KEY_LIFETIME_PERSISTENT)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The default lifetime for persistent keys.</para><para>A persistent key remains in storage until it is explicitly destroyed or until the corresponding storage area is wiped. This specification does not define any mechanism to wipe a storage area, but implementations may provide their own mechanism (for example to perform a factory reset, to prepare for device refurbishment, or to uninstall an application).</para><para>This lifetime value is the default storage area for the calling application. Implementations may offer other storage areas designated by other lifetime values as implementation-specific extensions.</para><para>Equivalent to <ref refid="group__key__lifetimes_1ga1e44dca17b092b3e83f5b7060327c5bc" kindref="member">KEYSTORE_PSA_KEY_LIFETIME_FROM_PERSISTENCE_AND_LOCATION</ref>(<ref refid="group__key__lifetimes_1ga771e95d016b952b4a60127a6cc9ecf3c" kindref="member">KEYSTORE_PSA_KEY_PERSISTENCE_DEFAULT</ref>, <ref refid="group__key__lifetimes_1gabce5406951cf74356a2a53c006c264cc" kindref="member">KEYSTORE_PSA_KEY_LOCATION_LOCAL_STORAGE</ref>) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="827" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="827" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1ga7e55c5afba380ad7db9e657a0d09db80" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_PERSISTENCE_VOLATILE</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1af7027aa7272eb5591047ccc0fcd39791" kindref="member">KeyStore_PSA_KeyPersistence</ref>)PSA_KEY_PERSISTENCE_VOLATILE)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The persistence level of volatile keys.</para><para>See <ref refid="_crypto_key_key_store___p_s_a_8h_1af7027aa7272eb5591047ccc0fcd39791" kindref="member">KeyStore_PSA_KeyPersistence</ref> for more information. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="833" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="833" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1ga771e95d016b952b4a60127a6cc9ecf3c" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_PERSISTENCE_DEFAULT</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1af7027aa7272eb5591047ccc0fcd39791" kindref="member">KeyStore_PSA_KeyPersistence</ref>)PSA_KEY_PERSISTENCE_DEFAULT)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The default persistence level for persistent keys.</para><para>See <ref refid="_crypto_key_key_store___p_s_a_8h_1af7027aa7272eb5591047ccc0fcd39791" kindref="member">KeyStore_PSA_KeyPersistence</ref> for more information. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="839" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="839" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1ga87091f827e8b89dc39f4fbb7de138664" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_PERSISTENCE_HSM_ASSET_STORE</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1af7027aa7272eb5591047ccc0fcd39791" kindref="member">KeyStore_PSA_KeyPersistence</ref>)0x80U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The persistence level for HSM Asset Store.</para><para>See <ref refid="_crypto_key_key_store___p_s_a_8h_1af7027aa7272eb5591047ccc0fcd39791" kindref="member">KeyStore_PSA_KeyPersistence</ref> for more information. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="845" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="845" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1gaae0f5f9ca3d757e8130c3950a9d4c23a" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_PERSISTENCE_READ_ONLY</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1af7027aa7272eb5591047ccc0fcd39791" kindref="member">KeyStore_PSA_KeyPersistence</ref>)PSA_KEY_PERSISTENCE_READ_ONLY)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A persistence level indicating that a key is never destroyed.</para><para>See <ref refid="_crypto_key_key_store___p_s_a_8h_1af7027aa7272eb5591047ccc0fcd39791" kindref="member">KeyStore_PSA_KeyPersistence</ref> for more information. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="851" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="851" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1ga6431c5f68b8171fa09cedae9833a67ef" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_LIFETIME_GET_PERSISTENCE</name>
+        <param><defname>lifetime</defname></param>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1af7027aa7272eb5591047ccc0fcd39791" kindref="member">KeyStore_PSA_KeyPersistence</ref>)((lifetime) &amp; 0x000000ff))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="854" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="854" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1ga1b0fb0be3d3b0c99d457d5d2375f5953" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_LIFETIME_GET_LOCATION</name>
+        <param><defname>lifetime</defname></param>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1a7470b47882d94399625c93210a199084" kindref="member">KeyStore_PSA_KeyLocation</ref>)((lifetime) &gt;&gt; 8))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="857" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="857" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1ga6113f7b88006303b65bc98b3f676272f" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_LIFETIME_IS_VOLATILE</name>
+        <param><defname>lifetime</defname></param>
+        <initializer>(<ref refid="group__key__lifetimes_1ga6431c5f68b8171fa09cedae9833a67ef" kindref="member">KEYSTORE_PSA_KEY_LIFETIME_GET_PERSISTENCE</ref>(lifetime) == <ref refid="group__key__lifetimes_1ga7e55c5afba380ad7db9e657a0d09db80" kindref="member">KEYSTORE_PSA_KEY_PERSISTENCE_VOLATILE</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether a key lifetime indicates that the key is volatile.</para><para>A volatile key is automatically destroyed by the implementation when the application instance terminates. In particular, a volatile key is automatically destroyed on a power reset of the device.</para><para>A key that is not volatile is persistent. Persistent keys are preserved until the application explicitly destroys them or until an implementation-specific device management event occurs (for example, a factory reset).</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lifetime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lifetime value to query (value of type <ref refid="_crypto_key_key_store___p_s_a_8h_1a6606ab969b68d63d56d28a8d718fcbb9" kindref="member">KeyStore_PSA_KeyLifetime</ref>).</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>1</computeroutput> if the key is volatile, otherwise <computeroutput>0</computeroutput>. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="875" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="875" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1ga22396e6294d2bf1b17888154b92d3557" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_LIFETIME_IS_READ_ONLY</name>
+        <param><defname>lifetime</defname></param>
+        <initializer>(<ref refid="group__key__lifetimes_1ga6431c5f68b8171fa09cedae9833a67ef" kindref="member">KEYSTORE_PSA_KEY_LIFETIME_GET_PERSISTENCE</ref>(lifetime) == <ref refid="group__key__lifetimes_1gaae0f5f9ca3d757e8130c3950a9d4c23a" kindref="member">KEYSTORE_PSA_KEY_PERSISTENCE_READ_ONLY</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether a key lifetime indicates that the key is read-only.</para><para>Read-only keys cannot be created or destroyed through the PSA Crypto API. They must be created through platform-specific means that bypass the API.</para><para>Some platforms may offer ways to destroy read-only keys. For example, consider a platform with multiple levels of privilege, where a low-privilege application can use a key but is not allowed to destroy it, and the platform exposes the key to the application with a read-only lifetime. High-privilege code can destroy the key even though the application sees the key as read-only.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lifetime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lifetime value to query (value of type <ref refid="_crypto_key_key_store___p_s_a_8h_1a6606ab969b68d63d56d28a8d718fcbb9" kindref="member">KeyStore_PSA_KeyLifetime</ref>).</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>1</computeroutput> if the key is read-only, otherwise <computeroutput>0</computeroutput>. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="895" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="895" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1ga1e44dca17b092b3e83f5b7060327c5bc" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_LIFETIME_FROM_PERSISTENCE_AND_LOCATION</name>
+        <param><defname>persistence</defname></param>
+        <param><defname>location</defname></param>
+        <initializer>(PSA_KEY_LIFETIME_FROM_PERSISTENCE_AND_LOCATION(persistence, location))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Construct a lifetime from a persistence level and a location.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>persistence</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The persistence level (value of type <ref refid="_crypto_key_key_store___p_s_a_8h_1af7027aa7272eb5591047ccc0fcd39791" kindref="member">KeyStore_PSA_KeyPersistence</ref>). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>location</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The location indicator (value of type <ref refid="_crypto_key_key_store___p_s_a_8h_1a7470b47882d94399625c93210a199084" kindref="member">KeyStore_PSA_KeyLocation</ref>).</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The constructed lifetime value. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="907" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="907" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1gabce5406951cf74356a2a53c006c264cc" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_LOCATION_LOCAL_STORAGE</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1a7470b47882d94399625c93210a199084" kindref="member">KeyStore_PSA_KeyLocation</ref>)PSA_KEY_LOCATION_LOCAL_STORAGE)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The local storage area for persistent keys.</para><para>This storage area is available on all systems that can store persistent keys without delegating the storage to a third-party cryptoprocessor.</para><para>See <ref refid="_crypto_key_key_store___p_s_a_8h_1a7470b47882d94399625c93210a199084" kindref="member">KeyStore_PSA_KeyLocation</ref> for more information. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="917" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="917" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1gabbc4cc76f71653de4c35e5deb31e0c93" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_LOCATION_HSM_ASSET_STORE</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1a7470b47882d94399625c93210a199084" kindref="member">KeyStore_PSA_KeyLocation</ref>)0x000001U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The default secure element storage area for persistent keys.</para><para>This storage location is available on systems that have one or more secure elements that are able to store keys (i.e. CC27XX only)</para><para>See <ref refid="_crypto_key_key_store___p_s_a_8h_1a7470b47882d94399625c93210a199084" kindref="member">KeyStore_PSA_KeyLocation</ref> for more information. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="926" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="926" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1ga2139eb197f8e363d1ff623139dbd84a7" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_ID_NULL</name>
+        <initializer>((KeyStore_PSA_keyID)0x0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The null key identifier. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="930" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="930" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1gad869ea4af97b63b8c729126387914257" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_ID_USER_MAX</name>
+        <initializer>((KeyStore_PSA_keyID)PSA_KEY_ID_USER_MAX)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The maximum value for a key identifier chosen by the application. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="934" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="942" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1gad869ea4af97b63b8c729126387914257" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_ID_USER_MAX</name>
+        <initializer>((KeyStore_PSA_keyID)PSA_KEY_ID_USER_MAX)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The maximum value for a key identifier chosen by the application. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="942" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="942" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1gadb82894cdb81fad99975fabc1f5bac81" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_ID_USER_MIN</name>
+        <initializer>((KeyStore_PSA_keyID)PSA_KEY_ID_USER_MIN)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The minimum value for a key identifier chosen by the application. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="938" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="938" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1gac487d6aa798bfd9970defd5f8a3c8048" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_ID_VENDOR_MIN</name>
+        <initializer>((KeyStore_PSA_keyID)PSA_KEY_ID_VENDOR_MIN)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The minimum value for a key identifier chosen by the implementation. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="946" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="946" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1ga61b58d606ee33b8ffc9d21b6ecd68927" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_ID_VENDOR_MAX</name>
+        <initializer>((KeyStore_PSA_keyID)PSA_KEY_ID_VENDOR_MAX)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The maximum value for a key identifier chosen by the implementation. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="950" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="950" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__lifetimes_1ga4e1a19f2b2d0b365d65a23809c8e16db" prot="public" static="no">
+        <name>KEYSTORE_PSA_DEFAULT_OWNER</name>
+        <initializer>MBEDTLS_PSA_CRYPTO_KEY_ID_DEFAULT_OWNER</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Default Key Owner </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="954" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="954" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Queues &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tasks" href="tasks.html" />
+    <link rel="prev" title="Thread Synchronization" href="synchronization.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug tirtos queues";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../wisun-guide/index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../wisun-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="hwis_swis_idle.html">Threading Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bios7_config.html">Kernel Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_vs_construct.html">Creating vs. Constructing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization.html">Thread Synchronization</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Queues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html">Clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="power.html">Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bios7_migration.html">TI-RTOS to TI-RTOS7 Migration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/wisun-index.html">TI Wi-SUN FAN Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/advanced-wisun-features.html">Advanced TI Wi-SUN FAN Stack Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/network-management.html">Wi-SUN Network Topology Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/NWP_interface.html">TI Wi-SUN FAN NWP Interface Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/wisun-oad-index.html">MCUBoot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/migration-guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../wisun-guide/index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../wisun-guide/index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../wisun-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a> &raquo;</li>
+      <li>Queues</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="queues">
+<h1>Queues<a class="headerlink" href="#queues" title="Permalink to this headline">¶</a></h1>
+<p>The TI-RTOS7 Queue module provides a thread-safe unidirectional message passing
+module operating in a first in, first out (FIFO) basis. Queues are commonly
+used to allow high priority threads to pass messages to lower priority tasks
+for deferred processing; therefore allowing low priority tasks to block until
+necessary to run.</p>
+<p>In <a class="reference internal" href="#fig-queue-messaging-process"><span class="std std-numref">Figure 14.</span></a> a queue is configured for
+unidirectional communication from task A to task B. Task A “puts” messages into
+the queue and task B “gets” messages from the queue.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-queue-messaging-process"></span><img alt="../_images/fig-queue-messaging-process.jpg" src="../_images/fig-queue-messaging-process.jpg" />
+<p class="caption"><span class="caption-number">Figure 14. </span><span class="caption-text">Queue Messaging Process</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Functional Examples <a class="reference internal" href="#fig-enqueue-message"><span class="std std-numref">Figure 15.</span></a> and
+<a class="reference internal" href="#fig-dequeue-message"><span class="std std-numref">Figure 16.</span></a> illustrate how a queue is used to enqueue a button
+press message from a Hwi to a Swi to be post-processed within a task context.</p>
+<div class="figure align-center" id="id3">
+<span id="fig-enqueue-message"></span><p class="plantuml">
+<img src="../_images/plantuml-a6820cb6023470b64c7cc0d96de1a657dffe7fe0.png" alt="&#64;startuml
+hide footbox
+
+box &quot;Swi context&quot;
+    participant &quot;Board Key module&quot; as A
+    participant Application as B
+    database appMsgQueue as C
+end box
+
+-[#red]&gt; A : Key press interrupt
+&lt;[#red]-- A
+
+activate A
+
+autonumber
+A -&gt; B : Application_keyChangeHandler();
+activate B
+
+note right: Add APP_KEY_CHANGE_EVT into the queue
+B -&gt; B : Application_enqueueMsg();
+activate B
+autonumber stop
+B -&gt; : malloc();
+B -&gt; C: Queue_put();
+activate C
+C --&gt; B:
+deactivate C
+B -&gt; : Event_post();
+deactivate B
+B --&gt; A
+deactivate B
+deactivate A
+
+&#64;enduml"/>
+</p>
+<p class="caption"><span class="caption-number">Figure 15. </span><span class="caption-text">Sequence diagram for enqueuing a message</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>With interrupts enabled, a pin interrupt can occur asynchronously within a
+<a class="reference internal" href="../wisun-guide/references.html#term-HWI"><span class="xref std std-term">Hwi</span></a> context. To keep interrupts as short as possible, the work
+associated to the interrupt is deferred to tasks for processing. In the
+some example applications, pin interrupts are abstracted
+via the <em>Board Key module</em>. This module notifies registered functions via a
+<a class="reference internal" href="../wisun-guide/references.html#term-SWI"><span class="xref std std-term">Swi</span></a> callback. In this case, <code class="docutils literal notranslate"><span class="pre">Application_keyChangeHandler</span></code>
+is the registered callback function.</p>
+<p><strong>Step 1</strong> in <a class="reference internal" href="#fig-enqueue-message"><span class="std std-numref">Figure 15.</span></a> shows the callback to
+<code class="docutils literal notranslate"><span class="pre">Application_keyChangeHandler</span></code> when a key is pressed. This event is
+placed into the application’s queue for processing.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<span id="board-key-change-handler-listing"></span><div class="code-block-caption"><span class="caption-number">Listing 8. </span><span class="caption-text">Defining Application_keyChangeHandler()</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kt">void</span><span class="w"> </span><span class="nf">Application_keyChangeHandler</span><span class="p">(</span><span class="n">uint8</span><span class="w"> </span><span class="n">keys</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">2</span><span class="p">{</span><span class="w"></span>
+<span class="hll"><span class="linenos">3</span><span class="w">  </span><span class="n">Application_enqueueMsg</span><span class="p">(</span><span class="n">APP_KEY_CHANGE_EVT</span><span class="p">,</span><span class="w"> </span><span class="n">keys</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos">4</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p><strong>Step 2</strong> in <a class="reference internal" href="#fig-enqueue-message"><span class="std std-numref">Figure 15.</span></a> shows how this key press is enqueued
+for the application task. Here, memory is allocated so the message can be added
+to the queue.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">Listing 9. </span><span class="caption-text">Defining Application_enqueueMsg()</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">Application_enqueueMsg</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">pData</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="hll"><span class="linenos"> 3</span><span class="w">  </span><span class="n">qEvt_t</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">qEvt_t</span><span class="p">));</span><span class="w"></span>
+</span><span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="c1">// Create dynamic pointer to message.</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">hdr</span><span class="p">.</span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">hdr</span><span class="p">.</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">    </span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">pData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pData</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">    </span><span class="c1">// Enqueue the message.</span>
+<span class="hll"><span class="linenos">13</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Queue_put</span><span class="p">(</span><span class="n">appMsgQueue</span><span class="p">,</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">_elem</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos">14</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">17</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="figure align-center" id="id6">
+<span id="fig-dequeue-message"></span><p class="plantuml">
+<img src="../_images/plantuml-f1d592a1cbd4e273975e99e5e2436c61dd86914e.png" alt="&#64;startuml
+hide footbox
+
+box &quot;Task context&quot;
+    participant Application as A
+    database appMsgQueue as B
+end box
+
+activate A
+A -&gt; : Event_pend()
+note right: Task called Event_pend() and gets blocked
+deactivate A
+
+...
+
+-&gt; A : Posted event
+activate A
+autonumber 3
+A -&gt; A : while (pMsg = Queue_get())
+activate A
+autonumber stop
+
+autonumber resume
+A -&gt; : Application_processAppMsg(pMsg);
+note right: Application_processAppMsg \n{\n\tcase (APP_KEY_CHANGE_EVT):\n\t\tApplication_handleKeys()\n};
+autonumber resume
+A -&gt; : free(pMsg)
+
+autonumber stop
+note right: Repeat while there are more messages\nin the queue
+deactivate A
+
+&#64;enduml"/>
+</p>
+<p class="caption"><span class="caption-number">Figure 16. </span><span class="caption-text">Sequence diagram for dequeuing a message</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>Step 3</strong> in <a class="reference internal" href="#fig-dequeue-message"><span class="std std-numref">Figure 16.</span></a>, the application is
+unblocked by the posted event where it proceeds
+to check if messages have been placed in the queue for processing.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-number">Listing 10. </span><span class="caption-text">Processing application messages</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// If RTOS queue is not empty, process app message</span>
+<span class="hll"><span class="linenos"> 2</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">events</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">APP_QUEUE_EVT</span><span class="p">)</span><span class="w"></span>
+</span><span class="linenos"> 3</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="n">scEvt_t</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="p">;</span><span class="w"></span>
+<span class="hll"><span class="linenos"> 5</span><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">scEvt_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">Queue_get</span><span class="p">(</span><span class="n">appMsgQueue</span><span class="p">))</span><span class="w"></span>
+</span><span class="linenos"> 6</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="c1">// Process message</span>
+<span class="hll"><span class="linenos"> 8</span><span class="w">        </span><span class="n">Application_processAppMsg</span><span class="p">(</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">        </span><span class="c1">// Free the space from the message</span>
+<span class="hll"><span class="linenos">11</span><span class="w">        </span><span class="n">free</span><span class="p">(</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos">12</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">13</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p><strong>Step 4</strong> in <a class="reference internal" href="#fig-dequeue-message"><span class="std std-numref">Figure 16.</span></a>, the application
+takes the dequeued message and processes it.</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-number">Listing 11. </span><span class="caption-text">Processing key interrupt message</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">Application_processAppMsg</span><span class="p">(</span><span class="n">sbcEvt_t</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">hdr</span><span class="p">.</span><span class="n">event</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">APP_KEY_CHANGE_EVT</span><span class="p">:</span><span class="w"></span>
+<span class="hll"><span class="linenos"> 6</span><span class="w">      </span><span class="n">Application_handleKeys</span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">hdr</span><span class="p">.</span><span class="n">state</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos"> 7</span><span class="w">      </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="c1">//...</span>
+<span class="linenos"> 9</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">10</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p><strong>Step 5</strong> in <a class="reference internal" href="#fig-dequeue-message"><span class="std std-numref">Figure 16.</span></a>, the application
+can now free the memory allocated in <strong>Step 2</strong>.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="synchronization.html" class="btn btn-neutral float-left" title="Thread Synchronization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tasks.html" class="btn btn-neutral float-right" title="Tasks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

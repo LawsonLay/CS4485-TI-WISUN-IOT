@@ -1,0 +1,156 @@
+/*
+ * Copyright (c) 2018-2024, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+// @cliArgs --board /ti/boards/LP_CC1311P3 --rtos freertos
+
+/*
+ *  i2secho.syscfg
+ */
+
+var board = system.deviceData.board.name;
+
+/* ======== CC3200 Audio BoosterPack ======== */
+if (!((board.match(/CC13.[12]/) && !board.match(/CC1312PSIP/)) || board.match(/CC2651P|CC2653P/))) {
+    var CC3200AUDBOOST = scripting.addHardware("/ti/boards/boosterpacks/CC3200AUDBOOST");
+}
+
+/* ======== Kernel Configuration ======== */
+system.getScript("kernel_config_release.syscfg.js");
+
+/* ======== GPIO ======== */
+    var GPIO = scripting.addModule("/ti/drivers/GPIO");
+    var gpio = GPIO.addInstance();
+    gpio.$hardware = system.deviceData.board.components.LED0;
+    gpio.$name = "CONFIG_GPIO_LED_0";
+
+/* ======== I2C ======== */
+var I2C = scripting.addModule("/ti/drivers/I2C");
+var i2c = I2C.addInstance();
+i2c.$name = "CONFIG_I2C_0";
+
+if (!((board.match(/CC13.[12]/) && !board.match(/CC1312PSIP/)) || board.match(/CC2651P|CC2653P/))) {
+    i2c.$hardware = CC3200AUDBOOST.components.CC3200AUDBOOST_I2C;
+}
+else {
+    i2c.i2c.sdaPin.$assign = "boosterpack.10";
+    i2c.i2c.sclPin.$assign = "boosterpack.9";
+}
+
+/* ======== I2S ======== */
+var I2S = scripting.addModule("/ti/drivers/I2S");
+var i2s = I2S.addInstance();
+i2s.interruptPriority = "2";
+i2s.$name = "CONFIG_I2S_0";
+
+
+/*
+ * Assign I2S pins manually for the following boards:
+ *  - All CC13x2 LaunchPads (except CC1312PSIP)
+ *  - CC2651P and CC2653 LaunchPads
+ *  - LP_EM_CC2674P10
+ *  - CC27xx LaunchPads
+ * Signal names and wiring below are taken from
+ * https://www.ti.com/lit/pdf/swru383, Figure 2-1.
+ *
+ * Other boards will use the CC3200AUDBOOST directly from SysCfg
+ */
+if ((board.match(/CC13.[12]/) && !board.match(/CC1312PSIP/)) || board.match(/CC2651P|CC2653P/) || board.match(/CC27/) || (board === "LP_EM_CC2674P10")) {
+
+    /* Set default pin assignments. They will be overridden as needed. */
+    let sd0Assignment  = "boosterpack.29";   // CC3200AUDBOOST DIN
+    let sd1Assignment  = "boosterpack.30";   // CC3200AUDBOOST DOUT
+    let sckAssignment  = "boosterpack.28";   // CC3200AUDBOOST BCLK
+    let wsAssignment   = "boosterpack.27";   // CC3200AUDBOOST FSYNC
+
+    if(board.match(/CC27/))
+    {
+        sd0Assignment = "boosterpack.38";  // CC3200AUDBOOST DIN
+        sckAssignment = "boosterpack.32";  // CC3200AUDBOOST BCLK
+        wsAssignment  = "boosterpack.31";  // CC3200AUDBOOST FSYNC
+
+        scripting.suppress("Connected to hardware*", i2s.i2s, "SD0Pin");
+        scripting.suppress("Connected to hardware*", i2s.i2s, "SD1Pin");
+        scripting.suppress("Connected to hardware*", i2s.i2s, "SCKPin");
+        scripting.suppress("Connected to hardware*", i2s.i2s, "WSPin");
+    }
+    else if(board === "LP_EM_CC2674P10")
+    {
+        /* The BoostPack's DIN, DOUT and FSYNC/WCLK signal pins are not
+         * compatible with LP_EM_CC2674P10.
+         * The following modifications are required
+         */
+        sd0Assignment = "boosterpack.23";  // CC3200AUDBOOST DIN
+        sd1Assignment = "boosterpack.24";  // CC3200AUDBOOST DOUT
+        wsAssignment  = "boosterpack.32";  // CC3200AUDBOOST FSYNC
+
+        /* Suppress warning that the SCK pin is connected to the CC3200 Audio
+         * BoosterPack I2S. It is intended to be connected to this hardware, but
+         * the "use hardware" option cannot be used because the other signals
+         * need to be jumpered.
+         */
+        scripting.suppress("Connected to hardware*", i2s.i2s, "SCKPin");
+    }
+    else
+    {
+        /*
+        * All CC13x2 LaunchPads must jumper SD0/DIN as this conflicts with the
+        * sub-1 GHz RF port.
+        */
+        sd0Assignment = "boosterpack.23";     // CC3200AUDBOOST DIN
+
+        if (board.match(/CC1352R/)) {
+            /*
+            * CC1352R1_LAUNCHXL have different mappings for SD1
+            * (due CC1352 having a 2.4GHz RF port)
+            */
+            sd1Assignment = "boosterpack.24";  // CC3200AUDBOOST DOUT
+        } else if (board.match(/CC1352P/) || board.match(/CC1311P/) || board.match(/CC2651P/) || board.match(/CC2653P/)) {
+            /*
+            * "P" variant LaunchPads must use jumpers for all I2S signals because
+            * there are conflicts between the I2S pins required by the BoosterPack
+            * and the RF ports and the RF switch signals on the LaunchPad
+            */
+            sd1Assignment = "boosterpack.24";  // CC3200AUDBOOST DOUT
+            sckAssignment = "boosterpack.25";  // CC3200AUDBOOST BCLK
+            wsAssignment  = "boosterpack.32";  // CC3200AUDBOOST FSYNC
+        }
+    }
+
+    /* Apply assignments to I2S module */
+    i2s.i2s.SD0Pin.$assign  = sd0Assignment;   // CC3200AUDBOOST DIN
+    i2s.i2s.SD1Pin.$assign  = sd1Assignment;   // CC3200AUDBOOST DOUT
+    i2s.i2s.SCKPin.$assign  = sckAssignment;   // CC3200AUDBOOST BCLK
+    i2s.i2s.WSPin.$assign   = wsAssignment;    // CC3200AUDBOOST FSYNC
+}
+else
+{
+    i2s.$hardware = CC3200AUDBOOST.components.CC3200AUDBOOST_I2S;
+}

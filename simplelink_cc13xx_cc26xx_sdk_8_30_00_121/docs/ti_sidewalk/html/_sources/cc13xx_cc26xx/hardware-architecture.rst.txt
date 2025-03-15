@@ -1,0 +1,147 @@
+.. _sec-cc13xx-cc26xx-hw-architecture:
+
+Hardware Architecture
+=====================
+
+.. important::
+
+    The main source of information for |DEVICEAND| hardware is the Technical 
+    Reference Manual:
+
+    - `CC13x1x3 CC26x1x3 SimpleLink Wireless MCU Technical Reference Manual`_
+    - `CC13x2 CC26x2 SimpleLink Wireless MCU Technical Reference Manual`_
+    - `CC13x2x7 CC26x2x7 SimpleLink Wireless MCU Technical Reference Manual`_
+    - `CC13x4 CC26x4 SimpleLink Wireless MCU Technical Reference Manual`_
+
+System Core
+-----------
+
+The system core is designed to run the wireless protocol stack from the
+link layer up to the user application.
+
+- For CC13x1 and CC26x1 devices the system core is ARM Cortex M4
+- For CC13x2 and CC26x2 devices the system core is ARM Cortex M4F
+- For CC13x4 and CC26x4 devices the system core is ARM Cortex M33
+
+You can read more about ARM Cortex in the `Arm Cortex User Guide`_.
+
+The link layer interfaces to the radio core through a software module called the
+RF driver, which sits above the RF doorbell software layer. The RF driver runs
+on the system core and acts as an interface to the radio on the |DEVICE|, and
+also manages the power domains of the radio hardware and radio core.
+Documentation for the RF driver can be found at the |TI_DRIVERS_API|.
+
+Radio Core (Arm Cortex-M0)
+--------------------------
+
+The Cortex-M0 (CM0) core within the |DEVICE| is responsible for both interfacing
+to the radio hardware, and translating complex instructions from the system core
+into bits that are sent over the air using the radio. For |STACK|, the CM0
+implements the PHY layer of the protocol stack. The CM0 is able to operate
+autonomously, which frees up the system core for higher-level protocol and
+application-layer processing.
+
+The system core communicates with the CM0 through a hardware interface called the RF
+doorbell, which is documented in the |TRM|. The radio core firmware is not
+intended to be used or modified by the application developer.
+
+Flash, RAM, and Peripherals
+---------------------------
+
+The following in-system programmable flash memory and SRAM options are available
+for the |DEVICE|. For a full memory of your device, please refer to the |DEVICE|
+datasheet.
+
++------------------------+------------+-----------+
+| Device                 | Flash (kB) | SRAM (kB) |
++========================+============+===========+
+| CC13x1x3 or CC26x1x3   | 352        | 40        |
++------------------------+------------+-----------+
+| CC13x2x1 or CC26x2x1   | 352        | 80        |
++------------------------+------------+-----------+
+| CC13x2x7 or CC26x2x7   | 704        | 144       |
++------------------------+------------+-----------+
+| CC13x4x10 or CC26x4x10 | 1024       | 256       |
++------------------------+------------+-----------+
+
+Devices outside of the |LITEDEVICE| also contain 8 kB of cache SRAM that can be
+utilized to extend RAM capacity or can function as a normal cache to increase
+application performance. The |DEVICE| also hosts a full range of peripherals
+including UART, I2C, I2S, AES, TRNG, temperature and battery monitors, 4x 32-bit
+timers, 2x SSI, and an integrated and autonomous sensor controller (an exception 
+being |LITEDEVICE| devices). See :ref:`sensor-controller` for more information 
+on the sensor controller.
+
+Below is a sample device block diagram. Please check the datasheet for an
+accurate block diagram of your device.
+
+.. figure:: resources/fig-agama-block-diagram.png
+    :name: fig-simplelink-block-diagram
+    :align: center
+
+    SimpleLink™ CC1352P1 Block Diagram
+
+
+CC13x1x3 and CC26x1x3
+^^^^^^^^^^^^^^^^^^^^^
+
+The |LITEDEVICE| are cost-optimized devices with a reduced feature set, as such
+the following changes have taken effect:
+
+-  Features and peripherals which have been **removed** (when compared with 
+   |DEVICE1| devices)
+
+   -  IEEE 754-compliant single-precision Floating Point Unit (FPU)
+   -  Memory Protection Unit (MPU)
+   -  AES 256-bit crypto accelerator
+   -  ECC and RSA Public Key Hardware Accelerator
+   -  SHA2 Accelerator
+   -  Sensor Controller with 4KB of SRAM
+
+-  Further peripheral modifications
+
+   -  Only 1x UART
+   -  Only 1x SSI (SPI, MICROWIRE, TI)
+   -  Reduced to 32KB + 8KB GP cache SRAM, parity removed
+   -  Reduced to 40 KB ROM
+
+.. note:: One implication of SRAM reduction is that Dynamic Multiprotocol Management 
+    (DMM) is not possible for common use cases with |LITEDEVICE| devices.
+
+.. _sec-programming-internal-flash-rom-bootloader:
+
+Programming Internal Flash With the ROM Bootloader
+--------------------------------------------------
+
+The |DEVICE| internal flash memory can be programmed using the bootloader
+located in device ROM. Both UART and SPI protocols are supported. See the
+Bootloader chapter of the |TRM| for more details on the programming protocol and
+requirements.
+
+.. note:: Because the ROM bootloader uses predefined DIO pins for internal flash
+    programming, allocate these pins in the board layout. The |TRM| has more
+    details on the pins allocated to the bootloader based on the chip package type.
+
+Startup Sequence
+----------------
+
+For a complete description of the |DEVICE| reset sequence, see the |TRM|.
+
+.. _sec-resets:
+
+Resets
+------
+
+Reset the device using only hard resets. From the software, this reset can be
+accomplished using:
+
+:code:`HAL_SYSTEM_RESET();`
+
+In CCS, select Board Reset (automatic) from the reset menu (see
+:numref:`fig-board-reset`). Then you can press the reset button to reset the
+device.
+
+.. _fig-board-reset:
+.. figure:: resources/fig-board-reset.png
+
+    Board Reset

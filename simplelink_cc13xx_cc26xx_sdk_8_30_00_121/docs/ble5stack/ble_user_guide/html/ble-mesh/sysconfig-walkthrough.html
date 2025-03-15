@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLE Mesh SysConfig Features &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="TI Bluetooth Mesh and OAD" href="ble-mesh-oad.html" />
+    <link rel="prev" title="Developing a Bluetooth Mesh Application" href="developing-a-ble-mesh-application.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-mesh sysconfig-walkthrough";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Bluetooth Mesh</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../quickstart-guide/ble-mesh-quick-start.html">TI Bluetooth Mesh Quick Start Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ti-zephyr-overview.html">TI Bluetooth Mesh and the Zephyr Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developing-a-ble-mesh-application.html">Developing a Bluetooth Mesh Application</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">BLE Mesh SysConfig Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ble-mesh-configuration">BLE Mesh Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ble-mesh-node-type-features">BLE Mesh Node Type Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#layer-specific-configuration">Layer-Specific Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-configuration">Data Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ble-mesh-oad.html">TI Bluetooth Mesh and OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ble-mesh-erpc.html">TI Bluetooth Mesh Host PC Tool</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Bluetooth Mesh</a> &raquo;</li>
+      <li>BLE Mesh SysConfig Features</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="ble-mesh-sysconfig-features">
+<span id="sec-sysconfig-blemesh"></span><h1>BLE Mesh SysConfig Features<a class="headerlink" href="#ble-mesh-sysconfig-features" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="../sysconfig/getting-started.html#sysconfig-sysconfig"><span class="std std-ref">Get started with SysConfig</span></a> provides an overview of what SysConfig is and how
+to get started with it. Please take a look at this if you have not already.</p>
+</div>
+<div class="section" id="ble-mesh-configuration">
+<h2>BLE Mesh Configuration<a class="headerlink" href="#ble-mesh-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The following is a high level overview of the relevant files generated by Sysconfig and their contents.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ti_ble_config.c/h</p></td>
+<td><p>Contains BLE stack defines (conn interval, slave latency, timeout, etc)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ti_ble_mesh_config.h</p></td>
+<td><p>Contains Mesh stack defines (key information, buffer size, node specific defines)</p></td>
+</tr>
+<tr class="row-even"><td><p>ti_ble_mesh_prov_data.h</p></td>
+<td><p>Contains device information used during provisioning (i.e. UUID)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ti_device_composition.c/h</p></td>
+<td><p>Contains model definitions, element composition data</p></td>
+</tr>
+</tbody>
+</table>
+<p>When opening the BLE tab (under RF Stacks) you will see the option to enable mesh:</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/syscfg_initialSelection.png" src="../_images/syscfg_initialSelection.png" />
+<p class="caption"><span class="caption-number">Figure 154. </span><span class="caption-text">Option to Enable Mesh</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Once selected, multiple sections related to BLE mesh will appear, and any
+sections that are not applicable to the mesh configuration will disapear.</p>
+<p>The most immediate item that will be encountered is the choice of application
+type. Here, the project can be configured to support a normal BLE peripheral
+configuration on top of the mesh configuration. Additionally, this peripheral
+configuration can be made to allow Over the Air Download(OAD) to this device.</p>
+<div class="section" id="ble-mesh-node-type-features">
+<h3>BLE Mesh Node Type Features<a class="headerlink" href="#ble-mesh-node-type-features" title="Permalink to this headline">¶</a></h3>
+<p>The following section describes the supported node features, along with
+additional configuration options for the node.</p>
+<div class="figure align-center" id="id3">
+<img alt="../_images/syscfg_nodeTypes.png" src="../_images/syscfg_nodeTypes.png" />
+<p class="caption"><span class="caption-number">Figure 155. </span><span class="caption-text">Node Type Configuration</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>Inside the <em>BLE Mesh - Configure BLE Mesh</em> tab shown above, 3 options are
+given to configure your mesh node.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Feature</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>Use NV</p></td>
+<td><p>Allow mesh node state and configuration data to be stored persistently in flash</p></td>
+</tr>
+<tr class="row-odd"><td><p>Use Extended Advertising</p></td>
+<td><p>Enable the use of Extended Advertisement payloads within the mesh network</p></td>
+</tr>
+<tr class="row-even"><td><p>Static Provisioning</p></td>
+<td><p>Allow the mesh node to provision itself using pre-configured provisioning data</p></td>
+</tr>
+</tbody>
+</table>
+<p>The various node types can also be selected for the device. A device can
+choose to support none of these features, or can support numerous different
+combinations of them.</p>
+<p>Any combination of Relay, Proxy, and Friend are possible, but keep in mind that
+a node that is considered a Low Power Node may not support any of the other
+features.</p>
+<p>When either the Friend or Low Power node type are selected, additonal options
+will appear to allow additional configuration for that specific node type, such
+as timing parameters for Low Power Nodes, or how many Low Power Nodes a Friend
+Node will be supporting.</p>
+</div>
+<div class="section" id="layer-specific-configuration">
+<h3>Layer-Specific Configuration<a class="headerlink" href="#layer-specific-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Many of the configuration options for BLE mesh have been seperated based on
+which layer of the protocol stack they affect. This way it is more apparent
+which component of the protocol you can expect to see the change in.</p>
+<div class="figure align-center" id="id4">
+<img alt="../_images/stack_layers.png" src="../_images/stack_layers.png" />
+<p class="caption"><span class="caption-number">Figure 156. </span><span class="caption-text">Layers of the BLE mesh protocol</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>Starting from the lowest layer, we can look towards the Provisioning
+Configuration section to make changes that affect the bearer level. Namely, the
+device can be set to act as a PB-ADV bearer or PB-GATT bearer. This will affect
+how provisioning is handled in regards to the specific node.</p>
+<p>The network layer configuration allows changes to be made that affect how the
+specific node interacts with the network, and what limitations there may be to
+that interaction.</p>
+<p>The transport layer has many opportunities for optimization based on the
+specific use case. Many of the configurables contained here have tradeoffs
+between memory and performance, so be sure to spend time considering what is
+best for the use case.</p>
+<p>The model layer has options pertaining to the model and their relationship with
+other pieces of the project such as the access layer or the application.</p>
+</div>
+<div class="section" id="data-configuration">
+<h3>Data Configuration<a class="headerlink" href="#data-configuration" title="Permalink to this headline">¶</a></h3>
+<p>The provisioning data configuration section allows callback functions to be set
+for the various stages of provisioning, along with several other provisioning
+properties. Utilizing these callbacks can allow for a very granular control
+over when specific events occur.</p>
+<p>Additionally, this section also allows customization of the UUID, which can be
+seen when the node is advertising as an unprovisioned node.</p>
+<p>The device composition data allows the addition of whatever elements and models
+are needed for the node. The basic identification information will be set here,
+as well as the configuration for the foundational models.</p>
+<p>This section can also be utilized to add additional elements or to add more
+models to a specific element. The models can be configured to be generic ones
+defined by the Bluetooth SIG or vendor-specific ones tailored to the specific
+use case.</p>
+<div class="figure align-center" id="id5">
+<img alt="../_images/node_element.png" src="../_images/node_element.png" />
+<p class="caption"><span class="caption-number">Figure 157. </span><span class="caption-text">An element configured with 2 models</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="developing-a-ble-mesh-application.html" class="btn btn-neutral float-left" title="Developing a Bluetooth Mesh Application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ble-mesh-oad.html" class="btn btn-neutral float-right" title="TI Bluetooth Mesh and OAD" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

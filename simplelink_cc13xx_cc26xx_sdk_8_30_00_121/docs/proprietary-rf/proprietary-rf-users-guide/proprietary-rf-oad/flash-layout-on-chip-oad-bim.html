@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flash Layout for On-Chip OAD &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User&#39;s Guide
+ 7.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OAD Image Tool" href="../oad-secure/tools.html" />
+    <link rel="prev" title="Flash Layout for Off-Chip OAD" href="../oad-secure/flash-layout-off-chip.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug proprietary-rf-oad flash-layout-on-chip-oad-bim";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/examples-cc13xx_cc26xx.html">Examples User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/custom-hardware.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/nortos-index.html">noRTOS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/rf-core-index.html">RF Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/physical-rf-layer-cc13xx_cc26xx.html">Physical Layer (PHY)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-bim-index.html">BIM Based Over-the-Air Download (OAD)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/oad-types.html">OAD Storage &amp; Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/bim.html">Boot Image Manager (BIM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/bim-off-chip.html">BIM for Off-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bim-on-chip-proprf-oad.html">BIM for On-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/image-header.html">OAD Image Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/ext-flash-image-header.html">OAD External Flash Image Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/flash-layout-off-chip.html">Flash Layout for Off-Chip OAD</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Flash Layout for On-Chip OAD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#constraints-and-requirements-for-on-chip-oad">Constraints and Requirements for On-chip OAD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#internal-flash-memory-layout">Internal Flash Memory Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/tools.html">OAD Image Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oad-process.html">OAD Process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-mcuboot-index.html">MCUBoot Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/sysconfig-index.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/glossary-cc13xx_cc26xx.html">Terms and acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../proprietary-rf-guide/proprietary-rf-oad-bim-index.html">BIM Based Over-the-Air Download (OAD)</a> &raquo;</li>
+      <li>Flash Layout for On-Chip OAD</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="flash-layout-for-on-chip-oad">
+<h1>Flash Layout for On-Chip OAD<a class="headerlink" href="#flash-layout-for-on-chip-oad" title="Permalink to this headline">¶</a></h1>
+<p>This section will describe the method for placing images in internal
+flash when using on-chip OAD.</p>
+<div class="section" id="constraints-and-requirements-for-on-chip-oad">
+<h2>Constraints and Requirements for On-chip OAD<a class="headerlink" href="#constraints-and-requirements-for-on-chip-oad" title="Permalink to this headline">¶</a></h2>
+<p>In order to perform an On-chip OAD the target system must have:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The user application must be sufficiently small in order to fit into the
+flash layout system described below</p></li>
+<li><p>User app functionality is lost while performing OAD (Persistent app is
+running)</p></li>
+</ul>
+</div></blockquote>
+<p>Only one user application image may be stored in flash at any time.</p>
+</div>
+<div class="section" id="internal-flash-memory-layout">
+<h2>Internal Flash Memory Layout<a class="headerlink" href="#internal-flash-memory-layout" title="Permalink to this headline">¶</a></h2>
+<p>The internal flash of the device contains the active user application, the persistent application,
+and the BIM. Each application’s role is defined below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 74%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Application Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>BIM</p></td>
+<td><ul class="simple">
+<li><p>Search for the proper image in FLASH</p></li>
+<li><p>Copy new user image</p></li>
+<li><p>Ensure validity and optionally security of image before running</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Persistent application</p></td>
+<td><ul class="simple">
+<li><p>Providing lightweight application that implements the OAD profile</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>User application</p></td>
+<td><ul class="simple">
+<li><p>User application</p></li>
+<li><p>Must implement OAD reset service</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<img alt="../_images/ditaa-05d19417c75751190a1ad59d325219d01758a133.png" src="../_images/ditaa-05d19417c75751190a1ad59d325219d01758a133.png" />
+<p>The user application (referred to as OAD_IMG_B) pictured above is responsible
+for the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Implementing the OAD reset service</p></li>
+<li><p>Implementing customer defined behavior</p></li>
+</ul>
+</div></blockquote>
+<p>The persistent application (referred to as OAD_IMG_A) pictured above is
+responsible for the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Implementing the protocol stack definition of the OAD service</p></li>
+<li><p>This image is permanently resident on the device</p></li>
+</ul>
+</div></blockquote>
+<p>The location of the persistent application varies depending on the flash size
+available for the selected device variant.  This is done to maximize the user’s
+application space.  Refer to the linker cmd file define IMG_A_FLASH_START to
+further determine where precisely the persistent application is located.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../oad-secure/flash-layout-off-chip.html" class="btn btn-neutral float-left" title="Flash Layout for Off-Chip OAD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../oad-secure/tools.html" class="btn btn-neutral float-right" title="OAD Image Tool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

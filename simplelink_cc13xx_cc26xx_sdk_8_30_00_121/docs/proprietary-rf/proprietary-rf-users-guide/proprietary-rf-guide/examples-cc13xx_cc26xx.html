@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examples User’s Guide &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User&#39;s Guide
+ 7.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Custom Hardware" href="custom-hardware.html" />
+    <link rel="prev" title="Sensor Controller" href="../sensor-controller/sensor-controller.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug proprietary-rf-guide examples-cc13xx_cc26xx";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples User’s Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#proprietary-rf-examples">Proprietary RF Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rf-settings-what-are-they-and-how-to-use-them">RF Settings; What are they and how to use them</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-rf-settings">Configuring RF Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-examples-in-code-composer-studio-ccs">Running Examples in Code Composer Studio (CCS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-examples-in-iar">Running Examples in IAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-examples-from-the-command-line">Building Examples From the Command Line</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom-hardware.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nortos-index.html">noRTOS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rf-core-index.html">RF Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physical-rf-layer-cc13xx_cc26xx.html">Physical Layer (PHY)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proprietary-rf-oad-bim-index.html">BIM Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proprietary-rf-oad-mcuboot-index.html">MCUBoot Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration-cc13xx_cc26xx.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary-cc13xx_cc26xx.html">Terms and acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Examples User’s Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="examples-user-s-guide">
+<span id="prop-examples-guide"></span><h1>Examples User’s Guide<a class="headerlink" href="#examples-user-s-guide" title="Permalink to this headline">¶</a></h1>
+<p>The Proprietary RF examples utilize the RF driver.</p>
+<p>The RF driver offers low-level APIs to run radio operation commands on the RF
+core and send and receive raw packets. You can find examples using the RF driver
+directly in the the <code class="docutils literal notranslate"><span class="pre">prop_rf</span></code> folder.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The examples are for both 868/915 MHz and 2.4 GHz operation, and they
+support multiple PHYs. You can provide your own RF settings with any
+example, allowing you to change both PHY and frequency band as you see fit.</p>
+<p>See Section about <a class="reference internal" href="#rf-settings-what-and-how"><span class="std std-ref">RF settings</span></a> for more
+information on what they are and how to use them.</p>
+</div>
+<div class="section" id="proprietary-rf-examples">
+<h2>Proprietary RF Examples<a class="headerlink" href="#proprietary-rf-examples" title="Permalink to this headline">¶</a></h2>
+<p>Proprietary RF examples are available for the <a class="reference external" href="../../../tirtos7/Bios_User_Guide.pdf">TI-RTOS7 Kernel (SYS/BIOS) User’s Guide</a>, but can
+also be used without any RTOS at all. That is possible with the <a class="reference external" href="../../../simplelink_mcu_sdk/Users_Guide.html#nortos">NoRTOS Driver Porting Layer</a>.Some
+examples are supported with FreeRTOS.</p>
+<p>The Proprietary RF examples can be imported from the following SDK directory:
+<code class="docutils literal notranslate"><span class="pre">{SDK_INSTALL_DIR}/examples/rtos/&lt;PLATFORM&gt;/prop_rf/</span></code></p>
+<dl class="field-list">
+<dt class="field-odd">UART Bridge</dt>
+<dd class="field-odd"><p>The Uart Bridge illustrates how to do simple packet transmitting and receiving from
+one UART to another over the RF driver. This example is meant to be used with two
+RF devices. For every packet received, the packet is printed on the UART (terminal).
+The red LED changes state when a packet is received, while the green LED changes
+state when a packet is being transmitted. Packets are sent when the UART data is
+longer than the chosen maximum packet length.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfUARTBridge/README.html">rfUARTBridge</a></p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt class="field-even">Diagnostics</dt>
+<dd class="field-even"><p>This example provides an AT command interface to perform RF test functionality
+over Proprietary RF, BLE, and IEEE PHYs. The AT command interface is to be used
+via UART.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfDiagnostics/README.html">rfDiagnostics</a></p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt class="field-odd">Carrier Wave</dt>
+<dd class="field-odd"><p>Basic example for RF performance measurements and testing,
+written directly on top of the TI-RTOS7 RF driver. Set the radio into various
+test modes. Transmission of modulated or unmodulated signal. Easy to change
+radio configuration. Use radio settings exported from SmartRF Studio or use
+SysConfig to change the settings.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfCarrierWave/README.html">rfCarrierWave</a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Dual Mode Rx/Tx</dt>
+<dd class="field-even"><p>(CC1352 Only) Dual Mode Rx/Tx shows how to setup a multi-mode radio. This
+example in particular configures the radio with BLE and proprietary PHY.
+These examples also have support for FreeRTOS.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfDualModeRx/README.html">rfDualModeRx</a></p></li>
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfDualModeTx/README.html">rfDualModeTx</a></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Echo Rx/Tx</dt>
+<dd class="field-odd"><p>The Echo Tx example transmits a packet and immediately switches over to
+receiver mode and waits for its echo. The Echo Rx example starts in receiver
+mode and transmits back any received packets (echo).</p>
+<ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfEchoRx/README.html">rfEchoRx</a></p></li>
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfEchoTx/README.html">rfEchoTx</a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Listen Before Talk</dt>
+<dd class="field-even"><p>The Listen Before Talk (LBT) example illustrates how to implement a simple,
+proprietary LBT algorithm using the command chaining feature of the CC13xx and CC26xx
+family.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfListenBeforeTalk/README.html">rfListenBeforeTalk</a></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Packet Error Rate</dt>
+<dd class="field-odd"><p>The Packet Error Rate (PER) example showcases different RF transfer modes of
+the CC13xx and CC26xx. Multiple packets are transmitted or received and the packet
+error rate is calculated. The result is shown on an LCD/UART display.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfPacketErrorRate/README.html">rfPacketErrorRate</a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Packet Rx/Tx</dt>
+<dd class="field-even"><p>Simple examples that show how to send and receive packets using the RF
+driver. These examples also have support for FreeRTOS.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfPacketRx/README.html">rfPacketRx</a></p></li>
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfPacketTx/README.html">rfPacketTx</a></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Synchronized Packet Rx/Tx</dt>
+<dd class="field-odd"><p>In this example you will learn how to build a time-synchronized connection
+between a transmitter and a receiver. This leads to the lowest possible
+power consumption on both sides. Time synchronization also builds the
+foundation for Frequency and Time Division Multiple Access, FDMA and TDMA
+respectively.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfSynchronizedPacketRx/README.html">rfSynchronizedPacketRx</a></p></li>
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfSynchronizedPacketTx/README.html">rfSynchronizedPacketTx</a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Wake On Radio Rx/Tx</dt>
+<dd class="field-even"><p>These examples showcase the Wake-on-Radio (WoR) functionality of the CC13xx and CC26xx
+family to significantly lower the power consumption of an RF link by duty
+cycling the RF core. It shows how to use the RF driver to schedule automatic
+wake-ups and send messages with long preambles.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfWakeOnRadioRx/README.html">rfWakeOnRadioRx</a></p></li>
+<li><p><a class="reference external" href="../../../../examples/rtos/CC1352R1_LAUNCHXL/prop_rf/rfWakeOnRadioTx/README.html">rfWakeOnRadioTx</a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list" id="rf-settings-what-and-how">
+<dt class="field-odd">RF OAD Client</dt>
+<dd class="field-odd"><p>This OAD client example works together with RF OAD Server example to illustrate
+on chip OAD when using MCUBoot as the image manager. It is supported on
+CC13x2x7, CC26x2x7, CC13x4 and CC26x4 devices.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/LP_CC1352P7_1/prop_rf/rfOADClient/README.html">rfOADClient</a></p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt class="field-even">RF OAD Client UApp/PApp</dt>
+<dd class="field-even"><p>These OAD client examples works together with RF OAD Server example to illustrate
+on chip OAD when using TI BIM as the image manager. It is supported on
+CC13x1, CC26x1, CC13x2, CC26x2, CC13x2x7 and CC26x2x7 devices.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/LP_CC1352P7_1/prop_rf/rfOADClientIntFlashPApp/README.html">rfOADClientIntFlashPApp</a></p></li>
+<li><p><a class="reference external" href="../../../../examples/rtos/LP_CC1352P7_1/prop_rf/rfOADClientIntFlashUApp/README.html">rfOADClientIntFlashUApp</a></p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt class="field-odd">RF OAD Client External Flash</dt>
+<dd class="field-odd"><p>This OAD client example works together with RF OAD Server example to illustrate
+off chip OAD when using TI BIM as the image manager. It is supported on
+CC13x1, CC26x1, CC13x2, CC26x2, CC13x2x7 and CC26x2x7 devices.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/LP_CC1352P7_1/prop_rf/rfOADClientExtFlash/README.html">rfOADClientExtFlash</a></p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt class="field-even">RF OAD Server</dt>
+<dd class="field-even"><p>This OAD server example works together with RF OAD Client examples to illustrate
+both on chip and offchip OAD when using either MCUBoot/TI BIM as the image manager.
+It is supported on CC13x1, CC26x1, CC13x2, CC26x2, CC13x2x7, CC26x2x7, CC13x4 and CC26x4 devices.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="../../../../examples/rtos/LP_CC1352P7_1/prop_rf/rfOADServer/README.html">rfOADServer</a></p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+<div class="section" id="rf-settings-what-are-they-and-how-to-use-them">
+<h2>RF Settings; What are they and how to use them<a class="headerlink" href="#rf-settings-what-are-they-and-how-to-use-them" title="Permalink to this headline">¶</a></h2>
+<p>All proprietary RF applications require a set of RF settings, often referred
+to as “<em>smartrf_settings</em>” (exported from SmartRF Studio), or
+“<em>ti_radio_config</em>” (generated by SysConfig) in order to achieve optimum
+performance for a specific PHY. Be aware that this is not only required for
+the proprietary PHY, but also all other PHYs, such as BLE, IEEE 802.15.4, etc.</p>
+<p>These RF settings, usually represented as a single pair of C header and source
+files in your project, must at minimum define a Setup Radio Operation command,
+RF core firmware patches, and RF core register overrides. Additional RF
+commands can be defined which are relevant to your PHY and application. See
+<a class="reference internal" href="../rf-core/phy-configuration.html"><span class="doc">PHY Configuration</span></a> for a more in-depth
+explanation of how the actual configuration works.</p>
+</div>
+<div class="section" id="configuring-rf-settings">
+<h2>Configuring RF Settings<a class="headerlink" href="#configuring-rf-settings" title="Permalink to this headline">¶</a></h2>
+<p>The main tool used for configuring RF settings is SysConfig. To learn more
+about SysConfig, and how this can be used to modify your settings, see
+<a class="reference internal" href="../sysconfig/proprietary-rf-driver.html#sysconfig-radio-configuration"><span class="std std-ref">Adding RF Settings</span></a>.</p>
+</div>
+<div class="section" id="running-examples-in-code-composer-studio-ccs">
+<span id="running-examples-in-ccs"></span><h2>Running Examples in Code Composer Studio (CCS)<a class="headerlink" href="#running-examples-in-code-composer-studio-ccs" title="Permalink to this headline">¶</a></h2>
+<p>The following walks through importing and building one of the proprietary RF
+examples using the CCS IDE and the TI Resource Explorer.</p>
+<ol class="arabic">
+<li><p>If CCS is not already installed; download and install CCS from
+the <a class="reference external" href="https://www.ti.com/tool/ccstudio">Code Composer Studio</a> tool page.</p>
+<p>If it is installed it is recommended that you install the available updates.</p>
+</li>
+<li><p>Download and install the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> from here:</p>
+<p><a class="reference external" href="https://www.ti.com/tool/SIMPLELINK-CC13XX-CC26XX-SDK">https://www.ti.com/tool/SIMPLELINK-CC13XX-CC26XX-SDK</a>.</p>
+</li>
+<li><p>Open CCS, and use the menu option <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">-&gt;</span> <span class="pre">Import</span> <span class="pre">CCS</span> <span class="pre">Projects...</span></code>.</p></li>
+<li><p>Browse to the examples folder in the SDK installation directory
+(<code class="docutils literal notranslate"><span class="pre">C:/ti/simplelink_cc13xx_cc26xx_sdk_x_xx_xx_xx/examples</span></code>) and select
+which example to import. We recommend using the CCS compiler, but
+compiling with GSS in the CCS IDE is also possible.</p></li>
+<li><p>As well as the example selected there is also the tirtos_builds project which
+is a platform and compiler specific TIRTOS build. This will only build once
+and is shared by all the projects for that platform and compiler in your
+workspace.</p>
+<div class="figure align-center" id="id3">
+<img alt="../_images/projectworkspace.png" src="../_images/projectworkspace.png" />
+<p class="caption"><span class="caption-number">Figure 11. </span><span class="caption-text">CCS Project workspace</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>Build and download and debug the project by clicking on the ‘bug’.
+The first time it will take some time due to the TI-RTOS7 build.</p>
+<div class="figure align-center" id="id4">
+<img alt="../_images/bug.png" src="../_images/bug.png" />
+<p class="caption"><span class="caption-number">Figure 12. </span><span class="caption-text">CCS Debug</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>Click run to run the example.</p>
+<div class="figure align-center" id="id5">
+<img alt="../_images/run.png" src="../_images/run.png" />
+<p class="caption"><span class="caption-number">Figure 13. </span><span class="caption-text">CCS Run</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+</ol>
+<p>An alternative way of downloading examples without downloading the SDK is
+to use Resource Explorer inside the CCS IDE. Open Resource Explorer by using
+menu option <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">-&gt;</span> <span class="pre">Resource</span> <span class="pre">Explorer</span></code>, locate the project you want to use,
+and follow the steps to download and build the project.</p>
+</div>
+<div class="section" id="running-examples-in-iar">
+<span id="id2"></span><h2>Running Examples in IAR<a class="headerlink" href="#running-examples-in-iar" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Download and install the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> from here:</p>
+<p><a class="reference external" href="https://www.ti.com/tool/SIMPLELINK-CC13XX-CC26XX-SDK">https://www.ti.com/tool/SIMPLELINK-CC13XX-CC26XX-SDK</a>.</p>
+</li>
+<li><p>Please make sure you’re using the IAR version which is recomended in the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>
+release notes. If IAR Arm Workbench is not already installed, download and
+install IAR Workbench for Arm from <a class="reference external" href="http://www.iar.com">http://www.iar.com</a>.</p></li>
+<li><p>When building projects in IAR, it is recommended to enable all build messages.
+This can be done by right-clicking in the Build window and selecting “All” as
+shown below:</p>
+<blockquote>
+<div><div class="figure align-center" id="id6">
+<img alt="../_images/iar_enable_build_messages.png" src="../_images/iar_enable_build_messages.png" />
+<p class="caption"><span class="caption-number">Figure 14. </span><span class="caption-text">Enabling build messages in IAR</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Import the IAR Custom Argument Variables file with the menu option
+<code class="docutils literal notranslate"><span class="pre">Tools</span> <span class="pre">-&gt;</span> <span class="pre">Configure</span> <span class="pre">Custom</span> <span class="pre">Argument</span> <span class="pre">Variables</span></code>.  The location and file to
+be imported is <code class="docutils literal notranslate"><span class="pre">C:/ti/simplelink_cc13xx_cc26xx_sdk_x_xx_xx_xx/tools/iar/SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars</span></code>.</p>
+<div class="figure align-center" id="id7">
+<img alt="../_images/iar-argvars.png" src="../_images/iar-argvars.png" />
+<p class="caption"><span class="caption-number">Figure 15. </span><span class="caption-text">Custom Argument Variables</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>Import the project by using the menu option <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">-&gt;</span> <span class="pre">Open</span> <span class="pre">Workspace...</span></code>
+and navigate to the examples folder in the SDK installation folder
+(<code class="docutils literal notranslate"><span class="pre">C:/ti/simplelink_cc13xx_cc26xx_sdk_x_xx_xx_xx/examples</span></code>). Select the .eww
+file of the project you want to import. This file is a template, so you will
+be prompted to save the workspace in another location.</p></li>
+<li><p>When the workspace have been saved, you can build the project by right-clicking
+on the project and then press “Make”.</p></li>
+<li><p>Download and debug the example with the menu option
+<code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">-&gt;</span> <span class="pre">Download</span> <span class="pre">and</span> <span class="pre">Debug</span></code>.</p></li>
+</ol>
+</div>
+<div class="section" id="building-examples-from-the-command-line">
+<span id="running-examples-makefiles"></span><h2>Building Examples From the Command Line<a class="headerlink" href="#building-examples-from-the-command-line" title="Permalink to this headline">¶</a></h2>
+<p>All examples can be built from command line using plain makefiles in 3 steps:</p>
+<ol class="arabic simple">
+<li><p>Configure the toolchain paths</p></li>
+<li><p>Build the kernel (only when using TI-RTOS7 kernel)</p></li>
+<li><p>Build the example</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To avoid problems with spaces in paths, it is recommended to use a Unix shell like
+<a class="reference external" href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a> as command line environment instead of the native
+command interpreter <cite>cmd.exe</cite> in Windows.</p>
+</div>
+<p>The toolchain paths are configured in a <code class="docutils literal notranslate"><span class="pre">imports.mak</span></code> in the SDK
+installation root folder. Open the file in an editor and modify the toolchain
+install paths lines depending on which toolchain you are going to use and
+where they are installed on your system.</p>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="c"># The shown versions are just examples.</span>
+<span class="nv">XDC_INSTALL_DIR</span>        <span class="o">?=</span> c:/ti/xdctools_3_50_03_33_core
+
+<span class="nv">CCS_ARMCOMPILER</span>        <span class="o">?=</span> c:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS
+<span class="nv">GCC_ARMCOMPILER</span>        <span class="o">?=</span> c:/ti/ccsv7/tools/compiler/gcc-arm-none-eabi-6-2017-q1-update
+<span class="nv">IAR_ARMCOMPILER</span>        <span class="o">?=</span> c:/Program Files <span class="o">(</span>x86<span class="o">)</span>/IAR Systems/Embedded Workbench <span class="m">8</span>.0/arm
+</pre></div>
+</div>
+<p>Once that is done, the TI-RTOS7 kernel can be built. This step is not necessary
+for No-RTOS examples.  In order to build the kernel, select a specific
+development board and build the <code class="docutils literal notranslate"><span class="pre">release</span></code> configuration. The makefile can be
+found in the folder
+<code class="docutils literal notranslate"><span class="pre">&lt;SDK_INSTALL_DIR&gt;/kernel/tirtos/builds/&lt;BOARD&gt;/release/&lt;TOOLCHAIN&gt;</span></code>.
+Example:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /c/ti/simplelink_cc13x2_sdk_1_xx_xx_xx/kernel/tirtos/builds/CC1352R1_LAUNCHXL/release/gcc
+$ make
+</pre></div>
+</div>
+<p>Finally, the examples can be built. Navigate to the desired example and invoke <cite>make</cite>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /c/ti/simplelink_cc13x2_sdk_1_xx_xx_xx/rtos/CC1352R1_LAUNCHXL/prop_rf/rfSynchronizedPacketRx/tirtos/gcc
+$ make -j4
+</pre></div>
+</div>
+<p>The resulting <code class="docutils literal notranslate"><span class="pre">.out</span></code> file is a regular
+<a class="reference external" href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format">ELF</a> file that can be flashed to
+the device or converted into a binary or an Intel Hex file for other purpose,
+for instance, over-the-air download. Example for <cite>objcopy</cite> from the <cite>GNU
+binutils</cite> package:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ arm-none-eabi-objcopy -S --gap-fill 0xff -O binary rfSynchronizedPacketRx.out rfSynchronizedPacketRx.bin
+$ arm-none-eabi-objcopy -S -O ihex rfSynchronizedPacketRx.out rfSynchronizedPacketRx.hex
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../sensor-controller/sensor-controller.html" class="btn btn-neutral float-left" title="Sensor Controller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="custom-hardware.html" class="btn btn-neutral float-right" title="Custom Hardware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

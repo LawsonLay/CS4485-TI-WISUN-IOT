@@ -1,0 +1,491 @@
+L2CAP_SendData
+--------------
+:Opcode: 0xFCF0
+:Command Description: The L2CAP Data command is used to send an SDU on a Connection Oriented Channel established with the peer device.
+
+**Command Parameters**
+
+:Layer: 
+
+ :Size: 1 byte(s)
+ :Value: 9
+
+:Event Opcode: 
+
+ :Size: 2 byte(s)
+ :Value: 0xFCF0
+
+:Payload Length(including CID): 
+
+ :Size: 2 byte(s)
+ :Value: size(dataLen)+size(cid)
+
+:CID: Local Channel ID
+
+ :Size: 2 byte(s)
+ :Default: 0x0040
+ :Range: 0x0040 - 0x007F
+
+:SDU: SDU to be sent on the channel
+
+ :Size: input byte(s)
+ :Default: ""
+ :Range: to L2CAP_SDU_SIZE octets
+
+**Events Generated**
+
+When this command is received, the host will send the CommandStatus Event. When the SDU transmission is done to the peer device, the L2CAP Send SDU Done Event (L2CAP_SendSduDone) will be generated. If the local channel runs out of credits required to send the SDU, the L2CAP Out of Credit Event (L2CAP_OutOfCredit) will be generated.
+
+L2CAP_RegisterPsm
+-----------------
+:Opcode: 0xFCF1
+:Command Description: The L2CAP Register PSM command is used to register a Protocol/Service Multiplexer (PSM) with the L2CAP layer.
+
+**Command Parameters**
+
+:PSM: Local Protocol/Service Multiplexer (PSM)
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: 0x0001 - 0x00FF
+
+:MTU: Maximum SDU size that can be received by PSM
+
+ :Size: 2 byte(s)
+ :Default: 0x0017
+ :Range: Any 2 byte value
+
+:initialPeerCredits: Number of packets that peer device can send to local device
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: Any 2 byte value
+
+:peerCreditThreshold: Low threshold for peer credits
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: Any 2 byte value
+
+:maxNumChannels: Maximum number of Connection Oriented Channels supported by PSM
+
+ :Size: 1 byte(s)
+ :Default: 0x01
+ :Range: Any 1 byte value
+
+:enableSecurityVerification: Indicates whether to enable security verification by the application for any incoming connection request
+
+ :Size: 1 byte(s)
+ :Default: 0x00
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  No 
+         0x01                  Yes  
+         ===================== ========================================================
+
+**Events Generated**
+
+When this command is received, the local device will send the CommandStatus Event. If the application wishes to perform its own security verification (by setting enableSecurityVerification to TRUE) for any incoming connection request then an L2CAP Connection Request (L2CAP_ConnectReq) event will be sent up to the application, which must then send an L2CAP Connection Response (L2CAP_ConnectRsp) command back. When the peer credit count reaches the peer credit threshold (specified by peerCreditThreshold), the L2CAP Peer Credit Threshold Event (L2CAP_PeerCreditThreshold) will be generated.
+
+L2CAP_DeregisterPsm
+-------------------
+:Opcode: 0xFCF2
+:Command Description: The L2CAP Deregister PSM command is sent to deregister a Protocol/Service Multiplexer (PSM) with the L2CAP layer.
+
+**Command Parameters**
+
+:PSM: Local Protocol/Service Multiplexer (PSM) to be deregistered with L2CAP
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: 0x0001 - 0x00FF
+
+**Events Generated**
+
+When this request is received, the local device will send the CommandStatus Event.
+
+L2CAP_PsmInfo
+-------------
+:Opcode: 0xFCF3
+:Command Description: The L2CAP PSM Info command is used to get the current information about a given PSM registered with the L2CAP layer.
+
+**Command Parameters**
+
+:PSM: Local Protocol/Service Multiplexer (PSM)
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: 0x0001 - 0x00FF
+
+**Events Generated**
+
+When this request is received, the local device will send the CommandStatus Event.
+
+**Additional Command Status Return Parameters**
+
+:dataLen: 
+
+ :Size: 1 byte(s)
+ :Range: 
+
+:MTU: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:MPS: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:initialPeerCredits: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCreditThreshold: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:maxNumChannels: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 1 byte(s)
+ :Range: 
+
+:numActiveChannels: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 1 byte(s)
+ :Range: 
+
+
+L2CAP_PsmChannels
+-----------------
+:Opcode: 0xFCF4
+:Command Description: The L2CAP PSM Channels command is used to get the list of all the active Connection Oriented Channels for a given PSM registered with the L2CAP layer.
+
+**Command Parameters**
+
+:PSM: Local Protocol/Service Multiplexer (PSM)
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: 0x0001 - 0x00FF
+
+**Events Generated**
+
+When this request is received, the local device will send the CommandStatus Event.
+
+**Additional Command Status Return Parameters**
+
+:dataLen: 
+
+ :Size: 1 byte(s)
+ :Range: 
+
+
+An array of size "dataLen/2" will be returned containing the parameters starting here:
+
+:CID: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+
+The array of parameters ends here.
+
+L2CAP_ChannelInfo
+-----------------
+:Opcode: 0xFCF5
+:Command Description: The L2CAP Channel Info command is used to get the current information about an active Connection Oriented Channel.
+
+**Command Parameters**
+
+:CID: Local Channel ID
+
+ :Size: 2 byte(s)
+ :Default: 0x0040
+ :Range: 0x0040 - 0x007F
+
+**Events Generated**
+
+When this request is received, the local device will send the CommandStatus Event.
+
+**Additional Command Status Return Parameters**
+
+:dataLen: 
+
+ :Size: 1 byte(s)
+ :Range: 
+
+:state: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x0000                L2CAP_CLOSED
+         0x0001                L2CAP_OPEN
+         0x0002                L2CAP_PENDING_CONN_RSP
+         0x0003                L2CAP_PENDING_DISCONN_RSP
+         0x0004                L2CAP_PENDING_PARAM_UPDATE_RSP
+         0x0005                L2CAP_PENDING_INFO_RSP
+         0x0006                L2CAP_PENDING_SEC_VERIFY
+         ===================== ========================================================
+
+:PSM: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:CID: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:MTU: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:MPS: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:credits: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCID: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerMTU: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerMPS: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCredits: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:peerCreditThreshold: 
+
+ :Condition: ( StatStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+
+L2CAP_ConnectReq
+----------------
+:Opcode: 0xFC94
+:Command Description: The L2CAP Connection Request command is used to create and configure a Connection Oriented Channel between the local and the peer device.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:PSM: Local Protocol/Service Multiplexer (PSM)
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: 0x0001 - 0x00FF
+
+:peerPSM: Peer Protocol/Service Multiplexer (PSM)
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: 0x0001 - 0x00FF
+
+**Events Generated**
+
+When this command is received, the local device will send the CommandStatus Event with the Status parameter after sending an LE Credit Based Connection Request to the peer device. When a new channel has been established, the L2CAP Channel Established Event (L2CAP_ChannelEstablished) will be generated.
+
+L2CAP_ConnectRsp
+----------------
+:Opcode: 0xFC95
+:Command Description: When a device receives an LE Credit Based Connection Request, it must send an LE Credit Based Connection Response back, which is done automatically by the L2CAP layer. However, if the application wishes to perform its own security verification (configurable at PSM registration), then a Connection Request (L2CAP_ConnectReq) event will be sent up to the application which must then send a Connection Response (L2CAP_ConnectRsp) command back indicating the outcome of the connection request.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:id: Identifier to match responses with requests
+
+ :Size: 1 byte(s)
+ :Default: 0x01
+ :Range: 0x01 - 0xFF
+
+:result: Indicates outcome of connection request
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x0000                L2CAP_CONN_SUCCESS
+         0x0001                Reserved
+         0x0002                L2CAP_CONN_PSM_NOT_SUPPORTED
+         0x0003                Reserved
+         0x0004                L2CAP_CONN_NO_RESOURCES
+         0x0005                L2CAP_CONN_INSUFFICIENT_AUTHEN
+         0x0006                L2CAP_CONN_INSUFFICIENT_AUTHOR
+         0x0007                L2CAP_CONN_INSUFFICIENT_KEY_SIZE
+         0x0008                L2CAP_CONN_INSUFFICIENT_ENCRYPT
+         0x0009                L2CAP_CONN_INVALID_SRC_CID
+         0x000A                L2CAP_CONN_SRC_CID_ALREADY_ALLOC
+         ===================== ========================================================
+
+**Events Generated**
+
+When this request is received, the local device will send the CommandStatus Event with the Status parameter after sending an LE Credit Based Connection Response back to the peer device.
+
+L2CAP_DisconnectReq
+-------------------
+:Opcode: 0xFC86
+:Command Description: The L2CAP Disconnection Request is sent to terminate a Connection Oriented Channel established between the local and the peer device.
+
+**Command Parameters**
+
+:CID: Local Channel ID
+
+ :Size: 2 byte(s)
+ :Default: 0x0040
+ :Range: 0x0040 - 0x007F
+
+**Events Generated**
+
+When this command is received, the local device will send the CommandStatus Event with the Status parameter after forwarding the request to the peer device. When the channel is terminated, the L2CAP Channel Terminated Event (L2CAP_ChannelTerminated) will be generated.
+
+L2CAP_FlowCtrlCredit
+--------------------
+:Opcode: 0xFC96
+:Command Description: The LE Flow Control Credit commands are sent when the local device is capable of receiving additional LE-frames on an established L2CAP channel.
+
+**Command Parameters**
+
+:CID: Local Channel ID
+
+ :Size: 2 byte(s)
+ :Default: 0x0040
+ :Range: 0x0040 - 0x007F
+
+:peerCredits: Number of LE-frames that can be sent to local device
+
+ :Size: 2 byte(s)
+ :Default: 0x0001
+ :Range: 0x0001 - 0xFFFF
+
+**Events Generated**
+
+When this request is received, the local device will send the CommandStatus Event with the Status parameter after forwarding the request to the peer device. When the peer credit count reaches a specified low threshold (configurable at PSM registration), the L2CAP Peer Credit Threshold Event (L2CAP_PeerCreditThreshold) will be generated.
+
+L2CAP_InfoReq
+-------------
+:Opcode: 0xFC8A
+:Command Description: L2CAP Info Request
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:infoType: The type of implementation specific information being requested
+
+ :Size: 2 byte(s)
+ :Default: 0x0002
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x0001                CONNECTIONLESS_MTU
+         0x0002                EXTENDED_FEATURES
+         0x0003                FIXED_CHANNELS
+         ===================== ========================================================
+
+**Events Generated**
+
+When this request is received, the local device will send the CommandStatus Event with the Status parameter after forwarding the request to the peer device. After receiving a response from the peer device, the L2CAP_InfoRsp will be generated.
+
+L2CAP_ConnParamUpdateReq
+------------------------
+:Opcode: 0xFC92
+:Command Description: The Connection Parameter Update Request is sent from the LE slave device to the LE master device. This request allows the LE slave Host to request a set of new connection parameters.
+
+**Command Parameters**
+
+:Connection Handle: Identifies the connection.
+
+ :Size: 2 byte(s)
+ :Default: 0x0000
+ :Range: 0x0000 to 0xFFFD
+
+:intervalMin: The minimum value for the connection event interval
+
+ :Size: 2 byte(s)
+ :Default: 80
+ :Range: 6 - 3200
+
+:intervalMax: The maximum value for the connection event interval
+
+ :Size: 2 byte(s)
+ :Default: 160
+ :Range: 6 - 3200
+
+:slaveLatency: The slave latency parameter
+
+ :Size: 2 byte(s)
+ :Default: 0
+ :Range: 0 - 500
+
+:timeoutMultiplier: The connection timeout parameter
+
+ :Size: 2 byte(s)
+ :Default: 1000
+ :Range: 10 - 3200
+
+**Events Generated**
+
+When this request is received, the LE slave host will send the CommandStatus Event with the Status parameter after forwarding the request to the LE master host. The LE master host will send the Connection Parameter Update Response (L2CAP_ConnParamUpdateRsp) event back. If the LE slave host receives this request, it will respond with a Command Reject (L2CAP_CmdReject) with reason 0x0000 (command not understood).
+

@@ -1,0 +1,146 @@
+UTIL_GetMemStats
+----------------
+:Opcode: 0x0681
+:Event Description: This event displays memory statistics for debugging.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range: See Status Table
+
+:Module: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  HCI TL
+         0x01                  Host TL
+         ===================== ========================================================
+
+:cmdID: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  Light Heap Statistic 
+         0x02                  Full Heap Statistic (requieres HEAPMGR_METRICS) 
+         0x04                  Thread usage Statistic (requieres HEAPMGR_METRICS)
+         ===================== ========================================================
+
+:cmdID: 
+
+ :Condition: ( (cmdID & 0x01) == 0x01)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  Light Heap Statistic 
+         0x02                  Full Heap Statistic (requieres HEAPMGR_METRICS) 
+         0x04                  Thread usage Statistic (requieres HEAPMGR_METRICS)
+         ===================== ========================================================
+
+:Heap Size: 
+
+ :Condition: ( (cmdID & 0x01) == 0x01)
+ :Size: 4 byte(s)
+ :Range: 
+
+:Heap Size Free: 
+
+ :Condition: ( (cmdID & 0x01) == 0x01)
+ :Size: 4 byte(s)
+ :Range: 
+
+:Biggest free buffer Available: 
+
+ :Condition: ( (cmdID & 0x01) == 0x01)
+ :Size: 4 byte(s)
+ :Range: 
+
+:cmdID: 
+
+ :Condition: ( (cmdID & 0x02) == 0x02)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  Light Heap Statistic 
+         0x02                  Full Heap Statistic (requieres HEAPMGR_METRICS) 
+         0x04                  Thread usage Statistic (requieres HEAPMGR_METRICS)
+         ===================== ========================================================
+
+:Heap Fail number: 
+
+ :Condition: ( (cmdID & 0x02) == 0x02)
+ :Size: 2 byte(s)
+ :Range: 
+
+:Heap Allocated: 
+
+ :Condition: ( (cmdID & 0x02) == 0x02)
+ :Size: 4 byte(s)
+ :Range: 
+
+:Heap Max Allocated: 
+
+ :Condition: ( (cmdID & 0x02) == 0x02)
+ :Size: 4 byte(s)
+ :Range: 
+
+:cmdID: 
+
+ :Condition: ( (cmdID & 0x04) ==0x04)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  Light Heap Statistic 
+         0x02                  Full Heap Statistic (requieres HEAPMGR_METRICS) 
+         0x04                  Thread usage Statistic (requieres HEAPMGR_METRICS)
+         ===================== ========================================================
+
+:Number of Thread: 
+
+ :Condition: ( (cmdID & 0x04) ==0x04)
+ :Size: 1 byte(s)
+ :Range: 
+
+
+An array of size "Count" will be returned containing the parameters starting here:
+
+:Priority: 
+
+ :Condition: ( (cmdID & 0x04) ==0x04)
+ :Size: 1 byte(s)
+ :Range: 
+
+:Handle: 
+
+ :Condition: ( (cmdID & 0x04) ==0x04)
+ :Size: 2 byte(s)
+ :Range: 
+
+:max Stack used: 
+
+ :Condition: ( (cmdID & 0x04) ==0x04)
+ :Size: 2 byte(s)
+ :Range: 
+
+:stack size: 
+
+ :Condition: ( (cmdID & 0x04) ==0x04)
+ :Size: 2 byte(s)
+ :Range: 
+
+
+The array of parameters ends here.
+

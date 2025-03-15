@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['readbuf',['readBuf',['../struct_i2_c___transaction.html#a804b918d5cb08bb75a39866d0b89e01e',1,'I2C_Transaction']]],
+  ['readcount',['readCount',['../struct_i2_c___transaction.html#a2085d4c943f0d8617365b7c427e6a0de',1,'I2C_Transaction']]],
+  ['recurrencemode',['recurrenceMode',['../struct_a_d_c_buf___params.html#a559d4f3324bdbee8f6b6140a6d7264fb',1,'ADCBuf_Params::recurrenceMode()'],['../struct_a_d_c_buf_c_c26_x_x___object.html#acdb55bda8b02fca3fa51f7ebfae6c42b',1,'ADCBufCC26XX_Object::recurrenceMode()']]],
+  ['refsource',['refSource',['../struct_a_d_c_c_c26_x_x___h_w_attrs.html#a49aac5c605e70776345e489a270dc45a',1,'ADCCC26XX_HWAttrs::refSource()'],['../struct_a_d_c_buf_c_c26_x_x___params_extension.html#ac969cbedfed803be061feb5c82d58c66',1,'ADCBufCC26XX_ParamsExtension::refSource()'],['../struct_a_d_c_buf_c_c26_x_x___object.html#a29b696a02137128f84aac8a3fa60fb31',1,'ADCBufCC26XX_Object::refSource()']]],
+  ['refvoltage',['refVoltage',['../struct_a_d_c_c_c26_x_x___h_w_attrs.html#abc222878e93cceb0101b0060d72eea11',1,'ADCCC26XX_HWAttrs']]],
+  ['reloadvalue',['reloadValue',['../struct_watchdog_c_c26_x_x___h_w_attrs.html#a4d5992495525d1457f5aa356046ce055',1,'WatchdogCC26XX_HWAttrs']]],
+  ['requestmode',['requestMode',['../struct_p_d_m_c_c26_x_x___i2_s___params.html#a2bd373c5a35eb5708499735ad1d1b0bb',1,'PDMCC26XX_I2S_Params::requestMode()'],['../struct_p_d_m_c_c26_x_x___i2_s___object.html#a075b678ddb1fa9546ada194fb0ea95be',1,'PDMCC26XX_I2S_Object::requestMode()']]],
+  ['requesttimeout',['requestTimeout',['../struct_p_d_m_c_c26_x_x___i2_s___params.html#ae24ad0b8694eecadda238df85e7a5f82',1,'PDMCC26XX_I2S_Params::requestTimeout()'],['../struct_p_d_m_c_c26_x_x___i2_s___object.html#ada304c8d2774a8f178d8ea9ff9fb488e',1,'PDMCC26XX_I2S_Object::requestTimeout()']]],
+  ['reserved',['reserved',['../struct_p_d_m_c_c26_x_x___i2_s___audio_clock_config.html#ad5468b30f2eea667d53831ee2a81ed1e',1,'PDMCC26XX_I2S_AudioClockConfig::reserved()'],['../union_p_d_m_c_c26_x_x___i2_s___audio_pin_config.html#ab1afe1354cd783e06dab4fc8e28f0baf',1,'PDMCC26XX_I2S_AudioPinConfig::reserved()']]],
+  ['resetmode',['resetMode',['../struct_watchdog___params.html#a94b5d650f8beb7dce719360404039ccf',1,'Watchdog_Params']]],
+  ['resourcecounts',['resourceCounts',['../struct_power_c_c26_x_x___module_state.html#af13aa7f8e1d035365a1f2b8b30e57a61',1,'PowerCC26XX_ModuleState']]],
+  ['resourcehandlers',['resourceHandlers',['../struct_power_c_c26_x_x___module_state.html#a6ac6e2129288deaf1550cd8c921dc49d',1,'PowerCC26XX_ModuleState']]],
+  ['retbufsizeinbytes',['retBufSizeInBytes',['../struct_p_d_m_c_c26_x_x___params.html#a05bff0a3c2ddbb3a49c2bc7a47a7fe24',1,'PDMCC26XX_Params::retBufSizeInBytes()'],['../struct_p_d_m_c_c26_x_x___object.html#a05f92e36498598102830fa57a91c2a85',1,'PDMCC26XX_Object::retBufSizeInBytes()']]],
+  ['returnadjustedval',['returnAdjustedVal',['../struct_a_d_c_c_c26_x_x___h_w_attrs.html#ac48647bbcf0573200c1909ff68257e91',1,'ADCCC26XX_HWAttrs']]],
+  ['returnmode',['returnMode',['../struct_a_d_c_buf___params.html#a17b3cdab5de5cfb81854b86f0cfc0ec1',1,'ADCBuf_Params::returnMode()'],['../struct_a_d_c_buf_c_c26_x_x___object.html#afce391d0185d4c1cf19c912d966b2aee',1,'ADCBufCC26XX_Object::returnMode()']]],
+  ['rxbuf',['rxBuf',['../struct_s_p_i___transaction.html#a214f57d7809c875fb9456a62a406e041',1,'SPI_Transaction']]]
+];

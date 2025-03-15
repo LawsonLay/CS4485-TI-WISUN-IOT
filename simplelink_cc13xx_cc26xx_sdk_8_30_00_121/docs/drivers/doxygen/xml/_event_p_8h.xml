@@ -1,0 +1,453 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_event_p_8h" kind="file" language="C++">
+    <compoundname>EventP.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stddef.h</includes>
+    <incdepgraph>
+      <node id="1141">
+        <label>stdbool.h</label>
+      </node>
+      <node id="1140">
+        <label>stdint.h</label>
+      </node>
+      <node id="1142">
+        <label>stddef.h</label>
+      </node>
+      <node id="1139">
+        <label>EventP.h</label>
+        <link refid="_event_p_8h"/>
+        <childnode refid="1140" relation="include">
+        </childnode>
+        <childnode refid="1141" relation="include">
+        </childnode>
+        <childnode refid="1142" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="union_event_p___struct" prot="public">EventP_Struct</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_event_p_8h_1aa17da81e032a4fd54a5cb534067fc362" prot="public" static="no">
+        <name>EventP_STRUCT_SIZE</name>
+        <initializer>(52)</initializer>
+        <briefdescription>
+<para>Number of bytes greater than or equal to the size of any RTOS Event object. </para>        </briefdescription>
+        <detaileddescription>
+<para>BIOS 6.x: 20 BIOS 7.x: 20 FreeRTOS: 52 </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="82" column="9" bodyfile="source/ti/drivers/dpl/EventP.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_event_p_8h_1af4e2cd535297528eb21330667506f2ed" prot="public" static="no">
+        <name>EventP_WAIT_FOREVER</name>
+        <initializer>~(0)</initializer>
+        <briefdescription>
+<para>Wait forever define. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="99" column="9" bodyfile="source/ti/drivers/dpl/EventP.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_event_p_8h_1a392634539549d325240499ad68a20adb" prot="public" static="no">
+        <name>EventP_NO_WAIT</name>
+        <initializer>(0)</initializer>
+        <briefdescription>
+<para>No wait define. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="104" column="9" bodyfile="source/ti/drivers/dpl/EventP.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_event_p_8h_1ab6dad72c2d3d2ed52462fce1b3616130" prot="public" static="no">
+        <type>union <ref refid="union_event_p___struct" kindref="compound">EventP_Struct</ref></type>
+        <definition>typedef union EventP_Struct  EventP_Struct</definition>
+        <argsstring></argsstring>
+        <name>EventP_Struct</name>
+        <briefdescription>
+<para>EventP structure. </para>        </briefdescription>
+        <detaileddescription>
+<para>Opaque structure that should be large enough to hold any of the RTOS specific EventP objects. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="94" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_event_p_8h_1ae86669a618ff7edb0c175dccce3b2d70" prot="public" static="no">
+        <type><ref refid="union_event_p___struct" kindref="compound">EventP_Struct</ref> *</type>
+        <definition>typedef EventP_Struct* EventP_Handle</definition>
+        <argsstring></argsstring>
+        <name>EventP_Handle</name>
+        <briefdescription>
+<para>Opaque client reference to an instance of a EventP. </para>        </briefdescription>
+        <detaileddescription>
+<para>A EventP_Handle returned from create or construct represents that instance. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="111" column="1" bodyfile="source/ti/drivers/dpl/EventP.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_event_p_8h_1acc4c141f5278340bc2a95ff4f63c6e61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_event_p_8h_1ae86669a618ff7edb0c175dccce3b2d70" kindref="member">EventP_Handle</ref></type>
+        <definition>EventP_Handle EventP_create</definition>
+        <argsstring>(void)</argsstring>
+        <name>EventP_create</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Create an EventP, allocating memory on the heap. </para>        </briefdescription>
+        <detaileddescription>
+<para>EventP_create creates a new event object. EventP_create returns the handle of the new task object or NULL if the event could not be created.</para><para>When created, no bits of an event are set. For FreeRTOS, configSUPPORT_DYNAMIC_ALLOCATION also has to be set to 1 in FreeRTOSConfig.h. See &apos;Configuration with FreeRTOS&apos; in the Core SDK User&apos;s Guide for how to do this.</para><para>This API cannot be called from interrupt contexts.</para><para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>EventP</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>handle (NULL on failure) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="128" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_event_p_8h_1a4a64fbc29196c2df065395f0a3c60a95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EventP_delete</definition>
+        <argsstring>(EventP_Handle handle)</argsstring>
+        <name>EventP_delete</name>
+        <param>
+          <type><ref refid="_event_p_8h_1ae86669a618ff7edb0c175dccce3b2d70" kindref="member">EventP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to delete an EventP. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A EventP_Handle returned from EventP_create </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="135" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_event_p_8h_1ad67450f13c6d2850aefe1bae8dd4ddd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_event_p_8h_1ae86669a618ff7edb0c175dccce3b2d70" kindref="member">EventP_Handle</ref></type>
+        <definition>EventP_Handle EventP_construct</definition>
+        <argsstring>(EventP_Struct *obj)</argsstring>
+        <name>EventP_construct</name>
+        <param>
+          <type><ref refid="union_event_p___struct" kindref="compound">EventP_Struct</ref> *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>Construct an EventP, using statically allocated memory. </para>        </briefdescription>
+        <detaileddescription>
+<para>EventP_construct creates a new event object. EventP_construct returns the handle of the new task object or NULL if the event could not be created.</para><para>When created, no bits of an event are set. For FreeRTOS, configSUPPORT_STATIC_ALLOCATION also has to be set to 1 in FreeRTOSConfig.h. See &apos;Configuration with FreeRTOS&apos; in the Core SDK User&apos;s Guide for how to do this.</para><para>This API cannot be called from interrupt contexts.</para><para><parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>EventP</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>handle (NULL on failure) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="152" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_event_p_8h_1a8a15a5b398c85b65f9ac5a2e447df14d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EventP_destruct</definition>
+        <argsstring>(EventP_Struct *obj)</argsstring>
+        <name>EventP_destruct</name>
+        <param>
+          <type><ref refid="union_event_p___struct" kindref="compound">EventP_Struct</ref> *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>Function to destruct an EventP. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a <ref refid="union_event_p___struct" kindref="compound">EventP_Struct</ref> object that was passed to <ref refid="_event_p_8h_1ad67450f13c6d2850aefe1bae8dd4ddd5" kindref="member">EventP_construct()</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="162" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_event_p_8h_1ab49cad4aa76c5b9b78f91afaa1e1acc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t EventP_pend</definition>
+        <argsstring>(EventP_Handle event, uint32_t eventMask, bool waitForAll, uint32_t timeout)</argsstring>
+        <name>EventP_pend</name>
+        <param>
+          <type><ref refid="_event_p_8h_1ae86669a618ff7edb0c175dccce3b2d70" kindref="member">EventP_Handle</ref></type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>eventMask</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>waitForAll</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>Wait for the events listed in eventMask. </para>        </briefdescription>
+        <detaileddescription>
+<para>EventP_pend is used to wait for events. The eventMask determine which event(s) must occur before returning from EventP_pend. The timeout parameter allows the task to wait until a timeout, wait indefinitely, or not wait at all. If waitForAll is true, the pend call will not return until all of the bits in eventMask are set. If it is false, any of the bits in eventMask will be returned. A return value of zero indicates that a timeout has occurred. A non-zero return value is the set of events in the eventMask that were active at the time the task was unblocked.</para><para>Event bits that caused a return (either the whole eventMask or any individual bit, depending on waitForAll) will be cleared when EventP_pend returns.</para><para>A timeout value of EventP_WAIT_FOREVER causes the task to wait indefinitely for matching events to be posted. A timeout value of EventP_NO_WAIT causes EventP_pend to return immediately.</para><para>This API cannot be called from interrupt contexts.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Event handle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eventMask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Match against the events in this bitmask. For FreeRTOS, only the 24 least significant bits in the event mask may be set, meaning the maximum allowed value for FreeRTOS is 0x00FFFFFF. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>waitForAll</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, only return when all matching bits are set </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Return after this many ClockP ticks, even if there is no match</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bitmask containing all consumed events, or zero on timeout. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="195" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_event_p_8h_1a8e4ffe447fc2a43ead540afab9862edd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EventP_post</definition>
+        <argsstring>(EventP_Handle event, uint32_t eventMask)</argsstring>
+        <name>EventP_post</name>
+        <param>
+          <type><ref refid="_event_p_8h_1ae86669a618ff7edb0c175dccce3b2d70" kindref="member">EventP_Handle</ref></type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>eventMask</declname>
+        </param>
+        <briefdescription>
+<para>Post events to an event object. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="_event_p_8h_1a8e4ffe447fc2a43ead540afab9862edd" kindref="member">EventP_post()</ref> is used to signal events. If a task is waiting for the event and the event conditions are met, <ref refid="_event_p_8h_1a8e4ffe447fc2a43ead540afab9862edd" kindref="member">EventP_post()</ref> unblocks the task. If no tasks are waiting, <ref refid="_event_p_8h_1a8e4ffe447fc2a43ead540afab9862edd" kindref="member">EventP_post()</ref> simply registers the event with the event object and returns.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Event handle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eventMask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mask of eventIds to post (this must be non-zero). For FreeRTOS, only the 24 least significant bits in the event mask may be set, meaning the maximum allowed value for FreeRTOS is 0x00FFFFFF. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="211" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_event_p_8h_1a96b6ddc8ffec6136ef08e3e8772bbcd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void EventP_clear</definition>
+        <argsstring>(EventP_Handle event, uint32_t eventMask)</argsstring>
+        <name>EventP_clear</name>
+        <param>
+          <type><ref refid="_event_p_8h_1ae86669a618ff7edb0c175dccce3b2d70" kindref="member">EventP_Handle</ref></type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>eventMask</declname>
+        </param>
+        <briefdescription>
+<para>Clear events from an event object. </para>        </briefdescription>
+        <detaileddescription>
+<para>Clears the bits in eventMask from the EventP.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Event handle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eventMask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mask of eventIds to clear (this must be non-zero). For FreeRTOS, only the 24 least significant bits in the event mask may be set, meaning the maximum allowed value for FreeRTOS is 0x00FFFFFF. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="224" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_event_p_8h_1a37cbde3a07725b4e93baad5888370766" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t EventP_get</definition>
+        <argsstring>(EventP_Handle event)</argsstring>
+        <name>EventP_get</name>
+        <param>
+          <type><ref refid="_event_p_8h_1ae86669a618ff7edb0c175dccce3b2d70" kindref="member">EventP_Handle</ref></type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>Get the current events from an event object. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns the currently active events in an EventP without clearing them.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Event handle</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>Currently</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>active events </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/EventP.h" line="235" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Event Group support. </para>    </briefdescription>
+    <detaileddescription>
+<para>============================================================================</para><para>Events are a collection of bits with an application-defined meaning, typically used for messaging or synchronisation. A task may check the state of a set of bits or pend on an EventP object to react to changes when they are posted from another context.</para><para>Only one Task may pend on a single EventP object at any given time.</para><para>Events are synchronous in nature, meaning that a receiving task will block or pend while waiting for the events to occur. When the desired events are received, the pending task continues its execution, as it would after a call to Semaphore_pend(), for example.</para><para>EventP_pend is used to wait for events. The eventMask determine which event(s) must occur before returning from EventP_pend. The timeout parameter allows the task to wait until a timeout, wait indefinitely, or not wait at all. If waitForAll is true, the pend call will not return until all of the bits in eventMask are set. If it is false, any of the bits in eventMask will be returned. A return value of zero indicates that a timeout has occurred. A non-zero return value is the set of events that were active at the time the task was unblocked. Event bits that caused a return (either the whole eventMask or any individual bit, depending on waitForAll) will be cleared when EventP_pend returns. <hruler/>
+ </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2021-2023,<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>-<sp/>http://www.ti.com</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*/</highlight></codeline>
+<codeline lineno="64"><highlight class="preprocessor">#ifndef<sp/>ti_dpl_EventP__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_dpl_EventP__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="_event_p_8h_1aa17da81e032a4fd54a5cb534067fc362" refkind="member"><highlight class="preprocessor">#define<sp/>EventP_STRUCT_SIZE<sp/>(52)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="union_event_p___struct" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">union<sp/></highlight><highlight class="normal"><ref refid="union_event_p___struct" kindref="compound">EventP_Struct</ref></highlight></codeline>
+<codeline lineno="91"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="92" refid="union_event_p___struct_1a48678fd4be4176436cf3a06fc497ad89" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="union_event_p___struct_1a48678fd4be4176436cf3a06fc497ad89" kindref="member">dummy</ref>;<sp/></highlight></codeline>
+<codeline lineno="93" refid="union_event_p___struct_1ae4650a199499e7b0d4255076e88e0f64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="union_event_p___struct_1ae4650a199499e7b0d4255076e88e0f64" kindref="member">data</ref>[<ref refid="_event_p_8h_1aa17da81e032a4fd54a5cb534067fc362" kindref="member">EventP_STRUCT_SIZE</ref>];</highlight></codeline>
+<codeline lineno="94"><highlight class="normal">}<sp/><ref refid="_event_p_8h_1ab6dad72c2d3d2ed52462fce1b3616130" kindref="member">EventP_Struct</ref>;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99" refid="_event_p_8h_1af4e2cd535297528eb21330667506f2ed" refkind="member"><highlight class="preprocessor">#define<sp/>EventP_WAIT_FOREVER<sp/>~(0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104" refid="_event_p_8h_1a392634539549d325240499ad68a20adb" refkind="member"><highlight class="preprocessor">#define<sp/>EventP_NO_WAIT<sp/>(0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111" refid="_event_p_8h_1ae86669a618ff7edb0c175dccce3b2d70" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="union_event_p___struct" kindref="compound">EventP_Struct</ref><sp/>*<ref refid="_event_p_8h_1ae86669a618ff7edb0c175dccce3b2d70" kindref="member">EventP_Handle</ref>;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>EventP_Handle<sp/><ref refid="_event_p_8h_1acc4c141f5278340bc2a95ff4f63c6e61" kindref="member">EventP_create</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_event_p_8h_1a4a64fbc29196c2df065395f0a3c60a95" kindref="member">EventP_delete</ref>(EventP_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>EventP_Handle<sp/><ref refid="_event_p_8h_1ad67450f13c6d2850aefe1bae8dd4ddd5" kindref="member">EventP_construct</ref>(<ref refid="union_event_p___struct" kindref="compound">EventP_Struct</ref><sp/>*obj);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_event_p_8h_1a8a15a5b398c85b65f9ac5a2e447df14d" kindref="member">EventP_destruct</ref>(<ref refid="union_event_p___struct" kindref="compound">EventP_Struct</ref><sp/>*obj);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/><ref refid="_event_p_8h_1ab49cad4aa76c5b9b78f91afaa1e1acc5" kindref="member">EventP_pend</ref>(EventP_Handle<sp/>event,<sp/>uint32_t<sp/>eventMask,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>waitForAll,<sp/>uint32_t<sp/>timeout);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_event_p_8h_1a8e4ffe447fc2a43ead540afab9862edd" kindref="member">EventP_post</ref>(EventP_Handle<sp/>event,<sp/>uint32_t<sp/>eventMask);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_event_p_8h_1a96b6ddc8ffec6136ef08e3e8772bbcd9" kindref="member">EventP_clear</ref>(EventP_Handle<sp/>event,<sp/>uint32_t<sp/>eventMask);</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/><ref refid="_event_p_8h_1a37cbde3a07725b4e93baad5888370766" kindref="member">EventP_get</ref>(EventP_Handle<sp/>event);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_dpl_EventP__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/dpl/EventP.h"/>
+  </compounddef>
+</doxygen>

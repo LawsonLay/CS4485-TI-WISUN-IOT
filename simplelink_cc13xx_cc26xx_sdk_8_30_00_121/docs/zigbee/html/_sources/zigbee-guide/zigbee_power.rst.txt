@@ -1,0 +1,25 @@
+Power Management
+----------------
+
+All power-management functionality is handled by the TI-RTOS power driver and
+is used by the peripheral drivers (e.g. UART, SPI, I2C, etc..). Applications
+can prevent, if they choose, the |DEVICE| from entering low power modes by
+setting a power constraint.
+
+
+With |STACK| applications, the power constraint is set in ``ti_zstack_config.h`` 
+for End Device types by defining the project's .syscfg file's *RF STACKS* |rarr| 
+*Z-Stack* |rarr| *Power Management* |rarr| *Power Mode of Operation* to
+*Sleepy (Low Power Mode)*.  With ``ZG_BUILD_ENDDEVICE_TYPE`` defined, the device 
+enters and exits sleep as required for |STACK| events, peripheral events, 
+application timers, and so forth. Coordinator and Router Zigbee device types 
+must always stayawake to properly route packets.
+
+More information on power-management functionality, including the API and a
+sample use case for a custom UART driver, can be found in the TI-RTOS Power
+Management for |DEVICE| included in the |SDK| install. These APIs are
+required only when using a custom driver.
+
+Also see *Z-Stack End Device Power Consumption Measurement* 
+`(SWRA625) <http://www.ti.com/lit/swra625>`_
+for steps to analyze the system power consumption and battery life.

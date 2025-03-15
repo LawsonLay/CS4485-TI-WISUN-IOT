@@ -1,0 +1,129 @@
+
+.. _sec-oad-types:
+
+OAD Storage & Security
+======================
+
+There are a couple of aspects with OAD that one must take into account when
+choosing which type of OAD implementation that suits your application.
+
+One aspect is where a new downloaded image is to be stored during the OAD
+process, for which you have two methods: on-chip and off-chip. On-chip OAD
+stores the downloaded image to internal flash, while off-chip OAD stores the
+downloaded image to external flash.
+
+Another aspect is security, which is to whether or not authenticate a new
+downloaded image to be from a trusted source. There are two methods of
+security: Unsecure and Secure. Unsecure OAD does not apply new image security
+before executing it on the device. Secure OAD authenticates new images using
+an Elliptic Curve Digital Signature Algorithm (:term:`ECDSA`) before it is
+installed and executed on-chip.
+
+.. note::
+
+    Both OAD storage and OAD security can be configured independently.
+
+.. _sec-oad-types-storage:
+
+OAD Storage
+-----------
+
+During an OAD procedure the candidate image is stored either in the internal
+flash, which is called on-chip OAD, or in external flash, which is called
+off-chip OAD. On-chip and off-chip OAD has associated trade-offs and benefits,
+which are summarized in :numref:`Table %s <tbl-oad-types-storage-comparison>`.
+
+.. note::
+
+    Due to flash constraints, on-chip OAD is only supported by some stacks.
+    Refer to the stack-specific OAD chapter whether on-chip OAD is supported.
+
+The biggest advantage of using on-chip OAD is allowing a single-chip OAD
+solution. However, on-chip OAD does put restrictions on application size in
+terms of flash usage.
+
+Off-chip OAD does not have these restrictions, and can store multiple
+application images and a factory image in the external flash without limiting
+the application size on the internal flash. This, of course, comes at the cost
+of requiring an additional component.
+
+Despite their differences, both on-chip and off-chip OAD are invariant to the
+transport of candidate images.
+
+.. _tbl-oad-types-storage-comparison:
+
+.. table:: OAD storage comparison
+
+    +------------+-----------------------------------+---------------------------------+
+    | Storage    | Advantages                        | Limitations                     |
+    +============+===================================+=================================+
+    | On-chip    | - No external flash required      | - Application size restriction  |
+    +------------+-----------------------------------+---------------------------------+
+    | Off-chip   | - Ability to store multiple /     | - Low power external flash      |
+    |            |   backup images                   |   required                      |
+    |            | - App + Stack merged update       |                                 |
+    |            |   supported                       |                                 |
+    |            | - Maximum application size        |                                 |
+    |            |   available to customer           |                                 |
+    +------------+-----------------------------------+---------------------------------+
+
+.. _sec-oad-types-security:
+
+OAD Security
+------------
+
+When talking about security in the context of OAD, it is referred to whether
+or not new downloaded images must be authenticated as part of the OAD process.
+It does not refer to the security level of the actual transport mechanism of
+the OAD image. The main purpose for authenticating new downloaded images is to
+verify the image is from an entrusted source.
+
+The only difference between secure OAD and unsecure OAD is that secure OAD
+will always authenticate new images as part of the OAD process when properly
+implemented along with the secure BIM. What it means for unsecure OAD to be
+unsecure, is that the problem of not verifying new OAD images could
+potentially allow untrusted sources to compromise the OAD Target.
+
+Secure OAD uses Elliptic Curve Digital Signature Algorithm (:term:`ECDSA`) to
+sign and verify secure OAD images. More specifically, the ECDSA-P256 algorithm
+is implemented. The underlying authentication mechanisms for :term:`ECDSA` is
+that a suitable private and public key pair are generated, and that the
+private key used for image signing is thoroughly protected. Only the public
+key is stored on Target device.
+
+Secure OAD affects multiple portions of the system including the following
+modules, the details of how secure OAD interacts with particular module can be
+found in its associated section.
+
+- :ref:`sec-oad-bim`: Image validation/verification procedure
+- :ref:`sec-oad-image-header` OAD image header: Added security segment
+- :ref:`sec-oad-tools`: Added key generation functionality/ ability to sign image
+
+.. warning::
+
+    It is imperative that the system developer protect the corresponding
+    private key. Since any party that has access to the private key can
+    generate signed images, these images will be treated as a valid authentic
+    image and executed by the device. Likewise, if the private key is lost,
+    the ability to generate new valid firmware images is lost.
+
+.. _tbl-oad-types-security-comparison:
+
+.. table:: OAD security comparison
+
+    +------------+-------------------------------------+-----------------------------------+
+    | Security   | Advantages                          | Limitations                       |
+    +============+=====================================+===================================+
+    | Unsecure   | - Less complexity runtime           | - Will naively accept, install    |
+    |            | - Requires less flash               |   and execute any downloaded      |
+    |            |                                     |   images with valid CRC           |
+    |            |                                     |                                   |
+    +------------+-------------------------------------+-----------------------------------+
+    | Secure     | - Verifies OAD image authenticity   | - All downloaded images are       |
+    |            |   before installing and enabling    |   required to be signed           |
+    |            |   device execution of the new       | - Requires more flash for the     |
+    |            |   image                             |   for the OAD Image Header        |
+    |            |                                     | - Takes longer time (more         |
+    |            |                                     |   energy) to perform the          |
+    |            |                                     |   firmware upgrade                |
+    +------------+-------------------------------------+-----------------------------------+

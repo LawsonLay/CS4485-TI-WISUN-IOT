@@ -1,0 +1,175 @@
+.. _sec-memory-map:
+
+Memory Map
+==========
+
+The devices supported by the |SDK| each contains several memory 
+regions including RAM, ROM, and Flash. This section aims to show how these
+memory regions are utilized by the stack and user application.
+
+After building your application, the full overview of all your objects and their
+location is stored in the .map file found in the build folder (e.g. Release
+folder). The .map file for a given project can be consulted to see exactly what
+objects reside in flash and ROM.
+
+|LITEDEVICE| Memory Map
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The following table contains the Memory Map for the |LITEDEVICE|.
+
+.. table::
+
+    +------------------------+-------------------+---------------+--------------------------------+
+    | Memory Section         | Starting Address  | Size (bytes)  | Description                    |
+    +========================+===================+===============+================================+
+    | Flash                  | 0x00000000        | 60            | Cortex Interrupt Vecs          |
+    |                        +-------------------+---------------+--------------------------------+
+    |                        | Application / Stack Code                                           |
+    |                        +-------------------+---------------+--------------------------------+
+    |                        | SNV*              | 1 or 2 pages  | Simple Non-Volatile Storage    |
+    |                        +-------------------+---------------+--------------------------------+
+    |                        | 0x56000           | 88            | :term:`Customer Configuration` |
+    |                        | (Last flash page) |               |                                |
+    +------------------------+-------------------+---------------+--------------------------------+
+    | RAM                    | 0x20000000        | |RAMVEC_SIZE| | Interrupt Vector Table in RAM  |
+    |                        |                   |               | for dynamic Hwi creation       |
+    |                        +-------------------+---------------+--------------------------------+
+    |                        | .bss and .data                                                     |
+    |                        +--------------------------------------------------------------------+
+    |                        | Application and/or Stack heap                                      |
+    |                        +--------------------------------------------------------------------+
+    |                        | TI-RTOS7 kernel system stack (CSTACK)                              |
+    +------------------------+--------------------------------------------------------------------+
+
+\*SNV is mandatory for most protocol stacks. Optional for other applications.
+
+|DEVICE| Memory Map
+^^^^^^^^^^^^^^^^^^^
+
+The following table contains the memory map for the |DEVICE|.
+
+.. table::
+
+    +------------------------+-------------------+---------------+---------------------------------------+
+    | Memory Section         | Starting Address  | Size (bytes)  | Description                           |
+    +------------------------+-------------------+---------------+---------------------------------------+
+    | Flash                  | 0x00000000        | 60            | Cortex Interrupt Vecs                 |
+    |                        +-------------------+---------------+---------------------------------------+
+    |                        | Application / Stack Code                                                  |
+    |                        +-------------------+---------------+---------------------------------------+
+    |                        | SNV*              | 1 or 2 pages  | Simple Non-Volatile Storage           |
+    |                        +-------------------+---------------+---------------------------------------+
+    |                        | 0x56000           | 88            | :term:`Customer Configuration`        |
+    |                        | (Last flash page) |               |                                       |
+    +------------------------+-------------------+---------------+---------------------------------------+
+    | ROM                    | 0x10000000        | |ROM_SIZE|    | BLE-Stack/BLE5-stack, TI 15.4-Stack,  |
+    |                        |                   |               | Crypto, Driverlib, Boot, TI-RTOS      |
+    +------------------------+-------------------+---------------+---------------------------------------+
+    | RAM                    | 0x20000000        | |RAMVEC_SIZE| | Interrupt Vector Table in RAM         |
+    |                        |                   |               | for dynamic Hwi creation              |
+    |                        +-------------------+---------------+---------------------------------------+
+    |                        | .bss and .data                                                            |
+    |                        +---------------------------------------------------------------------------+
+    |                        | Application and/or Stack heap                                             |
+    |                        +---------------------------------------------------------------------------+
+    |                        | TI-RTOS7 kernel system stack (CSTACK)                                     |
+    +------------------------+-------------------+---------------+---------------------------------------+
+    | AUX RAM                | 0x400E0000        | |AUXRAM_SIZE| | Sensor Controller RAM                 |
+    +------------------------+-------------------+---------------+---------------------------------------+
+
+\*SNV is mandatory for most protocol stacks. Optional for other applications.
+
+|DEVICE7| Memory Map
+^^^^^^^^^^^^^^^^^^^^
+
+The following table contains the memory map for the |DEVICE7|.
+
+.. table::
+
+    +------------------------+-------------------+---------------+---------------------------------------+
+    | Memory Section         | Starting Address  | Size (bytes)  | Description                           |
+    +------------------------+-------------------+---------------+---------------------------------------+
+    | Flash                  | 0x00000000        | 60            | Cortex Interrupt Vecs                 |
+    |                        +-------------------+---------------+---------------------------------------+
+    |                        | Application / Stack Code                                                  |
+    |                        +-------------------+---------------+---------------------------------------+
+    |                        | SNV*              | 1 or 2 pages  | Simple Non-Volatile Storage           |
+    |                        +-------------------+---------------+---------------------------------------+
+    |                        | 0xAE000           | 88            | :term:`Customer Configuration`        |
+    |                        | (Last flash page) |               |                                       |
+    +------------------------+-------------------+---------------+---------------------------------------+
+    | ROM                    | 0x10000000        | |ROM_SIZE|    | BLE-Stack/BLE5-stack, TI 15.4-Stack,  |
+    |                        |                   |               | Crypto, Driverlib, Boot, TI-RTOS      |
+    +------------------------+-------------------+---------------+---------------------------------------+
+    | RAM                    | 0x20000000        | |RAMVEC_SIZE| | Interrupt Vector Table in RAM         |
+    |                        |                   |               | for dynamic Hwi creation              |
+    |                        +-------------------+---------------+---------------------------------------+
+    |                        | .bss and .data                                                            |
+    |                        +---------------------------------------------------------------------------+
+    |                        | Application and/or Stack heap                                             |
+    |                        +---------------------------------------------------------------------------+
+    |                        | TI-RTOS7 kernel system stack (CSTACK)                                     |
+    +------------------------+-------------------+---------------+---------------------------------------+
+    | AUX RAM                | 0x400E0000        | |AUXRAM_SIZE| | Sensor Controller RAM                 |
+    +------------------------+-------------------+---------------+---------------------------------------+
+
+\*SNV is mandatory for most protocol stacks. Optional for other applications.
+
+.. _memory-map-1m: 
+
+|DEVICE1M| Memory Map
+^^^^^^^^^^^^^^^^^^^^^
+
+The following table contains the Memory Map for the |DEVICE1M|.
+
+.. table::
+
+    +------------------------+-------------------+---------------+--------------------------------+
+    | Memory Section         | Starting Address  | Size (bytes)  | Description                    |
+    +------------------------+-------------------+---------------+--------------------------------+
+    | Flash                  | 0x00000000        | 60            | Cortex Interrupt Vecs          |
+    |                        +-------------------+---------------+--------------------------------+
+    |                        | Application / Stack Code                                           |
+    |                        +-------------------+---------------+--------------------------------+
+    |                        | SNV*              | 1 or 2 pages  | Simple Non-Volatile Storage    |
+    |                        +-------------------+---------------+--------------------------------+
+    |                        | 0xFE000           | 8192          | Last flash page                |
+    +------------------------+-------------------+---------------+--------------------------------+
+    | CCFG                   | 0x50000000        | 2048          | :term:`Customer Configuration` |
+    +------------------------+-------------------+---------------+--------------------------------+
+    | RAM                    | Allocated by      | 252 B         | Interrupt Vector Table in RAM  |
+    |                        | linker            |               | for dynamic Hwi creation       |
+    |                        +-------------------+---------------+--------------------------------+
+    |                        | .bss and .data                                                     |
+    |                        +--------------------------------------------------------------------+
+    |                        | Application and/or Stack heap                                      |
+    |                        +--------------------------------------------------------------------+
+    |                        | TI-RTOS7 kernel system stack (CSTACK)                              |
+    +------------------------+-------------------+---------------+--------------------------------+
+    | AUX RAM                | 0x400E0000        | |AUXRAM_SIZE| | Sensor Controller RAM          |
+    +------------------------+-------------------+---------------+--------------------------------+
+
+\*SNV is mandatory for most protocol stacks. Optional for other applications.
+
+Memory Map Variables
+^^^^^^^^^^^^^^^^^^^^
+   
+In the tables above, the following variables are platform dependent. 
+
+    - **Last Flash Page**: top of the Flash subtracted by its page size
+        - |LITEDEVICE| : **344 kB** or 0x56000 (0x58000 - 0x2000)
+        - |DEVICE1| : **344 kB** or 0x56000 (0x58000 - 0x2000)
+        - |DEVICE7| : **696 kB** or 0xAE000 (0xB0000 - 0x2000)
+        - |DEVICE1M| : **1016 kB** or 0xFE000 (0x100000 - 0x2000)
+
+    - **ROM_SIZE** :
+        - |LITEDEVICE| : N/A. ROM not used on device
+        - |DEVICE1| : |ROM_SIZE| 
+        - |DEVICE7| : |ROM_SIZE|
+        - |DEVICE1M| : N/A. ROM not used on device
+
+    - **AUXRAM_SIZE** :
+        - |LITEDEVICE| : N/A. No AUX RAM present on device
+        - |DEVICE1| : |AUXRAM_SIZE| 
+        - |DEVICE7| : |AUXRAM_SIZE|
+        - |DEVICE1M| : |AUXRAM_SIZE|

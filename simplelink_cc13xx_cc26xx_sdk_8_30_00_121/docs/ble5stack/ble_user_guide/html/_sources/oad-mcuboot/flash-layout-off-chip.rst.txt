@@ -1,0 +1,191 @@
+.. _sec-oad-mcuboot-flash-layout-off-chip:
+
+Flash Layout for Off-Chip OAD
+=============================
+
+This section will describe the method for placing images in internal and
+external flash when using off-chip OAD.
+
+Internal flash refers to the flash memory inside the |DEVICE| and external
+flash refers to an external SPI flash memory connected to the |DEVICE| via SPI.
+
+See requirements below for off-chip OAD.
+
+Requirements and Constraints for Off-chip OAD
+---------------------------------------------
+
+In order to perform an Off-chip OAD the target system must have:
+
+  - An off-chip flash storage as large as the application size + one
+    external flash page to store the external flash image header. (default example
+    will use 1MB of external flash)
+  - A serial connection (SPI) is used to communicate with the off-chip flash
+    component.
+  - Free GPIO pins to interface to the external memory (i.e. 4 wires for SPI)
+
+The following software limitations exist on the external flash:
+  - Only the secondary slot is stored on the external flash.
+  - The OAD images' headers shall be stored in the first 1 MBytes of the external
+    flash addressable space.
+  - The total size of the stored images should not exceed 4 GBytes.
+
+.. ifconfig:: doctarget in ['ble2', 'ble3', 'ble5']
+
+  .. note::
+
+      Off-chip OAD using the |STACK| has only be tested using a 1 MBytes
+      external flash. The out-of-the-box software do not allow larger
+      external flash size.
+
+.. _sect-mcuboot-off-chip-bim-memory-layout:
+
+Internal Flash Memory Layout
+----------------------------
+
+The internal flash of the device contains the active user application and MCUboot.
+Off-chip OAD maximizes the available flash space to the user
+application because of its ability to store the incoming image in external flash
+during the download process.
+
+.. note::
+
+    When using security, the BIM may use a second page depending on the
+    page size of the device. Consult the BIM's linker file for more information.
+
+
+.. _fig-mcuboot-off-chip-oad-target-memory-partition:
+.. ditaa::
+    :--no-separation:
+
+        Internal Flash
+    +-------------------+ <- 0x00000000
+    | MCUboot     cRED  |
+    | Bootloader        |
+    |                   |
+    |                   |
+    |                   |
+    |                   |
+    |                   |
+    |                   |
+    +-------------------+ <- 0x00006000
+    |                   |
+    |                   | Primary Slot
+    |                   |
+    |                   |
+    |                   |
+    |                   |
+    |       User        |
+    |    Application    |
+    |       c7AF        |
+    |                   |
+    |                   |
+    |                   |
+    |                   |
+    |                   |
+    |                   |
+    +-------------------+ <- Device Flash Size - 0x4000
+    | NV Space          |
+    | Reserved for      |
+    | Bonding           |
+    | Information       |
+    | c333              |
+    +-------------------+ <- Device Flash Size
+
+
+The user application pictured above is responsible for the following:
+
+    - Implementing the protocol stack specific implementation of the OAD
+      transport
+    - Finding a suitable location in external flash for the image and storing
+      its image header in the table.
+
+.. _sec-mcuboot-ext-flash-layout:
+
+External Flash Memory Layout
+----------------------------
+
+The off-chip flash memory on the |LP| contains the secondary slot of the user applications.
+The memory map layout of the external flash is defined in :code:`flash_map_backend.h`.
+The size of the image in external flash can be determined
+once the image header vector is sent over the air.
+
+The application will round up as necessary according to the equation below:
+
+.. math::
+
+  \textrm{numExtFlashPages} = \frac{imageLen + (imageLen \bmod EFL\_PAGE\_SIZE)}{EFL\_PAGE\_SIZE}
+
+
+The memory partition of the application for Off-chip OAD is depicted in
+below.
+
+
+.. ifconfig:: device == 'cc23xx'
+
+    .. include:: inc_ext-flash-layout-cc23xx.rst
+
+.. ifconfig:: device != 'cc23xx'
+  
+    .. include:: inc_ext-flash-layout.rst
+
+
+.. ifconfig:: device != 'cc2640' and device != 'cc23xx'
+
+    .. warning::
+
+        The convention is that image header sector 0 is reserved for the
+        :term:`Factory Image`. This region should be reserved for known good images
+        as the BIM will revert to the factory image if there are no
+        acceptable images in internal or external flash (user section).
+
+
+
+
+.. ifconfig:: device == 'cc23xx'
+
+  Enabling External Flash support on |DEVICE_LOW_PLUS| 4x4 board
+  --------------------------------------------------------------
+
+  The following modifications are necessary to enable an external flash
+  enabled configuration on the |DEVICE_LOW_PLUS| device using a 4x4 board.
+  The exact pin assignments will depend on your custom board. The following
+  pin values were used as a reference.
+
+  Within the ``{SDK_INSTALL_DIR}/source/ti/common/flash/no_rtos/extFlash/bsp.h``, 
+  locate the following code:
+
+    .. code-block:: c
+
+      #define BSP_IOID_FLASH_CS       6
+      #define BSP_SPI_MOSI            13
+      #define BSP_SPI_MISO            12
+      #define BSP_SPI_CLK_FLASH       18
+
+  The above code should be changed to the following:
+
+    .. code-block:: c
+
+      #define BSP_IOID_FLASH_CS       11
+      #define BSP_SPI_MOSI            13
+      #define BSP_SPI_MISO            21
+      #define BSP_SPI_CLK_FLASH       24
+  
+  Within the ``{SDK_INSTALL_DIR}/source/ti/common/flash/no_rtos/extFlash/bsp_spi_lpf3.c``, 
+  locate the following code:
+
+    .. code-block:: c
+
+      #define MISO_PINMUX     GPIO_MUX_PORTCFG_PFUNC_1
+      #define MOSI_PINMUX     GPIO_MUX_PORTCFG_PFUNC_2
+      #define CLK_PINMUX      GPIO_MUX_PORTCFG_PFUNC_4
+
+  The above code should be changed to the following:
+
+    .. code-block:: c
+
+      #define MISO_PINMUX     GPIO_MUX_PORTCFG_PFUNC_4
+      #define MOSI_PINMUX     GPIO_MUX_PORTCFG_PFUNC_2
+      #define CLK_PINMUX      GPIO_MUX_PORTCFG_PFUNC_1
+  
+  On the 4x4 board, the 2-4 P2 and 5-3 P6 jumpers should be placed to
+  enable external flash SPI access.

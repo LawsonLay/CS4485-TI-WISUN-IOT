@@ -1,0 +1,236 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_n_v_s_c_c26_x_x_8h" kind="file" language="C++">
+    <compoundname>NVSCC26XX.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <incdepgraph>
+      <node id="1447">
+        <label>stdbool.h</label>
+      </node>
+      <node id="1445">
+        <label>NVSCC26XX.h</label>
+        <link refid="_n_v_s_c_c26_x_x_8h"/>
+        <childnode refid="1446" relation="include">
+        </childnode>
+        <childnode refid="1447" relation="include">
+        </childnode>
+      </node>
+      <node id="1446">
+        <label>stdint.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_n_v_s_c_c26_x_x___h_w_attrs" prot="public">NVSCC26XX_HWAttrs</innerclass>
+    <innerclass refid="struct_n_v_s_c_c26_x_x___object" prot="public">NVSCC26XX_Object</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_n_v_s_c_c26_x_x_8h_1aa21de44fea696d5e49503a7e0d9a00b7" prot="public" static="no">
+        <name>NVSCC26XX_STATUS_LOW_VOLTAGE</name>
+        <initializer>(<ref refid="group___n_v_s___c_o_n_t_r_o_l_1gad82fd139152ca14946c80c6c91edb4a0" kindref="member">NVS_STATUS_RESERVED</ref> - 1)</initializer>
+        <briefdescription>
+<para>Error status code returned by <ref refid="_n_v_s_8h_1a4f309d160ac4641c89501adc95d170b3" kindref="member">NVS_erase()</ref>, <ref refid="_n_v_s_8h_1aae7abe0cb889a6d0cc1858bfc69ab7e0" kindref="member">NVS_write()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>This error status is returned if the system voltage is too low to safely perform the flash operation. Voltage must be 1.5V or greater. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/nvs/NVSCC26XX.h" line="120" column="9" bodyfile="source/ti/drivers/nvs/NVSCC26XX.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_n_v_s_c_c26_x_x_8h_1ade3114c185df6a15ec62305dd5c6f6cc" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_n_v_s___fxn_table" kindref="compound">NVS_FxnTable</ref></type>
+        <definition>const NVS_FxnTable NVSCC26XX_fxnTable</definition>
+        <argsstring></argsstring>
+        <name>NVSCC26XX_fxnTable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/nvs/NVSCC26XX.h" line="154" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Non-Volatile Storage driver for CC13XX/CC26XX devices. </para>    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para><para><heading level="2">Interrupt Latency During Flash Operations</heading>
+</para><para>When writing or erasing flash, interrupts must be disabled to avoid executing code in flash while the flash is being reprogrammed. This constraint is handled by the driver. Application code does not need to safeguard against this.</para><para>Additionally, to avoid extremely large interrupt latencies that would be incurred if entire blocks were written with interrupts disabled, block writes to flash are broken into multiple smaller sizes.</para><para>Even with this scheme in place, latencies of roughly 64 microseconds will be incurred while flash is being written to.</para><para>A similar caveat applies to flash erase operations. Erasing an entire flash sector (the minimal amount that can be erased at a time) can take roughly 8 milliseconds. This entire operation must be performed with interrupts disabled. Here again, this requirement is met internally by the driver and flash region erases are performed one sector at a time to minimize this significant latency impact.</para><para>Care must be taken by the user to not perform flash write or erase operations during latency critical phases of an application. See the <ref refid="_n_v_s_8h_1a62d1593df9acb6d3c6446f1719f3bf28" kindref="member">NVS_lock()</ref> and <ref refid="_n_v_s_8h_1a01fb843c26ca406c5c9463eae6b0b817" kindref="member">NVS_unlock()</ref> API descriptions for more information.</para><para><heading level="2">Maximum flash writes before erase</heading>
+</para><para>On CC13XX &amp; CC26XX memory rows can be 128 or 256 bytes in length; refer to the device datasheet for the exact size. A maximum of 83 write operations can be performed on a memory row. Once the limit is reached, the row must be erased before it is written to again. It is the developer&apos;s responsibility to ensure that this limit is not exceeded in their applications. The developer may also opt to use the third party SPIFFS library implementation supported by TIRTOS which does track writes.</para><para><simplesect kind="note"><para>The 83 write limit persists through device reset &amp; power cycles. If 60 write operations were performed on a memory row &amp; the device is reset; the page can still only be written to 23 more times before it must be erased.</para></simplesect>
+A write &quot;Scoreboard&quot; can be enabled in this driver; the scoreboard keeps track of how many times a page has been written to. It is provided as a debug tool to ensure the 83 write limit is not exceeded. If a page is written to more than 83 times, the NVSCC26XX driver will spin forever. Each byte in the scoreboard corresponds to a memory page in the NVS region. The byte is incremented when the memory is written to &amp; set to 0 when erased.</para><para>To enable the &quot;scoreboard&quot; the &quot;NVSCC26XX_INSTRUMENTED&quot; symbol must be defined when the driver is compiled. Three new fields are added to the <ref refid="struct_n_v_s_c_c26_x_x___h_w_attrs" kindref="compound">NVSCC26XX_HWAttrs</ref> structure:<itemizedlist>
+<listitem><para>scoreboard - a buffer provided by the application where each byte represents how many times a page has been written to.</para></listitem><listitem><para>scoreboardSize - number of bytes in the scoreboard.</para></listitem><listitem><para>flashPageSize - number of bytes in a flash page (i.e. 128 or 256)</para></listitem></itemizedlist>
+</para><para>When configured correctly, the scoreboard can be viewed in a memory browser.</para><para><simplesect kind="note"><para>The scoreboard will only keep track of writes to flash within a NVS region using a NVS driver. Writes performed outside the NVS region or without the NVS driver are untracked.</para></simplesect>
+<simplesect kind="note"><para>The scoreboard is in RAM &amp; will be lost on reset or power cycle.</para></simplesect>
+<hruler/>
+ </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2015-2023,<sp/>Texas<sp/>Instruments<sp/>Incorporated</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">/*!*****************************************************************************</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*<sp/><sp/>@file<sp/><sp/><sp/><sp/><sp/><sp/><sp/>NVSCC26XX.h</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/><sp/>@brief<sp/><sp/><sp/><sp/><sp/><sp/>Non-Volatile<sp/>Storage<sp/>driver<sp/>for<sp/>CC13XX/CC26XX<sp/>devices.</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Interrupt<sp/>Latency<sp/>During<sp/>Flash<sp/>Operations<sp/>#</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/><sp/>When<sp/>writing<sp/>or<sp/>erasing<sp/>flash,<sp/>interrupts<sp/>must<sp/>be<sp/>disabled<sp/>to<sp/>avoid</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/><sp/>executing<sp/>code<sp/>in<sp/>flash<sp/>while<sp/>the<sp/>flash<sp/>is<sp/>being<sp/>reprogrammed.<sp/>This</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*<sp/><sp/>constraint<sp/>is<sp/>handled<sp/>by<sp/>the<sp/>driver.<sp/>Application<sp/>code<sp/>does<sp/>not<sp/>need</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/><sp/>to<sp/>safeguard<sp/>against<sp/>this.</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*<sp/><sp/>Additionally,<sp/>to<sp/>avoid<sp/>extremely<sp/>large<sp/>interrupt<sp/>latencies<sp/>that<sp/>would<sp/>be</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/>*<sp/><sp/>incurred<sp/>if<sp/>entire<sp/>blocks<sp/>were<sp/>written<sp/>with<sp/>interrupts<sp/>disabled,<sp/>block</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/>*<sp/><sp/>writes<sp/>to<sp/>flash<sp/>are<sp/>broken<sp/>into<sp/>multiple<sp/>smaller<sp/>sizes.</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/>*<sp/><sp/>Even<sp/>with<sp/>this<sp/>scheme<sp/>in<sp/>place,<sp/>latencies<sp/>of<sp/>roughly<sp/>64<sp/>microseconds<sp/>will</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/>*<sp/><sp/>be<sp/>incurred<sp/>while<sp/>flash<sp/>is<sp/>being<sp/>written<sp/>to.</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/>*<sp/><sp/>A<sp/>similar<sp/>caveat<sp/>applies<sp/>to<sp/>flash<sp/>erase<sp/>operations.<sp/>Erasing<sp/>an<sp/>entire</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/>*<sp/><sp/>flash<sp/>sector<sp/>(the<sp/>minimal<sp/>amount<sp/>that<sp/>can<sp/>be<sp/>erased<sp/>at<sp/>a<sp/>time)<sp/>can<sp/>take</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/>*<sp/><sp/>roughly<sp/>8<sp/>milliseconds.<sp/>This<sp/>entire<sp/>operation<sp/>must<sp/>be<sp/>performed<sp/>with</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/>*<sp/><sp/>interrupts<sp/>disabled.<sp/>Here<sp/>again,<sp/>this<sp/>requirement<sp/>is<sp/>met<sp/>internally</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/>*<sp/><sp/>by<sp/>the<sp/>driver<sp/>and<sp/>flash<sp/>region<sp/>erases<sp/>are<sp/>performed<sp/>one<sp/>sector<sp/>at<sp/>a</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/>*<sp/><sp/>time<sp/>to<sp/>minimize<sp/>this<sp/>significant<sp/>latency<sp/>impact.</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/>*<sp/><sp/>Care<sp/>must<sp/>be<sp/>taken<sp/>by<sp/>the<sp/>user<sp/>to<sp/>not<sp/>perform<sp/>flash<sp/>write<sp/>or<sp/>erase</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/>*<sp/><sp/>operations<sp/>during<sp/>latency<sp/>critical<sp/>phases<sp/>of<sp/>an<sp/>application.<sp/>See<sp/>the</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/>*<sp/><sp/>NVS_lock()<sp/>and<sp/>NVS_unlock()<sp/>API<sp/>descriptions<sp/>for<sp/>more<sp/>information.</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Maximum<sp/>flash<sp/>writes<sp/>before<sp/>erase<sp/>#</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/>*<sp/><sp/>On<sp/>CC13XX<sp/>&amp;<sp/>CC26XX<sp/>memory<sp/>rows<sp/>can<sp/>be<sp/>128<sp/>or<sp/>256<sp/>bytes<sp/>in<sp/>length;<sp/>refer<sp/>to</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/>*<sp/><sp/>the<sp/>device<sp/>datasheet<sp/>for<sp/>the<sp/>exact<sp/>size.<sp/><sp/>A<sp/>maximum<sp/>of<sp/>83<sp/>write<sp/>operations</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/>*<sp/><sp/>can<sp/>be<sp/>performed<sp/>on<sp/>a<sp/>memory<sp/>row.<sp/><sp/>Once<sp/>the<sp/>limit<sp/>is<sp/>reached,<sp/>the<sp/>row<sp/>must</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/>*<sp/><sp/>be<sp/>erased<sp/>before<sp/>it<sp/>is<sp/>written<sp/>to<sp/>again.<sp/>It<sp/>is<sp/>the<sp/>developer&apos;s</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/>*<sp/><sp/>responsibility<sp/>to<sp/>ensure<sp/>that<sp/>this<sp/>limit<sp/>is<sp/>not<sp/>exceeded<sp/>in<sp/>their</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/>*<sp/><sp/>applications.<sp/>The<sp/>developer<sp/>may<sp/>also<sp/>opt<sp/>to<sp/>use<sp/>the<sp/>third<sp/>party<sp/>SPIFFS</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/>*<sp/><sp/>library<sp/>implementation<sp/>supported<sp/>by<sp/>TIRTOS<sp/>which<sp/>does<sp/>track<sp/>writes.</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/>*<sp/><sp/>\note<sp/>The<sp/>83<sp/>write<sp/>limit<sp/>persists<sp/>through<sp/>device<sp/>reset<sp/>&amp;<sp/>power<sp/>cycles.</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/>*<sp/><sp/>If<sp/>60<sp/>write<sp/>operations<sp/>were<sp/>performed<sp/>on<sp/>a<sp/>memory<sp/>row<sp/>&amp;<sp/>the<sp/>device<sp/>is</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/>*<sp/><sp/>reset;<sp/>the<sp/>page<sp/>can<sp/>still<sp/>only<sp/>be<sp/>written<sp/>to<sp/>23<sp/>more<sp/>times<sp/>before<sp/>it<sp/>must</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/>*<sp/><sp/>be<sp/>erased.</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/>*<sp/><sp/>A<sp/>write<sp/>&quot;Scoreboard&quot;<sp/>can<sp/>be<sp/>enabled<sp/>in<sp/>this<sp/>driver;<sp/>the<sp/>scoreboard<sp/>keeps</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/>*<sp/><sp/>track<sp/>of<sp/>how<sp/>many<sp/>times<sp/>a<sp/>page<sp/>has<sp/>been<sp/>written<sp/>to.<sp/><sp/>It<sp/>is<sp/>provided<sp/>as<sp/>a</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/>*<sp/><sp/>debug<sp/>tool<sp/>to<sp/>ensure<sp/>the<sp/>83<sp/>write<sp/>limit<sp/>is<sp/>not<sp/>exceeded.<sp/><sp/>If<sp/>a<sp/>page<sp/>is</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/>*<sp/><sp/>written<sp/>to<sp/>more<sp/>than<sp/>83<sp/>times,<sp/>the<sp/>NVSCC26XX<sp/>driver<sp/>will<sp/>spin<sp/>forever.</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/>*<sp/><sp/>Each<sp/>byte<sp/>in<sp/>the<sp/>scoreboard<sp/>corresponds<sp/>to<sp/>a<sp/>memory<sp/>page<sp/>in<sp/>the<sp/>NVS<sp/>region.</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>byte<sp/>is<sp/>incremented<sp/>when<sp/>the<sp/>memory<sp/>is<sp/>written<sp/>to<sp/>&amp;<sp/>set<sp/>to<sp/>0<sp/>when</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/>*<sp/><sp/>erased.</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/>*<sp/><sp/>To<sp/>enable<sp/>the<sp/>&quot;scoreboard&quot;<sp/>the<sp/>&quot;NVSCC26XX_INSTRUMENTED&quot;<sp/>symbol<sp/>must<sp/>be</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/>*<sp/><sp/>defined<sp/>when<sp/>the<sp/>driver<sp/>is<sp/>compiled.<sp/><sp/>Three<sp/>new<sp/>fields<sp/>are<sp/>added<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/>*<sp/><sp/>#NVSCC26XX_HWAttrs<sp/>structure:</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>*<sp/>scoreboard<sp/>-<sp/>a<sp/>buffer<sp/>provided<sp/>by<sp/>the<sp/>application<sp/>where<sp/>each<sp/>byte</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>represents<sp/>how<sp/>many<sp/>times<sp/>a<sp/>page<sp/>has<sp/>been<sp/>written<sp/>to.</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>*<sp/>scoreboardSize<sp/>-<sp/>number<sp/>of<sp/>bytes<sp/>in<sp/>the<sp/>scoreboard.</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>*<sp/>flashPageSize<sp/>-<sp/>number<sp/>of<sp/>bytes<sp/>in<sp/>a<sp/>flash<sp/>page<sp/>(i.e.<sp/>128<sp/>or<sp/>256)</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/>*<sp/><sp/>When<sp/>configured<sp/>correctly,<sp/>the<sp/>scoreboard<sp/>can<sp/>be<sp/>viewed<sp/>in<sp/>a<sp/>memory<sp/>browser.</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/>*<sp/><sp/>\note<sp/>The<sp/>scoreboard<sp/>will<sp/>only<sp/>keep<sp/>track<sp/>of<sp/>writes<sp/>to<sp/>flash<sp/>within<sp/>a</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NVS<sp/>region<sp/>using<sp/>a<sp/>NVS<sp/>driver.<sp/><sp/>Writes<sp/>performed<sp/>outside<sp/>the<sp/>NVS</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>region<sp/>or<sp/>without<sp/>the<sp/>NVS<sp/>driver<sp/>are<sp/>untracked.</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*<sp/><sp/>\note<sp/><sp/>The<sp/>scoreboard<sp/>is<sp/>in<sp/>RAM<sp/>&amp;<sp/>will<sp/>be<sp/>lost<sp/>on<sp/>reset<sp/>or<sp/>power<sp/>cycle.</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/>*<sp/><sp/>============================================================================</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ti_drivers_nvs_NVSCC26XX__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_drivers_nvs_NVSCC26XX__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__cplusplus)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120" refid="_n_v_s_c_c26_x_x_8h_1aa21de44fea696d5e49503a7e0d9a00b7" refkind="member"><highlight class="preprocessor">#define<sp/>NVSCC26XX_STATUS_LOW_VOLTAGE<sp/>(NVS_STATUS_RESERVED<sp/>-<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_n_v_s___fxn_table" kindref="compound">NVS_FxnTable</ref><sp/><ref refid="_n_v_s_c_c26_x_x_8h_1ade3114c185df6a15ec62305dd5c6f6cc" kindref="member">NVSCC26XX_fxnTable</ref>;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="296" refid="struct_n_v_s_c_c26_x_x___h_w_attrs" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="298" refid="struct_n_v_s_c_c26_x_x___h_w_attrs_1ad5ee322e543d49b4c177f28f4e96f884" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="struct_n_v_s_c_c26_x_x___h_w_attrs_1ad5ee322e543d49b4c177f28f4e96f884" kindref="member">regionBase</ref>;<sp/></highlight></codeline>
+<codeline lineno="305" refid="struct_n_v_s_c_c26_x_x___h_w_attrs_1ab479adbd1bbeb60a6849c4611d9f4941" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="struct_n_v_s_c_c26_x_x___h_w_attrs_1ab479adbd1bbeb60a6849c4611d9f4941" kindref="member">regionSize</ref>;<sp/></highlight></codeline>
+<codeline lineno="316"><highlight class="preprocessor">#if<sp/>defined(NVSCC26XX_INSTRUMENTED)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>*scoreboard;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>scoreboardSize;<sp/><sp/></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>flashPageSize;<sp/></highlight></codeline>
+<codeline lineno="320"><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal">}<sp/><ref refid="struct_n_v_s_c_c26_x_x___h_w_attrs" kindref="compound">NVSCC26XX_HWAttrs</ref>;</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="324"><highlight class="comment"><sp/>*<sp/><sp/>@brief<sp/><sp/><sp/><sp/><sp/><sp/>NVSCC26XX<sp/>Object</highlight></codeline>
+<codeline lineno="325"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="326"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>application<sp/>must<sp/>not<sp/>access<sp/>any<sp/>member<sp/>variables<sp/>of<sp/>this<sp/>structure!</highlight></codeline>
+<codeline lineno="327"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="328" refid="struct_n_v_s_c_c26_x_x___object" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="329"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="330" refid="struct_n_v_s_c_c26_x_x___object_1a6efb4e8388b62e19e411d12299ebdcce" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_n_v_s_c_c26_x_x___object_1a6efb4e8388b62e19e411d12299ebdcce" kindref="member">opened</ref>;<sp/></highlight><highlight class="comment">/*<sp/>Has<sp/>this<sp/>region<sp/>been<sp/>opened<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="331"><highlight class="normal">}<sp/><ref refid="struct_n_v_s_c_c26_x_x___object" kindref="compound">NVSCC26XX_Object</ref>;</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"></highlight></codeline>
+<codeline lineno="338"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NVSCC26XX_close(<ref refid="struct_n_v_s___config__" kindref="compound">NVS_Handle</ref><sp/>handle);</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"></highlight></codeline>
+<codeline lineno="340"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>int_fast16_t<sp/>NVSCC26XX_control(<ref refid="struct_n_v_s___config__" kindref="compound">NVS_Handle</ref><sp/>handle,<sp/>uint_fast16_t<sp/>cmd,<sp/>uintptr_t<sp/>arg);</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>int_fast16_t<sp/>NVSCC26XX_erase(<ref refid="struct_n_v_s___config__" kindref="compound">NVS_Handle</ref><sp/>handle,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>offset,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size);</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NVSCC26XX_getAttrs(<ref refid="struct_n_v_s___config__" kindref="compound">NVS_Handle</ref><sp/>handle,<sp/><ref refid="struct_n_v_s___attrs" kindref="compound">NVS_Attrs</ref><sp/>*attrs);</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"></highlight></codeline>
+<codeline lineno="346"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NVSCC26XX_init(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"></highlight></codeline>
+<codeline lineno="348"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>int_fast16_t<sp/>NVSCC26XX_lock(<ref refid="struct_n_v_s___config__" kindref="compound">NVS_Handle</ref><sp/>handle,<sp/>uint32_t<sp/>timeout);</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="struct_n_v_s___config__" kindref="compound">NVS_Handle</ref><sp/>NVSCC26XX_open(uint_least8_t<sp/>index,<sp/><ref refid="struct_n_v_s___params" kindref="compound">NVS_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"></highlight></codeline>
+<codeline lineno="352"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>int_fast16_t<sp/>NVSCC26XX_read(<ref refid="struct_n_v_s___config__" kindref="compound">NVS_Handle</ref><sp/>handle,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>offset,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*buffer,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>bufferSize);</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"></highlight></codeline>
+<codeline lineno="354"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NVSCC26XX_unlock(<ref refid="struct_n_v_s___config__" kindref="compound">NVS_Handle</ref><sp/>handle);</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"></highlight></codeline>
+<codeline lineno="356"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>int_fast16_t<sp/>NVSCC26XX_write(<ref refid="struct_n_v_s___config__" kindref="compound">NVS_Handle</ref><sp/>handle,</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>offset,</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*buffer,</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>bufferSize,</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint_fast16_t<sp/>flags);</highlight></codeline>
+<codeline lineno="363"><highlight class="preprocessor">#if<sp/>defined(__cplusplus)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="364"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>defined<sp/>(__cplusplus)<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="366"><highlight class="normal"></highlight></codeline>
+<codeline lineno="368"><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_drivers_nvs_NVSCC26XX__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/nvs/NVSCC26XX.h"/>
+  </compounddef>
+</doxygen>

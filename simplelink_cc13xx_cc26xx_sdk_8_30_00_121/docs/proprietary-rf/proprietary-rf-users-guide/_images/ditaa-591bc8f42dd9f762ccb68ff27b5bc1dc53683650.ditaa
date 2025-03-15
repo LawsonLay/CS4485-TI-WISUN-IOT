@@ -1,0 +1,34 @@
+                                                 External Flash
++--------------------------------+ ------->   +--------------------+ <- EFL_SIZE
+| {d}                            |            |                    |
+| o Fact image is variable sized |            |     Factory        |
++--------------------------------+ ---\       |      Image         |
+                                      |       |       cRED         |
+                                      \--->   |                    |
++--------------------------------+ ------->   +--------------------+ <- EFL_SIZE - FACT_IMG_SIZE
+| {d}                            |            |                    |
+| o App images are variable sized|            |                    |
+| o Location based on header info|            |                    |
+|                                |            |      Variable      |
++--------------------------------+ ---\       |   space for user   |
+                                      |       |    applications    |
+                                      |       |       c7AF         |
+                                      |       |                    |
+                                      |       |                    |
+                                      |       |                    |
+                                      \--->   |                    |
++--------------------------------+ ------->   +--------------------+ <- N x EFL_PAGE_SIZE
+| {d}                            |            | EFL Image Header N |
+| o Img headers are page aligned |            | c777               |
+| o Image headers grow upwards   |            +--------------------+
++--------------------------------+ ---\       |        ... c777    |
+                                      |       +--------------------+ <- 3 x EFL_PAGE_SIZE
+                                      |       | EFL Image Header 2 |
+                                      |       | c777               |
+                                      |       +--------------------+ <- 2 x EFL_PAGE_SIZE
+                                      |       | EFL Image Header 1 |
+                                      |       | c777               |
+                                      |       +--------------------+ <- EFL_PAGE_SIZE
+                                      |       | EFL Image Header 0 |
+                                      |       | c777               |
+                                      \--->   +--------------------+ <- 0x00000000

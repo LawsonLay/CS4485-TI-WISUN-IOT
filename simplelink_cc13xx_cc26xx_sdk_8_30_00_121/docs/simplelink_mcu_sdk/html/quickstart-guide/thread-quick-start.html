@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TI Thread-Stack Quick Start &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Quick Start Guide
+ 7.40.00.xx documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Proprietary RF Quick Start Guide" href="proprietary-rf-quick-start.html" />
+    <link rel="prev" title="TI Bluetooth Mesh Quick Start Guide" href="ble-mesh-quick-start.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug quickstart-guide thread-quick-start";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Quick Start Guide
+
+          </a>
+              <div class="version">
+                7.40.00.xx
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tidrivers-quick-start.html">TI Drivers Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ti154stack-quick-start.html">TI 15.4-Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble-mesh-quick-start.html">TI Bluetooth Mesh Quick Start Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TI Thread-Stack Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-ti-openthread-stack-projects-with-ccs">Using TI-OpenThread Stack Projects with CCS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#importing-ti-openthread-stack-examples-with-ccs">Importing TI-OpenThread Stack Examples with CCS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-and-download-ti-openthread-stack-examples-with-ccs">Build and Download TI-OpenThread Stack Examples with CCS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-ti-openthread-stack-cli-ftd-project">Running the TI-OpenThread Stack CLI FTD Project</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#learning-more-about-the-ti-openthread-stack">Learning more about the TI-OpenThread Stack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#developing-ti-openthread-stack-projects">Developing TI-OpenThread Stack projects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enhancing-the-ti-openthread-stack-examples">Enhancing the TI-OpenThread Stack examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-ti-openthread-stack-help">Getting TI-OpenThread Stack Help</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zigbee-quick-start.html">TI Z-Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmm-quick-start.html">Dynamic Multi-protocol Manager Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wsms-quick-start.html">Wireless Solar Management System Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sidewalk-quick-start.html">Amazon Sidewalk Quick Start Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Quick Start Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>TI Thread-Stack Quick Start</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="ti-thread-stack-quick-start">
+<h1>TI Thread-Stack Quick Start<a class="headerlink" href="#ti-thread-stack-quick-start" title="Permalink to this headline">¶</a></h1>
+<p>The TI-OpenThread Stack examples contain the code to run OpenThread within the
+SimpleLink Ecosystem.</p>
+<p>This section describes how to import and build an existing example project from
+the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>. This section references the <code class="docutils literal notranslate"><span class="pre">cli_ftd</span></code> example project
+specifically. All TI-OpenThread Stack example projects have a similar
+structure.</p>
+<p>The TI-OpenThread Stack component of the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> provides TI-RTOS examples for
+two toolchains and two major device types. The project’s name will contain
+either <code class="docutils literal notranslate"><span class="pre">ccs</span></code> or <code class="docutils literal notranslate"><span class="pre">gcc</span></code> if they support the TI-CGT or GCC toolchain
+respectively.  The project’s name may contain <code class="docutils literal notranslate"><span class="pre">mtd</span></code> or <code class="docutils literal notranslate"><span class="pre">ftd</span></code> if it is
+showcasing Thread MTD or FTD functionality. Consult the SimpleLink
+TI-OpenThread Stack User’s Guide for an explanation of MTD and FTD. If an
+example’s name does not contain this information, consult the example’s README
+for that information.</p>
+<p>Every TI-OpenThread Stack example contains a README.html that details the
+example application design details and how each example works. The README.html
+can be viewed in Resource explorer or in CCS.</p>
+<div class="section" id="using-ti-openthread-stack-projects-with-ccs">
+<h2>Using TI-OpenThread Stack Projects with CCS<a class="headerlink" href="#using-ti-openthread-stack-projects-with-ccs" title="Permalink to this headline">¶</a></h2>
+<p>Importing a TI-OpenThread Stack example project into CCS will also import the
+necessary library projects for that device configuration. These library
+projects are marked as dependent projects to the example application project
+and will be built when the example is built. For more details and how to change
+configurations, look at the SimpleLink TI-OpenThread Stack User’s Guide.</p>
+<div class="section" id="importing-ti-openthread-stack-examples-with-ccs">
+<h3>Importing TI-OpenThread Stack Examples with CCS<a class="headerlink" href="#importing-ti-openthread-stack-examples-with-ccs" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Open CCS to an empty workspace.</p></li>
+<li><p>Open the Import Project dialog by selecting <code class="docutils literal notranslate"><span class="pre">Projects</span></code> → <code class="docutils literal notranslate"><span class="pre">Import</span> <span class="pre">CCS</span>
+<span class="pre">Projects...</span></code>, or by right clicking the Project Explorer pane and selecting
+<code class="docutils literal notranslate"><span class="pre">Import</span></code> → <code class="docutils literal notranslate"><span class="pre">CCS</span> <span class="pre">Projects</span></code>.</p></li>
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Browse...</span></code> button and navigate to
+<code class="docutils literal notranslate"><span class="pre">&lt;SDK_INSTALL_DIR&gt;/examples</span></code>.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Discovered</span> <span class="pre">projects</span></code> pane select the TI-OpenThread Stack example
+project you would like to use, <code class="docutils literal notranslate"><span class="pre">cli_ftd_CC26X2R1_LAUNCHXL_tirtos_ccs</span></code> is
+selected for this guide.</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Finish</span></code> to import the <code class="docutils literal notranslate"><span class="pre">cli_ftd</span></code> example application and
+associated library builds.</p></li>
+</ol>
+</div>
+<div class="section" id="build-and-download-ti-openthread-stack-examples-with-ccs">
+<h3>Build and Download TI-OpenThread Stack Examples with CCS<a class="headerlink" href="#build-and-download-ti-openthread-stack-examples-with-ccs" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Connect your CC13xx or CC26xx to your computer with the provided Micro USB cable.</p></li>
+<li><p>Click the debug icon on the CCS toolbar or select <code class="docutils literal notranslate"><span class="pre">Run</span></code> → <code class="docutils literal notranslate"><span class="pre">Debug</span></code>.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This process may take a few minutes for the dependent libraries to be
+built and linked into one image.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>The XDS110 debug probe may require a firmware update. If one is requested,
+follow the dialog’s prompts and watch the console output for a completion
+message.</p></li>
+<li><p>Once the debug session has started, click the resume button in CCS or click
+<code class="docutils literal notranslate"><span class="pre">Run</span></code> → <code class="docutils literal notranslate"><span class="pre">Resume</span></code>.</p></li>
+<li><p>The red LED on the CC13xx or CC26xx should be blinking, go to Running the
+TI-OpenThread Stack CLI FTD Project for more information on how to interact
+with the <code class="docutils literal notranslate"><span class="pre">cli_ftd</span></code> project.</p></li>
+</ol>
+</div>
+<div class="section" id="running-the-ti-openthread-stack-cli-ftd-project">
+<h3>Running the TI-OpenThread Stack CLI FTD Project<a class="headerlink" href="#running-the-ti-openthread-stack-cli-ftd-project" title="Permalink to this headline">¶</a></h3>
+<p>Two TI-RTOS tasks are setup by the CLI FTD example. One task runs the
+functionality of the TI-OpenThread Stack. The other task sets up the cli module
+in OpenThread, then blinks the red LED.</p>
+<p>The red LED can be used as a physical indication of whether or not the kernel
+has stopped.</p>
+<p>To interact with the command line interface, connect a terminal emulator to the
+associated COM port or tty. If you running Windows, open Device Manager and
+look for <code class="docutils literal notranslate"><span class="pre">Ports</span> <span class="pre">(COM</span> <span class="pre">&amp;</span> <span class="pre">LPT)</span></code> → <code class="docutils literal notranslate"><span class="pre">XDS110</span> <span class="pre">Class</span> <span class="pre">Application/User</span> <span class="pre">UART</span>
+<span class="pre">(COM**)</span></code>; this is the USB-to-UART back channel offered by the XDS110 debug
+probe. If you are running MacOS or Linux, look for the device <code class="docutils literal notranslate"><span class="pre">/dev/ttyACM*</span></code>;
+there may be multiple endpoints offered by the same XDS110 debug probe, the
+lower number is usually the USB-to-UART back channel.</p>
+<p>After finding the port number for the CC13xx or CC26xx’s UART back channel use a
+terminal emulator to open a session, we will use CCS but any terminal editor
+(like PuTTY or Tera Term) would work. Press <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">t</span></code> to bring
+up the New Terminal dialog. Select <code class="docutils literal notranslate"><span class="pre">Serial</span> <span class="pre">Terminal</span></code> with the Port you found
+earlier, <code class="docutils literal notranslate"><span class="pre">115200</span></code> as the Baud, <code class="docutils literal notranslate"><span class="pre">8</span></code> Data Bits, <code class="docutils literal notranslate"><span class="pre">None</span></code> Parity, <code class="docutils literal notranslate"><span class="pre">1</span></code> Stop
+Bit, and <code class="docutils literal notranslate"><span class="pre">None</span></code> Flow Control.</p>
+<p>Once the terminal is setup, select the terminal window and press enter a few
+times. This will cause the CC13xx or CC26xx to prompt you with a <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>. Type <code class="docutils literal notranslate"><span class="pre">help</span></code>
+and press enter to see a list of available commands. You can use the <code class="docutils literal notranslate"><span class="pre">scan</span></code>
+command to see other networks around you, this may look like below.  More
+likely than not, you don’t have any networks within range that will respond to
+a beacon request so the response area will be empty.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt; scan
+| J | Network Name     | Extended PAN     | PAN  | MAC Address      | Ch | dBm | LQI |
++---+------------------+------------------+------+------------------+----+-----+-----+
+&gt; | 0 | TI-OpenThread    | dead00beef00cafe | face | 0123456789abcdef | 22 | -58 |  49 |
+Done
+
+&gt;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The CLI is relativly basic, if a prompt is not visible try pressing enter a
+few times.</p>
+</div>
+<div class="section" id="learning-more-about-the-ti-openthread-stack">
+<h4>Learning more about the TI-OpenThread Stack<a class="headerlink" href="#learning-more-about-the-ti-openthread-stack" title="Permalink to this headline">¶</a></h4>
+<p>Consult the SimpleLink TI-OpenThread Stack User’s Guide for information on the
+TI-OpenThread Stack.</p>
+<p>Read the OpenThread documentation at openthread.io.</p>
+</div>
+<div class="section" id="developing-ti-openthread-stack-projects">
+<h4>Developing TI-OpenThread Stack projects<a class="headerlink" href="#developing-ti-openthread-stack-projects" title="Permalink to this headline">¶</a></h4>
+<p>Use the Thermostat, Temperature Sensor, Shade, and Doorlock examples as bases
+for new CoAP based projects.</p>
+</div>
+<div class="section" id="enhancing-the-ti-openthread-stack-examples">
+<h4>Enhancing the TI-OpenThread Stack examples<a class="headerlink" href="#enhancing-the-ti-openthread-stack-examples" title="Permalink to this headline">¶</a></h4>
+<p>Find in-depth guides such as integrating the TI-OpenThread Stack NCP example
+with BeagleBone Black in the <a class="reference external" href="https://dev.ti.com/tirex/nodeContent?node=A__AA78LmvkwjuaUT184Nz.jg__com.ti.SIMPLELINK_ACADEMY_CC13XX_CC26XX_SDK__AfkT0vQ__LATEST">SimpleLink Academy</a>.</p>
+</div>
+<div class="section" id="getting-ti-openthread-stack-help">
+<h4>Getting TI-OpenThread Stack Help<a class="headerlink" href="#getting-ti-openthread-stack-help" title="Permalink to this headline">¶</a></h4>
+<p>Posting on e2e.ti.com is the fastest way to get an answer to your TI-OpenThread
+Stack questions.</p>
+<p>If your question is generic to OpenThread, you may also find it useful to post
+an issue on github.com/openthread.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ble-mesh-quick-start.html" class="btn btn-neutral float-left" title="TI Bluetooth Mesh Quick Start Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="proprietary-rf-quick-start.html" class="btn btn-neutral float-right" title="Proprietary RF Quick Start Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

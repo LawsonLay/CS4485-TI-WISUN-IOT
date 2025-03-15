@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction to the SimpleLink CC13xx/CC26xx SDK &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User&#39;s Guide
+ 7.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction" href="../ti154stack/introduction.html" />
+    <link rel="prev" title="CC13xx or CC26xx TI 15.4-Stack User’s Guide" href="../ti154stack-guide/index-cc13xx_cc26xx.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug quickstart-guide quickstart-intro-cc13xx_cc26xx";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to the SimpleLink CC13xx/CC26xx SDK</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sdk-download-and-installation">SDK - Download and Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-sdk-online">Using the SDK Online</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-the-sdk">Installing the SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ide-download-and-installation">IDE - Download and Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ccs-download-and-installation">CCS Download and Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iar-download-and-installation">IAR Download and Installation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/ti154stack-index-cc13xx_cc26xx.html">TI 15.4-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/migration-guide-cc13xx_cc26xx.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack/api-reference.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ti154stack-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Introduction to the SimpleLink CC13xx/CC26xx SDK</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="introduction-to-the-sdk">
+<h1>Introduction to the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a><a class="headerlink" href="#introduction-to-the-sdk" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> delivers components that enable engineers to develop applications on
+the Texas Instruments SimpleLink CC13xx or CC26xx family of wireless microcontroller
+(MCUs). This powerful software toolkit provides a cohesive and consistent
+software experience for all SimpleLink CC13xx or CC26xx wireless MCU users by packaging
+essential software components, such as a Bluetooth® Low Energy (Bluetooth
+LE) protocol stack supporting Bluetooth 5, Thread 1.1 networking stack based on
+OpenThread (<a class="reference external" href="https://github.com/openthread/openthread">https://github.com/openthread/openthread</a>), TI’s 15.4 Stack,
+RF-Proprietary examples, a Zigbee stack as well as the TI-RTOS kernel and TI
+Drivers in one easy-to-use software package along with example applications and
+exhaustive documentation. In addition, the Dynamic Multi-Protocol Manager (DMM)
+software component enables multiprotocol development on a single SimpleLink
+wireless MCU through time division multiplexing.</p>
+<p>The SimpleLink MCU portfolio offers a single development environment that
+delivers flexible hardware, software and tool options for customers developing
+wired and wireless applications. With 100 percent code reuse across host MCUs,
+Wi-Fi™, Bluetooth Low Energy, Sub-1GHz devices and more, choose the MCU
+or connectivity standard that fits your design. A one-time investment with the
+SimpleLink software development kit (SDK) allows you to reuse often, opening the
+door to create unlimited applications. For more information, visit
+<a class="reference external" href="http://www.ti.com/simplelink">www.ti.com/simplelink</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following devices and resources are also included in the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>:
+CC13x1x3 or CC26x1x3 and CC13x4 or CC26x4</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>The user is expected to have the following:</p>
+<ul>
+<li><p>CC13xx or CC26xx LaunchPad</p></li>
+<li><p>A computer running a supported operating system listed in the Release Notes</p></li>
+<li><p>At least one of the following IDE supported by the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>CCS</p></li>
+<li><p>IAR for Arm</p></li>
+<li><p>GNU Arm Embedded Toolchain</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>FreeRTOS (Optional - Needed for FreeRTOS projects.) The <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> does not
+deliver FreeRTOS sources. User is expected to download it from
+<a class="reference external" href="https://www.freertos.org">FreeRTOS website</a> if they want to use FreeRTOS with the SDK.</p></li>
+</ul>
+</div>
+<div class="section" id="sdk-download-and-installation">
+<h2>SDK - Download and Installation<a class="headerlink" href="#sdk-download-and-installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="using-the-sdk-online">
+<h3>Using the SDK Online<a class="headerlink" href="#using-the-sdk-online" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>A quick and easy way to start working with the SDK is to use TI Resource
+Explorer on dev.ti.com. This online tool lets you explore the contents of the
+<a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>. You can build the examples directly using the cloud
+version of Code Composer Studio. If you choose to use the SDK online, there is
+no need to download the SDK to your local computer or install any tools (other
+than the TI Cloud Agent for first time users).  Visit
+<a class="reference external" href="https://dev.ti.com/about#default/ide">CCS Cloud</a> for more information</p>
+</div></blockquote>
+</div>
+<div class="section" id="installing-the-sdk">
+<h3>Installing the SDK<a class="headerlink" href="#installing-the-sdk" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>You can also download the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> from TI Resource Explorer or the
+software product page on TI’s website.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="ide-download-and-installation">
+<h2>IDE - Download and Installation<a class="headerlink" href="#ide-download-and-installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ccs-download-and-installation">
+<h3>CCS Download and Installation<a class="headerlink" href="#ccs-download-and-installation" title="Permalink to this headline">¶</a></h3>
+<p>This section covers the required settings for a CCS installation. The CCS
+toolchain contains many features beyond the scope of this document. More
+information and documentation can be found on the <a class="reference external" href="https://www.ti.com/tool/ccstudio">Code Composer Studio</a> tool
+page.</p>
+<p>Check the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> release notes to see which CCS version to use and any required
+workarounds. Object code produced by CCS may differ in size and performance as
+compared to IAR produced object code.</p>
+<ol class="arabic">
+<li><p>Download CCS</p>
+<p>CCS is available here: <a class="reference external" href="https://www.ti.com/tool/ccstudio">Code Composer Studio</a> .</p>
+<p>Refer to the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> release notes for the version that is compatible with
+this SDK.</p>
+<p>You can choose between a single file (offline) installer and on-demand (web)
+installer.</p>
+</li>
+<li><p>Installation Options</p>
+<p>During the installation, the following options are recommended:</p>
+<ul class="simple">
+<li><p>We recommend that you use the default installation folder</p></li>
+</ul>
+<div class="figure align-center" id="id2">
+<span id="fig-default-install-path"></span><img alt="../_images/ccs-install.png" src="../_images/ccs-install.png" />
+<p class="caption"><span class="caption-number">Figure 1. </span><span class="caption-text">Default CCS Installation Location</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<ul class="simple">
+<li><p>Select SimpleLink CC13xx and CC26xx Wireless MCUs is selected. You can select
+additional processor support options as needed.</p></li>
+</ul>
+<div class="figure align-center" id="id3">
+<span id="fig-processor-support-options"></span><img alt="../_images/ccs_install_select_processor_support.png" src="../_images/ccs_install_select_processor_support.png" />
+<p class="caption"><span class="caption-number">Figure 2. </span><span class="caption-text">Select Processor Support</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>To use a debug probe, select TI XDS Debug Probe Support and any other options
+you would like. The CC13xx or CC26xx LaunchPad uses TI XDS Debug Probe by default.</p>
+<div class="figure align-center" id="id4">
+<span id="fig-ccs-debugger-options"></span><img alt="../_images/ccs-v11-debugger-options.png" src="../_images/ccs-v11-debugger-options.png" />
+<p class="caption"><span class="caption-number">Figure 3. </span><span class="caption-text">CCS Debugger Options</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>When the installation has completed, make sure that CC13xx/CC26xx Device Support
+is installed by checking for updates under Help -&gt; Check for Updates.</p>
+</li>
+<li><p>Discovering the SDK in CCS</p>
+<p>Install the SDK in the default location pointed to by the installer -
+c:\ti and restart CCS. CCS will automatically detect the latest install.</p>
+<p>You can also Install products manually by selecting Window -&gt; Preferences
+-&gt; Code Composer Studio -&gt; Products and clicking Install and navigating
+to the SDK installation location.</p>
+<p>Code Composer Studio automatically discovers the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> if it installed in its
+default installation directory (<code class="docutils literal notranslate"><span class="pre">c:/ti</span></code>). Once discovered by CCS, it defines a
+build environment variable named SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR which is used by all <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>
+projects.</p>
+<p>If a project is imported from a path other than what was specified
+during the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> installation, the SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR
+variable must be redefined after the import proceeding at a project-by-project
+basis.</p>
+<p>To redefine this variable:</p>
+<ol class="arabic">
+<li><p>Open the CCS project’s properties (<strong>Project</strong> -&gt; <strong>Properties</strong>)</p></li>
+<li><p>Navigate to <strong>Resource</strong> -&gt; <strong>Linked Resources</strong> and <em>edit</em>
+SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR and have it point to your
+imported root directory location.</p>
+<div class="figure align-center" id="id5">
+<span id="fig-inc-developing-in-ccs-redefine-ccs-linked-resources"></span><a class="reference internal image-reference" href="../_images/redefine-ccs-linked-resources.png"><img alt="../_images/redefine-ccs-linked-resources.png" src="../_images/redefine-ccs-linked-resources.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-number">Figure 4. </span><span class="caption-text">Redefining SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+</ol>
+</li>
+<li><p>(Optional) Using a Specific TI Arm Compiler</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Verify Arm Compiler Tools version</p>
+<p>If needed, the CCS and Arm compiler versions can be verified by going to into
+Help -&gt; About Code Composer Studio. Under the Installation Details button, you
+can determine the Arm Compiler Tools version. Please ensure this version
+satisfies the version requirements as stated in the release notes.</p>
+<p>If an update is required, refer to Installing a Specific TI Arm Compiler for the
+procedure to install the required TI Arm Compiler version.</p>
+</li>
+<li><p>Install a Specific TI Arm Compiler, refer to the following steps and
+<a class="reference internal" href="#fig-verify-ccs-compiler"><span class="std std-numref">Figure 5.</span></a></p>
+<ol class="arabic simple">
+<li><p><strong>Help</strong> -&gt; <strong>Install New Software</strong></p></li>
+<li><p>Under the <strong>Work with:</strong> drop-down list, select <strong>Code Generation Tools
+Update</strong></p></li>
+<li><p>Uncheck <strong>Show only the latest versions of available software</strong></p></li>
+<li><p>Expand <strong>TI Compiler Update</strong>.</p></li>
+<li><p>Select the desired Arm Compiler Tools version as stated in the release notes.</p></li>
+<li><p>Press <strong>Next</strong> to complete the installation. You may have to restart CCS
+afterwards.</p></li>
+</ol>
+</li>
+</ol>
+<div class="figure align-center" id="id6">
+<span id="fig-verify-ccs-compiler"></span><a class="reference internal image-reference" href="../_images/ti-arm-compiler-version.jpg"><img alt="../_images/ti-arm-compiler-version.jpg" src="../_images/ti-arm-compiler-version.jpg" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Figure 5. </span><span class="caption-text">TI Arm Compiler Version in Code Composer Studio</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="iar-download-and-installation">
+<h3>IAR Download and Installation<a class="headerlink" href="#iar-download-and-installation" title="Permalink to this headline">¶</a></h3>
+<p>This section covers the required settings for a IAR installation.
+The IAR toolchain contains many features beyond the scope of this document.
+More information and documentation can be found at <a class="reference external" href="https://www.iar.com">IAR.com</a>.</p>
+<p>Not all components in the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> support IAR projects. Check the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> and
+component release notes to check IAR support, which IAR version to use and any
+required workarounds. Object code produced by IAR may differ in size and
+performance as compared to CCS produced object code.</p>
+<ol class="arabic">
+<li><p>Download IAR
+Download and install IAR Embedded Workbench for Arm. Please see the SDK
+release notes for what version of IAR the SDK supports. You can get IAR for
+Arm here: <a class="reference external" href="https://www.iar.com/iar-embedded-workbench/partners/texas-instruments/ti-wireless/">https://www.iar.com/iar-embedded-workbench/partners/texas-instruments/ti-wireless/</a></p>
+<blockquote>
+<div><p>To get IAR, choose one of the following methods:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Download the IAR Embedded Workbench 30-Day Evaluation Edition –
+This version of IAR is free, has full functionality, and
+includes all of the standard features. The size-limited
+Kickstart evaluation option is not compatible with this SDK.</p></li>
+<li><p>Purchase the full-featured version of IAR Embedded Workbench – For
+complete Bluetooth LE application development using the CC13xx or CC26xx, TI
+recommends purchasing the complete version of IAR without any
+restrictions. You can find the information on purchasing the complete
+version of <a class="reference external" href="https://www.iar.com/buy">IAR</a>.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The version required is stated in the release notes.
+Opening IAR project files with a previous version of IAR may cause
+project file corruption.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Installation Options
+Begin Installation by selecting Install IAR Embedded Workbench® for
+Arm.</p>
+<div class="figure align-center" id="id7">
+<span id="fig-iar-install"></span><img alt="../_images/iar-install.jpg" src="../_images/iar-install.jpg" />
+<p class="caption"><span class="caption-number">Figure 6. </span><span class="caption-text">IAR Installer</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<p>Click through the installation confirm windows and license agreement. We
+recommend installing to the default path</p>
+<div class="figure align-center" id="id8">
+<span id="fig-iar-install-dir"></span><img alt="../_images/iar_install_dir.png" src="../_images/iar_install_dir.png" />
+<p class="caption"><span class="caption-number">Figure 7. </span><span class="caption-text">Default IAR Installation Location</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<p>Make sure to select TI XDS as one of the debug probe drivers. You may also
+select other drivers. The driver will be installed towards the end of the
+installation of IAR.</p>
+</li>
+</ol>
+<blockquote>
+<div><div class="figure align-center" id="id9">
+<span id="fig-iar-debugger-options"></span><img alt="../_images/iar_install_debug_drivers.png" src="../_images/iar_install_debug_drivers.png" />
+<p class="caption"><span class="caption-number">Figure 8. </span><span class="caption-text">IAR Debugger Options</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<ol class="arabic" start="3">
+<li><p>Show Build Messages</p>
+<p>TI recommends showing all the build output messages for full verbosity
+during building. To do this, after importing a workspace, right-click in the
+Debug log window and select <strong>All</strong>.
+(see <a class="reference internal" href="#fig-show-all-build-messages"><span class="std std-numref">Figure 9.</span></a>)</p>
+<div class="figure align-center" id="id10">
+<span id="fig-show-all-build-messages"></span><img alt="../_images/iar-show-build-messages.png" src="../_images/iar-show-build-messages.png" />
+<p class="caption"><span class="caption-number">Figure 9. </span><span class="caption-text">Show All Build Messages in IAR</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="btn btn-neutral float-left" title="CC13xx or CC26xx TI 15.4-Stack User’s Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ti154stack/introduction.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

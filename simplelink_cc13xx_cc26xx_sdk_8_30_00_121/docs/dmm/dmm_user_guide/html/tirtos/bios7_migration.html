@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TI-RTOS to TI-RTOS7 Migration &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+DMM User&#39;s Guide
+ 6.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Dynamic Multi-protocol Manager (DMM)" href="../dmm-guide/dmm-index-cc13xx_cc26xx.html" />
+    <link rel="prev" title="Power Management" href="power.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug tirtos bios7_migration";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../dmm-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+DMM User's Guide
+
+          </a>
+              <div class="version">
+                6.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/dmm-quick-start.html">Dynamic Multi-protocol Manager Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../dmm-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="hwis_swis_idle.html">Threading Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bios7_config.html">Kernel Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_vs_construct.html">Creating vs. Constructing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization.html">Thread Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html">Queues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html">Clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="power.html">Power Management</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">TI-RTOS to TI-RTOS7 Migration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sdk-folder-structure">SDK folder structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cfg-vs-syscfg">.cfg vs .syscfg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-include-common-tirtos7-syscfg-file">How to include common tirtos7 .syscfg file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-sysconfig-options-do-you-have">What SysConfig options do you have?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#golden-syscfg">Golden .syscfg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging">Debugging</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/dmm-index-cc13xx_cc26xx.html">Dynamic Multi-protocol Manager (DMM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/oad-secure-index.html">Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/index-migration-cc13xx_cc26xx.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/api-reference.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/reference.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../dmm-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+DMM User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../dmm-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../dmm-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a> &raquo;</li>
+      <li>TI-RTOS to TI-RTOS7 Migration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="ti-rtos-to-ti-rtos7-migration">
+<span id="tirtos-to-tirtos7-porting-guide"></span><h1>TI-RTOS to TI-RTOS7 Migration<a class="headerlink" href="#ti-rtos-to-ti-rtos7-migration" title="Permalink to this headline">¶</a></h1>
+<p>The purpose of this is to be a customer porting guide from TI-RTOS (tirtos) to TI-RTOS7 (tirtos7).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>TI-RTOS7 is compiled in flash and does not use components in ROM.</p>
+</div>
+<div class="section" id="sdk-folder-structure">
+<h2>SDK folder structure<a class="headerlink" href="#sdk-folder-structure" title="Permalink to this headline">¶</a></h2>
+<p>TI-RTOS and TI-RTOS7 currently coexist in the SimpleLink SDK. They thus need separate folders for source and examples.
+The relative paths to header and source files are the same between tirtos and tirtos7.</p>
+<img alt="../_images/tirtos7_sdk_folder_struct.png" src="../_images/tirtos7_sdk_folder_struct.png" />
+</div>
+<div class="section" id="cfg-vs-syscfg">
+<h2>.cfg vs .syscfg<a class="headerlink" href="#cfg-vs-syscfg" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+<p>The kernel on TI-RTOS was configured by specifying a configuration in a .cfg file and XDC Tools to actually construct and build the kernel.
+When importing a TI-RTOS project, the dependent kernel project is also imported.</p>
+<p>TI-RTOS7 instead leverages SysConfig to generate <cite>ti_sysbios_config.c/h</cite> based on the project’s .syscfg file.
+This also means that the .cfg file, XDC Tools, and the dependent kernel project are no longer needed.</p>
+<img alt="../_images/tirtos7_syscfg_folder.png" src="../_images/tirtos7_syscfg_folder.png" />
+<p>The module and field names have been chosen to make the transition as easy as possible. You will need to take your existing
+.cfg file and translate it into content to add to your .syscfg.</p>
+</div>
+<div class="section" id="how-to-include-common-tirtos7-syscfg-file">
+<h3>How to include common tirtos7 .syscfg file<a class="headerlink" href="#how-to-include-common-tirtos7-syscfg-file" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>TI-RTOS7 only works with SysConfig 1.10 and above. Earlier versions of SysConfig are not compatible.</p>
+</div>
+<p>Depending on how often your projects share their kernel configurations and how complex they are,
+it can be advantageous to store a default .syscfg configuration in a dedicated file that is loaded by the actual project’s .sysconfig file.</p>
+<p>To facilitate this, SysConfig 1.10 added the <cite>–rtos</cite> command line parameter.
+This behaves just like the <cite>–board</cite> option that exists today and allows you to execute additional scripting.</p>
+<div class="line-block">
+<div class="line">Note that TI-RTOS7 will not show up in SysConfig unless you specify –rtos tirtos7 in your &#64;cliArgs.</div>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// @cliArgs --rtos tirtos7</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">system</span><span class="p">.</span><span class="n">getRTOS</span><span class="p">()</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s">&quot;tirtos7&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">tirtos7_release_syscfg_js</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="n">getScript</span><span class="p">(</span><span class="s">&quot;tirtos7_release.syscfg.js&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The Core SDK is shipping a reasonable common configuration in kernel/tirtos7/builds/ that can be loaded via the code above.</p>
+</div>
+<div class="section" id="what-sysconfig-options-do-you-have">
+<h3>What SysConfig options do you have?<a class="headerlink" href="#what-sysconfig-options-do-you-have" title="Permalink to this headline">¶</a></h3>
+<p>A complete listing of kernel configuration options is generated as html and can be found here: <a class="reference external" href="../../../../tirtos7/SysConfigDoc.html">TI-RTOS7 Kernel (SYS/BIOS) SysConfig Reference</a> .</p>
+<p>To locate the SysConfig modules for more information on configurations and details on each configuration, navigate to the following location in Core SDK:</p>
+<img alt="../_images/tirtos7_kernel_folder.png" src="../_images/tirtos7_kernel_folder.png" />
+</div>
+<div class="section" id="golden-syscfg">
+<h3>Golden .syscfg<a class="headerlink" href="#golden-syscfg" title="Permalink to this headline">¶</a></h3>
+<p>Here is a excerpt of the old “golden” .cfg configuration and the equivalent in .syscfg.
+These are what the Core SDK examples are based on.</p>
+<p>The golden .syscfg is expected to change over time as we remove POSIX from the default configuration
+and examples, and expose additional options that let us reduce the footprint of the default configuration.
+The current version has a number of features that are not necessarily useful to all users.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-number">Listing 16. </span><span class="caption-text">.cfg</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-cfg notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="na">/*</span> <span class="o">=</span><span class="s">=============== Clock configuration ================ */</span>
+<span class="linenos"> 2</span><span class="na">var Clock</span> <span class="o">=</span> <span class="s">xdc.useModule(&#39;ti.sysbios.knl.Clock&#39;);</span>
+<span class="linenos"> 3</span><span class="na">Clock.tickPeriod</span> <span class="o">=</span> <span class="s">10;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="na">/*</span> <span class="o">=</span><span class="s">=============== Hwi configuration ================ */</span>
+<span class="linenos"> 6</span><span class="na">var halHwi</span> <span class="o">=</span> <span class="s">xdc.useModule(&#39;ti.sysbios.hal.Hwi&#39;);</span>
+<span class="linenos"> 7</span><span class="na">var m3Hwi</span> <span class="o">=</span> <span class="s">xdc.useModule(&#39;ti.sysbios.family.arm.m3.Hwi&#39;);</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="na">//halHwi.checkStackFlag</span> <span class="o">=</span> <span class="s">true;</span>
+<span class="linenos">10</span><span class="na">halHwi.checkStackFlag</span> <span class="o">=</span> <span class="s">false;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="na">//m3Hwi.enableException</span> <span class="o">=</span> <span class="s">true;</span>
+<span class="linenos">13</span><span class="na">m3Hwi.enableException</span> <span class="o">=</span> <span class="s">false;</span>
+<span class="linenos">14</span><span class="na">//m3Hwi.excHandlerFunc</span> <span class="o">=</span> <span class="s">null;</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="na">m3Hwi.nvicCCR.DIV_0_TRP</span> <span class="o">=</span> <span class="s">0;</span>
+<span class="linenos">17</span><span class="na">//m3Hwi.nvicCCR.DIV_0_TRP</span> <span class="o">=</span> <span class="s">1;</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="na">/*</span> <span class="o">=</span><span class="s">=============== Idle configuration ================ */</span>
+<span class="linenos">20</span><span class="na">var Idle</span> <span class="o">=</span> <span class="s">xdc.useModule(&#39;ti.sysbios.knl.Idle&#39;);</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="na">//Idle.addFunc(&quot;&amp;myIdleFunc&quot;);</span>
+<span class="linenos">23</span><span class="na">Idle.addFunc(&#39;&amp;Power_idleFunc&#39;);  /* add the Power module&#39;s idle function */</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-number">Listing 17. </span><span class="caption-text">.syscfg</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm">/* ================ Kernel (SYS/BIOS) configuration ================ */</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="k">const</span><span class="w"> </span><span class="n">BIOS</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">scripting</span><span class="p">.</span><span class="n">addModule</span><span class="p">(</span><span class="s">&quot;/ti/sysbios/BIOS&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="cm">/* ================ Clock configuration ================ */</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="k">const</span><span class="w"> </span><span class="n">Clock</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="n">scripting</span><span class="p">.</span><span class="n">addModule</span><span class="p">(</span><span class="s">&quot;/ti/sysbios/knl/Clock&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="n">Clock</span><span class="p">.</span><span class="n">tickPeriod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="cm">/* ================ Hwi configuration ================ */</span><span class="w"></span>
+<span class="linenos">10</span><span class="k">const</span><span class="w"> </span><span class="n">Hwi</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="n">scripting</span><span class="p">.</span><span class="n">addModule</span><span class="p">(</span><span class="s">&quot;/ti/sysbios/family/arm/m3/Hwi&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1">//Hwi.checkStackFlag = true;</span>
+<span class="linenos">13</span><span class="n">Hwi</span><span class="p">.</span><span class="n">checkStackFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="c1">//Hwi.enableException = true;</span>
+<span class="linenos">16</span><span class="n">Hwi</span><span class="p">.</span><span class="n">enableException</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">17</span><span class="c1">//m3Hwi.excHandlerFunc = null;</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="c1">//Hwi.nvicCCR.DIV_0_TRP = 0;</span>
+<span class="linenos">20</span><span class="c1">//Hwi.nvicCCR.DIV_0_TRP = 1;</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="k">const</span><span class="w"> </span><span class="n">powerIdle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Idle</span><span class="p">.</span><span class="n">addInstance</span><span class="p">();</span><span class="w"></span>
+<span class="linenos">23</span><span class="n">powerIdle</span><span class="p">.</span><span class="n">$name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;powerIdle&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">24</span><span class="n">powerIdle</span><span class="p">.</span><span class="n">idleFxn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Power_idleFunc&quot;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>The following are differences observed between the .cfg
+configuration and .syscfg configuration that may not be a direct migration:</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>.cfg Module</p></th>
+<th class="head"><p>Difference between TI-RTOS and TI-RTOS7</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Boot</p></td>
+<td><p>Boot.syscfg exists in tirtos7, but .syscfg doesn’t need to add the Boot module unless non-default settings are used.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="debugging">
+<h3>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 50%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Resolution</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>When attempting to open the SysConfig file in CCS, <em>SysConfig will throw an error stating “/ti/boards/LP_CCXXXXXX: Device not found : CCXXXXXXGZ”</em></p></td>
+<td><p>Example image of error: <img alt="error_image" src="../_images/rtos7_error.png" /> This will occur if the SysConfig product version of the project does not match the expected SysConfig version.</p></td>
+<td><div class="line-block">
+<div class="line">Navigate to the the following settings:</div>
+<div class="line">Right click project → Properties → General → Products</div>
+<div class="line">Verify the SysConfig version matches the SysConfig version CoreSDK is using.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="power.html" class="btn btn-neutral float-left" title="Power Management" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../dmm-guide/dmm-index-cc13xx_cc26xx.html" class="btn btn-neutral float-right" title="Dynamic Multi-protocol Manager (DMM)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

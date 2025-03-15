@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Network Processor Interface (NPI) &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Custom Hardware" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html" />
+    <link rel="prev" title="RF Testing using BTool" href="../ble-stack-5.x/testing-with-btool-cc26xx.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-stack-common npi-index";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Network Processor Interface (NPI)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#unified-npi">Unified NPI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unpi-architecture">UNPI Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unpi-signaling">UNPI Signaling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#unpi-handshake">UNPI Handshake</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Packet Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Message Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#synchronous-messages">Synchronous Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#asynchronous-messages">Asynchronous Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bidirectional-messaging">Bidirectional Messaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unpi-usage">UNPI Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">UART</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">SPI</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#implementing-an-npi-controller">Implementing An NPI Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#npi-limitations">NPI limitations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a> &raquo;</li>
+      <li>Network Processor Interface (NPI)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="network-processor-interface-npi">
+<span id="sec-npi"></span><h1>Network Processor Interface (NPI)<a class="headerlink" href="#network-processor-interface-npi" title="Permalink to this headline">¶</a></h1>
+<p>TI’s Network Processor Interface (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-NPI"><span class="xref std std-term">NPI</span></a>) is used for establishing a serial
+data link between a TI SoC and external MCUs or PCs. It is an abstraction layer
+above the serial interface (UART or SPI) that handles sending / receiving
+data power management, and data parsing. It is mainly used by TI’s
+network processor solutions.</p>
+<p>There are two types of NPI used by BLE and they are described in the
+following sections.</p>
+<div class="section" id="legacy-npi">
+<span id="npi-legacy"></span><h2>Legacy NPI<a class="headerlink" href="#legacy-npi" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section has been updated to use appropriate language.
+The terms of <em>controller</em> and <em>peripheral</em> replace the
+terms of <em>master</em> and <em>slave</em>.</p>
+</div>
+<p>Anything that is not specifically “Unified NPI” is Legacy NPI. For example,
+the hostTest project uses Legacy NPI. For the remainder of this section, NPI
+will always refer to Legacy NPI</p>
+<p>TI provides the source code for NPI and it can be found in the following files
+at <em>&lt;SDK_INSTALL_DIR&gt;\source\ti\blestack\npi\src:</em></p>
+<ul class="simple">
+<li><p>npi_client_mt.c</p></li>
+<li><p>npi_frame_hci.c</p></li>
+<li><p>npi_fram_mt.c</p></li>
+<li><p>npi_rxbuf.c</p></li>
+<li><p>npi_task.c</p></li>
+<li><p>npi_tl.c</p></li>
+<li><p>npi_tl_spi.c or npi_tl_uart.c</p></li>
+</ul>
+<div class="section" id="signaling-protocol">
+<h3>Signaling Protocol<a class="headerlink" href="#signaling-protocol" title="Permalink to this headline">¶</a></h3>
+<p>Each processor in an NPI solution must occupy either the controller or peripheral role.
+The TI wireless SoC generally occupies the peripheral role in the network processor
+examples included in the SDK.</p>
+<div class="section" id="npi-signaling">
+<h4>NPI Signaling<a class="headerlink" href="#npi-signaling" title="Permalink to this headline">¶</a></h4>
+<p>In order to properly manage the power domains of the device, there must be a way
+for an external host to wake the network processor from low power modes. This is
+done through the inclusion of the following pins:</p>
+<ul class="simple">
+<li><p>Controller Ready (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-MRDY"><span class="xref std std-term">MRDY</span></a>): A GPIO pin whose logic level indicates the state of
+the controller processor. MRDY is an active low (low true) signal. An MRDY event
+indicates that the controller processor is ready to send or receive data.</p></li>
+<li><p>Peripheral Ready (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-SRDY"><span class="xref std std-term">SRDY</span></a>):  A GPIO pin whose logic level indicates the state of
+the peripheral processor. SRDY is an active low (low true) signal. An SRDY event
+indicates that the peripheral processor is ready to send or receive data.</p></li>
+</ul>
+<p>In the peripheral role, MRDY is an input pin and SRDY is an output in. In the controller
+role, MRDY is an output pin and SRDY is an input pin.</p>
+</div>
+<div class="section" id="npi-handshake">
+<h4>NPI Handshake<a class="headerlink" href="#npi-handshake" title="Permalink to this headline">¶</a></h4>
+<p>In order to start an
+NPI transaction, there first must occur a handshake sequence using the MRDY and
+SRDY pins. This handshake is required in order to guarantee that both devices are
+awake and ready to send and/or receive data. Whichever device first starts the
+handshake sequence is termed the “initiator”. Either the peripheral or the controller may
+may be the imitator. The UNPI transaction is completed by the controller
+raising MRDY followed by the peripheral raising SRDY.</p>
+<p>The figures below illustrate both controller and peripheral-initiated NPI transactions</p>
+<blockquote>
+<div><div class="figure align-center" id="id6">
+<img alt="../_images/legacy_npi_timing_master_initiates.png" src="../_images/legacy_npi_timing_master_initiates.png" />
+<p class="caption"><span class="caption-number">Figure 113. </span><span class="caption-text">Timing for Controller-Initiated NPI Transaction</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-center" id="id7">
+<img alt="../_images/legacy_npi_timing_slave_initiates.png" src="../_images/legacy_npi_timing_slave_initiates.png" />
+<p class="caption"><span class="caption-number">Figure 114. </span><span class="caption-text">Timing for Peripheral-Initiated NPI Transaction</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="packet-format">
+<h3>Packet Format<a class="headerlink" href="#packet-format" title="Permalink to this headline">¶</a></h3>
+<p>The NPI module handles the serial driver-level packet formatting, stripping of
+the NPI, header and FCS when unpacking. This section will describe the packet
+format to be used with NPI.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section does not consider the packet format of the data payload section
+of the NPI packet format as this is dependent on the NPI use case (i.e. HCI
+packet format for BLE).</p>
+</div>
+<p>The packet format is dependent on the serial protocol being used and described
+in the following sections.</p>
+<div class="section" id="spi">
+<h4>SPI<a class="headerlink" href="#spi" title="Permalink to this headline">¶</a></h4>
+<p>In order to understand the structure of the TL packet format, it is necessary to
+understand the complications inherent in the SPI protocol. The first limitation is
+that the SPI controller must trigger the clock signal (SCLK) in order to receive
+bytes from the peripheral. If the peripheral is sending a message, then the controller must
+know how long this message is in order to receive the complete message. The
+other limitation of SPI is that if the clock signal is triggered, the controller
+or peripheral must transmit empty bytes if they have nothing to send. The simple
+scenario when this occurs is during either a communication sequence where either
+the controller or peripheral receives only empty bytes. These messages of strictly empty
+bytes could be easily ignored but the bidirectional message scenario requires
+more complex handling. If the peripheral and controller are both transmitting non-empty
+bytes then the shorter message will have to be padded with empty bytes so that
+the longer message can be fully transmitted. Determining which bytes of message
+bytes versus empty bytes in this scenario requires message delimitation. In
+order to handle these limitations of SPI, the NPI SPI Frame is used for all
+NPI messages sent over SPI.</p>
+<p>The NPI SPI Frame has four fields described thus and pictured below:</p>
+<ul class="simple">
+<li><p>1 byte Start of Frame (SOF): always 0xFE</p></li>
+<li><p>1 byte length: length of the data payload field (must be between
+0-255 bytes)</p></li>
+<li><p>0-255 byte Data Payload</p></li>
+<li><p>1 byte Frame Check Sequence (FCS): calculated by doing a XOR on
+each byte of the frame in the order they are sent/received on the bus. The SOF
+byte shall not be included in the FCS calculation.</p></li>
+</ul>
+<blockquote>
+<div><div class="figure align-center" id="id8">
+<img alt="../_images/legacy_npi_spi_protocol.png" src="../_images/legacy_npi_spi_protocol.png" />
+<p class="caption"><span class="caption-number">Figure 115. </span><span class="caption-text">NPI SPI Packet Format</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<p>This NPI SPI Frame handles both the delimitation of empty vs non empty data
+bytes as well as having a fixed length field allowing the SPI controller to know how
+many times the SCLK signal must be toggled to receive a complete message from
+the SPI peripheral.</p>
+</div>
+<div class="section" id="uart">
+<h4>UART<a class="headerlink" href="#uart" title="Permalink to this headline">¶</a></h4>
+<p>Since UART does not have the same inherent complication as SPI, a much simpler
+frame format can be used. Because UART RX and TX channels are independent of each
+other, there is no need for a predefined fixed length field, Furthermore, since
+there are no empty bytes that must be transmitted, each frame does not need to
+be delimited. Therefore, every byte received over UART RX or TX
+channels can be treated as a valid byte of data payload. This allows the NPI
+UART Frame to consist of only a data payload field:</p>
+<blockquote>
+<div><div class="figure align-center" id="id9">
+<img alt="../_images/legacy_npi_uart_protocol.png" src="../_images/legacy_npi_uart_protocol.png" />
+<p class="caption"><span class="caption-number">Figure 116. </span><span class="caption-text">NPI UART Packet Format</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="message-types">
+<h3>Message Types<a class="headerlink" href="#message-types" title="Permalink to this headline">¶</a></h3>
+<p>Both synchronous and asynchronous messages can be supported by NPI. By default,
+only asynchronous messages are supported. Support for synchronous messages can
+be compiled into NPI using the compiler define <code class="docutils literal notranslate"><span class="pre">NPI_SREQRSP</span></code>.</p>
+<div class="section" id="asynchronous">
+<h4>Asynchronous<a class="headerlink" href="#asynchronous" title="Permalink to this headline">¶</a></h4>
+<p>There are two types of asynchronous messages: asynchronous request
+((<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-AREQ"><span class="xref std std-term">AREQ</span></a>)) and asynchronous indication ((<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-AIND"><span class="xref std std-term">AIND</span></a>)). These messages
+have the same frame, but the difference lies in whether the transfer was
+initiated by the network processor (AIND) or the host/application
+processor (AREQ).</p>
+</div>
+<div class="section" id="synchronous">
+<h4>Synchronous<a class="headerlink" href="#synchronous" title="Permalink to this headline">¶</a></h4>
+<p>Synchronous messages are blocking in that once a synchronous request
+((<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-SREQ"><span class="xref std std-term">SREQ</span></a>)) is sent over NPI all other NPI transmissions are blocked until
+a corresponding synchronous response ((<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-SRESP"><span class="xref std std-term">SRESP</span></a>)) is returned.</p>
+</div>
+</div>
+</div>
+<div class="section" id="unified-npi">
+<span id="npi-unified"></span><h2>Unified NPI<a class="headerlink" href="#unified-npi" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section has been updated to use appropriate language.
+The terms of <em>controller</em> and <em>peripheral</em> replace the
+terms of <em>master</em> and <em>slave</em>.</p>
+</div>
+<p>If Unified NPI is being referenced, it will be specifically referred to as
+“Unified NPI” or (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-UNPI"><span class="xref std std-term">UNPI</span></a>). Anything that is not specifically called
+“Unified NPI” is Legacy NPI. However, the API’s and source files of the UNPI
+implementation will still always be called “NPI”.</p>
+<p>Unified NPI offers some improvements over NPI in that it offers a unified frame
+format that is used by all transport layers.</p>
+<p>TI provides the source code for UNPI and it can be found in the following files
+at <em>&lt;SDK_INSTALL_DIR&gt;\source\ti\ble5stack\npi\src\unified</em></p>
+<ul class="simple">
+<li><p>npi_task.c</p></li>
+<li><p>npi_tl.c</p></li>
+<li><p>npi_tl_spi.c or npi_tl_uart.c</p></li>
+<li><p>npi_util.c</p></li>
+</ul>
+<div class="section" id="unpi-architecture">
+<h3>UNPI Architecture<a class="headerlink" href="#unpi-architecture" title="Permalink to this headline">¶</a></h3>
+<p>UNPI is implemented as its own TI-RTOS task, and supports inter task
+communication and routing to the underlying serial interface drivers. See the
+diagram below for details:</p>
+<blockquote>
+<div><div class="figure align-center" id="id10">
+<a class="reference internal image-reference" href="../_images/unified_npi_block_diagram.png"><img alt="../_images/unified_npi_block_diagram.png" src="../_images/unified_npi_block_diagram.png" style="width: 274.8px; height: 492.59999999999997px;" /></a>
+<p class="caption"><span class="caption-number">Figure 117. </span><span class="caption-text">Block Diagram for UNPI</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="unpi-signaling">
+<h3>UNPI Signaling<a class="headerlink" href="#unpi-signaling" title="Permalink to this headline">¶</a></h3>
+<p>Each processor in an UNPI solution must occupy either the controller or peripheral role.
+The TI wireless SoC generally occupies the peripheral role in the network processor
+examples included in the SDK.</p>
+<p>For the remainder of this section, the following terms will be used:</p>
+<ul class="simple">
+<li><p>Application Processor ((<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-AP"><span class="xref std std-term">AP</span></a>): UNPI Controller (the host MCU)</p></li>
+<li><p>Network Processor ((<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-NP"><span class="xref std std-term">NP</span></a>)): UNPI Peripheral (the TI network processor)</p></li>
+</ul>
+<p>In order to properly manage the power domains of the device, there must be a way
+for an external host to wake the network processor from low power modes. This is
+done through the inclusion of the following pins:</p>
+<ul class="simple">
+<li><p>Controller Ready (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-MRDY"><span class="xref std std-term">MRDY</span></a>): A GPIO pin whose logic level indicates the state of
+the controller processor. MRDY is an active low (low true) signal. An MRDY event
+indicates that the controller processor is ready to send or receive data.</p></li>
+<li><p>Peripheral Ready (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-SRDY"><span class="xref std std-term">SRDY</span></a>):  A GPIO pin whose logic level indicates the state of
+the peripheral processor. SRDY is an active low (low true) signal. An SRDY event
+indicates that the peripheral processor is ready to send or receive data.</p></li>
+</ul>
+<p>In the peripheral role, MRDY is an input pin and SRDY is an output in. In the controller
+role, MRDY is an output pin and SRDY is an input pin.</p>
+<div class="section" id="unpi-handshake">
+<h4>UNPI Handshake<a class="headerlink" href="#unpi-handshake" title="Permalink to this headline">¶</a></h4>
+<p>In order to start an
+UNPI transaction, there first must occur a handshake sequence using the MRDY and
+SRDY pins. This handshake is required in order to guarantee that both devices are
+awake and ready to send and/or receive data. Whichever device first starts the
+handshake sequence is termed the “initiator”. Either the peripheral or the controller may
+may be the imitator. The UNPI transaction is completed by the controller
+raising MRDY followed by the peripheral raising SRDY.</p>
+<p>The figures below illustrate both controller and peripheral-initiated UNPI transactions</p>
+<blockquote>
+<div><div class="figure align-center" id="id11">
+<img alt="../_images/unified_npi_timing_master_initiates.png" src="../_images/unified_npi_timing_master_initiates.png" />
+<p class="caption"><span class="caption-number">Figure 118. </span><span class="caption-text">Timing for Controller-Initiated UNPI Transaction</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-center" id="id12">
+<img alt="../_images/unified_npi_timing_slave_initiates.png" src="../_images/unified_npi_timing_slave_initiates.png" />
+<p class="caption"><span class="caption-number">Figure 119. </span><span class="caption-text">Timing for Peripheral-Initiated UNPI Transaction</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Bidirectional (full-duplex) messaging is also possible with UNPI. See the
+section below for more details.</p>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Packet Format<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The Unified NPI packet format consists of the following fields and is pictured
+below:</p>
+<ul class="simple">
+<li><p>1 byte Start of Frame (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-SOF"><span class="xref std std-term">SOF</span></a>): always 0xFE</p></li>
+<li><p>2 byte Length field in little-endian format (so LSB first)</p></li>
+<li><p>1 byte Type / Subsystem: that contains both message type and subsystem
+information as such:</p>
+<ul>
+<li><p>Bits[7:5]: Message type, see the message type section for more info</p></li>
+<li><p>Bits[4:0]: Subsystem ID field, used to help UNPI route the message to the
+appropriate place.</p></li>
+</ul>
+</li>
+<li><p>1 byte command ID: opcode of the command being sent</p></li>
+<li><p>variable length Payload: the length of the payload is defined by the length
+field.</p></li>
+<li><p>1 byte Frame Check Sequence (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-FCS"><span class="xref std std-term">FCS</span></a>): calculated by doing a XOR on each
+byte of the frame in the order they are sent / received on the bus. The SOF
+byte is always excluded from the FCS calculation.</p></li>
+</ul>
+<blockquote>
+<div><div class="figure align-center" id="id13">
+<img alt="../_images/unified_npi_packet_format.png" src="../_images/unified_npi_packet_format.png" />
+<p class="caption"><span class="caption-number">Figure 120. </span><span class="caption-text">UNPI Packet Format</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h3>Message Types<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>There are three message types supported by Unified NPI. The type of message
+being sent is often dependent on which processor initiated the transaction. The
+message types are described below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 83%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Message Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>Synchronous Request (SREQ)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>Asynchronous Request/Indication (AREQ/AIND)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x03</p></td>
+<td><p>Synchronous Response (SRESP)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="synchronous-messages">
+<h4>Synchronous Messages<a class="headerlink" href="#synchronous-messages" title="Permalink to this headline">¶</a></h4>
+<p>A Synchronous Request ((<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-SREQ"><span class="xref std std-term">SREQ</span></a>)) is a frame, defined by data content
+instead of the ordering of events of the physical interface, which is sent from
+the Host to NP where the next frame sent from NP to Host must be the Synchronous
+Response ((<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-SRESP"><span class="xref std std-term">SRESP</span></a>)) to that SREQ. Once a SREQ is sent, the UNPI interface
+blocks until a corresponding response (SRESP) is received.</p>
+</div>
+<div class="section" id="asynchronous-messages">
+<h4>Asynchronous Messages<a class="headerlink" href="#asynchronous-messages" title="Permalink to this headline">¶</a></h4>
+<p>There are two types of asynchronous messages: asynchronous request
+((<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-AREQ"><span class="xref std std-term">AREQ</span></a>)) and asynchronous indication ((<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-AIND"><span class="xref std std-term">AIND</span></a>)). These messages
+have the same frame, but the difference lies in whether the transfer was
+initiated by the network processor (AIND) or the host/application
+processor (AREQ).</p>
+</div>
+</div>
+<div class="section" id="bidirectional-messaging">
+<h3>Bidirectional Messaging<a class="headerlink" href="#bidirectional-messaging" title="Permalink to this headline">¶</a></h3>
+<p>There are inherently collisions between messages in any protocol that allows
+asynchronous messaging (where a signal transition denotes the start of a message
+as with MRDY and SRDY).  Instead of requiring intricate collision handling,
+the UNPI framework allows for bidirectional messaging to occur. This means that
+data can be sent from the AP to NP and from NP to the AP in the same message
+window regardless of the handshake order.</p>
+<p>While reducing collision handling, bidirectional messaging adds some complexity
+to what operations must be performed or initiated by each device. For every AIND
+the NP initiates, it must prepare to both read and write when MRDY is
+asserted. For every REQ, the AP must prepare to both read and write once SRDY
+is asserted. Each device will also need to handle any FIFOs that could
+potentially be overrun during a message and check at the end of every message
+to see what, if anything, has been received.</p>
+<p>The flow chart for bidirectional message is shown here:</p>
+<blockquote>
+<div><div class="figure align-center" id="id14">
+<img alt="../_images/unified_npi_bidirection.png" src="../_images/unified_npi_bidirection.png" />
+<p class="caption"><span class="caption-number">Figure 121. </span><span class="caption-text">UNPI Bidirectional Flow Chart</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Bidirectional messaging is enabled regardless of power savings options</p>
+</div>
+</div>
+<div class="section" id="unpi-usage">
+<h3>UNPI Usage<a class="headerlink" href="#unpi-usage" title="Permalink to this headline">¶</a></h3>
+<p>Currently, the UNPI protocol has been implemented using the UART and SPI drivers
+on CC13xx or CC26xx devices. There are certain driver specific settings that should be
+configured which are defined in the following sections.</p>
+<p>Initially, the UNPI task doesn’t initiate the MRDY and SRDY pins; it will let
+the pins default to <code class="docutils literal notranslate"><span class="pre">IOID_UNUSED</span></code>. It is application’s responsibility to define
+these pins as such:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#define MDRY_PIN        Board_PIN_BUTTON0</span>
+<span class="linenos"> 2</span><span class="cp">#define SDRY_PIN        Board_PIN_BUTTON1</span>
+<span class="linenos"> 3</span><span class="p">...</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="c1">// NP Parameters for opening serial port to NP</span>
+<span class="linenos"> 5</span><span class="k">static</span><span class="w"> </span><span class="n">NPI_Params</span><span class="w"> </span><span class="n">portParams</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="p">...</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="cp">#ifdef NPI_USE_UART</span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="n">NPITask_Params_init</span><span class="p">(</span><span class="n">NPI_SERIAL_TYPE_UART</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">portParams</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="cp">#elif defined(NPI_USE_SPI)</span>
+<span class="linenos">10</span><span class="w">  </span><span class="n">NPITask_Params_init</span><span class="p">(</span><span class="n">NPI_SERIAL_TYPE_SPI</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">portParams</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">11</span><span class="cp">#else</span>
+<span class="linenos">12</span><span class="cp">#error &quot;Must define NPI_USE_UART or NPI_USE_SPI for any project including NPI&quot;</span>
+<span class="linenos">13</span><span class="cp">#endif </span><span class="c1">//NPI_USE_UART</span>
+<span class="linenos">14</span><span class="w">  </span><span class="n">portParams</span><span class="p">.</span><span class="n">stackSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NPI_TASK_STACK_SIZE</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">  </span><span class="n">portParams</span><span class="p">.</span><span class="n">mrdyPinID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MDRY_PIN</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">16</span><span class="w">  </span><span class="n">portParams</span><span class="p">.</span><span class="n">srdyPinID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SDRY_PIN</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">  </span><span class="n">portParams</span><span class="p">.</span><span class="n">bufSize</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">530</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="w">  </span><span class="c1">// Kick off NPI</span>
+<span class="linenos">20</span><span class="w">  </span><span class="n">NPITask_open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">portParams</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="section" id="id4">
+<h4>UART<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p>To use this configuration, the UART project configuration should be selected
+(if available). This configuration allows low power modes through the inclusion
+of the MRDY and SRDY signals. If a pre-made project configuration is not
+included in the SDK, then <code class="docutils literal notranslate"><span class="pre">NPI_USE_UART</span></code> must be defined as well as including
+the CC13xx or CC26xx UART drivers. If power management is needed, be sure to define
+<code class="docutils literal notranslate"><span class="pre">POWER_SAVING</span></code> and use the MRDY/SRDY signals. The NPI task sets up the UART port
+with the following settings:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Baud Rate</p></td>
+<td><p>115200</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data Length</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>Parity</p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stop Bits</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>Flow Control</p></td>
+<td><p>None</p></td>
+</tr>
+</tbody>
+</table>
+<p>Changing the baud rate can be done in the <code class="docutils literal notranslate"><span class="pre">NPITask_Params_init()</span></code> function as
+below:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">UART_Params_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">portParams</span><span class="p">.</span><span class="n">uartParams</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">2</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">portParams</span><span class="p">.</span><span class="n">uartParams</span><span class="p">.</span><span class="n">readDataMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_DATA_BINARY</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">3</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">portParams</span><span class="p">.</span><span class="n">uartParams</span><span class="p">.</span><span class="n">writeDataMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_DATA_BINARY</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">4</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">portParams</span><span class="p">.</span><span class="n">uartParams</span><span class="p">.</span><span class="n">readMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_MODE_CALLBACK</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">5</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">portParams</span><span class="p">.</span><span class="n">uartParams</span><span class="p">.</span><span class="n">writeMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_MODE_CALLBACK</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">6</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">portParams</span><span class="p">.</span><span class="n">uartParams</span><span class="p">.</span><span class="n">readEcho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_ECHO_OFF</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">7</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">portParams</span><span class="p">.</span><span class="n">uartParams</span><span class="p">.</span><span class="n">baudRate</span><span class="o">=</span><span class="w"> </span><span class="mi">460800</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="id5">
+<h4>SPI<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>In order to allow full duplex communication, the SPI configuration requires the
+use of MRDY and SRDY regardless of whether or not power management is enabled.
+In order to use SPI, use the project configuration included in the SDK (if
+applicable). If a project configuration is unavailable, then <code class="docutils literal notranslate"><span class="pre">NPI_USE_SPI</span></code>
+should be defined as well as including the CC13xx or CC26xx SPI drivers. If power savings
+is needed, be sure to define <code class="docutils literal notranslate"><span class="pre">POWER_SAVING</span></code>.</p>
+<p>The NPI task will initialize the SPI with the following parameters</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 54%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bit Rate</p></td>
+<td><p>800000</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data Length</p></td>
+<td><p>8</p></td>
+</tr>
+</tbody>
+</table>
+<p>Changing the bit rate can be done in the <code class="docutils literal notranslate"><span class="pre">NPITask_Params_init()</span></code> function as
+below:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">SPI_Params_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">portParams</span><span class="p">.</span><span class="n">spiParams</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">2</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">portParams</span><span class="p">.</span><span class="n">spiParams</span><span class="p">.</span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SPI_PERIPHERAL</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">3</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">portParams</span><span class="p">.</span><span class="n">spiParams</span><span class="p">.</span><span class="n">bitRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8000000</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">4</span><span class="n">params</span><span class="o">-&gt;</span><span class="n">portParams</span><span class="p">.</span><span class="n">spiParams</span><span class="p">.</span><span class="n">frameFormat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SPI_POL1_PHA1</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="implementing-an-npi-controller">
+<h3>Implementing An NPI Controller<a class="headerlink" href="#implementing-an-npi-controller" title="Permalink to this headline">¶</a></h3>
+<p>As stated above, the TI device operates as an NPI peripheral in the network processor
+use case. This means the external MCU must implement the controller UNPI role. When
+developing the NPI controller role on an external MCU, there are a couple things to
+keep in mind:</p>
+<ul class="simple">
+<li><p>The NPI controller controls MRDY and thus controls when the NPI frame has
+completed.</p></li>
+<li><p>Even when the peripheral is sending data, the controller must use the
+payload format to determine how many bytes it expects and raise MRDY when it
+has received them.</p></li>
+<li><p>Since all packets use the same frame format regardless of protocol,
+the NPI controller can use the frame format to determine when to raise MRDY.</p></li>
+</ul>
+<p>An example of an NPI controller implementation for UART can be found at
+<em>&lt;SDK_INSTALL_DIR&gt;\source\ti\ble5stack\npi\src\unified\npi_tl_uart_m.c</em></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">NPI_MASTER</span></code> must be defined as a preprocessor symbol to use the above file.</p>
+</div>
+<p>When toggling MRDY / SRDY it is important to remember the following rules:</p>
+<ul class="simple">
+<li><p>Each device must always initiate a read prior to asserting its respective
+output pin (MRDY with respect to the AP) regardless of the state of the its
+respective input pin (SRDY with respect to the AP).</p></li>
+<li><p>Each device can only begin to write (or clock data in the case of SPI) once
+both MRDY and SRDY are asserted.</p></li>
+</ul>
+</div>
+<div class="section" id="npi-limitations">
+<h3>NPI limitations<a class="headerlink" href="#npi-limitations" title="Permalink to this headline">¶</a></h3>
+<p>The serial interface (SPI or UART) leveraged by the network processor to report
+data to the host processor has limited throughput. Systems designers should
+take this limitation into account, and make sure the amount of data reported by
+the network processor can be handled by the throughput offered by the serial
+link. Otherwise data and stack overflow may occur which lead to unexpected
+behaviors.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Projects based on the host_test example may be affected by the limitation
+described above. In that case the error <code class="docutils literal notranslate"><span class="pre">UTIL_SystemErrorEvent</span></code> with
+status <code class="docutils literal notranslate"><span class="pre">INVALID_INTERRUPT_ID</span></code> may be raised.</p>
+<p>Stack overflow can also be detected leveraging <a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html#sec-debugging"><span class="std std-ref">Debugging</span></a> guide.</p>
+</div>
+<p>Long scan operations in busy environment lead the network processor to report
+significant amount of data. The amount of data reported can be estimated
+considering the number of scan results expected and the size of each scan
+report.</p>
+<p>Data overflow risks can be reduced by increasing the throughput of the serial
+interface and/or reducing the amount of data reported.</p>
+<ul>
+<li><p>The data throughput offered by the serial interface can be increased by
+changing the baudrate / bitrate. SPI generally offers higher throughput
+than UART. Device’s datasheet and drivers’ documentation provide details
+on the maximum throughputs supported by each serial interface.</p></li>
+<li><p>The amount of data reported can be reduced following three approaches.</p>
+<ul class="simple">
+<li><p>Reduce the scan duty cycle i.e. the ratio scan window vs scan interval</p></li>
+<li><p>Enable filtering when scanning (see the section related to <a class="reference internal" href="../ble-stack-5.x/gap-cc13xx_cc26xx.html#gap-scanner-filtering"><span class="std std-ref">Obtain Advertising Channel from Advertising Report</span></a>
+in the <a class="reference internal" href="../ble-stack-5.x/gap-cc13xx_cc26xx.html#gapscanner"><span class="std std-ref">GAP Scanner</span></a> documentation).</p></li>
+<li><p>Shorten the reports sent through the serial interface by reducing the
+number of fields reported.</p></li>
+</ul>
+<p>Details on the way to implement these approaches are provided in the
+<a class="reference internal" href="../ble-stack-5.x/gap-cc13xx_cc26xx.html#gapscanner"><span class="std std-ref">GAP Scanner</span></a> section and in the <a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html#ble-api-reference"><span class="std std-ref">BLE Stack API Reference</span></a> (see the
+section about the <em>GAP Scanner</em>).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ble-stack-5.x/testing-with-btool-cc26xx.html" class="btn btn-neutral float-left" title="RF Testing using BTool" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html" class="btn btn-neutral float-right" title="Custom Hardware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

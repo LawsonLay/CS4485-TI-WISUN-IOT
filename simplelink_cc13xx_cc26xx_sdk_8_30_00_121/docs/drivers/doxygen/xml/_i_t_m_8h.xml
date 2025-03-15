@@ -1,0 +1,1292 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_i_t_m_8h" kind="file" language="C++">
+    <compoundname>ITM.h</compoundname>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">ti/devices/DeviceFamily.h</includes>
+    <includedby refid="_i_t_m_c_c26_x_x_8h" local="no">ITMCC26XX.h</includedby>
+    <incdepgraph>
+      <node id="1296">
+        <label>stdbool.h</label>
+      </node>
+      <node id="1297">
+        <label>stdint.h</label>
+      </node>
+      <node id="1294">
+        <label>ITM.h</label>
+        <link refid="_i_t_m_8h"/>
+        <childnode refid="1295" relation="include">
+        </childnode>
+        <childnode refid="1296" relation="include">
+        </childnode>
+        <childnode refid="1297" relation="include">
+        </childnode>
+        <childnode refid="1298" relation="include">
+        </childnode>
+      </node>
+      <node id="1295">
+        <label>stddef.h</label>
+      </node>
+      <node id="1298">
+        <label>ti/devices/DeviceFamily.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1299">
+        <label>ITM.h</label>
+        <link refid="_i_t_m_8h"/>
+        <childnode refid="1300" relation="include">
+        </childnode>
+      </node>
+      <node id="1300">
+        <label>ITMCC26XX.h</label>
+        <link refid="_i_t_m_c_c26_x_x_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_i_t_m___h_w_attrs" prot="public">ITM_HWAttrs</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_i_t_m_8h_1a17b8fe92bb0a90af0c2bb841edb45c42" prot="public" static="no">
+        <name>ITM_BASE_ADDR</name>
+        <initializer>(0xE0000000)</initializer>
+        <briefdescription>
+<para>Base address of the Instrumentation Trace Macrocell (ITM) module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="177" column="9" bodyfile="source/ti/drivers/ITM.h" bodystart="177" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1a119b6e75428fdd7c6e21450a8bab3343" prot="public" static="no">
+        <name>ITM_DWT_BASE_ADDR</name>
+        <initializer>(0xE0001000)</initializer>
+        <briefdescription>
+<para>Base address of the Debug Watchpoint and Trace (DWT) module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="183" column="9" bodyfile="source/ti/drivers/ITM.h" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1a5f75b2f8a45f18b9d3123aa3abd85355" prot="public" static="no">
+        <name>ITM_SCS_BASE_ADDR</name>
+        <initializer>(0xE000E000)</initializer>
+        <briefdescription>
+<para>Base address of the CPU_SCS module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="189" column="9" bodyfile="source/ti/drivers/ITM.h" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1a25c4b373d205eb9153065ae6ea4f7491" prot="public" static="no">
+        <name>ITM_TPIU_BASE_ADDR</name>
+        <initializer>(0xE0040000)</initializer>
+        <briefdescription>
+<para>Base address of the Trace Port Instrumentation Unit (TPIU) module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="195" column="9" bodyfile="source/ti/drivers/ITM.h" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1a82ff30b7cbbbdeaf30f97ed5a211aeac" prot="public" static="no">
+        <name>ITM_LAR_UNLOCK</name>
+        <initializer>(0xC5ACCE55)</initializer>
+        <briefdescription>
+<para>Value to unlock ARM debug modules. This value should be written to the Lock Access Registers (LAR) in order to enable their configuration and use. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="203" column="9" bodyfile="source/ti/drivers/ITM.h" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1aaefb788de5bc8c66593b709298d9cde4" prot="public" static="no">
+        <name>ITM_FUNCTION_DISABLED</name>
+        <initializer>(0x00)</initializer>
+        <briefdescription>
+<para>Device-specific values that implement the generic ITM-functions in ITM_WatchpointAction. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="212" column="13" bodyfile="source/ti/drivers/ITM.h" bodystart="212" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1afa5dd1af973cc317aa60de9aceb43e6c" prot="public" static="no">
+        <name>ITM_FUNCTION_EMIT_PC</name>
+        <initializer>(0x30 | 0x4)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="213" column="13" bodyfile="source/ti/drivers/ITM.h" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1a17ba960d5ed2582664e27d6f16fdb67a" prot="public" static="no">
+        <name>ITM_FUNCTION_EMIT_DATA_ON_READ_WRITE</name>
+        <initializer>(0x800 | 0x20 | 0xc)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="214" column="13" bodyfile="source/ti/drivers/ITM.h" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1ae2a2f43443471885317352216c2845cb" prot="public" static="no">
+        <name>ITM_FUNCTION_EMIT_PC_ON_READ_WRITE</name>
+        <initializer>(0x800 | 0x30 | 0x2)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="215" column="13" bodyfile="source/ti/drivers/ITM.h" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1ab3c5ee16d4d377fe6d3f1bacf73958a7" prot="public" static="no">
+        <name>ITM_FUNCTION_EMIT_DATA_ON_READ</name>
+        <initializer>(0x800 | 0x20 | 0xe)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="216" column="13" bodyfile="source/ti/drivers/ITM.h" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1a114abc7c9d00929b6e145b69253c7a93" prot="public" static="no">
+        <name>ITM_FUNCTION_EMIT_DATA_ON_WRITE</name>
+        <initializer>(0x800 | 0x20 | 0xd)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="217" column="13" bodyfile="source/ti/drivers/ITM.h" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1a79bf0b66e22e01e5453710a0309a8277" prot="public" static="no">
+        <name>ITM_FUNCTION_EMIT_PC_AND_DATA_ON_READ</name>
+        <initializer>(0x800 | 0x30 | 0xe)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="218" column="13" bodyfile="source/ti/drivers/ITM.h" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1a97d6154950d6996ba6507a75ca44865d" prot="public" static="no">
+        <name>ITM_FUNCTION_EMIT_PC_AND_DATA_ON_WRITE</name>
+        <initializer>(0x800 | 0x30 | 0xd)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="219" column="13" bodyfile="source/ti/drivers/ITM.h" bodystart="219" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1a42097c7b552905d45be6f672b36609cf" prot="public" static="no">
+        <name>ITM_port32</name>
+        <param><defname>n</defname></param>
+        <initializer>(*((volatile unsigned int *)(<ref refid="_i_t_m_8h_1a17b8fe92bb0a90af0c2bb841edb45c42" kindref="member">ITM_BASE_ADDR</ref> + 4 * n)))</initializer>
+        <briefdescription>
+<para>Write a 32-bit word to stimulus port n. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>This does not does not first poll the port for availability. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="237" column="9" bodyfile="source/ti/drivers/ITM.h" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1adf5d0a92dbae07a856534e154489634e" prot="public" static="no">
+        <name>ITM_send32Polling</name>
+        <param><defname>n</defname></param>
+        <param><defname>x</defname></param>
+        <initializer>do                             \
+    {                              \
+        while (0 == <ref refid="_i_t_m_8h_1a42097c7b552905d45be6f672b36609cf" kindref="member">ITM_port32</ref>(n)) \
+            ;                      \
+        <ref refid="_i_t_m_8h_1a42097c7b552905d45be6f672b36609cf" kindref="member">ITM_port32</ref>(n) = x;         \
+    } while (0)</initializer>
+        <briefdescription>
+<para>Write a 32-bit word to stimulus port n with polling. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>This macro does not guarantee atomic access between poll and write </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="250" column="9" bodyfile="source/ti/drivers/ITM.h" bodystart="250" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1aecb14735a7e440e12c1601a80afc412b" prot="public" static="no">
+        <name>ITM_port16</name>
+        <param><defname>n</defname></param>
+        <initializer>(*((volatile unsigned short *)(<ref refid="_i_t_m_8h_1a17b8fe92bb0a90af0c2bb841edb45c42" kindref="member">ITM_BASE_ADDR</ref> + 4 * n)))</initializer>
+        <briefdescription>
+<para>Write a 16-bit half word to stimulus port n. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>This does not does not first poll the port for availability. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="263" column="9" bodyfile="source/ti/drivers/ITM.h" bodystart="263" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1a77e05582b2936451bc63fb963467315c" prot="public" static="no">
+        <name>ITM_send16Polling</name>
+        <param><defname>n</defname></param>
+        <param><defname>x</defname></param>
+        <initializer>do                             \
+    {                              \
+        while (0 == <ref refid="_i_t_m_8h_1aecb14735a7e440e12c1601a80afc412b" kindref="member">ITM_port16</ref>(n)) \
+            ;                      \
+        <ref refid="_i_t_m_8h_1aecb14735a7e440e12c1601a80afc412b" kindref="member">ITM_port16</ref>(n) = x;         \
+    } while (0)</initializer>
+        <briefdescription>
+<para>Write a 16-bit word to stimulus port n with polling. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>This macro does not guarantee atomic access between poll and write </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="271" column="9" bodyfile="source/ti/drivers/ITM.h" bodystart="271" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1a1ff85e0d732215d06f483a798a8d9a47" prot="public" static="no">
+        <name>ITM_port8</name>
+        <param><defname>n</defname></param>
+        <initializer>(*((volatile unsigned char *)(<ref refid="_i_t_m_8h_1a17b8fe92bb0a90af0c2bb841edb45c42" kindref="member">ITM_BASE_ADDR</ref> + 4 * n)))</initializer>
+        <briefdescription>
+<para>Write a byte to stimulus port n. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>This does not does not first poll the port for availability. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="284" column="9" bodyfile="source/ti/drivers/ITM.h" bodystart="284" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_i_t_m_8h_1ab76f9d46e6391b7e2321b8a28e4665b7" prot="public" static="no">
+        <name>ITM_send8Polling</name>
+        <param><defname>n</defname></param>
+        <param><defname>x</defname></param>
+        <initializer>do                            \
+    {                             \
+        while (0 == <ref refid="_i_t_m_8h_1a1ff85e0d732215d06f483a798a8d9a47" kindref="member">ITM_port8</ref>(n)) \
+            ;                     \
+        <ref refid="_i_t_m_8h_1a1ff85e0d732215d06f483a798a8d9a47" kindref="member">ITM_port8</ref>(n) = x;         \
+    } while (0)</initializer>
+        <briefdescription>
+<para>Write a 8-bit word to stimulus port n with polling. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>This macro does not guarantee atomic access between poll and write </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="292" column="9" bodyfile="source/ti/drivers/ITM.h" bodystart="292" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="_i_t_m_8h_1a92abaf1991f9421d7b642ca5489c9897" prot="public" static="no">
+        <name>ITM_TPIU_PortFormat</name>
+        <enumvalue id="_i_t_m_8h_1a92abaf1991f9421d7b642ca5489c9897a9dbe5b7df6645097a4364d02c20d2a7d" prot="public">
+          <name>ITM_TPIU_SWO_MANCHESTER</name>
+          <initializer>= 0x00000001</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Serial format is manchester </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a92abaf1991f9421d7b642ca5489c9897a98249a1e3b05e6ec7e0789ea266ec772" prot="public">
+          <name>ITM_TPIU_SWO_UART</name>
+          <initializer>= 0x00000002</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Serial format is UART </para>          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="301" column="1" bodyfile="source/ti/drivers/ITM.h" bodystart="300" bodyend="304"/>
+      </memberdef>
+      <memberdef kind="enum" id="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4" prot="public" static="no">
+        <name>ITM_WatchpointAction</name>
+        <enumvalue id="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4ac20ba9c59b1ca0a2a66e2b18f6c25349" prot="public">
+          <name>ITM_Disabled</name>
+          <initializer>=  (0x00)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Disabled </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4a6f5267917ea1c22c57fe8f9241a673c2" prot="public">
+          <name>ITM_EmitPc</name>
+          <initializer>=  (0x30 | 0x4)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Emit Program Counter </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4ac8faf039ac05913295c9287771215b36" prot="public">
+          <name>ITM_EmitDataOnReadWrite</name>
+          <initializer>=  (0x800 | 0x20 | 0xc)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Emit Data on Read or Write </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4a9899de123384ddcdecc5ed21bbf9a74a" prot="public">
+          <name>ITM_SamplePcAndEmitDataOnReadWrite</name>
+          <initializer>=  (0x800 | 0x30 | 0x2)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Emit Program Counter on Read or Write </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4acde111ce38aab3f613515bb99a701f6c" prot="public">
+          <name>ITM_SampleDataOnRead</name>
+          <initializer>=  (0x800 | 0x20 | 0xe)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Sample Data on Read </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4aeb081e179c18b20dae2b0711e3545081" prot="public">
+          <name>ITM_SampleDataOnWrite</name>
+          <initializer>=  (0x800 | 0x20 | 0xd)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Sample Data on Write </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4a112139dac6393353ee5ee2d6a94fb146" prot="public">
+          <name>ITM_SamplePcAndDataOnRead</name>
+          <initializer>=  (0x800 | 0x30 | 0xe)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Sample PC and Data on Read </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4a81dbb9db3d688f562c620600305bdcca" prot="public">
+          <name>ITM_SamplePcAndDataOnWrite</name>
+          <initializer>=  (0x800 | 0x30 | 0xd)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Sample PC and Data on Write </para>          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Control the action taken by the DWT on comparator match. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="333" column="1" bodyfile="source/ti/drivers/ITM.h" bodystart="332" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="enum" id="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99f" prot="public" static="no">
+        <name>ITM_TimeStampPrescaler</name>
+        <enumvalue id="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99fa0fa092f567f9f125de7722c7054e9762" prot="public">
+          <name>ITM_TS_DIV_NONE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>No division </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99fad256c4024037e331b872b8fd34c53100" prot="public">
+          <name>ITM_TS_DIV_4</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Divide by 4 </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99fa9f7d7dff34e8a89bc945e2aa0976c325" prot="public">
+          <name>ITM_TS_DIV_16</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Divide by 16 </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99fa15f4f6ba80c96a58b130bdb9c1a1b364" prot="public">
+          <name>ITM_TS_DIV_64</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Divide by 64 </para>          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Prescaler for ITM timestamp generation based on the trace packet reference clock. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="350" column="1" bodyfile="source/ti/drivers/ITM.h" bodystart="349" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="enum" id="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804" prot="public" static="no">
+        <name>ITM_SyncPacketRate</name>
+        <enumvalue id="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804afdd102cd9b084b1bcae53d08fa793838" prot="public">
+          <name>ITM_SYNC_NONE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Disabled </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804afbaf2621e1a000f97c8543e4fedc1513" prot="public">
+          <name>ITM_SYNC_TAP_BIT24</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Tap the CYCCNT register at bit 24 </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804ae0321eaecee40a16fe4700ab07c5f9bc" prot="public">
+          <name>ITM_SYNC_TAP_BIT26</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Tap the CYCCNT register at bit 26 </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804a55c57e386b43a03439333391796cde3b" prot="public">
+          <name>ITM_SYNC_TAP_BIT28</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Tap the CYCCNT register at bit 28 </para>          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Synchronous packet generation rate based on cycles of CYCCNT This controls how often sync packets will be generated. The tap controls which bit transition in the counter triggers a packet. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="362" column="1" bodyfile="source/ti/drivers/ITM.h" bodystart="361" bodyend="367"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_i_t_m_8h_1a16102d41c7954c97735e43377beb7963" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ITM_open</definition>
+        <argsstring>(void)</argsstring>
+        <name>ITM_open</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Open and configure the ITM, DWT, and TPIU. This includes muxing pins as needed. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true - The ITM was successfully configured and the pins were acquired </para></simplesect>
+<simplesect kind="return"><para>false - Pin muxing failed and the ITM was not configured </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="376" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1abc95beb9b7eb30359f9202f7d252fb11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_close</definition>
+        <argsstring>(void)</argsstring>
+        <name>ITM_close</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Disable the ITM, when it is no longer in use, it will be shutdown. This will also turn off any additional features that were enabled such as PC sampling or interrupt tracing</para><para><simplesect kind="see"><para><ref refid="_i_t_m_8h_1a16102d41c7954c97735e43377beb7963" kindref="member">ITM_open()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="385" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1aa86439fd4831a7bfcee88c341d76c354" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_sendBufferAtomic</definition>
+        <argsstring>(const uint8_t port, const char *msg, size_t length)</argsstring>
+        <name>ITM_sendBufferAtomic</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+<para>Write the contents of a buffer to the stimulus port, polling to ensure the port is available. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>This API will disable interrupts for the entire buffer duration Use it cautiously to prevent negatively impacting interrupt latency</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stimulus port to use </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data to send. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>length of buffer in bytes </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="398" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1aa17c6a93828bd7f15d26ae2e9067240b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_send32Atomic</definition>
+        <argsstring>(uint8_t port, uint32_t value)</argsstring>
+        <name>ITM_send32Atomic</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Write a 32-bit word to the given stimulus port, polling to ensure the port is available. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stimulus port to use </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 32-bit value to write </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="407" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1ac5bf5a0c94dc37972c94b13bb89f35e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_send16Atomic</definition>
+        <argsstring>(uint8_t port, uint16_t value)</argsstring>
+        <name>ITM_send16Atomic</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Write a 16-bit short to the given stimulus port, polling to ensure the port is available. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stimulus port to use </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 16-bit value to write </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="416" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1a24c081b5f0d2b0cb665ba357c65e4531" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_send8Atomic</definition>
+        <argsstring>(uint8_t port, uint8_t value)</argsstring>
+        <name>ITM_send8Atomic</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Write an 8-bit byte to the given stimulus port, polling to ensure the port is available. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stimulus port to use </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 8-bit value to write </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="425" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1ac4f3f408f8babda3e63b15b2fcd7048d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_enableExceptionTrace</definition>
+        <argsstring>(void)</argsstring>
+        <name>ITM_enableExceptionTrace</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Enable exception tracing This will trigger the DWT to generate packets when the device enters or leaves an exception. The ITM will forward these packets to the TPIU to be sent to the debugger. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="434" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1a754aef7b79fc0b3cbe6ca530ab3f6ee9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_disableExceptionTrace</definition>
+        <argsstring>(void)</argsstring>
+        <name>ITM_disableExceptionTrace</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Disable exception tracing. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_i_t_m_8h_1ac4f3f408f8babda3e63b15b2fcd7048d" kindref="member">ITM_enableExceptionTrace()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="442" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1addbcfd1a2a6bc70194a83556d311fcbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_enablePCSampling</definition>
+        <argsstring>(bool prescale1024, uint8_t postReset)</argsstring>
+        <name>ITM_enablePCSampling</name>
+        <param>
+          <type>bool</type>
+          <declname>prescale1024</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>postReset</declname>
+        </param>
+        <briefdescription>
+<para>Enable periodic sampling of the program counter using the DWT POSTCNT timer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>prescale1024</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true: divide system clock by 1024 to generate POSTCNT false: divide system clock by 64 to generate POSTCNT </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>postReset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>4-bit downcounter that is reloaded on POSTCNT expiration</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>PC sampling and event counting are mutally exclusive. It is not recommended to call <ref refid="_i_t_m_8h_1a2f591d52bf64a2f6d65106bd58634ea5" kindref="member">ITM_enableEventCounter()</ref> after this API has been called </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="458" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1a2f591d52bf64a2f6d65106bd58634ea5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_enableEventCounter</definition>
+        <argsstring>(bool prescale1024, uint8_t postReset)</argsstring>
+        <name>ITM_enableEventCounter</name>
+        <param>
+          <type>bool</type>
+          <declname>prescale1024</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>postReset</declname>
+        </param>
+        <briefdescription>
+<para>Enable generation of event counter packets using the DWT POSTCNT timer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>prescale1024</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true: divide system clock by 1024 to generate POSTCNT false: divide system clock by 64 to generate POSTCNT </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>postReset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>4-bit downcounter that is reloaded on POSTCNT expiration</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>PC sampling and event counting are mutally exclusive. It is not recommended to call <ref refid="_i_t_m_8h_1addbcfd1a2a6bc70194a83556d311fcbd" kindref="member">ITM_enablePCSampling()</ref> after this API has been called </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="472" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1a615f7f8d141705531fd7a5870f15d4fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_disablePCAndEventSampling</definition>
+        <argsstring>(void)</argsstring>
+        <name>ITM_disablePCAndEventSampling</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Disable program counter and event sampling in the DWT. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_i_t_m_8h_1addbcfd1a2a6bc70194a83556d311fcbd" kindref="member">ITM_enablePCSampling()</ref>, <ref refid="_i_t_m_8h_1a2f591d52bf64a2f6d65106bd58634ea5" kindref="member">ITM_enableEventCounter</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="480" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1ab56cc8b6bba01270b080a9111e3002c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_enableTimestamps</definition>
+        <argsstring>(ITM_TimeStampPrescaler tsPrescale, bool asyncMode)</argsstring>
+        <name>ITM_enableTimestamps</name>
+        <param>
+          <type><ref refid="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99f" kindref="member">ITM_TimeStampPrescaler</ref></type>
+          <declname>tsPrescale</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>asyncMode</declname>
+        </param>
+        <briefdescription>
+<para>Enable the generation of local timestamp packets from the ITM module These are packets sent form the ITM that measure how long it has been since the previous timestamp. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tsPrescale</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prescaler value for the timestamp clock. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>asyncMode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true: Synchronous mode - generate timestamps by dividing the system clock. false: Asynchronous mode - generate timestamps by dividing the TPIU clock. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="493" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1a1b84f05e89bdb205c6f1ae8c9b3222de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_enableSyncPackets</definition>
+        <argsstring>(ITM_SyncPacketRate syncPacketRate)</argsstring>
+        <name>ITM_enableSyncPackets</name>
+        <param>
+          <type><ref refid="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804" kindref="member">ITM_SyncPacketRate</ref></type>
+          <declname>syncPacketRate</declname>
+        </param>
+        <briefdescription>
+<para>Enable the generation of synchronization packets from the ITM based on the CYCCNT counter. Synchronization packets can be used to recover bit-to-byte alignment information in a serial data stream. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>When using the TPIU as a asynchronous serial trace port ARM recommends disabling these packets to reduce stream bandwith.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>syncPacketRate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tap for CYCCNT. Controls the frequency of sync packets. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="505" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1a2e6e1ab7b441c982fee9d4d6fa5f287f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ITM_enableWatchpoint</definition>
+        <argsstring>(ITM_WatchpointAction function, const uintptr_t address)</argsstring>
+        <name>ITM_enableWatchpoint</name>
+        <param>
+          <type><ref refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4" kindref="member">ITM_WatchpointAction</ref></type>
+          <declname>function</declname>
+        </param>
+        <param>
+          <type>const uintptr_t</type>
+          <declname>address</declname>
+        </param>
+        <briefdescription>
+<para>Enable the watchpoint functionality using a DWT comparator. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>function</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The DWT_FUNCTION field to be programmed. This controls what data is emitted on comparator match see <ref refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4" kindref="member">ITM_WatchpointAction</ref> for possible values </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>address</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The address for the comparator to match on </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true The watchpoint was successfully set </para></simplesect>
+<simplesect kind="return"><para>false There was no watchpoint available (all are in use) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="517" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1aa685bcffb779886b550614e50df79405" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_flush</definition>
+        <argsstring>(void)</argsstring>
+        <name>ITM_flush</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Flush the ITM in preparation for power off of CPU domain. </para>        </briefdescription>
+        <detaileddescription>
+<para>This will disable PC sampling, and other DWT features, flush the fifo and (if applicable) setup the PIN as a GPIO.</para><para><simplesect kind="warning"><para>This function should not be called from ISR context</para></simplesect>
+<simplesect kind="note"><para>This function is invoked by the DPL power policy right before entering IDLE/DEEPSLEEP. By default it is an empty stub so that the power policy doesn&apos;t incur the flush overhead when ITM isn&apos;t used. When ITM is enabled this function will be strongly defined by SYSCFG. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="533" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_i_t_m_8h_1a787885218450bd7680840f00098f46c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ITM_restore</definition>
+        <argsstring>(void)</argsstring>
+        <name>ITM_restore</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Prepare the ITM hardware to return from power off of CPU domain This will reenable DWT features, re apply the ITM pin mux. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>This function should not be called from ISR context</para></simplesect>
+<simplesect kind="note"><para>This function is invoked by the DPL power policy right after leaving IDLE/DEEPSLEEP. By default it is an empty stub so that the power policy doesn&apos;t incur the flush overhead when ITM isn&apos;t used. When ITM is enabled this function will be strongly defined by SYSCFG. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ITM.h" line="546" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>ITM driver header. </para>    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para><para><anchor id="_i_t_m_8h_1ti_drivers_ITM_Overview"/> <heading level="3">Overview </heading>
+</para><para>This driver implements APIs to configure and control the ARM Instrumentation Trace Macrocell (ITM), Debug Watchpoint and Trace (DWT), and Trace Port Instrumentation Unit (TPIU) IPs to realize non-intrusive software logging and runtime trace.</para><para><heading level="1">Overview <anchor id="_1overview"/></heading>
+</para><para>The ITM software module provides application level APIs for the non-invasive debug capabilities of the ARM Cortex-M family. This includes the following hardware modules:</para><para><itemizedlist>
+<listitem><para>Instrumentation Trace Macrocell (ITM)</para></listitem><listitem><para>Debug Watchpoint and Trace (DWT)</para></listitem><listitem><para>Trace Port Instrumentation Unit (TPIU)</para></listitem></itemizedlist>
+</para><para>At a high level, the DWT provides watchpoint, data trace, and program counter sampling. The ITM provides memory mapped registers for low-intrusion software profiling. The TPIU provides an external interface for the ITM and DWT. Further details can be found in the <ulink url="https://static.docs.arm.com/ddi0403/e/DDI0403E_d_armv7m_arm.pdf">ARMv7-M Architecture Reference Manual</ulink></para><para><heading level="3">Limitations and Constraints </heading>
+</para><para>The driver is is designed with the following constraints in mind:<itemizedlist>
+<listitem><para>ITM is designed as a singleton. This means that a single instance is shared across all clients</para></listitem><listitem><para>The parallel TracePort mode of the TPIU is not supported, only serial protocols are considered</para></listitem><listitem><para>The ITM hardware is configured via firmware on the DUT. Log records can be read independent of any IDE or debugger configuration. This means that if the IDE debug system configures the ITM, it should be turned off.</para></listitem><listitem><para>In Code Composer Studio, it is not currently possible to disable the debugger configuration mentioned above. No ITM output will be visible while the IDE&apos;s debugger is connected. Please flash your firmware, then disconnect and reset the device to see ITM data on the serial port.</para></listitem></itemizedlist>
+</para><para><anchor id="_i_t_m_8h_1ti_drivers_ITM_Setup"/> <heading level="3">Setup </heading>
+</para><para>The ITM is configured via hardware attributes stored in the hardware attributes structure. This structure contains a common portion that is used for all drivers. This structure may be extended for some devices such as CC26XX.</para><para><heading level="3">Opening the driver </heading>
+</para><para>Unlike other drivers, the ITM is intended to be a singleton. This means that <ref refid="_i_t_m_8h_1a16102d41c7954c97735e43377beb7963" kindref="member">ITM_open</ref> can be called multiple times. The ITM will only be configured the first time open is called.</para><para>Furthermore, helper functions for features such as PC sampling must coherent across clients. The driver offers no protection against mismatched configuration.</para><para>The open call will enable ITM as well as the necessary stimulus ports. It will setup the TPIU for necessary baudrate and serial format.</para><para><anchor id="_i_t_m_8h_1ti_drivers_ITM_PinMux"/> <heading level="3">Pin Muxing </heading>
+</para><para>As the ITM driver is primarily interfacing to ARM defined IP, it is almost entirely common across all supported devices. The only specifics are pin muxing of the SWO pin. See the table below for some notes</para><para><table rows="2" cols="4"><row>
+<entry thead="yes"><para>Device Family </para></entry><entry thead="yes"><para>Debug Protocol </para></entry><entry thead="yes"><para>Muxing </para></entry><entry thead="yes"><para>Configurable?  </para></entry></row>
+<row>
+<entry thead="no"><para>CC13XX/CC26XX </para></entry><entry thead="no"><para>JTAG/cJTAG </para></entry><entry thead="no"><para>Any pin </para></entry><entry thead="no"><para>Y </para></entry></row>
+</table>
+Device specific pin muxing is done by the device specific ITM backend implementation.</para><para><anchor id="_i_t_m_8h_1ti_drivers_ITM_SwMessages"/> <heading level="3">Software Messages </heading>
+</para><para>The ITM stimulus ports enable serialization of application data with low overhead. There are multiple ports available, they are selectable via software.</para><para>Data written to the software stimulus ports is serialized by the TPIU and wrapped in the SWIT packet format. This packet format is standardized by ARM and described in <ulink url="https://static.docs.arm.com/ddi0403/e/DDI0403E_d_armv7m_arm.pdf">ARMv7-M Architecture Reference Manual</ulink></para><para>There are three tiers of access to the stimulus ports. In the table below, polled access means that the API/macro will poll the port&apos;s busy flag before writing. This is done to prevent silent data loss that occurs when writing to a port that is not ready. Actual serialization of the data will occur later inside the TPIU.</para><para><itemizedlist>
+<listitem><para>ITM_PortX - Macro to write or read to the port, doesn&apos;t poll before</para></listitem><listitem><para>ITM_sendXPolling - Macro that polls and writes to the port</para></listitem><listitem><para>ITM_sendXAtomic - Function that calls ITM_sendXPolling with interrupts disabled</para></listitem></itemizedlist>
+</para><para>It is up the the application writer to understand the tradeoff associated with each of these and select the correct one.</para><para><heading level="3">DWT Features </heading>
+</para><para>The Data Watchpoint and Trace (DWT) module is capable of many instrumentation features such as</para><para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>Feature </para></entry><entry thead="yes"><para>ITM API  </para></entry></row>
+<row>
+<entry thead="no"><para>Exception trace </para></entry><entry thead="no"><para><ref refid="_i_t_m_8h_1ac4f3f408f8babda3e63b15b2fcd7048d" kindref="member">ITM_enableExceptionTrace</ref> </para></entry></row>
+<row>
+<entry thead="no"><para>Program Counter sampling </para></entry><entry thead="no"><para><ref refid="_i_t_m_8h_1addbcfd1a2a6bc70194a83556d311fcbd" kindref="member">ITM_enablePCSampling</ref> </para></entry></row>
+<row>
+<entry thead="no"><para>Event counting </para></entry><entry thead="no"><para><ref refid="_i_t_m_8h_1a2f591d52bf64a2f6d65106bd58634ea5" kindref="member">ITM_enableEventCounter</ref> </para></entry></row>
+<row>
+<entry thead="no"><para>Synchronization packets </para></entry><entry thead="no"><para><ref refid="_i_t_m_8h_1a1b84f05e89bdb205c6f1ae8c9b3222de" kindref="member">ITM_enableSyncPackets</ref> </para></entry></row>
+</table>
+</para><para>Data generated by the DWT is serialized via the TPIU. DWT packet formats are defined in the ARMv7-M Architecture Reference Manual referenced above</para><para><heading level="3">Flush </heading>
+</para><para>The ITM/DWT/TPIU hardware resides in the CPU power domain. This means that whenever the CPU domain is powered down, ITM will power down. Powering down when data is inside in the TPIU can result in lost data. In order to prevent dataloss, the device&apos;s power policy will flush the ITM before powering down the CPU domain. When returning from sleep, the power policy will restore the ITM. This is achieved using the <ref refid="_i_t_m_8h_1aa685bcffb779886b550614e50df79405" kindref="member">ITM_flush</ref> and <ref refid="_i_t_m_8h_1a787885218450bd7680840f00098f46c1" kindref="member">ITM_restore</ref>.</para><para>These functions are weakly defined as empty functions. This reduces the overhead in the power policy when ITM is not enabled. These weak functions are overridden by syscfg when ITM is enabled. </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2020-2024,<sp/>Texas<sp/>Instruments<sp/>Incorporated</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">/*!*****************************************************************************</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*<sp/><sp/>@file<sp/><sp/><sp/><sp/><sp/><sp/><sp/>ITM.h</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/><sp/>@brief<sp/>ITM<sp/>driver<sp/>header</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_ITM_Overview</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/><sp/>&lt;h3&gt;<sp/>Overview<sp/>&lt;/h3&gt;</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/><sp/>This<sp/>driver<sp/>implements<sp/>APIs<sp/>to<sp/>configure<sp/>and<sp/>control<sp/>the<sp/>ARM<sp/>Instrumentation</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/><sp/>Trace<sp/>Macrocell<sp/>(ITM),<sp/>Debug<sp/>Watchpoint<sp/>and<sp/>Trace<sp/>(DWT),<sp/>and<sp/><sp/>Trace<sp/>Port</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*<sp/><sp/>Instrumentation<sp/>Unit<sp/>(TPIU)<sp/>IPs<sp/>to<sp/>realize<sp/>non-intrusive<sp/>software<sp/>logging</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/><sp/>and<sp/>runtime<sp/>trace.</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Overview<sp/>&lt;a<sp/>name=&quot;overview&quot;&gt;&lt;/a&gt;</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>ITM<sp/>software<sp/>module<sp/>provides<sp/>application<sp/>level<sp/>APIs<sp/>for<sp/>the<sp/>non-invasive</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/>*<sp/><sp/>debug<sp/>capabilities<sp/>of<sp/>the<sp/>ARM<sp/>Cortex-M<sp/>family.<sp/>This<sp/>includes<sp/>the<sp/>following</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/>*<sp/><sp/>hardware<sp/>modules:</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/>*<sp/><sp/><sp/>-<sp/>Instrumentation<sp/>Trace<sp/>Macrocell<sp/>(ITM)</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/>*<sp/><sp/><sp/>-<sp/>Debug<sp/>Watchpoint<sp/>and<sp/>Trace<sp/>(DWT)</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/>*<sp/><sp/><sp/>-<sp/>Trace<sp/>Port<sp/>Instrumentation<sp/>Unit<sp/>(TPIU)</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/>*<sp/><sp/>At<sp/>a<sp/>high<sp/>level,<sp/>the<sp/>DWT<sp/>provides<sp/>watchpoint,<sp/>data<sp/>trace,<sp/>and<sp/>program</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/>*<sp/><sp/>counter<sp/>sampling.<sp/>The<sp/>ITM<sp/>provides<sp/>memory<sp/>mapped<sp/>registers<sp/>for<sp/>low-intrusion</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/>*<sp/><sp/>software<sp/>profiling.<sp/>The<sp/>TPIU<sp/>provides<sp/>an<sp/>external<sp/>interface<sp/>for<sp/>the<sp/>ITM<sp/>and</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/>*<sp/><sp/>DWT.<sp/>Further<sp/>details<sp/>can<sp/>be<sp/>found<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/>*<sp/><sp/>[ARMv7-M<sp/>Architecture<sp/>Reference<sp/>Manual](https://static.docs.arm.com/ddi0403/e/DDI0403E_d_armv7m_arm.pdf)</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/>*<sp/><sp/>&lt;h3&gt;<sp/>Limitations<sp/>and<sp/>Constraints<sp/>&lt;/h3&gt;</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>driver<sp/>is<sp/>is<sp/>designed<sp/>with<sp/>the<sp/>following<sp/>constraints<sp/>in<sp/>mind:</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>ITM<sp/>is<sp/>designed<sp/>as<sp/>a<sp/>singleton.<sp/>This<sp/>means<sp/>that<sp/><sp/>a<sp/>single<sp/>instance<sp/>is</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>shared<sp/>across<sp/>all<sp/>clients</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>The<sp/>parallel<sp/>TracePort<sp/>mode<sp/>of<sp/>the<sp/>TPIU<sp/>is<sp/>not<sp/>supported,<sp/>only</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>serial<sp/>protocols<sp/>are<sp/>considered</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>The<sp/>ITM<sp/>hardware<sp/>is<sp/>configured<sp/>via<sp/>firmware<sp/>on<sp/>the<sp/>DUT.</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>Log<sp/>records<sp/>can<sp/>be<sp/>read<sp/>independent<sp/>of<sp/>any<sp/>IDE<sp/>or<sp/>debugger<sp/>configuration.</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>This<sp/>means<sp/>that<sp/>if<sp/>the<sp/>IDE<sp/>debug<sp/>system<sp/>configures<sp/>the<sp/>ITM,<sp/>it<sp/>should</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>be<sp/>turned<sp/>off.</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>In<sp/>Code<sp/>Composer<sp/>Studio,<sp/>it<sp/>is<sp/>not<sp/>currently<sp/>possible<sp/>to<sp/>disable</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>the<sp/>debugger<sp/>configuration<sp/>mentioned<sp/>above.<sp/>No<sp/>ITM<sp/>output<sp/>will<sp/>be<sp/>visible</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>the<sp/>IDE&apos;s<sp/>debugger<sp/>is<sp/>connected.<sp/>Please<sp/>flash<sp/>your<sp/>firmware,<sp/>then</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>disconnect<sp/>and<sp/>reset<sp/>the<sp/>device<sp/>to<sp/>see<sp/>ITM<sp/>data<sp/>on<sp/>the<sp/>serial<sp/>port.</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_ITM_Setup</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/>*<sp/><sp/>&lt;h3&gt;<sp/>Setup<sp/>&lt;/h3&gt;</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>ITM<sp/>is<sp/>configured<sp/>via<sp/>hardware<sp/>attributes<sp/>stored<sp/>in<sp/>the<sp/>hardware</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/>*<sp/><sp/>attributes<sp/>structure.<sp/>This<sp/>structure<sp/>contains<sp/>a<sp/>common<sp/>portion<sp/>that<sp/>is<sp/>used</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/>*<sp/><sp/>for<sp/>all<sp/>drivers.<sp/>This<sp/>structure<sp/>may<sp/>be<sp/>extended<sp/>for<sp/>some<sp/>devices<sp/>such<sp/>as</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/>*<sp/><sp/>CC26XX.</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/>*<sp/><sp/>&lt;h3&gt;<sp/>Opening<sp/>the<sp/>driver<sp/>&lt;/h3&gt;</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/>*<sp/><sp/>Unlike<sp/>other<sp/>drivers,<sp/>the<sp/>ITM<sp/>is<sp/>intended<sp/>to<sp/>be<sp/>a<sp/>singleton.</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/>*<sp/><sp/>This<sp/>means<sp/>that<sp/>@ref<sp/>ITM_open<sp/>can<sp/>be<sp/>called<sp/>multiple<sp/>times.</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>ITM<sp/>will<sp/>only<sp/>be<sp/>configured<sp/>the<sp/>first<sp/>time<sp/>open<sp/>is<sp/>called.</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/>*<sp/><sp/>Furthermore,<sp/>helper<sp/>functions<sp/>for<sp/>features<sp/>such<sp/>as<sp/>PC<sp/>sampling<sp/>must<sp/>coherent</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/>*<sp/><sp/>across<sp/>clients.<sp/>The<sp/>driver<sp/>offers<sp/>no<sp/>protection<sp/>against<sp/>mismatched</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*<sp/><sp/>configuration.</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>open<sp/>call<sp/>will<sp/>enable<sp/>ITM<sp/>as<sp/>well<sp/>as<sp/>the<sp/>necessary<sp/>stimulus<sp/>ports.</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/>*<sp/><sp/>It<sp/>will<sp/>setup<sp/>the<sp/>TPIU<sp/>for<sp/>necessary<sp/>baudrate<sp/>and<sp/>serial<sp/>format.</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_ITM_PinMux</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/>*<sp/><sp/>&lt;h3&gt;<sp/>Pin<sp/>Muxing<sp/>&lt;/h3&gt;</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/>*<sp/><sp/>As<sp/>the<sp/>ITM<sp/>driver<sp/>is<sp/>primarily<sp/>interfacing<sp/>to<sp/>ARM<sp/>defined<sp/>IP,<sp/>it<sp/>is<sp/>almost</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/>*<sp/><sp/>entirely<sp/>common<sp/>across<sp/>all<sp/>supported<sp/>devices.<sp/>The<sp/>only<sp/>specifics<sp/>are<sp/>pin</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*<sp/><sp/>muxing<sp/>of<sp/>the<sp/>SWO<sp/>pin.<sp/>See<sp/>the<sp/>table<sp/>below<sp/>for<sp/>some<sp/>notes</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"></highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*<sp/><sp/>|<sp/>Device<sp/>Family<sp/>|<sp/>Debug<sp/>Protocol<sp/>|<sp/>Muxing<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>Configurable?<sp/>|</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/>*<sp/><sp/>|---------------|----------------|-----------------|---------------|</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/>*<sp/><sp/>|<sp/>CC13XX/CC26XX<sp/>|<sp/>JTAG/cJTAG<sp/><sp/><sp/><sp/><sp/>|<sp/>Any<sp/>pin<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>Y<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/>*<sp/><sp/>Device<sp/>specific<sp/>pin<sp/>muxing<sp/>is<sp/>done<sp/>by<sp/>the<sp/>device<sp/>specific<sp/>ITM<sp/>backend</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/>*<sp/><sp/>implementation.</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_ITM_SwMessages</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/>*<sp/><sp/>&lt;h3&gt;<sp/>Software<sp/>Messages<sp/>&lt;/h3&gt;</highlight></codeline>
+<codeline lineno="107"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>ITM<sp/>stimulus<sp/>ports<sp/>enable<sp/>serialization<sp/>of<sp/>application<sp/>data<sp/>with<sp/>low</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/>*<sp/><sp/>overhead.<sp/>There<sp/>are<sp/>multiple<sp/>ports<sp/>available,<sp/>they<sp/>are<sp/>selectable<sp/>via</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/>*<sp/><sp/>software.</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/>*<sp/><sp/>Data<sp/>written<sp/>to<sp/>the<sp/>software<sp/>stimulus<sp/>ports<sp/>is<sp/>serialized<sp/>by<sp/>the<sp/>TPIU</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/>*<sp/><sp/>and<sp/>wrapped<sp/>in<sp/>the<sp/>SWIT<sp/>packet<sp/>format.<sp/>This<sp/>packet<sp/>format<sp/>is<sp/>standardized</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/>*<sp/><sp/>by<sp/>ARM<sp/>and<sp/>described<sp/>in<sp/>[ARMv7-M<sp/>Architecture<sp/>Reference</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/>Manual](https://static.docs.arm.com/ddi0403/e/DDI0403E_d_armv7m_arm.pdf)</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/>*<sp/><sp/>There<sp/>are<sp/>three<sp/>tiers<sp/>of<sp/>access<sp/>to<sp/>the<sp/>stimulus<sp/>ports.<sp/>In<sp/>the<sp/>table<sp/>below,</highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/>*<sp/><sp/>polled<sp/>access<sp/>means<sp/>that<sp/>the<sp/>API/macro<sp/>will<sp/>poll<sp/>the<sp/>port&apos;s<sp/>busy<sp/>flag</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/>*<sp/><sp/>before<sp/>writing.<sp/>This<sp/>is<sp/>done<sp/>to<sp/>prevent<sp/>silent<sp/>data<sp/>loss<sp/>that</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/>*<sp/><sp/>occurs<sp/>when<sp/>writing<sp/>to<sp/>a<sp/>port<sp/>that<sp/>is<sp/>not<sp/>ready.<sp/>Actual<sp/>serialization<sp/>of<sp/>the</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/>*<sp/><sp/>data<sp/>will<sp/>occur<sp/>later<sp/>inside<sp/>the<sp/>TPIU.</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="122"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>ITM_PortX<sp/>-<sp/>Macro<sp/>to<sp/>write<sp/>or<sp/>read<sp/>to<sp/>the<sp/>port,<sp/>doesn&apos;t<sp/>poll<sp/>before</highlight></codeline>
+<codeline lineno="123"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>ITM_sendXPolling<sp/>-<sp/>Macro<sp/>that<sp/>polls<sp/>and<sp/>writes<sp/>to<sp/>the<sp/>port</highlight></codeline>
+<codeline lineno="124"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>ITM_sendXAtomic<sp/>-<sp/>Function<sp/>that<sp/>calls<sp/>ITM_sendXPolling<sp/>with<sp/>interrupts</highlight></codeline>
+<codeline lineno="125"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>disabled</highlight></codeline>
+<codeline lineno="126"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="127"><highlight class="comment"><sp/>*<sp/><sp/>It<sp/>is<sp/>up<sp/>the<sp/>the<sp/>application<sp/>writer<sp/>to<sp/>understand<sp/>the<sp/>tradeoff<sp/>associated</highlight></codeline>
+<codeline lineno="128"><highlight class="comment"><sp/>*<sp/><sp/>with<sp/>each<sp/>of<sp/>these<sp/>and<sp/>select<sp/>the<sp/>correct<sp/>one.</highlight></codeline>
+<codeline lineno="129"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/>*<sp/><sp/>&lt;h3&gt;<sp/>DWT<sp/>Features<sp/>&lt;/h3&gt;</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>Data<sp/>Watchpoint<sp/>and<sp/>Trace<sp/>(DWT)<sp/>module<sp/>is<sp/>capable<sp/>of<sp/>many</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/>*<sp/><sp/>instrumentation<sp/>features<sp/>such<sp/>as</highlight></codeline>
+<codeline lineno="133"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/>*<sp/><sp/>|<sp/>Feature<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>ITM<sp/>API<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="135"><highlight class="comment"><sp/>*<sp/><sp/>|--------------------------|-------------------------------------|</highlight></codeline>
+<codeline lineno="136"><highlight class="comment"><sp/>*<sp/><sp/>|<sp/>Exception<sp/>trace<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>@ref<sp/>ITM_enableExceptionTrace<sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="137"><highlight class="comment"><sp/>*<sp/><sp/>|<sp/>Program<sp/>Counter<sp/>sampling<sp/>|<sp/>@ref<sp/>ITM_enablePCSampling<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="138"><highlight class="comment"><sp/>*<sp/><sp/>|<sp/>Event<sp/>counting<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|<sp/>@ref<sp/>ITM_enableEventCounter<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="139"><highlight class="comment"><sp/>*<sp/><sp/>|<sp/>Synchronization<sp/>packets<sp/><sp/>|<sp/>@ref<sp/>ITM_enableSyncPackets<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="140"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="141"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="142"><highlight class="comment"><sp/>*<sp/><sp/>Data<sp/>generated<sp/>by<sp/>the<sp/>DWT<sp/>is<sp/>serialized<sp/>via<sp/>the<sp/>TPIU.<sp/>DWT<sp/>packet<sp/>formats</highlight></codeline>
+<codeline lineno="143"><highlight class="comment"><sp/>*<sp/><sp/>are<sp/>defined<sp/>in<sp/>the<sp/>ARMv7-M<sp/>Architecture<sp/>Reference<sp/>Manual<sp/>referenced<sp/>above</highlight></codeline>
+<codeline lineno="144"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="145"><highlight class="comment"><sp/>*<sp/><sp/>&lt;h3&gt;Flush<sp/>&lt;/h3&gt;</highlight></codeline>
+<codeline lineno="146"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>ITM/DWT/TPIU<sp/>hardware<sp/>resides<sp/>in<sp/>the<sp/>CPU<sp/>power<sp/>domain.<sp/>This<sp/>means<sp/>that</highlight></codeline>
+<codeline lineno="147"><highlight class="comment"><sp/>*<sp/><sp/>whenever<sp/>the<sp/>CPU<sp/>domain<sp/>is<sp/>powered<sp/>down,<sp/>ITM<sp/>will<sp/>power<sp/>down.</highlight></codeline>
+<codeline lineno="148"><highlight class="comment"><sp/>*<sp/><sp/>Powering<sp/>down<sp/>when<sp/>data<sp/>is<sp/>inside<sp/>in<sp/>the<sp/>TPIU<sp/>can<sp/>result<sp/>in<sp/>lost<sp/>data.</highlight></codeline>
+<codeline lineno="149"><highlight class="comment"><sp/>*<sp/><sp/>In<sp/>order<sp/>to<sp/>prevent<sp/>dataloss,<sp/>the<sp/>device&apos;s<sp/>power<sp/>policy<sp/>will<sp/>flush<sp/>the</highlight></codeline>
+<codeline lineno="150"><highlight class="comment"><sp/>*<sp/><sp/>ITM<sp/>before<sp/>powering<sp/>down<sp/>the<sp/>CPU<sp/>domain.<sp/>When<sp/>returning<sp/>from<sp/>sleep,<sp/>the</highlight></codeline>
+<codeline lineno="151"><highlight class="comment"><sp/>*<sp/><sp/>power<sp/>policy<sp/>will<sp/>restore<sp/>the<sp/>ITM.<sp/>This<sp/>is<sp/>achieved<sp/>using<sp/>the</highlight></codeline>
+<codeline lineno="152"><highlight class="comment"><sp/>*<sp/><sp/>@ref<sp/>ITM_flush<sp/>and<sp/>@ref<sp/>ITM_restore.</highlight></codeline>
+<codeline lineno="153"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="154"><highlight class="comment"><sp/>*<sp/><sp/>These<sp/>functions<sp/>are<sp/>weakly<sp/>defined<sp/>as<sp/>empty<sp/>functions.<sp/>This<sp/>reduces<sp/>the</highlight></codeline>
+<codeline lineno="155"><highlight class="comment"><sp/>*<sp/><sp/>overhead<sp/>in<sp/>the<sp/>power<sp/>policy<sp/>when<sp/>ITM<sp/>is<sp/>not<sp/>enabled.<sp/>These<sp/>weak<sp/>functions</highlight></codeline>
+<codeline lineno="156"><highlight class="comment"><sp/>*<sp/><sp/>are<sp/>overridden<sp/>by<sp/>syscfg<sp/>when<sp/>ITM<sp/>is<sp/>enabled.</highlight></codeline>
+<codeline lineno="157"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="158"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ti_drivers_ITM__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_drivers_ITM__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ti/devices/DeviceFamily.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177" refid="_i_t_m_8h_1a17b8fe92bb0a90af0c2bb841edb45c42" refkind="member"><highlight class="preprocessor">#define<sp/>ITM_BASE_ADDR<sp/>(0xE0000000)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183" refid="_i_t_m_8h_1a119b6e75428fdd7c6e21450a8bab3343" refkind="member"><highlight class="preprocessor">#define<sp/>ITM_DWT_BASE_ADDR<sp/>(0xE0001000)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189" refid="_i_t_m_8h_1a5f75b2f8a45f18b9d3123aa3abd85355" refkind="member"><highlight class="preprocessor">#define<sp/>ITM_SCS_BASE_ADDR<sp/>(0xE000E000)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195" refid="_i_t_m_8h_1a25c4b373d205eb9153065ae6ea4f7491" refkind="member"><highlight class="preprocessor">#define<sp/>ITM_TPIU_BASE_ADDR<sp/>(0xE0040000)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203" refid="_i_t_m_8h_1a82ff30b7cbbbdeaf30f97ed5a211aeac" refkind="member"><highlight class="preprocessor">#define<sp/>ITM_LAR_UNLOCK<sp/>(0xC5ACCE55)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="preprocessor">#if<sp/>(DeviceFamily_PARENT<sp/>==<sp/>DeviceFamily_PARENT_CC13X4_CC26X3_CC26X4<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="211"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/>DeviceFamily_PARENT<sp/>==<sp/>DeviceFamily_PARENT_CC27XX)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="212" refid="_i_t_m_8h_1aaefb788de5bc8c66593b709298d9cde4" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_DISABLED<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(0x00)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="213" refid="_i_t_m_8h_1afa5dd1af973cc317aa60de9aceb43e6c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_PC<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(0x30<sp/>|<sp/>0x4)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="214" refid="_i_t_m_8h_1a17ba960d5ed2582664e27d6f16fdb67a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_DATA_ON_READ_WRITE<sp/><sp/><sp/>(0x800<sp/>|<sp/>0x20<sp/>|<sp/>0xc)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="215" refid="_i_t_m_8h_1ae2a2f43443471885317352216c2845cb" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_PC_ON_READ_WRITE<sp/><sp/><sp/><sp/><sp/>(0x800<sp/>|<sp/>0x30<sp/>|<sp/>0x2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="216" refid="_i_t_m_8h_1ab3c5ee16d4d377fe6d3f1bacf73958a7" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_DATA_ON_READ<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(0x800<sp/>|<sp/>0x20<sp/>|<sp/>0xe)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="217" refid="_i_t_m_8h_1a114abc7c9d00929b6e145b69253c7a93" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_DATA_ON_WRITE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(0x800<sp/>|<sp/>0x20<sp/>|<sp/>0xd)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="218" refid="_i_t_m_8h_1a79bf0b66e22e01e5453710a0309a8277" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_PC_AND_DATA_ON_READ<sp/><sp/>(0x800<sp/>|<sp/>0x30<sp/>|<sp/>0xe)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="219" refid="_i_t_m_8h_1a97d6154950d6996ba6507a75ca44865d" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_PC_AND_DATA_ON_WRITE<sp/>(0x800<sp/>|<sp/>0x30<sp/>|<sp/>0xd)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_DISABLED<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x00</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_PC<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x01</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_DATA_ON_READ_WRITE<sp/><sp/><sp/>0x02</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_PC_ON_READ_WRITE<sp/><sp/><sp/><sp/><sp/>0x03</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_DATA_ON_READ<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0C</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_DATA_ON_WRITE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0D</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_PC_AND_DATA_ON_READ<sp/><sp/>0x0E</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>ITM_FUNCTION_EMIT_PC_AND_DATA_ON_WRITE<sp/>0x0F</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237" refid="_i_t_m_8h_1a42097c7b552905d45be6f672b36609cf" refkind="member"><highlight class="preprocessor">#define<sp/>ITM_port32(n)<sp/>(*((volatile<sp/>unsigned<sp/>int<sp/>*)(ITM_BASE_ADDR<sp/>+<sp/>4<sp/>*<sp/>n)))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>The<sp/>do<sp/>{}<sp/>while()<sp/>loops<sp/>below<sp/>are<sp/>to<sp/>protect<sp/>the<sp/>macros<sp/>so<sp/>that<sp/>they&apos;re</highlight></codeline>
+<codeline lineno="240"><highlight class="comment"><sp/>*<sp/>evaluated<sp/>correctly<sp/>regardless<sp/>of<sp/>the<sp/>call<sp/>site.<sp/>They<sp/>do<sp/>not<sp/>have<sp/>any</highlight></codeline>
+<codeline lineno="241"><highlight class="comment"><sp/>*<sp/>function<sp/>besides<sp/>ensuring<sp/>that<sp/>the<sp/>syntax<sp/>is<sp/>preserved<sp/>correctly<sp/>by<sp/>the<sp/>pre</highlight></codeline>
+<codeline lineno="242"><highlight class="comment"><sp/>*<sp/>processor.</highlight></codeline>
+<codeline lineno="243"><highlight class="comment"><sp/>*/</highlight></codeline>
+<codeline lineno="250" refid="_i_t_m_8h_1adf5d0a92dbae07a856534e154489634e" refkind="member"><highlight class="preprocessor">#define<sp/>ITM_send32Polling(n,<sp/>x)<sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="251"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>do<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="252"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="253"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(0<sp/>==<sp/>ITM_port32(n))<sp/>\</highlight></codeline>
+<codeline lineno="254"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="255"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ITM_port32(n)<sp/>=<sp/>x;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="256"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>}<sp/>while<sp/>(0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263" refid="_i_t_m_8h_1aecb14735a7e440e12c1601a80afc412b" refkind="member"><highlight class="preprocessor">#define<sp/>ITM_port16(n)<sp/>(*((volatile<sp/>unsigned<sp/>short<sp/>*)(ITM_BASE_ADDR<sp/>+<sp/>4<sp/>*<sp/>n)))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="271" refid="_i_t_m_8h_1a77e05582b2936451bc63fb963467315c" refkind="member"><highlight class="preprocessor">#define<sp/>ITM_send16Polling(n,<sp/>x)<sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="272"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>do<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="273"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="274"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(0<sp/>==<sp/>ITM_port16(n))<sp/>\</highlight></codeline>
+<codeline lineno="275"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="276"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ITM_port16(n)<sp/>=<sp/>x;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="277"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>}<sp/>while<sp/>(0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight></codeline>
+<codeline lineno="284" refid="_i_t_m_8h_1a1ff85e0d732215d06f483a798a8d9a47" refkind="member"><highlight class="preprocessor">#define<sp/>ITM_port8(n)<sp/>(*((volatile<sp/>unsigned<sp/>char<sp/>*)(ITM_BASE_ADDR<sp/>+<sp/>4<sp/>*<sp/>n)))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"></highlight></codeline>
+<codeline lineno="292" refid="_i_t_m_8h_1ab76f9d46e6391b7e2321b8a28e4665b7" refkind="member"><highlight class="preprocessor">#define<sp/>ITM_send8Polling(n,<sp/>x)<sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="293"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>do<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="294"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="295"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>while<sp/>(0<sp/>==<sp/>ITM_port8(n))<sp/>\</highlight></codeline>
+<codeline lineno="296"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="297"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ITM_port8(n)<sp/>=<sp/>x;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="298"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>}<sp/>while<sp/>(0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="299"><highlight class="normal"></highlight></codeline>
+<codeline lineno="300" refid="_i_t_m_8h_1a92abaf1991f9421d7b642ca5489c9897" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="302" refid="_i_t_m_8h_1a92abaf1991f9421d7b642ca5489c9897a9dbe5b7df6645097a4364d02c20d2a7d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a92abaf1991f9421d7b642ca5489c9897a9dbe5b7df6645097a4364d02c20d2a7d" kindref="member">ITM_TPIU_SWO_MANCHESTER</ref><sp/>=<sp/>0x00000001,<sp/></highlight></codeline>
+<codeline lineno="303" refid="_i_t_m_8h_1a92abaf1991f9421d7b642ca5489c9897a98249a1e3b05e6ec7e0789ea266ec772" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a92abaf1991f9421d7b642ca5489c9897a98249a1e3b05e6ec7e0789ea266ec772" kindref="member">ITM_TPIU_SWO_UART</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0x00000002,<sp/></highlight></codeline>
+<codeline lineno="304"><highlight class="normal">}<sp/><ref refid="_i_t_m_8h_1a92abaf1991f9421d7b642ca5489c9897" kindref="member">ITM_TPIU_PortFormat</ref>;</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"></highlight></codeline>
+<codeline lineno="307"><highlight class="comment">/*<sp/>This<sp/>enables<sp/>a<sp/>common<sp/>defintion<sp/>of<sp/>the<sp/>hwAttrs<sp/>structure<sp/>that<sp/>can<sp/>be<sp/>easily</highlight></codeline>
+<codeline lineno="308"><highlight class="comment"><sp/>*<sp/>extended<sp/>by<sp/>the<sp/>device<sp/>specific<sp/>implementations.<sp/>This<sp/>structure<sp/>defintion</highlight></codeline>
+<codeline lineno="309"><highlight class="comment"><sp/>*<sp/>must<sp/>be<sp/>the<sp/>first<sp/>line<sp/>of<sp/>any<sp/>device<sp/>specific<sp/>structure</highlight></codeline>
+<codeline lineno="310"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="311"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ITM_BASE_HWATTRS<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="312"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>ITM_TPIU_PortFormat<sp/>format;<sp/><sp/></highlight><highlight class="comment">/*<sp/>Wire<sp/>interface<sp/>used<sp/>by<sp/>TPIU<sp/>*/</highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="313"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>uint32_t<sp/>traceEnable;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Bitmask<sp/>of<sp/>enabled<sp/>stimulus<sp/>ports<sp/>*/</highlight><highlight class="preprocessor"><sp/>\</highlight></codeline>
+<codeline lineno="314"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>uint32_t<sp/>tpiuPrescaler;<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Baudrate<sp/>to<sp/>be<sp/>used<sp/>by<sp/>the<sp/>TPIU<sp/>*/</highlight><highlight class="preprocessor"><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="315"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>uint32_t<sp/>fullPacketInCycles;<sp/></highlight><highlight class="comment">/*<sp/>Cycles<sp/>in<sp/>a<sp/>full<sp/>word<sp/>*/</highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="316"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="324" refid="struct_i_t_m___h_w_attrs" refkind="compound"><highlight class="preprocessor">typedef<sp/>struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="325"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/>ITM_BASE_HWATTRS</highlight></codeline>
+<codeline lineno="327"><highlight class="normal">}<sp/><ref refid="struct_i_t_m___h_w_attrs" kindref="compound">ITM_HWAttrs</ref>;</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"></highlight></codeline>
+<codeline lineno="332" refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="334" refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4ac20ba9c59b1ca0a2a66e2b18f6c25349" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4ac20ba9c59b1ca0a2a66e2b18f6c25349" kindref="member">ITM_Disabled</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="_i_t_m_8h_1aaefb788de5bc8c66593b709298d9cde4" kindref="member">ITM_FUNCTION_DISABLED</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="335" refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4a6f5267917ea1c22c57fe8f9241a673c2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4a6f5267917ea1c22c57fe8f9241a673c2" kindref="member">ITM_EmitPc</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="_i_t_m_8h_1afa5dd1af973cc317aa60de9aceb43e6c" kindref="member">ITM_FUNCTION_EMIT_PC</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="336" refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4ac8faf039ac05913295c9287771215b36" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4ac8faf039ac05913295c9287771215b36" kindref="member">ITM_EmitDataOnReadWrite</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="_i_t_m_8h_1a17ba960d5ed2582664e27d6f16fdb67a" kindref="member">ITM_FUNCTION_EMIT_DATA_ON_READ_WRITE</ref>,<sp/></highlight></codeline>
+<codeline lineno="337" refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4a9899de123384ddcdecc5ed21bbf9a74a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4a9899de123384ddcdecc5ed21bbf9a74a" kindref="member">ITM_SamplePcAndEmitDataOnReadWrite</ref><sp/>=<sp/><ref refid="_i_t_m_8h_1ae2a2f43443471885317352216c2845cb" kindref="member">ITM_FUNCTION_EMIT_PC_ON_READ_WRITE</ref>,<sp/></highlight></codeline>
+<codeline lineno="339" refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4acde111ce38aab3f613515bb99a701f6c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4acde111ce38aab3f613515bb99a701f6c" kindref="member">ITM_SampleDataOnRead</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="_i_t_m_8h_1ab3c5ee16d4d377fe6d3f1bacf73958a7" kindref="member">ITM_FUNCTION_EMIT_DATA_ON_READ</ref>,<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="340" refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4aeb081e179c18b20dae2b0711e3545081" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4aeb081e179c18b20dae2b0711e3545081" kindref="member">ITM_SampleDataOnWrite</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="_i_t_m_8h_1a114abc7c9d00929b6e145b69253c7a93" kindref="member">ITM_FUNCTION_EMIT_DATA_ON_WRITE</ref>,<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="341" refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4a112139dac6393353ee5ee2d6a94fb146" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4a112139dac6393353ee5ee2d6a94fb146" kindref="member">ITM_SamplePcAndDataOnRead</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="_i_t_m_8h_1a79bf0b66e22e01e5453710a0309a8277" kindref="member">ITM_FUNCTION_EMIT_PC_AND_DATA_ON_READ</ref>,<sp/><sp/></highlight></codeline>
+<codeline lineno="342" refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4a81dbb9db3d688f562c620600305bdcca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4a81dbb9db3d688f562c620600305bdcca" kindref="member">ITM_SamplePcAndDataOnWrite</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="_i_t_m_8h_1a97d6154950d6996ba6507a75ca44865d" kindref="member">ITM_FUNCTION_EMIT_PC_AND_DATA_ON_WRITE</ref>,<sp/></highlight></codeline>
+<codeline lineno="343"><highlight class="normal">}<sp/><ref refid="_i_t_m_8h_1a937373a3916f1a55a63934bdfd597fa4" kindref="member">ITM_WatchpointAction</ref>;</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight></codeline>
+<codeline lineno="349" refid="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99f" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="350"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="351" refid="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99fa0fa092f567f9f125de7722c7054e9762" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99fa0fa092f567f9f125de7722c7054e9762" kindref="member">ITM_TS_DIV_NONE</ref><sp/>=<sp/>0,<sp/></highlight></codeline>
+<codeline lineno="352" refid="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99fad256c4024037e331b872b8fd34c53100" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99fad256c4024037e331b872b8fd34c53100" kindref="member">ITM_TS_DIV_4</ref><sp/><sp/><sp/><sp/>=<sp/>1,<sp/></highlight></codeline>
+<codeline lineno="353" refid="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99fa9f7d7dff34e8a89bc945e2aa0976c325" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99fa9f7d7dff34e8a89bc945e2aa0976c325" kindref="member">ITM_TS_DIV_16</ref><sp/><sp/><sp/>=<sp/>2,<sp/></highlight></codeline>
+<codeline lineno="354" refid="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99fa15f4f6ba80c96a58b130bdb9c1a1b364" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99fa15f4f6ba80c96a58b130bdb9c1a1b364" kindref="member">ITM_TS_DIV_64</ref><sp/><sp/><sp/>=<sp/>3<sp/><sp/></highlight></codeline>
+<codeline lineno="355"><highlight class="normal">}<sp/><ref refid="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99f" kindref="member">ITM_TimeStampPrescaler</ref>;</highlight></codeline>
+<codeline lineno="361" refid="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="362"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="363" refid="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804afdd102cd9b084b1bcae53d08fa793838" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804afdd102cd9b084b1bcae53d08fa793838" kindref="member">ITM_SYNC_NONE</ref><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0,<sp/></highlight></codeline>
+<codeline lineno="364" refid="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804afbaf2621e1a000f97c8543e4fedc1513" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804afbaf2621e1a000f97c8543e4fedc1513" kindref="member">ITM_SYNC_TAP_BIT24</ref><sp/>=<sp/>1,<sp/></highlight></codeline>
+<codeline lineno="365" refid="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804ae0321eaecee40a16fe4700ab07c5f9bc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804ae0321eaecee40a16fe4700ab07c5f9bc" kindref="member">ITM_SYNC_TAP_BIT26</ref><sp/>=<sp/>2,<sp/></highlight></codeline>
+<codeline lineno="366" refid="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804a55c57e386b43a03439333391796cde3b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804a55c57e386b43a03439333391796cde3b" kindref="member">ITM_SYNC_TAP_BIT28</ref><sp/>=<sp/>3<sp/><sp/></highlight></codeline>
+<codeline lineno="367"><highlight class="normal">}<sp/><ref refid="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804" kindref="member">ITM_SyncPacketRate</ref>;</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"></highlight></codeline>
+<codeline lineno="376"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1a16102d41c7954c97735e43377beb7963" kindref="member">ITM_open</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"></highlight></codeline>
+<codeline lineno="385"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1abc95beb9b7eb30359f9202f7d252fb11" kindref="member">ITM_close</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"></highlight></codeline>
+<codeline lineno="398"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1aa86439fd4831a7bfcee88c341d76c354" kindref="member">ITM_sendBufferAtomic</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>port,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*msg,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>length);</highlight></codeline>
+<codeline lineno="399"><highlight class="normal"></highlight></codeline>
+<codeline lineno="407"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1aa17c6a93828bd7f15d26ae2e9067240b" kindref="member">ITM_send32Atomic</ref>(uint8_t<sp/>port,<sp/>uint32_t<sp/>value);</highlight></codeline>
+<codeline lineno="408"><highlight class="normal"></highlight></codeline>
+<codeline lineno="416"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1ac5bf5a0c94dc37972c94b13bb89f35e5" kindref="member">ITM_send16Atomic</ref>(uint8_t<sp/>port,<sp/>uint16_t<sp/>value);</highlight></codeline>
+<codeline lineno="417"><highlight class="normal"></highlight></codeline>
+<codeline lineno="425"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1a24c081b5f0d2b0cb665ba357c65e4531" kindref="member">ITM_send8Atomic</ref>(uint8_t<sp/>port,<sp/>uint8_t<sp/>value);</highlight></codeline>
+<codeline lineno="426"><highlight class="normal"></highlight></codeline>
+<codeline lineno="434"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1ac4f3f408f8babda3e63b15b2fcd7048d" kindref="member">ITM_enableExceptionTrace</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="435"><highlight class="normal"></highlight></codeline>
+<codeline lineno="442"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1a754aef7b79fc0b3cbe6ca530ab3f6ee9" kindref="member">ITM_disableExceptionTrace</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="443"><highlight class="normal"></highlight></codeline>
+<codeline lineno="458"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1addbcfd1a2a6bc70194a83556d311fcbd" kindref="member">ITM_enablePCSampling</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>prescale1024,<sp/>uint8_t<sp/>postReset);</highlight></codeline>
+<codeline lineno="459"><highlight class="normal"></highlight></codeline>
+<codeline lineno="472"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1a2f591d52bf64a2f6d65106bd58634ea5" kindref="member">ITM_enableEventCounter</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>prescale1024,<sp/>uint8_t<sp/>postReset);</highlight></codeline>
+<codeline lineno="473"><highlight class="normal"></highlight></codeline>
+<codeline lineno="480"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1a615f7f8d141705531fd7a5870f15d4fe" kindref="member">ITM_disablePCAndEventSampling</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="481"><highlight class="normal"></highlight></codeline>
+<codeline lineno="493"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1ab56cc8b6bba01270b080a9111e3002c1" kindref="member">ITM_enableTimestamps</ref>(<ref refid="_i_t_m_8h_1a20e174adf98212ca856d623dffe7b99f" kindref="member">ITM_TimeStampPrescaler</ref><sp/>tsPrescale,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>asyncMode);</highlight></codeline>
+<codeline lineno="494"><highlight class="normal"></highlight></codeline>
+<codeline lineno="505"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1a1b84f05e89bdb205c6f1ae8c9b3222de" kindref="member">ITM_enableSyncPackets</ref>(<ref refid="_i_t_m_8h_1a8acb6d4f9ecbfe6d47c322f895c22804" kindref="member">ITM_SyncPacketRate</ref><sp/>syncPacketRate);</highlight></codeline>
+<codeline lineno="506"><highlight class="normal"></highlight></codeline>
+<codeline lineno="517"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="_i_t_m_8h_1a2e6e1ab7b441c982fee9d4d6fa5f287f" kindref="member">ITM_enableWatchpoint</ref>(ITM_WatchpointAction<sp/></highlight><highlight class="keyword">function</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uintptr_t<sp/>address);</highlight></codeline>
+<codeline lineno="518"><highlight class="normal"></highlight></codeline>
+<codeline lineno="533"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>__attribute__((weak))<sp/><ref refid="_i_t_m_8h_1aa685bcffb779886b550614e50df79405" kindref="member">ITM_flush</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="534"><highlight class="normal"></highlight></codeline>
+<codeline lineno="546"><highlight class="normal">extern<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>__attribute__((weak))<sp/><ref refid="_i_t_m_8h_1a787885218450bd7680840f00098f46c1" kindref="member">ITM_restore</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="547"><highlight class="normal"></highlight></codeline>
+<codeline lineno="548"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="549"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="550"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="551"><highlight class="normal"></highlight></codeline>
+<codeline lineno="552"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_drivers_ITM__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/ITM.h"/>
+  </compounddef>
+</doxygen>

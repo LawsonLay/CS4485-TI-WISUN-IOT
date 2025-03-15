@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="TI Bluetooth Mesh and the Zephyr Project" href="ti-zephyr-overview.html" />
+    <link rel="prev" title="TI Bluetooth Mesh Quick Start Guide" href="../quickstart-guide/ble-mesh-quick-start.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-mesh overview";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Bluetooth Mesh</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../quickstart-guide/ble-mesh-quick-start.html">TI Bluetooth Mesh Quick Start Guide</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bluetooth-mesh-basics">Bluetooth Mesh Basics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#layers-of-bluetooth-mesh">Layers of Bluetooth Mesh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#network-architecture">Network Architecture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#security">Security</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ti-bluetooth-mesh-software-architecture">TI Bluetooth Mesh Software Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#provisioning-procedures">Provisioning Procedures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#provisioning-with-pb-adv">Provisioning with PB-ADV</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#provisioning-with-pb-gatt">Provisioning with PB-GATT</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#message-handling">Message handling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#relay-node-processing">Relay node processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxy-node-processing">Proxy node processing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ti-zephyr-overview.html">TI Bluetooth Mesh and the Zephyr Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developing-a-ble-mesh-application.html">Developing a Bluetooth Mesh Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysconfig-walkthrough.html">BLE Mesh SysConfig Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ble-mesh-oad.html">TI Bluetooth Mesh and OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ble-mesh-erpc.html">TI Bluetooth Mesh Host PC Tool</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Bluetooth Mesh</a> &raquo;</li>
+      <li>Overview</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>This section describes the functionality of the Bluetooth Mesh features and
+provides a list of APIs to interface with Bluetooth Mesh. The TI Mesh offering
+consists of Mesh models, provisioning and an example application.</p>
+<p>TI Bluetooth Mesh is implemented on top of the Zephyr Mesh project. For more
+information on this, refer to <a class="reference internal" href="ti-zephyr-overview.html#ti-ble-mesh-zephyr"><span class="std std-ref">TI Bluetooth Mesh and the Zephyr Project</span></a>.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>A general mesh network has a many-to-many topology, where each device is able to
+communicate with every other device in the mesh network. Communication is
+achieved using messages, and devices are able to relay messages to other devices
+so that the end-to-end communication range is extended far beyond the radio
+range of each individual node.</p>
+<p>Basic communication over a mesh network is based on flooding. This means that
+each node acts as a relay node, forwarding all messages that have been received
+(except messages designated to the local node). Managed flooding is a related
+term and means that <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-Time-to-live"><span class="xref std std-term">time to live</span></a> and message caching mechanisms are
+implemented. This is used to reduce the flooded traffic over the network.
+Enhanced implementations include management of forward paths to further optimize
+the forwarded traffic load.</p>
+<p>The Mesh network support over Bluetooth is standardized by the Bluetooth SIG in
+the <a class="reference external" href="https://www.bluetooth.com/specifications/mesh-specifications/">Bluetooth Mesh specifications</a> and defines fundamental requirements to
+enable an interoperable mesh networking solution for Bluetooth low energy
+wireless technology.</p>
+</div>
+<div class="section" id="bluetooth-mesh-basics">
+<h2>Bluetooth Mesh Basics<a class="headerlink" href="#bluetooth-mesh-basics" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="layers-of-bluetooth-mesh">
+<h3>Layers of Bluetooth Mesh<a class="headerlink" href="#layers-of-bluetooth-mesh" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="#stack-layers"><span class="std std-numref">Figure 142.</span></a> shows the layers of Bluetooth Mesh. Starting from the
+bottom up, the Bluetooth Mesh standard enables overlay of a complete protocol
+stack on top of a Bluetooth LE protocol stack.  The BLE-Stack provides bearer
+services, both connectionless (advertisement based) or connection-oriented (GATT
+based) connectivity. At the GATT bearers’ level, Bluetooth Mesh is seen as a
+profile where attributes are used to exchange mesh data.</p>
+<div class="figure align-center" id="id2">
+<span id="stack-layers"></span><a class="reference internal image-reference" href="../_images/stack_layers.png"><img alt="../_images/stack_layers.png" src="../_images/stack_layers.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Figure 142. </span><span class="caption-text">Layers of Bluetooth Mesh</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Starting from the bottom, the Bluetooth Mesh protocol stack layers provide the
+following functionalities and services:</p>
+<ul>
+<li><p><strong>The bearer layer</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Transport of network messages between connection-less nodes (advertisement
+based) and the connection bearers (GATT based)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>The network layer</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Network addressing of transport messages towards one or more elements
+(unicast/group/virtual)</p></li>
+<li><p>Network message format definition which allows transport PDUs to be
+transported by the bearer layer</p></li>
+<li><p>Network message handling including relay/forward, accept further
+processing, or reject message.</p></li>
+<li><p>Encryption and authentication of network messages</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>The lower transport layer</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Segmentation and reassembly of upper transport layer messages into
+multiple lower transport PDUs to deliver large upper transport layer
+messages to other nodes</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>The upper transport layer</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Encryption and authentication of application data for providing
+confidentiality of access messages</p></li>
+<li><p>Control messages for managing the upper transport layer between nodes</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>The access layer</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Definition of how higher layer applications can use the upper transport
+layer and how to format the application data</p></li>
+<li><p>Definition and control of the application data encryption and decryption
+performed in the upper transport layer</p></li>
+<li><p>Validation of whether incoming application data has been received in the
+context of the correct network and with correct application keys before
+forwarding it to the higher layers.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>The foundation model layer</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Definition of the states, messages, and models required to configure and
+manage a mesh network</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>The model layer</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Definition of models that are used to standardize the operation of typical
+user scenarios and are defined in the Bluetooth Mesh Model specification
+or other higher layer specifications</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="network-architecture">
+<h3>Network Architecture<a class="headerlink" href="#network-architecture" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="https://www.bluetooth.com/specifications/mesh-specifications/">Bluetooth Mesh specifications</a> defines a managed flood-based mesh network,
+which uses broadcast channels to transmit messages so that nodes can receive
+messages and relay these messages, thus extending the range of the original
+message. Any device in a managed flood mesh network can send a message at any
+time as long as there is a sufficient density of devices that are listening and
+relaying messages. Under the managed flooding, message caching is used to
+discard and not forward a message that has already been accepted. In addition,
+packet time to live (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-TTL"><span class="xref std std-term">TTL</span></a>) is used to limit the number of hops a packet
+can be forwarded in the mesh network.</p>
+<p>The Bluetooth Mesh network topology is built of different mesh nodes types:</p>
+<ul class="simple">
+<li><p><strong>Mesh node</strong>: A member of a mesh network. It includes basic node
+functionality for receiving and processing broadcast, multicast and unicast
+messages designated for the node as well as transmission of local mesh data.</p></li>
+<li><p><strong>Mesh relay node</strong>: Local processing as well as mesh message relaying for
+range extension within a mesh network. (Multiple hops supported)</p></li>
+<li><p><strong>Mesh proxy node</strong>: Proxying between GATT-Bearer and Advertise bearer. This
+allows transmission to devices that support GATT-bearer only (e.g. mobiles
+phones).</p></li>
+<li><p><strong>Mesh low power node</strong> (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-LPN"><span class="xref std std-term">LPN</span></a>): A power limited node which wakes up on
+specific time intervals to send messages or receive messages which are
+aggregated by a designated friend node.</p></li>
+<li><p><strong>Mesh friend node</strong>: Used to aggregate messages for <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-LPN"><span class="xref std std-term">LPN</span></a> during their
+sleep cycles and deliver their messages upon wake-up.</p></li>
+</ul>
+<p>Note that Bluetooth LE devices that are connected to a mesh proxy node are not
+counted as part of the Bluetooth Mesh network.</p>
+<p>Node combinations are allowed over the same device. For example, one device can
+be a Friend and Relay node.</p>
+<div class="section" id="provisioning">
+<h4>Provisioning<a class="headerlink" href="#provisioning" title="Permalink to this headline">¶</a></h4>
+<p>Provisioning is the process of adding the devices into a mesh network. A device
+that is not a member of a mesh network is known as an unprovisioned device.</p>
+<p>A provisioner is used to add a device to the network and manage the transitions
+between unprovisioned devices and a (provisioned) mesh node via the provisioning
+protocol. Provisioning of devices into a mesh network differs from the pairing
+and bonding process that is typically used in Bluetooth wireless technology.</p>
+<p>There are two provisioning bearers (PBs) for provisioning protocol messages:</p>
+<ul class="simple">
+<li><p>PB-ADV bearer (connectionless oriented): This vector is implemented on all
+Bluetooth mesh nodes.</p></li>
+<li><p>PB-GATT bearer (connection oriented): This vector is only implemented on mesh
+proxy nodes. This feature allows Bluetooth LE devices (which do not support
+advertising bearers), such as mobile phones, to act as provisioners.</p></li>
+</ul>
+<p>For more information on Provisioning, please see the <a class="reference internal" href="#provisioning-procedures">Provisioning Procedures</a>
+section below.</p>
+</div>
+<div class="section" id="node-configuration">
+<h4>Node Configuration<a class="headerlink" href="#node-configuration" title="Permalink to this headline">¶</a></h4>
+<p>A mesh node is managed by a Configuration Client to configure how the node
+communicates with other nodes. A Configuration Client can remove a node from a
+mesh network, which reverts it back to an unprovisioned device. The
+Configuration Client can be the same device as the provisioner.</p>
+<p>For more information on node configuration, please see <a class="reference internal" href="developing-a-ble-mesh-application.html#node-configuration"><span class="std std-ref">Configuring a Bluetooth Mesh Node to a Mesh Network</span></a>.</p>
+</div>
+<div class="section" id="elements-and-models">
+<h4>Elements and Models<a class="headerlink" href="#elements-and-models" title="Permalink to this headline">¶</a></h4>
+<p>An element is an addressable entity within a node. Each node has at least one
+element, the primary element, and may have one or more additional secondary
+elements.</p>
+<p>Each element has one or several Models. A model defines the basic functionality
+of a node by defining the required states, the messages that act upon those
+states, and any associated behavior. A node may include multiple models.
+Foundation configuration and health server models are mandatory in every node.</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/node_element.png"><img alt="../_images/node_element.png" src="../_images/node_element.png" style="width: 65%;" /></a>
+<p class="caption"><span class="caption-number">Figure 143. </span><span class="caption-text">Node - Element - Model - State</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>To recap:</p>
+<ul class="simple">
+<li><p><strong>Node</strong>: One device</p></li>
+<li><p><strong>Element</strong>: Addressable entity in the network</p></li>
+<li><p><strong>Model</strong>: Implements functionality</p></li>
+<li><p><strong>State</strong>: Contains the condition of a model</p></li>
+</ul>
+</div>
+<div class="section" id="data-distribution">
+<h4>Data Distribution<a class="headerlink" href="#data-distribution" title="Permalink to this headline">¶</a></h4>
+<p>Publication and subscription of data within the mesh network uses a
+publish-subscribe paradigm. Nodes that generate messages publish the messages to
+a single address. Nodes that are interested in receiving the message will
+subscribe to this address. Generated messages are sent to destination mesh
+addresses that can be unicast (associated with a single element), pre-configured
+group addresses, or virtual addresses. Messages can be sent as replies to other
+messages or can be unsolicited messages. When an instance of a model is sending
+a reply message, it uses the incoming message originator’s source address as the
+destination address. This way only the originator will receive this message.
+When an instance of a model is sending unsolicited messages, it uses a model
+publish address as the destination address. Each instance of a model within a
+node has a single publish address.</p>
+<p>For more information on this, navigate to <a class="reference internal" href="#message-handling">Message handling</a></p>
+</div>
+<div class="section" id="client-server-control">
+<h4>Client - Server - Control<a class="headerlink" href="#client-server-control" title="Permalink to this headline">¶</a></h4>
+<p>As in GATT, Bluetooth Mesh messages follow a Client - Server architecture:</p>
+<ul class="simple">
+<li><p>A Server is a Node that exposes an Element and stores the condition of all the
+states associated.</p></li>
+<li><p>A Client can interact with Elements through requests to the Server.</p></li>
+</ul>
+<p>The models are thus divided into Server Models, Client Models and Control Models:</p>
+<ul class="simple">
+<li><p><strong>Server Model</strong>: Contains states associated to the model and elements. Also
+contains rules for how the model will react to incoming requests.</p></li>
+<li><p><strong>Client Model</strong>: Contains definitions of messages used for read, write and
+other requests from the Client to the Server.</p></li>
+<li><p><strong>Control Model</strong>: A control model can contain server models, client models
+and rules for interactions between these.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="security">
+<h3>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h3>
+<p>As per the <a class="reference external" href="https://www.bluetooth.com/specifications/mesh-specifications/">Bluetooth Mesh specifications</a>, security in a Bluetooth mesh
+network is mandatory.</p>
+<p>All messages in the mesh network are encrypted and authenticated using two types
+of keys. One key type is for the network layer communication. This ensures that
+all communication within a mesh network uses the same network key. The other key
+type is for application data, used to secure payloads at the upper transport
+layer. Separating the keys for networking and applications allows sensitive
+access messages (e.g. for access control to a building) to be separated from
+non-sensitive access messages (e.g. for lighting).</p>
+<p>In addition, the network security model utilizes a privacy mechanism called
+<a class="reference external" href="https://en.wikipedia.org/wiki/Obfuscation_(software)">obfuscation</a> which utilizes the Advanced
+Encryption Standard (AES) to encrypt the source address, sequence numbers, and
+other header information using a private key. The intent for obfuscation is to
+make tracking nodes more difficult.</p>
+<p>Bluetooth Mesh networks also protect against <a class="reference external" href="https://en.wikipedia.org/wiki/Replay_attack">replay attacks</a>.
+A replay attack happens when a malicious third party eavesdrops on the
+communication of a mesh network with the aim to intercept secure network
+communication and resend secure payloads. The goal of the attacker is to
+misdirect the recipient of the message by <em>replaying</em> or resending a payload,
+hoping the recipient believes the source of the payload is genuine. In this way,
+the attacker can extract secure data from the recipient or perform a malicious
+task. For example, the malicious user may replay a message to try to switch on
+the lights in the middle of the night. Message sequence numbers and an
+<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-IV-Index"><span class="xref std std-term">IV Index</span></a> are added to mesh network payloads to protect against replay
+attacks. Each mesh message has its own 24-bit sequence number. The sequence
+number is incremented each time a message is sent. If a node receives a message
+with an old sequence number, the node will discard the payload. Similar to
+sequence numbers, an <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-IV-Index"><span class="xref std std-term">IV Index</span></a> is a separate field inside the network
+payload. When a node receives a message, it will also check the <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-IV-Index"><span class="xref std std-term">IV Index</span></a>
+value for validity. In short, the <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-IV-Index"><span class="xref std std-term">IV Index</span></a> must always be equal to or
+greater than the last valid message sent to that node. The <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-IV-Index"><span class="xref std std-term">IV Index</span></a>
+itself is protected by encryption and CRC performed when a node is added to a
+network and is not easily modifiable by an attacker.</p>
+<p>Additional security measures are defined in the <a class="reference external" href="https://www.bluetooth.com/specifications/mesh-specifications/">Bluetooth Mesh specifications</a>
+that protect a mesh network from nodes removed from the network so that these
+expired nodes cannot be used to attack the network, i.e. a trashcan attack.
+To protect against this, the specification implements a reject list that the
+provisioner maintains. When a node is ready to leave the network, the
+provisioner adds the node to the reject list and initiates the Key Refresh
+Procedure. The Key Refresh Procedure is initiated by the provisioner and it
+assigns new keys to all the nodes in the network.</p>
+<p>Nodes may also make use of Secure Network Beacons, which are used to indicate
+the security status of a node. The Secure Network Beacon is sent to update a
+network with an updated IV index and to expect a Key Refresh Procedure.</p>
+<p>For more information regarding Bluetooth Mesh Security, please review Section
+3.8 <strong>Mesh security</strong> of the Mesh Profile <a class="reference external" href="https://www.bluetooth.com/specifications/mesh-specifications/">Bluetooth Mesh specifications</a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>TI’s Bluetooth Mesh solution implements the above security model as
+defined by the specification inside the stack. As such, a developer
+need not worry about implementing at the application layer.</p>
+</div>
+</div>
+</div>
+<div class="section" id="ti-bluetooth-mesh-software-architecture">
+<h2>TI Bluetooth Mesh Software Architecture<a class="headerlink" href="#ti-bluetooth-mesh-software-architecture" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="id4">
+<span id="mesh-architecture"></span><a class="reference internal image-reference" href="../_images/mesh-architecture.png"><img alt="../_images/mesh-architecture.png" src="../_images/mesh-architecture.png" style="width: 60%;" /></a>
+<p class="caption"><span class="caption-number">Figure 144. </span><span class="caption-text">TI Bluetooth Mesh High-level Software Architecture</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>As shown above in <a class="reference internal" href="#mesh-architecture"><span class="std std-numref">Figure 144.</span></a>, TI’s Bluetooth mesh solution
+consists of 3 core functional components:</p>
+<ul class="simple">
+<li><p>BLE5 Stack - Bluetooth LE protocol stack implementation</p></li>
+<li><p>Bluetooth Mesh Stack - Bluetooth Mesh protocol stack implementation</p></li>
+<li><p>Bluetooth Mesh Application - User application implementation</p></li>
+</ul>
+<p>TI BLE5-Stack is at the foundation of the Bluetooth Mesh implementation. The
+Bluetooth Mesh stack uses the TI BLE5-Stack services for transporting data over
+GATT based connection oriented data channels and Advertisement based
+connection-less channels. For example, the traditional broadcaster role is used
+by nodes to send packets over the advertisement (ADV) bearer. In parallel, the
+observer role is used by nodes to receive packets by passively scanning.
+Finally, the peripheral/central roles are used by nodes in the Proxy
+configuration to communicate with legacy Bluetooth LE devices over the GATT
+bearer.</p>
+<p>Our Bluetooth Mesh stack is implemented on top of the <a class="reference external" href="https://www.zephyrproject.org/">Zephyr Project</a>’s
+Bluetooth Mesh stack. For more information on this, refer to
+<a class="reference internal" href="ti-zephyr-overview.html#ti-ble-mesh-zephyr"><span class="std std-ref">TI Bluetooth Mesh and the Zephyr Project</span></a>.</p>
+<p>The Bluetooth Mesh application is the core interface for users to control and
+manage the Bluetooth Mesh functionality. Here, specific node configurations and
+models are defined and used by each node in a mesh network.</p>
+<p>Alongside the stack, additional OS services and Drivers/Middleware are used by
+the application. These functional components consist of TI Drivers and TI-RTOS.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, only certain SIG-defined Models and Vendor Models are
+supported.</p>
+</div>
+</div>
+<div class="section" id="provisioning-procedures">
+<h2>Provisioning Procedures<a class="headerlink" href="#provisioning-procedures" title="Permalink to this headline">¶</a></h2>
+<p>The following section describes the provisioning procedure for both PB-ADV and
+PB-GATT bearers.</p>
+<div class="section" id="provisioning-with-pb-adv">
+<h3>Provisioning with PB-ADV<a class="headerlink" href="#provisioning-with-pb-adv" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-center" id="id5">
+<span id="provision-pb-adv"></span><img alt="../_images/provision-pb-adv.png" src="../_images/provision-pb-adv.png" />
+<p class="caption"><span class="caption-number">Figure 145. </span><span class="caption-text">Provisioning over PB_ADV high level overview</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#provision-pb-adv"><span class="std std-numref">Figure 145.</span></a> shows provisioning over the advertisement bearer
+(PB-ADV). Here, we can see there is no connection establishment. All
+communication occurs through advertisements, as the name suggests. Once the mesh
+application has been initialized, <strong>MeshApp_unprovisioned_beacon()</strong> is called
+to enable Provisioning. Then unprovisioned beacon advertisments are sent until
+a separate device (i.e.  the Provisioning Client) receives the unprovisioned
+beacon. At this time, the stack handles any response and the provisioning
+process until the device is successfully provisioned. At the application level,
+the user simply waits until the <strong>prov_complete_cbk()</strong> is called.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The application defines the provision complete callback by default
+and is modifiable via SysConfig. Check the SysConfig file inside BLE
+Mesh-&gt;Provisioning Data Configuration-&gt; Complete Callback Name.</p>
+</div>
+</div>
+<div class="section" id="provisioning-with-pb-gatt">
+<h3>Provisioning with PB-GATT<a class="headerlink" href="#provisioning-with-pb-gatt" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-center" id="id6">
+<span id="provision-pb-gatt"></span><img alt="../_images/provision-pb-gatt.png" src="../_images/provision-pb-gatt.png" />
+<p class="caption"><span class="caption-number">Figure 146. </span><span class="caption-text">Provisioning over PB_GATT high level overview</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#provision-pb-gatt"><span class="std std-numref">Figure 146.</span></a> shows provisioning over the GATT bearer (PB-GATT),
+which is used by Proxy configured nodes. To provision over PB-GATT, the mesh
+Proxy node must first send connectable advertisements. Once the mesh application
+has been initialized, <strong>MeshApp_unprovisioned_beacon()</strong> is called to enable
+Provisioning. From here, the mesh Proxy node waits for the provisioner to
+initiate a connection. Once the connection is established, provisioning beacons
+are sent to the provisioner, this time, using the GATT bearer. At this time,
+the stack handles any response and the provisioning process until the device
+is successfully provisioned. At the application level, the user simply waits
+until the <strong>prov_complete_cbk()</strong> is called.</p>
+<p>Once provisioned, the Mesh Stack will trigger a disconnect. This is done so the
+node can then expose its Bluetooth Proxy Service, as defined in the
+<a class="reference external" href="https://www.bluetooth.com/specifications/mesh-specifications/">Bluetooth Mesh specifications</a>.</p>
+</div>
+</div>
+<div class="section" id="message-handling">
+<h2>Message handling<a class="headerlink" href="#message-handling" title="Permalink to this headline">¶</a></h2>
+<p>The following section describes how messages are sent/received by the Bluetooth
+mesh stack. One important note here is that application data is only decrypted
+at the target destination with a valid, separate application key. The target
+destination may be a Group Address the node has subscribed to, or it can be the
+Unicast address of a particular node/model.</p>
+<div class="section" id="relay-node-processing">
+<h3>Relay node processing<a class="headerlink" href="#relay-node-processing" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-center" id="id7">
+<span id="relay-rx"></span><img alt="../_images/relay-rx.png" src="../_images/relay-rx.png" />
+<p class="caption"><span class="caption-number">Figure 147. </span><span class="caption-text">Inbound Relay Data processing</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<p>As shown above in <a class="reference internal" href="#relay-rx"><span class="std std-numref">Figure 147.</span></a>, when a mesh node publishes to an address
+in a network, it sends advertisement PDUs over the air. When a mesh node
+receives this PDU, the message is received by the stack and processed. Here, the
+network key is used to determine the message’s target destination. If the target
+address is a Group Address or received by a relay node, the mesh node will
+relay this information to the Mesh stack, and the advertisement PDU will be
+sent back out to the mesh network/target address. This process is shown below
+in <a class="reference internal" href="#relay-tx"><span class="std std-numref">Figure 148.</span></a></p>
+<div class="figure align-center" id="id8">
+<span id="relay-tx"></span><img alt="../_images/relay-tx.png" src="../_images/relay-tx.png" />
+<p class="caption"><span class="caption-number">Figure 148. </span><span class="caption-text">Outbound Relay Data processing</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="proxy-node-processing">
+<h3>Proxy node processing<a class="headerlink" href="#proxy-node-processing" title="Permalink to this headline">¶</a></h3>
+<p>Proxy Nodes request data over the GATT bearer, so an additional step is required
+for proxy configured nodes when receiving messages.</p>
+<div class="figure align-center" id="id9">
+<span id="proxy-rx"></span><img alt="../_images/proxy-rx.png" src="../_images/proxy-rx.png" />
+<p class="caption"><span class="caption-number">Figure 149. </span><span class="caption-text">Inbound Proxy Data processing</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<p>First, the <em>Peer GATT node</em> must submit a request for data from the mesh
+network. When the mesh stack receives this message, it will trigger a callback
+to the application and the <em>Mesh Stack</em> will request that data from the
+<em>Mesh Net</em>. Once received, it will forward this message using a GATT tx to the
+<em>Peer GATT node</em>.</p>
+<div class="figure align-center" id="id10">
+<span id="proxy-tx"></span><img alt="../_images/proxy-tx.png" src="../_images/proxy-tx.png" />
+<p class="caption"><span class="caption-number">Figure 150. </span><span class="caption-text">Outbound Proxy Data processing</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<p>Similar to the Inbound Proxy Data process, a mesh Proxy node waits for its
+<em>Peer GATT node</em> to send it a message before forwarding it to the <em>Mesh Net</em>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../quickstart-guide/ble-mesh-quick-start.html" class="btn btn-neutral float-left" title="TI Bluetooth Mesh Quick Start Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ti-zephyr-overview.html" class="btn btn-neutral float-right" title="TI Bluetooth Mesh and the Zephyr Project" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

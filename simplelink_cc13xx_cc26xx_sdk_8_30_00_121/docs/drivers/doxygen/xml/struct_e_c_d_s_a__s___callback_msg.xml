@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_e_c_d_s_a__s___callback_msg" kind="struct" language="C++" prot="public">
+    <compoundname>ECDSA_s_CallbackMsg</compoundname>
+    <includes refid="_e_c_d_s_a_c_c26_x4__s_8h" local="no">ECDSACC26X4_s.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_e_c_d_s_a__s___callback_msg_1a3d6801f400f90bace8e0b62a6920ab9e" prot="public" static="no" mutable="no">
+        <type><ref refid="_e_c_d_s_a_8h_1ae6d02614f5e1fff0c5327f91bcd74067" kindref="member">ECDSA_Handle</ref></type>
+        <definition>ECDSA_Handle ECDSA_s_CallbackMsg::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdsa/ECDSACC26X4_s.h" line="119" column="1" bodyfile="source/ti/drivers/ecdsa/ECDSACC26X4_s.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_c_d_s_a__s___callback_msg_1a8fcbce1abcf173ce0bb5b0eebd202815" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_e_c_d_s_a__s___secure_callback" kindref="compound">ECDSA_s_SecureCallback</ref> *</type>
+        <definition>ECDSA_s_SecureCallback* ECDSA_s_CallbackMsg::callback</definition>
+        <argsstring></argsstring>
+        <name>callback</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdsa/ECDSACC26X4_s.h" line="120" column="1" bodyfile="source/ti/drivers/ecdsa/ECDSACC26X4_s.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="896">
+        <label>ECDSA_OperationSign</label>
+        <link refid="struct_e_c_d_s_a___operation_sign"/>
+        <childnode refid="897" relation="usage">
+          <edgelabel>curve</edgelabel>
+        </childnode>
+        <childnode refid="893" relation="usage">
+          <edgelabel>myPrivateKey</edgelabel>
+        </childnode>
+      </node>
+      <node id="892">
+        <label>ECDSA_OperationVerify</label>
+        <link refid="struct_e_c_d_s_a___operation_verify"/>
+        <childnode refid="893" relation="usage">
+          <edgelabel>theirPublicKey</edgelabel>
+        </childnode>
+      </node>
+      <node id="890">
+        <label>ECDSA_s_SecureCallback</label>
+        <link refid="struct_e_c_d_s_a__s___secure_callback"/>
+        <childnode refid="889" relation="usage">
+          <edgelabel>handle</edgelabel>
+        </childnode>
+        <childnode refid="891" relation="usage">
+          <edgelabel>operation</edgelabel>
+        </childnode>
+        <childnode refid="898" relation="usage">
+          <edgelabel>object</edgelabel>
+        </childnode>
+      </node>
+      <node id="898">
+        <label>SecureCallback_Object</label>
+        <link refid="struct_secure_callback___object"/>
+        <childnode refid="899" relation="usage">
+          <edgelabel>elem</edgelabel>
+        </childnode>
+      </node>
+      <node id="893">
+        <label>CryptoKey</label>
+        <link refid="struct_crypto_key"/>
+        <childnode refid="894" relation="usage">
+          <edgelabel>plaintext</edgelabel>
+        </childnode>
+        <childnode refid="895" relation="usage">
+          <edgelabel>keyStore</edgelabel>
+        </childnode>
+      </node>
+      <node id="888">
+        <label>ECDSA_s_CallbackMsg</label>
+        <link refid="struct_e_c_d_s_a__s___callback_msg"/>
+        <childnode refid="889" relation="usage">
+          <edgelabel>handle</edgelabel>
+        </childnode>
+        <childnode refid="890" relation="usage">
+          <edgelabel>callback</edgelabel>
+        </childnode>
+      </node>
+      <node id="897">
+        <label>ECCParams_CurveParams</label>
+        <link refid="struct_e_c_c_params___curve_params"/>
+      </node>
+      <node id="894">
+        <label>CryptoKey_Plaintext</label>
+        <link refid="struct_crypto_key___plaintext"/>
+      </node>
+      <node id="889">
+        <label>ECDSA_Config</label>
+        <link refid="struct_e_c_d_s_a___config"/>
+      </node>
+      <node id="899">
+        <label>List_Elem_</label>
+        <link refid="struct_list___elem__"/>
+        <childnode refid="899" relation="usage">
+          <edgelabel>prev</edgelabel>
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="891">
+        <label>ECDSA_Operation</label>
+        <link refid="union_e_c_d_s_a___operation"/>
+        <childnode refid="892" relation="usage">
+          <edgelabel>verify</edgelabel>
+        </childnode>
+        <childnode refid="896" relation="usage">
+          <edgelabel>sign</edgelabel>
+        </childnode>
+      </node>
+      <node id="895">
+        <label>CryptoKey_KeyStore</label>
+        <link refid="struct_crypto_key___key_store"/>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/ecdsa/ECDSACC26X4_s.h" line="118" column="1" bodyfile="source/ti/drivers/ecdsa/ECDSACC26X4_s.h" bodystart="117" bodyend="121"/>
+    <listofallmembers>
+      <member refid="struct_e_c_d_s_a__s___callback_msg_1a8fcbce1abcf173ce0bb5b0eebd202815" prot="public" virt="non-virtual"><scope>ECDSA_s_CallbackMsg</scope><name>callback</name></member>
+      <member refid="struct_e_c_d_s_a__s___callback_msg_1a3d6801f400f90bace8e0b62a6920ab9e" prot="public" virt="non-virtual"><scope>ECDSA_s_CallbackMsg</scope><name>handle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

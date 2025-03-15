@@ -1,0 +1,12 @@
+var group___z_c_l___g_e_n_e_r_a_l___d_e_v_i_c_e___t_e_m_p___c_o_n_f_i_g_u_r_a_t_i_o_n =
+[
+    [ "ATTRID_DEVICE_TEMPERATURE_CONFIGURATION_CURRENT_TEMPERATURE", "group___z_c_l___g_e_n_e_r_a_l___d_e_v_i_c_e___t_e_m_p___c_o_n_f_i_g_u_r_a_t_i_o_n.html#gaaca6b679e93839418a21e3d32b788e73", null ],
+    [ "ATTRID_DEVICE_TEMPERATURE_CONFIGURATION_DEVICE_TEMP_ALARM_MASK", "group___z_c_l___g_e_n_e_r_a_l___d_e_v_i_c_e___t_e_m_p___c_o_n_f_i_g_u_r_a_t_i_o_n.html#gaadf678828f9624f6bbf92029fd618c71", null ],
+    [ "ATTRID_DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_DWELL_TRIP_POINT", "group___z_c_l___g_e_n_e_r_a_l___d_e_v_i_c_e___t_e_m_p___c_o_n_f_i_g_u_r_a_t_i_o_n.html#gaf69a39cbd6a5a8166c44d8e2beed6ee1", null ],
+    [ "ATTRID_DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_THRESHOLD", "group___z_c_l___g_e_n_e_r_a_l___d_e_v_i_c_e___t_e_m_p___c_o_n_f_i_g_u_r_a_t_i_o_n.html#ga51c99df4fa25f8f926a8688ad753e832", null ],
+    [ "ATTRID_DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_DWELL_TRIP_POINT", "group___z_c_l___g_e_n_e_r_a_l___d_e_v_i_c_e___t_e_m_p___c_o_n_f_i_g_u_r_a_t_i_o_n.html#gaa3df37ad01227453bc8f17804cc85a7c", null ],
+    [ "ATTRID_DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_THRESHOLD", "group___z_c_l___g_e_n_e_r_a_l___d_e_v_i_c_e___t_e_m_p___c_o_n_f_i_g_u_r_a_t_i_o_n.html#ga8a404cc517aa4f81b603e322dbdcfef8", null ],
+    [ "ATTRID_DEVICE_TEMPERATURE_CONFIGURATION_MAX_TEMP_EXPERIENCED", "group___z_c_l___g_e_n_e_r_a_l___d_e_v_i_c_e___t_e_m_p___c_o_n_f_i_g_u_r_a_t_i_o_n.html#gacb83ce905f95f0c23bd524e896bb0e61", null ],
+    [ "ATTRID_DEVICE_TEMPERATURE_CONFIGURATION_MIN_TEMP_EXPERIENCED", "group___z_c_l___g_e_n_e_r_a_l___d_e_v_i_c_e___t_e_m_p___c_o_n_f_i_g_u_r_a_t_i_o_n.html#ga4da99e85a8efa9c2706e2413a64ea96a", null ],
+    [ "ATTRID_DEVICE_TEMPERATURE_CONFIGURATION_OVER_TEMP_TOTAL_DWELL", "group___z_c_l___g_e_n_e_r_a_l___d_e_v_i_c_e___t_e_m_p___c_o_n_f_i_g_u_r_a_t_i_o_n.html#ga53e26775a60700f6d8250d0885c867f7", null ]
+];

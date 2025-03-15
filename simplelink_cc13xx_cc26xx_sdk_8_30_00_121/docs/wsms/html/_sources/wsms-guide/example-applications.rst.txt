@@ -1,0 +1,79 @@
+.. _sec-wsms-examples:
+
+Example Application Guide
+=========================
+
+This section provides an overview of the |STACK| out-of-box example applications
+and instructions on how to run them.
+
+IN WSMS, there are two types of logical devices:
+
+* The base device
+* Node devices.
+
+The |STACK| can be configured in either of the two roles by choosing the
+corresponding application.
+
+.. _sec-wsms-node-application:
+
+IPv6 Node Embedded Mode Example Application (ipv6_node)
+-------------------------------------------------------
+
+A node is a device capable of connecting to other devices in the mesh network.
+It can provide upward and downward packet forwarding. A new device is able to
+join the network through any node. The connections between different nodes form
+the mesh topology.
+
+The ``ipv6_node`` example is a fully embedded application demonstrating a CoAP
+server on WSMS. The example is intended to work with the base example, which
+acts as the CoAP client that interacts via the CoAP protocol with the CoAP node
+server. CoAP is an abbreviation of COnstrained Application Protocol.
+
+Running the Application
+^^^^^^^^^^^^^^^^^^^^^^^
+For information on how to run the router node example application please see the
+``README.md`` included with the application project.
+
+Device support
+^^^^^^^^^^^^^^
+``ipv6_node`` is supported on the following development boards:
+
+- CC1312R7 LaunchPad
+- CC1352P7-1 LaunchPad
+- LP_EM_CC1314R10
+- LP_EM_CC1354P10_1
+- LP_EM_CC1354P10_6
+
+
+IPv6 Base Example Application (ipv6_base)
+-----------------------------------------
+
+A base device is a device that can act as gateway between the WSMS network and a
+different network. In addition, the base acts as the :term:`root` device and
+establishes the network. For this reason, a WSMS network needs at least one base.
+The ``ipv6_base`` example implements the base with NWP mode architecture.
+
+Running the Application
+^^^^^^^^^^^^^^^^^^^^^^^
+For information on how to run the base example application please see the
+``README.md`` included with the application project.
+
+Device support
+^^^^^^^^^^^^^^
+``ipv6_base`` is supported on the following development boards:
+
+- CC1312R7 LaunchPad
+- CC1352P7-1 LaunchPad
+- LP_EM_CC1314R10
+- LP_EM_CC1354P10_1
+- LP_EM_CC1354P10_6
+
+Configuration Parameters
+------------------------
+
+Example configuration is done mainly through SysConfig. You can read about
+SysConfig configuration in the TI Wi-SUN FAN Stack User's Guide.
+
+For NWP mode, many values can be set at run time through the NWP interface. Please
+see the NWP interface guide in the TI WI-SUN FAN Stack User's Guide or
+the ti-wisunfan py-spinel readme for details.

@@ -1,0 +1,243 @@
+.. _sec-security-overview:
+
+Trusted Firmware-M Implementation Overview
+##########################################
+
+The following sections provide a high level overview of the security features of
+the |DEVICE1M_AND| family of devices.
+
+As described in the :ref:`sec-device-overview`, |DEVICE1M_AND| use the
+Cortex-M33. This ARM core provides a critical security feature called
+ARM |reg| `TrustZone`_ |reg|. For more information, see :ref:`sec-arm-tz-overview`.
+
+The security features provided by TI leverage |TFM|, an open-source reference
+implementation of the |PSA| (PSA) for the Cortex-M33 (amongst many others). This
+component directly interfaces with the Cortex-M33 to enable TrustZone and other
+important security features. For more information, see :ref:`sec-tfm-overview`.
+
+The above components provide a trusted and protected execution context. This
+allows secure services to perform their work with the confidence that the
+run-time environment has not been compromised and the secrets are kept safe.
+
+.. important::
+    Examples in the |SDK| that support this secure configuration will have
+    ``tfm_`` prefixes. For example, ``tfm_empty`` or ``tfm_aescbc``.
+
+.. _sec-arm-tz-overview:
+
+ARM TrustZone Overview
+**********************
+
+ARM |reg| `TrustZone`_ |reg| technology provides fundamental security features, enabling developers
+to put security first in their design. Mainly, ARM |reg| `TrustZone`_ |reg| allows for
+hardware-enforced isolation by defining memory partitions.
+
+For more information, see the following collateral:
+
+  * ARM |reg| `TrustZone`_ |reg|
+  * The Technical Reference Manual for your device
+  * `ARM Cortex-M33 documentation`_
+
+The ARM Cortex-M33 defines a secure memory system with the following available
+memory regions:
+
+* Non-secure (NS) : memory that can be called by any software
+* Non-secure Callable (NSC) : secure memory that can be called by software
+  executing in the NS region. Secure veneers located in the NSC region are used
+  to execute software that resides in the secure memory partition
+* Secure (S) : protected memory that can only be called by software in the
+  either the S memory partition or the NSC memory partition
+
+For more information on the above memory regions, refer to the
+`Secure Memory System and Memory Partitioning`_ section of the
+`Arm Cortex-M33 Devices Generic User Guide`_.
+
+.. _sec-tfm-overview:
+
+Trusted Firmware-M (TF-M)
+*************************
+
+|TFM| implements a secure environment executable on the ARM Cortex-M33 and
+aligns with |PSA| (PSA) guidelines. For |DEVICE1M| devices, the |SDK| uses |TFM| which
+offers a PSA *certifiable* solution. Although this solution is not PSA
+certified, it inherits the certifiablity of the |TFM|, which offers up to
+PSA Level 2 isolation. For more information on certification, see the following
+reference page: `PSA Certified Level 2`_.
+
+The TF-M provides the following functionality:
+
+* Secure Partition Manager
+* Inter-process Communication (IPC) handler to handle calls to service modules
+* Cryptography (AES, SHA, EC) service including key storage
+* Internal Trusted Storage (ITS) service
+* Protected Storage (PS) service
+
+The ITS is a |PSA| (PSA) Root of Trust (RoT) service for storing confidential
+security-critical data such as cryptographic keys. Our implementation will
+modify the ITS to add a Fletcher checksum to the filesystem metadata and data
+blocks for data integrity.
+
+The |SDK| provides a precompiled secure image file for |DEVICE1M| devices, which
+includes the features listed above. The security enhancements provided in the
+precompiled image take care of partitioning and other secure services by
+leveraging the open-source |TFM|. The secure image ``tfm_s.axf`` and a secure
+veneer file ``s_veneers.o`` are used by the non-secure application to access the
+features available in the device's secure region.
+
+Available Crypto Functions
+**************************
+
+|DEVICE1M| devices offer the following secure crypto drivers:
+
+    #. AES (all modes: CBC, CCM, CMAC/CBC-MAC, CTR, ECB, GCM)
+    #. SHA2
+    #. DRBG
+    #. TRNG
+    #. ECDH
+    #. ECDSA
+    #. ECJPAKE
+    #. EDDSA
+    #. KeyStore
+
+.. Below is specific guidance or helpful information
+
+Secure Partitions Overview
+**************************
+
+.. _fig-secure-partitions:
+
+.. ditaa::
+                 |
+  +-----------+  |     +---------------------------------+  +---------------------+
+  |cRED       |  |     |cEEE                             |  |cEEE                 |
+  |Non-Secure |  |     |       Secure Partition          |  |   Secure Partition  |
+  +           +--|-->  |                                 |  |  +----------------+ |
+  |Application|  |     |   +-----------+<-------+        |  |  |c1AB            | |
+  +-----------+  |     |   |cGRE       |        |        |  |  |    Initial     | |
+                 |     |   |   SL PKA  |        |        |  |  |  Attestation   | |
+                 |     |   +-----------+        |        |  |  +----------------+ |
+                 |     |                        |        |  |                     |
+                 |     |   +-----------+<-------+        |  +----------+----------+
+                 |     |   |cGRE       |        |        |             |
+                 |     |   |   SL SHA  |        |        |             |
+                 |     |   +-----------+        +--------|-------------+
+                 |     |                                 |
+                 |     |   +-----------+                 |
+                 |     |   |cGRE       |                 |
+                 |     |   |   SL DRBG |                 |
+              NS/S     |   +-----+-----+                 |
+              Boundary |         |                       |  +---------------------+
+                 |     |         |                       |  |cEEE                 |
+                 |     |         +--------------+        |  |   Secure Partition  |
+                 |     |         |              |        |  |  +----------------+ |
+                 |     |         |              |        |  |  |c1AB            | |
+                 |     |         v              v        |  |  |      ITS       | |
+                 |     |   +-----------+  +-----------+  |  |  +-------+--------+ |
+                 |     |   |cGRE       |  |cGRE       |  |  |          |          |
+                 |     |   |   SL TRNG |  |  SL AES   |  |  |          |          |
+                 |     |   +-----------+  +-----------+  |  |          |          |
+                 |     |                                 |  |          v          |
+                 |     |   +-----------+                 |  |  +----------------+ |
+                 |     |   |cGRE       |                 |  |  |cGRE            | |
+                 |     |   |SL KeyStore|                 |  |  |    SL Flash    | |
+                 |     |   |           | <---+           |  |  |    Storage     | |
+                 |     |   +-----------+     |           |  |  +----------------+ |
+                 |     +---------------------------------+  +-----------+---------+
+                 |                           |                          |
+                 |                           |                          |
+                 |                           +--------------------------+
+
+                Secure Partitions on the CC13x4 or CC26x4
+
+Secure/Non-secure Software Architecture
+***************************************
+
+The |DEVICE1M| family of devices support two configurations for application
+development:
+
+    * tfm_disabled: the application is placed in secure memory partition
+    * secure/non-secure configuration: the application is placed in a non-secure
+      memory partition
+
+The tfm_disabled configuration is not secure. That is, there is no partition
+between application software and the other secure elements on the device (i.e.
+key storage, crypto functions, etc). This configuration is vulnerable to
+malicious application software since the application can directly access secure
+elements, leaving them unprotected from malicious manipulation. This
+configuration provides a smaller memory footprint on |DEVICE1M| devices and the
+same look and feel as development on other devices that use ARM Cortex M4/M4F
+cores (see :ref:`sec-cc13xx-cc26xx-hw-architecture`).
+
+.. _fig-sns-block-diagram:
+
+.. figure:: resources/s-ns-architecture.png
+    :align: center
+
+    Secure/Non-Secure Software Block Diagram
+
+:numref:`fig-sns-block-diagram` shows the division of the secure and non-secure
+domains in the secure/non-secure configuration.
+
+Using ARM |reg| `TrustZone`_ |reg|, the secure and non-secure memory domains are hardware
+isolated regions. In this configuration, application developers are expected to
+develop their applications in the non-secure domain, while the secure domain is
+used for key storage and to securely perform cryptographic operations.
+
+.. _fig-sns-simplified-block-diagram:
+
+.. figure:: resources/s-ns-architecture-simplified.png
+    :align: center
+
+    Simplified Secure/Non-Secure Software Block Diagram
+
+:numref:`fig-sns-simplified-block-diagram` above shows the following files:
+
+* example.out : the generated application image, placed in non-secure memory
+* s_image.axf : the pre-compiled secure image provided in the |SDK|, placed in
+  secure memory space
+* Secure Boot : in this context, this is MCUBoot. For more details, the see
+  :ref:`sec-mcuboot-oad-overview` section of our User's Guide.
+
+Secure/Non-Secure Software Operation
+************************************
+
+The following diagram shows how a non-secure application performs an AES CCM
+operation. The details provided in this section are for reference only, as the
+secure drivers handle requests from the non-secure application, blocking, and
+executing callbacks as necessary. That is, the *psa_calls* shown below are
+executed by the secure TI driver and the application does not need to make calls
+to secure memory.
+
+.. figure:: resources/sns-sequence.png
+    :align: center
+
+    S/NS Block Diagram (AES CCM Example)
+
+#. The non-secure application includes and invokes a non-secure driver, i.e.
+   `xx_ns`. After setup, the non-secure application wishes to perform a crypto
+   operation. Secure code is then invoked through a psa_call.
+#. The secure service in the secure partition receives the request and processes
+   it.
+#. The secure Crypto driver begins the cryptographic operation.
+#. At this point, the key storage mechanism is invoked by the secure
+   driver to retrieve a key which will be used in the cryptographic operation.
+#. The key is retrieved using a second psa_call to access a different isolated
+   secure partition. Keys are stored in secure storage.
+
+    .. for more info -> see secure-key-storage page.
+
+#. After obtaining the key, the cryptographic operation can continue, where
+   the hardware accelerators on-board perform the AES operation.
+#. Upon completion of the operation, a secure callback is invoked in the
+   non-secure application. This completes the sequence, allowing the non-secure
+   application to continue.
+
+Secure Bootloader
+*****************
+
+.. note::
+    |TFM| offers secure boot services by leveraging MCUboot. The |SDK| inclueds
+    a secure bootloader using MCUboot directly that does not use the |TFM|
+    version provided in the |TFM| repository.
+
+For more information on this, see :ref:`sec-mcuboot-oad-overview`.

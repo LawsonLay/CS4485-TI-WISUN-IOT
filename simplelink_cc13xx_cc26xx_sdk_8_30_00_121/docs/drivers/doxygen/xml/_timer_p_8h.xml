@@ -1,0 +1,506 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_timer_p_8h" kind="file" language="C++">
+    <compoundname>TimerP.h</compoundname>
+    <innerclass refid="struct___timer_p___freq_hz" prot="public">_TimerP_FreqHz</innerclass>
+    <innerclass refid="struct___timer_p___params" prot="public">_TimerP_Params</innerclass>
+    <innerclass refid="union___timer_p___struct" prot="public">_TimerP_Struct</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_timer_p_8h_1afe947bc0d1bb86132104e2bc0943392f" prot="public" static="no">
+        <name>TimerP_STRUCT_SIZE</name>
+        <initializer>60</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="39" column="9" bodyfile="kernel/nortos/dpl/TimerP.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="_timer_p_8h_1ab3b38051bb1a1827e5c316fbef9531d0" prot="public" static="no">
+        <name>TimerP_Status</name>
+        <enumvalue id="_timer_p_8h_1ab3b38051bb1a1827e5c316fbef9531d0a45091179cbdd2ad6668249dc943a15b3" prot="public">
+          <name>TimerP_Status_INUSE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_timer_p_8h_1ab3b38051bb1a1827e5c316fbef9531d0a98c75a2ab357844036c3c7f9b28b14d7" prot="public">
+          <name>TimerP_Status_FREE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="42" column="1" bodyfile="kernel/nortos/dpl/TimerP.h" bodystart="41" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="enum" id="_timer_p_8h_1a99805bc574ea350fd18e37930002ab72" prot="public" static="no">
+        <name>TimerP_StartMode</name>
+        <enumvalue id="_timer_p_8h_1a99805bc574ea350fd18e37930002ab72a9e4f8fb8e61c5c31c2d7cf2c02d77cf1" prot="public">
+          <name>TimerP_StartMode_AUTO</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_timer_p_8h_1a99805bc574ea350fd18e37930002ab72a600572ab7318cb9c38f818a23bfb934d" prot="public">
+          <name>TimerP_StartMode_USER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="48" column="1" bodyfile="kernel/nortos/dpl/TimerP.h" bodystart="47" bodyend="51"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" prot="public" static="no">
+        <type>void *</type>
+        <definition>typedef void* TimerP_Handle</definition>
+        <argsstring></argsstring>
+        <name>TimerP_Handle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="36" column="1" bodyfile="kernel/nortos/dpl/TimerP.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_timer_p_8h_1a819e81a3b4cf7109bcb6a2c622f70c86" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* TimerP_Fxn) (uintptr_t arg)</definition>
+        <argsstring>)(uintptr_t arg)</argsstring>
+        <name>TimerP_Fxn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="37" column="1" bodyfile="kernel/nortos/dpl/TimerP.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_timer_p_8h_1a5696e3db22fb37d822ecb3bea07e315f" prot="public" static="no">
+        <type>struct <ref refid="struct___timer_p___freq_hz" kindref="compound">_TimerP_FreqHz</ref></type>
+        <definition>typedef struct _TimerP_FreqHz  TimerP_FreqHz</definition>
+        <argsstring></argsstring>
+        <name>TimerP_FreqHz</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="57" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_timer_p_8h_1a460d799faf72628340d8c2261ba553c5" prot="public" static="no">
+        <type>struct <ref refid="struct___timer_p___params" kindref="compound">_TimerP_Params</ref></type>
+        <definition>typedef struct _TimerP_Params  TimerP_Params</definition>
+        <argsstring></argsstring>
+        <name>TimerP_Params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="64" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_timer_p_8h_1a42b79af689c7a709f412ea28a1d630c1" prot="public" static="no">
+        <type>union <ref refid="union___timer_p___struct" kindref="compound">_TimerP_Struct</ref></type>
+        <definition>typedef union _TimerP_Struct  TimerP_Struct</definition>
+        <argsstring></argsstring>
+        <name>TimerP_Struct</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="70" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_timer_p_8h_1a144b00cda54abe52966a18626ac0ffdc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TimerP_Params_init</definition>
+        <argsstring>(TimerP_Params *params)</argsstring>
+        <name>TimerP_Params_init</name>
+        <param>
+          <type><ref refid="_timer_p_8h_1a460d799faf72628340d8c2261ba553c5" kindref="member">TimerP_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="72" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1ad97f9b4fd661e68abaccb79881f36490" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref></type>
+        <definition>TimerP_Handle TimerP_construct</definition>
+        <argsstring>(TimerP_Struct *handle, TimerP_Fxn timerFxn, TimerP_Params *params)</argsstring>
+        <name>TimerP_construct</name>
+        <param>
+          <type><ref refid="_timer_p_8h_1a42b79af689c7a709f412ea28a1d630c1" kindref="member">TimerP_Struct</ref> *</type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="_timer_p_8h_1a819e81a3b4cf7109bcb6a2c622f70c86" kindref="member">TimerP_Fxn</ref></type>
+          <declname>timerFxn</declname>
+        </param>
+        <param>
+          <type><ref refid="_timer_p_8h_1a460d799faf72628340d8c2261ba553c5" kindref="member">TimerP_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="73" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1a75d117d91a6fcbdde24d1eb5af5efa8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref></type>
+        <definition>TimerP_Handle TimerP_create</definition>
+        <argsstring>(TimerP_Fxn timerFxn, TimerP_Params *params)</argsstring>
+        <name>TimerP_create</name>
+        <param>
+          <type><ref refid="_timer_p_8h_1a819e81a3b4cf7109bcb6a2c622f70c86" kindref="member">TimerP_Fxn</ref></type>
+          <declname>timerFxn</declname>
+        </param>
+        <param>
+          <type><ref refid="_timer_p_8h_1a460d799faf72628340d8c2261ba553c5" kindref="member">TimerP_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="74" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1afa55d108bb9b755df8d599ad1c059a2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TimerP_getFreq</definition>
+        <argsstring>(TimerP_Handle handle, TimerP_FreqHz *freq)</argsstring>
+        <name>TimerP_getFreq</name>
+        <param>
+          <type><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="_timer_p_8h_1a5696e3db22fb37d822ecb3bea07e315f" kindref="member">TimerP_FreqHz</ref> *</type>
+          <declname>freq</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="75" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1a36f94fc0565353e828ac27c8ad84a510" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t TimerP_getMaxTicks</definition>
+        <argsstring>(TimerP_Handle handle)</argsstring>
+        <name>TimerP_getMaxTicks</name>
+        <param>
+          <type><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="76" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1a9602d7a28c26e0dc381e9e36981f6c57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TimerP_setThreshold</definition>
+        <argsstring>(TimerP_Handle handle, uint32_t next, bool wrap)</argsstring>
+        <name>TimerP_setThreshold</name>
+        <param>
+          <type><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>next</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>wrap</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="77" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1a06d3a031f1ddd77e11fa67abd887fa38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TimerP_setNextTick</definition>
+        <argsstring>(TimerP_Handle handle, uint32_t ticks)</argsstring>
+        <name>TimerP_setNextTick</name>
+        <param>
+          <type><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>ticks</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="78" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1a9e529d6dbbf6227b4ea344dbd813feff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TimerP_startup</definition>
+        <argsstring>(void)</argsstring>
+        <name>TimerP_startup</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="79" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1a8a55000f9739c4ef9bda6a14f808179d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TimerP_start</definition>
+        <argsstring>(TimerP_Handle handle)</argsstring>
+        <name>TimerP_start</name>
+        <param>
+          <type><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="80" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1a9271a4e27e6fba9902db00ee28e221c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TimerP_stop</definition>
+        <argsstring>(TimerP_Handle handle)</argsstring>
+        <name>TimerP_stop</name>
+        <param>
+          <type><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="81" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1ae5426e20efe630794ad5f8267b5ac1bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TimerP_setPeriod</definition>
+        <argsstring>(TimerP_Handle handle, uint32_t period)</argsstring>
+        <name>TimerP_setPeriod</name>
+        <param>
+          <type><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>period</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="82" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1a3d6ff42ec88f8d2b7bed8a6cc381b8a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t TimerP_getCount64</definition>
+        <argsstring>(TimerP_Handle handle)</argsstring>
+        <name>TimerP_getCount64</name>
+        <param>
+          <type><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="83" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1ab6a0d5fe7bd8fc64667df84e053b345a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TimerP_dynamicStub</definition>
+        <argsstring>(uintptr_t arg)</argsstring>
+        <name>TimerP_dynamicStub</name>
+        <param>
+          <type>uintptr_t</type>
+          <declname>arg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="84" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_timer_p_8h_1afe248b2d4e74817885d5094dbbe3b6c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t TimerP_getCurrentTick</definition>
+        <argsstring>(TimerP_Handle handle, bool saveFlag)</argsstring>
+        <name>TimerP_getCurrentTick</name>
+        <param>
+          <type><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>saveFlag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="kernel/nortos/dpl/TimerP.h" line="85" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2017-2021,<sp/>Texas<sp/>Instruments<sp/>Incorporated</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*<sp/><sp/>========<sp/>TimerP.h<sp/>========</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref>;</highlight></codeline>
+<codeline lineno="37" refid="_timer_p_8h_1a819e81a3b4cf7109bcb6a2c622f70c86" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="_timer_p_8h_1a819e81a3b4cf7109bcb6a2c622f70c86" kindref="member">TimerP_Fxn</ref>)(uintptr_t<sp/>arg);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="_timer_p_8h_1afe947bc0d1bb86132104e2bc0943392f" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TimerP_STRUCT_SIZE<sp/>60</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="_timer_p_8h_1ab3b38051bb1a1827e5c316fbef9531d0" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="43" refid="_timer_p_8h_1ab3b38051bb1a1827e5c316fbef9531d0a45091179cbdd2ad6668249dc943a15b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_timer_p_8h_1ab3b38051bb1a1827e5c316fbef9531d0a45091179cbdd2ad6668249dc943a15b3" kindref="member">TimerP_Status_INUSE</ref>,</highlight></codeline>
+<codeline lineno="44" refid="_timer_p_8h_1ab3b38051bb1a1827e5c316fbef9531d0a98c75a2ab357844036c3c7f9b28b14d7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_timer_p_8h_1ab3b38051bb1a1827e5c316fbef9531d0a98c75a2ab357844036c3c7f9b28b14d7" kindref="member">TimerP_Status_FREE</ref>,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal">}<sp/><ref refid="_timer_p_8h_1ab3b38051bb1a1827e5c316fbef9531d0" kindref="member">TimerP_Status</ref>;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="_timer_p_8h_1a99805bc574ea350fd18e37930002ab72" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="49" refid="_timer_p_8h_1a99805bc574ea350fd18e37930002ab72a9e4f8fb8e61c5c31c2d7cf2c02d77cf1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_timer_p_8h_1a99805bc574ea350fd18e37930002ab72a9e4f8fb8e61c5c31c2d7cf2c02d77cf1" kindref="member">TimerP_StartMode_AUTO</ref>,</highlight></codeline>
+<codeline lineno="50" refid="_timer_p_8h_1a99805bc574ea350fd18e37930002ab72a600572ab7318cb9c38f818a23bfb934d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_timer_p_8h_1a99805bc574ea350fd18e37930002ab72a600572ab7318cb9c38f818a23bfb934d" kindref="member">TimerP_StartMode_USER</ref>,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">}<sp/><ref refid="_timer_p_8h_1a99805bc574ea350fd18e37930002ab72" kindref="member">TimerP_StartMode</ref>;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="struct___timer_p___freq_hz" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct___timer_p___freq_hz" kindref="compound">_TimerP_FreqHz</ref></highlight></codeline>
+<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="55" refid="struct___timer_p___freq_hz_1aede9498688380e422a850f2d7f5832f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct___timer_p___freq_hz_1aede9498688380e422a850f2d7f5832f1" kindref="member">hi</ref>;</highlight></codeline>
+<codeline lineno="56" refid="struct___timer_p___freq_hz_1a85d10f15fbf6926c541e49275a39d37a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct___timer_p___freq_hz_1a85d10f15fbf6926c541e49275a39d37a" kindref="member">lo</ref>;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">}<sp/><ref refid="_timer_p_8h_1a5696e3db22fb37d822ecb3bea07e315f" kindref="member">TimerP_FreqHz</ref>;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="struct___timer_p___params" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct___timer_p___params" kindref="compound">_TimerP_Params</ref></highlight></codeline>
+<codeline lineno="60"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="61" refid="struct___timer_p___params_1a756b35a9282094e7528ae277ce04ac4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_timer_p_8h_1a99805bc574ea350fd18e37930002ab72" kindref="member">TimerP_StartMode</ref><sp/><ref refid="struct___timer_p___params_1a756b35a9282094e7528ae277ce04ac4c" kindref="member">startMode</ref>;</highlight></codeline>
+<codeline lineno="62" refid="struct___timer_p___params_1a9d90ca6050ffcbf7c59308c2748030ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uintptr_t<sp/><ref refid="struct___timer_p___params_1a9d90ca6050ffcbf7c59308c2748030ff" kindref="member">arg</ref>;</highlight></codeline>
+<codeline lineno="63" refid="struct___timer_p___params_1a1e72035c310518a10048f5b95303d889" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct___timer_p___params_1a1e72035c310518a10048f5b95303d889" kindref="member">period</ref>;<sp/></highlight><highlight class="comment">/*<sp/>in<sp/>microseconds<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal">}<sp/><ref refid="_timer_p_8h_1a460d799faf72628340d8c2261ba553c5" kindref="member">TimerP_Params</ref>;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="union___timer_p___struct" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">union<sp/></highlight><highlight class="normal"><ref refid="union___timer_p___struct" kindref="compound">_TimerP_Struct</ref></highlight></codeline>
+<codeline lineno="67"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="68" refid="union___timer_p___struct_1a981998777f337688dd91b617beb2bb8b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="union___timer_p___struct_1a981998777f337688dd91b617beb2bb8b" kindref="member">dummy</ref>;</highlight></codeline>
+<codeline lineno="69" refid="union___timer_p___struct_1a44b1971c573257c3596504b11335d92a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>data[<ref refid="_timer_p_8h_1afe947bc0d1bb86132104e2bc0943392f" kindref="member">TimerP_STRUCT_SIZE</ref>];</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">}<sp/><ref refid="_timer_p_8h_1a42b79af689c7a709f412ea28a1d630c1" kindref="member">TimerP_Struct</ref>;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_timer_p_8h_1a144b00cda54abe52966a18626ac0ffdc" kindref="member">TimerP_Params_init</ref>(<ref refid="struct___timer_p___params" kindref="compound">TimerP_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref><sp/><ref refid="_timer_p_8h_1ad97f9b4fd661e68abaccb79881f36490" kindref="member">TimerP_construct</ref>(<ref refid="union___timer_p___struct" kindref="compound">TimerP_Struct</ref><sp/>*handle,<sp/><ref refid="_timer_p_8h_1a819e81a3b4cf7109bcb6a2c622f70c86" kindref="member">TimerP_Fxn</ref><sp/>timerFxn,<sp/><ref refid="struct___timer_p___params" kindref="compound">TimerP_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref><sp/><ref refid="_timer_p_8h_1a75d117d91a6fcbdde24d1eb5af5efa8c" kindref="member">TimerP_create</ref>(<ref refid="_timer_p_8h_1a819e81a3b4cf7109bcb6a2c622f70c86" kindref="member">TimerP_Fxn</ref><sp/>timerFxn,<sp/><ref refid="struct___timer_p___params" kindref="compound">TimerP_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_timer_p_8h_1afa55d108bb9b755df8d599ad1c059a2f" kindref="member">TimerP_getFreq</ref>(<ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref><sp/>handle,<sp/><ref refid="struct___timer_p___freq_hz" kindref="compound">TimerP_FreqHz</ref><sp/>*freq);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">uint32_t<sp/><ref refid="_timer_p_8h_1a36f94fc0565353e828ac27c8ad84a510" kindref="member">TimerP_getMaxTicks</ref>(<ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref><sp/>handle);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_timer_p_8h_1a9602d7a28c26e0dc381e9e36981f6c57" kindref="member">TimerP_setThreshold</ref>(<ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref><sp/>handle,<sp/>uint32_t<sp/>next,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>wrap);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_timer_p_8h_1a06d3a031f1ddd77e11fa67abd887fa38" kindref="member">TimerP_setNextTick</ref>(<ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref><sp/>handle,<sp/>uint32_t<sp/>ticks);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_timer_p_8h_1a9e529d6dbbf6227b4ea344dbd813feff" kindref="member">TimerP_startup</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_timer_p_8h_1a8a55000f9739c4ef9bda6a14f808179d" kindref="member">TimerP_start</ref>(<ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref><sp/>handle);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_timer_p_8h_1a9271a4e27e6fba9902db00ee28e221c9" kindref="member">TimerP_stop</ref>(<ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref><sp/>handle);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_timer_p_8h_1ae5426e20efe630794ad5f8267b5ac1bb" kindref="member">TimerP_setPeriod</ref>(<ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref><sp/>handle,<sp/>uint32_t<sp/>period);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal">uint64_t<sp/><ref refid="_timer_p_8h_1a3d6ff42ec88f8d2b7bed8a6cc381b8a3" kindref="member">TimerP_getCount64</ref>(<ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref><sp/>handle);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_timer_p_8h_1ab6a0d5fe7bd8fc64667df84e053b345a" kindref="member">TimerP_dynamicStub</ref>(uintptr_t<sp/>arg);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal">uint32_t<sp/><ref refid="_timer_p_8h_1afe248b2d4e74817885d5094dbbe3b6c6" kindref="member">TimerP_getCurrentTick</ref>(<ref refid="_timer_p_8h_1a237528e42a877f50722f89466c29ff2f" kindref="member">TimerP_Handle</ref><sp/>handle,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>saveFlag);</highlight></codeline>
+    </programlisting>
+    <location file="kernel/nortos/dpl/TimerP.h"/>
+  </compounddef>
+</doxygen>

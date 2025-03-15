@@ -1,0 +1,339 @@
+TX Power
+========
+
+.. note::
+
+    You can read more about TX power configuration and setting the TX power in
+    the RF driver chapter of the |TI_DRIVERS_API|.
+
+TX power, short for transmit power, is a parameter used to set a desired
+output power during packet transmissions. The TX power level is programmable
+at run-time, and will only take affect on the next transmission.
+
+A specific TX power configuration will match a desired output power in dBm. In
+most use cases, a specific output power in dBm is desired and the TX power
+configuration that corresponds to that output power must be specified. That
+means you don't necessarily set any arbitrary TX power configuration and then
+measure what the output power is.
+
+
+.. _tx_power_configuration:
+
+TX Power Configuration
+----------------------
+
+A TX power configuration is represented by a hexadecimal value, which
+represents a bit field of multiple parameters. Two types of TX power
+configurations are possible depending on which RF front-end is used: one for
+default power amplifier (:term:`PA`) and one for the high-power :term:`PA`.
+
+.. note:: The high-power PA is only available on the `CC1352P`_ device.
+
+For the default PA, a TX power configuration consists of the parameters as
+described below. When all parameters are set, a resulting 16-bit hexadecimal
+value represents the TX power configuration. This 16-bit hexadecimal is contained
+in the ``txPower`` variable in your radio setup command.
+
+The parameter txPower contains temp. coefficient setting, gain setting, IB setting and the TX BOOST bit:
+
+The temperature coefficient is applied to automatically compensate the IB setting based on the temperature
+readout of AON_BATMON_TEMP.
+
+.. table:: Default PA TX power configuration
+
+    +----------------------------------+--------------------------------------------------------------------+
+    | Parameter                        | Description                                                        |
+    +==================================+====================================================================+
+    | txPower[15:9] Temp. Coefficient  | Value to write to the :term:`PA` power control field at 25 |deg| C |
+    +----------------------------------+--------------------------------------------------------------------+
+    | txPower[8]: TX BOOST bit         | Select between low or high driver strength into the :term:`PA`     |
+    +----------------------------------+--------------------------------------------------------------------+
+    | txPower[7:6]: Gain               | Value to write to the gain control field of the :term:`PA`         |
+    +----------------------------------+--------------------------------------------------------------------+
+    | txPower[5:0]: IB                 | Temperature coefficient for :term:`IB`                             |
+    +----------------------------------+--------------------------------------------------------------------+
+
+For high-power PA, a TX power configuration consists of the parameters as
+described below. When all parameters are set, a resulting 22-bit hexadecimal
+value represents that TX power configuration. This 22-bit hexadecimal is
+contained in the override list of your radio setup command. (When the high-power
+PA is in use, the ``txPower`` variable in your radio setup command is not used.)
+
+.. table:: High PA TX power configuration
+
+    +---------------------------+----------------------------------------------------------------------------+
+    | Parameter                 | Description                                                                |
+    +===========================+============================================================================+
+    | Current Bias (:term:`IB`) | Value to write to the :term:`PA` power control field at 25 |deg| C         |
+    +---------------------------+----------------------------------------------------------------------------+
+    | :term:`IB` Boost          | Value to write to the bias control field of the :term:`PA`                 |
+    +---------------------------+----------------------------------------------------------------------------+
+    | Boost Bit                 | Select between low or high driver strength into the :term:`PA`             |
+    +---------------------------+----------------------------------------------------------------------------+
+    | Temp. Coefficient         | Temperature coefficient for :term:`IB`                                     |
+    +---------------------------+----------------------------------------------------------------------------+
+    | :term:`PA` LDO Trim       | Value to write to the output voltage control of the +20 dBm :term:`PA` LDO |
+    +---------------------------+----------------------------------------------------------------------------+
+
+For a more detailed overview of each bit field, refer to the |TRM|.
+
+.. note::
+
+   The values for all parameters are usually measured by Texas Instruments for
+   a specific front-end configuration, and should be obtained from
+   `SysConfig`_  or `SmartRF Studio`_ rather than deduced by yourself.
+
+
+TX Power Tables
+---------------
+
+TX power configuration is usually done via `SysConfig`_  or via code export in
+`SmartRF Studio`_ . A default TX power configuration is set, in addition to a
+TX power table being configured/exported alongside the settings.
+
+A TX power table is a lookup table of all TX power table entries which are
+characterized for the given RF front-end configuration. A TX power table entry
+is a key-value pair, where the key is a human-readable power level in dBm and
+the value a TX power configuration value.
+
+:rflib_api:`The RF driver <RF.h>` defines the types used in context with the TX power
+table, as well as convenience macros and functions for querying and
+manipulating the table.
+
+There are two macros for defining a TX power configuration value:
+:rflib_api:`RF_TxPowerTable_DEFAULT_PA_ENTRY` for default PA entries, and
+:rflib_api:`RF_TxPowerTable_HIGH_PA_ENTRY` for high-PA entries. See below for how
+the macro is structured. Note how the macro arguments compare to the TX power
+configuration parameters, as detailed in :ref:`tx_power_configuration`.
+
+.. code-block:: c
+
+    #define RF_TxPowerTable_DEFAULT_PA_ENTRY(bias, gain, boost, coefficient) /* ... */
+    #define RF_TxPowerTable_HIGH_PA_ENTRY(bias, ibboost, boost, coefficient, ldotrim) /* ... */
+
+If you generate or export any RF settings for |DEVICEAND|, depending on which RF
+front-end configuration you are using, you will see in *ti_radio_config.c* or
+*smartrf_settings.c* a new array called :code:`txPowerTable` with the following
+syntax:
+
+.. code-block:: c
+
+    // Default PA TX Power Table
+    RF_TxPowerTable_Entry txPowerTable[] = {
+        // ...
+        { 11, RF_TxPowerTable_DEFAULT_PA_ENTRY(10, 0, 0, 71)},
+        { 12, RF_TxPowerTable_DEFAULT_PA_ENTRY(63, 0, 0, 64)},
+        // ...
+        RF_TxPowerTable_TERMINATION_ENTRY
+    };
+
+The array consists of TX power table entries in ascending order based on the
+human-readable power level, with the lowest power level at index 0 and the
+highest power level at index N - 2.
+
+For more details on how a TX power table is generated, see the "PA table" 
+chapter in `swra640 <https://www.ti.com/lit/pdf/swra640>`_
+
+.txPower setting vs TX Power Table setting
+------------------------------------------
+
+This section gives an example on how the .txPower setting can be found from the TX table setting and the other way around.
+
+The format for the PA table entries is given as RF_TxPowerTable_DEFAULT_PA_ENTRY(bias, gain, boost, coefficient)
+
+The .txTable format is given as:
+
+ - txPower[15:9]: temp coefficient
+ - txPower[8]: TX BOOST bit
+ - txPower[7:6]: Gain
+ - txPower[5:0]: IB 
+
+For this example, the 10 dBm setting for CC1312R is used. 
+
+From the .txPower value to PA table entry
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+10 dBm value = 0x3E92
+
+Starting with the first entry in the PA table:
+
+| bias = IB = .txPower[5:0] = 0b010010 = 18
+| gain = gain = .txPower[7:6] = 0b10 = 2
+| boost = tx boost bit = .txPower[8] = 0
+| coefficient = temp coef = .txPower[15:9] = 0b0011111 = 31
+
+Combining: RF_TxPowerTable_DEFAULT_PA_ENTRY(18, 2, 0, 31)
+
+From the PA table entry to .txPower value
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+10 dBm entry: {10, RF_TxPowerTable_DEFAULT_PA_ENTRY(18, 2, 0, 31) },
+
+Starting with the LSB:
+
+| IB [5:0] = bias = 18 = 0b010010
+| gain[7:6] = gain = 2 = 0b10
+| tx boost bit [8] = boost = 0 = 0b0
+| temp coef [15:9] = coefficient = 31 = 0b0011111
+
+Combining: 0b0011111 0b0 0b10 0b010010 = 0b0011.1110.1001.0010= 0x3E92
+
+TX20_POWER_OVERRIDE() setting vs TX Power Table setting, HPA
+------------------------------------------------------------
+When using the HPA with max 20 dBm output power the output power is set by the override TX20_POWER_OVERRIDE() and the .txPower field is set to 0xFFFF. 
+
+This section gives an example on how the tx power override can be found from the TX table setting and the other way around.
+
+The format for the PA table entries is given as RF_TxPowerTable_HIGH_PA_ENTRY(bias, ibboost, boost, coefficient, ldotrim)
+
+The TX20_POWER_OVERRIDE() format is as follows:
+
+ - [21:16]: paLdoTrim
+ -  [15:9]: temp coefficient
+ -     [8]: boost
+ -   [7:6]: ibBoost
+ -   [5:0]: IB 
+
+For this example, the 17 dBm setting for CC1352P is used:
+
+From the TX20_POWER_OVERRIDE() value to PA table entry
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+17 dBm value = 0x0002661C
+
+Starting with the first entry in the PA table:
+
+| bias = IB = [5:0] = 0b011100 = 28
+| gain = gain = [7:6] = 0b10 = 0
+| boost = tx boost bit = [8] = 0
+| coefficient = temp coef = [15:9] = 0b0110011 = 51
+| ldotrim = paLdoTrim = [21:16] = 0b10 = 2
+
+Combining: RF_TxPowerTable_HIGH_PA_ENTRY(28, 0, 0, 51, 2)
+
+From the PA table entry to TX20_POWER_OVERRIDE()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+17 dBm entry: {17, RF_TxPowerTable_HIGH_PA_ENTRY(28, 0, 0, 51, 2) },
+
+Starting with the LSB:
+
+| IB [5:0] = bias = 28 = 0b011100
+| gain[7:6] = gain = 0 = 0b00
+| tx boost bit [8] = boost = 0 = 0b0
+| temp coef [15:9] = coefficient = 51 = 0b0110011
+| paLdoTrim [21:16] = ldotrim = 2 = 0b10
+
+Combining: 0b10 0b0110011 0b0 0b00 0b011100 0b10.0110.0110.0001.1100 = 0x2661C
+
+Programming the TX Power Level
+------------------------------
+
+In the proprietary RF examples, the wanted tx power is set via syscfg. The value set in syscfg is translated to a CMD_PROP_RADIO_DIV_SETUP.txPower setting at compile time. 
+
+The application can program a TX power level by using the RF driver. For each
+RF client, the TX power is programmed with the function
+:rflib_api:`RF_setTxPower`. The new value takes immediate effect and is used next
+time transmission starts. If a packet is being transmitted, the new value will
+not be updated until transmission starts for the next packet.
+
+Given the TX power table format, the application may program a new power level
+in multiple ways. It can use convenience functions to search for a certain
+power level in the table, or may access the table by index:
+
+.. code-block:: c
+
+    // Set a certain power level. Search a matching level.
+    RF_setTxPower(h, RF_TxPowerTable_findValue(txPowerTable, 17));
+
+    // Set a certain power level with a known level.
+    RF_setTxPower(h, txPowerTable[3].value);
+
+    // Set a certain power without using a human readable level.
+    RF_setTxPower(h, value);
+
+    // Set maximum power. Search the value.
+    RF_setTxPower(h, RF_TxPowerTable_findValue(txPowerTable, RF_TxPowerTable_MAX_DBM));
+
+    // Set minimum power without searching.
+    RF_setTxPower(h, txPowerTable[0].value);
+
+    // Set minimum power. Search the value.
+    RF_setTxPower(h, RF_TxPowerTable_findValue(txPowerTable, RF_TxPowerTable_MIN_DBM));
+
+The current configured TX power level for a RF client can be retrieved with
+the function :rflib_api:`RF_getTxPower`.
+
+.. code-block:: c
+
+    // Get the current configured power level.
+    int8_t power = RF_TxPowerTable_findPowerLevel(txPowerTable, RF_getTxPower(h));
+	
+The :rflib_api:`RF_setTxPower` API uses and overwrites the TX_STD_POWER_OVERRIDE(), TX20_POWER_OVERRIDE() and .txPower values to set the power in the RF core. Changing the output power in the application should therefore be done with the API and not by changing any of the other power related settings.   
+
+Enable VDDR Boost Mode
+----------------------
+
+.. note::
+
+    The VDDR boost mode is only available on CC13x0 and CC13x2.
+
+In the CCFG area (``ccfg.c``, for the CC13x0 and ``ti_devices_config.c`` for the CC13x2),
+there is a ``CCFG_FORCE_VDDR_HH`` define. If this value is set to ``0``, the maximum output
+power for the device is +12.5 dBm. If you wish to increase the output power further, set 
+``CCFG_FORCE_VDDR_HH`` to ``1``. With ``CCFG_FORCE_VDDR_HH`` to ``1`` the maximum output 
+power is +14 dBm.
+
+Example of how this can be done for the CC13x0 is shown below:
+
+.. code-block:: c
+
+    // ccfg.c
+    #define CCFG_FORCE_VDDR_HH  1
+    // ... Use default values for all others
+    #include <ti/devices/DeviceFamily.h>
+    #include DeviceFamily_constructPath(startup_files/ccfg.c)
+
+For the CC13x2, this is done through the `Device Configuration`` in `SysConfig`_
+
+Use the +20 dBm :term:`Power Amplifier`
+---------------------------------------
+
+.. note::
+
+    The +20 dBm :term:`PA` is only available on the CC1352P device. (The associated
+    development boards are LAUNCHXL-CC1352P1, LAUNCHXL-CC1352P-2 and
+    LAUNCHXL-CC1352P-4).
+
+The CC1352P launchpads have three RF ports, configured for different frequency
+bands and transmit power ranges:
+
++-------------+----------------------+----------------------------------+
+| RF Port     | Frequency Band       | Transmit Power Range             |
++=============+======================+==================================+
+| Pin 1 and 2 | 2.4 GHz              | +5 dBm PA and LNA                |
++-------------+----------------------+----------------------------------+
+| Pin 3 and 4 | Sub-1 GHz            | -20 dBm to + 13.5 dBm PA and LNA |
++-------------+----------------------+----------------------------------+
+| Pin 5 and 6 | Sub-1 GHz or 2.4 GHz | +14 dBm to +20 dBm               |
++-------------+----------------------+----------------------------------+
+
+On the CC1352P launchpads, the RF ports are tuned for the following frequency
+bands:
+
++--------------------+---------------+---------------+----------------+
+| Development Board  | Pin 1/2       | Pin 3/4       | Pin 5/6        |
++====================+===============+===============+================+
+| LAUNCHXL-CC1352P1  | 2.4 GHz       | 868/915 MHz   | 868/915 MHz    |
++--------------------+---------------+---------------+----------------+
+| LAUNCHXL-CC1352P-2 | 2.4 GHz       | 868/915 MHz   | 2.4 GHz        |
++--------------------+---------------+---------------+----------------+
+| LAUNCHXL-CC1352P-4 | 2.4 GHz       | 433 MHz 	     | 2.4 GHz 10 dBm |
++--------------------+---------------+---------------+----------------+
+
+For more details on 2.4 GHz 10 dBm mode, see `swra635 <https://www.ti.com/lit/pdf/swra636>`_
+
+A Launchpad with 20 dBm support for 433 MHz is not available since no region allows up to 
+20 dBm output power in this band. 
+
+

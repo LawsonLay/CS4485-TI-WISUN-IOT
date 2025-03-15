@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developing a Bluetooth Mesh Application &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="BLE Mesh SysConfig Features" href="sysconfig-walkthrough.html" />
+    <link rel="prev" title="TI Bluetooth Mesh and the Zephyr Project" href="ti-zephyr-overview.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-mesh developing-a-ble-mesh-application";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Bluetooth Mesh</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../quickstart-guide/ble-mesh-quick-start.html">TI Bluetooth Mesh Quick Start Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ti-zephyr-overview.html">TI Bluetooth Mesh and the Zephyr Project</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Developing a Bluetooth Mesh Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ti-bluetooth-mesh-application-architecture">TI Bluetooth Mesh Application Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bluetooth-mesh-node-setup">Bluetooth Mesh Node Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-a-bluetooth-mesh-node-to-a-mesh-network">Configuring a Bluetooth Mesh Node to a Mesh Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sending-and-receiving-bluetooth-mesh-messages">Sending and Receiving Bluetooth Mesh Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extended-advertising-support-in-bluetooth-mesh">Extended Advertising Support in Bluetooth Mesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#design-considerations-and-limitations">Design Considerations and Limitations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#packet-size">Packet Size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#power-consumption">Power Consumption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#network-range">Network Range</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sysconfig-walkthrough.html">BLE Mesh SysConfig Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ble-mesh-oad.html">TI Bluetooth Mesh and OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ble-mesh-erpc.html">TI Bluetooth Mesh Host PC Tool</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Bluetooth Mesh</a> &raquo;</li>
+      <li>Developing a Bluetooth Mesh Application</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="developing-a-bluetooth-mesh-application">
+<h1>Developing a Bluetooth Mesh Application<a class="headerlink" href="#developing-a-bluetooth-mesh-application" title="Permalink to this headline">¶</a></h1>
+<p>This section will provide guidance and indications on where and how to start
+implementing a TI Bluetooth Mesh application.</p>
+<div class="section" id="ti-bluetooth-mesh-application-architecture">
+<h2>TI Bluetooth Mesh Application Architecture<a class="headerlink" href="#ti-bluetooth-mesh-application-architecture" title="Permalink to this headline">¶</a></h2>
+<p>The simple_mesh_node application is split up into two main parts, shown below:</p>
+<ul class="simple">
+<li><p><strong>BLE App</strong> : Responsible for managing the TI BLE5 Stack</p></li>
+<li><p><strong>Mesh App</strong>: Responsible for managing the Zephyr Mesh stack solution and
+application</p></li>
+</ul>
+<img alt="../_images/ditaa-e0b2b48a25e70b7340e9d43b4371e74110ad42a0.png" id="mesh-init" src="../_images/ditaa-e0b2b48a25e70b7340e9d43b4371e74110ad42a0.png" />
+<p>The simple_mesh_node example application supports the use of various Generic
+Client/Server models as well as Vendor model support, all configurable using the
+SysConfig tool. For more information, please refer to the <a class="reference external" href="../../../../../examples/rtos/CC26X2R1_LAUNCHXL/ble5stack/simple_mesh_node/README.html">simple_mesh_node</a>
+example README as well as <a class="reference internal" href="sysconfig-walkthrough.html#sec-sysconfig-blemesh"><span class="std std-ref">BLE Mesh SysConfig Features</span></a>.
+The example is located in:
+<code class="docutils literal notranslate"><span class="pre">&lt;SDK_INSTALL_DIR&gt;\examples\rtos\CC26X2R1_LAUNCHXL\ble5stack\simple_mesh_node</span></code></p>
+<p>The default application supports a network-processor implementation, where a
+user can implement a Bluetooth mesh application on a PC as a host using our
+Python <a class="reference external" href="../../../../../examples/rtos/CC26X2R1_LAUNCHXL/ble5stack/mesh_app_python/readme.txt">mesh_app_python</a> eRPC client. This enables the user to customize a mesh
+application using the eRPC client while keeping the Bluetooth mesh stack on our
+wireless System-on-Chip (SOC). In SysConfig, this is set by selecting the
+“Network Processor Mode” checkbox. For more information on this, please refer to
+<a class="reference internal" href="ble-mesh-erpc.html#sec-ble-mesh-erpc"><span class="std std-ref">TI Bluetooth Mesh Host PC Tool</span></a>.</p>
+<p>TI’s <a class="reference external" href="../../../../../examples/rtos/CC26X2R1_LAUNCHXL/ble5stack/simple_mesh_node/README.html">simple_mesh_node</a> application also supports over the air firmware updates
+using our OAD module. Typically, a mesh node can be configured to be a
+<code class="docutils literal notranslate"><span class="pre">Mesh</span> <span class="pre">Only</span></code> node. With OAD, a mesh node can concurrently operate as both a BLE
+peripheral and a Mesh node. In SysConfig, a few options are available under
+<code class="docutils literal notranslate"><span class="pre">Mesh</span> <span class="pre">Application</span></code>. However, it is recommended to first navigate to the
+<a class="reference external" href="../../../../../examples/rtos/CC26X2R1_LAUNCHXL/ble5stack/simple_mesh_node_oad_onchip/README.html">simple_mesh_node_oad_onchip</a> or <a class="reference external" href="../../../../../examples/rtos/CC26X2R1_LAUNCHXL/ble5stack/simple_mesh_node_oad_offchip/README.html">simple_mesh_node_oad_offchip</a>
+example(s) in the SDK before modifying this parameter. For more information,
+refer to <a class="reference internal" href="ble-mesh-oad.html#sec-mesh-oad"><span class="std std-ref">TI Bluetooth Mesh and OAD</span></a>.</p>
+<p>In addition, the <a class="reference external" href="../../../../../examples/rtos/CC26X2R1_LAUNCHXL/ble5stack/simple_mesh_node/README.html">simple_mesh_node</a> example supports a <code class="docutils literal notranslate"><span class="pre">Mesh</span> <span class="pre">and</span> <span class="pre">Peripheral</span></code>
+configuration. Here, a mesh node can behave both as a Mesh Node and as a BLE
+perhipheral device. This configuration is not to be confused with configuring a
+mesh node as a Proxy device. In this configuration, the mesh node and the BLE
+peripheral are two separate entities operating in parallel.</p>
+</div>
+<div class="section" id="bluetooth-mesh-node-setup">
+<h2>Bluetooth Mesh Node Setup<a class="headerlink" href="#bluetooth-mesh-node-setup" title="Permalink to this headline">¶</a></h2>
+<p>A Bluetooth Mesh device goes through the following stages before being
+added to a mesh network.</p>
+<ol class="arabic simple">
+<li><p>The unprovisioned mesh device sends unprovisioned device beacons.</p></li>
+<li><p>A mesh provisioning client begins the provisioning process, which includes
+an invitation to the network, securing the connection using a specific
+network key, and assigning the device an address within the network.</p></li>
+<li><p>Once the device is provisioned to the network, the device is configured by a
+configuration client. Here, network and application keys are added and the
+node can subscribe/publish to the mesh network.</p></li>
+</ol>
+</div>
+<div class="section" id="configuring-a-bluetooth-mesh-node-to-a-mesh-network">
+<span id="node-configuration"></span><h2>Configuring a Bluetooth Mesh Node to a Mesh Network<a class="headerlink" href="#configuring-a-bluetooth-mesh-node-to-a-mesh-network" title="Permalink to this headline">¶</a></h2>
+<p>A Bluetooth Mesh device must be configured by a configuration client. The
+configuration client allows mesh nodes to publish/subscribe to addresses in the
+mesh network. However, there are some initial steps required before the end node
+can successfully send messages to the network.</p>
+<ol class="arabic simple">
+<li><p>The configuration client discovers the node’s composition data.</p></li>
+<li><p>The user can then find a particular model and bind the application key to
+it. This way, the end node can authenticate the data sent using the model.</p></li>
+<li><p>The user can then subscribe to particular model addresses to receive data
+sent over the mesh network.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Mesh Stack handles the configuration steps using the Configuration
+Server model, as defined in <a class="reference external" href="https://www.bluetooth.com/specifications/mesh-specifications/">Bluetooth Mesh specifications</a>
+Section 4.4.1)</p>
+</div>
+</div>
+<div class="section" id="sending-and-receiving-bluetooth-mesh-messages">
+<h2>Sending and Receiving Bluetooth Mesh Messages<a class="headerlink" href="#sending-and-receiving-bluetooth-mesh-messages" title="Permalink to this headline">¶</a></h2>
+<p>The following diagram shows the software flow when a user chooses to send
+“LED on/off” messages to a defined GROUP_ADDR using the two-button menu
+displayed over UART (see please refer to the <a class="reference external" href="../../../../../examples/rtos/CC26X2R1_LAUNCHXL/ble5stack/simple_mesh_node/README.html">simple_mesh_node</a>
+example README for details). Here, a vendor model is
+used.</p>
+<div class="figure align-center" id="id2">
+<p class="plantuml">
+<img src="../_images/plantuml-777abdc10a2fc08d1b0cf0ec9b4c3ca02257f549.png" alt="&#64;startuml
+participant Application
+participant &quot;Mesh Stack&quot;
+participant &quot;Mesh Network&quot;
+
+group Provisioned and configured to a mesh network
+
+group User presses button to send &quot;turn LED on&quot; message
+  Application -&gt; Application: SimpleMeshMenu_doButton()
+end
+
+  Application -&gt; Application : MeshApp_button_pressed()
+  Application -&gt; &quot;Mesh Stack&quot; : bt_mesh_model_msg_init()
+  Application -&gt; &quot;Mesh Stack&quot; : net_buf_simple_add_u8()
+
+  rnote over Application
+   Space is allocated on the device and the message is prepared.
+  end note
+
+  Application -&gt; &quot;Mesh Stack&quot; : bt_mesh_model_send()
+  &quot;Mesh Stack&quot; -&gt; &quot;Mesh Network&quot; : message sent over the air to mesh network
+  &quot;Mesh Stack&quot; -&gt; Application : return(status)
+
+  group Received &quot;LED on/off&quot; message from mesh nwk
+    &quot;Mesh Network&quot; -&gt; &quot;Mesh Stack&quot; : message received from mesh network
+    &quot;Mesh Stack&quot; -&gt; &quot;Application&quot; : vnd_button_pressed_cb()
+    rnote over &quot;Application&quot;
+     Pull data from buffer using net_buf_simple_pull_u8()
+    end note
+
+  Application -&gt; Application : SimpleMeshMenu_turnLed()
+  end
+end
+
+&#64;enduml"/>
+</p>
+<p class="caption"><span class="caption-number">Figure 153. </span><span class="caption-text">Sending and Receiving Bluetooth Mesh Messages.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="extended-advertising-support-in-bluetooth-mesh">
+<h2>Extended Advertising Support in Bluetooth Mesh<a class="headerlink" href="#extended-advertising-support-in-bluetooth-mesh" title="Permalink to this headline">¶</a></h2>
+<p>The TI Bluetooth Mesh stack introduces a proprietary feature which allows
+nodes to send large packet payloads over a proprietary vendor command.
+Bluetooth 5 Advertising Extensions are leveraged to enable mesh nodes to send
+data packets of up to 226 bytes without the need for segmentation.</p>
+<p>When “Use Extended Advertising” is selected in SysConfig
+(refer to <a class="reference internal" href="sysconfig-walkthrough.html#sec-sysconfig-blemesh"><span class="std std-ref">BLE Mesh SysConfig Features</span></a> for more details), communication within
+the mesh network will use extended advertisements to send/receive data. To
+maintain interoperability with Bluetooth SIG defined mesh provisioners,
+provisioning is done over legacy advertisements, as defined in the
+<a class="reference external" href="https://www.bluetooth.com/specifications/mesh-specifications/">Bluetooth Mesh specifications</a>. Once the node is provisioned to the network,
+messages will be sent using extended advertisements (as opposed to legacy
+advertisements).</p>
+<p>The key benefit to enabling this feature, as mentioned above, is to allow nodes
+to send large, unsegmented packets within the mesh network. This reduces
+end-to-end latency for messages as larger packets no longer need to be
+segmented and re-assembled.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The Extended Advertising feature is NOT defined by the Bluetooth SIG in the
+<a class="reference external" href="https://www.bluetooth.com/specifications/mesh-specifications/">Bluetooth Mesh specifications</a>. This feature is proprietary and leverages
+vendor specific commands.
+This feature cannot be dynamically enabled/disabled at run-time and must be
+enabled at build-time by selecting the appropriate box in SysConfig.</p>
+</div>
+</div>
+<div class="section" id="design-considerations-and-limitations">
+<h2>Design Considerations and Limitations<a class="headerlink" href="#design-considerations-and-limitations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="packet-size">
+<h3>Packet Size<a class="headerlink" href="#packet-size" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="https://www.bluetooth.com/specifications/mesh-specifications/">Bluetooth Mesh specifications</a> (Section 3.5.2.1) defines a maximum
+unsegmented payload of up to 15 bytes . It also defines a maximum
+segmented payload of up to 12 bytes, with a maximum of 32 segments (Section
+3.7.3).</p>
+<p>With a managed-flooding style network, larger packets will crowd the network and
+likely reduce the efficieny of the network. For this reason, Bluetooth mesh was
+not designed for high throughput applications and is best suited for systems
+that require small amounts of data to be sent over the air. Packet
+segmentation is defined in the spec (see above), and can be used to send more
+data over the air.</p>
+</div>
+<div class="section" id="power-consumption">
+<h3>Power Consumption<a class="headerlink" href="#power-consumption" title="Permalink to this headline">¶</a></h3>
+<p>All mesh nodes, with the exception of the LPN, are designed to be always on to
+receive messages broadcasted over the air (at any time). As the radio is always
+being utilized, this will cause the device to consume more power.</p>
+<p>The <a class="reference external" href="https://www.bluetooth.com/specifications/mesh-specifications/">Bluetooth Mesh specifications</a> defines the Low Power Node, which is used
+in conjunction with a Friend node, enables the device to sleep and wake up
+periodically to receive messages. This results in lower power consumption.</p>
+</div>
+<div class="section" id="network-range">
+<h3>Network Range<a class="headerlink" href="#network-range" title="Permalink to this headline">¶</a></h3>
+<p>Mesh networks are known for their robustness, but also for their ability to
+provide longer range over multiple hops. The <a class="reference external" href="https://www.bluetooth.com/specifications/mesh-specifications/">Bluetooth Mesh specifications</a>
+defines Relay nodes for this purpose, to effectively increase the range of a
+network. As stated previously, a Bluetooth Mesh network uses a managed flooding
+approach with each message having a time to live (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-TTL"><span class="xref std std-term">TTL</span></a>). Depending on the
+designed network topology, care must be taken to ensure that there are not too
+many Relay nodes crowded together and they are spaced out. This avoids flooding
+the network with duplicate, unnecessary traffic.</p>
+<p>This can also be combated by appropriately setting the TTL for each message,
+where applicable.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ti-zephyr-overview.html" class="btn btn-neutral float-left" title="TI Bluetooth Mesh and the Zephyr Project" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sysconfig-walkthrough.html" class="btn btn-neutral float-right" title="BLE Mesh SysConfig Features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+var structzcl_general___app_callbacks__t =
+[
+    [ "pfnAlarm", "structzcl_general___app_callbacks__t.html#a6da877450f00c6d54471e975aa1eddc6", null ],
+    [ "pfnBasicReset", "structzcl_general___app_callbacks__t.html#a29a4f9e5e1a3846dffcceec569b37ad7", null ],
+    [ "pfnGetEventLog", "structzcl_general___app_callbacks__t.html#a40b0de5c85dfdec1e5f2fad0640923c2", null ],
+    [ "pfnGroupRsp", "structzcl_general___app_callbacks__t.html#a39cf16e417d61bb9550644bd57322aad", null ],
+    [ "pfnIdentify", "structzcl_general___app_callbacks__t.html#a87688e39bbc1e8ac779e1b94a6b3241a", null ],
+    [ "pfnIdentifyQuery", "structzcl_general___app_callbacks__t.html#a2d50c02fde8aec4f466b4343fbe076cd", null ],
+    [ "pfnIdentifyQueryRsp", "structzcl_general___app_callbacks__t.html#a5da2c93a41ac344751bf167bf5e3d51a", null ],
+    [ "pfnIdentifyTriggerEffect", "structzcl_general___app_callbacks__t.html#a755b6694e5a821ccc76fe127acb88a33", null ],
+    [ "pfnLevelControlMove", "structzcl_general___app_callbacks__t.html#ae344fc884190a55da9e0b09cdf248770", null ],
+    [ "pfnLevelControlMoveFreq", "structzcl_general___app_callbacks__t.html#a7c00ac8dfa5575e12ac5b9e5fea031a1", null ],
+    [ "pfnLevelControlMoveToLevel", "structzcl_general___app_callbacks__t.html#afb3279abfaeca65bfe01fcd078e7e4fc", null ],
+    [ "pfnLevelControlStep", "structzcl_general___app_callbacks__t.html#aa31cdafc3718cece5f14309b8b34f613", null ],
+    [ "pfnLevelControlStop", "structzcl_general___app_callbacks__t.html#aee4b8e017e430d1110cb9ae41988e37e", null ],
+    [ "pfnLocation", "structzcl_general___app_callbacks__t.html#ac226e1251259bb86d446eddc8b9b7f2d", null ],
+    [ "pfnLocationRsp", "structzcl_general___app_callbacks__t.html#ade8464f97fbb487d1befd97a5c88ea16", null ],
+    [ "pfnOnOff", "structzcl_general___app_callbacks__t.html#a4e805ddfcee200cc2997e8801a0d25f3", null ],
+    [ "pfnOnOff_OffWithEffect", "structzcl_general___app_callbacks__t.html#a0b46b63bf16d2fa818bb84e513c056a6", null ],
+    [ "pfnOnOff_OnWithRecallGlobalScene", "structzcl_general___app_callbacks__t.html#a73c273c538daaf77c9d532c7a99c9814", null ],
+    [ "pfnOnOff_OnWithTimedOff", "structzcl_general___app_callbacks__t.html#aea2e34ae7e4d808139c85fa0f4b539ef", null ],
+    [ "pfnPublishEventLog", "structzcl_general___app_callbacks__t.html#acbc13080dcc809fc722f6dbebd635977", null ],
+    [ "pfnSceneRecallReq", "structzcl_general___app_callbacks__t.html#a6db914461e9e32f5c1d21b86f0595ed5", null ],
+    [ "pfnSceneRsp", "structzcl_general___app_callbacks__t.html#ac63f9c9b155f9afb6d52930da9a4ba39", null ],
+    [ "pfnSceneStoreReq", "structzcl_general___app_callbacks__t.html#af4a898b9bb9e0b2a817b1c42b4e1be68", null ]
+];

@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_e_d_d_s_a___operation_generate_public_key" kind="struct" language="C++" prot="public">
+    <compoundname>EDDSA_OperationGeneratePublicKey</compoundname>
+    <includes refid="_e_d_d_s_a_8h" local="no">EDDSA.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_e_d_d_s_a___operation_generate_public_key_1a77944a798bfa7e537de1a6afa0e28d33" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_e_c_c_params___curve_params" kindref="compound">ECCParams_CurveParams</ref> *</type>
+        <definition>const ECCParams_CurveParams* EDDSA_OperationGeneratePublicKey::curve</definition>
+        <argsstring></argsstring>
+        <name>curve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to the elliptic curve parameters </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/EDDSA.h" line="602" column="1" bodyfile="source/ti/drivers/EDDSA.h" bodystart="602" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_d_d_s_a___operation_generate_public_key_1a4ccef9ec43e7defea0df0a27e4253eb2" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> *</type>
+        <definition>const CryptoKey* EDDSA_OperationGeneratePublicKey::myPrivateKey</definition>
+        <argsstring></argsstring>
+        <name>myPrivateKey</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer to the randomly generated randomly private key &quot;k&quot; in little endian. Must be 32 bytes for Ed25519. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/EDDSA.h" line="605" column="1" bodyfile="source/ti/drivers/EDDSA.h" bodystart="605" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_e_d_d_s_a___operation_generate_public_key_1aa129dd994bddd37a2251b4dfb5000557" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> *</type>
+        <definition>CryptoKey* EDDSA_OperationGeneratePublicKey::myPublicKey</definition>
+        <argsstring></argsstring>
+        <name>myPublicKey</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>A pointer public EdDSA key A = s*B in compressed public key format. Must be 32 bytes for Ed25519. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/EDDSA.h" line="610" column="1" bodyfile="source/ti/drivers/EDDSA.h" bodystart="610" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct containing the parameters required for generating an EdDSA private-public keypair. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1092">
+        <label>CryptoKey</label>
+        <link refid="struct_crypto_key"/>
+        <childnode refid="1093" relation="usage">
+          <edgelabel>plaintext</edgelabel>
+        </childnode>
+        <childnode refid="1094" relation="usage">
+          <edgelabel>keyStore</edgelabel>
+        </childnode>
+      </node>
+      <node id="1091">
+        <label>ECCParams_CurveParams</label>
+        <link refid="struct_e_c_c_params___curve_params"/>
+      </node>
+      <node id="1090">
+        <label>EDDSA_OperationGeneratePublicKey</label>
+        <link refid="struct_e_d_d_s_a___operation_generate_public_key"/>
+        <childnode refid="1091" relation="usage">
+          <edgelabel>curve</edgelabel>
+        </childnode>
+        <childnode refid="1092" relation="usage">
+          <edgelabel>myPrivateKey</edgelabel>
+          <edgelabel>myPublicKey</edgelabel>
+        </childnode>
+      </node>
+      <node id="1093">
+        <label>CryptoKey_Plaintext</label>
+        <link refid="struct_crypto_key___plaintext"/>
+      </node>
+      <node id="1094">
+        <label>CryptoKey_KeyStore</label>
+        <link refid="struct_crypto_key___key_store"/>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/EDDSA.h" line="601" column="1" bodyfile="source/ti/drivers/EDDSA.h" bodystart="600" bodyend="615"/>
+    <listofallmembers>
+      <member refid="struct_e_d_d_s_a___operation_generate_public_key_1a77944a798bfa7e537de1a6afa0e28d33" prot="public" virt="non-virtual"><scope>EDDSA_OperationGeneratePublicKey</scope><name>curve</name></member>
+      <member refid="struct_e_d_d_s_a___operation_generate_public_key_1a4ccef9ec43e7defea0df0a27e4253eb2" prot="public" virt="non-virtual"><scope>EDDSA_OperationGeneratePublicKey</scope><name>myPrivateKey</name></member>
+      <member refid="struct_e_d_d_s_a___operation_generate_public_key_1aa129dd994bddd37a2251b4dfb5000557" prot="public" virt="non-virtual"><scope>EDDSA_OperationGeneratePublicKey</scope><name>myPublicKey</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

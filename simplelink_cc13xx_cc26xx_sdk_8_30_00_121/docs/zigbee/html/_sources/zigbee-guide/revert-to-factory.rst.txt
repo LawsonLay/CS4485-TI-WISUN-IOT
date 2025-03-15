@@ -1,0 +1,29 @@
+.. _sec-reverting-to-factory-image:
+
+Reverting to a Factory Image
+============================
+
+Each OAD enabled application has enabled a mechanism in to revert to the factory
+image. This section will detail how to invalidate the current application image
+to revert to the factory image.
+
+#. Hold down the left button on the |LP|.
+#. While holding down the left button, press the reset button.
+
+    - On boot, the application will check the pin state and jump to the
+      invalidate routine.
+
+The process for invalidating the current image is as follows:
+
+    - The application corrupts the CRC status field in the
+      :ref:`sec-oad-image-header` by flipping a bit.
+    - The application reboots the device.
+    - The BIM will search for valid images, and since no new downloads have been
+      performed, it will not find any.
+    - At this point as a failsafe, the BIM will revert the factory image.
+      See :ref:`sec-oad-bim-off-chip`.
+
+.. note::
+    The application should check that a valid factory image is present before
+    invalidating itself. It can do so by ensuring there is valid metadata in
+    external flash page 0. See :ref:`sec-oad-ext-flash-image-header`.

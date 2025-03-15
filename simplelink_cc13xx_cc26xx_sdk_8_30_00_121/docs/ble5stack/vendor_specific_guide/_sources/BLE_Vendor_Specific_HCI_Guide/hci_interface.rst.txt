@@ -1,0 +1,392 @@
+HCI Interface
+*************
+
+HCI Overview
+============
+
+The HCI is a standardized Bluetooth interface for sending commands, receiving
+events, and for sending and receiving data. It is typically realized as a serial
+interface, using either RS232 or USB communication devices. As the name implies,
+the HCI is used to bridge the Host and Controller devices. Commands and Events
+can either be specified, or can be vendor specific for extensibility. The
+following sections summarize the HCI protocol, the specification defined
+commands and events used by BLE, and a detailed description of the vendor
+specific commands and events defined by Texas Instruments Inc. For complete
+details on the HCI as specified by the Special Interest Group (SIG), please
+see the Core specification [1].
+
+Specification Interface
+=======================
+
+HCI Interface Protocol
+----------------------
+
+The HCI supports four types of packets: Command Packet, Asynchronous Data
+Packet, Synchronous Data Packet, and Event Packet. The packet type is a one byte
+value that precedes the HCI packet. The packet type has the following values:
+
+==================== ===========
+Packet               Packet Type
+==================== ===========
+Command              0x01
+Asynchronous Data    0x02
+Synchronous Data     0x03
+Event                0x04
+Extended Command     0x09
+==================== ===========
+
+The contents of each packet are shown as follows (please see section 5.4 of
+[1], Vol. 2, Part E for additional details).
+
+Command Packet
+^^^^^^^^^^^^^^
+
+The command packet is comprised of the opcode, the number of parameters, and
+parameters themselves.
+
+.. _command-packet:
+.. figure:: vsg_resources/command-packet.png
+    :align: center
+
+    Command Packet
+
+Asynchronous Data Packet
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The asynchronous data packet is comprised of the connection handle, fragmentation
+bits, the number of data bytes, and the data bytes themselves.
+
+.. _async-data-packet:
+.. figure:: vsg_resources/async-data-packet.png
+    :align: center
+
+    Asynchronous Data Packet
+
+Synchronous Data Packet
+^^^^^^^^^^^^^^^^^^^^^^^
+
+This synchronous data packet is not used in BLE.
+
+Event Packet
+^^^^^^^^^^^^
+
+The event packet is comprised of the event code, the number of event parameters,
+and the event parameters themselves.
+
+.. _event-packet:
+.. figure:: vsg_resources/event-packet.png
+    :align: center
+
+    Event Packet
+
+Extended Command
+^^^^^^^^^^^^^^^^
+
+This packet is used to allow more than the HCI limit of 256 bytes. It includes a
+two-byte length field which states the payload length:
+
+============= ==================
+Offset        Description
+============= ==================
+0             packet type (0x09)
+1             LSB opcode
+2             MSB opcode
+3             LSB payload length
+4             MSB payload length
+5..(length-3) Payload
+============= ==================
+
+See each individual command for payload formatting.
+
+HCI Commands
+------------
+
+HCI commands use a 16-bit opcode for identification. The opcode is subdivided
+into two parts: a 10-bit Opcode Command Field (OCF) and a 6-bit Opcode Group
+Field (OGF).
+
+.. _hci-command-opcode:
+.. figure:: vsg_resources/hci-command-opcode.png
+    :align: center
+
+    HCI Command Opcode
+
+The OGF values are defined by the Bluetooth (BT) Core specification. The LE
+specification has its own OGF value. Also, there is an escape OGF value so that vendor specific OCF codes can be used. The following OGF values are valid for BLE:
+# Link Control Commands: 1
+# Link Policy Commands: 2
+# Controller and Baseband Commands: 3
+# Informational Parameters: 4
+# Status Parameters: 5
+# Testing Commands: 6
+# LE Only Commands: 8
+# Vendor Specific Commands: 63
+
+The following table, Table 2, lists all specification LE HCI commands and their opcodes. Note that while all commands can be sent by the application processor to the Network Processor using HCI, not all events will be returned as they will be trapped and possibly discarded by the Host layer of the BLE Stack. Therefore, it is not possible to support an external BLE Host in the Network Processor configuration. Network Processor based designs should use the respective Vendor Extension commands detailed in the following sections to implement an off-chip application.
+
+========================================================= === === ======
+LE Commands                                               OGF OCF Opcdoe
+========================================================= === === ======
+LE Set Event Mask                                         8   1   0x2001
+LE Read Buffer Size                                       8   2   0x2002
+LE Read Local Supported Features                          8   3   0x2003
+LE Set Random Address                                     8   5   0x2005
+LE Set Advertising Parameters                             8   6   0x2006
+LE Read Advertising Channel TX Power                      8   7   0x2007
+LE Set Advertising Data                                   8   8   0x2008
+LE Set Scan Response Data                                 8   9   0x2009
+LE Set Advertise Enable                                   8   10  0x200A
+LE Set Scan Parameters                                    8   11  0x200B
+LE Set Scan Enable                                        8   12  0x200C
+LE Create Connection                                      8   13  0x200D
+LE Create Connection Cancel                               8   14  0x200E
+LE Read White List Size                                   8   15  0x200F
+LE Clear White Lis                                        8   16  0x2010
+LE Add Device To White List                               8   17  0x2011
+LE Remove Device From White List                          8   18  0x2012
+LE Connection Update                                      8   19  0x2013
+LE Set Host Channel Classification                        8   20  0x2014
+LE Read Channel Map                                       8   21  0x2015
+LE Read Remote Used Features                              8   22  0x2016
+LE Encrypt                                                8   23  0x2017
+LE Rand                                                   8   24  0x2018
+LE Start Encryption                                       8   25  0x2019
+LE Long Term Key Requested Reply                          8   26  0x201A
+LE Long Term Key Requested Negative Reply                 8   27  0x201B
+LE Read Supported States                                  8   28  0x201C
+LE Receiver Test                                          8   29  0x201D
+LE Transmitter Test                                       8   30  0x201E
+LE Test End Command                                       8   31  0x201F
+LE Remote Connection Parameter Request Reply              8   32  0x2020
+LE Remote Connection Parameter Request Negative Reply     8   33  0x2021
+LE Set Data Length                                        8   34  0x2022
+LE Read Suggested Default Data Length                     8   35  0x2023
+LE Write Suggested Default Data Length                    8   36  0x2024
+LE Read Local P256 Public Key 37 0x2025 LE Generate DHKey 8   38  0x2026
+LE Add Device to Resolving List                           8   39  0x2027
+LE Remove Device from Resolving List                      8   40  0x2028
+LE Clear Resolving List                                   8   41  0x2029
+LE Read Resolving List Size                               8   42  0x202A
+LE Read Peer Resolvable Address                           8   43  0x202B
+LE Read Local Resolvable Address                          8   44  0x202C
+LE Set Address Resolution Enable                          8   45  0x202D
+LE Set Resolvable Private Address Timeout                 8   46  0x202E
+LE Read Maximum Data Length                               8   47  0x202F
+========================================================= === === ======
+
+============================================== === === ======
+BT Commands for LE                             OGF OCF Opcode
+============================================== === === ======
+Disconnect                                     1   6   0x0406
+Read Remote Version Information                1   29  0x041D
+Set Event Mask                                 3   1   0x0C01
+Reset                                          3   3   0x0C03
+Read Transmit Power Level                      3   45  0x0C2D
+Set Controller To Host Flow Control (optional) 3   49  0x0C31
+Host Buffer Size (optional)                    3   51  0x0C33
+Host Number Of Completed Packets (optional)    3   53  0x0C35
+Set Event Mask Page                            3   63  0x0C63
+Read Authenticated Payload Timeout             4   123 0x0C7B
+Write Authenticated Payload Timeout            4   124 0x0C7C
+Read Local Version Information                 4   1   0x1001
+Read Local Supported Commands (optional)       4   2   0x1002
+Read Local Supported Features                  4   3   0x1003
+Read BD_ADDR                                   4   9   0x1009
+Read RSSI                                      5   5   0x1405
+============================================== === === ======
+
+HCI Events
+----------
+
+HCI events use an 8-bit event code. All event codes are unique for BT and BLE.
+Only event code 255 is reserved for vendor specific events. There is only one
+event code for all LE events. The first event parameter is used as the subevent
+code to distinguish the LE event types.
+
+The following table lists all the BLE events and their event codes, and subevent
+codes when applicable:
+
+====================================== ========== =============
+LE Events                              Event Code Subevent Code
+====================================== ========== =============
+LE Connection Complete                 0x3E       0x01
+LE Advertising Report                  0x3E       0x02
+LE Connection Update Complete          0x3E       0x03
+LE Read Remote Used Features Complete  0x3E       0x04
+LE Long Term Key Requested             0x3E       0x05
+LE Remote Connection Parameter Request 0x3E       0x06
+LE Data Length Change                  0x3E       0x07
+LE Read Local P256 Public Key Complete 0x3E       0x08
+LE Generate DHKey Complete             0x3E       0x09
+LE Enhanced Connection Complete        0x3E       0x0A
+LE Direct Advertising Report           0x3E       0x0B
+====================================== ========== =============
+
+======================================== ==========
+BT Events                                Event Code
+======================================== ==========
+Disconnection Complete                   0x05
+Encryption Change                        0x08
+Read Remote Version Information Complete 0x0C
+Command Complete                         0x0E
+Command Status                           0x0F
+Hardware Error (optional)                0x10
+Number Of Completed Packets              0x13
+Data Buffer Overflow                     0x1A
+Encryption Key Refresh Complete          0x30
+Authenticated Payload Timeout Expired    0x57
+======================================== ==========
+
+Vendor Specific Interface
+=========================
+
+As mentioned, vendors can specify their own HCI commands and events by using the
+predefined vendor specific opcode and vendor specific event code.
+
+Vendor Specific Commands
+------------------------
+
+A vendor specific opcode is indicated by an OGF value of 63. The vendor can use
+the remaining 10 bits (i.e. the OCF) as they like. TI defines its vendor
+specific OCF values by subdividing the 10 bits into a 3 MSB Command Subgroup
+(CSG) and a 7 LSB Command (CMD). The CSG is used by the HCI to route the
+commands to a designated subsystem within the BLE stack. In this way, vendor
+specific commands can be specified for any BLE stack layer.
+
+.. _vendor-specific-opcode-0-6:
+.. figure:: vsg_resources/vendor-specific-opcode-0-6.png
+    :align: center
+
+    HCI Vendor Specific Command Opcode, CSG=0..6
+
+The Command Subgroups are defined as follows:
+
+=== ============
+CSG Subgroup
+=== ============
+0   HCI
+1   L2CAP
+2   ATT
+3   GATT
+4   GAP
+5   UTIL
+6   Reserved
+7   User Profile
+=== ============
+
+For Command Subgroups 0 to 6, the remaining 7 bits of Command provide up to 128
+commands for each subgroup. For Subgroup 7, the remaining 7 bits specify one of
+128 profiles and indicates that the subsequent byte is to be used as the command
+for that particular profile (i.e. up to 256 commands per profile).
+
+.. _vendor-specific-opcode-7:
+.. figure:: vsg_resources/vendor-specific-opcode-7.png
+    :align: center
+
+    HCI Vendor Specific Command Opcode, CSG=7
+
+The following table lists all TI-specific HCI commands:
+
+.. include:: /BLE_Vendor_Specific_HCI_Guide/hci_vs_extracted_command_table.rst
+
+Vendor Specific Events
+----------------------
+
+A vendor specific event code is indicated by a value of 255. The vendor must
+then use event parameters (following the length byte) to specify vendor specific
+events. TI defines the following two bytes as the Event Opcode.
+
+.. _vendor-specific-event-1:
+.. figure:: vsg_resources/vendor-specific-event-1.png
+    :align: center
+
+The Event Opcode was chosen to mirror the Command Opcode by dividing it into
+two parts: a 6 bit Event Opcode Group Field (EOGF), and a 10 bit Event Opcode
+Event Field (EOEF).
+
+.. _vendor-specific-event-2:
+.. figure:: vsg_resources/vendor-specific-event-2.png
+    :align: center
+
+The EOEF is again chosen to mirror the Command OCF by dividing it into two
+parts: the Event Subgroup (ESG) and the Event.
+
+.. _vendor-specific-event-3:
+.. figure:: vsg_resources/vendor-specific-event-3.png
+    :align: center
+
+The EOGF is defined as follows:
+
+==== ================
+EOGF Group
+==== ================
+0    Embedded Opcode
+1    Core Opcode
+2    Profile Request
+3    Profile Response
+4-63 Reserved
+==== ================
+
+The ESG is defined as in Table 4. The Events are as defined in the following
+table. Please note that the value of the Events cannot be less than 0x400 as the
+first 1024 values are reserved. The reason for this has to do with
+Client/Server Request/Response Tunneling, which is described in the following
+section. Tunneling requires embedding Command Opcodes in HCI Events. When this
+is done, the EOGF is zero, and the remaining 10 bits is the Command Opcode. In
+order to prevent Command and Event Opcode overlap, the first 1024 values are
+reserved in the Event Opcode space. Also note that the Event Code (EC) is
+always 0xFF since normally only Controller events are returned via the HCI.
+
+.. include:: /BLE_Vendor_Specific_HCI_Guide/hci_vs_extracted_event_table.rst
+
+You will note that there are two EOGF values for Profiles. At this time, no
+profiles are defined well enough to document here. These values are defined in
+anticipation of not only needing large numbers of profiles and their commands,
+but also of needing the direction the command is travelling when embedded in an
+HCI Command or Event. You can see that ATT does not have this issue as these
+commands are already defined using even values for commands and odd values for
+events, and thus, direction is distinguishable. For profiles, it is not yet
+known how the commands and events will be defined.
+
+Request and Response Tunneling
+------------------------------
+
+In the Client/Server model defined and supported by the BLE stack, the Client
+sends Requests to the Server and the Server sends Responses back to the Client.
+The Requests sent by the Client may be handled by a Server on the same device,
+or they may travel OTA to the Server on another device. Similarly, the Response
+sent by the Server may be handled by a Client on the same device, or may be sent
+OTA to a Client on another device from which the request came. But in either
+case, as long as the Requests and Responses remain within the scope of the BLE
+stack software (i.e. the BLE Server database is on the device), the BLE stack
+remains unconcerned about whether the Requests and Responses are sent/received
+by the same device or are from another device. Please see :numref:`tunneling-1`.
+
+.. _tunneling-1:
+.. figure:: vsg_resources/tunneling-1.png
+    :align: center
+
+    Request/Response with Server Database in BLE Stack
+
+However, when using the Network Processor Configuration with HCI such that the
+Server database is not located on the device, then Requests and Reponses have to
+be mapped into HCI Commands and Events. The HCI is specified such that only
+Commands are sent from the Host to the Controller, and only Events are sent from
+the Controller to the Host. If the Server database is located on say a PC, then
+when an OTA Request is received by the Server device, it must be sent to the PC
+via the HCI. Even though the Request started out on one end as an HCI Command,
+it must be provided to the remote PC as an HCI event on the other. Similarly,
+when the PC sends the Response on one end, which will be an HCI Event to the
+remote PC on the other, it must be sent to the device as an HCI Command. Thus,
+the Request, which starts out as an HCI Command, must be embedded in an HCI
+Event when received by the remote PC, and the Response, which starts out as an
+HCI Command, must be embedded in an HCI Event when received by the remote PC.
+In this way, Requests and Responses are being tunneled in HCI Commands and
+Events. Please see :numref:`tunneling-2`.
+
+.. _tunneling-2:
+.. figure:: vsg_resources/tunneling-2.png
+    :align: center
+
+    Request/Response with Server Database not in BLE Stack
+

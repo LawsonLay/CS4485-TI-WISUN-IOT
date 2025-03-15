@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get started with SysConfig &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+DMM User&#39;s Guide
+ 6.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configure The Board Files with SysConfig" href="sysconfig-board.html" />
+    <link rel="prev" title="System Configuration Tool (SysConfig)" href="../dmm-guide/sysconfig-index-cc13xx_cc26xx.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug sysconfig getting-started";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../dmm-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+DMM User's Guide
+
+          </a>
+              <div class="version">
+                6.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/dmm-quick-start.html">Dynamic Multi-protocol Manager Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/dmm-index-cc13xx_cc26xx.html">Dynamic Multi-protocol Manager (DMM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/oad-secure-index.html">Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../dmm-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Get started with SysConfig</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-stand-alone-sysconfig">Using Stand-alone SysConfig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-sysconfig-with-iar-workbench">Using SysConfig with IAR Workbench</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-sysconfig-as-a-plug-in-to-ccs">Using SysConfig as a Plug-In to CCS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#viewing-sysconfig-output">Viewing SysConfig Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sysconfig-board.html">Configure The Board Files with SysConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysconfig-board.html#reserve-peripheral-s">Reserve Peripheral(s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysconfig-board.html#hardware-view">Hardware View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysconfig-board.html#migrating-board-variant">Migrating Board Variant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dmm-sysconfig.html">DMM SysConfig Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysconfig-disable.html">Disable SysConfig</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/index-migration-cc13xx_cc26xx.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/api-reference.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dmm-guide/reference.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../dmm-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+DMM User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../dmm-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../dmm-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a> &raquo;</li>
+      <li>Get started with SysConfig</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="get-started-with-sysconfig">
+<span id="sysconfig-sysconfig"></span><h1>Get started with SysConfig<a class="headerlink" href="#get-started-with-sysconfig" title="Permalink to this headline">¶</a></h1>
+<p>System Configuration Tool (SysConfig) is a graphical interface for configuring
+your <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> project. Configuration files, C source files and header files are generated
+based on the parameters configured in the SysConfig dashboard.</p>
+<p>SysConfig can be used as a standalone tool, or as a plug-in to <a class="reference internal" href="../dmm-guide/reference.html#term-CCS"><span class="xref std std-term">CCS</span></a>.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Files and code generated by SysConfig should be thoroughly checked and
+reviewed.</p>
+</div>
+<div class="section" id="using-stand-alone-sysconfig">
+<h2>Using Stand-alone SysConfig<a class="headerlink" href="#using-stand-alone-sysconfig" title="Permalink to this headline">¶</a></h2>
+<p>You can find the standalone SysConfig tool on the <a class="reference external" href="http://www.ti.com/tool/download/SYSCONFIG">SysConfig Standalone Installer Download Page</a>.</p>
+<p>Open the System Configuration Tool, and select your device, part and package,
+then press <code class="docutils literal notranslate"><span class="pre">START</span></code>.</p>
+<p>When you have finished configuring your <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file, save and generate
+files. Export the generated files to your project, overwriting existing files if
+necessary. Make any needed changes to your application for interfacing with the
+SysConfig-generated files.</p>
+</div>
+<div class="section" id="using-sysconfig-with-iar-workbench">
+<span id="sysconfig-use-iar"></span><h2>Using SysConfig with IAR Workbench<a class="headerlink" href="#using-sysconfig-with-iar-workbench" title="Permalink to this headline">¶</a></h2>
+<p>If you are using IAR, you can use SysConfig as a standalone desktop tool to
+generate the configuration files to be compiled and linked with your application.
+The different SDK’s require specific versions of SysConfig and IAR Embedded
+Workbench. Refer to the Release Notes for these version numbers.</p>
+<p>These steps assume the TI Code Generation Tools are installed in the default
+location. The figures use the MSP432 SDK as an example, but other SimpleLink SDKs
+follow the same procedure.</p>
+<ol class="arabic">
+<li><p>Install <a class="reference external" href="http://www.ti.com/tool/SYSCONFIG">SysConfig</a> as a standalone tool in the default location (<code class="docutils literal notranslate"><span class="pre">C:\ti</span></code>).</p></li>
+<li><p>Open IAR and follow these steps to configure it to use the correct viewer for
+<code class="docutils literal notranslate"><span class="pre">*.syscfg</span></code> files:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>Choose Tools &gt; Configure Viewers from the menus, and then click Import.</p></li>
+<li><p>Navigate to the SDK installation directory
+<code class="docutils literal notranslate"><span class="pre">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$\tools\iar\</span></code> and select the
+file <code class="docutils literal notranslate"><span class="pre">sysconfig_iar_setup.xml</span></code></p></li>
+</ol>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure to select the correct $SIMPLELINK_SDK_INSTALL_DIR$ for your device family (e.g. CC13xx or CC26xx)</p>
+</div>
+</li>
+<li><p>Make sure you imported the custom argument variables and that the paths
+are correct.</p></li>
+</ol>
+<div class="figure align-center" id="id2">
+<img alt="../_images/sysconfig_iar_2.png" src="../_images/sysconfig_iar_2.png" />
+<p class="caption"><span class="caption-number">Figure 67. </span><span class="caption-text">Configuring Custom Argument Variables</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Import an example project workspace.</p></li>
+<li><p>Double click on the *.syscfg file in your project. This will open the
+SysConfig standalone tool. You can configure all the settings, then save your
+changes and switch back to the IAR view.</p></li>
+<li><p>Rebuild the project to perform the custom build step, which uses SysConfig to
+generate additional files.</p></li>
+</ol>
+<div class="figure align-center" id="id3">
+<img alt="../_images/sysconfig_iar_3.png" src="../_images/sysconfig_iar_3.png" />
+<p class="caption"><span class="caption-number">Figure 68. </span><span class="caption-text">Building with SysConfig in IAR</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="using-sysconfig-as-a-plug-in-to-ccs">
+<h2>Using SysConfig as a Plug-In to CCS<a class="headerlink" href="#using-sysconfig-as-a-plug-in-to-ccs" title="Permalink to this headline">¶</a></h2>
+<p>SysConfig requires <a class="reference internal" href="../dmm-guide/reference.html#term-CCS"><span class="xref std std-term">CCS</span></a> v. 8.3 or later. (Please use the version of CCS
+recommended for the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> you are working with. You can find the
+recommended tool version numbers in the release notes.)</p>
+<p>In CCS, import a SysConfig enabled project from the <code class="docutils literal notranslate"><span class="pre">examples</span></code>
+folder.</p>
+<p>In the project folder in <a class="reference internal" href="../dmm-guide/reference.html#term-CCS"><span class="xref std std-term">CCS</span></a>, you will see a <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> file. Open this file to
+start the SysConfig graphical interface.</p>
+<div class="figure align-center">
+<img alt="../_images/sysconfig_dashboard.png" src="../_images/sysconfig_dashboard.png" />
+</div>
+</div>
+<div class="section" id="viewing-sysconfig-output">
+<span id="sec-sysconfig-view-output"></span><h2>Viewing SysConfig Output<a class="headerlink" href="#viewing-sysconfig-output" title="Permalink to this headline">¶</a></h2>
+<p>If you click the <code class="docutils literal notranslate"><span class="pre">Generated</span> <span class="pre">Files</span></code> (&lt; &gt;) <a class="reference internal" href="#fig-generated-files"><span class="std std-ref">Generated Files</span></a> button
+at the top of the <code class="docutils literal notranslate"><span class="pre">Configuration</span></code> pane you will find a list of Generated Files.
+After selecting a file you will be able, in real-time, to identify how the
+changes in the GUI effect the generated files. This will help you review the
+relationship between the GUI and the code.</p>
+<div class="figure align-center" id="id4">
+<span id="fig-generated-files"></span><img alt="../_images/syscfg_generated_files_ble.png" src="../_images/syscfg_generated_files_ble.png" />
+<p class="caption"><span class="caption-number">Figure 69. </span><span class="caption-text">Generated Files</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../dmm-guide/sysconfig-index-cc13xx_cc26xx.html" class="btn btn-neutral float-left" title="System Configuration Tool (SysConfig)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sysconfig-board.html" class="btn btn-neutral float-right" title="Configure The Board Files with SysConfig" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

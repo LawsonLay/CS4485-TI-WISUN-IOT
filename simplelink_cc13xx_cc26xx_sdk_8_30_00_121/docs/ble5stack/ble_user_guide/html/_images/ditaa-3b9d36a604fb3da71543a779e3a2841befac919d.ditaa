@@ -1,0 +1,29 @@
+                                       +---------------------------------+
+                                       | Does one of the connection      |
+                                       | have larger connection interval?|
+                                       |   cCFF                          |
+                                       +---------------------------------+
+                      Yes, conn1 has larger   |                  | No.
+                       connection interval    |                  |
+                           /------------------/                  \-------------\
+                           |                                                   |
+                           |                                                   |
+                           |                                                   |
+                           v                                                   v
+                 +--------------------------------------+          +---------------------------------+
+                 | Is (Conn2 Interval x Conn2 MissedEvt)|          | Does one of the connection have |
+                 | larger than Conn1 Interval?          |          | higher missEvents count?        |
+                 |   c0CC                               |          |  c0CC                           |
+                 +--------------------------------------+          +---------------------------------+
+                        |              |                                |                  |
+              Yes       |              | No                         Yes |                  | No
+          /-------------/              |                      /---------/                  |
+          |                            |                      |                            |
+          |                            |                      |                            |
+          v                            v                      v                            v
+   +-------------+              +-------------+         +-------------------+       +---------------------+
+   | Conn 2 will |              | Conn 1 will |         | Connection with   |       | Connection with     |
+   | be scheduled|              | be scheduled|         | higher missEvents |       | earliest start time |
+   | c189        |              | c189        |         | will be scheduled |       | will be scheduled   |
+   +-------------+              +-------------+         | c189              |       | c189                |
+                                                        +-------------------+       +---------------------+

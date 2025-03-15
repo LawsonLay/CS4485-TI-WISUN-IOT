@@ -1,0 +1,51 @@
+ATT Vendor Specific API
+***********************
+
+ATT Commands
+============
+
+All ATT commands have the following format:
+
+================= ============ =============================
+Name              Size (bytes) Description
+----------------- ------------ -----------------------------
+Opcode            2            PDU operation code
+Connection Handle 2            Connection handle of the link
+Command PDU       Variable     Command Parameters
+================= ============ =============================
+
+For the command parameters, please see the corresponding section below.
+
+Note: The connection handle of 0xFFFE is considered as the loopback connection.
+All messages sent to this connection will be loop backed to the local host.
+
+**Events Generated**
+
+For each ATT command,when it is received, the host will send the CommandStatus
+Event with the Status parameter.  If a command will return additional
+events, it will be noted in the description below.
+
+.. include:: /BLE_Vendor_Specific_HCI_Guide/att_cmd_extracted.rst
+
+ATT Events
+==========
+
+All ATT events have the following format:
+
+================= ============ =============================
+Name              Size (bytes) Description
+----------------- ------------ -----------------------------
+Opcode            2            PDU operation code
+Status            1            Event status
+Connection Handle 2            Connection handle of the link
+PDU length        1            Length of event PDU
+Event PDU         Variable     Event parameters
+================= ============ =============================
+
+For the event parameters, please see the corresponding section below.
+
+Note: The connection handle of 0xFFFE is considered as the loopback connection.
+All messages sent to this connection will be loop backed to the local host.
+
+.. include:: /BLE_Vendor_Specific_HCI_Guide/att_event_extracted.rst
+

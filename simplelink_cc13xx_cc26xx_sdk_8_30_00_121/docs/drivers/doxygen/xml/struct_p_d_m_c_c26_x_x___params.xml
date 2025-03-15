@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_p_d_m_c_c26_x_x___params" kind="struct" language="C++" prot="public">
+    <compoundname>PDMCC26XX_Params</compoundname>
+    <includes refid="_p_d_m_c_c26_x_x_8h" local="no">PDMCC26XX.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1ab0b5ba7b77e820496242b568e9722197" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool PDMCC26XX_Params::micPowerActiveHigh</definition>
+        <argsstring></argsstring>
+        <name>micPowerActiveHigh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set to TRUE if setting the GPIO high powers the microphone </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="579" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="579" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1a8f7df45298c5e74e04e18050fc36adf9" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool PDMCC26XX_Params::applyCompression</definition>
+        <argsstring></argsstring>
+        <name>applyCompression</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set to TRUE to apply compression. Setting it to FALSE allows user to apply own compression scheme. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="580" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="580" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1a7866964e30e66983db76fb8eb8f20c31" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t PDMCC26XX_Params::pdmBufferQueueDepth</definition>
+        <argsstring></argsstring>
+        <name>pdmBufferQueueDepth</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>PDM buffer queue depth in number of blocks. We assume that we will be able to consume approximately one buffer per 2ms. This allows us to use the minium number of blocks (3) for the PDMCC26XX driver. If the application can not service the PDM task within the 2ms time window, increase this value to permit more latency in processing incoming PDM data at the cost of increased RAM useage. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="583" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="583" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1a05bff0a3c2ddbb3a49c2bc7a47a7fe24" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t PDMCC26XX_Params::retBufSizeInBytes</definition>
+        <argsstring></argsstring>
+        <name>retBufSizeInBytes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Size of returned buffers. It is not reccomended to make this value less than 64, the driver will not crash, but the sequence numbers may become unaligned with the data in the buffer. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="590" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="590" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1ada70be0c2c779c0908babb7978807589" prot="public" static="no" mutable="no">
+        <type>const int32_t *</type>
+        <definition>const int32_t* PDMCC26XX_Params::decimationFilter</definition>
+        <argsstring></argsstring>
+        <name>decimationFilter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Filter applied during PDM to PCM conversion. Will use default filter if NULL. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="593" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="593" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1ad6940680eb8801335070fef3ef6d128c" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t PDMCC26XX_Params::decimationFilterStateSize</definition>
+        <argsstring></argsstring>
+        <name>decimationFilterStateSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Size of the decimation filter state information in bytes. Should be (6 + 2 * N) * sizeof(uint32_t) bytes long, where N is the number of filter stages in <ref refid="struct_p_d_m_c_c26_x_x___params_1ada70be0c2c779c0908babb7978807589" kindref="member">PDMCC26XX_Params.decimationFilter</ref> for the default signal processing chain. The decimation state will be allocated using the <ref refid="struct_p_d_m_c_c26_x_x___params_1aea959cfd6c30b0af7f4c9547c5186d0a" kindref="member">PDMCC26XX_Params.mallocFxn</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="595" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="595" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1a1c5542bc8d7d16c9e4876746f24b2dcf" prot="public" static="no" mutable="no">
+        <type><ref refid="_p_d_m_c_c26_x_x_8h_1a8c2d67aee547a2c8228465034ae0267f" kindref="member">PDMCC26XX_Gain</ref></type>
+        <definition>PDMCC26XX_Gain PDMCC26XX_Params::defaultFilterGain</definition>
+        <argsstring></argsstring>
+        <name>defaultFilterGain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Gain of the signal chain before filtering. The decimation stage adds 12dB itself. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="602" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="602" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1a7a888cb14c83b729ad0886f1e50eb4a8" prot="public" static="no" mutable="no">
+        <type><ref refid="_p_d_m_c_c26_x_x_8h_1ac6ec7972a50a1ed1c12039047d3b2522" kindref="member">PDMCC26XX_PcmSampleRate</ref></type>
+        <definition>PDMCC26XX_PcmSampleRate PDMCC26XX_Params::pcmSampleRate</definition>
+        <argsstring></argsstring>
+        <name>pcmSampleRate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sample rate of the PCM output </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="604" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="604" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1a1ffbb2852a48ff157c0f58df4dce4a3b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t PDMCC26XX_Params::startupDelayWithClockInSamples</definition>
+        <argsstring></argsstring>
+        <name>startupDelayWithClockInSamples</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Some digital microphones have a startup delay. Set the number of samples to discard after powering the microphone starting to clock in data. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="605" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="605" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1ada480cae6ca7398efef4293350f92090" prot="public" static="no" mutable="no">
+        <type><ref refid="_p_d_m_c_c26_x_x_8h_1ab6fdee59a79029e938e3fbf0e446fa91" kindref="member">PDMCC26XX_CallbackFxn</ref></type>
+        <definition>PDMCC26XX_CallbackFxn PDMCC26XX_Params::callbackFxn</definition>
+        <argsstring></argsstring>
+        <name>callbackFxn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Callback function pointer </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="609" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="609" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1aea959cfd6c30b0af7f4c9547c5186d0a" prot="public" static="no" mutable="no">
+        <type><ref refid="_p_d_m_c_c26_x_x_8h_1acce02978ce536ea3b98a673587a6e75c" kindref="member">PDMCC26XX_MallocFxn</ref></type>
+        <definition>PDMCC26XX_MallocFxn PDMCC26XX_Params::mallocFxn</definition>
+        <argsstring></argsstring>
+        <name>mallocFxn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Malloc function pointer </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="610" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="610" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1ae0149ca1615d25422c7e0d9c473ccd2e" prot="public" static="no" mutable="no">
+        <type><ref refid="_p_d_m_c_c26_x_x_8h_1af95e29fbea1fadfb011e4ceaa36f1ab0" kindref="member">PDMCC26XX_FreeFxn</ref></type>
+        <definition>PDMCC26XX_FreeFxn PDMCC26XX_Params::freeFxn</definition>
+        <argsstring></argsstring>
+        <name>freeFxn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Free function pointer </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="611" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="611" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___params_1ad41793869ce12a57f513749b244aa1a3" prot="public" static="no" mutable="no">
+        <type>uintptr_t</type>
+        <definition>uintptr_t PDMCC26XX_Params::custom</definition>
+        <argsstring></argsstring>
+        <name>custom</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Custom argument used by driver implementation </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="612" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="612" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>PDMCC26XX Parameters are used to with the <ref refid="_p_d_m_c_c26_x_x_8h_1a431d9b71e0d0eebd5ab85960f1c82ee0" kindref="member">PDMCC26XX_open()</ref> call. Default values for these parameters are set using <ref refid="_p_d_m_c_c26_x_x_8h_1af8421d9a4381fc68e217650c426ba633" kindref="member">PDMCC26XX_Params_init()</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_p_d_m_c_c26_x_x_8h_1af8421d9a4381fc68e217650c426ba633" kindref="member">PDMCC26XX_Params_init</ref> </para></simplesect>
+</para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="1442">
+        <label>PDMCC26XX_Config</label>
+        <link refid="struct_p_d_m_c_c26_x_x___config"/>
+      </node>
+      <node id="1441">
+        <label>PDMCC26XX_Params</label>
+        <link refid="struct_p_d_m_c_c26_x_x___params"/>
+        <childnode refid="1442" relation="usage">
+          <edgelabel>callbackFxn</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/pdm/PDMCC26XX.h" line="577" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX.h" bodystart="576" bodyend="613"/>
+    <listofallmembers>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1a8f7df45298c5e74e04e18050fc36adf9" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>applyCompression</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1ada480cae6ca7398efef4293350f92090" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>callbackFxn</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1ad41793869ce12a57f513749b244aa1a3" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>custom</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1ada70be0c2c779c0908babb7978807589" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>decimationFilter</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1ad6940680eb8801335070fef3ef6d128c" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>decimationFilterStateSize</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1a1c5542bc8d7d16c9e4876746f24b2dcf" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>defaultFilterGain</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1ae0149ca1615d25422c7e0d9c473ccd2e" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>freeFxn</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1aea959cfd6c30b0af7f4c9547c5186d0a" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>mallocFxn</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1ab0b5ba7b77e820496242b568e9722197" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>micPowerActiveHigh</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1a7a888cb14c83b729ad0886f1e50eb4a8" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>pcmSampleRate</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1a7866964e30e66983db76fb8eb8f20c31" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>pdmBufferQueueDepth</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1a05bff0a3c2ddbb3a49c2bc7a47a7fe24" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>retBufSizeInBytes</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___params_1a1ffbb2852a48ff157c0f58df4dce4a3b" prot="public" virt="non-virtual"><scope>PDMCC26XX_Params</scope><name>startupDelayWithClockInSamples</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

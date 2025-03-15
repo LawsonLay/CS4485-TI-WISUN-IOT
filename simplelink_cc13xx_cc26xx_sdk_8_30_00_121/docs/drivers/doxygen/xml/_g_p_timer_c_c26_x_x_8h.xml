@@ -1,0 +1,1761 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_g_p_timer_c_c26_x_x_8h" kind="file" language="C++">
+    <compoundname>GPTimerCC26XX.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includes refid="_hwi_p_8h" local="no">ti/drivers/dpl/HwiP.h</includes>
+    <includes local="no">ti/devices/DeviceFamily.h</includes>
+    <includes local="no">DeviceFamily_constructPath(inc/hw_gpt.h)</includes>
+    <includes local="no">DeviceFamily_constructPath(driverlib/event.h)</includes>
+    <includes local="no">DeviceFamily_constructPath(driverlib/ioc.h)</includes>
+    <includes local="no">DeviceFamily_constructPath(driverlib/timer.h)</includes>
+    <includedby refid="_a_d_c_buf_c_c26_x2_8h" local="no">ADCBufCC26X2.h</includedby>
+    <includedby refid="_a_d_c_buf_c_c26_x_x_8h" local="no">ADCBufCC26XX.h</includedby>
+    <includedby refid="_p_w_m_timer_c_c26_x_x_8h" local="no">PWMTimerCC26XX.h</includedby>
+    <includedby refid="_timer_c_c26_x_x_8h" local="no">TimerCC26XX.h</includedby>
+    <incdepgraph>
+      <node id="1182">
+        <label>stdbool.h</label>
+      </node>
+      <node id="1181">
+        <label>stdint.h</label>
+      </node>
+      <node id="1180">
+        <label>GPTimerCC26XX.h</label>
+        <link refid="_g_p_timer_c_c26_x_x_8h"/>
+        <childnode refid="1181" relation="include">
+        </childnode>
+        <childnode refid="1182" relation="include">
+        </childnode>
+        <childnode refid="1183" relation="include">
+        </childnode>
+        <childnode refid="1184" relation="include">
+        </childnode>
+        <childnode refid="1185" relation="include">
+        </childnode>
+        <childnode refid="1186" relation="include">
+        </childnode>
+        <childnode refid="1187" relation="include">
+        </childnode>
+        <childnode refid="1188" relation="include">
+        </childnode>
+        <childnode refid="1189" relation="include">
+        </childnode>
+      </node>
+      <node id="1187">
+        <label>DeviceFamily_constructPath(driverlib/event.h)</label>
+      </node>
+      <node id="1189">
+        <label>DeviceFamily_constructPath(driverlib/timer.h)</label>
+      </node>
+      <node id="1183">
+        <label>stddef.h</label>
+      </node>
+      <node id="1186">
+        <label>DeviceFamily_constructPath(inc/hw_gpt.h)</label>
+      </node>
+      <node id="1184">
+        <label>ti/drivers/dpl/HwiP.h</label>
+        <link refid="_hwi_p_8h"/>
+        <childnode refid="1181" relation="include">
+        </childnode>
+        <childnode refid="1182" relation="include">
+        </childnode>
+        <childnode refid="1183" relation="include">
+        </childnode>
+      </node>
+      <node id="1185">
+        <label>ti/devices/DeviceFamily.h</label>
+      </node>
+      <node id="1188">
+        <label>DeviceFamily_constructPath(driverlib/ioc.h)</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1194">
+        <label>TimerCC26XX.h</label>
+        <link refid="_timer_c_c26_x_x_8h"/>
+      </node>
+      <node id="1190">
+        <label>GPTimerCC26XX.h</label>
+        <link refid="_g_p_timer_c_c26_x_x_8h"/>
+        <childnode refid="1191" relation="include">
+        </childnode>
+        <childnode refid="1192" relation="include">
+        </childnode>
+        <childnode refid="1193" relation="include">
+        </childnode>
+        <childnode refid="1194" relation="include">
+        </childnode>
+      </node>
+      <node id="1191">
+        <label>ADCBufCC26X2.h</label>
+        <link refid="_a_d_c_buf_c_c26_x2_8h"/>
+      </node>
+      <node id="1192">
+        <label>ADCBufCC26XX.h</label>
+        <link refid="_a_d_c_buf_c_c26_x_x_8h"/>
+      </node>
+      <node id="1193">
+        <label>PWMTimerCC26XX.h</label>
+        <link refid="_p_w_m_timer_c_c26_x_x_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_g_p_timer_c_c26_x_x___h_w_attrs" prot="public">GPTimerCC26XX_HWAttrs</innerclass>
+    <innerclass refid="struct_g_p_timer_c_c26_x_x___object" prot="public">GPTimerCC26XX_Object</innerclass>
+    <innerclass refid="struct_g_p_timer_c_c26_x_x___config" prot="public">GPTimerCC26XX_Config</innerclass>
+    <innerclass refid="struct_g_p_timer_c_c26_x_x___params" prot="public">GPTimerCC26XX_Params</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_g_p_timer_c_c26_x_x_8h_1a5d50b9348b12ac0acf558d5792dfd18f" prot="public" static="no">
+        <name>GPT_MODE_ONESHOT_UP</name>
+        <initializer><ref refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024caea969d39975d0d759030b9b51423d5a8" kindref="member">GPT_MODE_ONESHOT</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="163" column="9" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_g_p_timer_c_c26_x_x_8h_1ad45a55cbded959cf341c3384ff7e473c" prot="public" static="no">
+        <name>GPT_MODE_PERIODIC_UP</name>
+        <initializer><ref refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024cab1bc09dafb683b3d5b83d7653aa6c2e3" kindref="member">GPT_MODE_PERIODIC</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="164" column="9" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_g_p_timer_c_c26_x_x_8h_1ac710f5d3604bc5b87b2e57c60e36c08d" prot="public" static="no">
+        <name>GPT_MODE_EDGE_COUNT_UP</name>
+        <initializer><ref refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024cad5c7266ba7dc198e1dd6e5040ce28b65" kindref="member">GPT_MODE_EDGE_COUNT</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="165" column="9" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_g_p_timer_c_c26_x_x_8h_1aca59474a336de2c1cc9c075ce0b96d83" prot="public" static="no">
+        <name>GPT_MODE_EDGE_TIME_UP</name>
+        <initializer><ref refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024ca7f54e9a614b16868cc15ca6f6824641f" kindref="member">GPT_MODE_EDGE_TIME</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="166" column="9" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_g_p_timer_c_c26_x_x_8h_1ae8166f42d637bc48b784b2524e49d0fe" prot="public" static="no">
+        <name>GPT_NUM_INTS</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="217" column="9" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_g_p_timer_c_c26_x_x_8h_1ae3d45cf5aeefb7cb0adef012a1554f59" prot="public" static="no">
+        <name>GPT_PARTS_COUNT</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="231" column="9" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="231" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="_g_p_timer_c_c26_x_x_8h_1a37f7594eb4084eff43d5b80bb6418ec7" prot="public" static="no">
+        <name>GPTimerCC26XX_Width</name>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1a37f7594eb4084eff43d5b80bb6418ec7afbeda4c45001e3d32d50f576d6259016" prot="public">
+          <name>GPT_CONFIG_32BIT</name>
+          <initializer>= GPT_CFG_CFG_32BIT_TIMER</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1a37f7594eb4084eff43d5b80bb6418ec7a2e5a3c43a8c62eeace6b38800d39392f" prot="public">
+          <name>GPT_CONFIG_16BIT</name>
+          <initializer>= GPT_CFG_CFG_16BIT_TIMER</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Definitions for specifying the GPTimer configuration (width) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="173" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="172" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="enum" id="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024c" prot="public" static="no">
+        <name>GPTimerCC26XX_Mode</name>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024caea969d39975d0d759030b9b51423d5a8" prot="public">
+          <name>GPT_MODE_ONESHOT</name>
+          <initializer>= GPT_TAMR_TAMR_ONE_SHOT | GPT_TAMR_TAMIE</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024cab1bc09dafb683b3d5b83d7653aa6c2e3" prot="public">
+          <name>GPT_MODE_PERIODIC</name>
+          <initializer>= GPT_TAMR_TAMR_PERIODIC | GPT_TAMR_TAMIE</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024cad5c7266ba7dc198e1dd6e5040ce28b65" prot="public">
+          <name>GPT_MODE_EDGE_COUNT</name>
+          <initializer>= GPT_TAMR_TAMR_CAPTURE | GPT_TAMR_TACM_EDGCNT</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024ca7f54e9a614b16868cc15ca6f6824641f" prot="public">
+          <name>GPT_MODE_EDGE_TIME</name>
+          <initializer>= GPT_TAMR_TAMR_CAPTURE | GPT_TAMR_TACM_EDGTIME</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024ca5d09320529435b9b021abd37d4dac117" prot="public">
+          <name>GPT_MODE_PWM</name>
+          <initializer>= GPT_TAMR_TAMR_PERIODIC | GPT_TAMR_TAPWMIE_EN | GPT_TAMR_TAAMS_PWM | GPT_TAMR_TACM_EDGCNT |
+                   GPT_TAMR_TAPLO_CCP_ON_TO</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Definitions for supported GPTimer modes. Driver code assumes only modes using prescaler as timer extension in 16-bit configuration are used. Therefore new modes must not be added to the below description without also updating driver. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="187" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="186" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="enum" id="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92" prot="public" static="no">
+        <name>GPTimerCC26XX_Interrupt</name>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92a6c6f5236dcbe5f37289a4a513451851e" prot="public">
+          <name>GPT_INT_TIMEOUT</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92a438a33e76043ddb51f1c9e93820a8040" prot="public">
+          <name>GPT_INT_CAPTURE_MATCH</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92ae3e86fdcf14f9ff34c92aaf953b159d9" prot="public">
+          <name>GPT_INT_CAPTURE</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92a87f843ea54618ca92890d4db7f38f242" prot="public">
+          <name>GPT_INT_MATCH</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Definitions for supported GPTimer interrupts. GPTimerCC26XX_IntMask arguments should be a bit vector containing these definitions. See description in Technical Reference. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="209" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="208" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="enum" id="_g_p_timer_c_c26_x_x_8h_1aff5462fa33c306f2c8bd29284fd898b0" prot="public" static="no">
+        <name>GPTimerCC26XX_Part</name>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1aff5462fa33c306f2c8bd29284fd898b0a0630f8ce6004469fe81ebbc804e7ac2a" prot="public">
+          <name>GPT_A</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1aff5462fa33c306f2c8bd29284fd898b0a09aae74a0a9878654fa701a70b76387b" prot="public">
+          <name>GPT_B</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Definitions for GPTimer parts (Timer A / Timer B). Used in GPTimer configuration structure GPTimerCC26XX_config to configure the corresponding timer unit. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="226" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="225" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="enum" id="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359" prot="public" static="no">
+        <name>GPTimerCC26XX_PinMux</name>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a46af9b3278d2116fd4862c7fe19624b7" prot="public">
+          <name>GPT_PIN_0A</name>
+          <initializer>= IOC_PORT_MCU_PORT_EVENT0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a1e7ba339de898f1572f21424ce125f2d" prot="public">
+          <name>GPT_PIN_0B</name>
+          <initializer>= IOC_PORT_MCU_PORT_EVENT1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359acc7f9d714b4eb87595ebd5a8fdd6ed2f" prot="public">
+          <name>GPT_PIN_1A</name>
+          <initializer>= IOC_PORT_MCU_PORT_EVENT2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a69db29a9a9029d1fcfabfbf20ba26ee4" prot="public">
+          <name>GPT_PIN_1B</name>
+          <initializer>= IOC_PORT_MCU_PORT_EVENT3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a48b2ab2ad9e83e67d94421adb06f4aa1" prot="public">
+          <name>GPT_PIN_2A</name>
+          <initializer>= IOC_PORT_MCU_PORT_EVENT4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a3e1fd803b55127a98c4709cc9e811e70" prot="public">
+          <name>GPT_PIN_2B</name>
+          <initializer>= IOC_PORT_MCU_PORT_EVENT5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a4b93799cba930f4b538d0f0b3bfee4be" prot="public">
+          <name>GPT_PIN_3A</name>
+          <initializer>= IOC_PORT_MCU_PORT_EVENT6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359aca82a1cd0f9e891472b4f5b09998a597" prot="public">
+          <name>GPT_PIN_3B</name>
+          <initializer>= IOC_PORT_MCU_PORT_EVENT7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Definitions for input / output ports in IO controller to connect GPTimer to a pin. Used in gptimerCC26xxHWAttrs for static timer configuration PIN driver is used to mux a pin to the timer. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para>PINCC26XX_setMux </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1acc37d2af3b532038792452eee5bffa94" kindref="member">GPTimerCC26XX_getPinMux</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="242" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="241" bodyend="251"/>
+      </memberdef>
+      <memberdef kind="enum" id="_g_p_timer_c_c26_x_x_8h_1ab4c80c79c9acaf8e482e8244adbae73e" prot="public" static="no">
+        <name>GPTimerCC26XX_DebugMode</name>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ab4c80c79c9acaf8e482e8244adbae73ea1aca5e7c45ce80046cc86c309b1500b3" prot="public">
+          <name>GPTimerCC26XX_DEBUG_STALL_OFF</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ab4c80c79c9acaf8e482e8244adbae73ea78ecad7414438f969450881393850b8c" prot="public">
+          <name>GPTimerCC26XX_DEBUG_STALL_ON</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Definitions for controlling timer debug stall mode. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="258" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="257" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="enum" id="_g_p_timer_c_c26_x_x_8h_1a5e56cf3fdef86c705265b2a44a1b275a" prot="public" static="no">
+        <name>GPTimerCC26XX_Direction</name>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1a5e56cf3fdef86c705265b2a44a1b275aa59182c9e66e7c7591d9492edd1beddb1" prot="public">
+          <name>GPTimerCC26XX_DIRECTION_DOWN</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1a5e56cf3fdef86c705265b2a44a1b275aa1bbb01e280145c4b4e4e04e6dde2f062" prot="public">
+          <name>GPTimerCC26XX_DIRECTION_UP</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Definitions for controlling timer counting direction. Setting the Direction for PWM operation has no effect (always counts down). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="269" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="268" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="enum" id="_g_p_timer_c_c26_x_x_8h_1a9667f75063ad28303d1b1420d34c1018" prot="public" static="no">
+        <name>GPTimerCC26XX_SetMatchTiming</name>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1a9667f75063ad28303d1b1420d34c1018a5272d767dfc7efed4617614589d41ebd" prot="public">
+          <name>GPTimerCC26XX_SET_MATCH_NEXT_CLOCK</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1a9667f75063ad28303d1b1420d34c1018a26ab82e7192a9662aad4f28334d9c7ee" prot="public">
+          <name>GPTimerCC26XX_SET_MATCH_ON_TIMEOUT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Definitions for new value loading behaviour. </para>        </briefdescription>
+        <detaileddescription>
+<para>If set to NEXT_CLOCK, then the new match value is updated immediately. If set to ON_TIMEOUT the new match will only be applied to the next timer cycle.</para><para>Only match setting is affected by this option. Load setting is always applied immediately. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="284" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="283" bodyend="287"/>
+      </memberdef>
+      <memberdef kind="enum" id="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151" prot="public" static="no">
+        <name>GPTimerCC26XX_Edge</name>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151a0dda532d331ac235bead20fad3975f4f" prot="public">
+          <name>GPTimerCC26XX_POS_EDGE</name>
+          <initializer>= GPT_CTL_TAEVENT_POS</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151a2189f990a1c45892bdfcb31855d7d98f" prot="public">
+          <name>GPTimerCC26XX_NEG_EDGE</name>
+          <initializer>= GPT_CTL_TAEVENT_NEG</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151a2219c0e15065a692a80b4049036cd20a" prot="public">
+          <name>GPTimerCC26XX_BOTH_EDGES</name>
+          <initializer>= GPT_CTL_TAEVENT_BOTH</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Definitions for controlling edges used for timer capture. Used in GPTimer edge-time and edge-count modes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="295" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="294" bodyend="299"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1aeb2b955f6dda2b101294c7b521e715b4" prot="public" static="no">
+        <type>enum <ref refid="_g_p_timer_c_c26_x_x_8h_1a37f7594eb4084eff43d5b80bb6418ec7" kindref="member">GPTimerCC26XX_Width</ref></type>
+        <definition>typedef enum GPTimerCC26XX_Width  GPTimerCC26XX_Width</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_Width</name>
+        <briefdescription>
+<para>Definitions for specifying the GPTimer configuration (width) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="176" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1a13c88da09d4f9806f5555690bf2e3a49" prot="public" static="no">
+        <type>enum <ref refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024c" kindref="member">GPTimerCC26XX_Mode</ref></type>
+        <definition>typedef enum GPTimerCC26XX_Mode  GPTimerCC26XX_Mode</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_Mode</name>
+        <briefdescription>
+<para>Definitions for supported GPTimer modes. Driver code assumes only modes using prescaler as timer extension in 16-bit configuration are used. Therefore new modes must not be added to the below description without also updating driver. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="200" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1aa4cc2366361f3ae2d3438d4496e6b184" prot="public" static="no">
+        <type>enum <ref refid="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92" kindref="member">GPTimerCC26XX_Interrupt</ref></type>
+        <definition>typedef enum GPTimerCC26XX_Interrupt  GPTimerCC26XX_Interrupt</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_Interrupt</name>
+        <briefdescription>
+<para>Definitions for supported GPTimer interrupts. GPTimerCC26XX_IntMask arguments should be a bit vector containing these definitions. See description in Technical Reference. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="214" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1a7067a38f9de14af167de8df90dfb18d3" prot="public" static="no">
+        <type>enum <ref refid="_g_p_timer_c_c26_x_x_8h_1aff5462fa33c306f2c8bd29284fd898b0" kindref="member">GPTimerCC26XX_Part</ref></type>
+        <definition>typedef enum GPTimerCC26XX_Part  GPTimerCC26XX_Part</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_Part</name>
+        <briefdescription>
+<para>Definitions for GPTimer parts (Timer A / Timer B). Used in GPTimer configuration structure GPTimerCC26XX_config to configure the corresponding timer unit. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="229" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1a02bcd903a770b3bc9bea666cf5b0bded" prot="public" static="no">
+        <type>enum <ref refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359" kindref="member">GPTimerCC26XX_PinMux</ref></type>
+        <definition>typedef enum GPTimerCC26XX_PinMux  GPTimerCC26XX_PinMux</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_PinMux</name>
+        <briefdescription>
+<para>Definitions for input / output ports in IO controller to connect GPTimer to a pin. Used in gptimerCC26xxHWAttrs for static timer configuration PIN driver is used to mux a pin to the timer. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para>PINCC26XX_setMux </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1acc37d2af3b532038792452eee5bffa94" kindref="member">GPTimerCC26XX_getPinMux</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="251" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1a1c5a4b610efe0481e6ebf9575820a6f3" prot="public" static="no">
+        <type>enum <ref refid="_g_p_timer_c_c26_x_x_8h_1ab4c80c79c9acaf8e482e8244adbae73e" kindref="member">GPTimerCC26XX_DebugMode</ref></type>
+        <definition>typedef enum GPTimerCC26XX_DebugMode  GPTimerCC26XX_DebugMode</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_DebugMode</name>
+        <briefdescription>
+<para>Definitions for controlling timer debug stall mode. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="261" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1a9a4f7b5e5f3af06cd07d3d7c42419fb8" prot="public" static="no">
+        <type>enum <ref refid="_g_p_timer_c_c26_x_x_8h_1a5e56cf3fdef86c705265b2a44a1b275a" kindref="member">GPTimerCC26XX_Direction</ref></type>
+        <definition>typedef enum GPTimerCC26XX_Direction  GPTimerCC26XX_Direction</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_Direction</name>
+        <briefdescription>
+<para>Definitions for controlling timer counting direction. Setting the Direction for PWM operation has no effect (always counts down). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="272" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1a80a3229a3305b590fb470b4b1ec6704c" prot="public" static="no">
+        <type>enum <ref refid="_g_p_timer_c_c26_x_x_8h_1a9667f75063ad28303d1b1420d34c1018" kindref="member">GPTimerCC26XX_SetMatchTiming</ref></type>
+        <definition>typedef enum GPTimerCC26XX_SetMatchTiming  GPTimerCC26XX_SetMatchTiming</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_SetMatchTiming</name>
+        <briefdescription>
+<para>Definitions for new value loading behaviour. </para>        </briefdescription>
+        <detaileddescription>
+<para>If set to NEXT_CLOCK, then the new match value is updated immediately. If set to ON_TIMEOUT the new match will only be applied to the next timer cycle.</para><para>Only match setting is affected by this option. Load setting is always applied immediately. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="287" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1a32b251408c3c97a16d017a095555aa18" prot="public" static="no">
+        <type>enum <ref refid="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151" kindref="member">GPTimerCC26XX_Edge</ref></type>
+        <definition>typedef enum GPTimerCC26XX_Edge  GPTimerCC26XX_Edge</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_Edge</name>
+        <briefdescription>
+<para>Definitions for controlling edges used for timer capture. Used in GPTimer edge-time and edge-count modes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="299" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1ac827d51b6288add49797cd98976e9188" prot="public" static="no">
+        <type>struct <ref refid="struct_g_p_timer_c_c26_x_x___config" kindref="compound">GPTimerCC26XX_Config</ref></type>
+        <definition>typedef struct GPTimerCC26XX_Config GPTimerCC26XX_Config</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_Config</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="64" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="302" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" prot="public" static="no">
+        <type><ref refid="struct_g_p_timer_c_c26_x_x___config" kindref="compound">GPTimerCC26XX_Config</ref> *</type>
+        <definition>typedef GPTimerCC26XX_Config* GPTimerCC26XX_Handle</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_Handle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="305" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="305" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1ac74410bfd92bf89732dd795bbe8769d1" prot="public" static="no">
+        <type>uint16_t</type>
+        <definition>typedef uint16_t GPTimerCC26XX_IntMask</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_IntMask</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="308" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="308" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1ab667a2fd47273a9778f5011774fa55c0" prot="public" static="no">
+        <type>uint32_t</type>
+        <definition>typedef uint32_t GPTimerCC26XX_Value</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_Value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="311" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="311" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1a6b9b95974e20f85ccd3f8463fdda84f1" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* GPTimerCC26XX_HwiFxn) (GPTimerCC26XX_Handle handle, GPTimerCC26XX_IntMask interruptMask)</definition>
+        <argsstring>)(GPTimerCC26XX_Handle handle, GPTimerCC26XX_IntMask interruptMask)</argsstring>
+        <name>GPTimerCC26XX_HwiFxn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="314" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="314" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1a415d99f6aca4a4a8bf94a6328021c15c" prot="public" static="no">
+        <type>struct <ref refid="struct_g_p_timer_c_c26_x_x___h_w_attrs" kindref="compound">GPTimerCC26XX_HWAttrs</ref></type>
+        <definition>typedef struct GPTimerCC26XX_HWAttrs  GPTimerCC26XX_HWAttrs</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_HWAttrs</name>
+        <briefdescription>
+<para>GPTimer26XX Hardware attributes. </para>        </briefdescription>
+        <detaileddescription>
+<para>These fields are used by the driver to set up underlying GPTimer driver statically. A sample structure is shown below:</para><para><programlisting><codeline><highlight class="normal">//<sp/>GPTimer<sp/>hardware<sp/>attributes,<sp/>one<sp/>per<sp/>timer<sp/>unit<sp/>(Timer<sp/>0A,<sp/>0B,<sp/>1A,<sp/>1B..)</highlight></codeline>
+<codeline><highlight class="normal">const<sp/>GPTimerCC26XX_HWAttrs<sp/>gptimerCC26xxHWAttrs[CC2650_GPTIMERPARTSCOUNT]<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{.baseAddr<sp/>=<sp/>GPT0_BASE,<sp/>.intNum<sp/>=<sp/>INT_TIMER0A,<sp/>.powerMngrId<sp/>=<sp/>PERIPH_GPT0,<sp/>.pinMux<sp/>=<sp/>GPT_PIN_0A,<sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{.baseAddr<sp/>=<sp/>GPT0_BASE,<sp/>.intNum<sp/>=<sp/>INT_TIMER0B,<sp/>.powerMngrId<sp/>=<sp/>PERIPH_GPT0,<sp/>.pinMux<sp/>=<sp/>GPT_PIN_0B,<sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{.baseAddr<sp/>=<sp/>GPT1_BASE,<sp/>.intNum<sp/>=<sp/>INT_TIMER1A,<sp/>.powerMngrId<sp/>=<sp/>PERIPH_GPT1,<sp/>.pinMux<sp/>=<sp/>GPT_PIN_1A,<sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{.baseAddr<sp/>=<sp/>GPT1_BASE,<sp/>.intNum<sp/>=<sp/>INT_TIMER1B,<sp/>.powerMngrId<sp/>=<sp/>PERIPH_GPT1,<sp/>.pinMux<sp/>=<sp/>GPT_PIN_1B,<sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{.baseAddr<sp/>=<sp/>GPT2_BASE,<sp/>.intNum<sp/>=<sp/>INT_TIMER2A,<sp/>.powerMngrId<sp/>=<sp/>PERIPH_GPT2,<sp/>.pinMux<sp/>=<sp/>GPT_PIN_2A,<sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{.baseAddr<sp/>=<sp/>GPT2_BASE,<sp/>.intNum<sp/>=<sp/>INT_TIMER2B,<sp/>.powerMngrId<sp/>=<sp/>PERIPH_GPT2,<sp/>.pinMux<sp/>=<sp/>GPT_PIN_2B,<sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{.baseAddr<sp/>=<sp/>GPT3_BASE,<sp/>.intNum<sp/>=<sp/>INT_TIMER3A,<sp/>.powerMngrId<sp/>=<sp/>PERIPH_GPT3,<sp/>.pinMux<sp/>=<sp/>GPT_PIN_3A,<sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{.baseAddr<sp/>=<sp/>GPT3_BASE,<sp/>.intNum<sp/>=<sp/>INT_TIMER3B,<sp/>.powerMngrId<sp/>=<sp/>PERIPH_GPT3,<sp/>.pinMux<sp/>=<sp/>GPT_PIN_3B,<sp/>},</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="358" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1a98c0a6722f2d48af3b7c032235181bd1" prot="public" static="no">
+        <type>struct <ref refid="struct_g_p_timer_c_c26_x_x___object" kindref="compound">GPTimerCC26XX_Object</ref></type>
+        <definition>typedef struct GPTimerCC26XX_Object  GPTimerCC26XX_Object</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_Object</name>
+        <briefdescription>
+<para>GPTimer26XX Object. </para>        </briefdescription>
+        <detaileddescription>
+<para>These fields are used by the driver to store and modify GPTimer configuration during run-time. The application must not edit any member variables of this structure. Appplications should also not access member variables of this structure as backwards compatibility is not guaranteed. An example structure is shown below: <programlisting><codeline><highlight class="normal">//<sp/>GPTimer<sp/>objects,<sp/>one<sp/>per<sp/>full-width<sp/>timer<sp/>(A+B)<sp/>(Timer<sp/>0,<sp/>Timer<sp/>1..)</highlight></codeline>
+<codeline><highlight class="normal">GPTimerCC26XX_Object<sp/>gptimerCC26XXObjects[CC2650_GPTIMERCOUNT];</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="382" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_g_p_timer_c_c26_x_x_8h_1ad5264b3636e1d40a6cbd64cf150be32d" prot="public" static="no">
+        <type>struct <ref refid="struct_g_p_timer_c_c26_x_x___params" kindref="compound">GPTimerCC26XX_Params</ref></type>
+        <definition>typedef struct GPTimerCC26XX_Params  GPTimerCC26XX_Params</definition>
+        <argsstring></argsstring>
+        <name>GPTimerCC26XX_Params</name>
+        <briefdescription>
+<para>GPTimerCC26XX Parameters. </para>        </briefdescription>
+        <detaileddescription>
+<para>GPTimer parameters are used to with the <ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> call. Default values for these parameters are set using <ref refid="_g_p_timer_c_c26_x_x_8h_1a11e9f3ff24f5f075989f89d99e65e827" kindref="member">GPTimerCC26XX_Params_init()</ref>.</para><para><simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a11e9f3ff24f5f075989f89d99e65e827" kindref="member">GPTimerCC26XX_Params_init()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="426" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1a11e9f3ff24f5f075989f89d99e65e827" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_Params_init</definition>
+        <argsstring>(GPTimerCC26XX_Params *params)</argsstring>
+        <name>GPTimerCC26XX_Params_init</name>
+        <param>
+          <type><ref refid="struct_g_p_timer_c_c26_x_x___params" kindref="compound">GPTimerCC26XX_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Function to initialize the <ref refid="struct_g_p_timer_c_c26_x_x___params" kindref="compound">GPTimerCC26XX_Params</ref> struct to its default values. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An pointer to <ref refid="struct_g_p_timer_c_c26_x_x___params" kindref="compound">GPTimerCC26XX_Params</ref> structure for initialization</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Defaults values are:<itemizedlist>
+<listitem><para>32-bit configuration</para></listitem><listitem><para>Periodic mode counting upwards</para></listitem><listitem><para>Debug stall mode disabled </para></listitem></itemizedlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="440" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+        <definition>GPTimerCC26XX_Handle GPTimerCC26XX_open</definition>
+        <argsstring>(unsigned int index, const GPTimerCC26XX_Params *params)</argsstring>
+        <name>GPTimerCC26XX_open</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_g_p_timer_c_c26_x_x___params" kindref="compound">GPTimerCC26XX_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>This function opens a given GPTimer peripheral. Will set dependency on timer and configure it into specified mode. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Logical peripheral number for the GPTimer indexed into the GPTimerCC26XX_config table</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a parameter block. If NULL, it will use default values.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A GPTimerCC26XX_Handle on success or a NULL on an error or if it has been opened already. If NULL is returned, further GPTimerCC26XX API calls will result in undefined behaviour.</para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a0a148f2232f5bb4c59015de965c82d43" kindref="member">GPTimerCC26XX_close()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="458" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1a0a148f2232f5bb4c59015de965c82d43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_close</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle)</argsstring>
+        <name>GPTimerCC26XX_close</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to close a GPTimer peripheral specified by the GPTimer handle. Closing timer will releae dependency on timer and clear configuration. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first. </para></simplesect>
+<simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1aebdbd7f83c3824555e4abb7399802765" kindref="member">GPTimerCC26XX_stop()</ref> should to be called first if GPTimer is started</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from <ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a869213ede8949245112fd7ca9c9ebdaa" kindref="member">GPTimerCC26XX_start()</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1aebdbd7f83c3824555e4abb7399802765" kindref="member">GPTimerCC26XX_stop()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="473" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1a869213ede8949245112fd7ca9c9ebdaa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_start</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle)</argsstring>
+        <name>GPTimerCC26XX_start</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to start the specified GPTimer with current settings. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from <ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1aebdbd7f83c3824555e4abb7399802765" kindref="member">GPTimerCC26XX_stop()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="485" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1aebdbd7f83c3824555e4abb7399802765" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_stop</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle)</argsstring>
+        <name>GPTimerCC26XX_stop</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to stop the specified GPTimer. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from <ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a869213ede8949245112fd7ca9c9ebdaa" kindref="member">GPTimerCC26XX_start()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="497" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1aa365d9e1d6a1b324090510f2748db771" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_setLoadValue</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle, GPTimerCC26XX_Value loadValue)</argsstring>
+        <name>GPTimerCC26XX_setLoadValue</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab667a2fd47273a9778f5011774fa55c0" kindref="member">GPTimerCC26XX_Value</ref></type>
+          <declname>loadValue</declname>
+        </param>
+        <briefdescription>
+<para>Function to set load value of the specified GPTimer. Function can be called while GPTimer is running. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>loadValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Load value to set the GPTimer to.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="510" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1a3f83bdcc8482297952f6e08ccadd0e11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_setMatchValue</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle, GPTimerCC26XX_Value matchValue)</argsstring>
+        <name>GPTimerCC26XX_setMatchValue</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab667a2fd47273a9778f5011774fa55c0" kindref="member">GPTimerCC26XX_Value</ref></type>
+          <declname>matchValue</declname>
+        </param>
+        <briefdescription>
+<para>Function to set match value of the specified GPTimer. Function can be called while GPTimer is running. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>matchValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Match value to set the GPTimer to.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="523" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1ae6a091f0962d33a7897ae61b501aedc4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_setCaptureEdge</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle, GPTimerCC26XX_Edge edge)</argsstring>
+        <name>GPTimerCC26XX_setCaptureEdge</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151" kindref="member">GPTimerCC26XX_Edge</ref></type>
+          <declname>edge</declname>
+        </param>
+        <briefdescription>
+<para>Function to set which input edge the GPTimer capture should use. Applies to edge-count and edge-time modes Function can be called while GPTimer is running. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>edge</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The edge that should trigger a capture</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="537" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1af4832251ebc2e81a952bbc1c39d2502e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab667a2fd47273a9778f5011774fa55c0" kindref="member">GPTimerCC26XX_Value</ref></type>
+        <definition>GPTimerCC26XX_Value GPTimerCC26XX_getFreeRunValue</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle)</argsstring>
+        <name>GPTimerCC26XX_getFreeRunValue</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to retrieve the current free-running value of timer. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Current free-running timer value for all modes</para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="550" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1a553ef86139c25234964c81783aa2cd94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab667a2fd47273a9778f5011774fa55c0" kindref="member">GPTimerCC26XX_Value</ref></type>
+        <definition>GPTimerCC26XX_Value GPTimerCC26XX_getValue</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle)</argsstring>
+        <name>GPTimerCC26XX_getValue</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to retrieve the current value of timer This returns the value of the timer in all modes except for input edge count and input edge time mode. In edge count mode, this register contains the number of edges that have occurred. In input edge time, this register contains the timer value at which the last edge event took place. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Current free-running timer value for all modes</para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="569" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1a4032d544f2b79ae1a999a4faa5ee0884" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_registerInterrupt</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle, GPTimerCC26XX_HwiFxn callback, GPTimerCC26XX_IntMask intMask)</argsstring>
+        <name>GPTimerCC26XX_registerInterrupt</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1a6b9b95974e20f85ccd3f8463fdda84f1" kindref="member">GPTimerCC26XX_HwiFxn</ref></type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ac74410bfd92bf89732dd795bbe8769d1" kindref="member">GPTimerCC26XX_IntMask</ref></type>
+          <declname>intMask</declname>
+        </param>
+        <briefdescription>
+<para>Function to register a CPU interrupt for a given timer handle and enable a set of timer interrupt sources. The interrupt to the CPU will be a bitwise OR of the enabled interrupt sources. When an interrupt occurs, the driver will clear the interrupt source and call the application provided callback. The callback is executed in HW interrupt context and processing in callback should be minimized. </para>        </briefdescription>
+        <detaileddescription>
+<para>Interrupt sources can also be individually disabled and enabled by using GPTimerCC26XX_enableInterrupt / GPTimerCC26XX_disableInterrupt.</para><para>This function should only be called once for a handle after opening the timer. If closing a GPTimer, interrupts for the timer should be unregistered first using GPTimerCC26XX_unregisterInterrupt.</para><para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An application provided callback function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>intMask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A bit vector mask containing values from GPTimerCC26XX_Interrupt</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1af08557caa1e95c615a17428521d22d9d" kindref="member">GPTimerCC26XX_enableInterrupt</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a8aca62c518c9ff0347ec09f464b88b26" kindref="member">GPTimerCC26XX_disableInterrupt</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="598" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1adf0a8716a4197bba10d67322c3dfe5ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_unregisterInterrupt</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle)</argsstring>
+        <name>GPTimerCC26XX_unregisterInterrupt</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to disable a CPU interrupt for a given timer handle and disable all interrupt sources for corresponding GPTimer unit. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function should only be called once for a handle after opening the timer and registering the interrupt.</para><para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully </para></simplesect>
+<simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a4032d544f2b79ae1a999a4faa5ee0884" kindref="member">GPTimerCC26XX_registerInterrupt()</ref> has to be called first</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a4032d544f2b79ae1a999a4faa5ee0884" kindref="member">GPTimerCC26XX_registerInterrupt</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="617" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1af08557caa1e95c615a17428521d22d9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_enableInterrupt</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle, GPTimerCC26XX_IntMask interruptMask)</argsstring>
+        <name>GPTimerCC26XX_enableInterrupt</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ac74410bfd92bf89732dd795bbe8769d1" kindref="member">GPTimerCC26XX_IntMask</ref></type>
+          <declname>interruptMask</declname>
+        </param>
+        <briefdescription>
+<para>Function to enable a set of GPTimer interrupt sources. The interrupt to the CPU must be enabled using GPTimerCC26XX_registerInterrupt. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>interruptMask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A bit vector mask containing values from GPTimerCC26XX_Interrupt</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a8aca62c518c9ff0347ec09f464b88b26" kindref="member">GPTimerCC26XX_disableInterrupt</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="632" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1a8aca62c518c9ff0347ec09f464b88b26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_disableInterrupt</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle, GPTimerCC26XX_IntMask interruptMask)</argsstring>
+        <name>GPTimerCC26XX_disableInterrupt</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ac74410bfd92bf89732dd795bbe8769d1" kindref="member">GPTimerCC26XX_IntMask</ref></type>
+          <declname>interruptMask</declname>
+        </param>
+        <briefdescription>
+<para>Function to disable a set of GPTimer interrupt sources. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>interruptMask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A bit vector mask containing values from GPTimerCC26XX_Interrupt</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1af08557caa1e95c615a17428521d22d9d" kindref="member">GPTimerCC26XX_enableInterrupt</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="644" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1a5a8bdc7643305d21dcfcd567d215b7f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_configureDebugStall</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle, GPTimerCC26XX_DebugMode mode)</argsstring>
+        <name>GPTimerCC26XX_configureDebugStall</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4c80c79c9acaf8e482e8244adbae73e" kindref="member">GPTimerCC26XX_DebugMode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>Function to control timer debug stall mode. When enabled, the timer will stop when the debugger halts the CPU. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Configuration for debug stall mode (enable/disable)</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="657" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1a232b3933b05cd118df09de139efccb34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t GPTimerCC26XX_getArg</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle)</argsstring>
+        <name>GPTimerCC26XX_getArg</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to get a custom argument. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully </para></simplesect>
+<simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1ab2c8414bd2de13b140612e13f0c4b35b" kindref="member">GPTimerCC26XX_setArg()</ref> has to be called first</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1ab2c8414bd2de13b140612e13f0c4b35b" kindref="member">GPTimerCC26XX_setArg</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="670" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1ab2c8414bd2de13b140612e13f0c4b35b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GPTimerCC26XX_setArg</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle, void *arg)</argsstring>
+        <name>GPTimerCC26XX_setArg</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>arg</declname>
+        </param>
+        <briefdescription>
+<para>Function to set a custom argument. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>arg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a custom argument</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a232b3933b05cd118df09de139efccb34" kindref="member">GPTimerCC26XX_getArg</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="683" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_g_p_timer_c_c26_x_x_8h_1acc37d2af3b532038792452eee5bffa94" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359" kindref="member">GPTimerCC26XX_PinMux</ref></type>
+        <definition>static GPTimerCC26XX_PinMux GPTimerCC26XX_getPinMux</definition>
+        <argsstring>(GPTimerCC26XX_Handle handle)</argsstring>
+        <name>GPTimerCC26XX_getPinMux</name>
+        <param>
+          <type><ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to return the PIN mux used by the GPTimer identified by handle. This is used to connect a GPTimer capture/compare port to a device DIO using PINCC26XX_setMux. This is typically used in PWM mode and Timer Edge-Count / Edge-Time modes. Function assumes correct pinMux is set up in device specific <ref refid="struct_g_p_timer_c_c26_x_x___h_w_attrs" kindref="compound">GPTimerCC26XX_HWAttrs</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref> has to be called first successfully</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A GPTimerCC26XX handle returned from GPTimerCC26XX_open</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/timer/GPTimerCC26XX.h" line="700" column="1" bodyfile="source/ti/drivers/timer/GPTimerCC26XX.h" bodystart="700" bodyend="703"/>
+        <references refid="struct_g_p_timer_c_c26_x_x___config_1a713a6a23b178957ab2f245326f954b2b" compoundref="_g_p_timer_c_c26_x_x_8h" startline="407">GPTimerCC26XX_Config::hwAttrs</references>
+        <references refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1a7a5f3ba89a0094ead820cc15f9465ed5" compoundref="_g_p_timer_c_c26_x_x_8h" startline="357">GPTimerCC26XX_HWAttrs::pinMux</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>GPTimer driver implementation for CC26XX/CC13XX. </para>    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+ <verbatim># Overview #
+</verbatim> This TI RTOS driver can be used to configure GPTimer modules to the modes supported by the GPTimer. The board file or application must define the device specific configuration before using the driver. <heading level="1">Configuration</heading>
+</para><para>The GPTimer can be used in two different configurations. In 32-bit mode the timer will act as a full-width timer and is controlled using the Timer A unit. In split (16-bit) mode the timer is split into 2x 16-bit timers. In 16-bit mode a prescaler is available for each timer unit, effectively increasing the resolution in this mode to 24-bit. All supported modes by driver in split configuration uses prescaler as timer extension.</para><para><heading level="1">Modes</heading>
+</para><para>The GPTimer driver supports the following timer modes:<itemizedlist>
+<listitem><para>Oneshot mode counting upwards. When timer reaches load value, the timer is stopped automatically. Supported in both 16 and 32-bit configuration.</para></listitem><listitem><para>Periodic mode counting upwards. When timer reaches load value it wraps and starts counting from 0 again. Supported in both 16 and 32-bit configuration.</para></listitem><listitem><para>Input edge-count. Timer counts the number of events on its input capture port upwards from 0. Events can be rising-edge, falling-edge, or both. Supported only in 16-bit mode.</para></listitem><listitem><para>Input edge-time. Timer counts upwards from 0 and captures the time of an event on its input capture port. This can be used to count the time between events. Events can be rising-edge, falling-edge or both. Supported only in 16-bit mode.</para></listitem><listitem><para>PWM mode. Timer counts downwards from load value. CCP is set to 1 when reaching timeout (0) and toggles when reaching match value.</para></listitem></itemizedlist>
+</para><para><heading level="1">Power Management</heading>
+</para><para>The TI-RTOS power management framework will try to put the device into the most power efficient mode whenever possible. Please see the technical reference manual for further details on each power mode.</para><para>The GPTimerCC26XX driver will set constraints on disallowed power modes when needed, removing the need for the application to handle this. The following statements are valid:<itemizedlist>
+<listitem><para>After <ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open()</ref>: The device is still allowed to enter Standby. When the device is active the corresponding GPTimer peripheral will be enabled and clocked.</para></listitem><listitem><para>After <ref refid="_g_p_timer_c_c26_x_x_8h_1a869213ede8949245112fd7ca9c9ebdaa" kindref="member">GPTimerCC26XX_start()</ref>: The device will only go to Idle power mode since the high-frequency clock is needed for timer operation.</para></listitem><listitem><para>After <ref refid="_g_p_timer_c_c26_x_x_8h_1aebdbd7f83c3824555e4abb7399802765" kindref="member">GPTimerCC26XX_stop()</ref>: Conditions are equal as for after GPTimerCC26XX_open</para></listitem><listitem><para>After <ref refid="_g_p_timer_c_c26_x_x_8h_1a0a148f2232f5bb4c59015de965c82d43" kindref="member">GPTimerCC26XX_close()</ref>: The underlying GPTimer is turned off and the device is allowed to go to standby.</para></listitem></itemizedlist>
+</para><para><heading level="1">Accuracy</heading>
+</para><para>The GPTimer clock is dependent on the MCU system clock. If very high-accuracy outputs are needed, the application should request using the external HF crystal: <programlisting><codeline><highlight class="normal">#include<sp/>&lt;ti/sysbios/family/arm/cc26xx/Power.h&gt;</highlight></codeline>
+<codeline><highlight class="normal">#include<sp/>&lt;ti/sysbios/family/arm/cc26xx/PowerCC2650.h&gt;</highlight></codeline>
+<codeline><highlight class="normal">Power_setDependency(XOSC_HF);</highlight></codeline>
+</programlisting></para><para><heading level="1">Limitations</heading>
+</para><para><itemizedlist>
+<listitem><para>DMA usage is not supported</para></listitem><listitem><para>Timer synchronization is not supported</para></listitem><listitem><para>Down counting modes (except for PWM) are not supported by driver</para></listitem></itemizedlist>
+</para><para><heading level="1">GPTimerCC26XX usage</heading>
+</para><para><heading level="2">Periodic timer</heading>
+</para><para>The example below will generate an interrupt using the GPTimer every 1 ms.</para><para><programlisting><codeline><highlight class="normal">GPTimerCC26XX_Handle<sp/>hTimer;</highlight></codeline>
+<codeline><highlight class="normal">void<sp/>timerCallback(GPTimerCC26XX_Handle<sp/>handle,<sp/>GPTimerCC26XX_IntMask<sp/>interruptMask)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>interrupt<sp/>callback<sp/>code<sp/>goes<sp/>here.<sp/>Minimize<sp/>processing<sp/>in<sp/>interrupt.</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">void<sp/>taskFxn(uintptr_t<sp/>a0,<sp/>uintptr_t<sp/>a1)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>GPTimerCC26XX_Params<sp/>params;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>GPTimerCC26XX_Params_init(&amp;params);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>params.width<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>GPT_CONFIG_16BIT;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>params.mode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>GPT_MODE_PERIODIC;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>params.direction<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>GPTimerCC26XX_DIRECTION_UP;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>params.debugStallMode<sp/>=<sp/>GPTimerCC26XX_DEBUG_STALL_OFF;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>hTimer<sp/>=<sp/>GPTimerCC26XX_open(CC2650_GPTIMER0A,<sp/>&amp;params);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>if(hTimer<sp/>==<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Log_error0(&quot;Failed<sp/>to<sp/>open<sp/>GPTimer&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Task_exit();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>Types_FreqHz<sp/><sp/>freq;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>BIOS_getCpuFreq(&amp;freq);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>GPTimerCC26XX_Value<sp/>loadVal<sp/>=<sp/>freq.lo<sp/>/<sp/>1000<sp/>-<sp/>1;<sp/>//47999</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>GPTimerCC26XX_setLoadValue(hTimer,<sp/>loadVal);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>GPTimerCC26XX_registerInterrupt(hTimer,<sp/>timerCallback,<sp/>GPT_INT_TIMEOUT);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>GPTimerCC26XX_start(hTimer);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/>while(1)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Task_sleep(BIOS_WAIT_FOREVER);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para><para><heading level="2">PWM output</heading>
+</para><para>See the PWM2TimerCC26XX driver </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2015-2019,<sp/>Texas<sp/>Instruments<sp/>Incorporated</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">/*!*****************************************************************************</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*<sp/><sp/>@file<sp/><sp/><sp/><sp/><sp/><sp/><sp/>GPTimerCC26XX.h</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*<sp/><sp/>@brief<sp/><sp/><sp/><sp/><sp/><sp/>GPTimer<sp/>driver<sp/>implementation<sp/>for<sp/>CC26XX/CC13XX</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>#<sp/>Overview<sp/>#</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/><sp/>This<sp/>TI<sp/>RTOS<sp/>driver<sp/>can<sp/>be<sp/>used<sp/>to<sp/>configure<sp/>GPTimer<sp/>modules<sp/>to<sp/>the<sp/>modes</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/><sp/>supported<sp/>by<sp/>the<sp/>GPTimer.<sp/>The<sp/>board<sp/>file<sp/>or<sp/>application<sp/>must<sp/>define<sp/>the<sp/>device</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/><sp/>specific<sp/>configuration<sp/>before<sp/>using<sp/>the<sp/>driver.</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>#<sp/>Configuration<sp/>#</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>GPTimer<sp/>can<sp/>be<sp/>used<sp/>in<sp/>two<sp/>different<sp/>configurations.<sp/>In<sp/>32-bit<sp/>mode<sp/>the</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*<sp/><sp/>timer<sp/>will<sp/>act<sp/>as<sp/>a<sp/>full-width<sp/>timer<sp/>and<sp/>is<sp/>controlled<sp/>using<sp/>the<sp/>Timer<sp/>A<sp/>unit.</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*<sp/><sp/>In<sp/>split<sp/>(16-bit)<sp/>mode<sp/>the<sp/>timer<sp/>is<sp/>split<sp/>into<sp/>2x<sp/>16-bit<sp/>timers.<sp/>In<sp/>16-bit<sp/>mode</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/>*<sp/><sp/>a<sp/>prescaler<sp/>is<sp/>available<sp/>for<sp/>each<sp/>timer<sp/>unit,<sp/>effectively<sp/>increasing<sp/>the</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/>*<sp/><sp/>resolution<sp/>in<sp/>this<sp/>mode<sp/>to<sp/>24-bit.<sp/>All<sp/>supported<sp/>modes<sp/>by<sp/>driver<sp/>in<sp/>split</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/>*<sp/><sp/>configuration<sp/>uses<sp/>prescaler<sp/>as<sp/>timer<sp/>extension.</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Modes<sp/>#</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>GPTimer<sp/>driver<sp/>supports<sp/>the<sp/>following<sp/>timer<sp/>modes:</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>Oneshot<sp/>mode<sp/>counting<sp/>upwards.<sp/>When<sp/>timer<sp/>reaches<sp/>load<sp/>value,<sp/>the<sp/>timer</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>is<sp/>stopped<sp/>automatically.<sp/>Supported<sp/>in<sp/>both<sp/>16<sp/>and<sp/>32-bit<sp/>configuration.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>Periodic<sp/>mode<sp/>counting<sp/>upwards.<sp/>When<sp/>timer<sp/>reaches<sp/>load<sp/>value<sp/>it<sp/>wraps<sp/>and</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>starts<sp/>counting<sp/>from<sp/>0<sp/>again.<sp/>Supported<sp/>in<sp/>both<sp/>16<sp/>and<sp/>32-bit<sp/>configuration.</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>Input<sp/>edge-count.<sp/>Timer<sp/>counts<sp/>the<sp/>number<sp/>of<sp/>events<sp/>on<sp/>its<sp/>input<sp/>capture<sp/>port</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>upwards<sp/>from<sp/>0.<sp/>Events<sp/>can<sp/>be<sp/>rising-edge,<sp/>falling-edge,<sp/>or<sp/>both.</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>Supported<sp/>only<sp/>in<sp/>16-bit<sp/>mode.</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>Input<sp/>edge-time.<sp/>Timer<sp/>counts<sp/>upwards<sp/>from<sp/>0<sp/>and<sp/>captures<sp/>the<sp/>time<sp/>of<sp/>an</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>event<sp/>on<sp/>its<sp/>input<sp/>capture<sp/>port.<sp/>This<sp/>can<sp/>be<sp/>used<sp/>to<sp/>count<sp/>the<sp/>time</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>between<sp/>events.<sp/>Events<sp/>can<sp/>be<sp/>rising-edge,<sp/>falling-edge<sp/>or<sp/>both.</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>Supported<sp/>only<sp/>in<sp/>16-bit<sp/>mode.</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>PWM<sp/>mode.<sp/>Timer<sp/>counts<sp/>downwards<sp/>from<sp/>load<sp/>value.<sp/>CCP<sp/>is<sp/>set<sp/>to<sp/>1<sp/>when</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>reaching<sp/>timeout<sp/>(0)<sp/>and<sp/>toggles<sp/>when<sp/>reaching<sp/>match<sp/>value.</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/>*<sp/>#<sp/>Power<sp/>Management<sp/>#</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/>*<sp/>The<sp/>TI-RTOS<sp/>power<sp/>management<sp/>framework<sp/>will<sp/>try<sp/>to<sp/>put<sp/>the<sp/>device<sp/>into<sp/>the<sp/>most</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/>*<sp/>power<sp/>efficient<sp/>mode<sp/>whenever<sp/>possible.<sp/>Please<sp/>see<sp/>the<sp/>technical<sp/>reference</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/>*<sp/>manual<sp/>for<sp/>further<sp/>details<sp/>on<sp/>each<sp/>power<sp/>mode.</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>GPTimerCC26XX<sp/>driver<sp/>will<sp/>set<sp/>constraints<sp/>on<sp/>disallowed<sp/>power<sp/>modes<sp/>when</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/>*<sp/><sp/>needed,<sp/>removing<sp/>the<sp/>need<sp/>for<sp/>the<sp/>application<sp/>to<sp/>handle<sp/>this.</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>following<sp/>statements<sp/>are<sp/>valid:</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>After<sp/>GPTimerCC26XX_open():</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>The<sp/>device<sp/>is<sp/>still<sp/>allowed<sp/>to<sp/>enter<sp/>Standby.<sp/>When<sp/>the<sp/>device<sp/>is</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>active<sp/>the<sp/>corresponding<sp/>GPTimer<sp/>peripheral<sp/>will<sp/>be<sp/>enabled<sp/>and<sp/>clocked.</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>After<sp/>GPTimerCC26XX_start():</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>The<sp/>device<sp/>will<sp/>only<sp/>go<sp/>to<sp/>Idle<sp/>power<sp/>mode<sp/>since<sp/>the<sp/>high-frequency</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>clock<sp/>is<sp/>needed<sp/>for<sp/>timer<sp/>operation.</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>After<sp/>GPTimerCC26XX_stop():</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Conditions<sp/>are<sp/>equal<sp/>as<sp/>for<sp/>after<sp/>GPTimerCC26XX_open</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>After<sp/>GPTimerCC26XX_close():</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>The<sp/>underlying<sp/>GPTimer<sp/>is<sp/>turned<sp/>off<sp/>and<sp/>the<sp/>device<sp/>is<sp/>allowed<sp/>to<sp/>go</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>to<sp/>standby.</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Accuracy<sp/>#</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>GPTimer<sp/>clock<sp/>is<sp/>dependent<sp/>on<sp/>the<sp/>MCU<sp/>system<sp/>clock.</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/>*<sp/><sp/>If<sp/>very<sp/>high-accuracy<sp/>outputs<sp/>are<sp/>needed,<sp/>the<sp/>application<sp/>should<sp/>request</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*<sp/><sp/>using<sp/>the<sp/>external<sp/>HF<sp/>crystal:</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/>*<sp/><sp/>#include<sp/>&lt;ti/sysbios/family/arm/cc26xx/Power.h&gt;</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/>*<sp/><sp/>#include<sp/>&lt;ti/sysbios/family/arm/cc26xx/PowerCC2650.h&gt;</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/>*<sp/><sp/>Power_setDependency(XOSC_HF);</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Limitations<sp/>#</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>DMA<sp/>usage<sp/>is<sp/>not<sp/>supported</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>Timer<sp/>synchronization<sp/>is<sp/>not<sp/>supported</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>Down<sp/>counting<sp/>modes<sp/>(except<sp/>for<sp/>PWM)<sp/>are<sp/>not<sp/>supported<sp/>by<sp/>driver</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>GPTimerCC26XX<sp/>usage<sp/>#</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Periodic<sp/>timer<sp/>##</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>example<sp/>below<sp/>will<sp/>generate<sp/>an<sp/>interrupt<sp/>using<sp/>the<sp/>GPTimer<sp/>every<sp/>1<sp/>ms.</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/>*<sp/><sp/>GPTimerCC26XX_Handle<sp/>hTimer;</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/>*<sp/><sp/>void<sp/>timerCallback(GPTimerCC26XX_Handle<sp/>handle,<sp/>GPTimerCC26XX_IntMask<sp/>interruptMask)<sp/>{</highlight></codeline>
+<codeline lineno="107"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>interrupt<sp/>callback<sp/>code<sp/>goes<sp/>here.<sp/>Minimize<sp/>processing<sp/>in<sp/>interrupt.</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/>*<sp/><sp/>void<sp/>taskFxn(uintptr_t<sp/>a0,<sp/>uintptr_t<sp/>a1)<sp/>{</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>GPTimerCC26XX_Params<sp/>params;</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>GPTimerCC26XX_Params_init(&amp;params);</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>params.width<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>GPT_CONFIG_16BIT;</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>params.mode<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>GPT_MODE_PERIODIC;</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>params.direction<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>GPTimerCC26XX_DIRECTION_UP;</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>params.debugStallMode<sp/>=<sp/>GPTimerCC26XX_DEBUG_STALL_OFF;</highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>hTimer<sp/>=<sp/>GPTimerCC26XX_open(CC2650_GPTIMER0A,<sp/>&amp;params);</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>if(hTimer<sp/>==<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>Log_error0(&quot;Failed<sp/>to<sp/>open<sp/>GPTimer&quot;);</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>Task_exit();</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="122"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="123"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>Types_FreqHz<sp/><sp/>freq;</highlight></codeline>
+<codeline lineno="124"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>BIOS_getCpuFreq(&amp;freq);</highlight></codeline>
+<codeline lineno="125"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>GPTimerCC26XX_Value<sp/>loadVal<sp/>=<sp/>freq.lo<sp/>/<sp/>1000<sp/>-<sp/>1;<sp/>//47999</highlight></codeline>
+<codeline lineno="126"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>GPTimerCC26XX_setLoadValue(hTimer,<sp/>loadVal);</highlight></codeline>
+<codeline lineno="127"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>GPTimerCC26XX_registerInterrupt(hTimer,<sp/>timerCallback,<sp/>GPT_INT_TIMEOUT);</highlight></codeline>
+<codeline lineno="128"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="129"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>GPTimerCC26XX_start(hTimer);</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>while(1)<sp/>{</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>Task_sleep(BIOS_WAIT_FOREVER);</highlight></codeline>
+<codeline lineno="133"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="135"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="136"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="137"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="138"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>PWM<sp/>output<sp/>##</highlight></codeline>
+<codeline lineno="139"><highlight class="comment"><sp/>*<sp/><sp/>See<sp/>the<sp/>PWM2TimerCC26XX<sp/>driver</highlight></codeline>
+<codeline lineno="140"><highlight class="comment"><sp/>*******************************************************************************</highlight></codeline>
+<codeline lineno="141"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ti_drivers_timer_GPTIMERCC26XX__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_drivers_timer_GPTIMERCC26XX__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_hwi_p_8h" kindref="compound">ti/drivers/dpl/HwiP.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ti/devices/DeviceFamily.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>DeviceFamily_constructPath(inc/hw_gpt.h)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>DeviceFamily_constructPath(driverlib/event.h)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>DeviceFamily_constructPath(driverlib/ioc.h)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>DeviceFamily_constructPath(driverlib/timer.h)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Backwards<sp/>compatibility<sp/>-<sp/>old<sp/>timer<sp/>modes.<sp/>New<sp/>behaviour<sp/>is<sp/>count-up<sp/>by<sp/>default<sp/>but<sp/>configurable.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="163" refid="_g_p_timer_c_c26_x_x_8h_1a5d50b9348b12ac0acf558d5792dfd18f" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GPT_MODE_ONESHOT_UP<sp/><sp/><sp/><sp/>GPT_MODE_ONESHOT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164" refid="_g_p_timer_c_c26_x_x_8h_1ad45a55cbded959cf341c3384ff7e473c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GPT_MODE_PERIODIC_UP<sp/><sp/><sp/>GPT_MODE_PERIODIC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165" refid="_g_p_timer_c_c26_x_x_8h_1ac710f5d3604bc5b87b2e57c60e36c08d" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GPT_MODE_EDGE_COUNT_UP<sp/>GPT_MODE_EDGE_COUNT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166" refid="_g_p_timer_c_c26_x_x_8h_1aca59474a336de2c1cc9c075ce0b96d83" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GPT_MODE_EDGE_TIME_UP<sp/><sp/>GPT_MODE_EDGE_TIME</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172" refid="_g_p_timer_c_c26_x_x_8h_1a37f7594eb4084eff43d5b80bb6418ec7" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a37f7594eb4084eff43d5b80bb6418ec7" kindref="member">GPTimerCC26XX_Width</ref></highlight></codeline>
+<codeline lineno="173"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="174" refid="_g_p_timer_c_c26_x_x_8h_1a37f7594eb4084eff43d5b80bb6418ec7afbeda4c45001e3d32d50f576d6259016" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a37f7594eb4084eff43d5b80bb6418ec7afbeda4c45001e3d32d50f576d6259016" kindref="member">GPT_CONFIG_32BIT</ref><sp/>=<sp/>GPT_CFG_CFG_32BIT_TIMER,</highlight></codeline>
+<codeline lineno="175" refid="_g_p_timer_c_c26_x_x_8h_1a37f7594eb4084eff43d5b80bb6418ec7a2e5a3c43a8c62eeace6b38800d39392f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a37f7594eb4084eff43d5b80bb6418ec7a2e5a3c43a8c62eeace6b38800d39392f" kindref="member">GPT_CONFIG_16BIT</ref><sp/>=<sp/>GPT_CFG_CFG_16BIT_TIMER,</highlight></codeline>
+<codeline lineno="176"><highlight class="normal">}<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a37f7594eb4084eff43d5b80bb6418ec7" kindref="member">GPTimerCC26XX_Width</ref>;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186" refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024c" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024c" kindref="member">GPTimerCC26XX_Mode</ref></highlight></codeline>
+<codeline lineno="187"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>One<sp/>shot<sp/>mode<sp/>counting<sp/>upwards<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189" refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024caea969d39975d0d759030b9b51423d5a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024caea969d39975d0d759030b9b51423d5a8" kindref="member">GPT_MODE_ONESHOT</ref><sp/><sp/><sp/><sp/>=<sp/>GPT_TAMR_TAMR_ONE_SHOT<sp/>|<sp/>GPT_TAMR_TAMIE,</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Periodic<sp/>mode<sp/>counting<sp/>upwards<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191" refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024cab1bc09dafb683b3d5b83d7653aa6c2e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024cab1bc09dafb683b3d5b83d7653aa6c2e3" kindref="member">GPT_MODE_PERIODIC</ref><sp/><sp/><sp/>=<sp/>GPT_TAMR_TAMR_PERIODIC<sp/>|<sp/>GPT_TAMR_TAMIE,</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Edge<sp/>count<sp/>mode<sp/>counting<sp/>upwards<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="193" refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024cad5c7266ba7dc198e1dd6e5040ce28b65" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024cad5c7266ba7dc198e1dd6e5040ce28b65" kindref="member">GPT_MODE_EDGE_COUNT</ref><sp/>=<sp/>GPT_TAMR_TAMR_CAPTURE<sp/>|<sp/>GPT_TAMR_TACM_EDGCNT,</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Edge<sp/>count<sp/>mode<sp/>counting<sp/>upwards<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="195" refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024ca7f54e9a614b16868cc15ca6f6824641f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024ca7f54e9a614b16868cc15ca6f6824641f" kindref="member">GPT_MODE_EDGE_TIME</ref><sp/><sp/>=<sp/>GPT_TAMR_TAMR_CAPTURE<sp/>|<sp/>GPT_TAMR_TACM_EDGTIME,</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>PWM<sp/>mode<sp/>counting<sp/>downwards.<sp/>This<sp/>specific<sp/>configuration<sp/>is<sp/>used<sp/>by<sp/>the</highlight></codeline>
+<codeline lineno="197"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PWM2TimerCC26XX<sp/>driver<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198" refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024ca5d09320529435b9b021abd37d4dac117" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024ca5d09320529435b9b021abd37d4dac117" kindref="member">GPT_MODE_PWM</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>GPT_TAMR_TAMR_PERIODIC<sp/>|<sp/>GPT_TAMR_TAPWMIE_EN<sp/>|<sp/>GPT_TAMR_TAAMS_PWM<sp/>|<sp/>GPT_TAMR_TACM_EDGCNT<sp/>|</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GPT_TAMR_TAPLO_CCP_ON_TO,</highlight></codeline>
+<codeline lineno="200"><highlight class="normal">}<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac3f0539fd948c59b31df04dff5b7024c" kindref="member">GPTimerCC26XX_Mode</ref>;</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208" refid="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92" kindref="member">GPTimerCC26XX_Interrupt</ref></highlight></codeline>
+<codeline lineno="209"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="210" refid="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92a6c6f5236dcbe5f37289a4a513451851e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92a6c6f5236dcbe5f37289a4a513451851e" kindref="member">GPT_INT_TIMEOUT</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>0,</highlight></codeline>
+<codeline lineno="211" refid="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92a438a33e76043ddb51f1c9e93820a8040" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92a438a33e76043ddb51f1c9e93820a8040" kindref="member">GPT_INT_CAPTURE_MATCH</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1,</highlight></codeline>
+<codeline lineno="212" refid="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92ae3e86fdcf14f9ff34c92aaf953b159d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92ae3e86fdcf14f9ff34c92aaf953b159d9" kindref="member">GPT_INT_CAPTURE</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2,</highlight></codeline>
+<codeline lineno="213" refid="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92a87f843ea54618ca92890d4db7f38f242" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92a87f843ea54618ca92890d4db7f38f242" kindref="member">GPT_INT_MATCH</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>3,</highlight></codeline>
+<codeline lineno="214"><highlight class="normal">}<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a1e0397cdf2412358dfdf0eb0df40db92" kindref="member">GPTimerCC26XX_Interrupt</ref>;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Number<sp/>of<sp/>entries<sp/>in<sp/>GPTimerCC26XX_Interrupt<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="217" refid="_g_p_timer_c_c26_x_x_8h_1ae8166f42d637bc48b784b2524e49d0fe" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GPT_NUM_INTS<sp/>4</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="225" refid="_g_p_timer_c_c26_x_x_8h_1aff5462fa33c306f2c8bd29284fd898b0" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1aff5462fa33c306f2c8bd29284fd898b0" kindref="member">GPTimerCC26XX_Part</ref></highlight></codeline>
+<codeline lineno="226"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="227" refid="_g_p_timer_c_c26_x_x_8h_1aff5462fa33c306f2c8bd29284fd898b0a0630f8ce6004469fe81ebbc804e7ac2a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1aff5462fa33c306f2c8bd29284fd898b0a0630f8ce6004469fe81ebbc804e7ac2a" kindref="member">GPT_A</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="228" refid="_g_p_timer_c_c26_x_x_8h_1aff5462fa33c306f2c8bd29284fd898b0a09aae74a0a9878654fa701a70b76387b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1aff5462fa33c306f2c8bd29284fd898b0a09aae74a0a9878654fa701a70b76387b" kindref="member">GPT_B</ref>,</highlight></codeline>
+<codeline lineno="229"><highlight class="normal">}<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1aff5462fa33c306f2c8bd29284fd898b0" kindref="member">GPTimerCC26XX_Part</ref>;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231" refid="_g_p_timer_c_c26_x_x_8h_1ae3d45cf5aeefb7cb0adef012a1554f59" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GPT_PARTS_COUNT<sp/>2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241" refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359" kindref="member">GPTimerCC26XX_PinMux</ref></highlight></codeline>
+<codeline lineno="242"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="243" refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a46af9b3278d2116fd4862c7fe19624b7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a46af9b3278d2116fd4862c7fe19624b7" kindref="member">GPT_PIN_0A</ref><sp/>=<sp/>IOC_PORT_MCU_PORT_EVENT0,</highlight></codeline>
+<codeline lineno="244" refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a1e7ba339de898f1572f21424ce125f2d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a1e7ba339de898f1572f21424ce125f2d" kindref="member">GPT_PIN_0B</ref><sp/>=<sp/>IOC_PORT_MCU_PORT_EVENT1,</highlight></codeline>
+<codeline lineno="245" refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359acc7f9d714b4eb87595ebd5a8fdd6ed2f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359acc7f9d714b4eb87595ebd5a8fdd6ed2f" kindref="member">GPT_PIN_1A</ref><sp/>=<sp/>IOC_PORT_MCU_PORT_EVENT2,</highlight></codeline>
+<codeline lineno="246" refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a69db29a9a9029d1fcfabfbf20ba26ee4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a69db29a9a9029d1fcfabfbf20ba26ee4" kindref="member">GPT_PIN_1B</ref><sp/>=<sp/>IOC_PORT_MCU_PORT_EVENT3,</highlight></codeline>
+<codeline lineno="247" refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a48b2ab2ad9e83e67d94421adb06f4aa1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a48b2ab2ad9e83e67d94421adb06f4aa1" kindref="member">GPT_PIN_2A</ref><sp/>=<sp/>IOC_PORT_MCU_PORT_EVENT4,</highlight></codeline>
+<codeline lineno="248" refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a3e1fd803b55127a98c4709cc9e811e70" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a3e1fd803b55127a98c4709cc9e811e70" kindref="member">GPT_PIN_2B</ref><sp/>=<sp/>IOC_PORT_MCU_PORT_EVENT5,</highlight></codeline>
+<codeline lineno="249" refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a4b93799cba930f4b538d0f0b3bfee4be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359a4b93799cba930f4b538d0f0b3bfee4be" kindref="member">GPT_PIN_3A</ref><sp/>=<sp/>IOC_PORT_MCU_PORT_EVENT6,</highlight></codeline>
+<codeline lineno="250" refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359aca82a1cd0f9e891472b4f5b09998a597" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359aca82a1cd0f9e891472b4f5b09998a597" kindref="member">GPT_PIN_3B</ref><sp/>=<sp/>IOC_PORT_MCU_PORT_EVENT7,</highlight></codeline>
+<codeline lineno="251"><highlight class="normal">}<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4a2e82c659e0ea1fa2ae7a852298359" kindref="member">GPTimerCC26XX_PinMux</ref>;</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257" refid="_g_p_timer_c_c26_x_x_8h_1ab4c80c79c9acaf8e482e8244adbae73e" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4c80c79c9acaf8e482e8244adbae73e" kindref="member">GPTimerCC26XX_DebugMode</ref></highlight></codeline>
+<codeline lineno="258"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="259" refid="_g_p_timer_c_c26_x_x_8h_1ab4c80c79c9acaf8e482e8244adbae73ea1aca5e7c45ce80046cc86c309b1500b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4c80c79c9acaf8e482e8244adbae73ea1aca5e7c45ce80046cc86c309b1500b3" kindref="member">GPTimerCC26XX_DEBUG_STALL_OFF</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="260" refid="_g_p_timer_c_c26_x_x_8h_1ab4c80c79c9acaf8e482e8244adbae73ea78ecad7414438f969450881393850b8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4c80c79c9acaf8e482e8244adbae73ea78ecad7414438f969450881393850b8c" kindref="member">GPTimerCC26XX_DEBUG_STALL_ON</ref>,</highlight></codeline>
+<codeline lineno="261"><highlight class="normal">}<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab4c80c79c9acaf8e482e8244adbae73e" kindref="member">GPTimerCC26XX_DebugMode</ref>;</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="268" refid="_g_p_timer_c_c26_x_x_8h_1a5e56cf3fdef86c705265b2a44a1b275a" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a5e56cf3fdef86c705265b2a44a1b275a" kindref="member">GPTimerCC26XX_Direction</ref></highlight></codeline>
+<codeline lineno="269"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="270" refid="_g_p_timer_c_c26_x_x_8h_1a5e56cf3fdef86c705265b2a44a1b275aa59182c9e66e7c7591d9492edd1beddb1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a5e56cf3fdef86c705265b2a44a1b275aa59182c9e66e7c7591d9492edd1beddb1" kindref="member">GPTimerCC26XX_DIRECTION_DOWN</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="271" refid="_g_p_timer_c_c26_x_x_8h_1a5e56cf3fdef86c705265b2a44a1b275aa1bbb01e280145c4b4e4e04e6dde2f062" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a5e56cf3fdef86c705265b2a44a1b275aa1bbb01e280145c4b4e4e04e6dde2f062" kindref="member">GPTimerCC26XX_DIRECTION_UP</ref>,</highlight></codeline>
+<codeline lineno="272"><highlight class="normal">}<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a5e56cf3fdef86c705265b2a44a1b275a" kindref="member">GPTimerCC26XX_Direction</ref>;</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="283" refid="_g_p_timer_c_c26_x_x_8h_1a9667f75063ad28303d1b1420d34c1018" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a9667f75063ad28303d1b1420d34c1018" kindref="member">GPTimerCC26XX_SetMatchTiming</ref></highlight></codeline>
+<codeline lineno="284"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="285" refid="_g_p_timer_c_c26_x_x_8h_1a9667f75063ad28303d1b1420d34c1018a5272d767dfc7efed4617614589d41ebd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a9667f75063ad28303d1b1420d34c1018a5272d767dfc7efed4617614589d41ebd" kindref="member">GPTimerCC26XX_SET_MATCH_NEXT_CLOCK</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="286" refid="_g_p_timer_c_c26_x_x_8h_1a9667f75063ad28303d1b1420d34c1018a26ab82e7192a9662aad4f28334d9c7ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a9667f75063ad28303d1b1420d34c1018a26ab82e7192a9662aad4f28334d9c7ee" kindref="member">GPTimerCC26XX_SET_MATCH_ON_TIMEOUT</ref>,</highlight></codeline>
+<codeline lineno="287"><highlight class="normal">}<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a9667f75063ad28303d1b1420d34c1018" kindref="member">GPTimerCC26XX_SetMatchTiming</ref>;</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"></highlight></codeline>
+<codeline lineno="294" refid="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151" kindref="member">GPTimerCC26XX_Edge</ref></highlight></codeline>
+<codeline lineno="295"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="296" refid="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151a0dda532d331ac235bead20fad3975f4f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151a0dda532d331ac235bead20fad3975f4f" kindref="member">GPTimerCC26XX_POS_EDGE</ref><sp/><sp/><sp/>=<sp/>GPT_CTL_TAEVENT_POS,</highlight></codeline>
+<codeline lineno="297" refid="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151a2189f990a1c45892bdfcb31855d7d98f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151a2189f990a1c45892bdfcb31855d7d98f" kindref="member">GPTimerCC26XX_NEG_EDGE</ref><sp/><sp/><sp/>=<sp/>GPT_CTL_TAEVENT_NEG,</highlight></codeline>
+<codeline lineno="298" refid="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151a2219c0e15065a692a80b4049036cd20a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151a2219c0e15065a692a80b4049036cd20a" kindref="member">GPTimerCC26XX_BOTH_EDGES</ref><sp/>=<sp/>GPT_CTL_TAEVENT_BOTH,</highlight></codeline>
+<codeline lineno="299"><highlight class="normal">}<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac72f25419727329702ec162a2b6b9151" kindref="member">GPTimerCC26XX_Edge</ref>;</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Forward<sp/>declaration<sp/>of<sp/>GPTimer<sp/>configuration<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="302" refid="_g_p_timer_c_c26_x_x_8h_1ac827d51b6288add49797cd98976e9188" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_g_p_timer_c_c26_x_x___config" kindref="compound">GPTimerCC26XX_Config</ref><sp/><ref refid="struct_g_p_timer_c_c26_x_x___config" kindref="compound">GPTimerCC26XX_Config</ref>;</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>GPTimer<sp/>handle<sp/>is<sp/>pointer<sp/>to<sp/>configuration<sp/>structure<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="305" refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="struct_g_p_timer_c_c26_x_x___config" kindref="compound">GPTimerCC26XX_Config</ref><sp/>*<ref refid="_g_p_timer_c_c26_x_x_8h_1ab85403dde5940c587c57ca1a140e655a" kindref="member">GPTimerCC26XX_Handle</ref>;</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"></highlight></codeline>
+<codeline lineno="307"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Interrupt<sp/>bit<sp/>vector.<sp/>See<sp/>GPTimerCC26XX_Interrupt<sp/>for<sp/>available<sp/>interrupts<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="308" refid="_g_p_timer_c_c26_x_x_8h_1ac74410bfd92bf89732dd795bbe8769d1" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>uint16_t<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ac74410bfd92bf89732dd795bbe8769d1" kindref="member">GPTimerCC26XX_IntMask</ref>;</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Timer<sp/>value<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="311" refid="_g_p_timer_c_c26_x_x_8h_1ab667a2fd47273a9778f5011774fa55c0" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>uint32_t<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab667a2fd47273a9778f5011774fa55c0" kindref="member">GPTimerCC26XX_Value</ref>;</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"></highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Function<sp/>prototype<sp/>for<sp/>interrupt<sp/>callbacks<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="314" refid="_g_p_timer_c_c26_x_x_8h_1a6b9b95974e20f85ccd3f8463fdda84f1" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="_g_p_timer_c_c26_x_x_8h_1a6b9b95974e20f85ccd3f8463fdda84f1" kindref="member">GPTimerCC26XX_HwiFxn</ref>)(GPTimerCC26XX_Handle<sp/>handle,<sp/>GPTimerCC26XX_IntMask<sp/>interruptMask);</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"></highlight></codeline>
+<codeline lineno="336" refid="struct_g_p_timer_c_c26_x_x___h_w_attrs" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_g_p_timer_c_c26_x_x___h_w_attrs" kindref="compound">GPTimerCC26XX_HWAttrs</ref></highlight></codeline>
+<codeline lineno="337"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="339" refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1ad6bc77822c89ec42d268a29178d81828" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1ad6bc77822c89ec42d268a29178d81828" kindref="member">baseAddr</ref>;</highlight></codeline>
+<codeline lineno="341" refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1af8a6cce8af13c52e964b65ac2f8fa9f3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1af8a6cce8af13c52e964b65ac2f8fa9f3" kindref="member">intNum</ref>;</highlight></codeline>
+<codeline lineno="351" refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1a83fbce47b4ff591bde69b5f77d2c133e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1a83fbce47b4ff591bde69b5f77d2c133e" kindref="member">intPriority</ref>;</highlight></codeline>
+<codeline lineno="353" refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1a3772ec5a7f529047ed690c83cffad038" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1a3772ec5a7f529047ed690c83cffad038" kindref="member">powerMngrId</ref>;</highlight></codeline>
+<codeline lineno="355" refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1a85c14724ff57d1b25d6552752293d7fc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>GPTimerCC26XX_Part<sp/><ref refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1a85c14724ff57d1b25d6552752293d7fc" kindref="member">timer</ref>;</highlight></codeline>
+<codeline lineno="357" refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1a7a5f3ba89a0094ead820cc15f9465ed5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>GPTimerCC26XX_PinMux<sp/><ref refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1a7a5f3ba89a0094ead820cc15f9465ed5" kindref="member">pinMux</ref>;</highlight></codeline>
+<codeline lineno="358"><highlight class="normal">}<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a415d99f6aca4a4a8bf94a6328021c15c" kindref="member">GPTimerCC26XX_HWAttrs</ref>;</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"></highlight></codeline>
+<codeline lineno="374" refid="struct_g_p_timer_c_c26_x_x___object" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_g_p_timer_c_c26_x_x___object" kindref="compound">GPTimerCC26XX_Object</ref></highlight></codeline>
+<codeline lineno="375"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="376" refid="struct_g_p_timer_c_c26_x_x___object_1a81ee4bac962aee8e9d7289822d1e8005" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>GPTimerCC26XX_Width<sp/><ref refid="struct_g_p_timer_c_c26_x_x___object_1a81ee4bac962aee8e9d7289822d1e8005" kindref="member">width</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="377" refid="struct_g_p_timer_c_c26_x_x___object_1aa81688dec3340dd5ad2f3e19eeefdc17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isOpen[<ref refid="_g_p_timer_c_c26_x_x_8h_1ae3d45cf5aeefb7cb0adef012a1554f59" kindref="member">GPT_PARTS_COUNT</ref>];<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="378" refid="struct_g_p_timer_c_c26_x_x___object_1a8ea9d34ec7d19d5059826aeecd2dbf5f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="union_hwi_p___struct" kindref="compound">HwiP_Struct</ref><sp/>hwi[<ref refid="_g_p_timer_c_c26_x_x_8h_1ae3d45cf5aeefb7cb0adef012a1554f59" kindref="member">GPT_PARTS_COUNT</ref>];<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="379" refid="struct_g_p_timer_c_c26_x_x___object_1ad1931931acdb73ced544f667ac7f8f9b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a6b9b95974e20f85ccd3f8463fdda84f1" kindref="member">GPTimerCC26XX_HwiFxn</ref><sp/>hwiCallbackFxn[<ref refid="_g_p_timer_c_c26_x_x_8h_1ae3d45cf5aeefb7cb0adef012a1554f59" kindref="member">GPT_PARTS_COUNT</ref>];<sp/></highlight></codeline>
+<codeline lineno="380" refid="struct_g_p_timer_c_c26_x_x___object_1adf14dbb2f480fbdcda727c074248dbcf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>powerConstraint[<ref refid="_g_p_timer_c_c26_x_x_8h_1ae3d45cf5aeefb7cb0adef012a1554f59" kindref="member">GPT_PARTS_COUNT</ref>];<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="381" refid="struct_g_p_timer_c_c26_x_x___object_1ad6732c34aa20db8fbf9c0c644fe75713" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_g_p_timer_c_c26_x_x___object_1ad6732c34aa20db8fbf9c0c644fe75713" kindref="member">arg</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="382"><highlight class="normal">}<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a98c0a6722f2d48af3b7c032235181bd1" kindref="member">GPTimerCC26XX_Object</ref>;</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"></highlight></codeline>
+<codeline lineno="404" refid="struct_g_p_timer_c_c26_x_x___config" refkind="compound"><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_g_p_timer_c_c26_x_x___config" kindref="compound">GPTimerCC26XX_Config</ref></highlight></codeline>
+<codeline lineno="405"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="406" refid="struct_g_p_timer_c_c26_x_x___config_1a92658b3b494f165b96a8bb7324ffb737" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_g_p_timer_c_c26_x_x___object" kindref="compound">GPTimerCC26XX_Object</ref><sp/>*<ref refid="struct_g_p_timer_c_c26_x_x___config_1a92658b3b494f165b96a8bb7324ffb737" kindref="member">object</ref>;</highlight></codeline>
+<codeline lineno="407" refid="struct_g_p_timer_c_c26_x_x___config_1a713a6a23b178957ab2f245326f954b2b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_g_p_timer_c_c26_x_x___h_w_attrs" kindref="compound">GPTimerCC26XX_HWAttrs</ref><sp/>*<ref refid="struct_g_p_timer_c_c26_x_x___config_1a713a6a23b178957ab2f245326f954b2b" kindref="member">hwAttrs</ref>;</highlight></codeline>
+<codeline lineno="408" refid="struct_g_p_timer_c_c26_x_x___config_1a6d76dc1cbe8a2e7e38a2c6546ea58782" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>GPTimerCC26XX_Part<sp/><ref refid="struct_g_p_timer_c_c26_x_x___config_1a6d76dc1cbe8a2e7e38a2c6546ea58782" kindref="member">timerPart</ref>;</highlight></codeline>
+<codeline lineno="409"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="410"><highlight class="normal"></highlight></codeline>
+<codeline lineno="419" refid="struct_g_p_timer_c_c26_x_x___params" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_g_p_timer_c_c26_x_x___params" kindref="compound">GPTimerCC26XX_Params</ref></highlight></codeline>
+<codeline lineno="420"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="421" refid="struct_g_p_timer_c_c26_x_x___params_1a4c9e040425769960160b4d42496f5aec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>GPTimerCC26XX_Width<sp/><ref refid="struct_g_p_timer_c_c26_x_x___params_1a4c9e040425769960160b4d42496f5aec" kindref="member">width</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="422" refid="struct_g_p_timer_c_c26_x_x___params_1ae911c92ad3079146c568a02575bb6300" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>GPTimerCC26XX_Mode<sp/><ref refid="struct_g_p_timer_c_c26_x_x___params_1ae911c92ad3079146c568a02575bb6300" kindref="member">mode</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="423" refid="struct_g_p_timer_c_c26_x_x___params_1ab56d45730a939287443fd19135fa1e63" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>GPTimerCC26XX_SetMatchTiming<sp/><ref refid="struct_g_p_timer_c_c26_x_x___params_1ab56d45730a939287443fd19135fa1e63" kindref="member">matchTiming</ref>;<sp/></highlight></codeline>
+<codeline lineno="424" refid="struct_g_p_timer_c_c26_x_x___params_1af1bee4b3ddfb7464a760b70c9bca0313" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>GPTimerCC26XX_Direction<sp/><ref refid="struct_g_p_timer_c_c26_x_x___params_1af1bee4b3ddfb7464a760b70c9bca0313" kindref="member">direction</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="425" refid="struct_g_p_timer_c_c26_x_x___params_1aebaace525be6fc274c77ff655f604754" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>GPTimerCC26XX_DebugMode<sp/><ref refid="struct_g_p_timer_c_c26_x_x___params_1aebaace525be6fc274c77ff655f604754" kindref="member">debugStallMode</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="426"><highlight class="normal">}<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ad5264b3636e1d40a6cbd64cf150be32d" kindref="member">GPTimerCC26XX_Params</ref>;</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"></highlight></codeline>
+<codeline lineno="440"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a11e9f3ff24f5f075989f89d99e65e827" kindref="member">GPTimerCC26XX_Params_init</ref>(<ref refid="struct_g_p_timer_c_c26_x_x___params" kindref="compound">GPTimerCC26XX_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="441"><highlight class="normal"></highlight></codeline>
+<codeline lineno="458"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>GPTimerCC26XX_Handle<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a30f6c028f0abea0b35c3be3d1609ea9b" kindref="member">GPTimerCC26XX_open</ref>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_g_p_timer_c_c26_x_x___params" kindref="compound">GPTimerCC26XX_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="459"><highlight class="normal"></highlight></codeline>
+<codeline lineno="473"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a0a148f2232f5bb4c59015de965c82d43" kindref="member">GPTimerCC26XX_close</ref>(GPTimerCC26XX_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="474"><highlight class="normal"></highlight></codeline>
+<codeline lineno="485"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a869213ede8949245112fd7ca9c9ebdaa" kindref="member">GPTimerCC26XX_start</ref>(GPTimerCC26XX_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="486"><highlight class="normal"></highlight></codeline>
+<codeline lineno="497"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1aebdbd7f83c3824555e4abb7399802765" kindref="member">GPTimerCC26XX_stop</ref>(GPTimerCC26XX_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="498"><highlight class="normal"></highlight></codeline>
+<codeline lineno="510"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1aa365d9e1d6a1b324090510f2748db771" kindref="member">GPTimerCC26XX_setLoadValue</ref>(GPTimerCC26XX_Handle<sp/>handle,<sp/>GPTimerCC26XX_Value<sp/>loadValue);</highlight></codeline>
+<codeline lineno="511"><highlight class="normal"></highlight></codeline>
+<codeline lineno="523"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a3f83bdcc8482297952f6e08ccadd0e11" kindref="member">GPTimerCC26XX_setMatchValue</ref>(GPTimerCC26XX_Handle<sp/>handle,<sp/>GPTimerCC26XX_Value<sp/>matchValue);</highlight></codeline>
+<codeline lineno="524"><highlight class="normal"></highlight></codeline>
+<codeline lineno="537"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ae6a091f0962d33a7897ae61b501aedc4" kindref="member">GPTimerCC26XX_setCaptureEdge</ref>(GPTimerCC26XX_Handle<sp/>handle,<sp/>GPTimerCC26XX_Edge<sp/>edge);</highlight></codeline>
+<codeline lineno="538"><highlight class="normal"></highlight></codeline>
+<codeline lineno="550"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>GPTimerCC26XX_Value<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1af4832251ebc2e81a952bbc1c39d2502e" kindref="member">GPTimerCC26XX_getFreeRunValue</ref>(GPTimerCC26XX_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="551"><highlight class="normal"></highlight></codeline>
+<codeline lineno="569"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>GPTimerCC26XX_Value<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a553ef86139c25234964c81783aa2cd94" kindref="member">GPTimerCC26XX_getValue</ref>(GPTimerCC26XX_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="570"><highlight class="normal"></highlight></codeline>
+<codeline lineno="598"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a4032d544f2b79ae1a999a4faa5ee0884" kindref="member">GPTimerCC26XX_registerInterrupt</ref>(GPTimerCC26XX_Handle<sp/>handle,</highlight></codeline>
+<codeline lineno="599"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a6b9b95974e20f85ccd3f8463fdda84f1" kindref="member">GPTimerCC26XX_HwiFxn</ref><sp/>callback,</highlight></codeline>
+<codeline lineno="600"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GPTimerCC26XX_IntMask<sp/>intMask);</highlight></codeline>
+<codeline lineno="601"><highlight class="normal"></highlight></codeline>
+<codeline lineno="617"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1adf0a8716a4197bba10d67322c3dfe5ac" kindref="member">GPTimerCC26XX_unregisterInterrupt</ref>(GPTimerCC26XX_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="618"><highlight class="normal"></highlight></codeline>
+<codeline lineno="632"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1af08557caa1e95c615a17428521d22d9d" kindref="member">GPTimerCC26XX_enableInterrupt</ref>(GPTimerCC26XX_Handle<sp/>handle,<sp/>GPTimerCC26XX_IntMask<sp/>interruptMask);</highlight></codeline>
+<codeline lineno="644"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a8aca62c518c9ff0347ec09f464b88b26" kindref="member">GPTimerCC26XX_disableInterrupt</ref>(GPTimerCC26XX_Handle<sp/>handle,<sp/>GPTimerCC26XX_IntMask<sp/>interruptMask);</highlight></codeline>
+<codeline lineno="645"><highlight class="normal"></highlight></codeline>
+<codeline lineno="657"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a5a8bdc7643305d21dcfcd567d215b7f8" kindref="member">GPTimerCC26XX_configureDebugStall</ref>(GPTimerCC26XX_Handle<sp/>handle,<sp/>GPTimerCC26XX_DebugMode<sp/>mode);</highlight></codeline>
+<codeline lineno="658"><highlight class="normal"></highlight></codeline>
+<codeline lineno="670"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint32_t<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1a232b3933b05cd118df09de139efccb34" kindref="member">GPTimerCC26XX_getArg</ref>(GPTimerCC26XX_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="671"><highlight class="normal"></highlight></codeline>
+<codeline lineno="683"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1ab2c8414bd2de13b140612e13f0c4b35b" kindref="member">GPTimerCC26XX_setArg</ref>(GPTimerCC26XX_Handle<sp/>handle,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*arg);</highlight></codeline>
+<codeline lineno="684"><highlight class="normal"></highlight></codeline>
+<codeline lineno="700" refid="_g_p_timer_c_c26_x_x_8h_1acc37d2af3b532038792452eee5bffa94" refkind="member"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>GPTimerCC26XX_PinMux<sp/><ref refid="_g_p_timer_c_c26_x_x_8h_1acc37d2af3b532038792452eee5bffa94" kindref="member">GPTimerCC26XX_getPinMux</ref>(GPTimerCC26XX_Handle<sp/>handle)</highlight></codeline>
+<codeline lineno="701"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="702"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>handle-&gt;<ref refid="struct_g_p_timer_c_c26_x_x___config_1a713a6a23b178957ab2f245326f954b2b" kindref="member">hwAttrs</ref>-&gt;<ref refid="struct_g_p_timer_c_c26_x_x___h_w_attrs_1a7a5f3ba89a0094ead820cc15f9465ed5" kindref="member">pinMux</ref>;</highlight></codeline>
+<codeline lineno="703"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="704"><highlight class="normal"></highlight></codeline>
+<codeline lineno="705"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="706"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="707"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="708"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_drivers_timer_GPTIMERCC26XX__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/timer/GPTimerCC26XX.h"/>
+  </compounddef>
+</doxygen>

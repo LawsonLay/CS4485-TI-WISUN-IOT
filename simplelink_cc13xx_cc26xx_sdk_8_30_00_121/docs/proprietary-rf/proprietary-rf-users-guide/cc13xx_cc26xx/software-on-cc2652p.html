@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Running Software Examples on CC2652P &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User&#39;s Guide
+ 7.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Running Software Examples on the CC13x2x7 or CC26x2x7" href="software-on-cc13x2x7-26x2x7.html" />
+    <link rel="prev" title="Running Software Examples on CC2652XSIP and CC2651RSIPA devices" href="software-on-cc2652xSIP-cc2651RSIPA.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug cc13xx_cc26xx software-on-cc2652p";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/examples-cc13xx_cc26xx.html">Examples User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/custom-hardware.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/nortos-index.html">noRTOS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/rf-core-index.html">RF Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/physical-rf-layer-cc13xx_cc26xx.html">Physical Layer (PHY)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-bim-index.html">BIM Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-mcuboot-index.html">MCUBoot Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/sysconfig-index.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html">Migration Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html#porting-guides">Porting Guides</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html#id2">Migration Guides</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="devices_without_launchpads.html">Devices without LaunchPads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cc13x2-cc26x2-to-cc13x4-26x4.html">Migrate Your CC13x2 or CC26x2 Project to CC13x4 or CC26x4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x4-26x4.html">Migrate software examples from CC13x4 to CC26x4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x4-26x4-rgz-devices.html">CC13x4 and CC26x4 RGZ Variants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc2652xSIP-cc2651RSIPA.html">Running Software Examples on CC2652XSIP and CC2651RSIPA devices</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Running Software Examples on CC2652P</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#porting-software-examples-for-cc2652p">Porting Software Examples for CC2652P</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#choosing-launchpad-for-development">Choosing LaunchPad for Development</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#moving-from-launchpad-to-custom-board">Moving From LaunchPad to Custom Board</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x2x7-26x2x7.html">Running Software Examples on the CC13x2x7 or CC26x2x7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x1x-26x1x.html">Running Software Examples on the CC13x1x3 or CC26x1x3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sysconfig/proprietary-rf-migration.html">SysConfig Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio-porting-guide.html">GPIO++ Driver Porting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart_to_uart2.html">UART to UART2 Porting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tirtos/bios7_migration.html">TI-RTOS to TI-RTOS7 Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../proprietary-rf/cc1101-migration.html">Migrating from CC1101</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/glossary-cc13xx_cc26xx.html">Terms and acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html">Migration Guides</a> &raquo;</li>
+      <li>Running Software Examples on CC2652P</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="running-software-examples-on-cc2652p">
+<span id="sec-examples-on-cc2652p"></span><h1>Running Software Examples on CC2652P<a class="headerlink" href="#running-software-examples-on-cc2652p" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="porting-software-examples-for-cc2652p">
+<h2>Porting Software Examples for CC2652P<a class="headerlink" href="#porting-software-examples-for-cc2652p" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://www.ti.com/product/CC2652P">CC2652P</a> is pin compatible with, and functionally identical to the <a class="reference external" href="https://www.ti.com/product/CC1352P">CC1352P</a>
+device for 2.4 GHz operation. You can run CC1352P software examples on the
+CC2652P device without making any changes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The also applies to the <a class="reference external" href="https://www.ti.com/product/CC2652P7">CC2652P7</a> in relation to <a class="reference external" href="https://www.ti.com/product/CC1352P7">CC1352P7</a> devices</p>
+</div>
+</div>
+<div class="section" id="choosing-launchpad-for-development">
+<h2>Choosing LaunchPad for Development<a class="headerlink" href="#choosing-launchpad-for-development" title="Permalink to this headline">¶</a></h2>
+<p>All CC1352P LaunchPads can be used for software development for the CC2652P
+device. However, the LaunchPads have been designed with different use-cases in
+mind.</p>
+<ul class="simple">
+<li><p>The <a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC1352P">CC1352P1 LaunchPad</a> is optimized for transmitting with the high PA on
+the Sub 1 GHz frequency band and is thus less suitable for CC2652P development.</p></li>
+<li><p>The <a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC1352P">CC1352P-4 LaunchPad</a> is optimized to showcase coin cell battery operation
+while transmitting +10 dBm with the high power PA on the 2.4 GHz frequency
+band. For more information, see the application note on this topic:
+<a class="reference external" href="https://www.ti.com/lit/swra636">Optimizing the CC1352P and CC2652P for Coin Cell Operation at 10 dBm Output Power</a>.</p></li>
+<li><p>The <a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC1352P">CC1352P-2 LaunchPad</a> is optimized to transmit +20 dBm on the 2.4 GHz
+frequency band.</p></li>
+</ul>
+</div>
+<div class="section" id="moving-from-launchpad-to-custom-board">
+<h2>Moving From LaunchPad to Custom Board<a class="headerlink" href="#moving-from-launchpad-to-custom-board" title="Permalink to this headline">¶</a></h2>
+<p>You can find instructions on how to design and configure a custom board in the
+<a class="reference internal" href="../proprietary-rf-guide/custom-hardware.html#sec-custom-hardware"><span class="std std-ref">Custom Hardware</span></a> chapter.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="software-on-cc2652xSIP-cc2651RSIPA.html" class="btn btn-neutral float-left" title="Running Software Examples on CC2652XSIP and CC2651RSIPA devices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="software-on-cc13x2x7-26x2x7.html" class="btn btn-neutral float-right" title="Running Software Examples on the CC13x2x7 or CC26x2x7" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

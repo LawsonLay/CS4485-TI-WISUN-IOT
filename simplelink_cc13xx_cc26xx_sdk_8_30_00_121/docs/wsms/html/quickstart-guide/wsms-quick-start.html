@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wireless Solar Management System Quick Start Guide &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Wireless Solar Management System User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Wireless Solar Management System" href="../wsms-guide/wsms-index.html" />
+    <link rel="prev" title="Wireless Solar Management System User’s Guide" href="../wsms-guide/index.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug quickstart-guide wsms-quick-start";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../wsms-guide/index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Wireless Solar Management System User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Wireless Solar Management System Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-wsms-projects-with-ccs">Using WSMS Projects with CCS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#import-project-using-resource-explorer">Import Project Using Resource Explorer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-project-using-import-wizard">Import Project Using Import Wizard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-and-download-project">Build and Download Project</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-wsms-projects-with-iar">Using WSMS Projects with IAR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iar-one-time-configuration">IAR One-Time Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-project-using-workspace">Import Project Using Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Build and Download Project</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-demo">Running the Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-a-new-wsms-based-application">Developing a New WSMS Based Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enhance-your-project">Enhance Your Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-support">Getting Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wsms-guide/wsms-index.html">Wireless Solar Management System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wsms-guide/example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wsms-guide/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wsms-guide/references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../wsms-guide/index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Wireless Solar Management System User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../wsms-guide/index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Wireless Solar Management System Quick Start Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="wireless-solar-management-system-quick-start-guide">
+<span id="quick-start-wsms"></span><h1>Wireless Solar Management System Quick Start Guide<a class="headerlink" href="#wireless-solar-management-system-quick-start-guide" title="Permalink to this headline">¶</a></h1>
+<p>This section serves as a road map for users developing applications
+and products using the TI SimpleLink CC13xx wireless MCU platform for
+Wireless Solar Management System (WSMS) applications. Whether a seasoned developer or just getting
+started, TI has created a variety of resources to simplify development on the
+CC13xx platform. These resources will enhance your experience with the
+SimpleLink WSMS from the out-of-the-box demo to production.</p>
+<div class="section" id="using-wsms-projects-with-ccs">
+<span id="quick-start-wsms-ccs"></span><h2>Using WSMS Projects with CCS<a class="headerlink" href="#using-wsms-projects-with-ccs" title="Permalink to this headline">¶</a></h2>
+<p>Importing WSMS projects into CCS will also import a <code class="docutils literal notranslate"><span class="pre">README.md</span></code> that
+details the example application design, steps on running the example, and how
+each example works.</p>
+<p>For more details on TI WSMS Stack example application please see the
+<a class="reference external" href="../../../../wsms/wsms-users-guide.html">WSMS Stack User’s Guide</a>.</p>
+<div class="section" id="import-project-using-resource-explorer">
+<h3>Import Project Using Resource Explorer<a class="headerlink" href="#import-project-using-resource-explorer" title="Permalink to this headline">¶</a></h3>
+<p>A quick and easy way to start working with the SDK is to use the TI Resource
+Explorer in CCS.</p>
+<p>This section describes how to import and build an existing project and
+references the <em>node</em> project. This project is an example for a WSMS node
+node. All of WSMS projects included in the development kit have a similar
+structure.</p>
+<ol class="arabic">
+<li><p>Open the CCS IDE from the Start Menu.</p></li>
+<li><p>Create a workspace.</p>
+<blockquote>
+<div><div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Ensure that the CCS workspace path does not contain a whitespace.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Import a CCS Project using Resource Explorer</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Open Resource Explorer (if not open already) <strong>View</strong> -&gt; <strong>Resource
+Explorer</strong> - Navigate to the CCS folder for your chosen example:
+<strong>Software -&gt;</strong> <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> <strong>-&gt; Examples -&gt;</strong> {BOARD_NAME} <strong>-&gt;
+wsms -&gt; wsms_ipv6node -&gt; tirtos7 -&gt; ticlang -&gt; wsms_ipv6node_</strong></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Select the CCS Logo button to import the project into your workspace.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The import process will also install the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> if a local version does
+not exist. You must accept the End User License Agreement to proceeed.</p>
+<div class="figure align-center" id="id4">
+<img alt="../_images/eula.png" src="../_images/eula.png" />
+<p class="caption"><span class="caption-number">Figure 1. </span><span class="caption-text">Install <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>After the installation finishes, you must reopen CCS before importing
+the project.</p>
+</div>
+<ul class="simple">
+<li><p>If everything is successful, the project should appear in Resource
+Explorer.</p></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="import-project-using-import-wizard">
+<h3>Import Project Using Import Wizard<a class="headerlink" href="#import-project-using-import-wizard" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Open CCS</p></li>
+<li><p>Choose Project -&gt; Import CCS Projects… from the menu.</p></li>
+<li><p>Select the Browse button in the Import CCS Projects dialog and select the the
+directory <code class="docutils literal notranslate"><span class="pre">&lt;SDK_INSTALL_DIR&gt;/examples</span></code></p>
+<blockquote>
+<div><div class="figure align-center" id="id5">
+<span id="fig-wsms-ccs-import-wizard"></span><img alt="../_images/ccs-import-wizard.jpg" src="../_images/ccs-import-wizard.jpg" />
+<p class="caption"><span class="caption-number">Figure 2. </span><span class="caption-text">CCS Import Wizard</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<p>CCS discovers all examples supported, regardless of compiler.</p>
+</li>
+<li><p>Select the WSMS Example Project you would like to use. In this example,
+<code class="docutils literal notranslate"><span class="pre">wsms_ipv6node_LP_EM_CC1354P10_1_tirtos7_ticlang</span></code> is chosen. Click Finish
+to import the <code class="docutils literal notranslate"><span class="pre">wsms_ipv6node_LP_EM_CC1354P10_1_tirtos7_ticlang</span></code> project.</p></li>
+</ol>
+</div>
+<div class="section" id="build-and-download-project">
+<h3>Build and Download Project<a class="headerlink" href="#build-and-download-project" title="Permalink to this headline">¶</a></h3>
+<p>To build &amp; download the node project:</p>
+<ol class="arabic">
+<li><p>Build the Node project:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Set the Node project as the active project. Make sure the Release project
+configuration is used.</p></li>
+<li><p>Select <strong>Project</strong> -&gt; <strong>Rebuild</strong> to build the node project.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Load the Node project:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Select <strong>Run</strong> -&gt; <strong>Debug</strong> to download the node application.</p></li>
+<li><p>Once the debugging session starts, click the red stop button</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p>Before beginning execution, open a terminal window with the following settings:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>UART Param</p></th>
+<th class="head"><p>Default Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Baud Rate</p></td>
+<td><p>115200</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data length</p></td>
+<td><p>8 bits</p></td>
+</tr>
+<tr class="row-even"><td><p>Parity</p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stop bits</p></td>
+<td><p>1 bit</p></td>
+</tr>
+<tr class="row-even"><td><p>Flow Control</p></td>
+<td><p>None</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>When the debugging session opens, click the Green start button to start
+execution. Continue on to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> for information about using the
+example application.</p>
+</div>
+</div>
+<div class="section" id="using-wsms-projects-with-iar">
+<h2>Using WSMS Projects with IAR<a class="headerlink" href="#using-wsms-projects-with-iar" title="Permalink to this headline">¶</a></h2>
+<p>Importing a WSMS project into IAR will also import a README.md
+that details the example application design, steps on running the example, and
+how each example works.</p>
+<p>When building with IAR, it is recommended to enable all build messages. This
+can be done by right-clicking in the Build window and selecting “All” as shown
+below:</p>
+<blockquote>
+<div><div class="figure align-center" id="id6">
+<img alt="../_images/ble5_iar_enable_build_messages.png" src="../_images/ble5_iar_enable_build_messages.png" />
+<p class="caption"><span class="caption-number">Figure 3. </span><span class="caption-text">Enable All Build Messages</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Standalone SysConfig tool must be installed in order to use all the IAR projects and
+its location has to the same as specified by <code class="docutils literal notranslate"><span class="pre">SYSCONFIG_ROOT</span></code>.</p>
+<p>The SysConfig standalone package can be found here: <a class="reference external" href="http://www.ti.com/tool/download/SYSCONFIG">SysConfig Standalone Installer Download Page</a>.</p>
+</div>
+<div class="section" id="iar-one-time-configuration">
+<h3>IAR One-Time Configuration<a class="headerlink" href="#iar-one-time-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Below you can see how to add and enable the SDK-global argument variables. This
+is necessary before importing any project.</p>
+<blockquote>
+<div><div class="figure align-default" id="id7">
+<img alt="../_images/iar_custom_argvars_menu.png" src="../_images/iar_custom_argvars_menu.png" />
+<p class="caption"><span class="caption-number">Figure 4. </span><span class="caption-text">Select Configure Custom Argument Variables from the Tools menu</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id8">
+<img alt="../_images/iar_custom_argvars_empty.png" src="../_images/iar_custom_argvars_empty.png" />
+<p class="caption"><span class="caption-number">Figure 5. </span><span class="caption-text">Click on Import… with either the Workspace or Global namespace
+selected. For Global, the imported values will persist for other
+projects also.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id9">
+<img alt="../_images/iar_custom_argvars_file.png" src="../_images/iar_custom_argvars_file.png" />
+<p class="caption"><span class="caption-number">Figure 6. </span><span class="caption-text">Find the Custom Argument Variables file under <code class="docutils literal notranslate"><span class="pre">&lt;SDK</span> <span class="pre">root&gt;/tools/iar</span></code></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id10">
+<img alt="../_images/iar_custom_argvars_selected.png" src="../_images/iar_custom_argvars_selected.png" />
+<p class="caption"><span class="caption-number">Figure 7. </span><span class="caption-text">Success! Change these paths if you have installed in a different location.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have imported the global
+<code class="docutils literal notranslate"><span class="pre">&lt;SDK_INSTALL_DIR&gt;/tools/iar/SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars</span></code>,
+then the examples from the older SDKs will fail to build.</p>
+</div>
+</div>
+<div class="section" id="import-project-using-workspace">
+<h3>Import Project Using Workspace<a class="headerlink" href="#import-project-using-workspace" title="Permalink to this headline">¶</a></h3>
+<p>This section describes how to open and build an existing project and references
+the <code class="docutils literal notranslate"><span class="pre">wsms_ipv6node</span></code> project.</p>
+<ol class="arabic">
+<li><p>Open the IAR Embedded Workbench IDE from the Start Menu.</p></li>
+<li><p>Open an IAR workspace project: <strong>File</strong> -&gt; <strong>Open</strong> -&gt; <strong>Workspace…</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For this example, select
+<strong>&lt;SDK_INSTALL_DIR&gt;\examples\rtos\|LP|\wsms\wsms_ipv6node\tirtos7\iar\wsms_ipv6node_&lt;LP&gt;tirtos_iar.template.eww</strong></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>This will prompt you to select a folder location as a workspace for the
+project. It’s important to select an empty folder.</p></li>
+</ol>
+</div>
+<div class="section" id="id3">
+<h3>Build and Download Project<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>To build &amp; download the node project:</p>
+<ol class="arabic">
+<li><p>Build the Node project:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Set the Node project as the active project. Make sure the Release project
+configuration is used.</p></li>
+<li><p>Select <strong>Build</strong> to build the node project.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Load the Node project:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Select <strong>Debug</strong> to download the node application.</p></li>
+<li><p>Once the debugging session starts, click the red stop button</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p>Before beginning execution, open a terminal window with the following settings:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>UART Param</p></th>
+<th class="head"><p>Default Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Baud Rate</p></td>
+<td><p>115200</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data length</p></td>
+<td><p>8 bits</p></td>
+</tr>
+<tr class="row-even"><td><p>Parity</p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stop bits</p></td>
+<td><p>1 bit</p></td>
+</tr>
+<tr class="row-even"><td><p>Flow Control</p></td>
+<td><p>None</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>When the debugging session opens, click the start button to start
+execution. Continue on to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> for information about using the
+example application.</p>
+</div>
+</div>
+<div class="section" id="running-the-demo">
+<span id="quick-start-wsms-demo"></span><h2>Running the Demo<a class="headerlink" href="#running-the-demo" title="Permalink to this headline">¶</a></h2>
+<p>For information on running any of the WSMS example applications please refer
+to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> imported with the example application.</p>
+<p>When using the example in network processor mode, a host device running TI Wi-SUN
+FAN pySpinel scripts is needed. A description for setting this up is found in
+the <a class="reference external" href="https://github.com/TexasInstruments/ti-wisunfan-pyspinel">TI Wi-SUN FAN pySpinel GitHub repo</a>.</p>
+</div>
+<div class="section" id="developing-a-new-wsms-based-application">
+<span id="quick-start-wsms-develop"></span><h2>Developing a New WSMS Based Application<a class="headerlink" href="#developing-a-new-wsms-based-application" title="Permalink to this headline">¶</a></h2>
+<p>The develop track can be summarized with the following steps:</p>
+<ol class="arabic">
+<li><p><strong>Download the Simplelink SDK</strong></p>
+<p>The <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13XX CC26XX SDK</a> contains the code neccessary to start developing a WSMS
+application. The stack library code implements the WSMS stack, and the
+various example projects use the stack library to implement applications.
+These examples should be considered as starting points for end product design.</p>
+</li>
+<li><p><strong>Get Familiar with the User’s Guide</strong></p>
+<p>This User’s Guide is meant to be used alongside the example projects when
+developing an end product. It contains documentation on the stack
+architecture, APIs and suggestions for developing applications. To jump to
+the Table of Contents, click here:  <a class="reference external" href="../../../../wsms/wsms-users-guide.html">WSMS Stack User’s Guide</a>.</p>
+</li>
+<li><p><strong>Select an Example Project</strong></p>
+<p>The WSMS includes a basic set of projects to use as a starting point for
+development of your custom application. TI recommends that users start their
+development of project with the ipv6 Base and ipv6 Node example
+applications. For more details on these and all other included projects, see
+the <a class="reference external" href="../../../../wsms/wsms-users-guide.html">WSMS Stack User’s Guide</a>.</p>
+</li>
+<li><p><strong>Begin Development with an IDE</strong></p>
+<p>An Integrated Development Environment (IDE) can be set up to make it easier
+to browse through the relevant projects and view code. All embedded software
+is developed using TI’s Code Composer Studio on a Windows 10 or later
+PC.</p>
+</li>
+<li><p><strong>Troubleshooting Help</strong></p>
+<p>While developing your custom application, you may run into issues that
+require the use of a debugger. The <a class="reference external" href="../../../../wsms/wsms-users-guide.html">WSMS Stack User’s Guide</a> provides
+help with configuring your debugger and understanding common problems. If
+you are still having problems after reading through the Debugging chapter,
+see the <a class="reference internal" href="#quick-start-wsms-support"><span class="std std-ref">Getting Support</span></a> track for more options.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="enhance-your-project">
+<span id="quick-start-wsms-enhance"></span><h2>Enhance Your Project<a class="headerlink" href="#enhance-your-project" title="Permalink to this headline">¶</a></h2>
+<p>The following resources are intended to take your product to the next level by
+leveraging TI’s web-based collateral. Additional resources found in these pages
+include application-specific source code examples and complete sub-system designs.</p>
+<ol class="arabic">
+<li><p><strong>TI Designs™</strong> <a class="reference external" href="https://www.ti.com/reference-designs/index.html">http://www.ti.com/tidesigns</a></p>
+<p>Examples of system designs containing complete hardware and software examples.</p>
+</li>
+<li><p><strong>Application Notes</strong></p>
+<p>You can find a number of application notes on each <a class="reference external" href="https://www.ti.com/product/CC1354P10#tech-docs">device page on ti.com</a>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="getting-support">
+<span id="quick-start-wsms-support"></span><h2>Getting Support<a class="headerlink" href="#getting-support" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>E2E Forums</strong> <a class="reference external" href="https://e2e.ti.com/support/wireless-connectivity/">www.e2e.ti.com</a></p></li>
+</ul>
+<p>A support community providing answers to questions relating to the WSMS
+Stack. You can browse questions from other developers or ask your own questions
+if you run into issues developing with WSMS.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../wsms-guide/index.html" class="btn btn-neutral float-left" title="Wireless Solar Management System User’s Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../wsms-guide/wsms-index.html" class="btn btn-neutral float-right" title="Wireless Solar Management System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

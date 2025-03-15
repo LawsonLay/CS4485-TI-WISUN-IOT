@@ -1,0 +1,253 @@
+EAPOL Layer
+-----------
+
+The Extensible Authentication Protocol over LAN (EAPOL) layer is responsible for
+authenticating devices in the Wi-SUN network.
+
+Wi-SUN FAN networks mandate encryption of packets at the MAC level as well as
+allowing only authentic devices with right credentials to join the network. As
+per the |SPEC|, EAPOL is used to exchange identities and to install the keys
+required to establish an encrypted connection.
+
+Four types of keys are used for achieving security in the network:
+
+- Pairwise Master Key (PMK): Installed during authentication and used to derive
+  PTK. 
+- Pairwise Temporal Key (PTK): The packet containing the GTK is encrypted using
+  a pair wise common key called PTK.
+- Group Transient Key (:term:`GTK`): Installed on the node during the joining
+  process.
+- Group AES Key (:term:`GAK`):  All devices within a Wi-SUN FAN and PAN network
+  use a common key called GAK for encrypting packets at MAC layer. The GAK is
+  derived from the GTK.
+
+In TI Wi-SUN FAN examples, the EAPOL authenticator runs on the border router
+itself, and the nodes which have already joined the network provide EAPOL relay
+services to the joining node or the EAP supplicant.
+
+Details of the process between the EAP supplicant, relay agents, authenticator
+and authentication server can be found in the |SPEC|. 
+
+Usage of NV for Storing Keys
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Keys and network information can be stored in flash by using the non volatile
+(NV) layer.
+
+- On-chip non volatile storage is used by both border router and router devices
+  for storing different information related to network, keys, frame counter etc. 
+- On both border router and router devices, 16 kB of flash is reserved for these
+  needs. This can be increased through the SysConfig interface as needed.
+
+On the router side, following information is stored in the NV:
+
+- Network & :term:`GTK` related info: pan_id, network name, own-self EUI-64 and
+  for each GTK: GTK expiry time stamp + install order + actual key value
+- PTK and PMK related info: PMK + PMK lifetime + PMK replay counter + PTK + PTK
+  lifetime
+- Frame counter related info: restart counter + stored time + pan version + (GTK
+  + frame counter) for every GTK key 
+
+On the border router side, apart from network & GTK related info, Frame counter
+related info and the pair wise key information is stored for every device in the
+network.
+
+Enable NV to Store Keys
+"""""""""""""""""""""""
+
+In order to enable NV to store keys and related network information, it is
+required to perform the following steps:
+
+1. After importing your project, right click the SysConfig file associated with
+   the project to open using the default CCS text editor:
+
+	.. figure:: resources/open-in-text-editor.png
+	    :width: 600px
+	    :align: center
+
+2. On line 55 in the SysConfig file, paste in the following code to add the NVS
+   Module in SysConfig. Please note that depending on role (Border Router vs
+   Router Node), the ``regionBase`` is different.
+
+.. code-block:: c
+  	:caption: Add NVS to SysConfig (Border Router)
+  
+	/* ======== NVS ======== */
+	var NVS = scripting.addModule("/ti/drivers/NVS"); // Add a NVS module
+	var NVS_INT = NVS.addInstance(); // Add an internal NVS module instance
+
+	NVS_INT.$name = "CONFIG_NVSINTERNAL"; // Internal NVS
+	NVS_INT.internalFlash.regionBase = 0xAA000;
+	NVS_INT.internalFlash.regionSize = 0x4000;
+
+.. code-block:: c
+  	:caption: Add NVS to SysConfig (Router Node)
+  
+	/* ======== NVS ======== */
+	var NVS = scripting.addModule("/ti/drivers/NVS"); // Add a NVS module
+	var NVS_INT = NVS.addInstance(); // Add an internal NVS module instance
+
+	NVS_INT.$name = "CONFIG_NVSINTERNAL"; // Internal NVS
+	NVS_INT.internalFlash.regionBase = 0x52000;
+	NVS_INT.internalFlash.regionSize = 0x4000;
+
+3. Save and close the SysConfig file.
+
+4. Open Project -> Properties -> Build -> Arm Compiler -> Predefined Symbols ->
+   Pre-define NAME and add a predefined symbol: ``NV_RESTORE``
+
+5. The NV layer provides APIs for initializing the driver, storing, updating and
+   clearing data from NV. The user application should however ensure the NV driver
+   is initialized before any NV related APIs are called. In the TI Wi-SUN fan SDK
+   examples, the code related to NV initialization can be found in ``main_tirtos.c``
+   file as below. Make sure to save the NV driver's API function pointers in the
+   pointer ``pNV``, so that the TI Wi-SUN FAN stack can use them to store/retrieve
+   data from NV. 
+
+	  .. code-block:: c
+	  
+	    // Setup the NV driver
+	    NVOCMP_loadApiPtrs(&Main_user1Cfg.nvFps);
+
+	    // Do NV init
+	    if(Main_user1Cfg.nvFps.initNV)
+	    {
+	    	Main_user1Cfg.nvFps.initiNV( NULL );
+	    }
+
+	    // Save off the NV function pointers
+	    pNV = &Main_user1Cfg.nvFps;
+
+   The information stored in NV is updated when needed, based on a slow timer
+   managed by the |STACK| or when there is an update in the keys used. 
+
+   To clear NV content for a fresh start, see the section :ref:`sec-wisun-erase-nv`.
+
+Certificates for Certification 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wi-SUN requires the use of x.509 (RFC 5280) based certificates. The device
+identifier should be based on IDevId as defined in IEEE 802.1AR.
+
+There are two types of certificates that needs to be configured for a Wi-SUN device:
+
+1) Root Certificate(s):
+	- This forms the trusted root certificate(s) to validate other devices
+2) Device Certificate and corresponding private key. Components are:
+	- Device certificate to be sent to the other device for authentication
+	- Private key corresponding to the device certificate to be used for key
+	  exchange. (Note: the private key will not be sent over the air and is used
+	  internally only)
+
+In the |SDK| examples, default certificates are enabled. A guide is provided to
+enable and change certificates. 
+
+
+Configure Certificates
+""""""""""""""""""""""
+
+An example implementation of Wi-SUN certificates and keys is given in the
+``wisun_certificates.h`` file. The certificates and keys in this file are added
+in ``mbed_config_app.h`` and set in ``wisun_tasklet.h``.
+
+When using your own certificates and keys, you can either replace the values in
+``wisun_certificates.h``, make your own version of ``wisun_certificates.h`` or
+define your certificates and keys in ``application.c``. Only PEM format is
+supported for certificates and key.
+
+Adding certificates are done with the ``wisun_tasklet`` APIs, defined in ``wisun_tasklet.h``.
+   
+   - ``wisun_tasklet_set_trusted_certificate``
+   - ``wisun_tasklet_remove_trusted_certificates``
+   - ``wisun_tasklet_remove_own_certificates``
+   - ``wisun_tasklet_set_own_certificate``
+
+In ``application.c``, locate the ``*mainThread`` and add your code snippet after
+``nanostack_wisunInterface_bringup()`` has run.
+
+	  .. code-block:: c
+	  
+	        if( MESH_ERROR_NONE != nanostack_wisunInterface_bringup())
+    		{
+        		// release mutex
+        		nanostack_unlock();
+        		// do not proceed further
+        		while(1);
+    		}
+
+			// Set up custom certificates and keys
+			wisun_tasklet_remove_trusted_certificates();
+    		wisun_tasklet_set_trusted_certificate(MBED_CONF_MBED_MESH_APP_ROOT_CERTIFICATE, strlen((const char*)MBED_CONF_MBED_MESH_APP_ROOT_CERTIFICATE) + 1);
+    		wisun_tasklet_remove_own_certificates();
+    		wisun_tasklet_set_own_certificate(MBED_CONF_MBED_MESH_APP_OWN_CERTIFICATE, strlen((const char*)MBED_CONF_MBED_MESH_APP_OWN_CERTIFICATE) + 1,
+                                      		  MBED_CONF_MBED_MESH_APP_OWN_CERTIFICATE_KEY, strlen((const char*)MBED_CONF_MBED_MESH_APP_OWN_CERTIFICATE_KEY) + 1);
+
+Here, the ``MBED_CONF_MBED_MESH_APP_ROOT_CERTIFICATE`` and
+``MBED_CONF_MBED_MESH_APP_OWN_CERTIFICATE`` are analogous to
+``MBED_CONF_MBED_MESH_API_ROOT_CERTIFICATE`` and
+``MBED_CONF_MBED_MESH_API_OWN_CERTIFICATE`` defined in ``mbed_config_app.h``. 
+
+
+6LoWPAN Layer
+-------------
+
+The goal of the 6LoWPAN protocol is to support the :ref:`sec-wisun-ipv6` IP
+services by reducing the gap between IPv6 and lower stacks. This serves IPv6
+applications on the low-end devices typically restricted in processing power,
+memory, and energy. The primary tasks of the 6LoWPAN are:
+
+- fragmentation and reassembly
+- IPv6 and UDP header compression
+- stateless IPv6 address auto-configuration
+- neighbor discovery optimization.
+
+For details of the 6LoWPAN protocol, see the RFC standards RFC 4944 and RFC 6282
+or the `Wireless Network Challenges and Solutions for a Smarter Grid IoT`_ TI
+Training video.
+
+
+.. _sec-wisun-ipv6:
+
+IPv6 Layer
+----------
+
+In a Wi-SUN FAN network, all devices have an assigned Internet Protocol v6 (IPv6)
+address. 
+
+.. _sec-wisun-rpl:
+
+Routing Layer (RPL)
+-------------------
+
+The |SPEC| mandates usage of a routing protocol for low-power and lossy networks
+(RPL) algorithm in non-storing mode to achieve layer 3 routing. This protocol
+assigns the following roles in the network:
+
+- Root: First device in the mesh network, other devices join the root. For each
+  device joining the network, a hierarchical connection is formed. 
+- Parent: Device closer to the root. The parent can act as proxy for their child.
+- Child: Device farther from the root. Interacts with the root through the parent.
+
+
+The network formation with RPL routing is initiated by broadcasting Destination
+Oriented Directed Acyclic Graph (DODAG) information object (DIO) by the Border
+router as well the nodes who can provide routing services to/from the border
+router. 
+
+During the process of joining the network, a new child node receives the DIOs,
+then selects the best possible parents (minimum 2 parents if possible) who can 
+provide the best possible route to the border router i.e. root of the RPL tree.
+The preferred parent is chosen by a RPL metric. Per default, the RPL metric is
+the expected transmission count (ETX). Thus the preferred parent will be the one
+with the fewest expected transmissions to the border router. 
+
+The selected parent information is conveyed to the border router using DAO
+messages. After updating its routing tables, the border router acknowledges the
+receipt of DAO packet by sending DAO ACK back to the newly joined node. (The DIO
+and DAO transmission times are determined by the trickle algorithm (RFC 6206).)
+
+You can see a figure of all the steps in the node joining process in the
+:ref:`sec-wisun-node-join` chapter. 
+
+For details on RPL routing, see the RFC standard RFC 6550 or the `Wireless
+Network Challenges and Solutions for a Smarter Grid IoT`_ TI Training video.

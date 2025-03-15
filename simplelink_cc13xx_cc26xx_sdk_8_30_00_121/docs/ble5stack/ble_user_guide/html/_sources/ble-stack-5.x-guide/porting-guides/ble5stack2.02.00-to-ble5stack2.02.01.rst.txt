@@ -1,0 +1,119 @@
+BLE5-Stack 2.02.00 (SDK 4.40) to BLE5-Stack 2.02.01 (SDK 5.10)
+==============================================================
+
+This section will describe a way to migrate a project from BLE5-Stack 2.02.00 to
+a BLE5-Stack 2.02.01 project.
+
+The best way to migrate is to open a new project from the new SDK and transfer 
+your changes and application code over to the new example. 
+
+Porting Simple Peripheral
+-------------------------
+
+For this migration guide, Simple Peripheral from BLE5-Stack 2.02.00 will be 
+ported over to BLE5-Stack 2.02.01. The recommended approach is to start with a
+BLE5-Stack 2.02.01 project that contains the same base functionality as the
+porting target project and merge in any custom functionality.
+
+#. Choose a BLE5-Stack 2.02.01 example project that contains your target
+   project's base functionality.
+
+#. Transfer all modified application files from BLE5-Stack 2.02.00 into the
+   BLE5-Stack 2.02.01 example project.
+
+   In this example, the following files from BLE5-Stack 2.02.00 were moved into
+   Simple Peripheral BLE5-Stack 2.02.01 example:
+
+      - ``simple_peripheral.c``
+      - ``simple_peripheral.h``
+
+#. Move any profiles and services that the application is using to the 
+   BLE5-Stack 2.02.01 project.
+
+#. Transfer the SysConfig settings either visually through the GUI or open both 
+   the old and the new project .syscfg files and copy-paste the desired 
+   settings.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|.
+
+#. Refer to the Core SDK release notes for additional information and the 
+   TI-RTOS examples included with |SDK|.
+
+   For additional information on how BLE5-Stack 2.02.01 uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+
+Porting Simple Central
+-------------------------
+
+This section of the migration guide will focus on porting Simple Central 
+from BLE5-Stack 2.02.00 to the BLE5-Stack 2.02.01. The recommended approach is 
+to start with a BLE5-Stack 2.02.01 project that contains the same base 
+functionality as theporting target project and merge in any custom functionality.
+
+#. Choose a BLE5-Stack 2.02.01 example project that contains your target
+   project's base functionality.
+
+#. Transfer all modified application files from BLE5-Stack 2.02.00 into the
+   BLE5-Stack 2.02.01 example project.
+
+   In this example, the following files from BLE5-Stack 2.02.00 were moved into
+   Simple Central BLE5-Stack 2.02.01 example:
+
+      - ``simple_central.c``
+      - ``simple_central.h``
+
+#. Modify ``connRec_t`` definition in ``simple_central.c`` such that the 
+   ``charHandle`` is of type ``uint16_t`` as shown below:
+   
+    .. code-block:: c
+      :caption: Changed data type of addr and charHandle
+      :linenos:
+
+        // Connected device information
+        typedef struct
+        {
+          uint16_t connHandle;        // Connection Handle
+          uint16_t  addr[B_ADDR_LEN];  // Peer Device Address
+          uint16_t  charHandle;        // Characteristic Handle
+          Clock_Struct *pRssiClock;   // pointer to clock struct
+        } connRec_t;
+
+#. Modify ``main.c`` in the BLE5-Stack 2.02.01 example if additional tasks were
+   added in the BLE5-Stack 2.02.00 project.
+
+#. Move any profiles and services that the application is using to the BLE5-Stack
+   2.02.01 project.
+
+#. Transfer the Sysconfig settings either visually through the GUI or open both 
+   the old and the new project .syscfg files and copy-paste the desired settings.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|.
+
+#. Refer to the Core SDK release notes for additional information and the TI-RTOS
+   examples included with |SDK|.
+
+   For additional information on how BLE5-Stack 2.01.01 uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+
+A Few Noteworthy Changes from BLE5-Stack 2.02.00 to BLE5-Stack 2.02.01
+-------------------------------------------------------------------------
+
+You can follow the guide above without addressing these updates, they are listed
+for your information only. All fine grained details might not be mentioned, 
+please refer to the specific example you need to port and to a compare between 
+the old and new project files. Please refer to the BLE5-Stack Release Notes for 
+all the details.
+
+* Agama 704 device support has been added to SDK.
+
+* Examples for Agama 704 devices have been added to SDK.
+
+* Agama 704 devices included in SysConfig.

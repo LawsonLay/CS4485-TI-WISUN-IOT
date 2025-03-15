@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATT_ErrorRsp &mdash; Vendor Specific Guide 5.00.00 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Vendor Specific Guide
+          </a>
+              <div class="version">
+                5.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hci_interface.html">HCI Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="att_api.html">ATT Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gap_api.html">GAP Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gapbondmgr_api.html">GapBondMgr Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gatt_api.html">GATT Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hci_ext_api.html">HCI Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2cap_api.html">L2CAP Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util_api.html">UTIL Extension Vendor Specific API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vendor Specific Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>ATT_ErrorRsp</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="att-errorrsp">
+<h1>ATT_ErrorRsp<a class="headerlink" href="#att-errorrsp" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD01</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Error Response is used to state that a given request cannot be performed and to provide the reason.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">reqOpcode<span class="colon">:</span></dt>
+<dd class="field-even"><p>The request that generated this error response</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x01</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>ATT_ERROR_RSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>ATT_EXCHANGE_MTU_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x03</p></td>
+<td><p>ATT_EXCHANGE_MTU_RSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x04</p></td>
+<td><p>ATT_FIND_INFO_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x05</p></td>
+<td><p>ATT_FIND_INFO_RSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x06</p></td>
+<td><p>ATT_FIND_BY_TYPE_VALUE_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x07</p></td>
+<td><p>ATT_FIND_BY_TYPE_VALUE_RSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x08</p></td>
+<td><p>ATT_READ_BY_TYPE_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x09</p></td>
+<td><p>ATT_READ_BY_TYPE_RSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0A</p></td>
+<td><p>ATT_READ_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0B</p></td>
+<td><p>ATT_READ_RSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0C</p></td>
+<td><p>ATT_READ_BLOB_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0D</p></td>
+<td><p>ATT_READ_BLOB_RSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0E</p></td>
+<td><p>ATT_READ_MULTI_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0F</p></td>
+<td><p>ATT_READ_MULTI_RSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10</p></td>
+<td><p>ATT_READ_BY_GRP_TYPE_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x11</p></td>
+<td><p>ATT_READ_BY_GRP_TYPE_RSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>ATT_WRITE_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x13</p></td>
+<td><p>ATT_WRITE_RSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x16</p></td>
+<td><p>ATT_PREPARE_WRITE_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x17</p></td>
+<td><p>ATT_PREPARE_WRITE_RSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x18</p></td>
+<td><p>ATT_EXECUTE_WRITE_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x19</p></td>
+<td><p>ATT_EXECUTE_WRITE_RSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x1B</p></td>
+<td><p>ATT_HANDLE_VALUE_NOTI</p></td>
+</tr>
+<tr class="row-even"><td><p>0x1D</p></td>
+<td><p>ATT_HANDLE_VALUE_IND</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x1E</p></td>
+<td><p>ATT_HANDLE_VALUE_CFM</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">handle<span class="colon">:</span></dt>
+<dd class="field-even"><p>The attribute handle that generated this error response</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">errorCode<span class="colon">:</span></dt>
+<dd class="field-even"><p>The reason why the request has generated an error response</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x80</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>INVALID_HANDLE</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>READ_NOT_PERMITTED</p></td>
+</tr>
+<tr class="row-even"><td><p>0x03</p></td>
+<td><p>WRITE_NOT_PERMITTED</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x04</p></td>
+<td><p>INVALID_PDU</p></td>
+</tr>
+<tr class="row-even"><td><p>0x05</p></td>
+<td><p>INSUFFICIENT_AUTHEN</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x06</p></td>
+<td><p>UNSUPPORTED_REQ</p></td>
+</tr>
+<tr class="row-even"><td><p>0x07</p></td>
+<td><p>INVALID_OFFSET</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x08</p></td>
+<td><p>INSUFFICIENT_AUTHOR</p></td>
+</tr>
+<tr class="row-even"><td><p>0x09</p></td>
+<td><p>PREPARE_QUEUE_FULL</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0a</p></td>
+<td><p>ATTR_NOT_FOUND</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0b</p></td>
+<td><p>ATTR_NOT_LONG</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0c</p></td>
+<td><p>INSUFFICIENT_KEY_SIZE</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0d</p></td>
+<td><p>INVALID_VALUE_SIZE</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0e</p></td>
+<td><p>UNLIKELY_ERROR</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0f</p></td>
+<td><p>INSUFFICIENT_ENCRYPTION</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10</p></td>
+<td><p>UNSUPPORTED_GRP_TYPE</p></td>
+</tr>
+<tr class="row-even"><td><p>0x11</p></td>
+<td><p>INSUFFICIENT_RESOURCES</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x80</p></td>
+<td><p>INVALID_VALUE</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-exchangemtureq">
+<h1>ATT_ExchangeMTUReq<a class="headerlink" href="#att-exchangemtureq" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD02</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Exchange MTU Request is used by the client to inform the server of the clients maximum receive MTU size and request the server to respond with its maximum receive MTU size is used to state that a given request cannot be performed and to provide the reason.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">clientRxMTU<span class="colon">:</span></dt>
+<dd class="field-even"><p>Attribute client receive MTU size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>23</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>The server will respond to this request with a ATT_ExchangeMTURsp.</p>
+</section>
+<section id="att-exchangemtursp">
+<h1>ATT_ExchangeMTURsp<a class="headerlink" href="#att-exchangemtursp" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD03</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Exchange MTU Response is sent in reply to a received Exchange MTU Request.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">serverRxMTU<span class="colon">:</span></dt>
+<dd class="field-even"><p>Attribute server receive MTU size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>23</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-findinforeq">
+<h1>ATT_FindInfoReq<a class="headerlink" href="#att-findinforeq" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD04</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Find Information Request is used to obtain the mapping of attribute handles with their associated types. This allows a client to discover the list of attributes and their types on a server.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">startHandle<span class="colon">:</span></dt>
+<dd class="field-even"><p>First requested handle number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0001</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">endHandle<span class="colon">:</span></dt>
+<dd class="field-even"><p>Last requested handle number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0xFFFF</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this request is received, the server will send the ATT_FindInfoRsp. The client will forward all the Find Information Responses to the calling application. The response with the status of bleProcedureComplete will indicate the end of the sub-procedure. If no attributes will be returned or any of the requested parameters is invalid, the server will send an ATT_ErrorRsp.</p>
+</section>
+<section id="att-findinforsp">
+<h1>ATT_FindInfoRsp<a class="headerlink" href="#att-findinforsp" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD05</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Find Information Response is sent in reply to a received Find Information Request and contains information about the server.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">format<span class="colon">:</span></dt>
+<dd class="field-even"><p>The format of the information data</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x01</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>HANDLE_BT_UUID_TYPE - handle(s) and 16-bit Bluetooth UUID(s)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>HANDLE_UUID_TYPE - handle(s) and 128-bit UUID(s)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">info<span class="colon">:</span></dt>
+<dd class="field-even"><p>The information data whose format is determined by the format field</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>4 to (ATT_MTU - 2) octets</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-findbytypevaluereq">
+<h1>ATT_FindByTypeValueReq<a class="headerlink" href="#att-findbytypevaluereq" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD06</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Find By Type Value Request is used to obtain the handles of attributes that have a 16-bit UUID attribute type and attribute value. This allows the range of handles associated with a given attribute to be discovered when the attribute type determines the grouping of a set of attributes.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">startHandle<span class="colon">:</span></dt>
+<dd class="field-even"><p>First requested handle number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0001</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">endHandle<span class="colon">:</span></dt>
+<dd class="field-even"><p>Last requested handle number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0xFFFF</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">type<span class="colon">:</span></dt>
+<dd class="field-even"><p>2-octet UUID to find</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“00:00”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">value<span class="colon">:</span></dt>
+<dd class="field-even"><p>Attribute value to find</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0 to (ATT_MTU - 7) octets</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this request is received, the server will send the ATT_FindByTypeValueRsp. The client will forward all the ATT_FindByTypeValueRsp events to the calling application. The response with the status of bleProcedureComplete will indicate the end of the sub-procedure. If no attributes will be returned or any of the requested parameters is invalid, the server will send an ATT_ErrorRsp.</p>
+</section>
+<section id="att-findbytypevaluersp">
+<h1>ATT_FindByTypeValueRsp<a class="headerlink" href="#att-findbytypevaluersp" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD07</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Find By Type Value Response is sent in reply to a received Find By Type Value Request and contains information about this server.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">handlesInfo<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Handles Information List field is a list of one or more Handle Information groups where the first 2 bytes are the attribute handle and the next two bytes are the handle end group handle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2-byte value for each element.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-readbytypereq">
+<h1>ATT_ReadByTypeReq<a class="headerlink" href="#att-readbytypereq" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD08</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Read By Type Request is used to obtain the values of attributes where the attribute type is known but the handle is not known.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">startHandle<span class="colon">:</span></dt>
+<dd class="field-even"><p>First requested handle number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0001</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">endHandle<span class="colon">:</span></dt>
+<dd class="field-even"><p>Last requested handle number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0xFFFF</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">type<span class="colon">:</span></dt>
+<dd class="field-even"><p>2 or 16 octet UUID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“00:00”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 or 16 byte value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this request is received, the server will send the ATT_ReadByTypeRsp. The client will forward all the ATT_ReadByTypeRsp events to the calling application. The response with the status of bleProcedureComplete will indicate the end of the sub-procedure. If no attribute with the given type exists within the handle range or the attribute value cannot be read, the server will send an ATT_ErrorRsp.</p>
+</section>
+<section id="att-readbytypersp">
+<h1>ATT_ReadByTypeRsp<a class="headerlink" href="#att-readbytypersp" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD09</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Read By Type Response is sent in reply to a received Read By Type Request and contains the handles and values of the attributes that have been read.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">length<span class="colon">:</span></dt>
+<dd class="field-even"><p>The size of each attribute handle-value pair.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 1 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">dataList<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of Attribute Data (handle-value pairs) where the first two bytes are the attribute handle and the next two bytes are the attribute value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value for each attribute handle and any (length -2) bytes for each attribute value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-readreq">
+<h1>ATT_ReadReq<a class="headerlink" href="#att-readreq" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD0A</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Read Request is used request the server to read the value of an attribute and return its value in a Read Response.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">handle<span class="colon">:</span></dt>
+<dd class="field-even"><p>The handle of the attribute to be read</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this request is received, the server will send the ATT_ReadRsp. If the attribute handle is invalid or the attribute value cannot be read, the server will send an ATT_ErrorRsp.</p>
+</section>
+<section id="att-readrsp">
+<h1>ATT_ReadRsp<a class="headerlink" href="#att-readrsp" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD0B</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Read Response is sent in reply to a received Read Request and contains the value of the attribute that has been read.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">value<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value of the attribute with the handle given</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any (0 to (ATT_MTU - 1) byte) value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-readblobreq">
+<h1>ATT_ReadBlobReq<a class="headerlink" href="#att-readblobreq" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD0C</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Read Blob Request is used request the server to read part of the value of an attribute at a given offset and return a specific part of the value in a ATT_ReadBlobRsp.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">handle<span class="colon">:</span></dt>
+<dd class="field-even"><p>The handle of the attribute to be read</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">offset<span class="colon">:</span></dt>
+<dd class="field-even"><p>The offset of the first octet to be read</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this request is received, the server will send the ReadBlobRsp. The client will forward all the ReadBlobRsp events to the calling application. The response with the status of bleProcedureComplete will indicate the end of the sub-procedure. If the attribute handle or offset is invalid, or the attribute value cannot be read, the server will send an ATT_ErrorRsp.</p>
+</section>
+<section id="att-readblobrsp">
+<h1>ATT_ReadBlobRsp<a class="headerlink" href="#att-readblobrsp" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD0D</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Read Blob Response is sent in reply to a received Read Blob Request and contains part of the value of the attribute that has been read.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">value<span class="colon">:</span></dt>
+<dd class="field-even"><p>Part of the value of the attribute with the handle given</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any (0 to (ATT_MTU - 1) octets) value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-readmultireq">
+<h1>ATT_ReadMultiReq<a class="headerlink" href="#att-readmultireq" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD0E</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Read Multiple Request is used to request the server to read two or more values of a set of attributes and return their values in a ATT_ReadMultiRsp. Only values that have a known fixed size can be read, with the exception of the last value that can have a variable length.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">handles<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of two or more two-byte attribute handles</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any (4 to (ATT_MTU-1) byte) value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this request is received, the server will send the ATT_ReadMultiRsp. If any of the attribute handles are invalid or any of the attribute values cannot be read, the server will send an ATT_ErrorRsp.</p>
+</section>
+<section id="att-readmultirsp">
+<h1>ATT_ReadMultiRsp<a class="headerlink" href="#att-readmultirsp" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD0F</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Read Multiple Response is sent in reply to a received ATT_ReadMultiReq and contains the values of the attributes that have been read.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">values<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of two or more values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any (0 to (ATT_MTU - 1) byte) value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-readbygrptypereq">
+<h1>ATT_ReadByGrpTypeReq<a class="headerlink" href="#att-readbygrptypereq" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD10</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Read By Group Type Request is used to obtain the values of attributes where the attribute type is known, the type of a grouping attribute as defined by a higher layer specification, but the handle is not known.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">startHandle<span class="colon">:</span></dt>
+<dd class="field-even"><p>First requested handle number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0001</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">endHandle<span class="colon">:</span></dt>
+<dd class="field-even"><p>Last requested handle number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0xFFFF</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">groupType<span class="colon">:</span></dt>
+<dd class="field-even"><p>2 or 16 octet UUID</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“00:00”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 or 16 byte value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this request is received, the server will send the ATT_ReadByGrpTypeRsp. The client will forward all the ATT_ReadByGrpTypeRsp Events to the calling application. The response with the status of bleProcedureComplete will indicate the end of the sub-procedure. If no attributes with the given type exists within the handle ranges or the Attribute Group Type is not a supported grouping attribute, the server will send an ATT_ErrorRsp</p>
+</section>
+<section id="att-readbygrptypersp">
+<h1>ATT_ReadByGrpTypeRsp<a class="headerlink" href="#att-readbygrptypersp" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD11</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Read By Group Type Response is sent in reply to a received ATT_ReadByGrpTypeReq and contains the handles and values of the attributes that have been read.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">length<span class="colon">:</span></dt>
+<dd class="field-even"><p>The size of each Attribute Data (attribute handle, end group handle and attribute value set)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 1 byte value.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">dataList<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Attribute Data field is comprised of a list of attribute handle and value pairs where the first two bytes are the attribute handle, the next two bytes are the end group handle, and the next (length - 4) bytes are the attribute value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any value formatted as described above.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-writereq">
+<h1>ATT_WriteReq<a class="headerlink" href="#att-writereq" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD12</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Write Request is used to request the server to write the value of an attribute and acknowledge that this has been achieved in a ATT_WriteRsp. The command field is set for the Write Command. The signature and command fields are set for the Signed Write Command.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">signature<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether to include the Authentication Signature with the Write PDU</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x00</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">command<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether this is the Write Command</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x00</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">handle<span class="colon">:</span></dt>
+<dd class="field-even"><p>The handle of the attribute to be set</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">value<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value to be written to the attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any (0 to (ATT_MTU - 3) byte) value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-writersp">
+<h1>ATT_WriteRsp<a class="headerlink" href="#att-writersp" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD13</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Write Response is sent in reply to a valid Write Request and acknowledges that the attribute has been successfully written.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-preparewritereq">
+<h1>ATT_PrepareWriteReq<a class="headerlink" href="#att-preparewritereq" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD16</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Prepare Write Request is used to request the server to prepare to write the value of an attribute. The server will respond to this request with a ATT_PrepareWriteRsp, so that the client can verify that the value was received correctly. A client may send more than one ATT_PrepareWriteReq to a server, which will queue and send a response for each handle value pair.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">handle<span class="colon">:</span></dt>
+<dd class="field-even"><p>The handle of the attribute to be written</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">offset<span class="colon">:</span></dt>
+<dd class="field-even"><p>The offset of the first octet to be written</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">value<span class="colon">:</span></dt>
+<dd class="field-even"><p>Part of the value of the attribute to be written</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(0 to (ATT_MTU - 5) octets)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this request is received, the server will send the ATT_PrepareWriteRsp. If the attribute handle is invalid or the attribute value cannot be written, the server will send an ATT_ErrorRsp.</p>
+</section>
+<section id="att-preparewritersp">
+<h1>ATT_PrepareWriteRsp<a class="headerlink" href="#att-preparewritersp" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD17</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Prepare Write Response is sent in response to a received Prepare Write Request and acknowledges that the value has been successfully received and placed in the prepare write queue.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">handle<span class="colon">:</span></dt>
+<dd class="field-even"><p>The handle of the attribute to be written</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">offset<span class="colon">:</span></dt>
+<dd class="field-even"><p>The offset of the first octet to be written</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">value<span class="colon">:</span></dt>
+<dd class="field-even"><p>Part of the value of the attribute to be written</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any (0 to (ATT_MTU - 5) byte) value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-executewritereq">
+<h1>ATT_ExecuteWriteReq<a class="headerlink" href="#att-executewritereq" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD18</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Execute Write Request is used to request the server to write or cancel the write of all the prepared values currently held in the prepare queue from this client. This request shall be handled by the server as an atomic operation.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">flags<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether to cancel or write.</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x01</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>CANCEL_WRITES</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>WRITE_VALUES</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>When this request is received, the server will send the ATT_ExecuteWriteRsp. If the attribute value cannot be written, the server will send an ATT_ErrorRsp.</p>
+</section>
+<section id="att-executewritersp">
+<h1>ATT_ExecuteWriteRsp<a class="headerlink" href="#att-executewritersp" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD19</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Execute Write Response is sent in response to a received Execute Write Request.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-handlevaluenoti">
+<h1>ATT_HandleValueNoti<a class="headerlink" href="#att-handlevaluenoti" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD1B</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>A server can send a notification of an attributes value at any time.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">authenticated<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether or not an authenticated link is required</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x00</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">handle<span class="colon">:</span></dt>
+<dd class="field-even"><p>The handle of the attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">value<span class="colon">:</span></dt>
+<dd class="field-even"><p>The current value of the attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any (0 to (ATT_MTU - 3) byte) value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+<section id="att-handlevalueind">
+<h1>ATT_HandleValueInd<a class="headerlink" href="#att-handlevalueind" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD1D</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>A server can send an indication of an attributes value at any time.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">authenticated<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether or not an authenticated link is required</p>
+<dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x00</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">handle<span class="colon">:</span></dt>
+<dd class="field-even"><p>The handle of the attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any 2 byte value</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">value<span class="colon">:</span></dt>
+<dd class="field-even"><p>The current value of the attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>“”</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any (0 to (ATT_MTU - 3) byte) value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>The client shall send a ATT_HandleValueCfm in response to a Handle Value Indication. No further indications to this client shall occur until the confirmation has been received by the server.</p>
+</section>
+<section id="att-handlevaluecfm">
+<h1>ATT_HandleValueCfm<a class="headerlink" href="#att-handlevaluecfm" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0xFD1E</p>
+</dd>
+<dt class="field-even">Command Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Handle Value Confirmation is sent in response to a received ATT_HandleValueInd and confirms that the client has received an indication of the given attribute.</p>
+</dd>
+</dl>
+<p><strong>Command Parameters</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Connection Handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identifies the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2 byte(s)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0x0000</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0000 to 0xFFFD</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><strong>Events Generated</strong></p>
+<p>This command only returns the CommandStatus event</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright &amp;copy; Copyright 1995-2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

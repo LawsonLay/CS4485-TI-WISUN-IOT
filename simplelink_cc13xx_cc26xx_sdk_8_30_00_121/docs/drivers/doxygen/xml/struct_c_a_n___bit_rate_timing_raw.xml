@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_c_a_n___bit_rate_timing_raw" kind="struct" language="C++" prot="public">
+    <compoundname>CAN_BitRateTimingRaw</compoundname>
+    <includes refid="_c_a_n_8h" local="no">CAN.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_c_a_n___bit_rate_timing_raw_1a203d950ef871c3f4b0cd4bbda8c55d43" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t CAN_BitRateTimingRaw::nbrp</definition>
+        <argsstring></argsstring>
+        <name>nbrp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>NBRP: Nominal Bit Rate Prescaler value for the MCAN system clock. Interpreted by MCAN as the value is this field + 1. Valid range: 0 to 511. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="701" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="701" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_c_a_n___bit_rate_timing_raw_1a648d32469c2de3e4ea0bfc04d57c3224" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t CAN_BitRateTimingRaw::ntSeg1</definition>
+        <argsstring></argsstring>
+        <name>ntSeg1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>NTSEG1: Nominal time segment 1 + prop segment. Interpreted by MCAN as the value in this field + 1. Valid range: 1 to 255. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="706" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="706" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_c_a_n___bit_rate_timing_raw_1a021484219e767f0fe69ace098192224c" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t CAN_BitRateTimingRaw::ntSeg2</definition>
+        <argsstring></argsstring>
+        <name>ntSeg2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>NTSEG2: Nominal time segment 2. Interpreted by MCAN as the value is this field + 1. Valid range: 1 to 127. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="710" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="710" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_c_a_n___bit_rate_timing_raw_1a2b364b466d40d5c8bde6794e1070f689" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t CAN_BitRateTimingRaw::nsjw</definition>
+        <argsstring></argsstring>
+        <name>nsjw</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>NSJW: Nominal Resynchronization Jump Width. Interpreted by MCAN as the value is this field + 1. Valid range: 0 to 127. Typically set equal to tSeg2. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="714" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="714" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_c_a_n___bit_rate_timing_raw_1a85e3c466a055cba5c142e2442c0dfb4a" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_c_a_n___data_bit_rate_timing_raw" kindref="compound">CAN_DataBitRateTimingRaw</ref> *</type>
+        <definition>const CAN_DataBitRateTimingRaw* CAN_BitRateTimingRaw::dataTiming</definition>
+        <argsstring></argsstring>
+        <name>dataTiming</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>CAN FD data phase bit rate configuration. May be set to NULL if CAN FD bit rate switching is not enabled. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="720" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="720" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure defining the raw MCAN bit rate configuration. </para>    </briefdescription>
+    <detaileddescription>
+<para>The length of the bit time is [ntSeg1 + ntSeg2 + 3] tq. Bit Rate = (MCAN system clock / (nbrp + 1)) / (length of bit time) </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="655">
+        <label>CAN_BitRateTimingRaw</label>
+        <link refid="struct_c_a_n___bit_rate_timing_raw"/>
+        <childnode refid="656" relation="usage">
+          <edgelabel>dataTiming</edgelabel>
+        </childnode>
+      </node>
+      <node id="656">
+        <label>CAN_DataBitRateTimingRaw</label>
+        <link refid="struct_c_a_n___data_bit_rate_timing_raw"/>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/CAN.h" line="700" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="699" bodyend="724"/>
+    <listofallmembers>
+      <member refid="struct_c_a_n___bit_rate_timing_raw_1a85e3c466a055cba5c142e2442c0dfb4a" prot="public" virt="non-virtual"><scope>CAN_BitRateTimingRaw</scope><name>dataTiming</name></member>
+      <member refid="struct_c_a_n___bit_rate_timing_raw_1a203d950ef871c3f4b0cd4bbda8c55d43" prot="public" virt="non-virtual"><scope>CAN_BitRateTimingRaw</scope><name>nbrp</name></member>
+      <member refid="struct_c_a_n___bit_rate_timing_raw_1a2b364b466d40d5c8bde6794e1070f689" prot="public" virt="non-virtual"><scope>CAN_BitRateTimingRaw</scope><name>nsjw</name></member>
+      <member refid="struct_c_a_n___bit_rate_timing_raw_1a648d32469c2de3e4ea0bfc04d57c3224" prot="public" virt="non-virtual"><scope>CAN_BitRateTimingRaw</scope><name>ntSeg1</name></member>
+      <member refid="struct_c_a_n___bit_rate_timing_raw_1a021484219e767f0fe69ace098192224c" prot="public" virt="non-virtual"><scope>CAN_BitRateTimingRaw</scope><name>ntSeg2</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

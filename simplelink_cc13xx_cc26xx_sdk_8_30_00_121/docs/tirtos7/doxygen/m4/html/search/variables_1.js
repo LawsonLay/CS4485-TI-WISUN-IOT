@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['beginfxn',['beginFxn',['../structHwi__HookSet.html#a3ef6aab815ffefecddbdf933284580ae',1,'Hwi_HookSet::beginFxn()'],['../structSwi__HookSet.html#a0563545522a473e5dfd5f1f98cc6ee52',1,'Swi_HookSet::beginFxn()']]],
+  ['bfar',['BFAR',['../structHwi__NVIC.html#a67339c6ae533e9e87c2fca889b123a63',1,'Hwi_NVIC::BFAR()'],['../structHwi__ExcContext.html#a928e320d5d4c154df6bceba4b489a279',1,'Hwi_ExcContext::BFAR()']]],
+  ['bfsr',['BFSR',['../structHwi__NVIC.html#a759784b88ffe9c190617524295526df3',1,'Hwi_NVIC::BFSR()'],['../structHwi__ExcContext.html#ad323aa8c8f8a15afed8103d84852e3da',1,'Hwi_ExcContext::BFSR()']]],
+  ['bios_5fclockenabled',['BIOS_clockEnabled',['../BIOS_8h.html#ab1709b4e2178455e4e9260138665f429',1,'BIOS.h']]],
+  ['bios_5fcpufreq',['BIOS_cpuFreq',['../BIOS_8h.html#acf4d3d6df691738b5124d5f18121b5b9',1,'BIOS.h']]],
+  ['bios_5fheapsize',['BIOS_heapSize',['../BIOS_8h.html#a07105f5e0336a413079bb51d022be8ef',1,'BIOS.h']]],
+  ['bios_5fheaptrackenabled',['BIOS_heapTrackEnabled',['../BIOS_8h.html#a1d9c7c85435f0ff90b3fa1f4519c054f',1,'BIOS.h']]],
+  ['bios_5fswienabled',['BIOS_swiEnabled',['../BIOS_8h.html#a845337aede98ab92e70755d3ec6e4ed9',1,'BIOS.h']]],
+  ['bios_5ftaskenabled',['BIOS_taskEnabled',['../BIOS_8h.html#aa2582c943b509585b4039bdfed59ac94',1,'BIOS.h']]],
+  ['blockborrow',['blockBorrow',['../structHeapMultiBuf__Params.html#affea8264693351dbb543ec83d43ed4da',1,'HeapMultiBuf_Params::blockBorrow()'],['../structHeapMultiBuf__Struct.html#ae8a34c5321252e3e5288b94a6a454973',1,'HeapMultiBuf_Struct::blockBorrow()']]],
+  ['blocksize',['blockSize',['../structHeapBuf__Params.html#ad6bf5d49a6103d4d517daeaa0ddbb939',1,'HeapBuf_Params::blockSize()'],['../structHeapBuf__Struct.html#ab632e606364c5665f22a50c3d3212fe1',1,'HeapBuf_Struct::blockSize()']]],
+  ['buf',['buf',['../structHeapBuf__Params.html#abb0445e34f8612c8940dc3fbc731b5a2',1,'HeapBuf_Params::buf()'],['../structHeapBuf__Struct.html#addec21b4ae4792180c4c7aca96bbf564',1,'HeapBuf_Struct::buf()'],['../structHeapMem__ExtendedStats.html#aab2ea8b2deea50842b11e1961ad42f58',1,'HeapMem_ExtendedStats::buf()'],['../structHeapMem__Params.html#a3e0e3d8ab63466b9b890d6f350124bd4',1,'HeapMem_Params::buf()'],['../structHeapMin__Struct.html#aacd49bf3e60c0aecb3c77124c81510a9',1,'HeapMin_Struct::buf()'],['../structHeapMin__Params.html#a5fcfc6b4c888dfc8155a7e7fe4000f30',1,'HeapMin_Params::buf()'],['../structMailbox__Params.html#aa3c6c5fd2b7c8bd0c0d2c5263609dd17',1,'Mailbox_Params::buf()']]],
+  ['bufparams',['bufParams',['../structHeapMultiBuf__Params.html#a23991d1a6d8ca00bc0dd141917984c2e',1,'HeapMultiBuf_Params']]],
+  ['bufsbyaddr',['bufsByAddr',['../structHeapMultiBuf__Struct.html#a4887960bdcb06eda023a8ed4360588f9',1,'HeapMultiBuf_Struct']]],
+  ['bufsbysize',['bufsBySize',['../structHeapMultiBuf__Struct.html#a9b6dab5942289a1b2a6b716e970a9611',1,'HeapMultiBuf_Struct']]],
+  ['bufsize',['bufSize',['../structHeapBuf__Params.html#a09f8a20b5a7c5c5125c2610eacb8d8bf',1,'HeapBuf_Params::bufSize()'],['../structHeapBuf__Struct.html#aa93d6d2cf2e139ac9d7a9fc1a246345b',1,'HeapBuf_Struct::bufSize()'],['../structMailbox__Params.html#a1e07a9c9e707fb067688f0bb4450a3f0',1,'Mailbox_Params::bufSize()']]]
+];

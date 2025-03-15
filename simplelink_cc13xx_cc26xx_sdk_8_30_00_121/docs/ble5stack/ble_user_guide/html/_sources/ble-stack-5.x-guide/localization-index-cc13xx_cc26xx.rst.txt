@@ -1,0 +1,73 @@
+RTLS Toolbox
+************
+
+.. warning::
+    Only CTE Tx is supported on the |LITEDEVICE| devices.
+    Enabling CTE Rx feature on |LITEDEVICE| devices will result in unexpected
+    behavior in the |STACK|.
+
+.. Note::
+    The RTLS examples, documentation and tools have been updated to follow the
+    Appropriate Language nomenclature directive from Bluetooth SIG. Existing
+    E2E threads will not be modified and may use the terms *rtls_master* and
+    *rtls_slave* instead of *rtls_coordinator* and *rtls_responder*.
+
+The RTLS (Real Time Localization System) Toolbox, is a collection of RTLS
+techniques that can be implemented on TI’s standard Bluetooth Low Energy radios
+in the CC26xx series. These techniques provide raw data that can be utilized for
+developing localization algorithms and secure range bounding other Bluetooth Low
+Energy nodes. The two main techniques included in the RTLS toolbox are
+RSSI and |CORESPEC| Angle of Arrival.
+
+RSSI details the Received Signal Strength Indication of an incoming
+signal and is commonly leveraged for deriving the distance between a receiver
+and a transmitter through the process of trilateration in localization
+algorithms. The Bluetooth Low Energy stack enables developers to receive the
+RSSI of an incoming Bluetooth packet.
+
+|CORESPEC| Angle of Arrival is a technique for finding the direction that an
+incoming Bluetooth packet is coming from, creating a basis for triangulation.
+The device samples an incoming constant tone and as I/Q data. This raw I/Q data
+represents the amplitude and phase data of a signal and this data can be used
+to derive the angle the device transmitting the constant tone.
+
+For detailed information on the specific example, see the relevant README.html
+file in the
+simplelink_cc13xx_cc26xx_sdk_x_xx_xx_xx/examples/rtos/CC26X2R1_LAUNCHXL/ble5stack/PROJECT
+folder.
+
+Using the raw data provided by the RTLS Toolbox, TI is enabling developers to
+improve localization algorithms based on Bluetooth technology by delivering more
+data that can be leveraged for trilateration and triangulation.
+
+The inherent flexibility of the |DEVICE| RF Core is what enables this
+significant extension of functionality. The main advantages using the |DEVICE|
+are that customers can start adding RTLS features and security with little extra
+cost, very little extra energy consumption and no increase in peak power.
+
+There are two fundamentally different approaches for localization:
+
++-------------------------------------------------------------------------------+--------------------------------------------------------------------------------+
+| **Trilateration**                                                             | **Triangulation**                                                              |
++-------------------------------------------------------------------------------+--------------------------------------------------------------------------------+
+|  .. figure:: /localization/resources/trilateration.png                        |   .. figure:: /localization/resources/triangulation.png                        |
++-------------------------------------------------------------------------------+--------------------------------------------------------------------------------+
+| Trilateration is where you know the distance between a reference node and a   | Triangulation is where you know the direction from a reference node to a       |
+| target node. This means that the possible locations seen by one locator       | target node. This means that the possible locations seen by one locator        |
+| constitute a circle, so typically  three locators are needed to find a single | constitute a straight line,  so two nodes will be enough to determine a single |
+| common intersect point. (Assuming a 2D scenario)                              | intersect point. (Assuming a 2D scenario)                                      |
+|                                                                               |                                                                                |
+| :ref:`sec-rssi-localization` gives you the distance from the receiver to the  | :ref:`sec-aoa` gives you the angle from the receiver to the transmitter.       |
+| transmitter.                                                                  |                                                                                |
++-------------------------------------------------------------------------------+--------------------------------------------------------------------------------+
+
+
+.. note::
+         Existing examples with no external control interface are discontinued.
+         All RTLS examples now have an external control interface.
+
+.. include:: /localization/inc_rtls_software_overview-cc13xx_cc26xx.rst
+
+.. include:: /localization/inc_rssi_localization.rst
+
+.. include:: /localization/inc_aoa-cc13xx_cc26xx.rst

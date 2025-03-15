@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coexistence &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="RTLS Toolbox" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html" />
+    <link rel="prev" title="Optimizing Bluetooth Low Energy Stack Memory Usage" href="../ble-stack-5.x/optimization-cc13xx_cc26xx.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug coexistence coexistence";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Coexistence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#packet-traffic-arbitration-pta-interface">Packet Traffic Arbitration (PTA) Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coexistence-signaling">Coexistence Signaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-options">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Coexistence</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="coexistence">
+<span id="sec-coexistence"></span><h1>Coexistence<a class="headerlink" href="#coexistence" title="Permalink to this headline">¶</a></h1>
+<p>The coexistence (coex) feature is a means to organize wireless packet traffic for
+communication protocols operating in the same frequency band. Instead of interfering
+with each other’s transmissions, affecting the RF performance, two co-located devices
+will have a dedicated communication interface to signal and determine access to the
+shared frequency band.</p>
+<p>The coex feature is not a standard, but is rooted in the recommendations provided by
+<a class="reference external" href="https://standards.ieee.org/standard/802_15_2-2003.html">IEEE 802.15.2</a>: “Coexistence of Wireless Personal Area Networks with Other Unlicensed
+Frequency Bands Operating Wireless Devices”. The industry approach is more of a
+“best-practice” when it comes to this feature, and every device supporting a
+coexistence interface is free to implement its own solution to the problem.</p>
+<p>The coex interface implemented for CC13xx or CC26xx is compatible with
+Wi-Fi devices that support Packet Traffic Arbitration (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PTA"><span class="xref std std-term">PTA</span></a>). This is one of the
+approaches recommended and described by <a class="reference external" href="https://standards.ieee.org/standard/802_15_2-2003.html">IEEE 802.15.2</a>. This approach is based on a shared
+PTA control module between the coexisting devices, to decide which device is permitted
+to communicate in the shared frequency band. Many Wi-Fi devices implement their version
+of such a module, and the implemented coex feature is based on the assumption that the
+PTA control module is embedded in the Wi-Fi device. The Wi-Fi device will therefore
+have a master role in this coex device scheme, as it controls the PTA logic. The
+coexistence interface can be abstracted to a signal interface between the two devices,
+as illustrated in the figure below. For an example of supported Wi-Fi devices, see
+<a class="reference external" href="http://www.ti.com/tool/LAUNCHXL-CC3235SF">SimpleLink CC3235SF</a>, and see <a class="reference external" href="http://www.ti.com/lit/swra654">SimpleLink WLAN Access Point</a> application note for an example of coexistence
+solutions.</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/block-diagram_coex-interface-abstraction.png"><img alt="../_images/block-diagram_coex-interface-abstraction.png" src="../_images/block-diagram_coex-interface-abstraction.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Figure 128. </span><span class="caption-text">Block-diagram of coexistence interface abstraction</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="packet-traffic-arbitration-pta-interface">
+<span id="sec-pta-interface"></span><h2>Packet Traffic Arbitration (PTA) Interface<a class="headerlink" href="#packet-traffic-arbitration-pta-interface" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PTA"><span class="xref std std-term">PTA</span></a> interface between the two devices is a set of wired signals. What
+information to communicate, and ultimately the number of signals used, will depend on
+the implementation of the PTA control module. Based on the most common Wi-Fi PTA
+implementations, the implemented coex feature supports three sets of signals.
+These sets of signals, or <em>coex modes</em>, are named:</p>
+<ul class="simple">
+<li><p>3-Wire</p></li>
+<li><p>1-Wire REQUEST</p></li>
+<li><p>1-Wire GRANT</p></li>
+</ul>
+<p>From the naming scheme, it is obvious that the supported coex modes use at max three
+wires to signal state information to the Wi-Fi device. However, the two 1-Wire modes
+can be seen as subsets of the signaling provided by 3-Wire mode. As illustrated in the
+table below, the 3-Wire mode utilizes all the provided signals, and for both 1-Wire
+REQUEST and 1-Wire GRANT two of the signals are disabled.</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-number">Table 23. </span><span class="caption-text">Mapping of coex mode and PTA signals.</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 22%" />
+<col style="width: 22%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head" colspan="3"><p>PTA Coex Signals</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>Coex Mode</p></th>
+<th class="head"><p>REQUEST</p></th>
+<th class="head"><p>PRIORITY</p></th>
+<th class="head"><p>GRANT</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>3-Wire</p></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+</tr>
+<tr class="row-even"><td><p>1-Wire REQUEST</p></td>
+<td><p>X</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1-Wire GRANT</p></td>
+<td></td>
+<td></td>
+<td><p>X</p></td>
+</tr>
+</tbody>
+</table>
+<p>Furthermore, the supported coex modes can be illustrated as in the block-diagrams
+in the figures below. Seen from the BLE device, the REQUEST and PRIORITY signals are
+defined as outputs, and the GRANT signal is defined as an input.</p>
+<div class="figure align-center" id="id4">
+<a class="reference internal image-reference" href="../_images/block-diagram_coex-3-wire.png"><img alt="../_images/block-diagram_coex-3-wire.png" src="../_images/block-diagram_coex-3-wire.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Figure 129. </span><span class="caption-text">Block-diagram of coexistence mode <strong>3-Wire</strong></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-center" id="id5">
+<a class="reference internal image-reference" href="../_images/block-diagram_coex-1-wire-REQUEST.png"><img alt="../_images/block-diagram_coex-1-wire-REQUEST.png" src="../_images/block-diagram_coex-1-wire-REQUEST.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Figure 130. </span><span class="caption-text">Block-diagram of coexistence mode <strong>1-Wire REQUEST</strong></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-center" id="id6">
+<a class="reference internal image-reference" href="../_images/block-diagram_coex-1-wire-GRANT.png"><img alt="../_images/block-diagram_coex-1-wire-GRANT.png" src="../_images/block-diagram_coex-1-wire-GRANT.png" style="width: 70%;" /></a>
+<p class="caption"><span class="caption-number">Figure 131. </span><span class="caption-text">Block-diagram of coexistence mode <strong>1-Wire GRANT</strong></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>All coexistence modes are not supported on all Wi-Fi devices. The SimpleLink
+CC3135 and CC3235 Wi-Fi devices only support the 1-Wire REQUEST mode.</p>
+</div>
+<div class="section" id="coexistence-signaling">
+<span id="sec-coex-signaling"></span><h2>Coexistence Signaling<a class="headerlink" href="#coexistence-signaling" title="Permalink to this headline">¶</a></h2>
+<p>The coexistence signaling approach for the 3-Wire mode, using the three available
+signals, can be summarized in two steps:</p>
+<ol class="arabic simple">
+<li><p>Coex slave (BLE device) requests permission to perform RF activity, with info on:</p>
+<ul class="simple">
+<li><p>Priority of the request (low/high)</p></li>
+<li><p>Type of RF activity (TX/RX)</p></li>
+</ul>
+</li>
+<li><p>Coex master (Wi-Fi device) will grant or deny the request</p></li>
+</ol>
+<p>From the coex slave perspective, the above two steps are implemented by configuration
+of the following signals for the PTA interface:</p>
+<ul>
+<li><p>Coex <strong>REQUEST</strong> signal:</p>
+<blockquote>
+<div><p>This is an output signal, controlled by the coex slave. This signal is used to
+indicate a request to use the shared frequency band, that is, perform any RF
+activity.</p>
+</div></blockquote>
+</li>
+<li><p>Coex <strong>PRIORITY</strong> signal:</p>
+<blockquote>
+<div><p>This is an output signal, controlled by the coex slave. This signal is
+<em>time-shared</em> between first indicating the priority of the access request,
+followed by indicating the type of RF activity (TX/RX) the device will perform. At
+first, when the REQUEST signal is asserted, the value of the PRIORITY signal will
+indicate the <em>priority</em> (low/high) of the request. After a defined 20 µs, the
+PRIORITY signal is used to indicate the <em>type</em> of RF activity. This means that the
+signal will be de-asserted or asserted depending on if the scheduled activity is
+RX or TX.</p>
+</div></blockquote>
+</li>
+<li><p>Coex <strong>GRANT</strong> signal:</p>
+<blockquote>
+<div><p>This is an input signal, controlled by the coex master. This signal indicates the
+response of the <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PTA"><span class="xref std std-term">PTA</span></a> decision, that is, whether the request is granted or
+not.</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The terms signal <strong>assert</strong> and signal <strong>de-assert</strong> are used to describe the value
+change of a signal to respectively <em>active</em> and <em>idle</em>. For an <em>active high</em>
+signal, the signal is asserted by changing the signal value from low to high. For
+an <em>active low</em> signal, the signal is asserted by changing the signal value from
+high to low. For the opposite signal operation, de-assert, the signal value changes
+from active to idle.</p>
+<table class="docutils align-default" id="id7">
+<caption><span class="caption-number">Table 24. </span><span class="caption-text">Assert and de-assert meaning for signal active/idle level</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 20%" />
+<col style="width: 28%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Active Level</p></th>
+<th class="head"><p>Idle Level</p></th>
+<th class="head"><p>Assert</p></th>
+<th class="head"><p>De-assert</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>High</strong></p></td>
+<td><p>Low</p></td>
+<td><p>Low → High</p></td>
+<td><p>High → Low</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Low</strong></p></td>
+<td><p>High</p></td>
+<td><p>High → Low</p></td>
+<td><p>Low → High</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In order to support time-shared signals, the coex feature is heavily dependent on
+accurate <em>timing</em>. What makes this implementation compatible with a Wi-Fi device that
+supports a PTA interface, is the adherence to such timing requirements. The figure
+below illustrates a timing diagram for a BLE device signaling the scheduled RF
+activities, receive and transmit respectively. Note that the diagram depicts REQUEST
+and PRIORITY signals as active high, but the GRANT signal is by default defined as
+<em>active low</em>. This means that a coex request is granted when the GRANT signal is driven
+low by the Wi-Fi device.</p>
+<div class="figure align-center" id="id8">
+<span id="fig-time-diagram"></span><a class="reference internal image-reference" href="../_images/time-diagram_3-wire.png"><img alt="../_images/time-diagram_3-wire.png" src="../_images/time-diagram_3-wire.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Figure 132. </span><span class="caption-text">Coex 3-Wire timing diagram</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<p>The sections marked with red in the diagram, T1 - T5, are intended to highlight the
+following signaling and timing requirements to be aware of:</p>
+<ul class="simple">
+<li><p><strong>T1</strong>: The REQUEST signal is asserted by the coex slave, and indicates to the coex
+master that the coex slave will perform RF activity. This is a request for access to
+the shared frequency band. In the timing diagram, this happens at a time T1 before
+the BLE RX command is scheduled to run. T1 can be expected to be in the range of
+90-150 µs.</p></li>
+<li><p><strong>T2</strong>: The PRIORITY signal is <em>time-shared</em> between indicating <em>priority</em> and
+and <em>type of RF activity</em> (TX/RX) the BLE device will do. The time T2 indicates the
+duration of which the PRIORITY signal indicates priority; from the time the REQUEST
+signal is asserted, and for a duration of 20 µs. For the rest of the request
+interaction, as long as the REQUEST signal is asserted, the PRIORITY signal
+indicates TX/RX activity.</p></li>
+<li><p><strong>T3</strong>: In a period before the scheduled RF activity, the coex master will assert or
+de-assert the GRANT signal. This is to indicate if the request from the coex slave,
+asserted at <strong>T1</strong>, is granted or not. At period T3, 50-135 µs, the GRANT signal is
+expected to be in a stable state. The coex slave will read the GRANT signal within
+the T3 period, and use this value as the answer to the request.</p></li>
+<li><p><strong>T4</strong>: The PRIORITY signal is <em>time-shared</em>, as explained under <strong>T2</strong>. After T2,
+the PRIORITY signal indicates the type of RF activity (and no longer priority). In
+the timing diagram, the coex slave asserts the PRIORITY signal at T4 before it
+transmits, to indicate the change in type of activity; from RX to TX. The RX
+activity is indicated by de-asserting the PRIORITY signal, and the TX activity is
+indicated by asserting the PRIORITY signal.</p></li>
+<li><p><strong>T5</strong>: After the coex slave is finished with the scheduled RF activities, it will
+de-assert the REQUEST signal. This is how the coex slave indicates to the coex master
+that the requested RF activity is finished. This will happen 0-25 µs after the last
+RF activity.</p></li>
+</ul>
+</div>
+<div class="section" id="configuration-options">
+<span id="sec-coex-config"></span><h2>Configuration Options<a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h2>
+<p>The coex configuration options are made available from the RF driver module in
+SysConfig.</p>
+<div class="figure align-center" id="id9">
+<a class="reference internal image-reference" href="../_images/syscfg_coex-config.png"><img alt="../_images/syscfg_coex-config.png" src="../_images/syscfg_coex-config.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-number">Figure 133. </span><span class="caption-text">Coexistence configuration options in SysConfig</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<p>Depending on the application, use case, and what Wi-Fi device the CC13xx or CC26xx
+is intended to coexist with, certain options are up to the
+user to configure.</p>
+<p><strong>Coex mode</strong>: As described in <a class="reference internal" href="#sec-pta-interface"><span class="std std-ref">Packet Traffic Arbitration (PTA) Interface</span></a>, the coex feature can be
+configured to interface with PTA controllers based on 3-Wire, 1-Wire REQUEST or 1-Wire
+GRANT, which are different combinations of enabling or disabling the supported coex
+signals.</p>
+<p><strong>Coex signal idle level</strong>: The signal idle level can be configured as <em>low</em> or
+<em>high</em>, which in other terms means that the same signal is either respectively
+<em>active high</em> or <em>active low</em>. To configure the active levels used in
+<a class="reference internal" href="#fig-time-diagram"><span class="std std-ref">Coex 3-Wire timing diagram</span></a>, both REQUEST and PRIORITY are set to idle level low, and
+GRANT is set to idle level high.</p>
+<p><strong>Priority indication time</strong>: As described in <a class="reference internal" href="#sec-coex-signaling"><span class="std std-ref">Coexistence Signaling</span></a>, the PRIORITY
+signal is time-shared between indicating priority and the type of RF activity. The
+Priority Indication Time field in SysConfig specifies how long, in microseconds, the
+PRIORITY signal indicates priority before it switches to indicate the type of RF
+activity.</p>
+<p><strong>BLE Use Case Configuration</strong>: Separate configuration can be set for different BLE
+use cases (connection establishment, connected, broadcaster, observer) if the
+application requires the behavior to differ between these. The following
+configuration options can be set for each of these use cases separately:</p>
+<ul class="simple">
+<li><p><strong>Default priority</strong>: This is the default behavior of the PRIORITY signal when it
+indicates the priority of the coex request. It can be set to either low or high.</p></li>
+<li><p><strong>Assert REQUEST signal for RX</strong>: This option is by default enabled. However,
+depending on the use case and application, the coex behavior can be configured to
+not assert REQUEST for any scheduled RX activities. In this case, the BLE device does
+not care if the Wi-Fi device is performing any RF activities of its own. With
+reference to <a class="reference internal" href="#fig-time-diagram"><span class="std std-ref">Coex 3-Wire timing diagram</span></a>, disabling this option would shift the assertion
+of the REQUEST signal to the right. The REQUEST signal will then be asserted at a
+time T1 before the TX activity instead of the RX activity. This means that both
+REQUEST and PRIORITY signals will stay idle for the RX activity.</p></li>
+</ul>
+<p><strong>Coex pin mapping</strong>: Depending on the mode, the coex signal(s) used for the PTA
+interface with the Wi-Fi device can be mapped to any available DIO pins. This is
+configured in the pin mux section of the RF module, as illustrated in the figure
+below.</p>
+<div class="figure align-center" id="id10">
+<a class="reference internal image-reference" href="../_images/syscfg_coex-pin-selection.png"><img alt="../_images/syscfg_coex-pin-selection.png" src="../_images/syscfg_coex-pin-selection.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-number">Figure 134. </span><span class="caption-text">Coexistence pin mapping</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ble-stack-5.x/optimization-cc13xx_cc26xx.html" class="btn btn-neutral float-left" title="Optimizing Bluetooth Low Energy Stack Memory Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html" class="btn btn-neutral float-right" title="RTLS Toolbox" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

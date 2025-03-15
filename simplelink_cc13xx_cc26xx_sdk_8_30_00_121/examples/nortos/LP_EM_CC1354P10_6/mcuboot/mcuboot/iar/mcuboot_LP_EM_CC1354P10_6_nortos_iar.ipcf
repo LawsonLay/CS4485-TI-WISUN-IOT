@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IAR Project Connection File -->
+
+<iarProjectConnection version="1.2" name="mcuboot" oneShot="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="IarProjectConnection_1.2.xsd">
+
+    <device>
+        <name>CC1354P10</name>
+    </device>
+
+    <asmIncludePath>
+        <path>$PROJ_DIR$</path>
+    </asmIncludePath>
+
+    <includePath>
+        <path>$PROJ_DIR$</path>
+        <path>$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source</path>
+        <path>$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/kernel/nortos</path>
+        <path>$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/kernel/nortos/posix</path>
+        <path>$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source</path>
+        <path>$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include</path>
+        <path>$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src</path>
+        <path>$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/ext</path>
+        <path>$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/ext/mbedtls-asn1/include</path>
+        <path>$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/ti/source/mcuboot_app</path>
+    </includePath>
+
+    <defines>
+        <define>EXCLUDE_TRACE</define>
+        <define>BOOT_LOADER</define>
+    </defines>
+
+    <extraOptions>
+        <args>
+            <arg>-f$PROJ_DIR$/ti_utils_build_compiler.opt</arg>
+            <arg>--debug</arg>
+            <arg>--silent</arg>
+            <arg>-e</arg>
+            <arg>--aeabi</arg>
+            <arg>--thumb</arg>
+            <arg>--diag_suppress=Pa050</arg>
+        </args>
+    </extraOptions>
+
+    <linkerFile>
+        <override>true</override>
+        <path>$PROJ_DIR$/mcuboot_cc13x4_cc26x4.icf</path>
+    </linkerFile>
+
+    <linkerExtraOptions>
+        <args>
+            <arg>--silent</arg>
+            <arg>-L$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source</arg>
+            <arg>-L$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/kernel/nortos</arg>
+            <arg>-f$PROJ_DIR$/ti_utils_build_linker.cmd.genlibs</arg>
+        </args>
+    </linkerExtraOptions>
+
+    <customBuildTools>
+        <customBuildTool atRoot="true" name="SysConfig"> <!-- Custom build tool for entire project-->
+            <fileExtensions>.syscfg</fileExtensions>
+            <command>$SYSCONFIG_ROOT$/sysconfig_cli.bat -o $PROJ_DIR$ -s "$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/.metadata/product.json" -s "$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/.metadata/product.json" --compiler iar $FILE_PATH$</command>
+            <output>
+                <path>SysConfig_Generated_Files.ipcf</path>
+            </output>
+            <hasPrio>true</hasPrio> <!-- true: run this tool before all other tools-->
+        </customBuildTool>
+    </customBuildTools>
+
+    <heaps>
+        <heap> <!-- If omitted, id="0" -->
+            <size>0</size>
+        </heap>
+        <heap id="1">
+            <size>0</size>
+        </heap>
+    </heaps>
+    <stacks>
+        <stack> <!-- If omitted, id="0" -->
+            <size>512</size>
+        </stack>
+    </stacks>
+
+
+    <files>
+        <path reference="$PROJ_DIR$/keys.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/ti/source/mcuboot_app/keys.c</path>
+        <path copyTo="$PROJ_DIR$/mcuboot.syscfg">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/examples/nortos/LP_EM_CC1354P10_6/mcuboot/mcuboot/mcuboot.syscfg</path>
+        <path reference="$PROJ_DIR$/mcuboot_app.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/ti/source/mcuboot_app/mcuboot_app.c</path>
+        <path copyTo="$PROJ_DIR$/mcuboot_cc13x4_cc26x4.icf">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/examples/nortos/LP_EM_CC1354P10_6/mcuboot/mcuboot/mcuboot_cc13x4_cc26x4.icf</path>
+        <path reference="$PROJ_DIR$/README.md">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/ti/source/mcuboot_app/README.md</path>
+        <group name="boot_seed" build="true">
+            <path reference="$PROJ_DIR$/boot_seed/boot_seed_cc13x4_cc26x4.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/common/mcuboot/boot_seed/boot_seed_cc13x4_cc26x4.c</path>
+        </group>
+        <group name="bootutil/include" build="true">
+            <path reference="$PROJ_DIR$/bootutil/include/bench.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/bench.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/boot_record.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/boot_record.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/boot_status.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/boot_status.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/bootutil.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/bootutil.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/bootutil_log.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/bootutil_log.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/bootutil_public.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/bootutil_public.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/bootutil_test.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/bootutil_test.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/caps.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/caps.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/enc_key.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/enc_key.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/enc_key_public.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/enc_key_public.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/fault_injection_hardening.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/fault_injection_hardening.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/fault_injection_hardening_delay_rng.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/fault_injection_hardening_delay_rng.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/ignore.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/ignore.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/image.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/image.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/mcuboot_status.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/mcuboot_status.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/security_cnt.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/security_cnt.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/sign_key.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/sign_key.h</path>
+        </group>
+        <group name="bootutil/include/crypto" build="true">
+            <path reference="$PROJ_DIR$/bootutil/include/crypto/aes_ctr.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/crypto/aes_ctr.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/crypto/aes_kw.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/crypto/aes_kw.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/crypto/common.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/crypto/common.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/crypto/ecdh_p256.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/crypto/ecdh_p256.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/crypto/ecdh_x25519.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/crypto/ecdh_x25519.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/crypto/ecdsa.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/crypto/ecdsa.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/crypto/ecdsa_p256.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/crypto/ecdsa_p256.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/crypto/hmac_sha256.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/crypto/hmac_sha256.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/crypto/rsa.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/crypto/rsa.h</path>
+            <path reference="$PROJ_DIR$/bootutil/include/crypto/sha.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/include/bootutil/crypto/sha.h</path>
+        </group>
+        <group name="bootutil/src" build="true">
+            <path reference="$PROJ_DIR$/bootutil/src/boot_record.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/boot_record.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/bootutil_misc.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/bootutil_misc.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/bootutil_priv.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/bootutil_priv.h</path>
+            <path reference="$PROJ_DIR$/bootutil/src/bootutil_public.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/bootutil_public.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/caps.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/caps.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/encrypted.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/encrypted.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/fault_injection_hardening.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/fault_injection_hardening.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/fault_injection_hardening_delay_rng_mbedtls.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/fault_injection_hardening_delay_rng_mbedtls.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/image_ecdsa.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/image_ecdsa.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/image_ed25519.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/image_ed25519.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/image_rsa.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/image_rsa.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/image_validate.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/image_validate.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/loader.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/loader.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/security_cnt.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/ti/source/mcuboot_app/security_cnt.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/swap_misc.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/swap_misc.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/swap_move.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/swap_move.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/swap_priv.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/swap_priv.h</path>
+            <path reference="$PROJ_DIR$/bootutil/src/swap_scratch.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/swap_scratch.c</path>
+            <path reference="$PROJ_DIR$/bootutil/src/tlv.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/bootutil/src/tlv.c</path>
+        </group>
+        <group name="flash_map_backend" build="true">
+            <path reference="$PROJ_DIR$/flash_map_backend/bsp_spi_cc13x4_cc26x4.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/common/flash/no_rtos/extFlash/bsp_spi_cc13x4_cc26x4.c</path>
+            <path reference="$PROJ_DIR$/flash_map_backend/ext_flash.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/common/flash/no_rtos/extFlash/ext_flash.c</path>
+            <path reference="$PROJ_DIR$/flash_map_backend/ext_flash.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/common/flash/no_rtos/extFlash/ext_flash.h</path>
+            <path reference="$PROJ_DIR$/flash_map_backend/flash_map_backend.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/ti/source/mcuboot_app/flash_map_backend/flash_map_backend.c</path>
+        </group>
+        <group name="mbedtls-asn1" build="true">
+            <path reference="$PROJ_DIR$/mbedtls-asn1/asn1parse.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/ext/mbedtls-asn1/src/asn1parse.c</path>
+            <path reference="$PROJ_DIR$/mbedtls-asn1/platform_util.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/ext/mbedtls-asn1/src/platform_util.c</path>
+        </group>
+        <group name="mcuboot_config" build="true">
+            <path reference="$PROJ_DIR$/mcuboot_config/led_debug.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/common/cc26xx/debug/led_debug.c</path>
+            <path reference="$PROJ_DIR$/mcuboot_config/led_debug.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/common/cc26xx/debug/led_debug.h</path>
+            <path reference="$PROJ_DIR$/mcuboot_config/mcuboot_assert.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/ti/source/mcuboot_app/mcuboot_config/mcuboot_assert.h</path>
+            <path reference="$PROJ_DIR$/mcuboot_config/mcuboot_logging.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/ti/source/mcuboot_app/mcuboot_config/mcuboot_logging.h</path>
+        </group>
+        <group name="os" build="true">
+            <path reference="$PROJ_DIR$/os/os.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/ti/source/mcuboot_app/os/os.h</path>
+            <path reference="$PROJ_DIR$/os/os_heap.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/ti/source/mcuboot_app/os/os_heap.h</path>
+            <path reference="$PROJ_DIR$/os/os_malloc.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/ti/source/mcuboot_app/os/os_malloc.h</path>
+        </group>
+        <group name="sysflash" build="true">
+            <path reference="$PROJ_DIR$/sysflash/sysflash.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/boot/ti/source/mcuboot_app/sysflash/sysflash.h</path>
+        </group>
+        <group name="ti-crypto" build="true">
+            <path reference="$PROJ_DIR$/ti-crypto/AESCTRCC26X4_driverlib.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/common/cc26xx/ecc/AESCTRCC26X4_driverlib.c</path>
+            <path reference="$PROJ_DIR$/ti-crypto/AESCTRCC26X4_driverlib.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/common/cc26xx/ecc/AESCTRCC26X4_driverlib.h</path>
+            <path reference="$PROJ_DIR$/ti-crypto/ECDSACC26X4_driverlib.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/common/cc26xx/ecc/ECDSACC26X4_driverlib.c</path>
+            <path reference="$PROJ_DIR$/ti-crypto/ECDSACC26X4_driverlib.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/common/cc26xx/ecc/ECDSACC26X4_driverlib.h</path>
+            <path reference="$PROJ_DIR$/ti-crypto/sha2_driverlib.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/common/cc26xx/sha2/sha2_driverlib.c</path>
+            <path reference="$PROJ_DIR$/ti-crypto/sha2_driverlib.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/ti/common/cc26xx/sha2/sha2_driverlib.h</path>
+            <path reference="$PROJ_DIR$/ti-crypto/sl_crypto.c">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/ext/ti-crypto/sl_crypto.c</path>
+            <path reference="$PROJ_DIR$/ti-crypto/sl_crypto.h">$SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR$/source/third_party/mcuboot/ext/ti-crypto/sl_crypto.h</path>
+        </group>
+    </files>
+</iarProjectConnection>

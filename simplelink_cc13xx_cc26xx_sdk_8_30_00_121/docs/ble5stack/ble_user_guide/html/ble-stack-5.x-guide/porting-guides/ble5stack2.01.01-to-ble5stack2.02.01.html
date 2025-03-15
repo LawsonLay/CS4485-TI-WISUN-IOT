@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLE5-Stack 2.01.01 (SDK 3.40) to BLE5-Stack 2.02.01 (SDK 5.10) &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GPIO++ Driver Porting Guide" href="../../cc13xx_cc26xx/gpio-porting-guide.html" />
+    <link rel="prev" title="BLE5-Stack 2.01.02 (SDK 4.10) to BLE5-Stack 2.02.01 (SDK 5.10)" href="ble5stack2.01.02-to-ble5stack2.02.01.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-stack-5.x-guide porting-guides ble5stack2.01.01-to-ble5stack2.02.01";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../migration-cc13xx_cc26xx.html#porting-guides">Porting Guides</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../migration-cc13xx_cc26xx.html#year-to-year-migration-guides">Year-to-Year Migration Guides</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.02.05-to-ble5stack2.02.08.html">BLE5-Stack 2.02.05 (SDK 6.10) to BLE5-Stack 2.02.08 (SDK 7.10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.02.01-to-ble5stack2.02.05.html">BLE5-Stack 2.02.01 (SDK 5.10) to BLE5-Stack 2.02.05 (SDK 6.10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.01.02-to-ble5stack2.02.01.html">BLE5-Stack 2.01.02 (SDK 4.10) to BLE5-Stack 2.02.01 (SDK 5.10)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">BLE5-Stack 2.01.01 (SDK 3.40) to BLE5-Stack 2.02.01 (SDK 5.10)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#porting-simple-peripheral">Porting Simple Peripheral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#porting-simple-central">Porting Simple Central</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rtls-examples">RTLS Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-few-noteworthy-changes-from-ble5-stack-2-01-01-to-ble5-stack-2-02-01">A Few Noteworthy Changes from BLE5-Stack 2.01.01 to BLE5-Stack 2.02.01</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../migration-cc13xx_cc26xx.html#migration-guides">Migration Guides</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a> &raquo;</li>
+      <li>BLE5-Stack 2.01.01 (SDK 3.40) to BLE5-Stack 2.02.01 (SDK 5.10)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="ble5-stack-2-01-01-sdk-3-40-to-ble5-stack-2-02-01-sdk-5-10">
+<h1>BLE5-Stack 2.01.01 (SDK 3.40) to BLE5-Stack 2.02.01 (SDK 5.10)<a class="headerlink" href="#ble5-stack-2-01-01-sdk-3-40-to-ble5-stack-2-02-01-sdk-5-10" title="Permalink to this headline">¶</a></h1>
+<p>This section will describe a way to migrate a project from BLE5-Stack 2.01.01 to
+a BLE5-Stack 2.02.01 project.</p>
+<p>The best way to migrate is to open a new project from the new SDK and transfer
+your changes and application code over to the new example.</p>
+<div class="section" id="porting-simple-peripheral">
+<h2>Porting Simple Peripheral<a class="headerlink" href="#porting-simple-peripheral" title="Permalink to this headline">¶</a></h2>
+<p>This section of the migration guide will focus on porting Simple Peripheral
+from BLE5-Stack 2.01.01 to BLE5-Stack 2.02.01. The recommended approach is to
+start with a BLE5-Stack 2.02.01 project that contains the same base functionality
+as the porting target project and merge in any custom functionality.</p>
+<ol class="arabic">
+<li><p>Choose a BLE5-Stack 2.02.01 example project that contains your target
+project’s base functionality.</p></li>
+<li><p>Transfer all modified application files from BLE5-Stack 2.01.01 into the
+BLE5-Stack 2.02.01 example project.</p>
+<p>In this example, the following files from BLE5-Stack 2.01.01 were moved into
+Simple Peripheral BLE5-Stack 2.02.01 example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_peripheral.c</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_peripheral.h</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Add the pointer <code class="docutils literal notranslate"><span class="pre">&amp;pRandomAddress</span></code>  as argument in the last parameter in
+GAP_DeviceInit call. This is needed to correctly set a random static address
+if configured.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-number">Listing 232. </span><span class="caption-text">Added section to handle HCI Events for rejection of peer device Connection parameter update request.</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">  </span><span class="n">GAP_DeviceInit</span><span class="p">(</span><span class="n">GAP_PROFILE_PERIPHERAL</span><span class="p">,</span><span class="w"> </span><span class="n">selfEntity</span><span class="p">,</span><span class="w"> </span><span class="n">addrMode</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pRandomAddress</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add the following code section in <code class="docutils literal notranslate"><span class="pre">simple_peripheral.c</span></code> at the end of
+SimplePeripheral_processGapMessage before the <code class="docutils literal notranslate"><span class="pre">default:</span></code> case:</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-number">Listing 233. </span><span class="caption-text">Added section to handle HCI Events for rejection of peer device Connection parameter update request.</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">  </span><span class="cp">#if defined ( NOTIFY_PARAM_UPDATE_RJCT )</span>
+<span class="linenos"> 2</span><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="nl">GAP_LINK_PARAM_UPDATE_REJECT_EVENT</span><span class="p">:</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="n">linkDBInfo_t</span><span class="w"> </span><span class="n">linkInfo</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="n">gapLinkUpdateEvent_t</span><span class="w"> </span><span class="o">*</span><span class="n">pPkt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">gapLinkUpdateEvent_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">pMsg</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="c1">// Get the address from the connection handle</span>
+<span class="linenos"> 8</span><span class="w">        </span><span class="n">linkDB_GetInfo</span><span class="p">(</span><span class="n">pPkt</span><span class="o">-&gt;</span><span class="n">connectionHandle</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">linkInfo</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">        </span><span class="c1">// Display the address of the connection update failure</span>
+<span class="linenos">11</span><span class="w">        </span><span class="n">Display_printf</span><span class="p">(</span><span class="n">dispHandle</span><span class="p">,</span><span class="w"> </span><span class="n">SP_ROW_STATUS_2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">                       </span><span class="s">&quot;Peer Device&#39;s Update Request Rejected 0x%x: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pPkt</span><span class="o">-&gt;</span><span class="n">opcode</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">                       </span><span class="n">Util_convertBdAddr2Str</span><span class="p">(</span><span class="n">linkInfo</span><span class="p">.</span><span class="n">addr</span><span class="p">));</span><span class="w"></span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">16</span><span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">  </span><span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">main.c</span></code> in the BLE5-Stack 2.02.01 example if additional tasks were
+added in the BLE5-Stack 2.01.01 project.</p></li>
+<li><p>Move any profiles and services that the application is using to the BLE5-Stack
+2.02.01 project.</p></li>
+<li><p>Transfer the Sysconfig settings either visually through the GUI or open both
+the old and the new project .syscfg files and copy-paste the desired settings.</p></li>
+<li><p>If necessary, update the project to use the newer TI-RTOS drivers that are
+supplied with the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>.</p></li>
+<li><p>Refer to the Core SDK release notes for additional information and the TI-RTOS
+examples included with <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>.</p>
+<p>For additional information on how BLE5-Stack 2.01.02 uses TI-RTOS see
+<a class="reference internal" href="../tirtos-index-cc13xx_cc26xx.html#sec-tirtos-overview"><span class="std std-ref">TI-RTOS7 (RTOS Kernel) Overview</span></a>.</p>
+<p>For any utilized TI Drivers, review <a class="reference external" href="../../../../../tirtos7/Bios_User_Guide.pdf">TI-RTOS Kernel (SYS/BIOS) User’s Guide</a> and <a class="reference external" href="../../../../../drivers/tidriversAPIs.html">TI Drivers API Reference</a>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="porting-simple-central">
+<h2>Porting Simple Central<a class="headerlink" href="#porting-simple-central" title="Permalink to this headline">¶</a></h2>
+<p>This section of the migration guide will focus on porting Simple Central
+from BLE5-Stack 2.01.01 to the BLE5-Stack 2.02.01. The recommended approach is
+to start with a BLE5-Stack 2.02.01 project that contains the same base
+functionality as theporting target project and merge in any custom functionality.</p>
+<ol class="arabic">
+<li><p>Choose a BLE5-Stack 2.02.01 example project that contains your target
+project’s base functionality.</p></li>
+<li><p>Transfer all modified application files from BLE5-Stack 2.01.01 into the
+BLE5-Stack 2.02.01 example project.</p>
+<p>In this example, the following files from BLE5-Stack 2.01.01 were moved into
+Simple Central BLE5-Stack 2.02.01 example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_central.c</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_central.h</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Add the pointer <code class="docutils literal notranslate"><span class="pre">&amp;pRandomAddress</span></code>  as argument in the last parameter in
+GAP_DeviceInit call. This is needed to correctly set a random static address
+if configured.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-number">Listing 234. </span><span class="caption-text">Added section to handle HCI Events for rejection of peer device Connection parameter update request.</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">  </span><span class="n">GAP_DeviceInit</span><span class="p">(</span><span class="n">GAP_PROFILE_CENTRAL</span><span class="p">,</span><span class="w"> </span><span class="n">selfEntity</span><span class="p">,</span><span class="w"> </span><span class="n">addrMode</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pRandomAddress</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">connRec_t</span></code> definition in <code class="docutils literal notranslate"><span class="pre">simple_central.c</span></code> such that the <code class="docutils literal notranslate"><span class="pre">addr</span></code> and
+<code class="docutils literal notranslate"><span class="pre">charHandle</span></code> are of type <code class="docutils literal notranslate"><span class="pre">uint16_t</span></code> as shown below:</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">Listing 235. </span><span class="caption-text">Changed data type of addr and charHandle</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">  </span><span class="c1">// Connected device information</span>
+<span class="linenos">2</span><span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="linenos">3</span>  <span class="p">{</span><span class="w"></span>
+<span class="linenos">4</span><span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">connHandle</span><span class="p">;</span><span class="w">        </span><span class="c1">// Connection Handle</span>
+<span class="linenos">5</span><span class="w">    </span><span class="kt">uint16_t</span><span class="w">  </span><span class="n">addr</span><span class="p">[</span><span class="n">B_ADDR_LEN</span><span class="p">];</span><span class="w">  </span><span class="c1">// Peer Device Address</span>
+<span class="linenos">6</span><span class="w">    </span><span class="kt">uint16_t</span><span class="w">  </span><span class="n">charHandle</span><span class="p">;</span><span class="w">        </span><span class="c1">// Characteristic Handle</span>
+<span class="linenos">7</span><span class="w">    </span><span class="n">Clock_Struct</span><span class="w"> </span><span class="o">*</span><span class="n">pRssiClock</span><span class="p">;</span><span class="w">   </span><span class="c1">// pointer to clock struct</span>
+<span class="linenos">8</span><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="n">connRec_t</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Remove the <code class="docutils literal notranslate"><span class="pre">DEFAULT_DEV_DISC_BY_SVC_UUID</span></code> definition in <code class="docutils literal notranslate"><span class="pre">simple_central.c</span></code> as this
+is now modified through SysConfig.</p></li>
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">main.c</span></code> in the BLE5-Stack 2.02.01 example if additional tasks were
+added in the BLE5-Stack 2.01.01 project.</p></li>
+<li><p>Move any profiles and services that the application is using to the BLE5-Stack
+2.02.01 project.</p></li>
+<li><p>Transfer the Sysconfig settings either visually through the GUI or open both
+the old and the new project .syscfg files and copy-paste the desired settings.</p></li>
+<li><p>If necessary, update the project to use the newer TI-RTOS drivers that are
+supplied with the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>.</p></li>
+<li><p>Refer to the Core SDK release notes for additional information and the TI-RTOS
+examples included with <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>.</p>
+<p>For additional information on how BLE5-Stack 2.01.02 uses TI-RTOS see
+<a class="reference internal" href="../tirtos-index-cc13xx_cc26xx.html#sec-tirtos-overview"><span class="std std-ref">TI-RTOS7 (RTOS Kernel) Overview</span></a>.</p>
+<p>For any utilized TI Drivers, review <a class="reference external" href="../../../../../tirtos7/Bios_User_Guide.pdf">TI-RTOS Kernel (SYS/BIOS) User’s Guide</a> and <a class="reference external" href="../../../../../drivers/tidriversAPIs.html">TI Drivers API Reference</a>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="rtls-examples">
+<h2>RTLS Examples<a class="headerlink" href="#rtls-examples" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to the RTLS Toolbox chapter for up-to-date status and information
+about the RTLS offering. In this section a few application code related changes
+are listed for your information, but there are more code changes than listed.</p>
+<ul>
+<li><p>Time-of-Flight (TOF) removed from RTLS Toolbox.</p></li>
+<li><p>Extensive code changes to RTLSCtrl which also includes removal of ToF
+functionality. Please manually compare files from old and new SDK for more
+details.</p></li>
+<li><p>Host Test Example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Added handling for channel map changes
+(<code class="docutils literal notranslate"><span class="pre">HCI_BLE_CHANNEL_MAP_UPDATE_EVENT</span></code>).</p></li>
+<li><p>Added compilation options for Constant Tone Extension (<code class="docutils literal notranslate"><span class="pre">RTLS_CTE_TEST</span></code>).</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>RTLS API <code class="docutils literal notranslate"><span class="pre">rtls_ctrl_api.h</span></code> changes</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RTLSCtrl_sendDebugEvent</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">RTLSCtrl_sendDebugEvt</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RTLSCtrl_processDataSent</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">RTLSCtrl_dataSentEvt</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RTLSCtrl_processRtlsPacket</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">RTLSCtrl_rtlsPacketEvt</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RTLSCtrl_syncEventNotify</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">RTLSCtrl_syncNotifyEvt</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Updates to rtls_master.c</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Added handling for <code class="docutils literal notranslate"><span class="pre">RM_EVT_CONN_EVT</span></code> that will call new function
+<code class="docutils literal notranslate"><span class="pre">RTLSMaster_processConnEvt()</span></code>.</p></li>
+<li><p>Functionality from <code class="docutils literal notranslate"><span class="pre">RTLSMaster_connEvtCB</span></code> is moved to
+<code class="docutils literal notranslate"><span class="pre">RTLSMaster_processConnEvt</span></code>.</p></li>
+<li><p>Added handling for <code class="docutils literal notranslate"><span class="pre">HCI_BLE_CHANNEL_MAP_UPDATE_EVENT</span></code>.</p></li>
+<li><p>Updated handling for <code class="docutils literal notranslate"><span class="pre">GAP_LINK_PARAM_UPDATE_EVENT</span></code>.</p></li>
+<li><p>Testing of dynamic change of the channel map added
+(<code class="docutils literal notranslate"><span class="pre">RTLS_TEST_CHAN_MAP_DYNAMIC_CHANGE</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DEFAULT_MAX_SCAN_RES</span></code> changed from 8 to 16.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Updates to rtls_slave</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Minor changes to <code class="docutils literal notranslate"><span class="pre">RTLSPassive_cmStartReq</span></code>.</p></li>
+<li><p>AssertHandler added to ubStack_taskFxn.</p></li>
+<li><p>Small code updates in <code class="docutils literal notranslate"><span class="pre">micro_ble_cm.c</span></code> and <code class="docutils literal notranslate"><span class="pre">micro_ble_cm.h</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Updates to rtls_passive</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Only changes related to RTLS API name changes.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Changes in AoA Driver:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AOA_NUM_ANTENNAS</span></code> redefined to <code class="docutils literal notranslate"><span class="pre">BOOSTXL_AOA_NUM_ANT</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RF_PriorityCoexDefault</span></code> added to <code class="docutils literal notranslate"><span class="pre">AOA_rfEnableRam</span></code>.</p></li>
+<li><p>Define <code class="docutils literal notranslate"><span class="pre">AOA_NUM_ANTENNAS</span></code> changed to <code class="docutils literal notranslate"><span class="pre">BOOSTXL_AOA_NUM_ANT</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">AoA_IQSample_t</span></code> struct split into two structs.
+<code class="docutils literal notranslate"><span class="pre">AoA_IQSample_Ext_t</span></code> and  <code class="docutils literal notranslate"><span class="pre">AoA_IQSample_t</span></code>. This affect code and
+functions that use it (ex. <code class="docutils literal notranslate"><span class="pre">AOA_getPairAngles</span></code>).</p></li>
+<li><p>Changes in <code class="docutils literal notranslate"><span class="pre">AOA_getPairAngles</span></code> parameter.</p></li>
+<li><p>Changes in <code class="docutils literal notranslate"><span class="pre">AOA_postProcess</span></code> parameter.</p></li>
+<li><p>Minor updates in <code class="docutils literal notranslate"><span class="pre">AOA_getRfIqSamples</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="a-few-noteworthy-changes-from-ble5-stack-2-01-01-to-ble5-stack-2-02-01">
+<h2>A Few Noteworthy Changes from BLE5-Stack 2.01.01 to BLE5-Stack 2.02.01<a class="headerlink" href="#a-few-noteworthy-changes-from-ble5-stack-2-01-01-to-ble5-stack-2-02-01" title="Permalink to this headline">¶</a></h2>
+<p>You can follow the guide above without addressing these updates, they are listed
+for your information only. All fine grained details might not be mentioned,
+please refer to the specific example you need to port and to a compare between
+the old and new project files. Please refer to the BLE5-Stack Release Notes for
+all the details.</p>
+<ul class="simple">
+<li><p>Handling added in application code for HCI Events for rejection of peer
+device Connection parameter update request (<code class="docutils literal notranslate"><span class="pre">NOTIFY_PARAM_UPDATE_RJCT</span></code>).</p></li>
+<li><p>Define <code class="docutils literal notranslate"><span class="pre">NVOCMP_NWSAMEITEM</span></code> (set to avoid re-writing the same NV item) and
+define <code class="docutils literal notranslate"><span class="pre">FLASH_ROM_BUILD</span></code> added to project.</p></li>
+<li><p>Define <code class="docutils literal notranslate"><span class="pre">DEFAULT_DEV_DISC_BY_SVC_UUID</span></code> is now controlled in the checkbox
+SysConfig-&gt;Observer Configuration-&gt;Discover Devices By Service UUID. This is
+used in multi_role and the simple_central example.</p></li>
+<li><p>Privacy Override Offset (<code class="docutils literal notranslate"><span class="pre">privOverrideOffset</span></code>) and CoEx configuration
+(<code class="docutils literal notranslate"><span class="pre">coexUseCaseConfig</span></code>) added to <code class="docutils literal notranslate"><span class="pre">llUserCfg_t</span></code>. Configured in
+<code class="docutils literal notranslate"><span class="pre">ble_user_config_stack.c</span></code>.</p></li>
+<li><p>Updated code in osal_icall_ble.c to match the extended number of
+parameters in <code class="docutils literal notranslate"><span class="pre">GATTServApp_Init()</span></code> and <code class="docutils literal notranslate"><span class="pre">GAPBondMgr_Init()</span></code>. Parameters
+<code class="docutils literal notranslate"><span class="pre">cfg_GATTServApp_att_delayed_req</span></code> and
+<code class="docutils literal notranslate"><span class="pre">cfg_GATTServApp_gatt_no_service_changed</span></code> are added.</p></li>
+<li><p>GAP Scanner has now the ability to select only to scan on specified channels
+rather all 3 channels.</p></li>
+<li><p>Non Volatile On-Chip Multi Page (NVOCMP) Driver now allow the user to check
+when the next compaction will takes place and receive low voltage detection
+notifications.</p></li>
+<li><p>GAPBondMgr can be configured to delete a bond even while the device is in an
+active connection.</p></li>
+<li><p>The BLE stack library files (OneLib.a and StackWrapper.a) required by
+the linker are not directly provided by the .projectspec (CCS) or the
+.ipcf (IAR). From now on, the file ti_utils_build_linker.cmd.genlibs,
+generated by SysConfig, includes the libraries required to link the
+application based on the configurations chosen.</p></li>
+<li><p>Connectionless-AoA is now supported. For more information, refer to
+<a class="reference internal" href="../localization-index-cc13xx_cc26xx.html#sec-aoa"><span class="std std-ref">Angle of Arrival</span></a>.</p></li>
+<li><p>Periodic Advertisements are now supported. For more information, refer to
+<a class="reference internal" href="../../ble-stack-5.x/gap-cc13xx_cc26xx.html#gap-periodic-advertising"><span class="std std-ref">Periodic Advertising</span></a>.</p></li>
+<li><p>TI clang compiler support was added to BLE projects. See
+<a class="reference internal" href="../../quickstart-guide/ble5-quick-start.html#get-started-ble5-develop"><span class="std std-ref">Developing a New BLE5-Stack Based Application</span></a> for a list of projects supported. This change
+required some modifications to code (i.e. passing in “” to functions
+that do not receive any input). When porting, no change is required if the
+legacy compiler is used.</p></li>
+<li><p>Improvements were made to the BLE5 Stack’s scheduling of events. For details,
+see <a class="reference internal" href="../../ble-stack-common/link-layer-cc13xx_cc26xx.html#sec-connection-fairness"><span class="std std-ref">Connection Fairness</span></a>.</p></li>
+<li><p>A new define was added to gapbondmgr.h. <code class="docutils literal notranslate"><span class="pre">GAPBOND_AUTHEN_PAIRING_ONLY</span></code> is
+used to enforce authenticated pairing. Additional checks were added to the
+GAPBondMgr to ensure proper IO capabilities are set when when authenticated
+pairing is used. Refer to <a class="reference internal" href="../../ble-stack-5.x/gapbondmngr-cc13xx_cc26xx.html#authentication-pairing-only"><span class="std std-ref">Authentication Pairing Only</span></a>.</p></li>
+<li><p>The Project Zero data_service.c profile ‘s <em>String Characterisitc Value</em> has
+been modified to support encrpyted reads/writes. Additionally, in
+simple_gatt_profile.c, <em>Simple Profile Characteristic 4 Properties</em> were
+modified to support writes in addition to the original notify support
+(i.e. <code class="docutils literal notranslate"><span class="pre">`</span> <span class="pre">simpleProfileChar4Props</span> <span class="pre">=</span> <span class="pre">GATT_PROP_WRITE</span> <span class="pre">|</span> <span class="pre">GATT_PROP_NOTIFY;)`</span></code>)</p></li>
+<li><p>Agama 704 device support has been added to SDK.</p></li>
+<li><p>Examples for Agama 704 devices have been added to SDK.</p></li>
+<li><p>Agama 704 devices included in SysConfig.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ble5stack2.01.02-to-ble5stack2.02.01.html" class="btn btn-neutral float-left" title="BLE5-Stack 2.01.02 (SDK 4.10) to BLE5-Stack 2.02.01 (SDK 5.10)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../cc13xx_cc26xx/gpio-porting-guide.html" class="btn btn-neutral float-right" title="GPIO++ Driver Porting Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

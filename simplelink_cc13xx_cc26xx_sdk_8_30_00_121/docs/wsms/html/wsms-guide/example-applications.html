@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example Application Guide &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Wireless Solar Management System User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="Overview" href="../wsms/wsms-overview.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug wsms-guide example-applications";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Wireless Solar Management System User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wsms-quick-start.html">Wireless Solar Management System Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wsms-index.html">Wireless Solar Management System</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Example Application Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ipv6-node-embedded-mode-example-application-ipv6-node">IPv6 Node Embedded Mode Example Application (ipv6_node)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-application">Running the Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#device-support">Device support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ipv6-base-example-application-ipv6-base">IPv6 Base Example Application (ipv6_base)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Running the Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Device support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-parameters">Configuration Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Wireless Solar Management System User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Example Application Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="example-application-guide">
+<span id="sec-wsms-examples"></span><h1>Example Application Guide<a class="headerlink" href="#example-application-guide" title="Permalink to this headline">¶</a></h1>
+<p>This section provides an overview of the Wireless Solar Management System out-of-box example applications
+and instructions on how to run them.</p>
+<p>IN WSMS, there are two types of logical devices:</p>
+<ul class="simple">
+<li><p>The base device</p></li>
+<li><p>Node devices.</p></li>
+</ul>
+<p>The Wireless Solar Management System can be configured in either of the two roles by choosing the
+corresponding application.</p>
+<div class="section" id="ipv6-node-embedded-mode-example-application-ipv6-node">
+<span id="sec-wsms-node-application"></span><h2>IPv6 Node Embedded Mode Example Application (ipv6_node)<a class="headerlink" href="#ipv6-node-embedded-mode-example-application-ipv6-node" title="Permalink to this headline">¶</a></h2>
+<p>A node is a device capable of connecting to other devices in the mesh network.
+It can provide upward and downward packet forwarding. A new device is able to
+join the network through any node. The connections between different nodes form
+the mesh topology.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ipv6_node</span></code> example is a fully embedded application demonstrating a CoAP
+server on WSMS. The example is intended to work with the base example, which
+acts as the CoAP client that interacts via the CoAP protocol with the CoAP node
+server. CoAP is an abbreviation of COnstrained Application Protocol.</p>
+<div class="section" id="running-the-application">
+<h3>Running the Application<a class="headerlink" href="#running-the-application" title="Permalink to this headline">¶</a></h3>
+<p>For information on how to run the router node example application please see the
+<code class="docutils literal notranslate"><span class="pre">README.md</span></code> included with the application project.</p>
+</div>
+<div class="section" id="device-support">
+<h3>Device support<a class="headerlink" href="#device-support" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ipv6_node</span></code> is supported on the following development boards:</p>
+<ul class="simple">
+<li><p>CC1312R7 LaunchPad</p></li>
+<li><p>CC1352P7-1 LaunchPad</p></li>
+<li><p>LP_EM_CC1314R10</p></li>
+<li><p>LP_EM_CC1354P10_1</p></li>
+<li><p>LP_EM_CC1354P10_6</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="ipv6-base-example-application-ipv6-base">
+<h2>IPv6 Base Example Application (ipv6_base)<a class="headerlink" href="#ipv6-base-example-application-ipv6-base" title="Permalink to this headline">¶</a></h2>
+<p>A base device is a device that can act as gateway between the WSMS network and a
+different network. In addition, the base acts as the <a class="reference internal" href="references.html#term-Root"><span class="xref std std-term">root</span></a> device and
+establishes the network. For this reason, a WSMS network needs at least one base.
+The <code class="docutils literal notranslate"><span class="pre">ipv6_base</span></code> example implements the base with NWP mode architecture.</p>
+<div class="section" id="id2">
+<h3>Running the Application<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>For information on how to run the base example application please see the
+<code class="docutils literal notranslate"><span class="pre">README.md</span></code> included with the application project.</p>
+</div>
+<div class="section" id="id3">
+<h3>Device support<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ipv6_base</span></code> is supported on the following development boards:</p>
+<ul class="simple">
+<li><p>CC1312R7 LaunchPad</p></li>
+<li><p>CC1352P7-1 LaunchPad</p></li>
+<li><p>LP_EM_CC1314R10</p></li>
+<li><p>LP_EM_CC1354P10_1</p></li>
+<li><p>LP_EM_CC1354P10_6</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="configuration-parameters">
+<h2>Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Example configuration is done mainly through SysConfig. You can read about
+SysConfig configuration in the TI Wi-SUN FAN Stack User’s Guide.</p>
+<p>For NWP mode, many values can be set at run time through the NWP interface. Please
+see the NWP interface guide in the TI WI-SUN FAN Stack User’s Guide or
+the ti-wisunfan py-spinel readme for details.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../wsms/wsms-overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="references.html" class="btn btn-neutral float-right" title="References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Rate and PHY &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MAC and Frequency Hopping" href="MAC.html" />
+    <link rel="prev" title="Overview" href="wisun-stack-overview.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug wisun-stack PHY";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../wisun-guide/index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../wisun-guide/wisun-index.html">TI Wi-SUN FAN Stack</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="wisun-stack-overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wisun-stack-overview.html#what-is-a-fan">What is a FAN?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wisun-stack-overview.html#architecture-choices">Architecture Choices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wisun-stack-overview.html#network-profiles">Network Profiles</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data Rate and PHY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MAC.html">MAC and Frequency Hopping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="join_process.html">Join Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networklayer.html">EAPOL Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networklayer.html#lowpan-layer">6LoWPAN Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networklayer.html#ipv6-layer">IPv6 Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networklayer.html#routing-layer-rpl">Routing Layer (RPL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arib-regulation-type.html">JP/EU Certification Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/advanced-wisun-features.html">Advanced TI Wi-SUN FAN Stack Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/network-management.html">Wi-SUN Network Topology Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/NWP_interface.html">TI Wi-SUN FAN NWP Interface Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/wisun-oad-index.html">MCUBoot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/migration-guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../wisun-guide/index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../wisun-guide/index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../wisun-guide/wisun-index.html">TI Wi-SUN FAN Stack</a> &raquo;</li>
+      <li>Data Rate and PHY</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="data-rate-and-phy">
+<h1>Data Rate and PHY<a class="headerlink" href="#data-rate-and-phy" title="Permalink to this headline">¶</a></h1>
+<p>PHYs (also known as Modes) are defined by Wi-SUN Alliance. The following modes
+are supported by TI Wi-SUN FAN Stack. (All modes use 2-FSK.)</p>
+<dl class="simple">
+<dt>Wi-SUN frequency bands:</dt><dd><ul class="simple">
+<li><p>EU: Europe</p></li>
+<li><p>NA: North America</p></li>
+<li><p>JP: Japan</p></li>
+<li><p>BZ: Brazil</p></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-number">Table 3. </span><span class="caption-text">Wi-SUN FAN PHY’s and their channel frequencies</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 11%" />
+<col style="width: 13%" />
+<col style="width: 21%" />
+<col style="width: 13%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operating Mode ID</p></th>
+<th class="head"><p>Mode ID</p></th>
+<th class="head"><p>Data Rate</p></th>
+<th class="head"><p>Modulation Index</p></th>
+<th class="head"><p>Deviation</p></th>
+<th class="head"><p>Region</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mode #1a</p></td>
+<td><p>1</p></td>
+<td><p>50 kbps</p></td>
+<td><p>0.5</p></td>
+<td><p>12.5 kHz</p></td>
+<td><p>EU</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mode #1b</p></td>
+<td><p>2</p></td>
+<td><p>50 kbps</p></td>
+<td><p>1</p></td>
+<td><p>25 kHz</p></td>
+<td><p>NA, BZ, JP</p></td>
+</tr>
+<tr class="row-even"><td><p>Mode #2a</p></td>
+<td><p>3</p></td>
+<td><p>100 kbps</p></td>
+<td><p>0.5</p></td>
+<td><p>25 kHz</p></td>
+<td><p>EU</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mode #2b</p></td>
+<td><p>4</p></td>
+<td><p>100 kbps</p></td>
+<td><p>1</p></td>
+<td><p>50 kHz</p></td>
+<td><p>NA, BZ, JP</p></td>
+</tr>
+<tr class="row-even"><td><p>Mode #3</p></td>
+<td><p>5</p></td>
+<td><p>150 kbps</p></td>
+<td><p>0.5</p></td>
+<td><p>37.5 kHz</p></td>
+<td><p>EU, NA, BZ, JP</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mode #4a</p></td>
+<td><p>6</p></td>
+<td><p>200 kbps</p></td>
+<td><p>0.5</p></td>
+<td><p>50 kHz</p></td>
+<td><p>NA, BZ</p></td>
+</tr>
+<tr class="row-even"><td><p>Mode #4b</p></td>
+<td><p>7</p></td>
+<td><p>200 kbps</p></td>
+<td><p>1</p></td>
+<td><p>100 kHz</p></td>
+<td><p>JP</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mode #5</p></td>
+<td><p>8</p></td>
+<td><p>300 kbps</p></td>
+<td><p>0.5</p></td>
+<td><p>75 kHz</p></td>
+<td><p>NA, BZ, JP</p></td>
+</tr>
+</tbody>
+</table>
+<p>A quick way to test a PHY with a CC13xx device is to use <a class="reference external" href="https://www.ti.com/tool/smartrftm-studio">SmartRF Studio</a> . A
+quick guide to getting started is found on SimpleLink Academy: <a class="reference external" href="https://dev.ti.com/tirex/explore/node?node=AJ1y3Qt11VwjrCSQsRfxXw__pTTHBmu__LATEST">Basic RX and TX
+SimpleLink Academy</a>.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="wisun-stack-overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="MAC.html" class="btn btn-neutral float-right" title="MAC and Frequency Hopping" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

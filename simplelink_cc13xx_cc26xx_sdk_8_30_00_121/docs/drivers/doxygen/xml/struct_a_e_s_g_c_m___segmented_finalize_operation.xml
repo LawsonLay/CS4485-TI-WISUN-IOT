@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_a_e_s_g_c_m___segmented_finalize_operation" kind="struct" language="C++" prot="public">
+    <compoundname>AESGCM_SegmentedFinalizeOperation</compoundname>
+    <includes refid="_a_e_s_g_c_m_8h" local="no">AESGCM.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_a_e_s_g_c_m___segmented_finalize_operation_1a09877eac5ea680ad3e2bb50ca16207e7" prot="public" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* AESGCM_SegmentedFinalizeOperation::input</definition>
+        <argsstring></argsstring>
+        <name>input</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>Encryption: The plaintext buffer to be encrypted and authenticated in the GCM operation.</para></listitem><listitem><para>Decryption: The ciphertext to be decrypted and verified. </para></listitem></itemizedlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/AESGCM.h" line="901" column="1" bodyfile="source/ti/drivers/AESGCM.h" bodystart="901" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_a_e_s_g_c_m___segmented_finalize_operation_1a0161e3fc8ff0d2e6443f0bcf3d667cd9" prot="public" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* AESGCM_SegmentedFinalizeOperation::output</definition>
+        <argsstring></argsstring>
+        <name>output</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>Encryption: The output ciphertext buffer that the encrypted plaintext is copied to.</para></listitem><listitem><para>Decryption: The plaintext derived from the decrypted and verified ciphertext is copied here.</para></listitem></itemizedlist>
+</para><para>For cc27XX devices, when key encoding is _HSM suffixed, the output buffer needs to be 32-bit aligned. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/AESGCM.h" line="906" column="1" bodyfile="source/ti/drivers/AESGCM.h" bodystart="906" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_a_e_s_g_c_m___segmented_finalize_operation_1a47bc02d71067de0e7ccb6009aa186f97" prot="public" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* AESGCM_SegmentedFinalizeOperation::mac</definition>
+        <argsstring></argsstring>
+        <name>mac</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>Encryption: The buffer where the message authentication code is copied.</para></listitem><listitem><para>Decryption: The buffer containing the received message authentication code. </para></listitem></itemizedlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/AESGCM.h" line="916" column="1" bodyfile="source/ti/drivers/AESGCM.h" bodystart="916" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_a_e_s_g_c_m___segmented_finalize_operation_1a2d6643455a1991794b410aee224c656c" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t AESGCM_SegmentedFinalizeOperation::inputLength</definition>
+        <argsstring></argsstring>
+        <name>inputLength</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Length of the input/output data in bytes. Can be 0 if finalizing without new payload data. Unlike this field in <ref refid="struct_a_e_s_g_c_m___segmented_data_operation" kindref="compound">AESGCM_SegmentedDataOperation</ref>, the length doesn&apos;t need to be block-aligned.</para><para>For CC27XX devices with _HSM-suffixed key encoding, the inputLength must be block-size aligned. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/AESGCM.h" line="922" column="1" bodyfile="source/ti/drivers/AESGCM.h" bodystart="922" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_a_e_s_g_c_m___segmented_finalize_operation_1a3fcb8f0deac47428651e2134c71eb53f" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t AESGCM_SegmentedFinalizeOperation::macLength</definition>
+        <argsstring></argsstring>
+        <name>macLength</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Length of <computeroutput>mac</computeroutput> in bytes. Valid MAC lengths are [4, 8, 12, 13, 14, 15, 16]. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/AESGCM.h" line="930" column="1" bodyfile="source/ti/drivers/AESGCM.h" bodystart="930" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct containing the parameters required for finalizing an encryption/decryption and authentication/verification of a message in a segmented operation. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="source/ti/drivers/AESGCM.h" line="900" column="1" bodyfile="source/ti/drivers/AESGCM.h" bodystart="899" bodyend="933"/>
+    <listofallmembers>
+      <member refid="struct_a_e_s_g_c_m___segmented_finalize_operation_1a09877eac5ea680ad3e2bb50ca16207e7" prot="public" virt="non-virtual"><scope>AESGCM_SegmentedFinalizeOperation</scope><name>input</name></member>
+      <member refid="struct_a_e_s_g_c_m___segmented_finalize_operation_1a2d6643455a1991794b410aee224c656c" prot="public" virt="non-virtual"><scope>AESGCM_SegmentedFinalizeOperation</scope><name>inputLength</name></member>
+      <member refid="struct_a_e_s_g_c_m___segmented_finalize_operation_1a47bc02d71067de0e7ccb6009aa186f97" prot="public" virt="non-virtual"><scope>AESGCM_SegmentedFinalizeOperation</scope><name>mac</name></member>
+      <member refid="struct_a_e_s_g_c_m___segmented_finalize_operation_1a3fcb8f0deac47428651e2134c71eb53f" prot="public" virt="non-virtual"><scope>AESGCM_SegmentedFinalizeOperation</scope><name>macLength</name></member>
+      <member refid="struct_a_e_s_g_c_m___segmented_finalize_operation_1a0161e3fc8ff0d2e6443f0bcf3d667cd9" prot="public" virt="non-virtual"><scope>AESGCM_SegmentedFinalizeOperation</scope><name>output</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_swi_p___params" kind="struct" language="C++" prot="public">
+    <compoundname>SwiP_Params</compoundname>
+    <includes refid="_swi_p_8h" local="no">SwiP.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_swi_p___params_1ae189b3d772aeecf7bdd97702ed6c4d0d" prot="public" static="no" mutable="no">
+        <type>uintptr_t</type>
+        <definition>uintptr_t SwiP_Params::arg0</definition>
+        <argsstring></argsstring>
+        <name>arg0</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Argument passed into the SwiP function. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/SwiP.h" line="115" column="1" bodyfile="source/ti/drivers/dpl/SwiP.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_swi_p___params_1aa25eb09538f959b632be48cee8a4ed17" prot="public" static="no" mutable="no">
+        <type>uintptr_t</type>
+        <definition>uintptr_t SwiP_Params::arg1</definition>
+        <argsstring></argsstring>
+        <name>arg1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Argument passed into the SwiP function. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/SwiP.h" line="116" column="1" bodyfile="source/ti/drivers/dpl/SwiP.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_swi_p___params_1af9c1e4f447c892114beabcbe13dac109" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SwiP_Params::priority</definition>
+        <argsstring></argsstring>
+        <name>priority</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>priority, 0 is min, 1, 2, ..., ~0 for max </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/SwiP.h" line="117" column="1" bodyfile="source/ti/drivers/dpl/SwiP.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_swi_p___params_1a431dcf62eaa19ef0c4ce85d1ab58b940" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SwiP_Params::trigger</definition>
+        <argsstring></argsstring>
+        <name>trigger</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initial SwiP trigger value. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/SwiP.h" line="118" column="1" bodyfile="source/ti/drivers/dpl/SwiP.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Basic SwiP Parameters. </para>    </briefdescription>
+    <detaileddescription>
+<para>Structure that contains the parameters passed into <ref refid="_swi_p_8h_1aeed3e97f791991345cac2d0c7627475c" kindref="member">SwiP_create</ref> and <ref refid="_swi_p_8h_1af7d6d234f82bec50c73147177ffeed1f" kindref="member">SwiP_construct</ref> when creating or constructing a SwiP instance. The <ref refid="_swi_p_8h_1aff5b136d88dfec9e82e0e310b0f08945" kindref="member">SwiP_Params_init</ref> function should be used to initialize the fields to default values before the application sets the fields manually. The SwiP default parameters are noted in <ref refid="_swi_p_8h_1aff5b136d88dfec9e82e0e310b0f08945" kindref="member">SwiP_Params_init</ref>.</para><para>Each SwiP object has a &quot;trigger&quot; used either to determine whether to post the SwiP or as a value that can be evaluated within the SwiP&apos;s function.</para><para>The SwiP_andn and SwiP_dec functions post the SwiP if the trigger value transitions to 0. The SwiP_or and SwiP_inc functions also modify the trigger value. SwiP_or sets bits, and SwiP_andn clears bits. </para>    </detaileddescription>
+    <location file="source/ti/drivers/dpl/SwiP.h" line="114" column="1" bodyfile="source/ti/drivers/dpl/SwiP.h" bodystart="113" bodyend="119"/>
+    <listofallmembers>
+      <member refid="struct_swi_p___params_1ae189b3d772aeecf7bdd97702ed6c4d0d" prot="public" virt="non-virtual"><scope>SwiP_Params</scope><name>arg0</name></member>
+      <member refid="struct_swi_p___params_1aa25eb09538f959b632be48cee8a4ed17" prot="public" virt="non-virtual"><scope>SwiP_Params</scope><name>arg1</name></member>
+      <member refid="struct_swi_p___params_1af9c1e4f447c892114beabcbe13dac109" prot="public" virt="non-virtual"><scope>SwiP_Params</scope><name>priority</name></member>
+      <member refid="struct_swi_p___params_1a431dcf62eaa19ef0c4ce85d1ab58b940" prot="public" virt="non-virtual"><scope>SwiP_Params</scope><name>trigger</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

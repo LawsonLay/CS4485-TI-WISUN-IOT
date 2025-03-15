@@ -1,0 +1,1850 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_r_n_g_8h" kind="file" language="C++">
+    <compoundname>RNG.h</compoundname>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">stdint.h</includes>
+    <includes refid="_crypto_key_8h" local="no">ti/drivers/cryptoutils/cryptokey/CryptoKey.h</includes>
+    <includedby refid="_r_n_g_c_c26_x_x_8h" local="no">RNGCC26XX.h</includedby>
+    <incdepgraph>
+      <node id="1669">
+        <label>stdbool.h</label>
+      </node>
+      <node id="1671">
+        <label>stdint.h</label>
+      </node>
+      <node id="1670">
+        <label>stddef.h</label>
+      </node>
+      <node id="1668">
+        <label>RNG.h</label>
+        <link refid="_r_n_g_8h"/>
+        <childnode refid="1669" relation="include">
+        </childnode>
+        <childnode refid="1670" relation="include">
+        </childnode>
+        <childnode refid="1671" relation="include">
+        </childnode>
+        <childnode refid="1672" relation="include">
+        </childnode>
+      </node>
+      <node id="1672">
+        <label>ti/drivers/cryptoutils/cryptokey/CryptoKey.h</label>
+        <link refid="_crypto_key_8h"/>
+        <childnode refid="1671" relation="include">
+        </childnode>
+        <childnode refid="1669" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1674">
+        <label>RNGCC26XX.h</label>
+        <link refid="_r_n_g_c_c26_x_x_8h"/>
+      </node>
+      <node id="1673">
+        <label>RNG.h</label>
+        <link refid="_r_n_g_8h"/>
+        <childnode refid="1674" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_r_n_g___config" prot="public">RNG_Config</innerclass>
+    <innerclass refid="struct_r_n_g___params" prot="public">RNG_Params</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_r_n_g_8h_1ac306e4cfc6cc7ffd4bc3788ab0b1d9a7" prot="public" static="no">
+        <name>RNG_STATUS_RESERVED</name>
+        <initializer>(-32)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Common RNG status code reservation offset. RNG driver implementations should offset status codes with RNG_STATUS_RESERVED growing negatively.</para><para>Example implementation specific status codes: <programlisting><codeline><highlight class="normal">#define<sp/>RNGXYZ_STATUS_ERROR0<sp/><sp/><sp/><sp/>((int_fast16_t)<sp/>(RNG_STATUS_RESERVED<sp/>-<sp/>0))</highlight></codeline>
+<codeline><highlight class="normal">#define<sp/>RNGXYZ_STATUS_ERROR1<sp/><sp/><sp/><sp/>((int_fast16_t)<sp/>(RNG_STATUS_RESERVED<sp/>-<sp/>1))</highlight></codeline>
+<codeline><highlight class="normal">#define<sp/>RNGXYZ_STATUS_ERROR2<sp/><sp/><sp/><sp/>((int_fast16_t)<sp/>(RNG_STATUS_RESERVED<sp/>-<sp/>2))</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="336" column="9" bodyfile="source/ti/drivers/RNG.h" bodystart="336" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_r_n_g_8h_1ab3076e27bfcbaad810b27dd790b63649" prot="public" static="no">
+        <name>RNG_STATUS_SUCCESS</name>
+        <initializer>((int_fast16_t)0)</initializer>
+        <briefdescription>
+<para>Successful status code. </para>        </briefdescription>
+        <detaileddescription>
+<para>Functions return RNG_STATUS_SUCCESS if the function was executed successfully. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="344" column="9" bodyfile="source/ti/drivers/RNG.h" bodystart="344" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_r_n_g_8h_1a608c7c1a93bf68c4a98edf40d0df18c2" prot="public" static="no">
+        <name>RNG_STATUS_ERROR</name>
+        <initializer>((int_fast16_t)-1)</initializer>
+        <briefdescription>
+<para>Generic error status code. </para>        </briefdescription>
+        <detaileddescription>
+<para>Functions return RNG_STATUS_ERROR if the function was not executed successfully. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="352" column="9" bodyfile="source/ti/drivers/RNG.h" bodystart="352" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_r_n_g_8h_1a230a714031b745ee550160cd49feb9f1" prot="public" static="no">
+        <name>RNG_STATUS_RESOURCE_UNAVAILABLE</name>
+        <initializer>((int_fast16_t)-2)</initializer>
+        <briefdescription>
+<para>An error status code returned if the hardware or software resource is currently unavailable. </para>        </briefdescription>
+        <detaileddescription>
+<para>RNG driver implementations may have hardware or software limitations on how many clients can simultaneously perform operations. This status code is returned if the mutual exclusion mechanism signals that an operation cannot currently be performed. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="363" column="9" bodyfile="source/ti/drivers/RNG.h" bodystart="363" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_r_n_g_8h_1a0e210940ccc309d0dfd333e6fd48e875" prot="public" static="no">
+        <name>RNG_STATUS_INVALID_INPUTS</name>
+        <initializer>((int_fast16_t)-3)</initializer>
+        <briefdescription>
+<para>Operation failed due to invalid inputs. </para>        </briefdescription>
+        <detaileddescription>
+<para>Functions return RNG_STATUS_INVALID_INPUTS if input validation fails. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="370" column="9" bodyfile="source/ti/drivers/RNG.h" bodystart="370" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_r_n_g_8h_1ab63bae3047edfe506f2bfec86ef2c5f8" prot="public" static="no">
+        <name>RNG_STATUS_CANCELED</name>
+        <initializer>((int_fast16_t)-4)</initializer>
+        <briefdescription>
+<para>The ongoing operation was canceled. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="375" column="9" bodyfile="source/ti/drivers/RNG.h" bodystart="375" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_r_n_g_8h_1aeb6cdafa2fe8dcd983db3d435579ed19" prot="public" static="no">
+        <name>RNG_ENTROPY_EXHAUSTED</name>
+        <initializer>((int_fast16_t)-5)</initializer>
+        <briefdescription>
+<para>The pool of entropy has been exhausted and additional entropy cannot be generated. A reset of the system may be required to generate more entropy. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="382" column="9" bodyfile="source/ti/drivers/RNG.h" bodystart="382" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_r_n_g_8h_1af4aca552ecdb55994356cfa50e82d4d9" prot="public" static="no">
+        <name>RNG_STATUS_INIT_NOT_ALLOWED</name>
+        <initializer>((int_fast16_t)-6)</initializer>
+        <briefdescription>
+<para>Some implementations have restrictions on how often or when RNG_init may be called. See the documentation for the implementation for more information. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="389" column="9" bodyfile="source/ti/drivers/RNG.h" bodystart="389" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_r_n_g_8h_1aaa727a5b5ea0ed0df85f734562e08d05" prot="public" static="no">
+        <name>RNG_STATUS_NOISE_INPUT_INVALID</name>
+        <initializer>((int_fast16_t)-7)</initializer>
+        <briefdescription>
+<para>Some implementations require a noise input during initialization which is conditioned to seed the RNG driver. <ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref> will return this error if the noise input pointer is not initialized with valid information. See documentation for the implementation for more information. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="397" column="9" bodyfile="source/ti/drivers/RNG.h" bodystart="397" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_r_n_g_8h_1a1c0881e8b77094f70151f63bc548d304" prot="public" static="no">
+        <name>RNG_STATUS_NOT_INITIALIZED</name>
+        <initializer>((int_fast16_t)-8)</initializer>
+        <briefdescription>
+<para>RNG driver not initialized. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Some implementations restrict when <ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref> may be called. Refer to <ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref> for more information. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="405" column="9" bodyfile="source/ti/drivers/RNG.h" bodystart="405" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_r_n_g_8h_1a6ce028f88ad8438e91e7a4f62001846e" prot="public" static="no">
+        <name>RNG_MAX_BIT_LENGTH</name>
+        <initializer>((size_t)1u &lt;&lt; 20u) /* 1 MiB */</initializer>
+        <briefdescription>
+<para>Maximum number of bits that may be requested in a single call. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="410" column="9" bodyfile="source/ti/drivers/RNG.h" bodystart="410" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17" prot="public" static="no">
+        <name>RNG_ReturnBehavior</name>
+        <enumvalue id="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a89864eea2d3bf5da6902f34f9f2f0dca" prot="public">
+          <name>RNG_RETURN_BEHAVIOR_CALLBACK</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>The function call will return immediately while the RNG operation goes on in the background. The registered callback function is called after the operation completes. The context the callback function is called (task, HWI, SWI) is implementation-dependent. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17aea00815364b26007576f615660b49ffa" prot="public">
+          <name>RNG_RETURN_BEHAVIOR_BLOCKING</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>The function call will block while RNG operation goes on in the background. RNG operation results are available after the function returns. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a291c8dc3d119f96e80043d04f0c71b27" prot="public">
+          <name>RNG_RETURN_BEHAVIOR_POLLING</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>The function call will continuously poll a flag while RNG operation goes on in the background. RNG operation results are available after the function returns. </para>          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The way in which RNG function calls return after generating the requested entropy. </para>        </briefdescription>
+        <detaileddescription>
+<para>Not all RNG implementations support all of the return behavior options.</para><para>Not all RNG operations exhibit the specified return behavior. Functions that do not require significant computation and cannot offload that computation to a background thread behave like regular functions. Which functions exhibit the specified return behavior is not implementation dependent. Specifically, a software-backed implementation run on the same CPU as the application will emulate the return behavior while not actually offloading the computation to the background thread.</para><para>RNG functions exhibiting the specified return behavior have restrictions on the context from which they may be called.</para><para><table rows="4" cols="4"><row>
+<entry thead="yes"><para></para></entry><entry thead="yes"><para>Task </para></entry><entry thead="yes"><para>Hwi </para></entry><entry thead="yes"><para>Swi  </para></entry></row>
+<row>
+<entry thead="no"><para>RNG_RETURN_BEHAVIOR_CALLBACK </para></entry><entry thead="no"><para>X </para></entry><entry thead="no"><para></para></entry><entry thead="no"><para></para></entry></row>
+<row>
+<entry thead="no"><para>RNG_RETURN_BEHAVIOR_BLOCKING </para></entry><entry thead="no"><para>X </para></entry><entry thead="no"><para></para></entry><entry thead="no"><para></para></entry></row>
+<row>
+<entry thead="no"><para>RNG_RETURN_BEHAVIOR_POLLING </para></entry><entry thead="no"><para>X </para></entry><entry thead="no"><para>X </para></entry><entry thead="no"><para>X </para></entry></row>
+</table>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="462" column="1" bodyfile="source/ti/drivers/RNG.h" bodystart="461" bodyend="479"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" prot="public" static="no">
+        <type>const <ref refid="struct_r_n_g___config" kindref="compound">RNG_Config</ref> *</type>
+        <definition>typedef const RNG_Config* RNG_Handle</definition>
+        <argsstring></argsstring>
+        <name>RNG_Handle</name>
+        <briefdescription>
+<para>A handle that is returned from a <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref> call. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="435" column="1" bodyfile="source/ti/drivers/RNG.h" bodystart="435" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_r_n_g_8h_1ad5cded400eae369dc7d6a6fbf5f33168" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* RNG_CryptoKeyCallbackFxn) (RNG_Handle handle, int_fast16_t returnValue, CryptoKey *key)</definition>
+        <argsstring>)(RNG_Handle handle, int_fast16_t returnValue, CryptoKey *key)</argsstring>
+        <name>RNG_CryptoKeyCallbackFxn</name>
+        <briefdescription>
+<para>The definition of a callback function used by the RNG driver when <ref refid="_r_n_g_8h_1af0d87cb0f061c45161597771a92f6360" kindref="member">RNG_generateKey()</ref>, <ref refid="_r_n_g_8h_1a669aa831effa103664cb5ccf71060979" kindref="member">RNG_generateLEKeyInRange()</ref>, or <ref refid="_r_n_g_8h_1ae6e9b34b2bb8b9ef3712ddd3281ef4a8" kindref="member">RNG_generateBEKeyInRange()</ref> is called with <ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a89864eea2d3bf5da6902f34f9f2f0dca" kindref="member">RNG_RETURN_BEHAVIOR_CALLBACK</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>Attempting to make calls to the RNG driver from the callback may result in deadlock.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle of the client that started the RNG operation.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>returnValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Return status code describing the outcome of the operation.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> that describes the location the generated entropy will be copied to. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="496" column="1" bodyfile="source/ti/drivers/RNG.h" bodystart="496" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_r_n_g_8h_1ac30888d0e097bb5d21872797f43c31fb" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* RNG_RandomBitsCallbackFxn) (RNG_Handle handle, int_fast16_t returnValue, uint8_t *randomBits, size_t randomBitsLength)</definition>
+        <argsstring>)(RNG_Handle handle, int_fast16_t returnValue, uint8_t *randomBits, size_t randomBitsLength)</argsstring>
+        <name>RNG_RandomBitsCallbackFxn</name>
+        <briefdescription>
+<para>The definition of a callback function used by the RNG driver when <ref refid="_r_n_g_8h_1a2ea3a4ebb1fdf9ce8707eb1c75bcf4d4" kindref="member">RNG_getRandomBits()</ref>, <ref refid="_r_n_g_8h_1a10d0f6139e387ca2c2863e52b74fda48" kindref="member">RNG_getLERandomNumberInRange()</ref>, or RNG_getBERandomNumberInRange is called with <ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a89864eea2d3bf5da6902f34f9f2f0dca" kindref="member">RNG_RETURN_BEHAVIOR_CALLBACK</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>Attempting to make calls to the RNG driver from the callback may result in deadlock.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle of the client that started the RNG operation.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>returnValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Return status code describing the outcome of the operation.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>randomBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an array that stores the random bits output by this function.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>randomBitsLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The length of the random data generated, in bits. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="516" column="1" bodyfile="source/ti/drivers/RNG.h" bodystart="516" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_r_n_g_8h_1aeca982c6cf31dceb6116b9bfb7556473" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref></type>
+        <definition>const RNG_Params RNG_defaultParams</definition>
+        <argsstring></argsstring>
+        <name>RNG_defaultParams</name>
+        <briefdescription>
+<para>Default <ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref> structure. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="_r_n_g_8h_1a2d222b0cdeac690905f6be9df444e23f" kindref="member">RNG_Params_init()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="555" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_r_n_g_8h_1ace25c61f527654aca367fc3fabf22399" prot="public" static="no" mutable="no">
+        <type>const size_t</type>
+        <definition>const size_t RNG_poolByteSize</definition>
+        <argsstring></argsstring>
+        <name>RNG_poolByteSize</name>
+        <briefdescription>
+<para>The byte size of the pool. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="560" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t RNG_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>RNG_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>This function initializes the RNG module. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para>The RNG_config structure must exist and be persistent before this function can be called. This function must also be called before any other RNG driver APIs. This function call does not modify any peripheral registers. For CC23X0, RNG must be initialized by application in a task context with interrupts enabled using the following steps prior to the use of the Radio because CC23X0 uses the ADC samples from radio as noise that is conditioned using CBC MAC to generate the seed for RNG driver<orderedlist>
+<listitem><para>Read radio noise using RCL_AdcNoise_get_samples_blocking(). This RCL function must be called from a task context with interrupts enabled and therefore cannot be called by startup code. This must be executed prior to the use of the radio.</para></listitem><listitem><para>Condition the noise to seed the RNG using RNGLPF3RF_conditionNoiseToGenerateSeed().</para></listitem><listitem><para>Initialize the RNG from the application with <ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref></para></listitem></orderedlist>
+</para></simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1ab3076e27bfcbaad810b27dd790b63649" kindref="member">RNG_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation succeeded. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a608c7c1a93bf68c4a98edf40d0df18c2" kindref="member">RNG_STATUS_ERROR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation failed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a230a714031b745ee550160cd49feb9f1" kindref="member">RNG_STATUS_RESOURCE_UNAVAILABLE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The required hardware resource was not available. Try again later. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="584" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_r_n_g_8h_1a973cba8a512dd97404babeb8a5ee9b1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t RNG_fillPoolIfLessThan</definition>
+        <argsstring>(size_t bytes)</argsstring>
+        <name>RNG_fillPoolIfLessThan</name>
+        <param>
+          <type>size_t</type>
+          <declname>bytes</declname>
+        </param>
+        <briefdescription>
+<para>Fills the pool with entropy if the number of bytes with entropy in the pool is less than the value specified. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This function does not take in a handle and the implementation may run in either blocking or polling mode.</para></simplesect>
+<simplesect kind="pre"><para><ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bytes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pool will be filled if current level is less than this number. Use RNG_POOL_BYTE_SIZE (from ti_drivers_config.h) to always fill.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1ab3076e27bfcbaad810b27dd790b63649" kindref="member">RNG_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation succeeded. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a608c7c1a93bf68c4a98edf40d0df18c2" kindref="member">RNG_STATUS_ERROR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation failed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a230a714031b745ee550160cd49feb9f1" kindref="member">RNG_STATUS_RESOURCE_UNAVAILABLE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The required hardware resource was not available. Try again later. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1aeb6cdafa2fe8dcd983db3d435579ed19" kindref="member">RNG_ENTROPY_EXHAUSTED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pool could not be refilled, device may need reset. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a1c0881e8b77094f70151f63bc548d304" kindref="member">RNG_STATUS_NOT_INITIALIZED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RNG not initialized. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="606" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_r_n_g_8h_1a2d222b0cdeac690905f6be9df444e23f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void RNG_Params_init</definition>
+        <argsstring>(RNG_Params *params)</argsstring>
+        <name>RNG_Params_init</name>
+        <param>
+          <type><ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Function to initialize the <ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref> struct to its defaults. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An pointer to <ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref> structure for initialization</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Default values are: <linebreak/>
+ returnBehavior = RNG_RETURN_BEHAVIOR_BLOCKING <linebreak/>
+ cryptoKeyCallbackFxn = NULL <linebreak/>
+ randomBitsCallbackFxn = NULL <linebreak/>
+ timeout = SemaphoreP_WAIT_FOREVER <linebreak/>
+ custom = NULL <linebreak/>
+ </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="621" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref></type>
+        <definition>RNG_Handle RNG_open</definition>
+        <argsstring>(uint_least8_t index, const RNG_Params *params)</argsstring>
+        <name>RNG_open</name>
+        <param>
+          <type>uint_least8_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>This function opens a given RNG peripheral. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para>RNG controller has been initialized using <ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref></para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Logical peripheral number for the RNG indexed into the RNG_config table</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an parameter block, if NULL it will use default values.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A RNG_Handle on success or a NULL on an error or if it has been opened already.</para></simplesect>
+<simplesect kind="see"><para><ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_r_n_g_8h_1ab3c29d15e2efdb2efb3e8a82d6f37fcf" kindref="member">RNG_close()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="640" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_r_n_g_8h_1ab3c29d15e2efdb2efb3e8a82d6f37fcf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void RNG_close</definition>
+        <argsstring>(RNG_Handle handle)</argsstring>
+        <name>RNG_close</name>
+        <param>
+          <type><ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Function to close a RNG peripheral specified by the RNG handle. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="pre"><para><ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RNG handle returned from <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="651" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_r_n_g_8h_1a2ea3a4ebb1fdf9ce8707eb1c75bcf4d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t RNG_getRandomBits</definition>
+        <argsstring>(RNG_Handle handle, void *randomBits, size_t randomBitsLength)</argsstring>
+        <name>RNG_getRandomBits</name>
+        <param>
+          <type><ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>randomBits</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>randomBitsLength</declname>
+        </param>
+        <briefdescription>
+<para>Generate random bits and output to the given array. </para>        </briefdescription>
+        <detaileddescription>
+<para>Generates random a random number of bits with length of <computeroutput>randomBitsLength</computeroutput>. The output length in bytes will be the minimum number of bytes needed to contain <computeroutput>randomBitsLength</computeroutput>. The output will be placed at the address pointed to by <computeroutput>randomBits</computeroutput>. The user shall be responsible for allocating sufficient memory starting at the address pointed at by <computeroutput>randomBits</computeroutput> to hold the number of bytes output.</para><para><simplesect kind="attention"><para>When called with <ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a89864eea2d3bf5da6902f34f9f2f0dca" kindref="member">RNG_RETURN_BEHAVIOR_CALLBACK</ref>, provide a callback function of type <ref refid="_r_n_g_8h_1ac30888d0e097bb5d21872797f43c31fb" kindref="member">RNG_RandomBitsCallbackFxn</ref>.</para></simplesect>
+<simplesect kind="note"><para>See <ref refid="_r_n_g_8h_1af0d87cb0f061c45161597771a92f6360" kindref="member">RNG_generateKey()</ref> to output random bytes to a <computeroutput><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref></computeroutput> instead.</para></simplesect>
+<simplesect kind="pre"><para><ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RNG handle returned from <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref>.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>randomBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an array that stores the random bits output by this function.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>randomBitsLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The length of the random data required, in bits. A maximum of 1MiB is allowed.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_r_n_g_8h_1a10d0f6139e387ca2c2863e52b74fda48" kindref="member">RNG_getLERandomNumberInRange</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_r_n_g_8h_1ab886feb4749365da4c820b7a53b06ed3" kindref="member">RNG_getBERandomNumberInRange</ref></para></simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1ab3076e27bfcbaad810b27dd790b63649" kindref="member">RNG_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation succeeded. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a608c7c1a93bf68c4a98edf40d0df18c2" kindref="member">RNG_STATUS_ERROR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation failed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a230a714031b745ee550160cd49feb9f1" kindref="member">RNG_STATUS_RESOURCE_UNAVAILABLE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The required hardware resource was not available. Try again later. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a0e210940ccc309d0dfd333e6fd48e875" kindref="member">RNG_STATUS_INVALID_INPUTS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Inputs provided are not valid. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1aeb6cdafa2fe8dcd983db3d435579ed19" kindref="member">RNG_ENTROPY_EXHAUSTED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Requested number of bytes could not be obtained. Device may need reset. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a1c0881e8b77094f70151f63bc548d304" kindref="member">RNG_STATUS_NOT_INITIALIZED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RNG not initialized. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="690" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_r_n_g_8h_1a10d0f6139e387ca2c2863e52b74fda48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t RNG_getLERandomNumberInRange</definition>
+        <argsstring>(RNG_Handle handle, const void *lowerLimit, const void *upperLimit, void *randomNumber, size_t randomNumberBitLength)</argsstring>
+        <name>RNG_getLERandomNumberInRange</name>
+        <param>
+          <type><ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>lowerLimit</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>upperLimit</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>randomNumber</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>randomNumberBitLength</declname>
+        </param>
+        <briefdescription>
+<para>Generate random number, stored in little-endian (LE) format, where the number is within the specified range. </para>        </briefdescription>
+        <detaileddescription>
+<para>Generates random a random number within the range [lowerLimit, upperLimit) of bit size <computeroutput>randomNumberBitLength</computeroutput>. The output length in bytes will be the minimum number of bytes needed to contain <computeroutput>randomNumberBitLength</computeroutput>. The output will be placed at the address pointed to by <computeroutput>randomNumber</computeroutput>. The user shall be responsible for allocating sufficient memory starting at the address pointed at by <computeroutput>randomNumber</computeroutput> to hold the number of bytes output.</para><para>Note that the special values of <ref refid="_crypto_utils_8h_1ad691f4762b00aaabe9b624d01f45a131" kindref="member">CryptoUtils_limitZero</ref> and <ref refid="_crypto_utils_8h_1a2e03f3453ad6a977d9db6117f04ff525" kindref="member">CryptoUtils_limitOne</ref> are available to pass in for the <computeroutput>lowerLimit</computeroutput>. (These values can also be used for the <computeroutput>upperLimit</computeroutput> but their use for the upperLimit has no practical use.)</para><para>If <computeroutput>lowerLimit</computeroutput> is NULL then the lower limit is taken as 0. If <computeroutput>upperLimit</computeroutput> is NULL then the upper limit is taken as 2<superscript>(<computeroutput>bitLength</computeroutput> + 1)</superscript>.</para><para><simplesect kind="attention"><para>When called with <ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a89864eea2d3bf5da6902f34f9f2f0dca" kindref="member">RNG_RETURN_BEHAVIOR_CALLBACK</ref>, provide a callback function of type <ref refid="_r_n_g_8h_1ac30888d0e097bb5d21872797f43c31fb" kindref="member">RNG_RandomBitsCallbackFxn</ref>.</para></simplesect>
+<simplesect kind="note"><para>See <ref refid="_r_n_g_8h_1a669aa831effa103664cb5ccf71060979" kindref="member">RNG_generateLEKeyInRange()</ref> to output a ranged number to a <computeroutput><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref></computeroutput> instead.</para></simplesect>
+<simplesect kind="pre"><para><ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RNG handle returned from <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref>.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lowerLimit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an array that stores the lower limit (inclusive) in LE format for the generated number.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>upperLimit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an array that stores the upper limit (exclusive) in LE format for the generated number.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>randomNumber</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an array that stores the random number output by this function.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>randomNumberBitLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The length, in bits, of both the limit values and the random number to be generated.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_crypto_utils_8h_1ad691f4762b00aaabe9b624d01f45a131" kindref="member">CryptoUtils_limitZero</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_crypto_utils_8h_1a2e03f3453ad6a977d9db6117f04ff525" kindref="member">CryptoUtils_limitOne</ref></para></simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1ab3076e27bfcbaad810b27dd790b63649" kindref="member">RNG_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation succeeded. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a608c7c1a93bf68c4a98edf40d0df18c2" kindref="member">RNG_STATUS_ERROR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation failed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a230a714031b745ee550160cd49feb9f1" kindref="member">RNG_STATUS_RESOURCE_UNAVAILABLE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The required hardware resource was not available. Try again later. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a0e210940ccc309d0dfd333e6fd48e875" kindref="member">RNG_STATUS_INVALID_INPUTS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Inputs provided are not valid. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1aeb6cdafa2fe8dcd983db3d435579ed19" kindref="member">RNG_ENTROPY_EXHAUSTED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Requested number of bytes could not be obtained. Device may need reset. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a1c0881e8b77094f70151f63bc548d304" kindref="member">RNG_STATUS_NOT_INITIALIZED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RNG not initialized. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="745" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_r_n_g_8h_1ab886feb4749365da4c820b7a53b06ed3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t RNG_getBERandomNumberInRange</definition>
+        <argsstring>(RNG_Handle handle, const void *lowerLimit, const void *upperLimit, void *randomNumber, size_t randomNumberBitLength)</argsstring>
+        <name>RNG_getBERandomNumberInRange</name>
+        <param>
+          <type><ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>lowerLimit</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>upperLimit</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>randomNumber</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>randomNumberBitLength</declname>
+        </param>
+        <briefdescription>
+<para>Generate random number, stored in big-endian (BE) format, where the number is within the specified range. </para>        </briefdescription>
+        <detaileddescription>
+<para>Generates random a random number within the range [lowerLimit, upperLimit) of bit size <computeroutput>randomNumberBitLength</computeroutput>. The output length in bytes will be the minimum number of bytes needed to contain <computeroutput>randomNumberBitLength</computeroutput>. The output will be placed at the address pointed to by <computeroutput>randomNumber</computeroutput>. The user shall be responsible for allocating sufficient memory starting at the address pointed at by <computeroutput>randomNumber</computeroutput> to hold the number of bytes output.</para><para>Note that the special values of <ref refid="_crypto_utils_8h_1ad691f4762b00aaabe9b624d01f45a131" kindref="member">CryptoUtils_limitZero</ref> and <ref refid="_crypto_utils_8h_1a2e03f3453ad6a977d9db6117f04ff525" kindref="member">CryptoUtils_limitOne</ref> are available to pass in for the <computeroutput>lowerLimit</computeroutput>. (These values can also be used for the <computeroutput>upperLimit</computeroutput> but their use for the upperLimit has no practical use.)</para><para>If <computeroutput>lowerLimit</computeroutput> is NULL then the lower limit is taken as 0. If <computeroutput>upperLimit</computeroutput> is NULL then the upper limit is taken as 2<superscript>(<computeroutput>bitLength</computeroutput> + 1)</superscript>.</para><para><simplesect kind="attention"><para>When called with <ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a89864eea2d3bf5da6902f34f9f2f0dca" kindref="member">RNG_RETURN_BEHAVIOR_CALLBACK</ref>, provide a callback function of type <ref refid="_r_n_g_8h_1ac30888d0e097bb5d21872797f43c31fb" kindref="member">RNG_RandomBitsCallbackFxn</ref>.</para></simplesect>
+<simplesect kind="note"><para>See <ref refid="_r_n_g_8h_1ae6e9b34b2bb8b9ef3712ddd3281ef4a8" kindref="member">RNG_generateBEKeyInRange()</ref> to output a ranged number to a <computeroutput><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref></computeroutput> instead.</para></simplesect>
+<simplesect kind="pre"><para><ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RNG handle returned from <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref>.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lowerLimit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an array that stores the lower limit (inclusive) in BE format for the generated number.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>upperLimit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an array that stores the upper limit (exclusive) in BE format for the generated number.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>randomNumber</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an array that stores the random number output by this function.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>randomNumberBitLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The length, in bits, of both the limit value and the random number to be generated.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_crypto_utils_8h_1ad691f4762b00aaabe9b624d01f45a131" kindref="member">CryptoUtils_limitZero</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_crypto_utils_8h_1a2e03f3453ad6a977d9db6117f04ff525" kindref="member">CryptoUtils_limitOne</ref></para></simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1ab3076e27bfcbaad810b27dd790b63649" kindref="member">RNG_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation succeeded. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a608c7c1a93bf68c4a98edf40d0df18c2" kindref="member">RNG_STATUS_ERROR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation failed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a230a714031b745ee550160cd49feb9f1" kindref="member">RNG_STATUS_RESOURCE_UNAVAILABLE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The required hardware resource was not available. Try again later. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a0e210940ccc309d0dfd333e6fd48e875" kindref="member">RNG_STATUS_INVALID_INPUTS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Inputs provided are not valid. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1aeb6cdafa2fe8dcd983db3d435579ed19" kindref="member">RNG_ENTROPY_EXHAUSTED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Requested number of bytes could not be obtained. Device may need reset. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a1c0881e8b77094f70151f63bc548d304" kindref="member">RNG_STATUS_NOT_INITIALIZED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RNG not initialized. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="804" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_r_n_g_8h_1af0d87cb0f061c45161597771a92f6360" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t RNG_generateKey</definition>
+        <argsstring>(RNG_Handle handle, CryptoKey *key)</argsstring>
+        <name>RNG_generateKey</name>
+        <param>
+          <type><ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> *</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Generate random bits and output them to the given <computeroutput><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref></computeroutput> object. </para>        </briefdescription>
+        <detaileddescription>
+<para>Generates a random bitstream of the size defined in the <computeroutput>key</computeroutput> <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> in the range 0 &lt;= <computeroutput>key</computeroutput> buffer &lt; 2 ^ (entropy length * 8). The entropy will be generated and stored according to the storage requirements defined in the <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref>. The length of the entropy generated will be the same as the key length.</para><para><simplesect kind="attention"><para>When called with <ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a89864eea2d3bf5da6902f34f9f2f0dca" kindref="member">RNG_RETURN_BEHAVIOR_CALLBACK</ref>, provide a callback function of type <ref refid="_r_n_g_8h_1ad5cded400eae369dc7d6a6fbf5f33168" kindref="member">RNG_CryptoKeyCallbackFxn</ref>.</para></simplesect>
+<simplesect kind="pre"><para><ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RNG handle returned from <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref>.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a blank <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref>, initialized with a length and appropriate storage for storing a key of the specified length.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_r_n_g_8h_1a669aa831effa103664cb5ccf71060979" kindref="member">RNG_generateLEKeyInRange</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_r_n_g_8h_1ae6e9b34b2bb8b9ef3712ddd3281ef4a8" kindref="member">RNG_generateBEKeyInRange</ref></para></simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1ab3076e27bfcbaad810b27dd790b63649" kindref="member">RNG_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation succeeded. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a608c7c1a93bf68c4a98edf40d0df18c2" kindref="member">RNG_STATUS_ERROR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation failed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a230a714031b745ee550160cd49feb9f1" kindref="member">RNG_STATUS_RESOURCE_UNAVAILABLE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The required hardware resource was not available. Try again later. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a0e210940ccc309d0dfd333e6fd48e875" kindref="member">RNG_STATUS_INVALID_INPUTS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Inputs provided are not valid. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1aeb6cdafa2fe8dcd983db3d435579ed19" kindref="member">RNG_ENTROPY_EXHAUSTED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Requested number of bytes could not be obtained. Device may need reset. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a1c0881e8b77094f70151f63bc548d304" kindref="member">RNG_STATUS_NOT_INITIALIZED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RNG not initialized. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="841" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_r_n_g_8h_1a669aa831effa103664cb5ccf71060979" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t RNG_generateLEKeyInRange</definition>
+        <argsstring>(RNG_Handle handle, const void *lowerLimit, const void *upperLimit, CryptoKey *key, size_t randomNumberBitLength)</argsstring>
+        <name>RNG_generateLEKeyInRange</name>
+        <param>
+          <type><ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>lowerLimit</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>upperLimit</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> *</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>randomNumberBitLength</declname>
+        </param>
+        <briefdescription>
+<para>Generate random number, in little-endian (LE) format, where the number is within the specified range. Store the random number in the given <computeroutput><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref></computeroutput> object. </para>        </briefdescription>
+        <detaileddescription>
+<para>Generates a random number within the range [lowerLimit, upperLimit) of bit size <computeroutput>randomNumberBitLength</computeroutput>. The output length in bytes will be the minimum number of bytes needed to contain <computeroutput>randomNumberBitLength</computeroutput>. The output will be placed as specified by the members of <computeroutput>key</computeroutput>.</para><para>Note that the special values of <ref refid="_crypto_utils_8h_1ad691f4762b00aaabe9b624d01f45a131" kindref="member">CryptoUtils_limitZero</ref> and <ref refid="_crypto_utils_8h_1a2e03f3453ad6a977d9db6117f04ff525" kindref="member">CryptoUtils_limitOne</ref> are available to pass in for the <computeroutput>lowerLimit</computeroutput>. (These values can also be used for the <computeroutput>upperLimit</computeroutput> but their use for the upperLimit has no practical use.)</para><para>If <computeroutput>lowerLimit</computeroutput> is NULL then the lower limit is taken as 0. If <computeroutput>upperLimit</computeroutput> is NULL then the upper limit is taken as 2<superscript>(<computeroutput>bitLength</computeroutput> + 1)</superscript>.</para><para><simplesect kind="attention"><para>When called with <ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a89864eea2d3bf5da6902f34f9f2f0dca" kindref="member">RNG_RETURN_BEHAVIOR_CALLBACK</ref>, provide a callback function of type <ref refid="_r_n_g_8h_1ad5cded400eae369dc7d6a6fbf5f33168" kindref="member">RNG_CryptoKeyCallbackFxn</ref>.</para></simplesect>
+<simplesect kind="pre"><para><ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RNG handle returned from <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref>.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lowerLimit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an array that stores the lower limit (inclusive) in LE format for the generated number.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>upperLimit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an array that stores the upper limit (exclusive) in LE format for the generated number.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a blank <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref>, initialized with a length and appropriate storage for storing a key of the specified length.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>randomNumberBitLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The length, in bits, of both the limit values and the random number to be generated.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_crypto_utils_8h_1ad691f4762b00aaabe9b624d01f45a131" kindref="member">CryptoUtils_limitZero</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_crypto_utils_8h_1a2e03f3453ad6a977d9db6117f04ff525" kindref="member">CryptoUtils_limitOne</ref></para></simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1ab3076e27bfcbaad810b27dd790b63649" kindref="member">RNG_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation succeeded. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a608c7c1a93bf68c4a98edf40d0df18c2" kindref="member">RNG_STATUS_ERROR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation failed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a230a714031b745ee550160cd49feb9f1" kindref="member">RNG_STATUS_RESOURCE_UNAVAILABLE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The required hardware resource was not available. Try again later. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a0e210940ccc309d0dfd333e6fd48e875" kindref="member">RNG_STATUS_INVALID_INPUTS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Inputs provided are not valid. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1aeb6cdafa2fe8dcd983db3d435579ed19" kindref="member">RNG_ENTROPY_EXHAUSTED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Requested number of bytes could not be obtained. Device may need reset. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a1c0881e8b77094f70151f63bc548d304" kindref="member">RNG_STATUS_NOT_INITIALIZED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RNG not initialized. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="893" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_r_n_g_8h_1ae6e9b34b2bb8b9ef3712ddd3281ef4a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t RNG_generateBEKeyInRange</definition>
+        <argsstring>(RNG_Handle handle, const void *lowerLimit, const void *upperLimit, CryptoKey *key, size_t randomNumberBitLength)</argsstring>
+        <name>RNG_generateBEKeyInRange</name>
+        <param>
+          <type><ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>lowerLimit</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>upperLimit</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> *</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>randomNumberBitLength</declname>
+        </param>
+        <briefdescription>
+<para>Generate random number, stored in big-endian (BE) format, where the number is within the specified range. Store the random number in the given <computeroutput><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref></computeroutput> object. </para>        </briefdescription>
+        <detaileddescription>
+<para>Generates a random number within the range [lowerLimit, upperLimit) of bit size <computeroutput>randomNumberBitLength</computeroutput>. The output length in bytes will be the minimum number of bytes needed to contain <computeroutput>randomNumberBitLength</computeroutput>. The output will be placed as specified by the members of <computeroutput>key</computeroutput>.</para><para>Note that the special values of <ref refid="_crypto_utils_8h_1ad691f4762b00aaabe9b624d01f45a131" kindref="member">CryptoUtils_limitZero</ref> and <ref refid="_crypto_utils_8h_1a2e03f3453ad6a977d9db6117f04ff525" kindref="member">CryptoUtils_limitOne</ref> are available to pass in for the <computeroutput>lowerLimit</computeroutput>. (These values can also be used for the <computeroutput>upperLimit</computeroutput> but their use for the upperLimit has no practical use.)</para><para>If <computeroutput>lowerLimit</computeroutput> is NULL then the lower limit is taken as 0. If <computeroutput>upperLimit</computeroutput> is NULL then the upper limit is taken as 2<superscript>(<computeroutput>bitLength</computeroutput> + 1)</superscript>.</para><para><simplesect kind="attention"><para>When called with <ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a89864eea2d3bf5da6902f34f9f2f0dca" kindref="member">RNG_RETURN_BEHAVIOR_CALLBACK</ref>, provide a callback function of type <ref refid="_r_n_g_8h_1ad5cded400eae369dc7d6a6fbf5f33168" kindref="member">RNG_CryptoKeyCallbackFxn</ref>.</para></simplesect>
+<simplesect kind="pre"><para><ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref> has to be called first.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A RNG handle returned from <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref>.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lowerLimit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an array that stores the lower limit (inclusive) in BE format for the generated number.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>upperLimit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an array that stores the upper limit (exclusive) in BE format for the generated number.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a blank <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref>, initialized with a length and appropriate storage for storing a key of the specified length.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>randomNumberBitLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The length, in bits, of both the limit values and the random number to be generated.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="_crypto_utils_8h_1ad691f4762b00aaabe9b624d01f45a131" kindref="member">CryptoUtils_limitZero</ref> </para></simplesect>
+<simplesect kind="see"><para><ref refid="_crypto_utils_8h_1a2e03f3453ad6a977d9db6117f04ff525" kindref="member">CryptoUtils_limitOne</ref></para></simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1ab3076e27bfcbaad810b27dd790b63649" kindref="member">RNG_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation succeeded. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a608c7c1a93bf68c4a98edf40d0df18c2" kindref="member">RNG_STATUS_ERROR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation failed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a230a714031b745ee550160cd49feb9f1" kindref="member">RNG_STATUS_RESOURCE_UNAVAILABLE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The required hardware resource was not available. Try again later. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a0e210940ccc309d0dfd333e6fd48e875" kindref="member">RNG_STATUS_INVALID_INPUTS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Inputs provided are not valid. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1aeb6cdafa2fe8dcd983db3d435579ed19" kindref="member">RNG_ENTROPY_EXHAUSTED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Requested number of bytes could not be obtained. Device may need reset. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1a1c0881e8b77094f70151f63bc548d304" kindref="member">RNG_STATUS_NOT_INITIALIZED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RNG not initialized. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="949" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_r_n_g_8h_1a95c951e38c31933d1ef60ba509b1dac0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref></type>
+        <definition>RNG_Handle RNG_construct</definition>
+        <argsstring>(const RNG_Config *config, const RNG_Params *params)</argsstring>
+        <name>RNG_construct</name>
+        <param>
+          <type>const <ref refid="struct_r_n_g___config" kindref="compound">RNG_Config</ref> *</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>const <ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a new RNG object. </para>        </briefdescription>
+        <detaileddescription>
+<para>Unlike <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref>, <ref refid="_r_n_g_8h_1a95c951e38c31933d1ef60ba509b1dac0" kindref="member">RNG_construct()</ref> does not require the hwAttrs and object to be allocated in a <ref refid="struct_r_n_g___config" kindref="compound">RNG_Config</ref> array that is indexed into. Instead, the <ref refid="struct_r_n_g___config" kindref="compound">RNG_Config</ref>, hwAttrs, and object can be allocated at any location. This allows for relatively simple run-time allocation of temporary driver instances on the stack or the heap. The drawback is that this makes it more difficult to write device-agnostic code. If you use an ifdef with DeviceFamily, you can choose the correct object and hwAttrs to allocate. That compilation unit will be tied to the device it was compiled for at this point. To change devices, recompilation of the application with a different DeviceFamily setting is necessary.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="struct_r_n_g___config" kindref="compound">RNG_Config</ref> describing the location of the object and hwAttrs.</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref> to configure the driver instance.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns a <ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref> on success or NULL on failure.</para></simplesect>
+<simplesect kind="pre"><para>The object struct <computeroutput>config</computeroutput> points to must be zeroed out prior to calling this function. Otherwise, unexpected behavior may ensue. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="978" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_r_n_g_8h_1ab2fc99ab8e109cf9b0f9264cdf0d6638" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t RNG_cancelOperation</definition>
+        <argsstring>(RNG_Handle handle)</argsstring>
+        <name>RNG_cancelOperation</name>
+        <param>
+          <type><ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>Aborts an ongoing RNG operation and clears internal buffers. </para>        </briefdescription>
+        <detaileddescription>
+<para>Aborts an operation to generate random bytes/entropy. The operation will terminate as though an error occurred and the status code of the operation will be <ref refid="_r_n_g_8h_1ab63bae3047edfe506f2bfec86ef2c5f8" kindref="member">RNG_STATUS_CANCELED</ref> in this case.</para><para>Any entropy already copied out of the pool will have already been removed from the pool and will not be reused for later requests.</para><para>Canceling an operation may be delayed if the entropy pool is below its minimum fill mark as the driver will refill the pool before finishing the cancelled operation.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A <ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref> returned from <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="_r_n_g_8h_1ab3076e27bfcbaad810b27dd790b63649" kindref="member">RNG_STATUS_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operation was canceled or there was no operation in progress to be canceled. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="999" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>RNG driver header. </para>    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para><para><anchor id="_r_n_g_8h_1ti_drivers_RNG_Overview"/><heading level="1">Overview</heading>
+</para><para>The Random Number Generator (RNG) module generates random data of variable lengths from a pool of entropy. The pool of entropy is maintained by the driver using implementation-specific sources of entropy. The output is suitable for applications requiring cryptographically random data such as keying material for private or symmetric keys.</para><para>The RNG driver for CC27XX devices is strictly a CRNG/HSM implementation only.</para><para>CRNG (Cryptographically Secure Pseudo Random Number) a DRBG method alternative to True Random Number (TRNG)</para><para>HSM (Hardware Security Module) is a HW IP used for RNG operations</para><para>For CC27XX devices only, the RNG driver accepts two types of cryptoKey encoding<itemizedlist>
+<listitem><para>CryptoKey_BLANK_PLAINTEXT</para></listitem><listitem><para>CryptoKey_BLANK_PLAINTEXT_HSM</para></listitem></itemizedlist>
+</para><para><anchor id="_r_n_g_8h_1ti_drivers_RNG_Usage"/><heading level="1">Usage</heading>
+</para><para><heading level="2">Initialization</heading>
+</para><para>Unlike most drivers, there is a global instance of RNG driver data that is always available once <ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref> is called. This data will contain the entropy pool and any needed state information required to refill the pool. <ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref> should be called once before using other RNG driver APIs.</para><para><simplesect kind="note"><para>Some implementations restrict when <ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref> may be called. Check the implementation&apos;s documentation for more information.</para></simplesect>
+For CC23X0, RNG must be initialized by application in a task context with interrupts enabled using the following steps prior to the use of the Radio because CC23X0 uses the ADC samples from radio as noise that is conditioned using CBC MAC to generate the seed for RNG driver</para><para><heading level="3">Step 1: Required header file</heading>
+</para><para><programlisting><codeline><highlight class="normal">#include<sp/>&lt;ti/drivers/rng/RNGLPF3RF.h&gt;<sp/>//<sp/>required<sp/>for<sp/>external<sp/>syscfg<sp/>variable<sp/>RNGLPF3RF_noiseInputWordLen</highlight></codeline>
+</programlisting></para><para><heading level="3">Step 2: External APIs</heading>
+</para><para><programlisting><codeline><highlight class="normal">//<sp/>Use<sp/>the<sp/>function<sp/>provided<sp/>by<sp/>RCL<sp/>to<sp/>read<sp/>noise<sp/>input<sp/>//</highlight></codeline>
+<codeline><highlight class="normal">extern<sp/>int_fast16_t<sp/>RCL_AdcNoise_get_samples_blocking(uint32_t<sp/>*buffer,<sp/>uint32_t<sp/>numWords);</highlight></codeline>
+</programlisting></para><para><heading level="3">Step 3: Read noise input from RCL using RCL_AdcNoise_get_samples_blocking()</heading>
+</para><para><programlisting><codeline><highlight class="normal">int_fast16_t<sp/>rclStatus,<sp/>result;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>User&apos;s<sp/>global<sp/>array<sp/>for<sp/>noise<sp/>input<sp/>based<sp/>on<sp/>size<sp/>provided<sp/>in<sp/>syscfg<sp/>//</highlight></codeline>
+<codeline><highlight class="normal">uint32_t<sp/>localNoiseInput[];<sp/>//Minimum<sp/>array<sp/>size<sp/>80<sp/>words</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/>//<sp/>Clear<sp/>noise<sp/>input<sp/>//</highlight></codeline>
+<codeline><highlight class="normal">memset(localNoiseInput,<sp/>0,<sp/>sizeof(localNoiseInput));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Fill<sp/>noise<sp/>input<sp/>from<sp/>RCL<sp/>//</highlight></codeline>
+<codeline><highlight class="normal">//RNGLPF3RF_noiseInputWordLen<sp/>is<sp/>external<sp/>variable<sp/>from<sp/>RNGLPF3RF.h</highlight></codeline>
+<codeline><highlight class="normal"><sp/>rclStatus<sp/>=<sp/>RCL_AdcNoise_get_samples_blocking(localNoiseInput,<sp/>RNGLPF3RF_noiseInputWordLen);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">if<sp/>(rclStatus<sp/>!=<sp/>0)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//Handle<sp/>error;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Initialize<sp/>the<sp/>RNG<sp/>driver<sp/>noise<sp/>input<sp/>pointer<sp/>with<sp/>global<sp/>noise<sp/>input<sp/>array<sp/>from<sp/>user<sp/>//</highlight></codeline>
+<codeline><highlight class="normal">result<sp/>=<sp/>RNGLPF3RF_conditionNoiseToGenerateSeed(localNoiseInput);</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(<sp/>rclStatus<sp/>!=<sp/>0)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//Handle<sp/>error;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para><para><heading level="2">Before starting a RNG operation</heading>
+</para><para>Before starting a RNG operation, the application must do the following:<itemizedlist>
+<listitem><para>Call <ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref> to initialize the driver&apos;s global instance data.</para></listitem><listitem><para>Call <ref refid="_r_n_g_8h_1a2d222b0cdeac690905f6be9df444e23f" kindref="member">RNG_Params_init()</ref> to initialize the <ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref> to default values.</para></listitem><listitem><para>Modify the <ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref> as desired.</para></listitem><listitem><para>Call <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref> to open an instance of the driver.</para></listitem></itemizedlist>
+</para><para><simplesect kind="note"><para>Some implementations restrict when <ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref> may be called. Check the implementation&apos;s documentation for more information.</para></simplesect>
+<heading level="2">Entropy Pool Management</heading>
+</para><para>At any time after calling <ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init()</ref>, the application may call <ref refid="_r_n_g_8h_1a973cba8a512dd97404babeb8a5ee9b1c" kindref="member">RNG_fillPoolIfLessThan()</ref> to add entropy to the pool which will then make future requests for entropy execute faster. Note that the driver never automatically refills the pool. However, if the pool is empty, the RNG driver will still generate entropy upon request (for example when <ref refid="_r_n_g_8h_1a2ea3a4ebb1fdf9ce8707eb1c75bcf4d4" kindref="member">RNG_getRandomBits()</ref> is called).</para><para>The application is responsible for deciding when it is appropriate to spend the time and energy to refill the pool. One suggested location to do so is the idle thread.</para><para><heading level="2">RNG operations</heading>
+</para><para>Use <ref refid="_r_n_g_8h_1a2ea3a4ebb1fdf9ce8707eb1c75bcf4d4" kindref="member">RNG_getRandomBits()</ref> to obtain random bits from the entropy pool and copy them to a buffer/array. The caller must allocate memory sufficient to hold at least the number of bits of random data requested.</para><para><heading level="2">After the RNG operation completes</heading>
+</para><para>After the RNG operation completes, the application should either start another operation or close the driver by calling <ref refid="_r_n_g_8h_1ab3c29d15e2efdb2efb3e8a82d6f37fcf" kindref="member">RNG_close()</ref>. Note that the singleton instance of the driver, along with its associated pool of entropy will still exist and will be used by any future <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref> calls. Note that closing the driver instance may not be strictly required, but is good practice.</para><para><heading level="2">Security</heading>
+</para><para><heading level="3">Data Protection</heading>
+</para><para>The entropy pool and any required state to generate more entropy is maintained in memory, in the driver&apos;s global instance data. The entirety of this data is stored in two global variables called RNG_instanceData and RNG_instancePool. It is up to the system to provide adequate protection (primarily confidentiality and integrity) of these in-memory assets.</para><para><heading level="3">Timing Side Channels</heading>
+</para><para>Functions which provide for generation of a value within a range use an algorithm which is timing-constant when the following parameters are held constant: lowerLimit, upperLimit, bitLength, and endianess. Thus, while the driver may create multiple candidates for the value to find one within the range, timing will not leak the final value&apos;s relation to the limits. However, timing may leak the bitLength, the endianess, and the use of <ref refid="_crypto_utils_8h_1ad691f4762b00aaabe9b624d01f45a131" kindref="member">CryptoUtils_limitZero</ref>, <ref refid="_crypto_utils_8h_1a2e03f3453ad6a977d9db6117f04ff525" kindref="member">CryptoUtils_limitOne</ref>, or NULL for the limit values.</para><para><anchor id="_r_n_g_8h_1ti_drivers_RNG_Synopsis"/><heading level="2">Synopsis</heading>
+</para><para><anchor id="_r_n_g_8h_1ti_drivers_RNG_Synopsis_Code"/><heading level="3">Generate random bytes to a user provided buffer</heading>
+</para><para><programlisting><codeline><highlight class="normal">#include<sp/>&lt;ti/drivers/RNG.h&gt;</highlight></codeline>
+<codeline><highlight class="normal">#include<sp/>&quot;ti_drivers_config.h&quot;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Setup<sp/>RNG</highlight></codeline>
+<codeline><highlight class="normal">RNG_Init();</highlight></codeline>
+<codeline><highlight class="normal">RNG_fillPoolIfLessThan(RNG_POOL_BYTE_SIZE);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Use<sp/>RNG</highlight></codeline>
+<codeline><highlight class="normal">#define<sp/>RANDOM_BYTES_SIZE<sp/>16u</highlight></codeline>
+<codeline><highlight class="normal">RNG_Handle<sp/>handle;</highlight></codeline>
+<codeline><highlight class="normal">int_fast16_t<sp/>result;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">uint8_t<sp/>randomBytesArray[RANDOM_BYTES_SIZE]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">handle<sp/>=<sp/>RNG_open(0,<sp/>NULL);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">if<sp/>(!handle)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>error</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>while(1);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">result<sp/>=<sp/>RNG_getRandomBits(handle,<sp/>randomBytesArray,<sp/>RANDOM_BYTES_SIZE<sp/>*<sp/>8);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">if<sp/>(result<sp/>!=<sp/>RNG_STATUS_SUCCESS)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>error</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>while(1);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">RNG_close(handle);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Refill<sp/>RNG<sp/>Pool<sp/>when<sp/>convenient</highlight></codeline>
+<codeline><highlight class="normal">RNG_fillPoolIfLessThan(RNG_POOL_BYTE_SIZE);</highlight></codeline>
+</programlisting></para><para><anchor id="_r_n_g_8h_1ti_drivers_RNG_Examples"/><heading level="2">Examples</heading>
+</para><para>The following examples do not show the process of initializing the RNG module and refilling the pool. See <ref refid="_r_n_g_8h_1ti_drivers_RNG_Synopsis" kindref="member">ti_drivers_RNG_Synopsis</ref> RNG Driver Synopsis for an example showing those parts of RNG operation. *</para><para><heading level="3">Generate a number within a range</heading>
+</para><para><programlisting><codeline><highlight class="normal">#include<sp/>&lt;ti/drivers/RNG.h&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#define<sp/>RANDOM_BIT_SIZE<sp/><sp/>15u</highlight></codeline>
+<codeline><highlight class="normal">#define<sp/>RANDOM_BYTE_SIZE<sp/>((RANDOM_BIT_SIZE<sp/>+<sp/>7u)/8u)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">RNG_Handle<sp/>handle;</highlight></codeline>
+<codeline><highlight class="normal">int_fast16_t<sp/>result;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">uint8_t<sp/>randomBytesArray[RANDOM_BYTES_SIZE]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline><highlight class="normal">uint8_t<sp/>upperLimit[RANDOM_BYTES_SIZE]<sp/>=<sp/>{0xA9,<sp/>0x61};<sp/>//<sp/>25,001,<sp/>LE<sp/>format</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">handle<sp/>=<sp/>RNG_open(0,<sp/>NULL);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">if<sp/>(!handle)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>error</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>while(1);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Generate<sp/>a<sp/>number<sp/>from<sp/>1<sp/>to<sp/>25,000<sp/>(inclusive)</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Note<sp/>that<sp/>lowerLimit<sp/>parameter<sp/>is<sp/>inclusive<sp/>and<sp/>upperLimit<sp/>is</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>exclusive.<sp/>Thus,<sp/>upperLimit<sp/>is<sp/>set<sp/>to<sp/>25,001.</highlight></codeline>
+<codeline><highlight class="normal">result<sp/>=<sp/>RNG_getLERandomNumberInRange(RNG_Handle<sp/>handle,<sp/>RNG_limitOne,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>upperLimit,<sp/>randomBytesArray,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RANDOM_BIT_SIZE);</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">if<sp/>(result<sp/>!=<sp/>RNG_STATUS_SUCCESS)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>error</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>while(1);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">RNG_close(handle);</highlight></codeline>
+</programlisting></para><para><heading level="3">Generate an ECC private key</heading>
+</para><para><programlisting><codeline><highlight class="normal">#include<sp/>&lt;ti/drivers/RNG.h&gt;</highlight></codeline>
+<codeline><highlight class="normal">#include<sp/>&lt;ti/drivers/cryptoutils/ecc/ECCParams.h&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Values<sp/>are<sp/>chosen<sp/>to<sp/>generate<sp/>a<sp/>NIST<sp/>256<sp/>bit<sp/>key.</highlight></codeline>
+<codeline><highlight class="normal">CryptoKey<sp/>privateKey;</highlight></codeline>
+<codeline><highlight class="normal">uint8_t<sp/>privateKeyingMaterial[NISTP256_PARAM_SIZE_BYTES];</highlight></codeline>
+<codeline><highlight class="normal">RNG_Handle<sp/>handle;</highlight></codeline>
+<codeline><highlight class="normal">int_fast16_t<sp/>result;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">handle<sp/>=<sp/>RNG_open(0,<sp/>NULL);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">if<sp/>(!handle)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>error</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>while(1);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">CryptoKeyPlaintext_initBlankKey(&amp;privateKey,<sp/>privateKeyingMaterial,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ECCParams_NISTP256.length);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Generate<sp/>NIST<sp/>256<sp/>bit<sp/>key<sp/>in<sp/>BE<sp/>format.</highlight></codeline>
+<codeline><highlight class="normal">result<sp/>=<sp/>RNG_generateBEKeyInRange(RNG_Handle<sp/>handle,<sp/>RNG_limitOne,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ECCParams_NISTP256.order,<sp/>privateKey,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>256);</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">if<sp/>(result<sp/>!=<sp/>RNG_STATUS_SUCCESS)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>error</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>while(1);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">RNG_close(handle);</highlight></codeline>
+</programlisting> </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2021-2024,<sp/>Texas<sp/>Instruments<sp/>Incorporated</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">/*!****************************************************************************</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*<sp/><sp/>@file<sp/><sp/><sp/><sp/><sp/><sp/><sp/>RNG.h</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*<sp/><sp/>@brief<sp/><sp/><sp/><sp/><sp/><sp/>RNG<sp/>driver<sp/>header</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_RNG_Overview</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Overview<sp/>#</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>Random<sp/>Number<sp/>Generator<sp/>(RNG)<sp/>module<sp/>generates<sp/>random<sp/>data<sp/>of<sp/>variable</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*<sp/><sp/>lengths<sp/>from<sp/>a<sp/>pool<sp/>of<sp/>entropy.<sp/>The<sp/>pool<sp/>of<sp/>entropy<sp/>is<sp/>maintained<sp/>by<sp/>the</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/><sp/>driver<sp/>using<sp/>implementation-specific<sp/>sources<sp/>of<sp/>entropy.</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>output<sp/>is<sp/>suitable<sp/>for<sp/>applications<sp/>requiring<sp/>cryptographically</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*<sp/><sp/>random<sp/>data<sp/>such<sp/>as<sp/>keying<sp/>material<sp/>for<sp/>private<sp/>or<sp/>symmetric<sp/>keys.</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>RNG<sp/>driver<sp/>for<sp/>CC27XX<sp/>devices<sp/>is<sp/>strictly<sp/>a<sp/>CRNG/HSM<sp/>implementation<sp/>only.</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/>*<sp/><sp/>CRNG<sp/>(Cryptographically<sp/>Secure<sp/>Pseudo<sp/>Random<sp/>Number)<sp/>a<sp/>DRBG<sp/>method<sp/>alternative<sp/>to</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/>*<sp/><sp/>True<sp/>Random<sp/>Number<sp/>(TRNG)</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/>*<sp/><sp/>HSM<sp/>(Hardware<sp/>Security<sp/>Module)<sp/>is<sp/>a<sp/>HW<sp/>IP<sp/>used<sp/>for<sp/>RNG<sp/>operations</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/>*<sp/><sp/>For<sp/>CC27XX<sp/>devices<sp/>only,<sp/>the<sp/>RNG<sp/>driver<sp/>accepts<sp/>two<sp/>types<sp/>of<sp/>cryptoKey<sp/>encoding</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>CryptoKey_BLANK_PLAINTEXT</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>CryptoKey_BLANK_PLAINTEXT_HSM</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_RNG_Usage</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Usage<sp/>#</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Initialization<sp/>##</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/>*<sp/><sp/>Unlike<sp/>most<sp/>drivers,<sp/>there<sp/>is<sp/>a<sp/>global<sp/>instance<sp/>of<sp/>RNG<sp/>driver<sp/>data</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/>*<sp/><sp/>that<sp/>is<sp/>always<sp/>available<sp/>once<sp/>#RNG_init()<sp/>is<sp/>called.<sp/>This<sp/>data<sp/>will<sp/>contain</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/>*<sp/><sp/>the<sp/>entropy<sp/>pool<sp/>and<sp/>any<sp/>needed<sp/>state<sp/>information<sp/>required<sp/>to<sp/>refill<sp/>the</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/>*<sp/><sp/>pool.<sp/>#RNG_init()<sp/>should<sp/>be<sp/>called<sp/>once<sp/>before<sp/>using<sp/>other<sp/>RNG</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/>*<sp/><sp/>driver<sp/>APIs.</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/>*<sp/><sp/>@note<sp/>Some<sp/>implementations<sp/>restrict<sp/>when<sp/>RNG_init()<sp/>may<sp/>be<sp/>called.</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Check<sp/>the<sp/>implementation&apos;s<sp/>documentation<sp/>for<sp/>more<sp/>information.</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/>*<sp/><sp/>For<sp/>CC23X0,<sp/>RNG<sp/>must<sp/>be<sp/>initialized<sp/>by<sp/>application<sp/>in<sp/>a<sp/>task<sp/>context<sp/>with<sp/>interrupts<sp/>enabled</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/>*<sp/><sp/>using<sp/>the<sp/>following<sp/>steps<sp/>prior<sp/>to<sp/>the<sp/>use<sp/>of<sp/>the<sp/>Radio<sp/>because<sp/>CC23X0<sp/>uses<sp/>the<sp/>ADC<sp/>samples</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/>*<sp/><sp/>from<sp/>radio<sp/>as<sp/>noise<sp/>that<sp/>is<sp/>conditioned<sp/>using<sp/>CBC<sp/>MAC<sp/>to<sp/>generate<sp/>the<sp/>seed<sp/>for<sp/>RNG<sp/>driver</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/>*<sp/><sp/>###<sp/>Step<sp/>1:<sp/>Required<sp/>header<sp/>file<sp/>###</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/>*<sp/><sp/><sp/>#include<sp/>&lt;ti/drivers/rng/RNGLPF3RF.h&gt;<sp/>//<sp/>required<sp/>for<sp/>external<sp/>syscfg<sp/>variable<sp/>RNGLPF3RF_noiseInputWordLen</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/>*<sp/><sp/>###<sp/>Step<sp/>2:<sp/>External<sp/>APIs<sp/>###</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Use<sp/>the<sp/>function<sp/>provided<sp/>by<sp/>RCL<sp/>to<sp/>read<sp/>noise<sp/>input<sp/>//</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/>*<sp/><sp/>extern<sp/>int_fast16_t<sp/>RCL_AdcNoise_get_samples_blocking(uint32_t<sp/>*buffer,<sp/>uint32_t<sp/>numWords);</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/>*<sp/><sp/>###<sp/>Step<sp/>3:<sp/>Read<sp/>noise<sp/>input<sp/>from<sp/>RCL<sp/>using<sp/>RCL_AdcNoise_get_samples_blocking()<sp/>###</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/>*<sp/><sp/>int_fast16_t<sp/>rclStatus,<sp/>result;</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"></highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>User&apos;s<sp/>global<sp/>array<sp/>for<sp/>noise<sp/>input<sp/>based<sp/>on<sp/>size<sp/>provided<sp/>in<sp/>syscfg<sp/>//</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/>*<sp/><sp/>uint32_t<sp/>localNoiseInput[];<sp/>//Minimum<sp/>array<sp/>size<sp/>80<sp/>words</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/>*<sp/><sp/><sp/>//<sp/>Clear<sp/>noise<sp/>input<sp/>//</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/>*<sp/><sp/>memset(localNoiseInput,<sp/>0,<sp/>sizeof(localNoiseInput));</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Fill<sp/>noise<sp/>input<sp/>from<sp/>RCL<sp/>//</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/>*<sp/><sp/>//RNGLPF3RF_noiseInputWordLen<sp/>is<sp/>external<sp/>variable<sp/>from<sp/>RNGLPF3RF.h</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/>*<sp/><sp/><sp/>rclStatus<sp/>=<sp/>RCL_AdcNoise_get_samples_blocking(localNoiseInput,<sp/>RNGLPF3RF_noiseInputWordLen);</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(rclStatus<sp/>!=<sp/>0)</highlight></codeline>
+<codeline lineno="107"><highlight class="comment"><sp/>*<sp/><sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//Handle<sp/>error;</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Initialize<sp/>the<sp/>RNG<sp/>driver<sp/>noise<sp/>input<sp/>pointer<sp/>with<sp/>global<sp/>noise<sp/>input<sp/>array<sp/>from<sp/>user<sp/>//</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/>*<sp/><sp/>result<sp/>=<sp/>RNGLPF3RF_conditionNoiseToGenerateSeed(localNoiseInput);</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(<sp/>rclStatus<sp/>!=<sp/>0)</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/>*<sp/><sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//Handle<sp/>error;</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Before<sp/>starting<sp/>a<sp/>RNG<sp/>operation<sp/>##</highlight></codeline>
+<codeline lineno="122"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="123"><highlight class="comment"><sp/>*<sp/><sp/>Before<sp/>starting<sp/>a<sp/>RNG<sp/>operation,<sp/>the<sp/>application<sp/>must<sp/>do<sp/>the<sp/>following:</highlight></codeline>
+<codeline lineno="124"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Call<sp/>RNG_init()<sp/>to<sp/>initialize<sp/>the<sp/>driver&apos;s<sp/>global<sp/>instance<sp/>data.</highlight></codeline>
+<codeline lineno="125"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Call<sp/>RNG_Params_init()<sp/>to<sp/>initialize<sp/>the<sp/>RNG_Params<sp/>to<sp/>default<sp/>values.</highlight></codeline>
+<codeline lineno="126"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Modify<sp/>the<sp/>RNG_Params<sp/>as<sp/>desired.</highlight></codeline>
+<codeline lineno="127"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Call<sp/>RNG_open()<sp/>to<sp/>open<sp/>an<sp/>instance<sp/>of<sp/>the<sp/>driver.</highlight></codeline>
+<codeline lineno="128"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="129"><highlight class="comment"><sp/>*<sp/><sp/>@note<sp/>Some<sp/>implementations<sp/>restrict<sp/>when<sp/>RNG_init()<sp/>may<sp/>be<sp/>called.</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Check<sp/>the<sp/>implementation&apos;s<sp/>documentation<sp/>for<sp/>more<sp/>information.</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Entropy<sp/>Pool<sp/>Management<sp/>##</highlight></codeline>
+<codeline lineno="133"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/>*<sp/><sp/>At<sp/>any<sp/>time<sp/>after<sp/>calling<sp/>RNG_init(),<sp/>the<sp/>application<sp/>may<sp/>call</highlight></codeline>
+<codeline lineno="135"><highlight class="comment"><sp/>*<sp/><sp/>RNG_fillPoolIfLessThan()<sp/>to<sp/>add<sp/>entropy<sp/>to<sp/>the<sp/>pool<sp/>which<sp/>will<sp/>then<sp/>make</highlight></codeline>
+<codeline lineno="136"><highlight class="comment"><sp/>*<sp/><sp/>future<sp/>requests<sp/>for<sp/>entropy<sp/>execute<sp/>faster.<sp/>Note<sp/>that<sp/>the<sp/>driver<sp/>never</highlight></codeline>
+<codeline lineno="137"><highlight class="comment"><sp/>*<sp/><sp/>automatically<sp/>refills<sp/>the<sp/>pool.<sp/>However,<sp/>if<sp/>the<sp/>pool<sp/>is<sp/>empty,<sp/>the<sp/>RNG</highlight></codeline>
+<codeline lineno="138"><highlight class="comment"><sp/>*<sp/><sp/>driver<sp/>will<sp/>still<sp/>generate<sp/>entropy<sp/>upon<sp/>request<sp/>(for<sp/>example<sp/>when</highlight></codeline>
+<codeline lineno="139"><highlight class="comment"><sp/>*<sp/><sp/>RNG_getRandomBits()<sp/>is<sp/>called).</highlight></codeline>
+<codeline lineno="140"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="141"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>application<sp/>is<sp/>responsible<sp/>for<sp/>deciding<sp/>when<sp/>it<sp/>is<sp/>appropriate<sp/>to</highlight></codeline>
+<codeline lineno="142"><highlight class="comment"><sp/>*<sp/><sp/>spend<sp/>the<sp/>time<sp/>and<sp/>energy<sp/>to<sp/>refill<sp/>the<sp/>pool.<sp/>One<sp/>suggested<sp/>location</highlight></codeline>
+<codeline lineno="143"><highlight class="comment"><sp/>*<sp/><sp/>to<sp/>do<sp/>so<sp/>is<sp/>the<sp/>idle<sp/>thread.</highlight></codeline>
+<codeline lineno="144"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="145"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>RNG<sp/>operations<sp/>##</highlight></codeline>
+<codeline lineno="146"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="147"><highlight class="comment"><sp/>*<sp/><sp/>Use<sp/>RNG_getRandomBits()<sp/>to<sp/>obtain<sp/>random<sp/>bits<sp/>from<sp/>the<sp/>entropy<sp/>pool<sp/>and</highlight></codeline>
+<codeline lineno="148"><highlight class="comment"><sp/>*<sp/><sp/>copy<sp/>them<sp/>to<sp/>a<sp/>buffer/array.<sp/>The<sp/>caller<sp/>must<sp/>allocate<sp/>memory<sp/>sufficient</highlight></codeline>
+<codeline lineno="149"><highlight class="comment"><sp/>*<sp/><sp/>to<sp/>hold<sp/>at<sp/>least<sp/>the<sp/>number<sp/>of<sp/>bits<sp/>of<sp/>random<sp/>data<sp/>requested.</highlight></codeline>
+<codeline lineno="150"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="151"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>After<sp/>the<sp/>RNG<sp/>operation<sp/>completes<sp/>##</highlight></codeline>
+<codeline lineno="152"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="153"><highlight class="comment"><sp/>*<sp/><sp/>After<sp/>the<sp/>RNG<sp/>operation<sp/>completes,<sp/>the<sp/>application<sp/>should<sp/>either<sp/>start</highlight></codeline>
+<codeline lineno="154"><highlight class="comment"><sp/>*<sp/><sp/>another<sp/>operation<sp/>or<sp/>close<sp/>the<sp/>driver<sp/>by<sp/>calling<sp/>RNG_close().<sp/>Note<sp/>that<sp/>the</highlight></codeline>
+<codeline lineno="155"><highlight class="comment"><sp/>*<sp/><sp/>singleton<sp/>instance<sp/>of<sp/>the<sp/>driver,<sp/>along<sp/>with<sp/>its<sp/>associated<sp/>pool<sp/>of<sp/>entropy</highlight></codeline>
+<codeline lineno="156"><highlight class="comment"><sp/>*<sp/><sp/>will<sp/>still<sp/>exist<sp/>and<sp/>will<sp/>be<sp/>used<sp/>by<sp/>any<sp/>future<sp/>RNG_open()<sp/>calls.<sp/>Note<sp/>that</highlight></codeline>
+<codeline lineno="157"><highlight class="comment"><sp/>*<sp/><sp/>closing<sp/>the<sp/>driver<sp/>instance<sp/>may<sp/>not<sp/>be<sp/>strictly<sp/>required,<sp/>but<sp/>is<sp/>good</highlight></codeline>
+<codeline lineno="158"><highlight class="comment"><sp/>*<sp/><sp/>practice.</highlight></codeline>
+<codeline lineno="159"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="160"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Security<sp/>##</highlight></codeline>
+<codeline lineno="161"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="162"><highlight class="comment"><sp/>*<sp/><sp/>###<sp/>Data<sp/>Protection<sp/>###</highlight></codeline>
+<codeline lineno="163"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="164"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>entropy<sp/>pool<sp/>and<sp/>any<sp/>required<sp/>state<sp/>to<sp/>generate<sp/>more<sp/>entropy<sp/>is</highlight></codeline>
+<codeline lineno="165"><highlight class="comment"><sp/>*<sp/><sp/>maintained<sp/>in<sp/>memory,<sp/>in<sp/>the<sp/>driver&apos;s<sp/>global<sp/>instance<sp/>data.<sp/>The<sp/>entirety<sp/>of</highlight></codeline>
+<codeline lineno="166"><highlight class="comment"><sp/>*<sp/><sp/>this<sp/>data<sp/>is<sp/>stored<sp/>in<sp/>two<sp/>global<sp/>variables<sp/>called<sp/>RNG_instanceData<sp/>and</highlight></codeline>
+<codeline lineno="167"><highlight class="comment"><sp/>*<sp/><sp/>RNG_instancePool.<sp/>It<sp/>is<sp/>up<sp/>to<sp/>the<sp/>system<sp/>to<sp/>provide<sp/>adequate</highlight></codeline>
+<codeline lineno="168"><highlight class="comment"><sp/>*<sp/><sp/>protection<sp/>(primarily<sp/>confidentiality<sp/>and<sp/>integrity)<sp/>of<sp/>these<sp/>in-memory</highlight></codeline>
+<codeline lineno="169"><highlight class="comment"><sp/>*<sp/><sp/>assets.</highlight></codeline>
+<codeline lineno="170"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="171"><highlight class="comment"><sp/>*<sp/><sp/>###<sp/>Timing<sp/>Side<sp/>Channels<sp/>###</highlight></codeline>
+<codeline lineno="172"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="173"><highlight class="comment"><sp/>*<sp/><sp/>Functions<sp/>which<sp/>provide<sp/>for<sp/>generation<sp/>of<sp/>a<sp/>value<sp/>within<sp/>a<sp/>range<sp/>use</highlight></codeline>
+<codeline lineno="174"><highlight class="comment"><sp/>*<sp/><sp/>an<sp/>algorithm<sp/>which<sp/>is<sp/>timing-constant<sp/>when<sp/>the<sp/>following<sp/>parameters</highlight></codeline>
+<codeline lineno="175"><highlight class="comment"><sp/>*<sp/><sp/>are<sp/>held<sp/>constant:<sp/>lowerLimit,<sp/>upperLimit,<sp/>bitLength,</highlight></codeline>
+<codeline lineno="176"><highlight class="comment"><sp/>*<sp/><sp/>and<sp/>endianess.<sp/>Thus,<sp/>while<sp/>the<sp/>driver<sp/>may<sp/>create<sp/>multiple<sp/>candidates<sp/>for<sp/>the</highlight></codeline>
+<codeline lineno="177"><highlight class="comment"><sp/>*<sp/><sp/>value<sp/>to<sp/>find<sp/>one<sp/>within<sp/>the<sp/>range,<sp/>timing<sp/>will<sp/>not<sp/>leak<sp/>the<sp/>final</highlight></codeline>
+<codeline lineno="178"><highlight class="comment"><sp/>*<sp/><sp/>value&apos;s<sp/>relation<sp/>to<sp/>the<sp/>limits.<sp/>However,<sp/>timing<sp/>may<sp/>leak<sp/>the<sp/>bitLength,</highlight></codeline>
+<codeline lineno="179"><highlight class="comment"><sp/>*<sp/><sp/>the<sp/>endianess,<sp/>and<sp/>the<sp/>use<sp/>of<sp/>#CryptoUtils_limitZero,<sp/>#CryptoUtils_limitOne,</highlight></codeline>
+<codeline lineno="180"><highlight class="comment"><sp/>*<sp/><sp/>or<sp/>NULL<sp/>for<sp/>the<sp/>limit<sp/>values.</highlight></codeline>
+<codeline lineno="181"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="182"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_RNG_Synopsis</highlight></codeline>
+<codeline lineno="183"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Synopsis</highlight></codeline>
+<codeline lineno="184"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_RNG_Synopsis_Code</highlight></codeline>
+<codeline lineno="185"><highlight class="comment"><sp/>*<sp/><sp/>###<sp/>Generate<sp/>random<sp/>bytes<sp/>to<sp/>a<sp/>user<sp/>provided<sp/>buffer<sp/>#</highlight></codeline>
+<codeline lineno="186"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="187"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="188"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="189"><highlight class="comment"><sp/>*<sp/><sp/>#include<sp/>&lt;ti/drivers/RNG.h&gt;</highlight></codeline>
+<codeline lineno="190"><highlight class="comment"><sp/>*<sp/><sp/>#include<sp/>&quot;ti_drivers_config.h&quot;</highlight></codeline>
+<codeline lineno="191"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="192"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Setup<sp/>RNG</highlight></codeline>
+<codeline lineno="193"><highlight class="comment"><sp/>*<sp/><sp/>RNG_Init();</highlight></codeline>
+<codeline lineno="194"><highlight class="comment"><sp/>*<sp/><sp/>RNG_fillPoolIfLessThan(RNG_POOL_BYTE_SIZE);</highlight></codeline>
+<codeline lineno="195"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="196"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Use<sp/>RNG</highlight></codeline>
+<codeline lineno="197"><highlight class="comment"><sp/>*<sp/><sp/>#define<sp/>RANDOM_BYTES_SIZE<sp/>16u</highlight></codeline>
+<codeline lineno="198"><highlight class="comment"><sp/>*<sp/><sp/>RNG_Handle<sp/>handle;</highlight></codeline>
+<codeline lineno="199"><highlight class="comment"><sp/>*<sp/><sp/>int_fast16_t<sp/>result;</highlight></codeline>
+<codeline lineno="200"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="201"><highlight class="comment"><sp/>*<sp/><sp/>uint8_t<sp/>randomBytesArray[RANDOM_BYTES_SIZE]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="202"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="203"><highlight class="comment"><sp/>*<sp/><sp/>handle<sp/>=<sp/>RNG_open(0,<sp/>NULL);</highlight></codeline>
+<codeline lineno="204"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="205"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(!handle)<sp/>{</highlight></codeline>
+<codeline lineno="206"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>error</highlight></codeline>
+<codeline lineno="207"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>while(1);</highlight></codeline>
+<codeline lineno="208"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="209"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="210"><highlight class="comment"><sp/>*<sp/><sp/>result<sp/>=<sp/>RNG_getRandomBits(handle,<sp/>randomBytesArray,<sp/>RANDOM_BYTES_SIZE<sp/>*<sp/>8);</highlight></codeline>
+<codeline lineno="211"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="212"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(result<sp/>!=<sp/>RNG_STATUS_SUCCESS)<sp/>{</highlight></codeline>
+<codeline lineno="213"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>error</highlight></codeline>
+<codeline lineno="214"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>while(1);</highlight></codeline>
+<codeline lineno="215"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="216"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="217"><highlight class="comment"><sp/>*<sp/><sp/>RNG_close(handle);</highlight></codeline>
+<codeline lineno="218"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="219"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Refill<sp/>RNG<sp/>Pool<sp/>when<sp/>convenient</highlight></codeline>
+<codeline lineno="220"><highlight class="comment"><sp/>*<sp/><sp/>RNG_fillPoolIfLessThan(RNG_POOL_BYTE_SIZE);</highlight></codeline>
+<codeline lineno="221"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="222"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="223"><highlight class="comment"><sp/>*<sp/><sp/>@anchor<sp/>ti_drivers_RNG_Examples</highlight></codeline>
+<codeline lineno="224"><highlight class="comment"><sp/>*<sp/><sp/>##<sp/>Examples</highlight></codeline>
+<codeline lineno="225"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="226"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>following<sp/>examples<sp/>do<sp/>not<sp/>show<sp/>the<sp/>process<sp/>of<sp/>initializing<sp/>the<sp/>RNG</highlight></codeline>
+<codeline lineno="227"><highlight class="comment"><sp/>*<sp/><sp/>module<sp/>and<sp/>refilling<sp/>the<sp/>pool.</highlight></codeline>
+<codeline lineno="228"><highlight class="comment"><sp/>*<sp/><sp/>See<sp/>@ref<sp/>ti_drivers_RNG_Synopsis<sp/>RNG<sp/>Driver<sp/>Synopsis<sp/>for<sp/>an<sp/>example</highlight></codeline>
+<codeline lineno="229"><highlight class="comment"><sp/>*<sp/><sp/>showing<sp/>those<sp/>parts<sp/>of<sp/>RNG<sp/>operation.<sp/>*</highlight></codeline>
+<codeline lineno="230"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="231"><highlight class="comment"><sp/>*<sp/><sp/>###<sp/>Generate<sp/>a<sp/>number<sp/>within<sp/>a<sp/>range<sp/>###</highlight></codeline>
+<codeline lineno="232"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="233"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="234"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="235"><highlight class="comment"><sp/>*<sp/><sp/>#include<sp/>&lt;ti/drivers/RNG.h&gt;</highlight></codeline>
+<codeline lineno="236"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="237"><highlight class="comment"><sp/>*<sp/><sp/>#define<sp/>RANDOM_BIT_SIZE<sp/><sp/>15u</highlight></codeline>
+<codeline lineno="238"><highlight class="comment"><sp/>*<sp/><sp/>#define<sp/>RANDOM_BYTE_SIZE<sp/>((RANDOM_BIT_SIZE<sp/>+<sp/>7u)/8u)</highlight></codeline>
+<codeline lineno="239"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="240"><highlight class="comment"><sp/>*<sp/><sp/>RNG_Handle<sp/>handle;</highlight></codeline>
+<codeline lineno="241"><highlight class="comment"><sp/>*<sp/><sp/>int_fast16_t<sp/>result;</highlight></codeline>
+<codeline lineno="242"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="243"><highlight class="comment"><sp/>*<sp/><sp/>uint8_t<sp/>randomBytesArray[RANDOM_BYTES_SIZE]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="244"><highlight class="comment"><sp/>*<sp/><sp/>uint8_t<sp/>upperLimit[RANDOM_BYTES_SIZE]<sp/>=<sp/>{0xA9,<sp/>0x61};<sp/>//<sp/>25,001,<sp/>LE<sp/>format</highlight></codeline>
+<codeline lineno="245"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="246"><highlight class="comment"><sp/>*<sp/><sp/>handle<sp/>=<sp/>RNG_open(0,<sp/>NULL);</highlight></codeline>
+<codeline lineno="247"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="248"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(!handle)<sp/>{</highlight></codeline>
+<codeline lineno="249"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>error</highlight></codeline>
+<codeline lineno="250"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>while(1);</highlight></codeline>
+<codeline lineno="251"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="252"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="253"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Generate<sp/>a<sp/>number<sp/>from<sp/>1<sp/>to<sp/>25,000<sp/>(inclusive)</highlight></codeline>
+<codeline lineno="254"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Note<sp/>that<sp/>lowerLimit<sp/>parameter<sp/>is<sp/>inclusive<sp/>and<sp/>upperLimit<sp/>is</highlight></codeline>
+<codeline lineno="255"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>exclusive.<sp/>Thus,<sp/>upperLimit<sp/>is<sp/>set<sp/>to<sp/>25,001.</highlight></codeline>
+<codeline lineno="256"><highlight class="comment"><sp/>*<sp/><sp/>result<sp/>=<sp/>RNG_getLERandomNumberInRange(RNG_Handle<sp/>handle,<sp/>RNG_limitOne,</highlight></codeline>
+<codeline lineno="257"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>upperLimit,<sp/>randomBytesArray,</highlight></codeline>
+<codeline lineno="258"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RANDOM_BIT_SIZE);</highlight></codeline>
+<codeline lineno="259"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="260"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="261"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(result<sp/>!=<sp/>RNG_STATUS_SUCCESS)<sp/>{</highlight></codeline>
+<codeline lineno="262"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>error</highlight></codeline>
+<codeline lineno="263"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>while(1);</highlight></codeline>
+<codeline lineno="264"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="265"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="266"><highlight class="comment"><sp/>*<sp/><sp/>RNG_close(handle);</highlight></codeline>
+<codeline lineno="267"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="268"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="269"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="270"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="271"><highlight class="comment"><sp/>*<sp/><sp/>###<sp/>Generate<sp/>an<sp/>ECC<sp/>private<sp/>key<sp/>###</highlight></codeline>
+<codeline lineno="272"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="273"><highlight class="comment"><sp/>*<sp/><sp/>@code</highlight></codeline>
+<codeline lineno="274"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="275"><highlight class="comment"><sp/>*<sp/><sp/>#include<sp/>&lt;ti/drivers/RNG.h&gt;</highlight></codeline>
+<codeline lineno="276"><highlight class="comment"><sp/>*<sp/><sp/>#include<sp/>&lt;ti/drivers/cryptoutils/ecc/ECCParams.h&gt;</highlight></codeline>
+<codeline lineno="277"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="278"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Values<sp/>are<sp/>chosen<sp/>to<sp/>generate<sp/>a<sp/>NIST<sp/>256<sp/>bit<sp/>key.</highlight></codeline>
+<codeline lineno="279"><highlight class="comment"><sp/>*<sp/><sp/>CryptoKey<sp/>privateKey;</highlight></codeline>
+<codeline lineno="280"><highlight class="comment"><sp/>*<sp/><sp/>uint8_t<sp/>privateKeyingMaterial[NISTP256_PARAM_SIZE_BYTES];</highlight></codeline>
+<codeline lineno="281"><highlight class="comment"><sp/>*<sp/><sp/>RNG_Handle<sp/>handle;</highlight></codeline>
+<codeline lineno="282"><highlight class="comment"><sp/>*<sp/><sp/>int_fast16_t<sp/>result;</highlight></codeline>
+<codeline lineno="283"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="284"><highlight class="comment"><sp/>*<sp/><sp/>handle<sp/>=<sp/>RNG_open(0,<sp/>NULL);</highlight></codeline>
+<codeline lineno="285"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="286"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(!handle)<sp/>{</highlight></codeline>
+<codeline lineno="287"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>error</highlight></codeline>
+<codeline lineno="288"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>while(1);</highlight></codeline>
+<codeline lineno="289"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="290"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="291"><highlight class="comment"><sp/>*<sp/><sp/>CryptoKeyPlaintext_initBlankKey(&amp;privateKey,<sp/>privateKeyingMaterial,</highlight></codeline>
+<codeline lineno="292"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ECCParams_NISTP256.length);</highlight></codeline>
+<codeline lineno="293"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="294"><highlight class="comment"><sp/>*<sp/><sp/>//<sp/>Generate<sp/>NIST<sp/>256<sp/>bit<sp/>key<sp/>in<sp/>BE<sp/>format.</highlight></codeline>
+<codeline lineno="295"><highlight class="comment"><sp/>*<sp/><sp/>result<sp/>=<sp/>RNG_generateBEKeyInRange(RNG_Handle<sp/>handle,<sp/>RNG_limitOne,</highlight></codeline>
+<codeline lineno="296"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ECCParams_NISTP256.order,<sp/>privateKey,</highlight></codeline>
+<codeline lineno="297"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>256);</highlight></codeline>
+<codeline lineno="298"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="299"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="300"><highlight class="comment"><sp/>*<sp/><sp/>if<sp/>(result<sp/>!=<sp/>RNG_STATUS_SUCCESS)<sp/>{</highlight></codeline>
+<codeline lineno="301"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>error</highlight></codeline>
+<codeline lineno="302"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>while(1);</highlight></codeline>
+<codeline lineno="303"><highlight class="comment"><sp/>*<sp/><sp/>}</highlight></codeline>
+<codeline lineno="304"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="305"><highlight class="comment"><sp/>*<sp/><sp/>RNG_close(handle);</highlight></codeline>
+<codeline lineno="306"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="307"><highlight class="comment"><sp/>*<sp/><sp/>@endcode</highlight></codeline>
+<codeline lineno="308"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="309"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight></codeline>
+<codeline lineno="311"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ti_drivers_RNG__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_drivers_RNG__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="315"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_crypto_key_8h" kindref="compound">ti/drivers/cryptoutils/cryptokey/CryptoKey.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"></highlight></codeline>
+<codeline lineno="320"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"></highlight></codeline>
+<codeline lineno="336" refid="_r_n_g_8h_1ac306e4cfc6cc7ffd4bc3788ab0b1d9a7" refkind="member"><highlight class="preprocessor">#define<sp/>RNG_STATUS_RESERVED<sp/>(-32)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="337"><highlight class="normal"></highlight></codeline>
+<codeline lineno="344" refid="_r_n_g_8h_1ab3076e27bfcbaad810b27dd790b63649" refkind="member"><highlight class="preprocessor">#define<sp/>RNG_STATUS_SUCCESS<sp/>((int_fast16_t)0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="345"><highlight class="normal"></highlight></codeline>
+<codeline lineno="352" refid="_r_n_g_8h_1a608c7c1a93bf68c4a98edf40d0df18c2" refkind="member"><highlight class="preprocessor">#define<sp/>RNG_STATUS_ERROR<sp/>((int_fast16_t)-1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="353"><highlight class="normal"></highlight></codeline>
+<codeline lineno="363" refid="_r_n_g_8h_1a230a714031b745ee550160cd49feb9f1" refkind="member"><highlight class="preprocessor">#define<sp/>RNG_STATUS_RESOURCE_UNAVAILABLE<sp/>((int_fast16_t)-2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight></codeline>
+<codeline lineno="370" refid="_r_n_g_8h_1a0e210940ccc309d0dfd333e6fd48e875" refkind="member"><highlight class="preprocessor">#define<sp/>RNG_STATUS_INVALID_INPUTS<sp/>((int_fast16_t)-3)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="371"><highlight class="normal"></highlight></codeline>
+<codeline lineno="375" refid="_r_n_g_8h_1ab63bae3047edfe506f2bfec86ef2c5f8" refkind="member"><highlight class="preprocessor">#define<sp/>RNG_STATUS_CANCELED<sp/>((int_fast16_t)-4)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="376"><highlight class="normal"></highlight></codeline>
+<codeline lineno="382" refid="_r_n_g_8h_1aeb6cdafa2fe8dcd983db3d435579ed19" refkind="member"><highlight class="preprocessor">#define<sp/>RNG_ENTROPY_EXHAUSTED<sp/>((int_fast16_t)-5)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="383"><highlight class="normal"></highlight></codeline>
+<codeline lineno="389" refid="_r_n_g_8h_1af4aca552ecdb55994356cfa50e82d4d9" refkind="member"><highlight class="preprocessor">#define<sp/>RNG_STATUS_INIT_NOT_ALLOWED<sp/>((int_fast16_t)-6)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="390"><highlight class="normal"></highlight></codeline>
+<codeline lineno="397" refid="_r_n_g_8h_1aaa727a5b5ea0ed0df85f734562e08d05" refkind="member"><highlight class="preprocessor">#define<sp/>RNG_STATUS_NOISE_INPUT_INVALID<sp/>((int_fast16_t)-7)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="398"><highlight class="normal"></highlight></codeline>
+<codeline lineno="405" refid="_r_n_g_8h_1a1c0881e8b77094f70151f63bc548d304" refkind="member"><highlight class="preprocessor">#define<sp/>RNG_STATUS_NOT_INITIALIZED<sp/>((int_fast16_t)-8)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="406"><highlight class="normal"></highlight></codeline>
+<codeline lineno="410" refid="_r_n_g_8h_1a6ce028f88ad8438e91e7a4f62001846e" refkind="member"><highlight class="preprocessor">#define<sp/>RNG_MAX_BIT_LENGTH<sp/>((size_t)1u<sp/>&lt;&lt;<sp/>20u)<sp/></highlight><highlight class="comment">/*<sp/>1<sp/>MiB<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="411"><highlight class="normal"></highlight></codeline>
+<codeline lineno="423" refid="struct_r_n_g___config" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="424"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="426" refid="struct_r_n_g___config_1a813353f402979d5ec415a6fd6fd2ff4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*<ref refid="struct_r_n_g___config_1a813353f402979d5ec415a6fd6fd2ff4c" kindref="member">object</ref>;</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"></highlight></codeline>
+<codeline lineno="429" refid="struct_r_n_g___config_1a0b91703805c15e0134acb25c4486c8bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>*<ref refid="struct_r_n_g___config_1a0b91703805c15e0134acb25c4486c8bd" kindref="member">hwAttrs</ref>;</highlight></codeline>
+<codeline lineno="430"><highlight class="normal">}<sp/><ref refid="struct_r_n_g___config" kindref="compound">RNG_Config</ref>;</highlight></codeline>
+<codeline lineno="431"><highlight class="normal"></highlight></codeline>
+<codeline lineno="435" refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_r_n_g___config" kindref="compound">RNG_Config</ref><sp/>*<ref refid="_r_n_g_8h_1a757fe651eb1c02d5ffafc5d8e2c7a3f0" kindref="member">RNG_Handle</ref>;</highlight></codeline>
+<codeline lineno="436"><highlight class="normal"></highlight></codeline>
+<codeline lineno="461" refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="462"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="463" refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a89864eea2d3bf5da6902f34f9f2f0dca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a89864eea2d3bf5da6902f34f9f2f0dca" kindref="member">RNG_RETURN_BEHAVIOR_CALLBACK</ref><sp/>=<sp/>1,<sp/></highlight></codeline>
+<codeline lineno="470" refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17aea00815364b26007576f615660b49ffa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17aea00815364b26007576f615660b49ffa" kindref="member">RNG_RETURN_BEHAVIOR_BLOCKING</ref><sp/>=<sp/>2,<sp/></highlight></codeline>
+<codeline lineno="474" refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a291c8dc3d119f96e80043d04f0c71b27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a291c8dc3d119f96e80043d04f0c71b27" kindref="member">RNG_RETURN_BEHAVIOR_POLLING</ref><sp/><sp/>=<sp/>4,<sp/></highlight></codeline>
+<codeline lineno="479"><highlight class="normal">}<sp/><ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17" kindref="member">RNG_ReturnBehavior</ref>;</highlight></codeline>
+<codeline lineno="480"><highlight class="normal"></highlight></codeline>
+<codeline lineno="496" refid="_r_n_g_8h_1ad5cded400eae369dc7d6a6fbf5f33168" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="_r_n_g_8h_1ad5cded400eae369dc7d6a6fbf5f33168" kindref="member">RNG_CryptoKeyCallbackFxn</ref>)(RNG_Handle<sp/>handle,<sp/>int_fast16_t<sp/>returnValue,<sp/><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref><sp/>*key);</highlight></codeline>
+<codeline lineno="497"><highlight class="normal"></highlight></codeline>
+<codeline lineno="516" refid="_r_n_g_8h_1ac30888d0e097bb5d21872797f43c31fb" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="_r_n_g_8h_1ac30888d0e097bb5d21872797f43c31fb" kindref="member">RNG_RandomBitsCallbackFxn</ref>)(RNG_Handle<sp/>handle,</highlight></codeline>
+<codeline lineno="517"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int_fast16_t<sp/>returnValue,</highlight></codeline>
+<codeline lineno="518"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>*randomBits,</highlight></codeline>
+<codeline lineno="519"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>randomBitsLength);</highlight></codeline>
+<codeline lineno="520"><highlight class="normal"></highlight></codeline>
+<codeline lineno="533" refid="struct_r_n_g___params" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="534"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="535" refid="struct_r_n_g___params_1a48abd0b97444c80cd43415ed5d584b49" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17" kindref="member">RNG_ReturnBehavior</ref><sp/><ref refid="struct_r_n_g___params_1a48abd0b97444c80cd43415ed5d584b49" kindref="member">returnBehavior</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="536" refid="struct_r_n_g___params_1a38dd1d40deb45010e36507bdb6365682" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_r_n_g_8h_1ad5cded400eae369dc7d6a6fbf5f33168" kindref="member">RNG_CryptoKeyCallbackFxn</ref><sp/><ref refid="struct_r_n_g___params_1a38dd1d40deb45010e36507bdb6365682" kindref="member">cryptoKeyCallbackFxn</ref>;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="540" refid="struct_r_n_g___params_1a56b635e5f67b341fbb0a9e98b5f26e6c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_r_n_g_8h_1ac30888d0e097bb5d21872797f43c31fb" kindref="member">RNG_RandomBitsCallbackFxn</ref><sp/><ref refid="struct_r_n_g___params_1a56b635e5f67b341fbb0a9e98b5f26e6c" kindref="member">randomBitsCallbackFxn</ref>;<sp/></highlight></codeline>
+<codeline lineno="545" refid="struct_r_n_g___params_1acb1811e8008c9d1f718ebae9484a8de7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="struct_r_n_g___params_1acb1811e8008c9d1f718ebae9484a8de7" kindref="member">timeout</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="548"><highlight class="normal">}<sp/><ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref>;</highlight></codeline>
+<codeline lineno="549"><highlight class="normal"></highlight></codeline>
+<codeline lineno="555"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref><sp/><ref refid="_r_n_g_8h_1aeca982c6cf31dceb6116b9bfb7556473" kindref="member">RNG_defaultParams</ref>;</highlight></codeline>
+<codeline lineno="556"><highlight class="normal"></highlight></codeline>
+<codeline lineno="560"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="_r_n_g_8h_1ace25c61f527654aca367fc3fabf22399" kindref="member">RNG_poolByteSize</ref>;</highlight></codeline>
+<codeline lineno="561"><highlight class="normal"></highlight></codeline>
+<codeline lineno="584"><highlight class="normal">int_fast16_t<sp/><ref refid="_r_n_g_8h_1a1ec742dff77c74db333fec6edcdbde01" kindref="member">RNG_init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="585"><highlight class="normal"></highlight></codeline>
+<codeline lineno="606"><highlight class="normal">int_fast16_t<sp/><ref refid="_r_n_g_8h_1a973cba8a512dd97404babeb8a5ee9b1c" kindref="member">RNG_fillPoolIfLessThan</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>bytes);</highlight></codeline>
+<codeline lineno="607"><highlight class="normal"></highlight></codeline>
+<codeline lineno="621"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_r_n_g_8h_1a2d222b0cdeac690905f6be9df444e23f" kindref="member">RNG_Params_init</ref>(<ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="622"><highlight class="normal"></highlight></codeline>
+<codeline lineno="640"><highlight class="normal">RNG_Handle<sp/><ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open</ref>(uint_least8_t<sp/>index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="641"><highlight class="normal"></highlight></codeline>
+<codeline lineno="651"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_r_n_g_8h_1ab3c29d15e2efdb2efb3e8a82d6f37fcf" kindref="member">RNG_close</ref>(RNG_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="652"><highlight class="normal"></highlight></codeline>
+<codeline lineno="690"><highlight class="normal">int_fast16_t<sp/><ref refid="_r_n_g_8h_1a2ea3a4ebb1fdf9ce8707eb1c75bcf4d4" kindref="member">RNG_getRandomBits</ref>(RNG_Handle<sp/>handle,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*randomBits,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>randomBitsLength);</highlight></codeline>
+<codeline lineno="691"><highlight class="normal"></highlight></codeline>
+<codeline lineno="745"><highlight class="normal">int_fast16_t<sp/><ref refid="_r_n_g_8h_1a10d0f6139e387ca2c2863e52b74fda48" kindref="member">RNG_getLERandomNumberInRange</ref>(RNG_Handle<sp/>handle,</highlight></codeline>
+<codeline lineno="746"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*lowerLimit,</highlight></codeline>
+<codeline lineno="747"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*upperLimit,</highlight></codeline>
+<codeline lineno="748"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*randomNumber,</highlight></codeline>
+<codeline lineno="749"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>randomNumberBitLength);</highlight></codeline>
+<codeline lineno="750"><highlight class="normal"></highlight></codeline>
+<codeline lineno="804"><highlight class="normal">int_fast16_t<sp/><ref refid="_r_n_g_8h_1ab886feb4749365da4c820b7a53b06ed3" kindref="member">RNG_getBERandomNumberInRange</ref>(RNG_Handle<sp/>handle,</highlight></codeline>
+<codeline lineno="805"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*lowerLimit,</highlight></codeline>
+<codeline lineno="806"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*upperLimit,</highlight></codeline>
+<codeline lineno="807"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*randomNumber,</highlight></codeline>
+<codeline lineno="808"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>randomNumberBitLength);</highlight></codeline>
+<codeline lineno="809"><highlight class="normal"></highlight></codeline>
+<codeline lineno="841"><highlight class="normal">int_fast16_t<sp/><ref refid="_r_n_g_8h_1af0d87cb0f061c45161597771a92f6360" kindref="member">RNG_generateKey</ref>(RNG_Handle<sp/>handle,<sp/><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref><sp/>*key);</highlight></codeline>
+<codeline lineno="842"><highlight class="normal"></highlight></codeline>
+<codeline lineno="893"><highlight class="normal">int_fast16_t<sp/><ref refid="_r_n_g_8h_1a669aa831effa103664cb5ccf71060979" kindref="member">RNG_generateLEKeyInRange</ref>(RNG_Handle<sp/>handle,</highlight></codeline>
+<codeline lineno="894"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*lowerLimit,</highlight></codeline>
+<codeline lineno="895"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*upperLimit,</highlight></codeline>
+<codeline lineno="896"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref><sp/>*key,</highlight></codeline>
+<codeline lineno="897"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>randomNumberBitLength);</highlight></codeline>
+<codeline lineno="898"><highlight class="normal"></highlight></codeline>
+<codeline lineno="949"><highlight class="normal">int_fast16_t<sp/><ref refid="_r_n_g_8h_1ae6e9b34b2bb8b9ef3712ddd3281ef4a8" kindref="member">RNG_generateBEKeyInRange</ref>(RNG_Handle<sp/>handle,</highlight></codeline>
+<codeline lineno="950"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*lowerLimit,</highlight></codeline>
+<codeline lineno="951"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*upperLimit,</highlight></codeline>
+<codeline lineno="952"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref><sp/>*key,</highlight></codeline>
+<codeline lineno="953"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>randomNumberBitLength);</highlight></codeline>
+<codeline lineno="954"><highlight class="normal"></highlight></codeline>
+<codeline lineno="978"><highlight class="normal">RNG_Handle<sp/><ref refid="_r_n_g_8h_1a95c951e38c31933d1ef60ba509b1dac0" kindref="member">RNG_construct</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_r_n_g___config" kindref="compound">RNG_Config</ref><sp/>*config,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_r_n_g___params" kindref="compound">RNG_Params</ref><sp/>*<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>);</highlight></codeline>
+<codeline lineno="979"><highlight class="normal"></highlight></codeline>
+<codeline lineno="999"><highlight class="normal">int_fast16_t<sp/><ref refid="_r_n_g_8h_1ab2fc99ab8e109cf9b0f9264cdf0d6638" kindref="member">RNG_cancelOperation</ref>(RNG_Handle<sp/>handle);</highlight></codeline>
+<codeline lineno="1000"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1001"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1002"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1003"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1004"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1005"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_drivers_RNG__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/RNG.h"/>
+  </compounddef>
+</doxygen>

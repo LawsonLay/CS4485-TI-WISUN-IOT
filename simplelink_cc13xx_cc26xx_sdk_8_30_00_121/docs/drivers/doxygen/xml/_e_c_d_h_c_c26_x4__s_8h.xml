@@ -1,0 +1,438 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_e_c_d_h_c_c26_x4__s_8h" kind="file" language="C++">
+    <compoundname>ECDHCC26X4_s.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes refid="_crypto_c_c26_x4__s_8h" local="no">ti/drivers/crypto/CryptoCC26X4_s.h</includes>
+    <includes refid="_e_c_d_h_8h" local="no">ti/drivers/ECDH.h</includes>
+    <includes refid="_secure_callback_8h" local="no">ti/drivers/tfm/SecureCallback.h</includes>
+    <includes local="no">third_party/tfm/interface/include/psa/error.h</includes>
+    <includes local="no">third_party/tfm/interface/include/psa/service.h</includes>
+    <incdepgraph>
+      <node id="950">
+        <label>stdbool.h</label>
+      </node>
+      <node id="947">
+        <label>stdint.h</label>
+      </node>
+      <node id="956">
+        <label>ti/drivers/tfm/SecureCallback.h</label>
+        <link refid="_secure_callback_8h"/>
+        <childnode refid="951" relation="include">
+        </childnode>
+        <childnode refid="947" relation="include">
+        </childnode>
+        <childnode refid="957" relation="include">
+        </childnode>
+      </node>
+      <node id="955">
+        <label>ti/drivers/cryptoutils/ecc/ECCParamsLPF3HSM.h</label>
+      </node>
+      <node id="951">
+        <label>stddef.h</label>
+      </node>
+      <node id="953">
+        <label>ti/drivers/cryptoutils/ecc/ECCParams.h</label>
+        <link refid="_e_c_c_params_8h"/>
+        <childnode refid="947" relation="include">
+        </childnode>
+        <childnode refid="951" relation="include">
+        </childnode>
+        <childnode refid="950" relation="include">
+        </childnode>
+        <childnode refid="952" relation="include">
+        </childnode>
+        <childnode refid="954" relation="include">
+        </childnode>
+        <childnode refid="955" relation="include">
+        </childnode>
+      </node>
+      <node id="954">
+        <label>ti/devices/DeviceFamily.h</label>
+      </node>
+      <node id="957">
+        <label>ti/drivers/utils/List.h</label>
+        <link refid="_list_8h"/>
+        <childnode refid="947" relation="include">
+        </childnode>
+        <childnode refid="950" relation="include">
+        </childnode>
+        <childnode refid="951" relation="include">
+        </childnode>
+      </node>
+      <node id="948">
+        <label>ti/drivers/crypto/CryptoCC26X4_s.h</label>
+        <link refid="_crypto_c_c26_x4__s_8h"/>
+        <childnode refid="947" relation="include">
+        </childnode>
+      </node>
+      <node id="952">
+        <label>ti/drivers/cryptoutils/cryptokey/CryptoKey.h</label>
+        <link refid="_crypto_key_8h"/>
+        <childnode refid="947" relation="include">
+        </childnode>
+        <childnode refid="950" relation="include">
+        </childnode>
+      </node>
+      <node id="946">
+        <label>ECDHCC26X4_s.h</label>
+        <link refid="_e_c_d_h_c_c26_x4__s_8h"/>
+        <childnode refid="947" relation="include">
+        </childnode>
+        <childnode refid="948" relation="include">
+        </childnode>
+        <childnode refid="949" relation="include">
+        </childnode>
+        <childnode refid="956" relation="include">
+        </childnode>
+        <childnode refid="958" relation="include">
+        </childnode>
+        <childnode refid="959" relation="include">
+        </childnode>
+      </node>
+      <node id="949">
+        <label>ti/drivers/ECDH.h</label>
+        <link refid="_e_c_d_h_8h"/>
+        <childnode refid="950" relation="include">
+        </childnode>
+        <childnode refid="951" relation="include">
+        </childnode>
+        <childnode refid="947" relation="include">
+        </childnode>
+        <childnode refid="952" relation="include">
+        </childnode>
+        <childnode refid="953" relation="include">
+        </childnode>
+      </node>
+      <node id="958">
+        <label>third_party/tfm/interface/include/psa/error.h</label>
+      </node>
+      <node id="959">
+        <label>third_party/tfm/interface/include/psa/service.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_e_c_d_h__s___secure_callback" prot="public">ECDH_s_SecureCallback</innerclass>
+    <innerclass refid="struct_e_c_d_h__s___construct_msg" prot="public">ECDH_s_ConstructMsg</innerclass>
+    <innerclass refid="struct_e_c_d_h__s___open_msg" prot="public">ECDH_s_OpenMsg</innerclass>
+    <innerclass refid="struct_e_c_d_h__s___callback_msg" prot="public">ECDH_s_CallbackMsg</innerclass>
+    <innerclass refid="struct_e_c_d_h__s___close_msg" prot="public">ECDH_s_CloseMsg</innerclass>
+    <innerclass refid="struct_e_c_d_h__s___generate_public_key_msg" prot="public">ECDH_s_GeneratePublicKeyMsg</innerclass>
+    <innerclass refid="struct_e_c_d_h__s___compute_shared_secret_msg" prot="public">ECDH_s_ComputeSharedSecretMsg</innerclass>
+    <innerclass refid="struct_e_c_d_h__s___cancel_operation_msg" prot="public">ECDH_s_CancelOperationMsg</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_e_c_d_h_c_c26_x4__s_8h_1a4ca848d90eae4f46828288d7737c65ae" prot="public" static="no">
+        <name>ECDH_S_MSG_TYPE_CONSTRUCT</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1ae8d8ac0c4d2bc2ab80c917fbff14e350" kindref="member">ECDH_S_MSG_TYPE</ref>(0U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdh/ECDHCC26X4_s.h" line="57" column="9" bodyfile="source/ti/drivers/ecdh/ECDHCC26X4_s.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_e_c_d_h_c_c26_x4__s_8h_1a4d98d3d109d6bf091d8db59c05f56fd2" prot="public" static="no">
+        <name>ECDH_S_MSG_TYPE_OPEN</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1ae8d8ac0c4d2bc2ab80c917fbff14e350" kindref="member">ECDH_S_MSG_TYPE</ref>(1U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdh/ECDHCC26X4_s.h" line="58" column="9" bodyfile="source/ti/drivers/ecdh/ECDHCC26X4_s.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_e_c_d_h_c_c26_x4__s_8h_1a312ab5b80e604bad94709641696b59ee" prot="public" static="no">
+        <name>ECDH_S_MSG_TYPE_REGISTER_CALLBACK</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1ae8d8ac0c4d2bc2ab80c917fbff14e350" kindref="member">ECDH_S_MSG_TYPE</ref>(2U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdh/ECDHCC26X4_s.h" line="59" column="9" bodyfile="source/ti/drivers/ecdh/ECDHCC26X4_s.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_e_c_d_h_c_c26_x4__s_8h_1ae8a94e63c0f0ead501df46434186ded9" prot="public" static="no">
+        <name>ECDH_S_MSG_TYPE_CLOSE</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1ae8d8ac0c4d2bc2ab80c917fbff14e350" kindref="member">ECDH_S_MSG_TYPE</ref>(3U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdh/ECDHCC26X4_s.h" line="60" column="9" bodyfile="source/ti/drivers/ecdh/ECDHCC26X4_s.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_e_c_d_h_c_c26_x4__s_8h_1a8244e4427604c568b7b7a63c2376ee60" prot="public" static="no">
+        <name>ECDH_S_MSG_TYPE_GENERATE_PUBLIC_KEY</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1ae8d8ac0c4d2bc2ab80c917fbff14e350" kindref="member">ECDH_S_MSG_TYPE</ref>(4U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdh/ECDHCC26X4_s.h" line="61" column="9" bodyfile="source/ti/drivers/ecdh/ECDHCC26X4_s.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_e_c_d_h_c_c26_x4__s_8h_1a3fd8d5a9d84a25d189976979b6fdb739" prot="public" static="no">
+        <name>ECDH_S_MSG_TYPE_COMPUTE_SHARED_SECRET</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1ae8d8ac0c4d2bc2ab80c917fbff14e350" kindref="member">ECDH_S_MSG_TYPE</ref>(5U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdh/ECDHCC26X4_s.h" line="62" column="9" bodyfile="source/ti/drivers/ecdh/ECDHCC26X4_s.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_e_c_d_h_c_c26_x4__s_8h_1a0c7e06a274e3ad838dec1d12ccd883db" prot="public" static="no">
+        <name>ECDH_S_MSG_TYPE_CANCEL_OPERATION</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1ae8d8ac0c4d2bc2ab80c917fbff14e350" kindref="member">ECDH_S_MSG_TYPE</ref>(6U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdh/ECDHCC26X4_s.h" line="63" column="9" bodyfile="source/ti/drivers/ecdh/ECDHCC26X4_s.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_e_c_d_h_c_c26_x4__s_8h_1ad92e36d54aa2424bea19776b6be14a85" prot="public" static="no">
+        <name>CONFIG_ECDH_S_CONFIG_POOL_SIZE</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdh/ECDHCC26X4_s.h" line="70" column="13" bodyfile="source/ti/drivers/ecdh/ECDHCC26X4_s.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_e_c_d_h_c_c26_x4__s_8h_1a3641a07689075b7b7c9cb57627f8cf23" prot="public" static="no">
+        <name>ECDH_SECURE_CALLBACK_COUNT</name>
+        <initializer>(CONFIG_TI_DRIVERS_ECDH_COUNT + <ref refid="_e_c_d_h_c_c26_x4__s_8h_1ad92e36d54aa2424bea19776b6be14a85" kindref="member">CONFIG_ECDH_S_CONFIG_POOL_SIZE</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdh/ECDHCC26X4_s.h" line="73" column="9" bodyfile="source/ti/drivers/ecdh/ECDHCC26X4_s.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_e_c_d_h_c_c26_x4__s_8h_1a13756b197374e9ba578819f57d4cba0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>psa_status_t</type>
+        <definition>psa_status_t ECDH_s_handlePsaMsg</definition>
+        <argsstring>(psa_msg_t *msg)</argsstring>
+        <name>ECDH_s_handlePsaMsg</name>
+        <param>
+          <type>psa_msg_t *</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Handles PSA messages for ECDH secure driver. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This function should be called by secure partition thread only.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to PSA message</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>PSA_SUCCESS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>PSA_ERROR_PROGRAMMER_ERROR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if any args point to secure addresses. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdh/ECDHCC26X4_s.h" line="149" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_e_c_d_h_c_c26_x4__s_8h_1af2f26db5c1e9d59ce31e96c93b712916" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ECDH_s_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>ECDH_s_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initializes the ECDH secure driver. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This function should be called by secure partition thread only. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/ecdh/ECDHCC26X4_s.h" line="156" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2022-2023,<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>-<sp/>http://www.ti.com</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ti_drivers_ecdh_ECDHCC26X4_s__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_drivers_ecdh_ECDHCC26X4_s__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_crypto_c_c26_x4__s_8h" kindref="compound">ti/drivers/crypto/CryptoCC26X4_s.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_e_c_d_h_8h" kindref="compound">ti/drivers/ECDH.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_secure_callback_8h" kindref="compound">ti/drivers/tfm/SecureCallback.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;third_party/tfm/interface/include/psa/error.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;third_party/tfm/interface/include/psa/service.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(TFM_BUILD)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;ti_drivers_config.h&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="comment">/*<sp/>Sysconfig<sp/>generated<sp/>header<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/>*<sp/>ECDH<sp/>secure<sp/>message<sp/>types</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="_e_c_d_h_c_c26_x4__s_8h_1a4ca848d90eae4f46828288d7737c65ae" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECDH_S_MSG_TYPE_CONSTRUCT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ECDH_S_MSG_TYPE(0U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="_e_c_d_h_c_c26_x4__s_8h_1a4d98d3d109d6bf091d8db59c05f56fd2" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECDH_S_MSG_TYPE_OPEN<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ECDH_S_MSG_TYPE(1U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="_e_c_d_h_c_c26_x4__s_8h_1a312ab5b80e604bad94709641696b59ee" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECDH_S_MSG_TYPE_REGISTER_CALLBACK<sp/><sp/><sp/><sp/><sp/>ECDH_S_MSG_TYPE(2U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="_e_c_d_h_c_c26_x4__s_8h_1ae8a94e63c0f0ead501df46434186ded9" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECDH_S_MSG_TYPE_CLOSE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ECDH_S_MSG_TYPE(3U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="_e_c_d_h_c_c26_x4__s_8h_1a8244e4427604c568b7b7a63c2376ee60" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECDH_S_MSG_TYPE_GENERATE_PUBLIC_KEY<sp/><sp/><sp/>ECDH_S_MSG_TYPE(4U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="_e_c_d_h_c_c26_x4__s_8h_1a3fd8d5a9d84a25d189976979b6fdb739" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECDH_S_MSG_TYPE_COMPUTE_SHARED_SECRET<sp/>ECDH_S_MSG_TYPE(5U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="_e_c_d_h_c_c26_x4__s_8h_1a0c7e06a274e3ad838dec1d12ccd883db" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECDH_S_MSG_TYPE_CANCEL_OPERATION<sp/><sp/><sp/><sp/><sp/><sp/>ECDH_S_MSG_TYPE(6U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/>*<sp/>Config<sp/>pool<sp/>size<sp/>determines<sp/>how<sp/>many<sp/>dynamic<sp/>driver<sp/>instances<sp/>can<sp/>be<sp/>created</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/>*<sp/>by<sp/>the<sp/>non-secure<sp/>client<sp/>using<sp/>ECDH_construct().</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>CONFIG_ECDH_S_CONFIG_POOL_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70" refid="_e_c_d_h_c_c26_x4__s_8h_1ad92e36d54aa2424bea19776b6be14a85" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>CONFIG_ECDH_S_CONFIG_POOL_SIZE<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="_e_c_d_h_c_c26_x4__s_8h_1a3641a07689075b7b7c9cb57627f8cf23" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECDH_SECURE_CALLBACK_COUNT<sp/>(CONFIG_TI_DRIVERS_ECDH_COUNT<sp/>+<sp/>CONFIG_ECDH_S_CONFIG_POOL_SIZE)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/>*<sp/>=========<sp/>ECDH<sp/>Secure<sp/>Callback<sp/>struct<sp/>=========</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/>*<sp/>Non-secure<sp/>clients<sp/>must<sp/>register<sp/>their<sp/>callback<sp/>after<sp/>opening<sp/>or</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/>*<sp/>constructing<sp/>a<sp/>driver<sp/>instance<sp/>with<sp/>blocking<sp/>or<sp/>callback<sp/>return<sp/>behavior.</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="struct_e_c_d_h__s___secure_callback" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="82" refid="struct_e_c_d_h__s___secure_callback_1a546c9961d11e01235464d54fa87f8bbd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_secure_callback___object" kindref="compound">SecureCallback_Object</ref><sp/><ref refid="struct_e_c_d_h__s___secure_callback_1a546c9961d11e01235464d54fa87f8bbd" kindref="member">object</ref>;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>ECDH<sp/>callback<sp/>fxn<sp/>parameters<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="struct_e_c_d_h__s___secure_callback_1ab0dcaded5b15826c1ba41b79637a349e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_e_c_d_h___config" kindref="compound">ECDH_Handle</ref><sp/><ref refid="struct_e_c_d_h__s___secure_callback_1ab0dcaded5b15826c1ba41b79637a349e" kindref="member">handle</ref>;</highlight></codeline>
+<codeline lineno="85" refid="struct_e_c_d_h__s___secure_callback_1a11b11ccb383648d6714d6f6aa9a0b39a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int_fast16_t<sp/><ref refid="struct_e_c_d_h__s___secure_callback_1a11b11ccb383648d6714d6f6aa9a0b39a" kindref="member">returnStatus</ref>;</highlight></codeline>
+<codeline lineno="86" refid="struct_e_c_d_h__s___secure_callback_1aa6c0630c14c286171f28806b9b7b02a2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="union_e_c_d_h___operation" kindref="compound">ECDH_Operation</ref><sp/><ref refid="struct_e_c_d_h__s___secure_callback_1aa6c0630c14c286171f28806b9b7b02a2" kindref="member">operation</ref>;</highlight></codeline>
+<codeline lineno="87" refid="struct_e_c_d_h__s___secure_callback_1ac83b3268a4891ab81977eadbf3e32af7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_e_c_d_h_8h_1a99b8a8bbad4e932870174c38dec46490" kindref="member">ECDH_OperationType</ref><sp/><ref refid="struct_e_c_d_h__s___secure_callback_1ac83b3268a4891ab81977eadbf3e32af7" kindref="member">operationType</ref>;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal">}<sp/><ref refid="struct_e_c_d_h__s___secure_callback" kindref="compound">ECDH_s_SecureCallback</ref>;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/>*<sp/>=========<sp/>ECDH<sp/>Secure<sp/>Message<sp/>Structs<sp/>=========</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/>*<sp/>These<sp/>secure<sp/>message<sp/>structs<sp/>correspond<sp/>to<sp/>the<sp/>secure<sp/>message<sp/>types<sp/>defined</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/>*<sp/>above.<sp/>Together,<sp/>they<sp/>are<sp/>used<sp/>by<sp/>non-secure<sp/>client<sp/>to<sp/>make<sp/>PSA<sp/>calls<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/>*<sp/>ECDH<sp/>secure<sp/>service.<sp/>There<sp/>is<sp/>a<sp/>single<sp/>input<sp/>vector<sp/>for<sp/>the<sp/>PSA<sp/>call</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/>*<sp/>which<sp/>is<sp/>a<sp/>pointer<sp/>to<sp/>secure<sp/>message<sp/>struct.<sp/>If<sp/>the<sp/>underlying<sp/>function</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*<sp/>has<sp/>a<sp/>return<sp/>value,<sp/>there<sp/>is<sp/>a<sp/>single<sp/>output<sp/>vector<sp/>which<sp/>is<sp/>a<sp/>pointer<sp/>to</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/>*<sp/>storage<sp/>for<sp/>the<sp/>return<sp/>value.</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99" refid="struct_e_c_d_h__s___construct_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="101" refid="struct_e_c_d_h__s___construct_msg_1a89c1ea444f983806dcec710a2df5ba6d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_e_c_d_h___config" kindref="compound">ECDH_Config</ref><sp/>*<ref refid="struct_e_c_d_h__s___construct_msg_1a89c1ea444f983806dcec710a2df5ba6d" kindref="member">config</ref>;</highlight></codeline>
+<codeline lineno="102" refid="struct_e_c_d_h__s___construct_msg_1a0bf1384473723bdb8d4855ca4d73cfc4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_e_c_d_h___params" kindref="compound">ECDH_Params</ref><sp/>*<ref refid="struct_e_c_d_h__s___construct_msg_1a0bf1384473723bdb8d4855ca4d73cfc4" kindref="member">params</ref>;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal">}<sp/><ref refid="struct_e_c_d_h__s___construct_msg" kindref="compound">ECDH_s_ConstructMsg</ref>;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="struct_e_c_d_h__s___open_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="107" refid="struct_e_c_d_h__s___open_msg_1a826aee5e929fd4e3f6ea02a200bf046b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint_least8_t<sp/><ref refid="struct_e_c_d_h__s___open_msg_1a826aee5e929fd4e3f6ea02a200bf046b" kindref="member">index</ref>;</highlight></codeline>
+<codeline lineno="108" refid="struct_e_c_d_h__s___open_msg_1aa7d701ca600cb6002ca25dee21a4e04d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_e_c_d_h___params" kindref="compound">ECDH_Params</ref><sp/>*<ref refid="struct_e_c_d_h__s___open_msg_1aa7d701ca600cb6002ca25dee21a4e04d" kindref="member">params</ref>;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal">}<sp/><ref refid="struct_e_c_d_h__s___open_msg" kindref="compound">ECDH_s_OpenMsg</ref>;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111" refid="struct_e_c_d_h__s___callback_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="113" refid="struct_e_c_d_h__s___callback_msg_1a904d33cca6f215af565d75e01a5db712" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_e_c_d_h___config" kindref="compound">ECDH_Handle</ref><sp/><ref refid="struct_e_c_d_h__s___callback_msg_1a904d33cca6f215af565d75e01a5db712" kindref="member">handle</ref>;</highlight></codeline>
+<codeline lineno="114" refid="struct_e_c_d_h__s___callback_msg_1a5ab2161a0012621235f839ba27cffe20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_e_c_d_h__s___secure_callback" kindref="compound">ECDH_s_SecureCallback</ref><sp/>*<ref refid="struct_e_c_d_h__s___callback_msg_1a5ab2161a0012621235f839ba27cffe20" kindref="member">callback</ref>;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal">}<sp/><ref refid="struct_e_c_d_h__s___callback_msg" kindref="compound">ECDH_s_CallbackMsg</ref>;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117" refid="struct_e_c_d_h__s___close_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="119" refid="struct_e_c_d_h__s___close_msg_1ad76a903dc7e73cefbc4023f86827227f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_e_c_d_h___config" kindref="compound">ECDH_Handle</ref><sp/><ref refid="struct_e_c_d_h__s___close_msg_1ad76a903dc7e73cefbc4023f86827227f" kindref="member">handle</ref>;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal">}<sp/><ref refid="struct_e_c_d_h__s___close_msg" kindref="compound">ECDH_s_CloseMsg</ref>;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122" refid="struct_e_c_d_h__s___generate_public_key_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="124" refid="struct_e_c_d_h__s___generate_public_key_msg_1af0d4117ef948c1b17051afd4e17c2d08" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_e_c_d_h___config" kindref="compound">ECDH_Handle</ref><sp/><ref refid="struct_e_c_d_h__s___generate_public_key_msg_1af0d4117ef948c1b17051afd4e17c2d08" kindref="member">handle</ref>;</highlight></codeline>
+<codeline lineno="125" refid="struct_e_c_d_h__s___generate_public_key_msg_1ac5c1514a581d50da621da49e42cf4ac4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_e_c_d_h___operation_generate_public_key" kindref="compound">ECDH_OperationGeneratePublicKey</ref><sp/>*<ref refid="struct_e_c_d_h__s___generate_public_key_msg_1ac5c1514a581d50da621da49e42cf4ac4" kindref="member">operation</ref>;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal">}<sp/><ref refid="struct_e_c_d_h__s___generate_public_key_msg" kindref="compound">ECDH_s_GeneratePublicKeyMsg</ref>;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128" refid="struct_e_c_d_h__s___compute_shared_secret_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="130" refid="struct_e_c_d_h__s___compute_shared_secret_msg_1ac29e8dc536333517283277df11b5edb5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_e_c_d_h___config" kindref="compound">ECDH_Handle</ref><sp/><ref refid="struct_e_c_d_h__s___compute_shared_secret_msg_1ac29e8dc536333517283277df11b5edb5" kindref="member">handle</ref>;</highlight></codeline>
+<codeline lineno="131" refid="struct_e_c_d_h__s___compute_shared_secret_msg_1aeaa0b434d273677c3968036ff65eebaa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_e_c_d_h___operation_compute_shared_secret" kindref="compound">ECDH_OperationComputeSharedSecret</ref><sp/>*<ref refid="struct_e_c_d_h__s___compute_shared_secret_msg_1aeaa0b434d273677c3968036ff65eebaa" kindref="member">operation</ref>;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal">}<sp/><ref refid="struct_e_c_d_h__s___compute_shared_secret_msg" kindref="compound">ECDH_s_ComputeSharedSecretMsg</ref>;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134" refid="struct_e_c_d_h__s___cancel_operation_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="136" refid="struct_e_c_d_h__s___cancel_operation_msg_1a7b1e75b519d8f8d0ede944b283163bd6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_e_c_d_h___config" kindref="compound">ECDH_Handle</ref><sp/><ref refid="struct_e_c_d_h__s___cancel_operation_msg_1a7b1e75b519d8f8d0ede944b283163bd6" kindref="member">handle</ref>;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal">}<sp/><ref refid="struct_e_c_d_h__s___cancel_operation_msg" kindref="compound">ECDH_s_CancelOperationMsg</ref>;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal">psa_status_t<sp/><ref refid="_e_c_d_h_c_c26_x4__s_8h_1a13756b197374e9ba578819f57d4cba0d" kindref="member">ECDH_s_handlePsaMsg</ref>(psa_msg_t<sp/>*msg);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_e_c_d_h_c_c26_x4__s_8h_1af2f26db5c1e9d59ce31e96c93b712916" kindref="member">ECDH_s_init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_drivers_ecdh_ECDHCC26X4_s__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/ecdh/ECDHCC26X4_s.h"/>
+  </compounddef>
+</doxygen>

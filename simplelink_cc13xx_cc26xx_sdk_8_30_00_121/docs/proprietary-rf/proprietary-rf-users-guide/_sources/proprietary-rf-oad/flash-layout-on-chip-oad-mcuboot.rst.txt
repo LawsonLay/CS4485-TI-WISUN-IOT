@@ -1,0 +1,143 @@
+.. _sec-oad-on-chip-memory-layout-proprf-mcuboot:
+
+Flash Layout for On-Chip OAD
+=============================
+
+This section will describe the method for placing images in internal
+flash when using on-chip OAD with the MCUBoot bootloader.
+
+
+Constraints and Requirements for On-chip OAD
+--------------------------------------------
+
+In order to perform an On-chip OAD the target system must have:
+
+  - The user application must be sufficiently small in order to fit into the
+    flash layout system described below
+
+Internal Flash Memory Layout
+----------------------------
+
+The flash memory layout is dependent on the Device family. CC13x4 and CC26x4 devices differ from
+CC13x2, CC26x2 devices in their flash memory layout of the bootloader and user applications.
+
+Internal Flash Memory Layout for CC13x2x7 and CC26x2x7
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+The following diagram shows default the flash memory layout for the MCUBoot based
+Proprietary RF OAD projects on both CC13x2x7 and CC26x2x7 devices.
+
+
+.. _fig-on-chip-oad-704-target-memory-partition:
+.. ditaa::
+    :--no-separation:
+
+    +---------------------------------------------------------+   0x000B0000
+    |                                                         |
+    |                  MCUBoot + CCFG cRED                    |
+    |                                                         |
+    |                                                         |
+    +---------------------------------------------------------+   0x0000AC000
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                  Secondary Slot  c7AF                   |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    +---------------------------------------------------------+ 0x00056000(Secondary Slot Base)
+    |                                                         |
+    |                  MCUBoot Trailer                        |
+    |                       c333                              |
+    +---------------------------------------------------------+
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                  User Application   c7AF                |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    +---------------------------------------------------------+ 0x000001C8
+    |                  OAD Header                             |
+    |                        c333                             |
+    +---------------------------------------------------------+
+    |                                        c7AF             |
+    |                  App Interrupt Vectors                  |
+    |                                                         |
+    +---------------------------------------------------------+ 0x00000020
+    |                                                         |
+    |                  MCUBoot Header                         |
+    |                        c333                             |
+    +---------------------------------------------------------+ 0x00000000
+
+
+
+Internal Flash Memory Layout for CC13x4 and CC26x4
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+The following diagram shows default the flash memory layout for the MCUBoot based
+Proprietary RF OAD projects on both CC13x4 CC26x4 devices.
+
+
+.. _fig-on-chip-oad-1m-target-memory-partition:
+.. ditaa::
+    :--no-separation:
+
+    +---------------------------------------------------------+ 0x50000800
+    |                                                         |
+    |                  CCFG   cRED                            |
+    |                                                         |
+    +---------------------------------------------------------+ 0x50000000
+    |                                                         |
+    |                  Padding                                |
+    |                               c333                      |
+    |                                                         |
+    +---------------------------------------------------------+ 0x00100000
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    |                  Secondary Slot    c7AF                 |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    +---------------------------------------------------------+ 0x00083000 (Secondary Slot Base)
+    |                                                         |
+    |                  MCUBoot Trailer     c333               |
+    |                                                         |
+    +---------------------------------------------------------+
+    |                                                         |
+    |                                                         |
+    |                  User Application                       |
+    |                                                         |
+    |                                      c7AF               |
+    |                                                         |
+    |                                                         |
+    |                                                         |
+    +---------------------------------------------------------+ 0x000061C8
+    |                                                         |
+    |                  OAD Header           c333              |
+    |                                                         |
+    +---------------------------------------------------------+ 0x00006120
+    |                                                         |
+    |                                           c7AF          |
+    |                  App Interrupt Vectors                  |
+    +---------------------------------------------------------+ 0x00006020
+    |                                                         |
+    |                  MCUBoot Header      c333               |
+    +---------------------------------------------------------+ 0x00006000
+    |                                                         |
+    |                                                         |
+    |                  MCUBoot+Padding     cRED               |
+    |                                                         |
+    +---------------------------------------------------------+ 0x00000000

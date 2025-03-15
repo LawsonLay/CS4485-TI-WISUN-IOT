@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Queues &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tasks" href="tasks.html" />
+    <link rel="prev" title="Thread Synchronization" href="../tirtos/synchronization.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-stack-tirtos queues";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../tirtos/hwis_swis_idle.html">Threading Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tirtos/bios7_config.html">Kernel Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tirtos/create_vs_construct.html">Creating vs. Constructing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tirtos/synchronization.html">Thread Synchronization</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Queues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#functional-example">Functional Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html">Clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tirtos/power.html">Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tirtos/bios7_migration.html">TI-RTOS to TI-RTOS7 Migration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a> &raquo;</li>
+      <li>Queues</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="queues">
+<h1>Queues<a class="headerlink" href="#queues" title="Permalink to this headline">¶</a></h1>
+<p>The TI-RTOS Queue module provides a thread-safe unidirectional message passing
+module operating in a first in, first out (FIFO) basis. Queues are commonly
+used to allow high priority threads to pass messages to lower priority tasks
+for deferred processing; therefore allowing low priority tasks to block until
+necessary to run.</p>
+<p>In <a class="reference internal" href="#fig-ble-queue-messaging-process"><span class="std std-numref">Figure 60.</span></a> a queue is configured for
+unidirectional communication from task A to task B. Task A “puts” messages into
+the queue and task B “gets” messages from the queue.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-ble-queue-messaging-process"></span><img alt="../_images/fig-queue-messaging-process.jpg" src="../_images/fig-queue-messaging-process.jpg" />
+<p class="caption"><span class="caption-number">Figure 60. </span><span class="caption-text">Queue Messaging Process</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>In BLE5-Stack, TI-RTOS Queue functions have been abstracted into functions
+in <code class="docutils literal notranslate"><span class="pre">util.c</span></code> See the Queue module documentation in the
+<a class="reference external" href="../../../../tirtos7/Bios_User_Guide.pdf">TI-RTOS7 Kernel (SYS/BIOS) User’s Guide</a>. for the underlying functions. The functions in
+<code class="docutils literal notranslate"><span class="pre">util.c</span></code> combine a queue from the Queue module with an event from the
+Event module to pass messages between threads.</p>
+<p>In CC13xx or CC26xx software, ICall uses queues and events from their respective
+modules to pass messages between the application and stack tasks.
+An example of this can be seen in <code class="docutils literal notranslate"><span class="pre">SimpleCentral_enqueueMsg()</span></code>. A high
+priority Task, Swi, or Hwi queues a message to the application task. The
+application task will then process this message in its own context when no
+other high priority threads are running.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">util</span></code> module contains a set of abstracted TI-RTOS Queue functions as
+shown here:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="../../doxygen/ble/html/group___util.html#ga1a402aa73798e67c21ea960bb67ed516">Util_constructQueue()</a> creates a queue.</p></li>
+<li><p><a class="reference external" href="../../doxygen/ble/html/group___util.html#gada1270148b25421486d6a0f6e001a3b5">Util_enqueueMsg()</a> puts items into the queue.</p></li>
+<li><p><a class="reference external" href="../../doxygen/ble/html/group___util.html#ga2119072ce502da984eed8a9dd614da07">Util_dequeueMsg()</a> gets items from the queue.</p></li>
+</ul>
+<div class="section" id="functional-example">
+<h2>Functional Example<a class="headerlink" href="#functional-example" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="#fig-ble-enqueue-message"><span class="std std-numref">Figure 61.</span></a> and <a class="reference internal" href="#fig-ble-dequeue-message"><span class="std std-numref">Figure 62.</span></a> illustrate
+how a queue is used to enqueue a button press message from a Hwi (to a Swi in
+the Board Key module) to be post-processed within a task context. This example
+is taken from the from the simple_central project in BLE5-Stack.</p>
+<div class="figure align-center" id="id3">
+<span id="fig-ble-enqueue-message"></span><p class="plantuml">
+<img src="../_images/plantuml-d2d063751a6f60aa88d8c95dba442896549d0f77.png" alt="&#64;startuml
+hide footbox
+
+box &quot;Swi context&quot;
+    participant &quot;Board Key module&quot; as A
+    participant simple_central.c as B
+    database appMsgQueue as C
+end box
+
+-[#red]&gt; A : Key press interrupt
+&lt;[#red]-- A
+
+activate A
+
+autonumber
+A -&gt; B : SimpleCentral_keyChangeHandler();
+activate B
+
+note right: Add SC_KEY_CHANGE_EVT into the queue
+B -&gt; B : SimpleCentral_enqueueMsg();
+activate B
+autonumber stop
+B -&gt; : ICall_malloc();
+B -&gt; C: Util_enqueueMsg();
+activate C
+C --&gt; B:
+deactivate C
+B -&gt; : Event_post();
+deactivate B
+B --&gt; A
+deactivate B
+deactivate A
+
+&#64;enduml"/>
+</p>
+<p class="caption"><span class="caption-number">Figure 61. </span><span class="caption-text">Sequence diagram for enqueuing a message</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>With interrupts enabled, a pin interrupt can occur asynchronously within a
+<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-HWI"><span class="xref std std-term">Hwi</span></a> context. To keep interrupts as short as possible, the work
+associated to the interrupt is deferred to tasks for processing. In the
+simple_central example found in BLE5-Stack, pin interrupts are abstracted
+via the <em>Board Key module</em>. This module notifies registered functions via a
+<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-SWI"><span class="xref std std-term">Swi</span></a> callback. In this case, <code class="docutils literal notranslate"><span class="pre">SimpleCentral_keyChangeHandler</span></code>
+is the registered callback function.</p>
+<p><strong>Step 1</strong> in <a class="reference internal" href="#fig-ble-enqueue-message"><span class="std std-numref">Figure 61.</span></a> shows the callback to
+<code class="docutils literal notranslate"><span class="pre">SimpleCentral_keyChangeHandler</span></code> when a key is pressed. This event is
+placed into the application’s queue for processing.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<span id="board-key-change-handler-listing"></span><div class="code-block-caption"><span class="caption-number">Listing 8. </span><span class="caption-text">Defining SimpleCentral_keyChangeHandler()</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kt">void</span><span class="w"> </span><span class="nf">SimpleCentral_keyChangeHandler</span><span class="p">(</span><span class="n">uint8</span><span class="w"> </span><span class="n">keys</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">2</span><span class="p">{</span><span class="w"></span>
+<span class="hll"><span class="linenos">3</span><span class="w">  </span><span class="n">SimpleCentral_enqueueMsg</span><span class="p">(</span><span class="n">SC_KEY_CHANGE_EVT</span><span class="p">,</span><span class="w"> </span><span class="n">keys</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos">4</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p><strong>Step 2</strong> in <a class="reference internal" href="#fig-ble-enqueue-message"><span class="std std-numref">Figure 61.</span></a> shows how this key press is enqueued
+for simple_central task. Here, memory is allocated via <a class="reference external" href="../../doxygen/ble/html/group___i_call.html#ga00ce08b268a246cee700442af6ac10ec">ICall_malloc()</a>
+so the message can be added to the queue. Once added, <a class="reference external" href="../../doxygen/ble/html/group___util.html#gada1270148b25421486d6a0f6e001a3b5">Util_enqueueMsg()</a>
+will generate a <code class="xref c c-macro docutils literal notranslate"><span class="pre">UTIL_QUEUE_EVENT_ID</span></code> event to signal the application
+for processing.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">Listing 9. </span><span class="caption-text">Defining SimpleCentral_enqueueMsg()</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">SimpleCentral_enqueueMsg</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">pData</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="hll"><span class="linenos"> 3</span><span class="w">  </span><span class="n">scEvt_t</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ICall_malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">scEvt_t</span><span class="p">));</span><span class="w"></span>
+</span><span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="c1">// Create dynamic pointer to message.</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">hdr</span><span class="p">.</span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">hdr</span><span class="p">.</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">    </span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">pData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pData</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">    </span><span class="c1">// Enqueue the message.</span>
+<span class="hll"><span class="linenos">13</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Util_enqueueMsg</span><span class="p">(</span><span class="n">appMsgQueue</span><span class="p">,</span><span class="w"> </span><span class="n">syncEvent</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos">14</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">17</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="figure align-center" id="id6">
+<span id="fig-ble-dequeue-message"></span><p class="plantuml">
+<img src="../_images/plantuml-258398d03de89f27b5ace3b65194be1d11b2b676.png" alt="&#64;startuml
+hide footbox
+
+box &quot;Task context&quot;
+    participant simple_central.c as A
+    database appMsgQueue as B
+end box
+
+activate A
+A -&gt; : Event_pend()
+note right: Task called Event_pend() and gets blocked
+deactivate A
+
+...
+
+-&gt; A : Posted event
+activate A
+autonumber 3
+A -&gt; A : while (pMsg = Util_dequeueMsg())
+activate A
+autonumber stop
+note right: Util_dequeueMsg() checks and dequeues any message
+
+autonumber resume
+A -&gt; : SimpleCentral_processAppMsg(pMsg);
+note right: SimpleCentral_processAppMsg \n{\n\tcase (SC_KEY_CHANGE_EVT):\n\t\tSimpleCentral_handleKeys()\n};
+autonumber resume
+A -&gt; : ICall_free(pMsg)
+
+autonumber stop
+note right: Repeat while there are more messages\nin the queue
+deactivate A
+
+&#64;enduml"/>
+</p>
+<p class="caption"><span class="caption-number">Figure 62. </span><span class="caption-text">Sequence diagram for dequeuing a message</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p><strong>Step 3</strong> in <a class="reference internal" href="#fig-ble-dequeue-message"><span class="std std-numref">Figure 62.</span></a>, the simple_central application is
+unblocked by the posted <code class="xref c c-macro docutils literal notranslate"><span class="pre">UTIL_QUEUE_EVENT_ID</span></code> event where it proceeds
+to check if messages have been placed in the queue for processing.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-number">Listing 10. </span><span class="caption-text">Processing application messages</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// If RTOS queue is not empty, process app message</span>
+<span class="hll"><span class="linenos"> 2</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">events</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">SC_QUEUE_EVT</span><span class="p">)</span><span class="w"></span>
+</span><span class="linenos"> 3</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="n">scEvt_t</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="p">;</span><span class="w"></span>
+<span class="hll"><span class="linenos"> 5</span><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">scEvt_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">Util_dequeueMsg</span><span class="p">(</span><span class="n">appMsgQueue</span><span class="p">))</span><span class="w"></span>
+</span><span class="linenos"> 6</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="c1">// Process message</span>
+<span class="hll"><span class="linenos"> 8</span><span class="w">        </span><span class="n">SimpleCentral_processAppMsg</span><span class="p">(</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">        </span><span class="c1">// Free the space from the message</span>
+<span class="hll"><span class="linenos">11</span><span class="w">        </span><span class="n">ICall_free</span><span class="p">(</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos">12</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">13</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p><strong>Step 4</strong> in <a class="reference internal" href="#fig-ble-dequeue-message"><span class="std std-numref">Figure 62.</span></a>, the simple_central application
+takes the dequeued message and processes it.</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-number">Listing 11. </span><span class="caption-text">Processing key interrupt message</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">SimpleCentral_processAppMsg</span><span class="p">(</span><span class="n">sbcEvt_t</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">hdr</span><span class="p">.</span><span class="n">event</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">SC_KEY_CHANGE_EVT</span><span class="p">:</span><span class="w"></span>
+<span class="hll"><span class="linenos"> 6</span><span class="w">      </span><span class="n">SimpleCentral_handleKeys</span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">hdr</span><span class="p">.</span><span class="n">state</span><span class="p">);</span><span class="w"></span>
+</span><span class="linenos"> 7</span><span class="w">      </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="c1">//...</span>
+<span class="linenos"> 9</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">10</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p><strong>Step 5</strong> in <a class="reference internal" href="#fig-ble-dequeue-message"><span class="std std-numref">Figure 62.</span></a>, the simple_central application
+can now free the memory allocated in <strong>Step 2</strong>.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tirtos/synchronization.html" class="btn btn-neutral float-left" title="Thread Synchronization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tasks.html" class="btn btn-neutral float-right" title="Tasks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

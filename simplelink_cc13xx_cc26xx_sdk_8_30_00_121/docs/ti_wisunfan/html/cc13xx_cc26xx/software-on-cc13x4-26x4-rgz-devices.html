@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CC13x4 and CC26x4 RGZ Variants &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="References" href="../wisun-guide/references.html" />
+    <link rel="prev" title="Migrate software examples from CC13x4 to CC26x4" href="software-on-cc13x4-26x4.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug cc13xx_cc26xx software-on-cc13x4-26x4-rgz-devices";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../wisun-guide/index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/wisun-index.html">TI Wi-SUN FAN Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/advanced-wisun-features.html">Advanced TI Wi-SUN FAN Stack Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/network-management.html">Wi-SUN Network Topology Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/NWP_interface.html">TI Wi-SUN FAN NWP Interface Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/wisun-oad-index.html">MCUBoot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../wisun-guide/migration-guide.html">Migration Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../wisun-guide/migration-guide.html#migration-guides">Migration Guides</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../tirtos/bios7_migration.html">TI-RTOS to TI-RTOS7 Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart_to_uart2.html">UART to UART2 Porting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio-porting-guide.html">GPIO++ Driver Porting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devices_without_launchpads.html">Devices without LaunchPads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x2x7-26x2x7.html">Running Software Examples on the CC13x2x7 or CC26x2x7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cc13x2-cc26x2-to-cc13x4-26x4.html">Migrate Your CC13x2 or CC26x2 Project to CC13x4 or CC26x4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x4-26x4.html">Migrate software examples from CC13x4 to CC26x4</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CC13x4 and CC26x4 RGZ Variants</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../wisun-guide/index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../wisun-guide/index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../wisun-guide/migration-guide.html">Migration Guide</a> &raquo;</li>
+      <li>CC13x4 and CC26x4 RGZ Variants</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="cc13x4-and-cc26x4-rgz-variants">
+<span id="sec-ccxxx4rgz"></span><h1>CC13x4 and CC26x4 RGZ Variants<a class="headerlink" href="#cc13x4-and-cc26x4-rgz-variants" title="Permalink to this headline">¶</a></h1>
+<p>CC13x4 and CC26x4 devices come with a 7x7 mm package variant, the RGZ variant.
+Since there is no launchpad with this device offered, please follow below
+recommendations. Use soldering to remove the CC13x2 or CC26x2 device from the
+board and replace it with your CC13x4 or CC26x4 RGZ device. The table also tells
+you which SDK examples folder to look in when starting your software development.</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-number">Table 15. </span><span class="caption-text">Suggested development boards and and software examples for RGZ variant devices.</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 34%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>LaunchPad</p></th>
+<th class="head"><p>Software example folder</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CC1314R10RGZ</p></td>
+<td><p>CC1312R1_LAUNCHXL</p></td>
+<td><p>LP_EM_CC1314R10</p></td>
+</tr>
+<tr class="row-odd"><td><p>CC1354R10RGZ</p></td>
+<td><p>CC1352R1_LAUNCHXL</p></td>
+<td><p>LP_EM_CC1354P10_1</p></td>
+</tr>
+<tr class="row-even"><td><p>CC1354P10RGZ</p></td>
+<td><p>CC1352P1_LAUNCHXL*</p></td>
+<td><p>LP_EM_CC1354P10_1*</p></td>
+</tr>
+<tr class="row-odd"><td><p>CC2674R10RGZ</p></td>
+<td><p>CC26X2R1_LAUNCHXL</p></td>
+<td><p>LP_EM_CC1354P10_1</p></td>
+</tr>
+<tr class="row-even"><td><p>CC2674P10RGZ</p></td>
+<td><p>CC1352P_2_LAUNCHXL</p></td>
+<td><p>LP_EM_CC1354P10_6</p></td>
+</tr>
+</tbody>
+</table>
+<p>* For P variants, choose the LaunchPad which corresponds to your rf design.</p>
+<p>For CC26x4 users, it may be helpful to take a look at the <a class="reference internal" href="software-on-cc13x4-26x4.html#sec-cc13x4-to-cc26x4"><span class="std std-ref">Migrate software examples from CC13x4 to CC26x4</span></a> guide.</p>
+<p>When you have soldered your LaunchPad and are ready to start software development,
+select a software example from the corresponding folder. We will open SysConfig
+and switch the board or device to he RGZ variant. Depending on the specific example
+project you are working on, additional steps may be required.</p>
+<ol class="arabic">
+<li><p>Open your example’s sysconfig file, whether it’s inside CCS, standalone
+sysconfig or from IAR.</p></li>
+<li><p>Press the SWITCH button.</p>
+<div class="figure align-center">
+<img alt="../_images/sysconfig-device.png" src="../_images/sysconfig-device.png" />
+</div>
+</li>
+<li><p>Press the dropdown menu for New Value for Board. If your board is available,
+select it. If not, select None.</p>
+<div class="figure align-center">
+<img alt="../_images/switch-board.png" src="../_images/switch-board.png" />
+</div>
+</li>
+<li><p>If your board was available, skip to 5. If not, open the dropdown menu for
+New Value for Device and select your device.</p>
+<div class="figure align-center">
+<img alt="../_images/switch-device.png" src="../_images/switch-device.png" />
+</div>
+</li>
+<li><p>Press Confirm. Save your sysconfig file. For certain examples these are all
+the required steps and you can go ahead and build your example.</p></li>
+<li><p>If you have errors in SysConfig, you’re not done yet. Errors will show up as
+small red crosses. For each error, open the sysconfig module and take the
+required action. E.g. verify your GPIOs on the new board and make required
+changes or suppress/accept the error.</p>
+<div class="figure align-center">
+<img alt="../_images/errors-in-sysconfig.png" src="../_images/errors-in-sysconfig.png" />
+</div>
+<p>Most errors will be easy to fix. Like this one, where the required action is
+to select the Based on RF Design drop down menu and select the correct option.</p>
+<div class="figure align-center">
+<img alt="../_images/rf_design_error.png" src="../_images/rf_design_error.png" />
+</div>
+<p>Accept all remaining errors where no changes are required.</p>
+<p>If you encounter an error that’s not explained, in most cases the easiest
+approach is to remove the sysconfig object and make a new one with the same
+name and configuration.</p>
+</li>
+<li><p>When you have resolved all sysconfig errors you should be able to build your
+project. One exception; when migrating to a CC26x4 device there are additional
+steps required which are dercibed in this guide: <a class="reference internal" href="software-on-cc13x4-26x4.html#sec-cc13x4-to-cc26x4"><span class="std std-ref">Migrate software examples from CC13x4 to CC26x4</span></a> .</p></li>
+</ol>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="software-on-cc13x4-26x4.html" class="btn btn-neutral float-left" title="Migrate software examples from CC13x4 to CC26x4" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../wisun-guide/references.html" class="btn btn-neutral float-right" title="References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

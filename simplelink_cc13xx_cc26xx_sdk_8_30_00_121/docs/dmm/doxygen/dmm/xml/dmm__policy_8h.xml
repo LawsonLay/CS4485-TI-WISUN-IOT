@@ -1,0 +1,1516 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="dmm__policy_8h" kind="file" language="C++">
+    <compoundname>dmm_policy.h</compoundname>
+    <includes local="yes">stdint.h</includes>
+    <includes local="no">ti/drivers/rf/RF.h</includes>
+    <includedby refid="dmm__policy__blesp__wsnnode_8h" local="no">source/ti/dmm/dmm_policy_blesp_wsnnode.h</includedby>
+    <includedby refid="dmm__scheduler_8h" local="yes">source/ti/dmm/dmm_scheduler.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>stdint.h</label>
+      </node>
+      <node id="0">
+        <label>source/ti/dmm/dmm_policy.h</label>
+        <link refid="dmm__policy_8h"/>
+        <childnode refid="1" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ti/drivers/rf/RF.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="6">
+        <label>source/ti/dmm/dmm_rfmap.h</label>
+        <link refid="dmm__rfmap_8h"/>
+      </node>
+      <node id="3">
+        <label>source/ti/dmm/dmm_policy.h</label>
+        <link refid="dmm__policy_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>source/ti/dmm/dmm_policy_blesp_wsnnode.h</label>
+        <link refid="dmm__policy__blesp__wsnnode_8h_source"/>
+      </node>
+      <node id="5">
+        <label>source/ti/dmm/dmm_scheduler.h</label>
+        <link refid="dmm__scheduler_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structDMMPolicy__State" prot="public">DMMPolicy_State</innerclass>
+    <innerclass refid="structDMMPolicy__Policy" prot="public">DMMPolicy_Policy</innerclass>
+    <innerclass refid="structDMMPolicy__StackCmdIndexTable" prot="public">DMMPolicy_StackCmdIndexTable</innerclass>
+    <innerclass refid="structDMMPolicy__PolicyTable" prot="public">DMMPolicy_PolicyTable</innerclass>
+    <innerclass refid="structStackActivity" prot="public">StackActivity</innerclass>
+    <innerclass refid="structGlobalTable" prot="public">GlobalTable</innerclass>
+    <innerclass refid="structDMMPolicy__CurrentInfo" prot="public">DMMPolicy_CurrentInfo</innerclass>
+    <innerclass refid="structDMMPolicy__Params" prot="public">DMMPolicy_Params</innerclass>
+    <innerclass refid="structDMMPolicy__AppCbs__t" prot="public">DMMPolicy_AppCbs_t</innerclass>
+      <sectiondef kind="user-defined">
+      <header>DMM Policy</header>
+      <description><para><anchor id="dmm__policy_8h_1DMMPOLICY"/> Reserved values to define the DMM policy attributes and values </para></description>
+      <memberdef kind="define" id="dmm__policy_8h_1aa05d905b09e89a66fb3105e6f2cac989" prot="public" static="no">
+        <name>DMMPOLICY_NUM_STACKS</name>
+        <initializer>2</initializer>
+        <briefdescription>
+<para>Number of RF driver clients supported. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="156" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a38db8b8fe64e551f7cba27642cbf14f9" prot="public" static="no">
+        <name>DMMPOLICY_PRIORITY_LOW</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Low priority used when using application states instead of GPT. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="158" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1aa6c13d4edc8548dd7221a9e2a7223716" prot="public" static="no">
+        <name>DMMPOLICY_PRIORITY_HIGH</name>
+        <initializer>1</initializer>
+        <briefdescription>
+<para>High priority used when using application states instead of GPT. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="159" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1aa1f68cd74b20ab99f4d112ccdd149fca" prot="public" static="no">
+        <name>DMMPOLICY_TIME_NONE_CRITICAL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Stack commands can be delayed when using application states instead of GPT. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="161" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a5270392d8aa21017900349659db0de08" prot="public" static="no">
+        <name>DMMPOLICY_TIME_CRITICAL</name>
+        <initializer>1</initializer>
+        <briefdescription>
+<para>Stack commands cannot be delayed when using application states instead of GPT. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="162" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a1bb54ef9da88ddf704a48b1420f06e59" prot="public" static="no">
+        <name>DMMPOLICY_TIME_RESERVED</name>
+        <initializer>1</initializer>
+        <briefdescription>
+<para>Stack commands allow delay settings are not overwritten. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="163" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a4ffdeea9b2905785fe0021ce04d17d9f" prot="public" static="no">
+        <name>DMMPOLICY_NOT_PAUSED</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Stack pause callback is not called for application states including this. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="165" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1ab6ae08dba0f223deeea6f3d4153e6210" prot="public" static="no">
+        <name>DMMPOLICY_PAUSED</name>
+        <initializer>0x0001</initializer>
+        <briefdescription>
+<para>Stack pause callback is called for application states including this. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="166" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a4b1c5c8f6ba04b63f7c3caec52498102" prot="public" static="no">
+        <name>DMMPOLICY_SCHEDULE_BLOCKED</name>
+        <initializer>0x0002</initializer>
+        <briefdescription>
+<para>reserve for future usage </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="167" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a9a4a3d8c41c6b618463a127cc3b6d61e" prot="public" static="no">
+        <name>DMMPOLICY_BALANCED_NONE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Does not use balanced mode. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="169" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a35422b04e0c3df4587edf2d08c148a73" prot="public" static="no">
+        <name>DMMPOLICY_BALANCED_TIME_BM_1</name>
+        <initializer>0x80000000</initializer>
+        <briefdescription>
+<para>Balanced mode is time (MSB = 1) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="171" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a321b6df13c8b6547be908b098dfa830b" prot="public" static="no">
+        <name>DMMPOLICY_BALANCED_TIME_MODE_1</name>
+        <param><defname>onMin</defname></param>
+        <param><defname>offMax</defname></param>
+        <initializer>(<ref refid="dmm__policy_8h_1a35422b04e0c3df4587edf2d08c148a73" kindref="member">DMMPOLICY_BALANCED_TIME_BM_1</ref> | (onMin &amp; 0xFFF) | ((offMax &amp; 0xFFF) &lt;&lt; 12))</initializer>
+        <briefdescription>
+<para>macro for defining balanced mode on/off time </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="172" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a00ffa999440629c9e3c5f965b90b08f9" prot="public" static="no">
+        <name>DMMPOLICY_BALANCED_TIME_MODE_1_ON_MIN</name>
+        <param><defname>RatioTime</defname></param>
+        <initializer>(RatioTime &amp; 0xFFF)</initializer>
+        <briefdescription>
+<para>macro for defining balanced mode on time </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="173" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1ace566c80b5c892db9247490996159186" prot="public" static="no">
+        <name>DMMPOLICY_BALANCED_TIME_MODE_1_OFF_MAX</name>
+        <param><defname>RatioTime</defname></param>
+        <initializer>((RatioTime &amp; 0xFFF000) &gt;&gt; 12)</initializer>
+        <briefdescription>
+<para>macro for defining balanced mode off time </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="174" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1acad780ccbdfffc632fd69752dc6c6f4f" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_NONE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>Activity state where there is no activity. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="176" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a28b43c58d66ac0b83b0452e3a75fc1a2" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_ALL</name>
+        <initializer>0xFFFF</initializer>
+        <briefdescription>
+<para>Activity state to define any activity. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="177" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="177" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a2a4befeae8a20d38892505a11c8dd693" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_BLE_CONNECTION</name>
+        <initializer>0x0001</initializer>
+        <briefdescription>
+<para>Activity state where BLE Connection is ongoing. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="178" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a14c3f9e1d91f67d0549d697e9415e7d6" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_BLE_LINK_EST</name>
+        <initializer>0x0002</initializer>
+        <briefdescription>
+<para>Activity state where BLE link is being established. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="179" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a5930a3e02d7681c611af3e5cb8673b42" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_BLE_BROADCASTING</name>
+        <initializer>0x0004</initializer>
+        <briefdescription>
+<para>Activity state where BLE is broadcasting. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="180" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a4ad0d229e589911e2f064de88d26741c" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_BLE_OBSERVING</name>
+        <initializer>0x0008</initializer>
+        <briefdescription>
+<para>Activity state where BLE is observing. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="181" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1abf1e69f62749452e0876947df8c97d47" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_THREAD_TX_DATA</name>
+        <initializer>0x0001</initializer>
+        <briefdescription>
+<para>Activity state where Thread data is being sent or received (Direct/Indirect) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="183" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1ad3f64e1f5bbfc0ad0fc4c0ce87a4b6e3" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_THREAD_TX_POLL</name>
+        <initializer>0x0002</initializer>
+        <briefdescription>
+<para>Activity state where Thread is transmitting polled data. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="184" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a58934445b3a266f4be0d5cf7b7520f3f" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_THREAD_RX_SCAN</name>
+        <initializer>0x0004</initializer>
+        <briefdescription>
+<para>Activity state where Thread is scanning (Energy Detect/Active) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="185" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a3a1d8148404805b9be01e3eaae764be0" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_THREAD_RX_POLL</name>
+        <initializer>0x0008</initializer>
+        <briefdescription>
+<para>Activity state where Thread is receiving polled data. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="186" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a43958de78e6d3015106e89fe66923732" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_THREAD_RX_IDLE</name>
+        <initializer>0x0010</initializer>
+        <briefdescription>
+<para>Activity state where Thread radio is Idle. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="187" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a1c214bd0e4bce0c198b5bbf10ac3413e" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_154_DATA</name>
+        <initializer>0x0001</initializer>
+        <briefdescription>
+<para>Activity state where 15.4 data is being sent or received. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="189" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a40e641dee20730fd78c8d5f43cc72236" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_154_LINK_EST</name>
+        <initializer>0x0002</initializer>
+        <briefdescription>
+<para>Activity state where 15.4 link is being established. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="190" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1ae87baee935d7ba43bb492b4add17a1f4" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_154_TX_BEACON</name>
+        <initializer>0x0004</initializer>
+        <briefdescription>
+<para>Activity state where 15.4 is transmitting a beacon. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="191" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a4a370d8c934d3da44548d90ff6be246e" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_154_RX_BEACON</name>
+        <initializer>0x0008</initializer>
+        <briefdescription>
+<para>Activity state where 15.4 is receiving a beacon. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="192" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a0c8b17cbab6515ab9bf040ea9384b5d6" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_154_FH</name>
+        <initializer>0x0010</initializer>
+        <briefdescription>
+<para>Activity state where 15.4 is ongoing frequency hopping. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="193" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1ab5700ba89d4726d2099f8ca04ca546ba" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_154_SCAN</name>
+        <initializer>0x0020</initializer>
+        <briefdescription>
+<para>Activity state where 15.4 scanning. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="194" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a48dfbe0ec375e1bf45d036cc2e3b1ae4" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_154_RXON</name>
+        <initializer>0x0040</initializer>
+        <briefdescription>
+<para>Activity state where 15.4 is receiving. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="195" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a0d3fbcfa9f67efb107e97167eadf2465" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_WSN_RETRANSMIT</name>
+        <initializer>0x0001</initializer>
+        <briefdescription>
+<para>Activity state where WSN is retransmitting. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="197" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a9d7e5f63ec1a19718be2542d5c947c30" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_WSN_TRANSMIT</name>
+        <initializer>0x0002</initializer>
+        <briefdescription>
+<para>Activity state where WSN is transmitting. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="198" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1aebb33fc57e739160b809c95b5c6ca309" prot="public" static="no">
+        <name>DMMPOLICY_APPLIED_ACTIVITY_WSN_RECEIVE</name>
+        <initializer>0x0004</initializer>
+        <briefdescription>
+<para>Activity state where WSN is receiving. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="199" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>DMM Priority</header>
+      <description><para><anchor id="dmm__policy_8h_1DMM_PRIORITY"/> Define the limit attributes of DMM Priority changing </para></description>
+      <memberdef kind="define" id="dmm__policy_8h_1adbb9baa18e3ffc3ca27071dceb65ca78" prot="public" static="no">
+        <name>DMM_PRIORITY_MAX_LIMIT</name>
+        <initializer>250</initializer>
+        <briefdescription>
+<para>Maximum stack priority. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="216" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a276b98e38ee094db5af96ca0e8152bad" prot="public" static="no">
+        <name>DMM_PRIORITY_MAX_CHANGE_LIMIT</name>
+        <initializer>185</initializer>
+        <briefdescription>
+<para>Maximum change limit of a stack priority. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="217" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="dmm__policy_8h_1a3f926e6f56fc696ec54cbf2ea688f328" prot="public" static="no">
+        <name>BLE_STACK_POLICY_IDX</name>
+        <initializer>0</initializer>
+        <briefdescription>
+<para>BLE stack is always the first policy. </para>        </briefdescription>
+        <detaileddescription>
+<para>BLE stack is always the first policy </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="147" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a172268da1c1e3cde359b6a3e67394126" prot="public" static="no">
+        <name>PRIORITY_NUM</name>
+        <initializer>3</initializer>
+        <briefdescription>
+<para>The number of priority for stack activities. </para>        </briefdescription>
+        <detaileddescription>
+<para>The number of priority for stack activities </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="204" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1a3b80c97cb962dad0928eb42f6bf44c1b" prot="public" static="no">
+        <name>DMMPolicy_updateStackState</name>
+        <initializer><ref refid="dmm__policy_8h_1a03b4e93eb7e39916b422b54edd218123" kindref="member">DMMPolicy_updateApplicationState</ref></initializer>
+        <briefdescription>
+<para>To maintain compatibility, define old DMMPolicy_updateStackState function as new DMMPolicy_updateApplicationState function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="207" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="207" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dmm__policy_8h_1aa3b174a2b299e204ab31be5ff82d7644" prot="public" static="no">
+        <name>DMM_GLOBAL_PRIORITY</name>
+        <param><defname>activity</defname></param>
+        <param><defname>level</defname></param>
+        <param><defname>weight</defname></param>
+        <initializer>{(activity &lt;&lt; 16 | level), weight}</initializer>
+        <briefdescription>
+<para>global priority table </para>        </briefdescription>
+        <detaileddescription>
+<para>macro for getting the global priority </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="221" column="9" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="221" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789f" prot="public" static="no">
+        <name>DMMPolicy_StackRole</name>
+        <enumvalue id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fadb29702b127faa77edfef2e3c0f5a5d6" prot="public">
+          <name>DMMPolicy_StackRole_invalid</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>invalid stack role </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa9eb3719bf52003bad5c664a2c9115081" prot="public">
+          <name>DMMPolicy_StackRole_BlePeripheral</name>
+          <briefdescription>
+<para>stack role for a BLE Simple Peripheral </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa366c9c4e05e0cfb61bedd51f7f0a6b9a" prot="public">
+          <name>DMMPolicy_StackRole_WsnNode</name>
+          <briefdescription>
+<para>stack role for an EasyLink Wireless Sensor Network Node </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa561201f0249f1d164f9faef1a6087e1f" prot="public">
+          <name>DMMPolicy_StackRole_threadMtd</name>
+          <briefdescription>
+<para>stack role reserved for a customers proprietary stack </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa27a69ada611052ee23eda75185421930" prot="public">
+          <name>DMMPolicy_StackRole_threadFtd</name>
+          <briefdescription>
+<para>stack role reserved for a customers proprietary stack </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa013e10d0ad3661b5ecd63e814e3b8890" prot="public">
+          <name>DMMPolicy_StackRole_154Sensor</name>
+          <briefdescription>
+<para>stack role for a 15.4 Sensor </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa3700b52b46384e3439632cc935eef45b" prot="public">
+          <name>DMMPolicy_StackRole_154Collector</name>
+          <briefdescription>
+<para>stack role for a 15.4 Collector </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa76eecb1e964dcfdc6e5aa1ace3c150e5" prot="public">
+          <name>DMMPolicy_StackRole_ZigbeeEndDevice</name>
+          <briefdescription>
+<para>stack role for a Zigbee End Device </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa12018fca3cff2a95954930b2f32f7359" prot="public">
+          <name>DMMPolicy_StackRole_ZigbeeRouter</name>
+          <briefdescription>
+<para>stack role for a Zigbee Router </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa52b19c14722f21e3b7a8f3e9e5b77fbb" prot="public">
+          <name>DMMPolicy_StackRole_ZigbeeCoordinator</name>
+          <briefdescription>
+<para>stack role for a Zigbee Coordinator </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa639e02f0b2df62d926a94319a83cc9c0" prot="public">
+          <name>DMMPolicy_StackRole_custom1</name>
+          <briefdescription>
+<para>stack role reserved for a customers proprietary stack </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fac54bde5b66ba9ec33a90b99371fead0f" prot="public">
+          <name>DMMPolicy_StackRole_custom2</name>
+          <briefdescription>
+<para>stack role reserved for a customers proprietary stack </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>the stack roles supported </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="225" column="1" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="224" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="enum" id="dmm__policy_8h_1a5005baa168c275e7aff2bca934e6ed9a" prot="public" static="no">
+        <name>PriorityDef</name>
+        <enumvalue id="dmm__policy_8h_1a5005baa168c275e7aff2bca934e6ed9aac0399cc9c90d46001fd7bf56486d4c2a" prot="public">
+          <name>DMM_StackPNormal</name>
+          <initializer>=0</initializer>
+          <briefdescription>
+<para>Normal priority. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a5005baa168c275e7aff2bca934e6ed9aa4d9e45769c5b848e0f33e279228a98ee" prot="public">
+          <name>DMM_StackPHigh</name>
+          <briefdescription>
+<para>High priority. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a5005baa168c275e7aff2bca934e6ed9aa314da8fe97310439b0e9ae49a7ffa7fd" prot="public">
+          <name>DMM_StackPUrgent</name>
+          <briefdescription>
+<para>Urgent priority. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Stack Activity Priority. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="281" column="1" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="280" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="enum" id="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7" prot="public" static="no">
+        <name>DMMPolicy_Status</name>
+        <enumvalue id="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7ae496d7fc0de4bcc1f403f6708fed122f" prot="public">
+          <name>DMMPolicy_StatusError</name>
+          <briefdescription>
+<para>Error. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7aa24c4a0100072e1aad0c8cef61f01334" prot="public">
+          <name>DMMPolicy_StatusNoPolicyError</name>
+          <briefdescription>
+<para>Error with policy table. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7acdc573ebd5ddf9871f367b6b9b965d5d" prot="public">
+          <name>DMMPolicy_StatusParamError</name>
+          <briefdescription>
+<para>Parameter Error. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7a6939d023fdead8354e7069fe34fcc315" prot="public">
+          <name>DMMPolicy_StatusSuccess</name>
+          <briefdescription>
+<para>Function finished with success. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Status codes for various DMM Policy functions. </para>        </briefdescription>
+        <detaileddescription>
+<para>RF_Stat is reported as return value for DMM Policy functions. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="315" column="1" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="315" bodyend="320"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="dmm__policy_8h_1aafb2f235fbb1da6a8687ab82511ab2c3" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* DMMPolicy_appPauseCb_t) (uint16_t pause)</definition>
+        <argsstring>)(uint16_t pause)</argsstring>
+        <name>DMMPolicy_appPauseCb_t</name>
+        <briefdescription>
+<para>Callback function type for app pause/reseume. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="323" column="1" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="323" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="dmm__policy_8h_1a8bda8711d4a594c9c7cb80dae4c7a1cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DMMPolicy_Params_init</definition>
+        <argsstring>(DMMPolicy_Params *params)</argsstring>
+        <name>DMMPolicy_Params_init</name>
+        <param>
+          <type><ref refid="structDMMPolicy__Params" kindref="compound">DMMPolicy_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Function to initialize the <ref refid="structDMMPolicy__Params" kindref="compound">DMMPolicy_Params</ref> struct to its defaults. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An pointer to RF_Params structure for initialization </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="336" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1ae82b5251e335ef6ea6ee8c2507e58d0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DMMPolicy_registerAppCbs</definition>
+        <argsstring>(DMMPolicy_AppCbs_t AppCbs, DMMPolicy_StackRole StackRole)</argsstring>
+        <name>DMMPolicy_registerAppCbs</name>
+        <param>
+          <type><ref refid="structDMMPolicy__AppCbs__t" kindref="compound">DMMPolicy_AppCbs_t</ref></type>
+          <declname>AppCbs</declname>
+        </param>
+        <param>
+          <type><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789f" kindref="member">DMMPolicy_StackRole</ref></type>
+          <declname>StackRole</declname>
+        </param>
+        <briefdescription>
+<para>Register the application policy callbacks. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>AppCbs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>application callback take </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>StackRole</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>application stack role </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="343" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1a0628d93d02aa11182608c8fb38fe27b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DMMPolicy_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>DMMPolicy_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Function that initializes the DMMPolicy module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="348" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1ab734042a6d7057a69b68dd438de2f7fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7" kindref="member">DMMPolicy_Status</ref></type>
+        <definition>DMMPolicy_Status DMMPolicy_open</definition>
+        <argsstring>(DMMPolicy_Params *params)</argsstring>
+        <name>DMMPolicy_open</name>
+        <param>
+          <type><ref refid="structDMMPolicy__Params" kindref="compound">DMMPolicy_Params</ref> *</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Function to open the DMMPolicy module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An pointer to RF_Params structure for initialization</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>DMMPolicy_Stat status </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="356" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1a03b4e93eb7e39916b422b54edd218123" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7" kindref="member">DMMPolicy_Status</ref></type>
+        <definition>DMMPolicy_Status DMMPolicy_updateApplicationState</definition>
+        <argsstring>(DMMPolicy_StackRole StackRole, uint32_t newState)</argsstring>
+        <name>DMMPolicy_updateApplicationState</name>
+        <param>
+          <type><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789f" kindref="member">DMMPolicy_StackRole</ref></type>
+          <declname>StackRole</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>newState</declname>
+        </param>
+        <briefdescription>
+<para>Updates the policy used to make scheduling decisions. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>StackRole</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stack role that has changed state </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>newState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state the stack has changed to</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>DMMPolicy_Stat status </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="365" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1ac009d5cc78945737c8ff3833efa9e86e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t DMMPolicy_getGlobalPriority</definition>
+        <argsstring>(uint32_t activity, uint32_t stackID)</argsstring>
+        <name>DMMPolicy_getGlobalPriority</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>activity</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stackID</declname>
+        </param>
+        <briefdescription>
+<para>Get the global activity based on stack activity. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>activity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stack Activity </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stackID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stack ID</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Global Priority Value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="374" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1a205b0f1e4a8b76e6bdb683fb0eebd17d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t DMMPolicy_getDefaultPriority</definition>
+        <argsstring>(uint32_t stackID)</argsstring>
+        <name>DMMPolicy_getDefaultPriority</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>stackID</declname>
+        </param>
+        <briefdescription>
+<para>Get the default priority. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stackID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stack ID (uint32_t)</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>default priority value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="382" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1ab762438eb0d65393a43687f00dbb0019" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DMMPolicy_setStackID</definition>
+        <argsstring>(uint32_t stackID, DMMPolicy_StackRole StackRole)</argsstring>
+        <name>DMMPolicy_setStackID</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>stackID</declname>
+        </param>
+        <param>
+          <type><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789f" kindref="member">DMMPolicy_StackRole</ref></type>
+          <declname>StackRole</declname>
+        </param>
+        <briefdescription>
+<para>Get the global activity based on stack activity. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stackID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stack ID </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>StackRole</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>DMMPolicy_StackRole</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Global Priority Value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="391" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1a992254757845d6103e80903c059cbec4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t DMMPolicy_getPauseValue</definition>
+        <argsstring>(uint32_t stackID)</argsstring>
+        <name>DMMPolicy_getPauseValue</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>stackID</declname>
+        </param>
+        <briefdescription>
+<para>Get the pause value from the current policy. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stackID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stack ID</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>pause Value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="399" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1a47baf3db018e38672c8e3e0ec8d8af33" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t DMMPolicy_getTimeConstraintValue</definition>
+        <argsstring>(uint32_t stackID)</argsstring>
+        <name>DMMPolicy_getTimeConstraintValue</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>stackID</declname>
+        </param>
+        <briefdescription>
+<para>Get the time constraint value from the current policy. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stackID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stack ID</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>TimeConstraint </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="407" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1a230f2142b1e78e6d6af9590b3b53dbfc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DMMPolicy_getGPTStatus</definition>
+        <argsstring>(void)</argsstring>
+        <name>DMMPolicy_getGPTStatus</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>check if the global priority table is available </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>bool true =&gt; GPT is available, false =&gt; GPT is not available (legacy policy table mode) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="413" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1a3d0a6535f5cfd2b6100999620f1e6b74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DMMPolicy_setBlockModeOn</definition>
+        <argsstring>(DMMPolicy_StackRole StackRole)</argsstring>
+        <name>DMMPolicy_setBlockModeOn</name>
+        <param>
+          <type><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789f" kindref="member">DMMPolicy_StackRole</ref></type>
+          <declname>StackRole</declname>
+        </param>
+        <briefdescription>
+<para>Turn on Block mode. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>StackRole</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stack role associated with Task handle </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true: success, false: the stack role cannot be found </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="420" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1a9fc36ec6ba8c150972df0b96aee3d528" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DMMPolicy_setBlockModeOff</definition>
+        <argsstring>(DMMPolicy_StackRole StackRole)</argsstring>
+        <name>DMMPolicy_setBlockModeOff</name>
+        <param>
+          <type><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789f" kindref="member">DMMPolicy_StackRole</ref></type>
+          <declname>StackRole</declname>
+        </param>
+        <briefdescription>
+<para>Turn off Block mode. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>StackRole</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stack role associated with Task handle </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true: success, false: the stack role cannot be found </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="427" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="dmm__policy_8h_1a8fdfd30b0d5718a1f5588ca1a2a779a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DMMPolicy_getBlockModeStatus</definition>
+        <argsstring>(DMMPolicy_StackRole StackRole)</argsstring>
+        <name>DMMPolicy_getBlockModeStatus</name>
+        <param>
+          <type><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789f" kindref="member">DMMPolicy_StackRole</ref></type>
+          <declname>StackRole</declname>
+        </param>
+        <briefdescription>
+<para>Get Block mode status. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>StackRole</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>stack role associated with Task handle</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+return True: Block Mode is On, False: Block Mode is Off </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="435" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Dual Mode Policy Manager. </para>    </briefdescription>
+    <detaileddescription>
+<para><hruler/>
+</para><para>The DMMPolicy interface provides a service to for the stack applications to update the priority of the stack activities, which is then used to make scheduling decisions.</para><para><heading level="1">Fields in the Policy Table</heading>
+</para><para>.state: the name of the application state .weight: amount of adjusted priority for stack activities specified in .appliedActivity .timingConstraint: reserved for future usage .pause: whether or not the specified stack&apos;s application is paused during the state .appliedActivity: Specified the activities of which priority is/are adjusted by .weight<itemizedlist>
+<listitem><para>Final Priority = GPT (Stack level priority) + weight (Application Level) .balancedMode: Switch the .weight value between the two stacks based on the time information specified</para></listitem></itemizedlist>
+</para><para><heading level="1">Usage</heading>
+</para><para>To use the DMMPolicy module to set the scheduling policy, the application calls the following APIs:<itemizedlist>
+<listitem><para><ref refid="dmm__policy_8h_1a0628d93d02aa11182608c8fb38fe27b0" kindref="member">DMMPolicy_init()</ref>: Initialize the DMMPolicy module/task.</para></listitem><listitem><para><ref refid="dmm__policy_8h_1a8bda8711d4a594c9c7cb80dae4c7a1cd" kindref="member">DMMPolicy_Params_init()</ref>: Initialize a <ref refid="structDMMPolicy__Params" kindref="compound">DMMPolicy_Params</ref> structure with default values. Then change the parameters from non-default values as needed.</para></listitem><listitem><para><ref refid="dmm__policy_8h_1ab734042a6d7057a69b68dd438de2f7fd" kindref="member">DMMPolicy_open()</ref>: Open an instance of the DMMPolicy module, passing the initialized parameters.</para></listitem><listitem><para>Stack A/B application - DMMPolicy_updateApplicationState: Update the application state. The Policy Manager finds the matching policy that is used when scheduling RF commands from stack A and B.</para></listitem></itemizedlist>
+</para><para>An example of a policy table (define in ti_dmm_application_policy.c, which is generated by SysConfig)</para><para><programlisting><codeline><highlight class="normal"><sp/><sp/>DMMPolicy_Policy<sp/>DMMPolicy_ApplicationPolicy[]<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>DMM<sp/>Policy<sp/>0</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>BLE<sp/>Peripheral<sp/>Policy</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appState[BLE_STACK_POLICY_IDX]<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.state<sp/>=<sp/>DMMPOLICY_BLE_OAD,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.weight<sp/>=<sp/>25,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timingConstraint<sp/>=<sp/>DMMPOLICY_TIME_RESERVED,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.pause<sp/>=<sp/>DMMPOLICY_NOT_PAUSED,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appliedActivity<sp/>=<sp/><sp/>DMMPOLICY_APPLIED_ACTIVITY_BLE_CONNECTION,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(note:<sp/>the<sp/>priority<sp/>of<sp/>BLE<sp/>connection<sp/>event<sp/>is<sp/>increased<sp/>by<sp/>.weight<sp/>(25)<sp/>during<sp/>BLE_OAD)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>15.4<sp/>Collector<sp/>Policy</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appState[TI154_STACK_POLICY_IDX]<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.state<sp/>=<sp/>ANY,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.weight<sp/>=<sp/>0,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timingConstraint<sp/>=<sp/>DMMPOLICY_TIME_RESERVED,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.pause<sp/>=<sp/>DMMPOLICY_PAUSED,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appliedActivity<sp/>=<sp/><sp/>DMMPOLICY_APPLIED_ACTIVITY_NONE,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//Balanced<sp/>Mode<sp/>Policy</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.balancedMode<sp/>=<sp/>DMMPOLICY_BALANCED_NONE,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>//<sp/>DMM<sp/>Policy<sp/>1</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>BLE<sp/>Peripheral<sp/>Policy</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appState[BLE_STACK_POLICY_IDX]<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.state<sp/>=<sp/>DMMPOLICY_BLE_HIGH_BANDWIDTH,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.weight<sp/>=<sp/>25,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timingConstraint<sp/>=<sp/>DMMPOLICY_TIME_RESERVED,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.pause<sp/>=<sp/>DMMPOLICY_NOT_PAUSED,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appliedActivity<sp/>=<sp/><sp/>DMMPOLICY_APPLIED_ACTIVITY_BLE_CONNECTION,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(note:<sp/>the<sp/>priority<sp/>of<sp/>BLE<sp/>connection<sp/>event<sp/>is<sp/>increased<sp/>by<sp/>.weight<sp/>(25)<sp/>during<sp/>BLE_HIGH_BANDWIDTH)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>15.4<sp/>Collector<sp/>Policy</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appState[TI154_STACK_POLICY_IDX]<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.state<sp/>=<sp/>ANY,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.weight<sp/>=<sp/>0,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timingConstraint<sp/>=<sp/>DMMPOLICY_TIME_RESERVED,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.pause<sp/>=<sp/>DMMPOLICY_NOT_PAUSED,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appliedActivity<sp/>=<sp/><sp/>DMMPOLICY_APPLIED_ACTIVITY_NONE,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//Balanced<sp/>Mode<sp/>Policy</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.balancedMode<sp/>=<sp/>DMMPOLICY_BALANCED_NONE,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>//<sp/>DMM<sp/>Policy<sp/>2<sp/>(The<sp/>last<sp/>policy<sp/>indicates<sp/>the<sp/>default<sp/>priority<sp/>of<sp/>the<sp/>two<sp/>stacks)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>BLE<sp/>Peripheral<sp/>Policy</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appState[BLE_STACK_POLICY_IDX]<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.state<sp/>=<sp/>ANY,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.weight<sp/>=<sp/>0,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timingConstraint<sp/>=<sp/>DMMPOLICY_TIME_RESERVED,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.pause<sp/>=<sp/>DMMPOLICY_NOT_PAUSED,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appliedActivity<sp/>=<sp/><sp/>DMMPOLICY_APPLIED_ACTIVITY_NONE,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>15.4<sp/>Collector<sp/>Policy</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appState[TI154_STACK_POLICY_IDX]<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.state<sp/>=<sp/>ANY,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.weight<sp/>=<sp/>1,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timingConstraint<sp/>=<sp/>DMMPOLICY_TIME_RESERVED,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.pause<sp/>=<sp/>DMMPOLICY_NOT_PAUSED,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appliedActivity<sp/>=<sp/><sp/>DMMPOLICY_APPLIED_ACTIVITY_NONE,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//Balanced<sp/>Mode<sp/>Policy</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.balancedMode<sp/>=<sp/>DMMPOLICY_BALANCED_NONE,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline><highlight class="normal"><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"><sp/></highlight></codeline>
+<codeline><highlight class="normal">*DMMPolicy_PolicyTable<sp/>DMMPolicy_ApplicationPolicyTable<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>//Stack<sp/>Roles</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>.stackRole[BLE_STACK_POLICY_IDX]<sp/>=<sp/>DMMPolicy_StackRole_BlePeripheral,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>.stackRole[TI154_STACK_POLICY_IDX]<sp/>=<sp/>DMMPolicy_StackRole_154Sensor,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>//Policy<sp/>table</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>.policy<sp/>=<sp/>DMMPolicy_ApplicationPolicy,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>//<sp/>Index<sp/>Table<sp/>for<sp/>future<sp/>use</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>.indexTable<sp/>=<sp/>NULL,</highlight></codeline>
+<codeline><highlight class="normal"><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>//!<sp/>\brief<sp/>The<sp/>application<sp/>policy<sp/>table<sp/>size</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>uint32_t<sp/>DMMPolicy_ApplicationPolicySize<sp/>=<sp/>(sizeof(DMMPolicy_ApplicationPolicy)<sp/>/<sp/>sizeof(DMMPolicy_Policy));</highlight></codeline>
+</programlisting> </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/******************************************************************************</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"></highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>@file<sp/>dmm_policy.h</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"></highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>@brief<sp/>dmm<sp/>policy<sp/>Header</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"></highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>Group:<sp/>WCS<sp/>LPC</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>$Target<sp/>Device:<sp/>DEVICES<sp/>$</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"></highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>******************************************************************************</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>$License:<sp/>TI_TEXT<sp/>2019<sp/>$</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>******************************************************************************</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>$Release<sp/>Name:<sp/>PACKAGE<sp/>NAME<sp/>$</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>$Release<sp/>Date:<sp/>PACKAGE<sp/>RELEASE<sp/>DATE<sp/>$</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*****************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">/*!****************************************************************************</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/>@file<sp/><sp/><sp/><sp/><sp/><sp/><sp/>dmm_policy.h</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/><sp/>@brief<sp/><sp/><sp/><sp/><sp/><sp/>Dual<sp/>Mode<sp/>Policy<sp/>Manager</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/><sp/>The<sp/>DMMPolicy<sp/>interface<sp/>provides<sp/>a<sp/>service<sp/>to<sp/>for<sp/>the<sp/>stack<sp/>applications<sp/>to</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/><sp/>update<sp/>the<sp/>priority<sp/>of<sp/>the<sp/>stack<sp/>activities,<sp/>which<sp/>is<sp/>then<sp/>used<sp/>to<sp/>make<sp/>scheduling<sp/>decisions.</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Fields<sp/>in<sp/>the<sp/>Policy<sp/>Table<sp/>#</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/><sp/>.state:<sp/>the<sp/>name<sp/>of<sp/>the<sp/>application<sp/>state</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/><sp/>.weight:<sp/>amount<sp/>of<sp/>adjusted<sp/>priority<sp/>for<sp/>stack<sp/>activities<sp/>specified<sp/>in<sp/>.appliedActivity</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/><sp/>.timingConstraint:<sp/>reserved<sp/>for<sp/>future<sp/>usage</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/><sp/>.pause:<sp/>whether<sp/>or<sp/>not<sp/>the<sp/>specified<sp/>stack&apos;s<sp/>application<sp/>is<sp/>paused<sp/>during<sp/>the<sp/>state</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/><sp/>.appliedActivity:<sp/>Specified<sp/>the<sp/>activities<sp/>of<sp/>which<sp/>priority<sp/>is/are<sp/>adjusted<sp/>by<sp/>.weight</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>Final<sp/>Priority<sp/>=<sp/>GPT<sp/>(Stack<sp/>level<sp/>priority)<sp/>+<sp/><sp/>weight<sp/>(Application<sp/>Level)</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*<sp/><sp/>.balancedMode:<sp/>Switch<sp/>the<sp/>.weight<sp/>value<sp/>between<sp/>the<sp/>two<sp/>stacks<sp/>based<sp/>on<sp/>the<sp/>time<sp/>information<sp/>specified</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*<sp/><sp/>#<sp/>Usage<sp/>#</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/>*<sp/><sp/>To<sp/>use<sp/>the<sp/>DMMPolicy<sp/>module<sp/>to<sp/>set<sp/>the<sp/>scheduling<sp/>policy,<sp/>the<sp/>application</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*<sp/><sp/>calls<sp/>the<sp/>following<sp/>APIs:</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>DMMPolicy_init():<sp/>Initialize<sp/>the<sp/>DMMPolicy<sp/>module/task.</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>DMMPolicy_Params_init():<sp/><sp/>Initialize<sp/>a<sp/>DMMPolicy_Params<sp/>structure</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>with<sp/>default<sp/>values.<sp/><sp/>Then<sp/>change<sp/>the<sp/>parameters<sp/>from<sp/>non-default</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>values<sp/>as<sp/>needed.</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>DMMPolicy_open():<sp/><sp/>Open<sp/>an<sp/>instance<sp/>of<sp/>the<sp/>DMMPolicy<sp/>module,</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>passing<sp/>the<sp/>initialized<sp/>parameters.</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>-<sp/>Stack<sp/>A/B<sp/>application<sp/>-<sp/>DMMPolicy_updateApplicationState:<sp/>Update<sp/>the<sp/>application<sp/>state.</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>The<sp/>Policy<sp/>Manager<sp/>finds<sp/>the<sp/>matching<sp/>policy<sp/>that<sp/>is<sp/>used</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>when<sp/>scheduling<sp/>RF<sp/>commands<sp/>from<sp/>stack<sp/>A<sp/>and<sp/>B.</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/>*<sp/><sp/><sp/>An<sp/>example<sp/>of<sp/>a<sp/>policy<sp/>table<sp/>(define<sp/>in<sp/>ti_dmm_application_policy.c,<sp/>which<sp/>is<sp/>generated<sp/>by<sp/>SysConfig)</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/>*<sp/><sp/><sp/>\code</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/>*<sp/>DMMPolicy_Policy<sp/>DMMPolicy_ApplicationPolicy[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/>*<sp/><sp/><sp/>//<sp/>DMM<sp/>Policy<sp/>0</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/>*<sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>BLE<sp/>Peripheral<sp/>Policy</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appState[BLE_STACK_POLICY_IDX]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.state<sp/>=<sp/>DMMPOLICY_BLE_OAD,</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.weight<sp/>=<sp/>25,</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timingConstraint<sp/>=<sp/>DMMPOLICY_TIME_RESERVED,</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.pause<sp/>=<sp/>DMMPOLICY_NOT_PAUSED,</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appliedActivity<sp/>=<sp/><sp/>DMMPOLICY_APPLIED_ACTIVITY_BLE_CONNECTION,</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(note:<sp/>the<sp/>priority<sp/>of<sp/>BLE<sp/>connection<sp/>event<sp/>is<sp/>increased<sp/>by<sp/>.weight<sp/>(25)<sp/>during<sp/>BLE_OAD)</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>15.4<sp/>Collector<sp/>Policy</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appState[TI154_STACK_POLICY_IDX]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.state<sp/>=<sp/>ANY,</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.weight<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timingConstraint<sp/>=<sp/>DMMPOLICY_TIME_RESERVED,</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.pause<sp/>=<sp/>DMMPOLICY_PAUSED,</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appliedActivity<sp/>=<sp/><sp/>DMMPOLICY_APPLIED_ACTIVITY_NONE,</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//Balanced<sp/>Mode<sp/>Policy</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.balancedMode<sp/>=<sp/>DMMPOLICY_BALANCED_NONE,</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>//<sp/>DMM<sp/>Policy<sp/>1</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>BLE<sp/>Peripheral<sp/>Policy</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appState[BLE_STACK_POLICY_IDX]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.state<sp/>=<sp/>DMMPOLICY_BLE_HIGH_BANDWIDTH,</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.weight<sp/>=<sp/>25,</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timingConstraint<sp/>=<sp/>DMMPOLICY_TIME_RESERVED,</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.pause<sp/>=<sp/>DMMPOLICY_NOT_PAUSED,</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appliedActivity<sp/>=<sp/><sp/>DMMPOLICY_APPLIED_ACTIVITY_BLE_CONNECTION,</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(note:<sp/>the<sp/>priority<sp/>of<sp/>BLE<sp/>connection<sp/>event<sp/>is<sp/>increased<sp/>by<sp/>.weight<sp/>(25)<sp/>during<sp/>BLE_HIGH_BANDWIDTH)</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>15.4<sp/>Collector<sp/>Policy</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appState[TI154_STACK_POLICY_IDX]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.state<sp/>=<sp/>ANY,</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.weight<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timingConstraint<sp/>=<sp/>DMMPOLICY_TIME_RESERVED,</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.pause<sp/>=<sp/>DMMPOLICY_NOT_PAUSED,</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appliedActivity<sp/>=<sp/><sp/>DMMPOLICY_APPLIED_ACTIVITY_NONE,</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//Balanced<sp/>Mode<sp/>Policy</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.balancedMode<sp/>=<sp/>DMMPOLICY_BALANCED_NONE,</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>//<sp/>DMM<sp/>Policy<sp/>2<sp/>(The<sp/>last<sp/>policy<sp/>indicates<sp/>the<sp/>default<sp/>priority<sp/>of<sp/>the<sp/>two<sp/>stacks)</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>BLE<sp/>Peripheral<sp/>Policy</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appState[BLE_STACK_POLICY_IDX]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.state<sp/>=<sp/>ANY,</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.weight<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timingConstraint<sp/>=<sp/>DMMPOLICY_TIME_RESERVED,</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.pause<sp/>=<sp/>DMMPOLICY_NOT_PAUSED,</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appliedActivity<sp/>=<sp/><sp/>DMMPOLICY_APPLIED_ACTIVITY_NONE,</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>15.4<sp/>Collector<sp/>Policy</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appState[TI154_STACK_POLICY_IDX]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="107"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.state<sp/>=<sp/>ANY,</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.weight<sp/>=<sp/>1,</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.timingConstraint<sp/>=<sp/>DMMPOLICY_TIME_RESERVED,</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.pause<sp/>=<sp/>DMMPOLICY_NOT_PAUSED,</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.appliedActivity<sp/>=<sp/><sp/>DMMPOLICY_APPLIED_ACTIVITY_NONE,</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//Balanced<sp/>Mode<sp/>Policy</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.balancedMode<sp/>=<sp/>DMMPOLICY_BALANCED_NONE,</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/>*};</highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/>*DMMPolicy_PolicyTable<sp/>DMMPolicy_ApplicationPolicyTable<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>//Stack<sp/>Roles</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>.stackRole[BLE_STACK_POLICY_IDX]<sp/>=<sp/>DMMPolicy_StackRole_BlePeripheral,</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>.stackRole[TI154_STACK_POLICY_IDX]<sp/>=<sp/>DMMPolicy_StackRole_154Sensor,</highlight></codeline>
+<codeline lineno="122"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>//Policy<sp/>table</highlight></codeline>
+<codeline lineno="123"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>.policy<sp/>=<sp/>DMMPolicy_ApplicationPolicy,</highlight></codeline>
+<codeline lineno="124"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>//<sp/>Index<sp/>Table<sp/>for<sp/>future<sp/>use</highlight></codeline>
+<codeline lineno="125"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>.indexTable<sp/>=<sp/>NULL,</highlight></codeline>
+<codeline lineno="126"><highlight class="comment"><sp/>*};</highlight></codeline>
+<codeline lineno="127"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="128"><highlight class="comment"><sp/>*<sp/>//!<sp/>\brief<sp/>The<sp/>application<sp/>policy<sp/>table<sp/>size</highlight></codeline>
+<codeline lineno="129"><highlight class="comment"><sp/>*<sp/>uint32_t<sp/>DMMPolicy_ApplicationPolicySize<sp/>=<sp/>(sizeof(DMMPolicy_ApplicationPolicy)<sp/>/<sp/>sizeof(DMMPolicy_Policy));</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/>*<sp/><sp/><sp/>\endcode</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="133"><highlight class="comment"><sp/>*********************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>DMMPolicy_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DMMPolicy_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;stdint.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ti/drivers/rf/RF.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147" refid="dmm__policy_8h_1a3f926e6f56fc696ec54cbf2ea688f328" refkind="member"><highlight class="preprocessor">#define<sp/>BLE_STACK_POLICY_IDX<sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="148"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156" refid="dmm__policy_8h_1aa05d905b09e89a66fb3105e6f2cac989" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_NUM_STACKS<sp/><sp/><sp/><sp/>2<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="157"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158" refid="dmm__policy_8h_1a38db8b8fe64e551f7cba27642cbf14f9" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DMMPOLICY_PRIORITY_LOW<sp/><sp/><sp/><sp/><sp/>0<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="159" refid="dmm__policy_8h_1aa6c13d4edc8548dd7221a9e2a7223716" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_PRIORITY_HIGH<sp/><sp/><sp/><sp/>1<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="160"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161" refid="dmm__policy_8h_1aa1f68cd74b20ab99f4d112ccdd149fca" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DMMPOLICY_TIME_NONE_CRITICAL<sp/><sp/><sp/><sp/>0<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="162" refid="dmm__policy_8h_1a5270392d8aa21017900349659db0de08" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_TIME_CRITICAL<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="163" refid="dmm__policy_8h_1a1bb54ef9da88ddf704a48b1420f06e59" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_TIME_RESERVED<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="164"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165" refid="dmm__policy_8h_1a4ffdeea9b2905785fe0021ce04d17d9f" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DMMPOLICY_NOT_PAUSED<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="166" refid="dmm__policy_8h_1ab6ae08dba0f223deeea6f3d4153e6210" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_PAUSED<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0001<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="167" refid="dmm__policy_8h_1a4b1c5c8f6ba04b63f7c3caec52498102" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_SCHEDULE_BLOCKED<sp/><sp/><sp/><sp/><sp/><sp/>0x0002<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="168"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="169" refid="dmm__policy_8h_1a9a4a3d8c41c6b618463a127cc3b6d61e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DMMPOLICY_BALANCED_NONE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="170"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171" refid="dmm__policy_8h_1a35422b04e0c3df4587edf2d08c148a73" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DMMPOLICY_BALANCED_TIME_BM_1<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x80000000<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="172" refid="dmm__policy_8h_1a321b6df13c8b6547be908b098dfa830b" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_BALANCED_TIME_MODE_1(onMin,<sp/>offMax)<sp/><sp/><sp/><sp/><sp/>(DMMPOLICY_BALANCED_TIME_BM_1<sp/>|<sp/>(onMin<sp/>&amp;<sp/>0xFFF)<sp/>|<sp/>((offMax<sp/>&amp;<sp/>0xFFF)<sp/>&lt;&lt;<sp/>12))<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="173" refid="dmm__policy_8h_1a00ffa999440629c9e3c5f965b90b08f9" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_BALANCED_TIME_MODE_1_ON_MIN(RatioTime)<sp/><sp/><sp/><sp/><sp/>(RatioTime<sp/>&amp;<sp/>0xFFF)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="174" refid="dmm__policy_8h_1ace566c80b5c892db9247490996159186" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_BALANCED_TIME_MODE_1_OFF_MAX(RatioTime)<sp/><sp/><sp/><sp/><sp/>((RatioTime<sp/>&amp;<sp/>0xFFF000)<sp/>&gt;&gt;<sp/>12)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="175"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="176" refid="dmm__policy_8h_1acad780ccbdfffc632fd69752dc6c6f4f" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_NONE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="177" refid="dmm__policy_8h_1a28b43c58d66ac0b83b0452e3a75fc1a2" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_ALL<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0xFFFF<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="178" refid="dmm__policy_8h_1a2a4befeae8a20d38892505a11c8dd693" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_BLE_CONNECTION<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0001<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="179" refid="dmm__policy_8h_1a14c3f9e1d91f67d0549d697e9415e7d6" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_BLE_LINK_EST<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0002<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="180" refid="dmm__policy_8h_1a5930a3e02d7681c611af3e5cb8673b42" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_BLE_BROADCASTING<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0004<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="181" refid="dmm__policy_8h_1a4ad0d229e589911e2f064de88d26741c" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_BLE_OBSERVING<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0008<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="182"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="183" refid="dmm__policy_8h_1abf1e69f62749452e0876947df8c97d47" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_THREAD_TX_DATA<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0001<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="184" refid="dmm__policy_8h_1ad3f64e1f5bbfc0ad0fc4c0ce87a4b6e3" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_THREAD_TX_POLL<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0002<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="185" refid="dmm__policy_8h_1a58934445b3a266f4be0d5cf7b7520f3f" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_THREAD_RX_SCAN<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0004<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="186" refid="dmm__policy_8h_1a3a1d8148404805b9be01e3eaae764be0" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_THREAD_RX_POLL<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0008<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="187" refid="dmm__policy_8h_1a43958de78e6d3015106e89fe66923732" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_THREAD_RX_IDLE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0010<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="188"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189" refid="dmm__policy_8h_1a1c214bd0e4bce0c198b5bbf10ac3413e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_154_DATA<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0001<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="190" refid="dmm__policy_8h_1a40e641dee20730fd78c8d5f43cc72236" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_154_LINK_EST<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0002<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="191" refid="dmm__policy_8h_1ae87baee935d7ba43bb492b4add17a1f4" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_154_TX_BEACON<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0004<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="192" refid="dmm__policy_8h_1a4a370d8c934d3da44548d90ff6be246e" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_154_RX_BEACON<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0008<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="193" refid="dmm__policy_8h_1a0c8b17cbab6515ab9bf040ea9384b5d6" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_154_FH<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0010<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="194" refid="dmm__policy_8h_1ab5700ba89d4726d2099f8ca04ca546ba" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_154_SCAN<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0020<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="195" refid="dmm__policy_8h_1a48dfbe0ec375e1bf45d036cc2e3b1ae4" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_154_RXON<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0040<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="196"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="197" refid="dmm__policy_8h_1a0d3fbcfa9f67efb107e97167eadf2465" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_WSN_RETRANSMIT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0001<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="198" refid="dmm__policy_8h_1a9d7e5f63ec1a19718be2542d5c947c30" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_WSN_TRANSMIT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0002<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="199" refid="dmm__policy_8h_1aebb33fc57e739160b809c95b5c6ca309" refkind="member"><highlight class="preprocessor">#define<sp/>DMMPOLICY_APPLIED_ACTIVITY_WSN_RECEIVE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0x0004<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="200"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="preprocessor">#define<sp/>PRIORITY_NUM<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>3<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="205"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DMMPolicy_updateStackState<sp/>DMMPolicy_updateApplicationState</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216" refid="dmm__policy_8h_1adbb9baa18e3ffc3ca27071dceb65ca78" refkind="member"><highlight class="preprocessor">#define<sp/>DMM_PRIORITY_MAX_LIMIT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>250<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="217" refid="dmm__policy_8h_1a276b98e38ee094db5af96ca0e8152bad" refkind="member"><highlight class="preprocessor">#define<sp/>DMM_PRIORITY_MAX_CHANGE_LIMIT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>185<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="218"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="220"><highlight class="preprocessor">#define<sp/>DMM_GLOBAL_PRIORITY(activity,<sp/>level,<sp/>weight)<sp/>{(activity<sp/>&lt;&lt;<sp/>16<sp/>|<sp/>level),<sp/>weight}<sp/></highlight></codeline>
+<codeline lineno="222"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="226" refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fadb29702b127faa77edfef2e3c0f5a5d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fadb29702b127faa77edfef2e3c0f5a5d6" kindref="member">DMMPolicy_StackRole_invalid</ref><sp/>=<sp/>0,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="227" refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa9eb3719bf52003bad5c664a2c9115081" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa9eb3719bf52003bad5c664a2c9115081" kindref="member">DMMPolicy_StackRole_BlePeripheral</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="228" refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa366c9c4e05e0cfb61bedd51f7f0a6b9a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa366c9c4e05e0cfb61bedd51f7f0a6b9a" kindref="member">DMMPolicy_StackRole_WsnNode</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="229" refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa561201f0249f1d164f9faef1a6087e1f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa561201f0249f1d164f9faef1a6087e1f" kindref="member">DMMPolicy_StackRole_threadMtd</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="230" refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa27a69ada611052ee23eda75185421930" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa27a69ada611052ee23eda75185421930" kindref="member">DMMPolicy_StackRole_threadFtd</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="231" refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa013e10d0ad3661b5ecd63e814e3b8890" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa013e10d0ad3661b5ecd63e814e3b8890" kindref="member">DMMPolicy_StackRole_154Sensor</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="232" refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa3700b52b46384e3439632cc935eef45b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa3700b52b46384e3439632cc935eef45b" kindref="member">DMMPolicy_StackRole_154Collector</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="233" refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa76eecb1e964dcfdc6e5aa1ace3c150e5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa76eecb1e964dcfdc6e5aa1ace3c150e5" kindref="member">DMMPolicy_StackRole_ZigbeeEndDevice</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="234" refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa12018fca3cff2a95954930b2f32f7359" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa12018fca3cff2a95954930b2f32f7359" kindref="member">DMMPolicy_StackRole_ZigbeeRouter</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="235" refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa52b19c14722f21e3b7a8f3e9e5b77fbb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa52b19c14722f21e3b7a8f3e9e5b77fbb" kindref="member">DMMPolicy_StackRole_ZigbeeCoordinator</ref>,<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="236" refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa639e02f0b2df62d926a94319a83cc9c0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fa639e02f0b2df62d926a94319a83cc9c0" kindref="member">DMMPolicy_StackRole_custom1</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="237" refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fac54bde5b66ba9ec33a90b99371fead0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789fac54bde5b66ba9ec33a90b99371fead0f" kindref="member">DMMPolicy_StackRole_custom2</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="238"><highlight class="normal">}<sp/><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789f" kindref="member">DMMPolicy_StackRole</ref>;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241" refid="structDMMPolicy__State" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="243" refid="structDMMPolicy__State_1ac72d934939cfec2d5bb0bbd6ec2f699b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><sp/><sp/><sp/><sp/><ref refid="structDMMPolicy__State_1ac72d934939cfec2d5bb0bbd6ec2f699b" kindref="member">state</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="244" refid="structDMMPolicy__State_1a38d7e0053aa69437803f63e42d353271" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structDMMPolicy__State_1a38d7e0053aa69437803f63e42d353271" kindref="member">weight</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="245" refid="structDMMPolicy__State_1a51f2725534dfd88841385a2dac3c1ff4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint16_t<sp/><sp/><sp/><sp/><sp/><ref refid="structDMMPolicy__State_1a51f2725534dfd88841385a2dac3c1ff4" kindref="member">timingConstraint</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="246" refid="structDMMPolicy__State_1aea103b8e9ac7504443991853b580dddf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><sp/><sp/><sp/><sp/><ref refid="structDMMPolicy__State_1aea103b8e9ac7504443991853b580dddf" kindref="member">appliedActivity</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/>uint16_t<sp/><sp/><sp/><sp/><sp/>pause;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="249"><highlight class="normal">}<sp/><ref refid="structDMMPolicy__State" kindref="compound">DMMPolicy_State</ref>;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252" refid="structDMMPolicy__Policy" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="254" refid="structDMMPolicy__Policy_1aacff31b4101d050f71980b8dcfaa9e88" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structDMMPolicy__State" kindref="compound">DMMPolicy_State</ref><sp/>appState[<ref refid="dmm__policy_8h_1aa05d905b09e89a66fb3105e6f2cac989" kindref="member">DMMPOLICY_NUM_STACKS</ref>];<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="255" refid="structDMMPolicy__Policy_1a7c896397bbe027896589d5cbb95de854" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structDMMPolicy__Policy_1a7c896397bbe027896589d5cbb95de854" kindref="member">balancedMode</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="256"><highlight class="normal">}<sp/><ref refid="structDMMPolicy__Policy" kindref="compound">DMMPolicy_Policy</ref>;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight></codeline>
+<codeline lineno="259" refid="structDMMPolicy__StackCmdIndexTable" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="261" refid="structDMMPolicy__StackCmdIndexTable_1a5ff05cccd8224d174ca32a7ea2a8ca5e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>*<ref refid="structDMMPolicy__StackCmdIndexTable_1a5ff05cccd8224d174ca32a7ea2a8ca5e" kindref="member">CmdIndex</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="262" refid="structDMMPolicy__StackCmdIndexTable_1abe43468a2f77b6f3c42faea2d48a9b74" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structDMMPolicy__StackCmdIndexTable_1abe43468a2f77b6f3c42faea2d48a9b74" kindref="member">tableSize</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="263"><highlight class="normal">}<ref refid="structDMMPolicy__StackCmdIndexTable" kindref="compound">DMMPolicy_StackCmdIndexTable</ref>;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="266" refid="structDMMPolicy__PolicyTable" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="268" refid="structDMMPolicy__PolicyTable_1a6fcf9777e72f183c3eb201fca4f4b38a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>DMMPolicy_StackRole<sp/>stackRole[<ref refid="dmm__policy_8h_1aa05d905b09e89a66fb3105e6f2cac989" kindref="member">DMMPOLICY_NUM_STACKS</ref>];<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="269" refid="structDMMPolicy__PolicyTable_1a74746b904ba250b40116979692f1c12f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structDMMPolicy__Policy" kindref="compound">DMMPolicy_Policy</ref>*<sp/><ref refid="structDMMPolicy__PolicyTable_1a74746b904ba250b40116979692f1c12f" kindref="member">policy</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="270" refid="structDMMPolicy__PolicyTable_1a43abc5e6ff4d3fa15c70ff16398f46ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structDMMPolicy__StackCmdIndexTable" kindref="compound">DMMPolicy_StackCmdIndexTable</ref><sp/>*<ref refid="structDMMPolicy__PolicyTable_1a43abc5e6ff4d3fa15c70ff16398f46ee" kindref="member">indexTable</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="271"><highlight class="normal">}<sp/><ref refid="structDMMPolicy__PolicyTable" kindref="compound">DMMPolicy_PolicyTable</ref>;</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"></highlight></codeline>
+<codeline lineno="274" refid="structStackActivity" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="275" refid="structStackActivity_1aaa16240b4a9198e1559cac19584a5031" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structStackActivity_1aaa16240b4a9198e1559cac19584a5031" kindref="member">activity</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="276" refid="structStackActivity_1a6832e603ab7fdc249fd78fe04ee33764" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint16_t<sp/><ref refid="structStackActivity_1a6832e603ab7fdc249fd78fe04ee33764" kindref="member">globalPriority</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="277"><highlight class="normal">}<sp/><ref refid="structStackActivity" kindref="compound">StackActivity</ref>;</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280" refid="dmm__policy_8h_1a5005baa168c275e7aff2bca934e6ed9a" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="282" refid="dmm__policy_8h_1a5005baa168c275e7aff2bca934e6ed9aac0399cc9c90d46001fd7bf56486d4c2a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a5005baa168c275e7aff2bca934e6ed9aac0399cc9c90d46001fd7bf56486d4c2a" kindref="member">DMM_StackPNormal</ref><sp/>=0,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="283" refid="dmm__policy_8h_1a5005baa168c275e7aff2bca934e6ed9aa4d9e45769c5b848e0f33e279228a98ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a5005baa168c275e7aff2bca934e6ed9aa4d9e45769c5b848e0f33e279228a98ee" kindref="member">DMM_StackPHigh</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="284" refid="dmm__policy_8h_1a5005baa168c275e7aff2bca934e6ed9aa314da8fe97310439b0e9ae49a7ffa7fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a5005baa168c275e7aff2bca934e6ed9aa314da8fe97310439b0e9ae49a7ffa7fd" kindref="member">DMM_StackPUrgent</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="285"><highlight class="normal">}<sp/><ref refid="dmm__policy_8h_1a5005baa168c275e7aff2bca934e6ed9a" kindref="member">PriorityDef</ref>;</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight></codeline>
+<codeline lineno="288" refid="structGlobalTable" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="289" refid="structGlobalTable_1a33b8685b6d2be6413ea61b49d75c79c9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structStackActivity" kindref="compound">StackActivity</ref><sp/>*<ref refid="structGlobalTable_1a33b8685b6d2be6413ea61b49d75c79c9" kindref="member">globalTableArray</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="290" refid="structGlobalTable_1aee97ff468ce9f353e012e1686d3c0751" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structGlobalTable_1aee97ff468ce9f353e012e1686d3c0751" kindref="member">tableSize</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="291" refid="structGlobalTable_1a9616e160b9371757c675f9a7a159772a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>DMMPolicy_StackRole<sp/><ref refid="structGlobalTable_1a9616e160b9371757c675f9a7a159772a" kindref="member">stackRole</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="292"><highlight class="normal">}<sp/><ref refid="structGlobalTable" kindref="compound">GlobalTable</ref>;</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight></codeline>
+<codeline lineno="295" refid="structDMMPolicy__CurrentInfo" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="296" refid="structDMMPolicy__CurrentInfo_1a7a996ffdee9bed6cb543773a9f66cb93" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structDMMPolicy__CurrentInfo_1a7a996ffdee9bed6cb543773a9f66cb93" kindref="member">stackID</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="297" refid="structDMMPolicy__CurrentInfo_1a65a801c56accf16feb1db57808b81758" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structDMMPolicy__CurrentInfo_1a65a801c56accf16feb1db57808b81758" kindref="member">currentWeight</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="298" refid="structDMMPolicy__CurrentInfo_1a77fc92065565af0c591b17bb975c77ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/><ref refid="structDMMPolicy__CurrentInfo_1a77fc92065565af0c591b17bb975c77ba" kindref="member">defaultPriority</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="299"><highlight class="normal">}<sp/><ref refid="structDMMPolicy__CurrentInfo" kindref="compound">DMMPolicy_CurrentInfo</ref>;</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"></highlight></codeline>
+<codeline lineno="304" refid="structDMMPolicy__Params" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="305" refid="structDMMPolicy__Params_1aae0924e609055a415f8ab92d6788318e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structDMMPolicy__PolicyTable" kindref="compound">DMMPolicy_PolicyTable</ref><sp/><ref refid="structDMMPolicy__Params_1aae0924e609055a415f8ab92d6788318e" kindref="member">policyTable</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="306" refid="structDMMPolicy__Params_1a2043aab3f9b6fc34510cb944ccd057c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structDMMPolicy__Params_1a2043aab3f9b6fc34510cb944ccd057c4" kindref="member">numPolicyTableEntries</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="307" refid="structDMMPolicy__Params_1a36d30aa1c47b6a6143967e980fd4d426" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structGlobalTable" kindref="compound">GlobalTable</ref><sp/>*<ref refid="structDMMPolicy__Params_1a36d30aa1c47b6a6143967e980fd4d426" kindref="member">globalPriorityTable</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="308" refid="structDMMPolicy__Params_1a472eadd5e861ca7bb1c3321429ed8d03" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structDMMPolicy__CurrentInfo" kindref="compound">DMMPolicy_CurrentInfo</ref><sp/><sp/>policyCurrentInfo[<ref refid="dmm__policy_8h_1aa05d905b09e89a66fb3105e6f2cac989" kindref="member">DMMPOLICY_NUM_STACKS</ref>];<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="309"><highlight class="normal">}<sp/><ref refid="structDMMPolicy__Params" kindref="compound">DMMPolicy_Params</ref>;</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight></codeline>
+<codeline lineno="315" refid="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="316" refid="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7ae496d7fc0de4bcc1f403f6708fed122f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7ae496d7fc0de4bcc1f403f6708fed122f" kindref="member">DMMPolicy_StatusError</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="317" refid="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7aa24c4a0100072e1aad0c8cef61f01334" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7aa24c4a0100072e1aad0c8cef61f01334" kindref="member">DMMPolicy_StatusNoPolicyError</ref>,<sp/><sp/></highlight></codeline>
+<codeline lineno="318" refid="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7acdc573ebd5ddf9871f367b6b9b965d5d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7acdc573ebd5ddf9871f367b6b9b965d5d" kindref="member">DMMPolicy_StatusParamError</ref>,<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="319" refid="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7a6939d023fdead8354e7069fe34fcc315" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7a6939d023fdead8354e7069fe34fcc315" kindref="member">DMMPolicy_StatusSuccess</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="320"><highlight class="normal">}<sp/><ref refid="dmm__policy_8h_1a7061ebe0e60dfaa3322a9cff090aacc7" kindref="member">DMMPolicy_Status</ref>;</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight></codeline>
+<codeline lineno="323" refid="dmm__policy_8h_1aafb2f235fbb1da6a8687ab82511ab2c3" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="dmm__policy_8h_1aafb2f235fbb1da6a8687ab82511ab2c3" kindref="member">DMMPolicy_appPauseCb_t</ref>)(uint16_t<sp/>pause);</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"></highlight></codeline>
+<codeline lineno="326" refid="structDMMPolicy__AppCbs__t" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="327"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="328" refid="structDMMPolicy__AppCbs__t_1a57efcc095ea500cba87935fc81203d4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="dmm__policy_8h_1aafb2f235fbb1da6a8687ab82511ab2c3" kindref="member">DMMPolicy_appPauseCb_t</ref><sp/><ref refid="structDMMPolicy__AppCbs__t_1a57efcc095ea500cba87935fc81203d4c" kindref="member">appPauseCb</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="329"><highlight class="normal">}<sp/><ref refid="structDMMPolicy__AppCbs__t" kindref="compound">DMMPolicy_AppCbs_t</ref>;</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"></highlight></codeline>
+<codeline lineno="336"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="dmm__policy_8h_1a8bda8711d4a594c9c7cb80dae4c7a1cd" kindref="member">DMMPolicy_Params_init</ref>(<ref refid="structDMMPolicy__Params" kindref="compound">DMMPolicy_Params</ref><sp/>*params);</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"></highlight></codeline>
+<codeline lineno="343"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="dmm__policy_8h_1ae82b5251e335ef6ea6ee8c2507e58d0c" kindref="member">DMMPolicy_registerAppCbs</ref>(<ref refid="structDMMPolicy__AppCbs__t" kindref="compound">DMMPolicy_AppCbs_t</ref><sp/>AppCbs,<sp/>DMMPolicy_StackRole<sp/>StackRole);</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight></codeline>
+<codeline lineno="348"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="dmm__policy_8h_1a0628d93d02aa11182608c8fb38fe27b0" kindref="member">DMMPolicy_init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight></codeline>
+<codeline lineno="356"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>DMMPolicy_Status<sp/><ref refid="dmm__policy_8h_1ab734042a6d7057a69b68dd438de2f7fd" kindref="member">DMMPolicy_open</ref>(<ref refid="structDMMPolicy__Params" kindref="compound">DMMPolicy_Params</ref><sp/>*params);</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"></highlight></codeline>
+<codeline lineno="365"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>DMMPolicy_Status<sp/><ref refid="dmm__policy_8h_1a03b4e93eb7e39916b422b54edd218123" kindref="member">DMMPolicy_updateApplicationState</ref>(DMMPolicy_StackRole<sp/>StackRole,<sp/>uint32_t<sp/>newState);</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"></highlight></codeline>
+<codeline lineno="374"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint16_t<sp/><ref refid="dmm__policy_8h_1ac009d5cc78945737c8ff3833efa9e86e" kindref="member">DMMPolicy_getGlobalPriority</ref><sp/>(uint32_t<sp/>activity,<sp/>uint32_t<sp/>stackID);</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"></highlight></codeline>
+<codeline lineno="382"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint8_t<sp/><ref refid="dmm__policy_8h_1a205b0f1e4a8b76e6bdb683fb0eebd17d" kindref="member">DMMPolicy_getDefaultPriority</ref><sp/>(uint32_t<sp/>stackID);</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"></highlight></codeline>
+<codeline lineno="391"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="dmm__policy_8h_1ab762438eb0d65393a43687f00dbb0019" kindref="member">DMMPolicy_setStackID</ref><sp/>(uint32_t<sp/>stackID,<sp/>DMMPolicy_StackRole<sp/>StackRole);</highlight></codeline>
+<codeline lineno="392"><highlight class="normal"></highlight></codeline>
+<codeline lineno="399"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint16_t<sp/><ref refid="dmm__policy_8h_1a992254757845d6103e80903c059cbec4" kindref="member">DMMPolicy_getPauseValue</ref><sp/>(uint32_t<sp/>stackID);</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"></highlight></codeline>
+<codeline lineno="407"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>uint16_t<sp/><ref refid="dmm__policy_8h_1a47baf3db018e38672c8e3e0ec8d8af33" kindref="member">DMMPolicy_getTimeConstraintValue</ref><sp/>(uint32_t<sp/>stackID);</highlight></codeline>
+<codeline lineno="408"><highlight class="normal"></highlight></codeline>
+<codeline lineno="413"><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="dmm__policy_8h_1a230f2142b1e78e6d6af9590b3b53dbfc" kindref="member">DMMPolicy_getGPTStatus</ref><sp/>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="414"><highlight class="normal"></highlight></codeline>
+<codeline lineno="420"><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="dmm__policy_8h_1a3d0a6535f5cfd2b6100999620f1e6b74" kindref="member">DMMPolicy_setBlockModeOn</ref>(DMMPolicy_StackRole<sp/>StackRole);</highlight></codeline>
+<codeline lineno="421"><highlight class="normal"></highlight></codeline>
+<codeline lineno="427"><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="dmm__policy_8h_1a9fc36ec6ba8c150972df0b96aee3d528" kindref="member">DMMPolicy_setBlockModeOff</ref>(DMMPolicy_StackRole<sp/>StackRole);</highlight></codeline>
+<codeline lineno="428"><highlight class="normal"></highlight></codeline>
+<codeline lineno="435"><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="dmm__policy_8h_1a8fdfd30b0d5718a1f5588ca1a2a779a9" kindref="member">DMMPolicy_getBlockModeStatus</ref>(DMMPolicy_StackRole<sp/>StackRole);</highlight></codeline>
+<codeline lineno="436"><highlight class="normal"></highlight></codeline>
+<codeline lineno="437"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="438"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="439"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="440"><highlight class="normal"></highlight></codeline>
+<codeline lineno="441"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>DMMPolicy_H_<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/dmm/dmm_policy.h"/>
+  </compounddef>
+</doxygen>

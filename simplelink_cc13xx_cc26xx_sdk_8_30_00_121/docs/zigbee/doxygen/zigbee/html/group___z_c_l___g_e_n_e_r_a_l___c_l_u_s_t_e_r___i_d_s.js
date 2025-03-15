@@ -1,0 +1,28 @@
+var group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s =
+[
+    [ "ZCL_CLUSTER_ID_GENERAL_ALARMS", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga4d2b3dc9a8dba4bfcca853ce6edde334", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_ANALOG_INPUT_BASIC", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#gaaf3747d242763a4d22f7c3ca59d7cc92", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_ANALOG_OUTPUT_BASIC", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga4bcc559b1960378eaa6088b70cd1e0aa", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_ANALOG_VALUE_BASIC", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga155a47f7993d593b8aa672ed14fde8f8", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_BASIC", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga8b4366ef48c130c683119e808f789892", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_BINARY_INPUT_BASIC", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga4a47666ea620887f81b6f37f6a945b74", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_BINARY_OUTPUT_BASIC", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#gaf8bd8a3fcc7f94b1924c4510d936026d", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_BINARY_VALUE_BASIC", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#gae8c7c794b6fe596873fe6807e871df31", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_DEVICE_TEMP_CONFIG", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga243077393c0f44516d824846ae5030ad", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_GROUPS", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga2873aa9ae3cad5ece5eff0ca6140c933", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_IDENTIFY", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga48fd8465a42353a047bd27c091068497", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_LEVEL_CONTROL", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga056d29e28fc9c08a5e7bb9050104026a", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_LOCATION", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga3a07adcae1dfb2100abb404826112b74", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_MULTISTATE_INPUT_BASIC", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga878a130aae2dd215d2323ba6282628ab", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_MULTISTATE_OUTPUT_BASIC", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga3dd0bd85fe1b34b05f9248f6f9bd19cf", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_MULTISTATE_VALUE_BASIC", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#gaf85df343d2a5e3e274648520368c6bda", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_ON_OFF", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga8ad0a94ded04307f9daaf383b8d5c75e", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_ON_OFF_SWITCH_CONFIGURATION", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga263027b6cf319c3eee402cdc2ede42a3", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_POLL_CONTROL", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga37d095646533fbb75b8bee405a5c7210", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_POWER_CFG", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga599aece6e9aa7c8eae830a31cf326e3f", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_POWER_PROFILE", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#gab6bab4b77a0063a7094bb7b7f9f85a01", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_SCENES", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#gabb425cab62befba9eab8b8acd7a3f170", null ],
+    [ "ZCL_CLUSTER_ID_GENERAL_TIME", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga250a90b025a20d40c7a13a5f7b378e59", null ],
+    [ "ZCL_CLUSTER_ID_HA_DIAGNOSTIC", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga204adf23216971c7f77653d37e50ddda", null ],
+    [ "ZCL_CLUSTER_ID_HA_METER_IDENTIFICATION", "group___z_c_l___g_e_n_e_r_a_l___c_l_u_s_t_e_r___i_d_s.html#ga36001371b80e0dffceee801b9897887d", null ]
+];

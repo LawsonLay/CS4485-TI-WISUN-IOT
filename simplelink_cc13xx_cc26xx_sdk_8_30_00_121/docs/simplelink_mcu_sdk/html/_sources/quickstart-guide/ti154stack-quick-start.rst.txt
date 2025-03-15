@@ -1,0 +1,363 @@
+.. DO NOT RENAME OR MOVE THIS FILE FROM THE QUICKSTART GUIDE! THIS GUARANTEES
+   EXTERNAL LINKS TO THIS GUIDE WILL PERSIST IN E2E AND SUCH.
+
+.. |TI154_UG| replace:: :docs_root:`TI 15.4-Stack Users Guide <ti154stack/ti-15.4-stack-users-guide.html>`
+
+.. _quick-start-ti154stack:
+
+|TIMAC| Quick Start Guide
+=========================
+
+This section serves as a road map for users developing applications
+and products using the TI SimpleLink |DEVICE| wireless MCU platform for
+|TIMAC| applications. Whether a seasoned developer or just getting
+started, TI has created a variety of resources to simplify development on the
+|DEVICE| platform. These resources will enhance your experience with the
+SimpleLink |TIMAC| from the out-of-the-box demo to production.
+
+:numref:`fig_ti154stack_suggested_workflow` shows the suggested workflow for getting
+started with TI's SimpleLink |TIMAC| development environment.
+
+.. _fig_ti154stack_suggested_workflow:
+.. figure:: resources/ti154stack/ti154stack-suggestedworkflow.png
+    :align: center
+
+    Suggested Workflow
+
+.. _quick-start-ti154stack-ccs:
+
+Using |TIMAC| Projects with CCS
+-------------------------------
+
+Importing |TIMAC| projects into CCS will also import a ``README.html`` that
+details the example application design, steps on running the example, and how
+each example works.
+
+Projects that contain the TI Over-the-Air Download (OAD) Profile will also
+import the Boot Image Manager (BIM) into the workspace. For more information on TI OAD and the BIM see the |TI154_UG|.
+
+For more details on TI 15.4-Stack example application please see the
+|TI154_UG|.
+
+Import Project Using Resource Explorer
+""""""""""""""""""""""""""""""""""""""
+
+A quick and easy way to start working with the SDK is to use the TI Resource
+Explorer in CCS.
+
+This section describes how to import and build an existing project and
+references the *sensor* project. All of |TIMAC| projects included
+in the development kit have a similar structure.
+
+#. Open the CCS IDE from the Start Menu.
+#. Create a workspace.
+
+    .. attention::
+
+        Ensure that the CCS workspace path does not contain a whitespace.
+
+#. Import a CCS Project using Resource Explorer
+
+    -   Open Resource Explorer (if not open already) **View** -> **Resource
+        Explorer** - Navigate to the CCS folder for your chosen example:
+        **Wireless connectivity -> Embedded Software ->** |SDK| **-> Examples ->** \ |DEVICE|\ \_LAUNCHXL **->
+        TI 15.4-Stack -> sensor ->** |TIRTOS| **-> CCS or TI Clang Compiler -> sensor**
+
+#.  Select the CCS Logo button to import project into Project Explorer
+
+    .. attention::
+
+        The import process will also install the |SDK| if a local version does
+        not exist. You must accept the End User License Agreement to proceeed.
+
+        .. _fig-ti154stack-resource-explorer-eula:
+        .. figure:: resources/eula.png
+            :align: center
+
+            Install |SDK|
+
+        After the installation finishes, you must reopen CCS before importing
+        the project.
+
+    - If everything is successful, the project should appear in Resource
+      Explorer.
+
+
+Import Project Using Import Wizard
+""""""""""""""""""""""""""""""""""
+
+#. Open CCS
+#. Choose Project -> Import CCS Projects from the menu.
+#. Select the Browse button in the Import CCS Projects dialog and select the the directory
+   ``<SDK_INSTALL_DIR>/examples``
+
+    .. _fig-ti154stack-ccs-import-wizard:
+    .. figure:: resources/tidrivers/ccs-import-wizard.jpg
+        :align: center
+
+        CCS Import Wizard
+
+   CCS discovers both CCS and GCC based examples.
+#. Select the |TIMAC| Example Project you would like to use. In this example,
+   ``sensor_cc1310lp`` is chosen. Click Finish to import the
+   ``sensor_cc1310lp`` project.
+
+
+Build and Download Project
+""""""""""""""""""""""""""
+
+To build & download the sensor project:
+
+#. Build the Sensor project.
+
+    - Set the Sensor project as the active project. Make sure the Debug project
+      configuration is used.
+    - Select **Project** -> **Rebuild** to build the sensor project.
+
+#. Load the Sensor project
+
+    - Select **Run** -> **Debug** to download the sensor application.
+    - Once the debugging session starts, click the red stop button
+
+Before beginning execution, open a terminal window with the following settings:
+
+  +-----------------+-----------------+
+  | UART Param      | Default Values  |
+  +=================+=================+
+  | Baud Rate       | 115200          |
+  +-----------------+-----------------+
+  | Data length     | 8 bits          |
+  +-----------------+-----------------+
+  | Parity          | None            |
+  +-----------------+-----------------+
+  | Stop bits       | 1 bit           |
+  +-----------------+-----------------+
+  | Flow Control    | None            |
+  +-----------------+-----------------+
+
+When the debugging session opens, click the Green start button to start
+execution. Continue on to the ``README.html`` for information about using the
+example application.
+
+.. _quick-start-ti154stack-iar:
+
+Using |TIMAC| Projects with IAR
+-------------------------------
+
+When building with IAR, it is recommended to enable all build messages. This
+can be done by right-clicking in the Build window and selecting "All" as shown
+below:
+
+    .. _fig-ti154stack-iar-enable-build-messages:
+    .. figure:: resources/iar_enable_build_messages.png
+        :align: center
+
+        Enable All Build Messages
+
+Before starting to work with any of the |TIMAC| projects in the SDK, you need
+to load a set of variables that will be set for your current workspace.
+
+1. Select Tools -> Configure Custom Argument Variables
+
+    .. _fig-ti154stack-iar-configure-argvars:
+    .. figure:: resources/iar-configure-argvars.jpg
+        :align: center
+
+        Configure Custom Argument Variables
+
+2. Select the Global tab, then click Import..
+
+    .. _fig-ti154stack-iar-import-argvars:
+    .. figure:: resources/iar-import-argvars.jpg
+        :align: center
+
+        Import Global Argument Variables
+
+3. Import the custom argvars from the SDK. The argvars are stored in a SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars file, which is located in the
+tools/iar directory of the SDK
+(``<SDK_INSTALL_PATH>/tools/iar/SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars``)
+
+    .. _fig-ti154stack-iar-custom-argvars:
+    .. figure:: resources/iar-custom-argvars.jpg
+        :align: center
+
+        Custom Argvars Location
+
+4. You can open
+(``<SDK_INSTALL_PATH>/tools/iar/SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars``)
+in a text editor if you need to modify the default path argument variables.
+
+    .. _fig-ti154stack-iar-default-argvars:
+    .. figure:: resources/iar-default-argvars.jpg
+        :align: center
+
+        Default Path Argument Variables
+
+5. Restart IAR
+
+Import Project Using Workspace
+""""""""""""""""""""""""""""""
+This section describes how to open and build an existing project and references
+the Sensor project.
+
+#. Open the IAR Embedded Workbench IDE from the Start Menu.
+#. Open an IAR workspace project: **File** -> **Open** -> **Workspace...**
+
+    - For this example, select"
+      <SDK\_INSTALL\_DIR>\\examples\\rtos\\\ |DEVICE|\ \_LAUNCHXL\\ti154stack\\sensor\\tirtos\\iar\\sensor\_\ |DEVICE|\ .eww
+
+This workspace file is for the sensor project. When selected, the
+files associated with the workspace become visible in the Workspace pane on the
+left side of the screen.
+
+Build and Download Project
+""""""""""""""""""""""""""
+
+To build & download the Sensor Project:
+
+#. Build the Sensor project.
+
+    - Set the Sensor project as the active project. Make sure the Debug project
+      configuration is used.
+    - Select **Project** -> **Make** to build the Sensor project.
+
+#. Load the Sensor project
+
+    - To download without debugging: Select **Project** -> **Download** ->
+        **Download Active Application**
+    - When the download process is complete, you will see a message that the
+      .out file was downloaded to flash memory in the Debug Log.
+
+Before beginning execution, open a terminal window with the following settings:
+
+  +-----------------+-----------------+
+  | UART Param      | Default Values  |
+  +=================+=================+
+  | Baud Rate       | 115200          |
+  +-----------------+-----------------+
+  | Data length     | 8 bits          |
+  +-----------------+-----------------+
+  | Parity          | None            |
+  +-----------------+-----------------+
+  | Stop bits       | 1 bit           |
+  +-----------------+-----------------+
+  | Flow Control    | None            |
+  +-----------------+-----------------+
+
+When the debugging session opens, click the start button to start execution.
+See the ``README.html`` or |TI154_UG| for information
+about using the Sensor project.
+
+.. _quick-start-ti154stack-demo:
+
+Running the Demo
+----------------
+
+For information on running any of the |TIMAC| example applications please refer
+to the ``README.html`` imported with the example application.
+
+.. _quick-start-ti154stack-learn:
+
+Learning More About |TIMAC|
+---------------------------
+
+Resources contained in the Learn track of :numref:`fig_ti154stack_suggested_workflow` are
+intended for users who are new to |TIMAC| or |TIRTOS|. These modules demonstrate
+how to create custom applications with |TIMAC| and TI's Real Time Operation
+System (|TIRTOS|).
+
+-  **SimpleLink Academy** `Project Zero <https://training.ti.com/simplelink-academy-ti-154-stack-sensor-and-collector-ti-154-stack-project-zero>`_
+
+Contains |TIRTOS| modules written to demonstrate the rich debug environment and
+peripheral driver capability provided by the RTOS.
+
+-  **TI-RTOS Kernel Workshop** `www.training.ti.com/ti-rtos-kernel-workshop <http://training.ti.com/ti-rtos-kernel-workshop>`_
+
+This material teaches users who are new to |TIRTOS| or any RTOS
+programming in general about TI’s RTOS kernel implementation.
+
+Modules within the kernel training greatly expand the information
+presented in the |TI154_UG|.
+
+Learn how the |TIRTOS| provides the most optimal power management
+and design flexibly.
+
+.. _quick-start-ti154stack-develop:
+
+Developing a New |TIMAC| Based Application
+------------------------------------------
+
+The develop track of :numref:`fig_ti154stack_suggested_workflow` is intended for
+programmers who are ready to start developing an end product using |TIMAC|.
+To begin:
+
+#.  **Download the Simplelink SDK** `SIMPLELINK-SDK
+    <http://www.ti.com/ti154stack>`_
+    |TIMAC| contains the code neccessary to create a complete IEEE 802.15.4g
+    compliant application.
+    The stack library code implements the IEEE 802.15.4g protocol stack, and the
+    various example projects use the stack library to implement end devices.
+    These examples should be considered as starting points for end product designs.
+
+
+#.  **Get Familiar with the User’s Guide**
+    This User's Guide is meant to be used alongside the |TIMAC| when developing
+    an end product. It contains documentation on the stack architecture, APIs,
+    and suggestions for developing applications. To jump to the Table of
+    Contents, click here:  |TI154_UG|.
+
+#.  **Select an Example Project**
+    The |TIMAC| includes a basic set of projects to use as a starting point for
+    development of your custom application. TI recommends that users start their
+    development on a project starting the Collector and Sensor example
+    applications. For more details on these and all other included projects, see
+    the |TI154_UG|.
+
+#.  **Begin Development with an IDE**
+    An Integrated Development Environment can be set up to make it easier to
+    browse through the relevant projects and view code. All embedded software is
+    developed using TI's Code Composer Studio on a Windows 7 or later
+    PC.
+
+#.  **Troubleshooting Help**
+    While developing your custom application, you may run into issues that
+    require the use of a debugger. The |TI154_UG| provides
+    help with configuring your debugger and understanding common problems. If
+    you are still having problems after reading through the Debugging chapter,
+    see the :ref:`quick-start-ti154stack-support` track for more options.
+
+.. _quick-start-ti154stack-enhance:
+
+Enhance Your Project
+--------------------
+
+The enhance track of :numref:`fig_ti154stack_suggested_workflow` is intended to take your
+product to the next level by leveraging TI’s web-based collateral. Additional
+resources found in these pages include application-specific source code examples
+and complete sub-system designs.
+
+-  **TI Designs™** `http://www.ti.com/tidesigns <http://www.ti.com/tool/TIDEP0084>`_
+
+Examples of system designs containing complete hardware and
+software examples, using |TIMAC|.
+
+.. _quick-start-ti154stack-support:
+
+Getting Support
+---------------
+
+The support track of :numref:`fig_ti154stack_suggested_workflow` is intended to provide you
+additional help and resources that aren't contained in the previous tracks.
+
+- **TI 15.4-Stack-Wiki** `www.ti.com/ti154stack-wiki <http://www.ti.com/ti154stack-wiki>`_
+
+A collection of webpages that contain step-by-step guides and code snippets that
+enable certain features and enhancements to |TIMAC|, such as production test
+mode and certification.
+
+- **E2E Forums** `www.e2e.ti.com <https://e2e.ti.com/support/wireless-connectivity/>`_
+
+A support community providing answers to questions relating to the |TIMAC|. You
+can browse questions from other developers or ask your own questions if you run
+into issues developing with the |TIMAC|.
+

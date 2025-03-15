@@ -1,0 +1,369 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_crypto_key_key_store___p_s_a__init_8h" kind="file" language="C++">
+    <compoundname>CryptoKeyKeyStore_PSA_init.h</compoundname>
+    <includes refid="_crypto_key_8h" local="no">ti/drivers/cryptoutils/cryptokey/CryptoKey.h</includes>
+    <includes refid="_crypto_key_key_store___p_s_a_8h" local="no">ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h</includes>
+    <incdepgraph>
+      <node id="710">
+        <label>stdbool.h</label>
+      </node>
+      <node id="711">
+        <label>ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h</label>
+        <link refid="_crypto_key_key_store___p_s_a_8h"/>
+        <childnode refid="712" relation="include">
+        </childnode>
+        <childnode refid="713" relation="include">
+        </childnode>
+        <childnode refid="714" relation="include">
+        </childnode>
+        <childnode refid="715" relation="include">
+        </childnode>
+      </node>
+      <node id="713">
+        <label>third_party/hsmddk/include/Integration/Adapter_PSA/incl/psa/crypto.h</label>
+      </node>
+      <node id="709">
+        <label>stdint.h</label>
+      </node>
+      <node id="707">
+        <label>CryptoKeyKeyStore_PSA_init.h</label>
+        <link refid="_crypto_key_key_store___p_s_a__init_8h"/>
+        <childnode refid="708" relation="include">
+        </childnode>
+        <childnode refid="711" relation="include">
+        </childnode>
+      </node>
+      <node id="715">
+        <label>third_party/hsmddk/include/Integration/Adapter_PSA/Adapter_mbedTLS/incl/private_access.h</label>
+      </node>
+      <node id="712">
+        <label>ti/devices/DeviceFamily.h</label>
+      </node>
+      <node id="714">
+        <label>third_party/hsmddk/include/Integration/Adapter_PSA/incl/psa/crypto_extra.h</label>
+      </node>
+      <node id="708">
+        <label>ti/drivers/cryptoutils/cryptokey/CryptoKey.h</label>
+        <link refid="_crypto_key_8h"/>
+        <childnode refid="709" relation="include">
+        </childnode>
+        <childnode refid="710" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_crypto_key_key_store___p_s_a__init_8h_1a744d9e61c7949082baef772dcd2a1c6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t KeyStore_PSA_initKey</definition>
+        <argsstring>(CryptoKey *keyHandle, KeyStore_PSA_KeyFileId keyID, size_t keyLength, const void *keyAttributes)</argsstring>
+        <name>KeyStore_PSA_initKey</name>
+        <param>
+          <type><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> *</type>
+          <declname>keyHandle</declname>
+        </param>
+        <param>
+          <type><ref refid="group__attributes_1ga54486a82cbcbaf04f23408c4181d39ec" kindref="member">KeyStore_PSA_KeyFileId</ref></type>
+          <declname>keyID</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>keyLength</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>keyAttributes</declname>
+        </param>
+        <briefdescription>
+<para>Initializes a <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> type. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">keyHandle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> which will be initialized to type CryptoKey_KEYSTORE and ready for use </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">keyID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Key ID of the key in Key Store</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">keyLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of keying material in bytes </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">keyAttributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the attributes for KeyStore key, use NULL if <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> structure will not be used to generate keys</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns a status code from <ref refid="_crypto_key_8h" kindref="compound">CryptoKey.h</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_init.h" line="59" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_crypto_key_key_store___p_s_a__init_8h_1a8972bdba189dd7b4ef454d8c2b0ee1ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t KeyStore_PSA_initBlankKey</definition>
+        <argsstring>(CryptoKey *keyHandle, KeyStore_PSA_KeyFileId keyID, size_t keyLength, const void *keyAttributes)</argsstring>
+        <name>KeyStore_PSA_initBlankKey</name>
+        <param>
+          <type><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> *</type>
+          <declname>keyHandle</declname>
+        </param>
+        <param>
+          <type><ref refid="group__attributes_1ga54486a82cbcbaf04f23408c4181d39ec" kindref="member">KeyStore_PSA_KeyFileId</ref></type>
+          <declname>keyID</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>keyLength</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>keyAttributes</declname>
+        </param>
+        <briefdescription>
+<para>Initializes a Blank <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> type. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">keyHandle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> which will be initialized to type CryptoKey_BLANK_KEYSTORE and ready for use </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">keyID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Key ID of the key in Key Store</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">keyLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of keying material in bytes </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">keyAttributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the attributes for KeyStore key, use NULL if <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> structure will not be used to generate keys</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns a status code from <ref refid="_crypto_key_8h" kindref="compound">CryptoKey.h</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_init.h" line="79" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_crypto_key_key_store___p_s_a__init_8h_1aa580fbd793d73b862df4c77d3e8c53cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t KeyStore_PSA_initKeyHSM</definition>
+        <argsstring>(CryptoKey *keyHandle, KeyStore_PSA_KeyFileId keyID, size_t keyLength, const void *keyAttributes)</argsstring>
+        <name>KeyStore_PSA_initKeyHSM</name>
+        <param>
+          <type><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> *</type>
+          <declname>keyHandle</declname>
+        </param>
+        <param>
+          <type><ref refid="group__attributes_1ga54486a82cbcbaf04f23408c4181d39ec" kindref="member">KeyStore_PSA_KeyFileId</ref></type>
+          <declname>keyID</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>keyLength</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>keyAttributes</declname>
+        </param>
+        <briefdescription>
+<para>Initializes a <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> type. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">keyHandle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> which will be initialized to type CryptoKey_KEYSTORE_HSM and ready for use </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">keyID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Key ID of the key in Key Store </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">keyLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of keying material in bytes </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">keyAttributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the attributes for KeyStore key, use NULL if <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> structure will not be used to generate keys</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns a status code from <ref refid="_crypto_key_8h" kindref="compound">CryptoKey.h</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_init.h" line="98" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_crypto_key_key_store___p_s_a__init_8h_1a5be1e6f7b3e02d5adc5d122533177ec4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int_fast16_t</type>
+        <definition>int_fast16_t KeyStore_PSA_initBlankKeyHSM</definition>
+        <argsstring>(CryptoKey *keyHandle, KeyStore_PSA_KeyFileId keyID, size_t keyLength, const void *keyAttributes)</argsstring>
+        <name>KeyStore_PSA_initBlankKeyHSM</name>
+        <param>
+          <type><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> *</type>
+          <declname>keyHandle</declname>
+        </param>
+        <param>
+          <type><ref refid="group__attributes_1ga54486a82cbcbaf04f23408c4181d39ec" kindref="member">KeyStore_PSA_KeyFileId</ref></type>
+          <declname>keyID</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>keyLength</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>keyAttributes</declname>
+        </param>
+        <briefdescription>
+<para>Initializes a Blank <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> type. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">keyHandle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> which will be initialized to type CryptoKey_BLANK_KEYSTORE_HSM and ready for use </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">keyID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Key ID of the key in Key Store </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">keyLength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of keying material in bytes </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">keyAttributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the attributes for KeyStore key, use NULL if <ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref> structure will not be used to generate keys</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns a status code from <ref refid="_crypto_key_8h" kindref="compound">CryptoKey.h</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_init.h" line="117" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2022-2024,<sp/>Texas<sp/>Instruments<sp/>Incorporated</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ti_drivers_CryptoKeyKeyStore_PSA_init__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_drivers_CryptoKeyKeyStore_PSA_init__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_crypto_key_8h" kindref="compound">ti/drivers/cryptoutils/cryptokey/CryptoKey.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_crypto_key_key_store___p_s_a_8h" kindref="compound">ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal">int_fast16_t<sp/><ref refid="_crypto_key_key_store___p_s_a__init_8h_1a744d9e61c7949082baef772dcd2a1c6e" kindref="member">KeyStore_PSA_initKey</ref>(<ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref><sp/>*keyHandle,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__attributes_1ga54486a82cbcbaf04f23408c4181d39ec" kindref="member">KeyStore_PSA_KeyFileId</ref><sp/>keyID,</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>keyLength,</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*keyAttributes);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal">int_fast16_t<sp/><ref refid="_crypto_key_key_store___p_s_a__init_8h_1a8972bdba189dd7b4ef454d8c2b0ee1ba" kindref="member">KeyStore_PSA_initBlankKey</ref>(<ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref><sp/>*keyHandle,</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__attributes_1ga54486a82cbcbaf04f23408c4181d39ec" kindref="member">KeyStore_PSA_KeyFileId</ref><sp/>keyID,</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>keyLength,</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*keyAttributes);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal">int_fast16_t<sp/><ref refid="_crypto_key_key_store___p_s_a__init_8h_1aa580fbd793d73b862df4c77d3e8c53cb" kindref="member">KeyStore_PSA_initKeyHSM</ref>(<ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref><sp/>*keyHandle,</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__attributes_1ga54486a82cbcbaf04f23408c4181d39ec" kindref="member">KeyStore_PSA_KeyFileId</ref><sp/>keyID,</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>keyLength,</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*keyAttributes);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal">int_fast16_t<sp/><ref refid="_crypto_key_key_store___p_s_a__init_8h_1a5be1e6f7b3e02d5adc5d122533177ec4" kindref="member">KeyStore_PSA_initBlankKeyHSM</ref>(<ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref><sp/>*keyHandle,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__attributes_1ga54486a82cbcbaf04f23408c4181d39ec" kindref="member">KeyStore_PSA_KeyFileId</ref><sp/>keyID,</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>keyLength,</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*keyAttributes);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_drivers_KeyStore_PSA_init__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA_init.h"/>
+  </compounddef>
+</doxygen>

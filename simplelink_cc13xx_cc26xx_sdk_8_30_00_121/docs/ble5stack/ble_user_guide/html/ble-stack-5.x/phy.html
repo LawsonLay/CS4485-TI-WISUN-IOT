@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Physical Layer (PHY) &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Stack Configurations" href="stack-configuration-cc13xx_cc26xx.html" />
+    <link rel="prev" title="Host Controller Interface (HCI)" href="hci.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-stack-5.x phy";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview-cc13xx_cc26xx.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gap-cc13xx_cc26xx.html">Generic Access Profile (GAP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gatt.html">Generic Attribute Profile (GATT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gatt.html#gap-gatt-service-ggs">GAP GATT Service (GGS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gatt.html#generic-attribute-profile-service-gatt-service">Generic Attribute Profile Service (GATT Service)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gatt.html#gattservapp-module">GATTServApp Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gapbondmngr-cc13xx_cc26xx.html">GAP Bond Manager and LE Secure Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="privacy.html">Privacy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-common/l2cap.html">Logical Link Control and Adaptation Layer Protocol (L2CAP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-common/link-layer-cc13xx_cc26xx.html">Link Layer (LL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channel-selection-algorithm-number-two.html">Channel Selection Algorithm #2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hci.html">Host Controller Interface (HCI)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Physical Layer (PHY)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#le-2m-phy">LE 2M PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#le-coded-phy">LE Coded PHY</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#le-coded-s2-and-s8">LE Coded S2 and S8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#link-budget">Link Budget</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#phy-comparison">PHY Comparison</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#le-2m-phy-vs-le-1m-phy">LE 2M PHY vs LE 1M PHY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#le-coded-phy-vs-le-1m-phy">LE Coded PHY vs LE 1M PHY</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#advertising-phy">Advertising PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scanning-phy">Scanning PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initiating-phy">Initiating PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changing-phy">Changing PHY</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#phy-negotiation">PHY Negotiation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#disable-specific-phy-support-during-runtime">Disable Specific PHY Support During Runtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phy-limitations">PHY Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="stack-configuration-cc13xx_cc26xx.html">Stack Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a> &raquo;</li>
+      <li>Physical Layer (PHY)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="physical-layer-phy">
+<span id="sec-phy"></span><h1>Physical Layer (PHY)<a class="headerlink" href="#physical-layer-phy" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The physical layer (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PHY"><span class="xref std std-term">PHY</span></a>) is the lowest layer of the Bluetooth low
+energy protocol stack. It configures the physical parameters of the radio
+transmission and reception. It determines how a bit (and its value) are
+represented over the air. By switching the PHY, the physical properties of the
+RF signal is changed.</p>
+<p>The supported PHYs include LE 1M, 2M, and Coded PHY. All the projects in BLE5-Stack
+have support for all of these PHYs; APIs need to be called in the application
+to utilize the feature.</p>
+<p>The following HCI commands were added to support this feature:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>LE Set PHY Command (<a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#ga540aa5d357dedb39422bfe98bada4b22">HCI_LE_SetPhyCmd()</a>)</p></li>
+<li><p>LE Set Default PHY Command (<a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#gae3788543722bdd6ca32740ecb8d48cd8">HCI_LE_SetDefaultPhyCmd()</a>)</p></li>
+<li><p>LE Read PHY Command (<a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#gab861d912273534c2be1b31cfa6564ce7">HCI_LE_ReadPhyCmd()</a>)</p></li>
+</ul>
+</div></blockquote>
+<p>When the <a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#ga540aa5d357dedb39422bfe98bada4b22">HCI_LE_SetPhyCmd()</a> is called, the controller starts the PHY
+Update Procedure to change the PHYs. The procedure consists of exchanging the
+PHY preferences of both devices and negotiating the correct PHY to use based on
+the PHY preferences. Depending on peer device capability and preference(s), the
+PHY Update Procedure may not result in a change to the active PHY configuration.</p>
+</div>
+<div class="section" id="le-2m-phy">
+<span id="sec-phy-2mbps"></span><h2>LE 2M PHY<a class="headerlink" href="#le-2m-phy" title="Permalink to this headline">¶</a></h2>
+<p>The BLE5-Stack supports transferring data over the mandatory symbol rate of 1
+megasymbol per second (Msym/s) where 1 symbol represents 1 bit.
+This results in a bit rate of 1 megabit per second (Mb/s), which is referred to
+as LE 1M PHY.</p>
+<p>The stack also supports an optional symbol rate of 2 Msym/s, with a
+bit rate of 2 Mb/s, which is referred to as LE 2M PHY.</p>
+</div>
+<div class="section" id="le-coded-phy">
+<span id="sec-phy-coded"></span><h2>LE Coded PHY<a class="headerlink" href="#le-coded-phy" title="Permalink to this headline">¶</a></h2>
+<p>LE Coded PHY allows the ability to have the signal range increase up to nearly
+quadruple the range of LE 1M PHY. This is achieved by coding the signal, so the
+Tx power stays the same. This means that the power consumption per time stays
+the same. On the other hand, this coding entails a lower data throughput.</p>
+<div class="section" id="le-coded-s2-and-s8">
+<span id="phy-coded-s2-s8"></span><h3>LE Coded S2 and S8<a class="headerlink" href="#le-coded-s2-and-s8" title="Permalink to this headline">¶</a></h3>
+<p>The LE Coded <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PHY"><span class="xref std std-term">PHY</span></a> can be operated with two data rates:</p>
+<ul class="simple">
+<li><p><strong>S2</strong> : In LE Coded S=2 mode, each bit is represented by two symbols. Thus,
+the data rate is 500kbps. In this mode the range is roughly doubled compared
+to the LE 1M PHY.</p></li>
+<li><p><strong>S8</strong>: In LE Coded S=8, each bit is represented by eight symbols. This
+gives a data rate of 125kbps. In this mode the range is roughly quadrupled
+compared to the LE 1M PHY.</p></li>
+</ul>
+<p>Every packet sent on LE Coded PHY contains a coding indicator (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-CI"><span class="xref std std-term">CI</span></a>),
+which indicates the coding of the packet. Thus, when a packet is being received
+on the LE Coded PHY, the receiver uses the coding indicator to determine the
+coding of the packet. The full packet format of packets sent on LE Coded PHY is
+found in the <a class="reference external" href="https://www.bluetooth.com/specifications/adopted-specifications">Bluetooth Core Specifications Version 5.3</a>, Vol 6, Part B, Chapter 2.2 PACKET FORMAT FOR THE
+LE CODED PHY.</p>
+</div>
+<div class="section" id="link-budget">
+<h3>Link Budget<a class="headerlink" href="#link-budget" title="Permalink to this headline">¶</a></h3>
+<p>The LE Coded <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PHY"><span class="xref std std-term">PHY</span></a> gives a higher sensitivity than the LE 1M PHY. The
+receiver sensitivity is defined by how weak signals the receiver can receive
+compared to the level of interfering RF power received simultaneously. If no
+interference is present, the sensitivity level is determined by the thermal
+background noise and will correspond to the sensitivity specified in the
+datasheet.</p>
+<p>In an operating RF link, the transmitter will transmit at a specified RF power
+level, and a (usually very tiny) fraction of that RF power will be picked up by
+the receiving antenna and fed to the receiver.  If that fraction is too small,
+the received power level will drop below the receiver sensitivity level and the
+link will fail.</p>
+<p>The link budget is the ratio between transmitted power and the Rx sensitivity
+level. For convenience, the link budget (LB) is usually denoted in a
+logarithmic scale (dB). Output power and sensitivity are usually denoted in a
+logarithmic scale relative to 1mW (dBm). This means that:</p>
+<div class="math">
+<p><img src="../_images/math/8a4b2c9350117925711acd53d1cf805d142b1d76.svg" alt="\textrm{LB}_{\textrm{dBm}} = \textrm{Tx Power} (\textrm{dBm}) - \textrm{Rx Sensitivity Level} (\textrm{dBm})"/></p>
+</div><p>There are two ways to improve the link budget:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Increase the output power</p></li>
+<li><p>Improve (reduce) the receiver sensitivity level</p></li>
+</ol>
+</div></blockquote>
+<p>Increasing the output power is fairly straight forward, but it comes at the cost
+of (sometimes significantly) increased power consumption. In addition, all
+regulatory jurisdictions have limits on RF emission levels and unwanted spurious
+emissions, both of which will increase if the transmit power is increased.</p>
+<p>The other option, improving receiver sensitivity, is the path chosen by the
+Bluetooth SIG when Bluetooth 5 was adopted with the intention of offering four
+times the RF range. This was also chosen to provide the longest range Bluetooth
+Low Energy solutions at lowest power consumption. In free space, a doubling of
+the range requires a quadrupling of the link budget (or 6 dB increase). This
+means that four times the range requires 12 dB better sensitivity for the LE
+Coded PHY, when compared with the LE 1M PHY. The reference for LE 1M PHY is set
+to -93 dBm. (Note that -93 dBm was chosen as a reference point for a standard
+radio at the time the spec was written.) Since the reference for LE 1M PHY is
+-93 dBm, the LE Coded PHY needs a sensitivity of -105 dBm in order to achieve
+four times the range. For the true RX sensitivity of the CC13xx or CC26xx for the
+different PHYs, please refer to the CC13xx or CC26xx datasheet.</p>
+<p>See <a class="reference internal" href="#lbfig"><span class="std std-numref">Figure 101.</span></a> for an illustration of this.</p>
+<div class="figure align-default" id="id4">
+<span id="lbfig"></span><img alt="../_images/LBfigure.png" src="../_images/LBfigure.png" />
+<p class="caption"><span class="caption-number">Figure 101. </span><span class="caption-text">Link Budget Illustration</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>The link budget increase is achieved through a two-way approach:</p>
+<ul class="simple">
+<li><p>The biggest improvement comes simply from the fact that the data rate is
+reduced to 1/8th, which means that every bit carries eight times more energy
+for any given power level. Theoretically, this allows the receiver to
+receive signals at 9 dB lower power levels and still accumulate the same
+energy per bit as before.</p></li>
+<li><p>The last 3 dB can be achieved due to the coding employed. The -93 dBm
+comparison level (for 1Mpbs) assumed a standard differential demodulator,
+where each received symbol (1 symbol per bit) is determined to be “1” or
+“0” based on a comparison with the previous symbol. The Coded PHYs
+facilitate a semi-coherent receiver where eight symbols make up 1 bit, and
+correlators can search for these known symbol sequences. This is called
+Forward Error Correction (<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-FEC"><span class="xref std std-term">FEC</span></a>).</p></li>
+</ul>
+<p>It is worth noting that even though the Tx power is the same for LE Coded PHY
+as for LE 1M PHY, the data rate is lower, thus the device will spend a longer
+time to send the same amount of data. This will give a higher power consumption
+for sending the same amount of data on LE Coded PHY compared to LE 1M PHY.</p>
+<p>You can read more about how the LE Coded PHY in this blog: <a class="reference external" href="https://e2e.ti.com/blogs_/b/connecting_wirelessly/archive/2017/01/30/how-does-bluetooth-5-increase-the-achievable-range-of-a-bluetooth-low-energy-connection">How does Bluetooth®
+5 increase the achievable range of a Bluetooth Low Energy connection?</a></p>
+</div>
+</div>
+<div class="section" id="phy-comparison">
+<h2>PHY Comparison<a class="headerlink" href="#phy-comparison" title="Permalink to this headline">¶</a></h2>
+<p>A comparison of the Bluetooth Low Energy PHYs is given below:</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-number">Table 18. </span><span class="caption-text">Comparison of the PHYs.</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 21%" />
+<col style="width: 10%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>LE 1M</p></th>
+<th class="head"><p>LE 2M</p></th>
+<th class="head"><p>LE Coded S=2</p></th>
+<th class="head"><p>LE Coded S=8</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Symbol Rate</p></td>
+<td><p>1Msps</p></td>
+<td><p>2Msps</p></td>
+<td><p>1Msps</p></td>
+<td><p>1Msps</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data Rate</p></td>
+<td><p>1Mbps</p></td>
+<td><p>2Mbps</p></td>
+<td><p>500kbps</p></td>
+<td><p>125kbps</p></td>
+</tr>
+<tr class="row-even"><td><p>Error Correction</p></td>
+<td><p>None</p></td>
+<td><p>None</p></td>
+<td><p><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-FEC"><span class="xref std std-term">FEC</span></a></p></td>
+<td><p><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-FEC"><span class="xref std std-term">FEC</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Range Multiplier</p></td>
+<td><p>1</p></td>
+<td><p>~0.8</p></td>
+<td><p>~2</p></td>
+<td><p>~4</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="le-2m-phy-vs-le-1m-phy">
+<h3>LE 2M PHY vs LE 1M PHY<a class="headerlink" href="#le-2m-phy-vs-le-1m-phy" title="Permalink to this headline">¶</a></h3>
+<p>The LE 2M PHY feature uses the same transmit power as the LE 1M PHY, the only
+change is in the modulation of data in the PHY. Using the LE 2M PHY, the energy
+consumption decreases due to higher data modulation at the same output power.
+The following table lists some of the differences between the two PHYs:</p>
+<span id="phy-tradeoffs"></span><table class="docutils align-default" id="id6">
+<caption><span class="caption-number">Table 19. </span><span class="caption-text">Tradeoff between 1M and 2M PHYs</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 64%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Comparison</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Power consumption</p></td>
+<td><p>Energy consumption is reduced using the same transmit power.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data Rate</p></td>
+<td><p>LE 2M PHY is 2x faster to transmit data than LE 1M PHY.</p></td>
+</tr>
+<tr class="row-even"><td><p>Receive Sensitivity</p></td>
+<td><p>The link budget will be lower relative to LE 1M PHY, due to
+the increased symbol rate.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transmit Power</p></td>
+<td><p>The output power is same for both PHYs.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The main advantage to use the LE 2M PHY is for high throughput applications to
+transfer data at a higher speed.</p>
+</div>
+<div class="section" id="le-coded-phy-vs-le-1m-phy">
+<h3>LE Coded PHY vs LE 1M PHY<a class="headerlink" href="#le-coded-phy-vs-le-1m-phy" title="Permalink to this headline">¶</a></h3>
+<p>The LE Coded <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PHY"><span class="xref std std-term">PHY</span></a> feature uses the same transmit power as the LE 1M PHY,
+the only change is in the modulation of data in the PHY. Using the LE Coded
+PHY, the energy consumption increases because the radio is in Tx longer. Thus
+the main application for LE Coded PHY should be applications that need a long
+range, but a low data rate. According to the Bluetooth spec, there are
+limitations on what packets can be sent on the LE Coded PHY.</p>
+</div>
+</div>
+<div class="section" id="advertising-phy">
+<span id="advert-phy"></span><h2>Advertising PHY<a class="headerlink" href="#advertising-phy" title="Permalink to this headline">¶</a></h2>
+<p>We will use a snippet similar to the example application <strong>simple peripheral</strong>
+to show how to advertise on multiple PHYs by selecting a PHY for each
+advertisement set. Please use <a class="reference internal" href="gap-cc13xx_cc26xx.html#gap-advertiser"><span class="std std-ref">GAP Advertiser</span></a> as a reference for the
+advertisement <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-API"><span class="xref std std-term">API</span></a> s.</p>
+<p>Set up the advertising parameters for each set and specify the PHY. The snippet
+provides a way to use a predefined parameter set
+(e.g. <a class="reference external" href="../../doxygen/ble/html/group___gap_adv___constants.html#ga449950966e3d246dca0f0012f2ad37d5">GAPADV_PARAMS_LEGACY_SCANN_CONN</a>). The primary PHY and secondary
+PHY can also be individually selected (e.g. <a class="reference external" href="../../doxygen/ble/html/group___gap_adv___constants.html#ggadd8d1f9b9dd8d6af8395e380a8613dd5a69d3d557eb707cf44668f621221be550">GAP_ADV_PRIM_PHY_CODED_S2</a>
+or <a class="reference external" href="../../doxygen/ble/html/group___gap_adv___constants.html#gga6da0f4d041a51d00f5bd02891fe12025a9013799aa1a1b9f7eb939b117e242542">GAP_ADV_SEC_PHY_CODED_S8</a>) in the advertisement parameters:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-number">Listing 154. </span><span class="caption-text">Create two advertisement sets at different PHYs</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w">  </span><span class="c1">// Advertising handles</span>
+<span class="linenos"> 2</span><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">advHandleLegacy</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">advHandleLongRange</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="c1">// Temporary memory for advertising parameters for set #1 (1M PHY)</span>
+<span class="hll"><span class="linenos"> 6</span><span class="w">  </span><span class="n">GapAdv_params_t</span><span class="w"> </span><span class="n">advParamLegacy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAPADV_PARAMS_LEGACY_SCANN_CONN</span><span class="p">;</span><span class="w"></span>
+</span><span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="c1">// Create Advertisement set #1 and assign handle</span>
+<span class="linenos"> 9</span><span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GapAdv_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">SimplePeripheral_advCallback</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">advParamLegacy</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">                         </span><span class="o">&amp;</span><span class="n">advHandleLegacy</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">  </span><span class="c1">// Use long range params to create long range set #2 (Coded PHY S2)</span>
+<span class="hll"><span class="linenos">13</span><span class="w">  </span><span class="n">GapAdv_params_t</span><span class="w"> </span><span class="n">advParamLongRange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAPADV_PARAMS_AE_LONG_RANGE_CONN</span><span class="p">;</span><span class="w"></span>
+</span><span class="linenos">14</span>
+<span class="linenos">15</span><span class="w">  </span><span class="c1">// Alternatively, set the parameters individually.</span>
+<span class="linenos">16</span><span class="w">  </span><span class="n">advParamLongRange</span><span class="p">.</span><span class="n">primPhy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAP_ADV_PRIM_PHY_CODED_S2</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">  </span><span class="n">advParamLongRange</span><span class="p">.</span><span class="n">secPhy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GAP_ADV_SEC_PHY_CODED_S8</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="w">  </span><span class="c1">// Create Advertisement set #2 and assign handle</span>
+<span class="linenos">20</span><span class="w">  </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GapAdv_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">SimplePeripheral_advCallback</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">advParamLongRange</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">21</span><span class="w">                         </span><span class="o">&amp;</span><span class="n">advHandleLongRange</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>According to the <a class="reference external" href="https://www.bluetooth.com/specifications/adopted-specifications">Bluetooth Core Specifications Version 5.3</a> (Version 5.0 | Vol 6, Part B, Chapter 2.3
+ADVERTISING CHANNEL PDU), only the following <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PDU"><span class="xref std std-term">PDU</span></a> types can be
+transmitted on the LE Coded <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PHY"><span class="xref std std-term">PHY</span></a>:</p>
+<ul class="simple">
+<li><p>ADV_EXT_IND</p></li>
+<li><p>AUX_ADV_IND</p></li>
+<li><p>AUX_SYNC_IND</p></li>
+<li><p>AUX_CHAIN_IND</p></li>
+<li><p>AUX_SCAN_REQ</p></li>
+<li><p>AUX_SCAN_RSP</p></li>
+<li><p>AUX_CONNECT_REQ</p></li>
+<li><p>AUX_CONNECT_RSP</p></li>
+</ul>
+<p>You can read about each PDU in the <a class="reference external" href="https://www.bluetooth.com/specifications/adopted-specifications">Bluetooth Core Specifications Version 5.3</a>, Vol 6, Part B, Chapter 2.3
+ADVERTISING CHANNEL PDU.</p>
+<p>The primary PHY parameter will decide whether the device is advertising in
+legacy mode, or in long range mode (with ADV_EXT_IND). The secondary PHY
+parameter will decide the PHY of any auxiliary advertisement packets (i.e. all
+packets beginning with AUX_).</p>
+<p>If advertising non-connectable and non-scannable, an ADV_EXT_IND PDU with no Adv
+Data can be sent without an auxiliary packet. In all other cases, the
+ADV_EXT_IND PDU must contain a pointer to an auxiliary advertisement packet,
+AUX_ADV_IND. The AUX_ADV_IND PDU is sent on the PHY given in secPhy, and on one
+of the secondary channels (also known as data channels).</p>
+</div>
+<div class="section" id="scanning-phy">
+<span id="scan-phy"></span><h2>Scanning PHY<a class="headerlink" href="#scanning-phy" title="Permalink to this headline">¶</a></h2>
+<p>We will use a snippet similar to the example application <strong>simple central</strong> to
+show how the scanning PHY is selected. Please use <a class="reference internal" href="gap-cc13xx_cc26xx.html#gapscanner"><span class="std std-ref">GAP Scanner</span></a> as a
+reference for the scanner <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-API"><span class="xref std std-term">API</span></a> s.</p>
+<p>Setup the scanner PHY parameters and the scan primary PHY
+(e.g. <a class="reference external" href="../../doxygen/ble/html/group___gap_scan___constants.html#ggad929afccdc672967805c1f8aa8344799a118160965cbadc3283364571f5579dce">SCAN_PRIM_PHY_1M</a>):</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-number">Listing 156. </span><span class="caption-text">Setup scan parameters</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="w">  </span><span class="n">GapScan_PrimPhy_t</span><span class="w"> </span><span class="n">scanPhy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SCAN_PRIM_PHY_1M</span><span class="p">;</span><span class="w"></span>
+</span><span class="linenos"> 2</span><span class="w">  </span><span class="n">GapScan_ScanType_t</span><span class="w"> </span><span class="n">scanType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SCAN_TYPE_ACTIVE</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">scanInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SCAN_PARAM_DFLT_INTERVAL</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">scanWindow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SCAN_PARAM_DFLT_INTERVAL</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="c1">// Set Scan PHY parameters</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="n">GapScan_setPhyParams</span><span class="p">(</span><span class="n">DEFAULT_SCAN_PHY</span><span class="p">,</span><span class="w"> </span><span class="n">SCAN_TYPE_ACTIVE</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">                     </span><span class="n">SCAN_PARAM_DFLT_INTERVAL</span><span class="p">,</span><span class="w"> </span><span class="n">SCAN_PARAM_DFLT_INTERVAL</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">  </span><span class="c1">// Set scanning primary PHY</span>
+<span class="linenos">11</span><span class="w">  </span><span class="n">GapScan_setParam</span><span class="p">(</span><span class="n">SCAN_PARAM_PRIM_PHYS</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">scanPhy</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>To scan on multiple PHYs (e.g. <a class="reference external" href="../../doxygen/ble/html/group___gap_scan___constants.html#ggad929afccdc672967805c1f8aa8344799a118160965cbadc3283364571f5579dce">SCAN_PRIM_PHY_1M</a> and
+<a class="reference external" href="../../doxygen/ble/html/group___gap_scan___constants.html#ggad929afccdc672967805c1f8aa8344799aaf009db5715edd5effb641ae10ea6630">SCAN_PRIM_PHY_CODED</a>), individual PHYs can be OR’ed together:</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-number">Listing 157. </span><span class="caption-text">Multiple PHY scan</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="w">  </span><span class="n">GapScan_PrimPhy_t</span><span class="w"> </span><span class="n">scanPhy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SCAN_PRIM_PHY_1M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SCAN_PRIM_PHY_CODED</span><span class="p">;</span><span class="w"></span>
+</span><span class="linenos"> 2</span><span class="w">  </span><span class="n">GapScan_ScanType_t</span><span class="w"> </span><span class="n">scanType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SCAN_TYPE_ACTIVE</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">scanInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SCAN_PARAM_DFLT_INTERVAL</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">scanWindow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SCAN_PARAM_DFLT_INTERVAL</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="c1">// Set Scan PHY parameters</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="n">GapScan_setPhyParams</span><span class="p">(</span><span class="n">scanPhy</span><span class="p">,</span><span class="w"> </span><span class="n">scanType</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">                   </span><span class="n">scanInt</span><span class="p">,</span><span class="w"> </span><span class="n">scanWindow</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">  </span><span class="c1">// Set scanning primary PHY</span>
+<span class="linenos">11</span><span class="w">  </span><span class="n">GapScan_setParam</span><span class="p">(</span><span class="n">SCAN_PARAM_PRIM_PHYS</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">scanPhy</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p>As noted in <a class="reference internal" href="#phy-coded-s2-s8"><span class="std std-ref">LE Coded S2 and S8</span></a>, each packet transmitted on the LE Coded PHY
+contains a coding indicator that tells the receiving device what the coding of
+the packet is. It is thus not necessary to tell the <a class="reference internal" href="gap-cc13xx_cc26xx.html#gapscanner"><span class="std std-ref">GAP Scanner</span></a> what
+coding to use when scanning on the LE Coded PHY.</p>
+<p>In order to send a scan request to an advertiser which is advertising on LE
+Coded PHY, the scanner must listen for the AUX_ADV_IND indicated by the pointer
+in the ADV_EXT_IND <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PDU"><span class="xref std std-term">PDU</span></a>, and send a scan request to this packet. This
+will be an AUX_SCAN_REQ, sent on the same PHY and channel as the AUX_ADV_IND. In
+turn, the advertiser can send an AUX_SCAN_RSP on the same PHY and channel.</p>
+<p>Please reference <a class="reference internal" href="#limitations-phy"><span class="std std-ref">PHY Limitations</span></a> if trying to use the LE 2M PHY when
+scanning for extended advertisements.</p>
+</div>
+<div class="section" id="initiating-phy">
+<span id="init-phy"></span><h2>Initiating PHY<a class="headerlink" href="#initiating-phy" title="Permalink to this headline">¶</a></h2>
+<p>We will use a snippet similar to the example application <strong>simple central</strong> to
+show how the initiating PHY is selected. Please use <a class="reference internal" href="gap-cc13xx_cc26xx.html#gapinitiator"><span class="std std-ref">GAP Initiator</span></a> as a
+reference for the initiator <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-API"><span class="xref std std-term">API</span></a> s.</p>
+<p>Select which PHY to use when initiating the connection
+(e.g. <a class="reference external" href="../../doxygen/ble/html/group___gap_init___constants.html#gga4325e81ea17c15264390e6fe6e024ab5afd280094b0ddc1a600bb83ef2ec00e91">INIT_PHY_CODED</a>):</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">Listing 159. </span><span class="caption-text">Initiate a connection using LE Coded PHY</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="w">  </span><span class="n">GapInit_InitPhy_t</span><span class="w"> </span><span class="n">initPhy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INIT_PHY_CODED</span><span class="p">;</span><span class="w"></span>
+</span><span class="linenos">2</span>
+<span class="linenos">3</span><span class="w">  </span><span class="n">GapInit_connect</span><span class="p">(</span><span class="n">scanList</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="n">addrType</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">MASK_ADDRTYPE_ID</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">4</span><span class="w">                  </span><span class="n">scanList</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">initPhy</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>To initiate on multiple PHYs (e.g. <a class="reference external" href="../../doxygen/ble/html/group___gap_init___constants.html#gga4325e81ea17c15264390e6fe6e024ab5a46d51c44a45af362e34da7e357db181f">INIT_PHY_1M</a> and
+<a class="reference external" href="../../doxygen/ble/html/group___gap_init___constants.html#gga4325e81ea17c15264390e6fe6e024ab5afd280094b0ddc1a600bb83ef2ec00e91">INIT_PHY_CODED</a>), individual PHYs can be OR’ed together:</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">Listing 160. </span><span class="caption-text">Multiple PHY init</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="w">  </span><span class="n">GapInit_InitPhy_t</span><span class="w"> </span><span class="n">initPhy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INIT_PHY_1M</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">INIT_PHY_CODED</span><span class="p">;</span><span class="w"></span>
+</span><span class="linenos">2</span>
+<span class="linenos">3</span><span class="w">  </span><span class="n">GapInit_connect</span><span class="p">(</span><span class="n">scanList</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="n">addrType</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">MASK_ADDRTYPE_ID</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">4</span><span class="w">                  </span><span class="n">scanList</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">initPhy</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>In order to send a connection request to an advertiser which is advertising on
+LE Coded PHY, the initiator must listen for the AUX_ADV_IND indicated by the
+pointer in the ADV_EXT_IND <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PDU"><span class="xref std std-term">PDU</span></a>, and send a connection request to this
+packet. This will be an AUX_CONNECT_REQ, sent on the same PHY and channel as the
+AUX_ADV_IND. In turn, the advertiser can send an AUX_CONNECT_RSP on the same PHY
+and channel.</p>
+</div>
+<div class="section" id="changing-phy">
+<span id="id2"></span><h2>Changing PHY<a class="headerlink" href="#changing-phy" title="Permalink to this headline">¶</a></h2>
+<p>The application can initiate a <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PHY"><span class="xref std std-term">PHY</span></a> Update Procedure in a connection
+regardless of the role of the device (Central or Peripheral). The PHY preferences
+that are set by <a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#gae3788543722bdd6ca32740ecb8d48cd8">HCI_LE_SetDefaultPhyCmd()</a> are used by default during a
+set PHY negotiation.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Calling <a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#ga540aa5d357dedb39422bfe98bada4b22">HCI_LE_SetPhyCmd()</a> to change the PHY will change the
+preferred PHY of the device. This means that in some cases, only the device
+that first changed the active PHY can change it back.</p>
+<p>When the application has finished the PHY critical operations, it is
+therefore a good idea to change the PHY to a bit mask with every supported
+PHY, e.g. (LE 1M PHY | LE Coded PHY). This will allow the peer device to
+change the PHY back to LE 1M.</p>
+<p>The <a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#gae3788543722bdd6ca32740ecb8d48cd8">HCI_LE_SetDefaultPhyCmd()</a> is used to specify the preferred PHY
+for transmit and receive for all subsequent connections. However, when the
+<a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#ga540aa5d357dedb39422bfe98bada4b22">HCI_LE_SetPhyCmd()</a> is used to change the PHY for the connection,
+the change only applies to that connection. Subsequent connections will
+revert to using the default PHYs.</p>
+<p>The <a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#gae3788543722bdd6ca32740ecb8d48cd8">HCI_LE_SetDefaultPhyCmd()</a> should be called before forming the
+connection and <a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#ga540aa5d357dedb39422bfe98bada4b22">HCI_LE_SetPhyCmd()</a> can only be called during a
+connection. Also note that the <a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#gae3788543722bdd6ca32740ecb8d48cd8">HCI_LE_SetDefaultPhyCmd()</a> does not
+change the PHY, only the <a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#ga540aa5d357dedb39422bfe98bada4b22">HCI_LE_SetPhyCmd()</a> can request a change
+to the PHY.</p>
+</div>
+<p>The parameters for <a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#gae3788543722bdd6ca32740ecb8d48cd8">HCI_LE_SetDefaultPhyCmd()</a> and
+<a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#ga540aa5d357dedb39422bfe98bada4b22">HCI_LE_SetPhyCmd()</a> are same. The allPhys parameter specifies whether
+the other two parameters (txPhy and rxPhy) are used or not.
+Central value of ‘1’ indicates the client has no PHY preference for that
+direction, while a ‘0’ indicates that the corresponding parameter should be
+used. The txPhy and rxPhy can be set to specify which PHY to use for
+transmitting and receiving, respectively. Note that when all supported PHY are
+specified, the stack always tries to select the fastest PHY during a set PHY
+negotiation.</p>
+<span id="phyopts"></span><table class="docutils align-default" id="id15">
+<caption><span class="caption-number">Table 20. </span><span class="caption-text">HCI_LE_SetPhyCmd and HCI_LE_SetDefaultPhyCmd variables.</span><a class="headerlink" href="#id15" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 26%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Usage</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="../../doxygen/ble/html/group___p_h_y__2___c_o_d_e_d.html#gaddcc7af908bd7e7d5a895fc7eab45d1c">HCI_PHY_USE_PHY_PARAM</a></p></td>
+<td><p>allPhys</p></td>
+<td><p>Use Phy Param</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="../../doxygen/ble/html/group___p_h_y__2___c_o_d_e_d.html#ga9c865b36daf539fc988115ab0893241d">HCI_PHY_USE_ANY_PHY</a></p></td>
+<td><p>allPhys</p></td>
+<td><p>Use any PHY</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="../../doxygen/ble/html/group___p_h_y__2___c_o_d_e_d.html#gaaed9c8ba340dbdd7428850221cae1006">HCI_PHY_1_MBPS</a></p></td>
+<td><p>txPhy and rxPhy</p></td>
+<td><p>LE 1M PHY</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="../../doxygen/ble/html/group___p_h_y__2___c_o_d_e_d.html#ga32f4a0c977d4202f993e41b6917c1914">HCI_PHY_2_MBPS</a></p></td>
+<td><p>txPhy and rxPhy</p></td>
+<td><p>LE 2M PHY</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="../../doxygen/ble/html/group___p_h_y__2___c_o_d_e_d.html#gac6dc7d5f9665d680763147167fe24f1a">HCI_PHY_CODED</a></p></td>
+<td><p>txPhy and rxPhy</p></td>
+<td><p>LE Coded PHY</p></td>
+</tr>
+</tbody>
+</table>
+<p>In addition, for LE Coded PHY you can choose between S=2 and S=8 with the
+phyOpts parameter. Use the following <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-API"><span class="xref std std-term">API</span></a> to change/set the PHY:</p>
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-number">Listing 162. </span><span class="caption-text">Call API to set the PHY</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Set Phy Preference on the current connection. Apply the same value</span>
+<span class="c1">// for RX and TX.</span>
+<span class="n">HCI_LE_SetPhyCmd</span><span class="p">(</span><span class="n">connectionHandle</span><span class="p">,</span><span class="w"> </span><span class="n">HCI_PHY_USE_PHY_PARAM</span><span class="p">,</span><span class="w"> </span><span class="n">HCI_PHY_CODED</span><span class="p">,</span><span class="w"> </span><span class="n">HCI_PHY_CODED</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>Based on the PHY negotiation, the PHY will change if the peer remote device
+supports the given PHY(s). Otherwise, it will continue using
+the current PHY. After this command is sent, the controller
+will send a <a class="reference external" href="../../doxygen/ble/html/structhci_evt___b_l_e_phy_update_complete__t.html">hciEvt_BLEPhyUpdateComplete_t</a> which will indicate
+completion of this command:</p>
+<div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-number">Listing 163. </span><span class="caption-text">Receive PHY Update Complete event</span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">SimplePeripheral_processStackMsg</span><span class="p">(</span><span class="n">ICall_Hdr</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="p">...</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nl">HCI_LE_EVENT_CODE</span><span class="p">:</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="n">hciEvt_BLEPhyUpdateComplete_t</span><span class="w"> </span><span class="o">*</span><span class="n">pPUC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">hciEvt_BLEPhyUpdateComplete_t</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">pMsg</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="c1">// A Phy Update Has Completed or Failed</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pPUC</span><span class="o">-&gt;</span><span class="n">BLEEventCode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HCI_BLE_PHY_UPDATE_COMPLETE_EVENT</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pPUC</span><span class="o">-&gt;</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">SUCCESS</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">        </span><span class="n">Display_printf</span><span class="p">(</span><span class="n">dispHandle</span><span class="p">,</span><span class="w"> </span><span class="n">SBP_ROW_STATUS_1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PHY Change failure&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="linenos">16</span><span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">        </span><span class="c1">// Only symmetrical PHY is supported.</span>
+<span class="linenos">18</span><span class="w">        </span><span class="c1">// rxPhy should be equal to txPhy.</span>
+<span class="linenos">19</span><span class="w">        </span><span class="n">Display_printf</span><span class="p">(</span><span class="n">dispHandle</span><span class="p">,</span><span class="w"> </span><span class="n">SP_ROW_STATUS_2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">                       </span><span class="s">&quot;PHY Updated to %s&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">21</span><span class="w">                       </span><span class="p">(</span><span class="n">pPUC</span><span class="o">-&gt;</span><span class="n">rxPhy</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HCI_PHY_1_MBPS</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;1M&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
+<span class="linenos">22</span><span class="w">                       </span><span class="p">(</span><span class="n">pPUC</span><span class="o">-&gt;</span><span class="n">rxPhy</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HCI_PHY_2_MBPS</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;2M&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
+<span class="linenos">23</span><span class="w">                        </span><span class="s">&quot;CODED&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">25</span><span class="w">      </span><span class="p">...</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>In case this is not the first time a PHY change is attempted, and the controller
+knows that the peer device does not support the desired PHY, a
+<a class="reference external" href="../../doxygen/ble/html/group___h_c_i___constants.html#gaf156446a61da6bbb4d0e0f03998d7614">HCI_LE_SET_PHY</a> event will be received:</p>
+<div class="literal-block-wrapper docutils container" id="id19">
+<div class="code-block-caption"><span class="caption-number">Listing 165. </span><span class="caption-text">Receive PHY Update Complete event</span><a class="headerlink" href="#id19" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">SimplePeripheral_processStackMsg</span><span class="p">(</span><span class="n">ICall_Hdr</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="p">...</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nl">HCI_GAP_EVENT_EVENT</span><span class="p">:</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="p">...</span><span class="w"></span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="c1">// HCI Commands Events</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">HCI_COMMAND_STATUS_EVENT_CODE</span><span class="p">:</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">      </span><span class="n">hciEvt_CommandStatus_t</span><span class="w"> </span><span class="o">*</span><span class="n">pMyMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">hciEvt_CommandStatus_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">pMsg</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">      </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">pMyMsg</span><span class="o">-&gt;</span><span class="n">cmdOpcode</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nl">HCI_LE_SET_PHY</span><span class="p">:</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">16</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pMyMsg</span><span class="o">-&gt;</span><span class="n">cmdStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HCI_ERROR_CODE_UNSUPPORTED_REMOTE_FEATURE</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">           </span><span class="n">Display_printf</span><span class="p">(</span><span class="n">dispHandle</span><span class="p">,</span><span class="w"> </span><span class="n">SP_ROW_STATUS_1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">19</span><span class="w">                          </span><span class="s">&quot;PHY Change failure, peer does not support this&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="w">        </span><span class="p">....</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p>See <a class="reference internal" href="hci.html#sec-hci"><span class="std std-ref">Host Controller Interface (HCI)</span></a> for more information on receiving HCI events.</p>
+<p>The sequence diagram below shows the use case where the Central initiates the PHY
+update procedure:</p>
+<div class="figure align-center" id="id21">
+<span id="fig-phy-update-master"></span><p class="plantuml">
+<img src="../_images/plantuml-99c497348eaf64967a602812095fdfefd441813f.png" alt="&#64;startuml
+hide footbox
+
+
+            participant Central
+            participant CentralLL
+            participant PeripheralLL
+            participant Peripheral
+
+
+            group Establish connection
+                            Central -&gt; CentralLL: GapInit_connect()
+                            note left
+                                    Central (formerly known as 'Central') and Peripheral
+                                    (formerly known as 'Slave') are in connection
+                            end note
+            end
+            == LE 1M PHY ==
+...
+
+            group Change PHY
+                    Central -&gt; CentralLL: HCI_LE_SetPhyCmd()
+                    note left
+                            Central application initiates PHY change
+                    end note
+                    ...
+
+                    CentralLL -&gt; PeripheralLL : LL_PHY_REQ
+                    PeripheralLL -&gt; CentralLL : LL_PHY_RES
+                    note left
+                            Link layer messages exchanged
+                    end note
+                    ...
+                    CentralLL -&gt; PeripheralLL : LL_PHY_UPDATE_IND
+
+            end
+            == Change of PHY ==
+...
+
+            group Receive event
+                    CentralLL -&gt; Central : LE PHY Update Complete
+                    note left
+                            Application receives event from stack
+                    end note
+                    PeripheralLL --&gt; Peripheral : LE PHY Update Complete
+            end
+
+&#64;enduml"/>
+</p>
+<p class="caption"><span class="caption-number">Figure 102. </span><span class="caption-text">Sequence diagram for changing PHY by Central</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
+</div>
+<p>Alternatively, the Peripheral can also initiate the PHY Update Procedure as well
+using the same API as shown below:</p>
+<div class="figure align-center" id="id22">
+<span id="fig-phy-update-slave"></span><p class="plantuml">
+<img src="../_images/plantuml-44efcf85c0ee4899c20d8c7da4393ac8634bb1df.png" alt="&#64;startuml
+hide footbox
+
+
+participant Central
+            participant CentralLL
+            participant PeripheralLL
+participant Peripheral
+
+            group Establish connection
+                            Central -&gt; CentralLL: GapInit_connect()
+                            note right
+                                    Central (formerly known as 'Master') and Peripheral
+                                    (formerly known as 'Slave')  are in connection
+                            end note
+            end
+            == LE 1M PHY ==
+...
+
+            group Change PHY
+                    PeripheralLL &lt;- Peripheral: HCI_LE_SetPhyCmd()
+                    note left
+                            Peripheral application initiates PHY change
+                    end note
+                    ...
+
+                    CentralLL &lt;- PeripheralLL : LL_PHY_REQ
+                    note left
+                            Link layer messages exchanged
+                    end note
+                    ...
+                    CentralLL -&gt; PeripheralLL : LL_PHY_UPDATE_IND
+
+            end
+            == Change of PHY ==
+...
+
+            group Receive event
+                    CentralLL --&gt; Central : LE PHY Update Complete
+                    PeripheralLL -&gt; Peripheral : LE PHY Update Complete
+                    note left
+                            Application receives event from stack
+                    end note
+            end
+
+&#64;enduml"/>
+</p>
+<p class="caption"><span class="caption-number">Figure 103. </span><span class="caption-text">Sequence diagram for changing PHY by Peripheral</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+</div>
+<p>If the PHY does not change (for example, if the Central tries to change to a PHY not
+supported by the Peripheral), then only the side that initiated the PHY Update
+Procedure will get a <a class="reference external" href="../../doxygen/ble/html/structhci_evt___b_l_e_phy_update_complete__t.html">hciEvt_BLEPhyUpdateComplete_t</a> event. The other
+side will not receive a <a class="reference external" href="../../doxygen/ble/html/structhci_evt___b_l_e_phy_update_complete__t.html">hciEvt_BLEPhyUpdateComplete_t</a> event if the
+PHY is not changed. This is represented by dotted arrow lines in the flow charts above.</p>
+<div class="section" id="phy-negotiation">
+<span id="negotiating-phy"></span><h3>PHY Negotiation<a class="headerlink" href="#phy-negotiation" title="Permalink to this headline">¶</a></h3>
+<p>Determining when the <a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-PHY"><span class="xref std std-term">PHY</span></a> will change can be determined by looking at the PHY
+preferences of both devices after the <a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#ga540aa5d357dedb39422bfe98bada4b22">HCI_LE_SetPhyCmd()</a> is called.
+If both devices prefers to use LE 2M PHY, the PHY will change to LE 2M PHY. If the PHY is
+changed to 2M due to Central preference of only 2M, the Peripheral cannot change
+the PHY back to 1M until the Central changes its PHY preference to support 1M as
+well. Similarly if the PHY is changed to 1M due to the Peripheral preference of only
+1M, the Central will not be able to change the PHY to 2M until the Peripheral changes
+its PHY preference to support 2M as well.</p>
+<p>If one device initiates change to a PHY not supported on other remote device,
+the initiating side will receive a <a class="reference external" href="../../doxygen/ble/html/structhci_evt___b_l_e_phy_update_complete__t.html">hciEvt_BLEPhyUpdateComplete_t</a>
+event with nonzero status indicating the change was not successful. If the PHY
+does not change after <a class="reference external" href="../../doxygen/ble/html/group___h_c_i.html#ga540aa5d357dedb39422bfe98bada4b22">HCI_LE_SetPhyCmd()</a> is called, the connection
+continues with the current PHY.</p>
+<div class="figure align-center" id="id23">
+<p class="plantuml">
+<img src="../_images/plantuml-935e129ae3d370efdb7ae1ae8b9515948cfdd6fa.png" alt="&#64;startuml
+hide footbox
+
+participant Central
+participant CentralLL
+participant PeripheralLL
+participant Peripheral
+
+group Establish connection
+    Central -&gt; CentralLL: GapInit_connect()
+                            note right
+                                            Central (formerly known as 'Master') and Peripheral
+                                            (formerly known as 'Slave') are in connection
+                            end note
+end
+== LE 1M PHY ==
+...
+
+group Change PHY
+  PeripheralLL &lt;- Peripheral: HCI_LE_SetPhyCmd()
+                    note left
+                            Peripheral application initiates PHY change
+                    end note
+  ...
+
+  CentralLL &lt;- PeripheralLL : LL_PHY_REQ
+                    note left
+                            Link layer messages exchanged
+                    end note
+  ...
+  CentralLL -&gt; PeripheralLL : LL_UNKNOWN_RSP
+  ...
+  PeripheralLL -&gt; Peripheral : LE PHY Update Complete: \n PHY Change Failure
+                    note left
+                            Application receives event from stack
+                    end note
+
+end
+== No Change of PHY ==
+...
+group Consecutive PHY change attempts
+  PeripheralLL &lt;- Peripheral: HCI_LE_SetPhyCmd()
+                    note left
+                            Peripheral application initiates PHY change
+                    end note
+...
+PeripheralLL -&gt; Peripheral : LE set PHY status: \n Unsupported remote feature
+                    note left
+                            Application receives event from stack
+                    end note
+end
+
+&#64;enduml"/>
+</p>
+<p class="caption"><span class="caption-number">Figure 104. </span><span class="caption-text">Sequence diagram for failed changing PHY attempts.</span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="disable-specific-phy-support-during-runtime">
+<span id="id3"></span><h2>Disable Specific PHY Support During Runtime<a class="headerlink" href="#disable-specific-phy-support-during-runtime" title="Permalink to this headline">¶</a></h2>
+<p>In order to make sure that a device is not going to change PHY when requested from
+another device, the best approach is to mark this PHY as non-supported for the
+other devices. This approach allows the supported PHYs list to be modified
+again or set back to its original support during runtime. It is also possible
+to have different PHY supports for different connections. The following code
+snippets showcase how to remove support for one or several PHYs during runtime.</p>
+<ul class="simple">
+<li><p>Go to the initialization function of your application and add
+<code class="docutils literal notranslate"><span class="pre">HCI_LE_ReadLocalSupportedFeaturesCmd()</span></code> to the very end of it.
+This command is used to read the LE locally supported features of
+the device and will trigger a <code class="docutils literal notranslate"><span class="pre">hciEvt_CmdComplete_t</span></code> status with
+opcode: <code class="docutils literal notranslate"><span class="pre">HCI_LE_READ_LOCAL_SUPPORTED_FEATURES</span></code>.</p></li>
+<li><p>To update the PHY support based on this status, go to the function
+that processes incoming HCI command complete events and add the following
+case to the switch statement.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">LL_FEATURE_2M_PHY</span></code> or <code class="docutils literal notranslate"><span class="pre">LL_FEATURE_CODED_PHY</span></code> flags to disable
+2M or Coded PHYs respectively.</p></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id24">
+<div class="code-block-caption"><span class="caption-number">Listing 167. </span><span class="caption-text">simple_peripheral.c::SimplePeripheral_processCmdCompleteEvt() or project_zero:: ProjectZero_processCmdCompleteEvt() - Include a case to handle <code class="docutils literal notranslate"><span class="pre">HCI_LE_READ_LOCAL_SUPPORTED_FEATURES</span></code> events.</span><a class="headerlink" href="#id24" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">case</span><span class="w"> </span><span class="nl">HCI_LE_READ_LOCAL_SUPPORTED_FEATURES</span><span class="p">:</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pktStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SUCCESS</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">      </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">featSet</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span><span class="w"></span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="w">      </span><span class="c1">// Get current feature set from received event (bits 1-9)</span>
+<span class="linenos"> 8</span><span class="w">      </span><span class="c1">// of the returned data</span>
+<span class="linenos"> 9</span><span class="w">      </span><span class="n">memcpy</span><span class="p">(</span><span class="w"> </span><span class="n">featSet</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">pReturnParam</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="w">      </span><span class="c1">// Clear relevant bit(s) of byte 1</span>
+<span class="linenos">12</span><span class="w">      </span><span class="n">CLR_FEATURE_FLAG</span><span class="p">(</span><span class="w"> </span><span class="n">featSet</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">LL_FEATURE_2M_PHY</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">      </span><span class="c1">// CLR_FEATURE_FLAG( featSet[1], LL_FEATURE_CODED_PHY ); // This one is only if you want to disable LE Coded PHYs too</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="w">      </span><span class="c1">// Update controller with modified features</span>
+<span class="linenos">16</span><span class="w">      </span><span class="n">HCI_EXT_SetLocalSupportedFeaturesCmd</span><span class="p">(</span><span class="w"> </span><span class="n">featSet</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">18</span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">19</span><span class="p">}</span><span class="w"></span>
+<span class="linenos">20</span><span class="c1">//...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="phy-limitations">
+<span id="limitations-phy"></span><h2>PHY Limitations<a class="headerlink" href="#phy-limitations" title="Permalink to this headline">¶</a></h2>
+<p>The following are the current PHY limitations in BLE5-Stack:</p>
+<ul class="simple">
+<li><p>The BLE controller does not support asymmetric connections where the
+connection uses different PHYs in each direction (RX and TX).</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hci.html" class="btn btn-neutral float-left" title="Host Controller Interface (HCI)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stack-configuration-cc13xx_cc26xx.html" class="btn btn-neutral float-right" title="Stack Configurations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+.. _using-the-aux-as-ram:
+
+Using the AUX RAM as RAM
+^^^^^^^^^^^^^^^^^^^^^^^^^
+For variants other than the |LITEDEVICE|, you can use this memory as RAM for your
+application if it does not use the Sensor Controller. However, access to this 
+memory is significantly slower than access to the SRAM. This may lead to 
+increased power consumption and slower program execution. Additionally, if using 
+the AUX RAM as RAM it is important that you test **thoroughly**. Certain objects, 
+when put in AUX RAM can cause the application to crash. One should test for each 
+object they want to store in AUX RAM.
+
+.. important::
+
+  The Application Processor (AP) can do other tasks while the data is being
+  transferred to AUX RAM, but if the bus buffer gets full during back to back
+  writes, it will stall the AP until there is free space in the buffer. After
+  you write a series of data to AUX RAM you should implement a singe read access
+  to make sure all the data has been written. The read access will stall the AP
+  until all the data has been transferred to AUX RAM.
+
+Modifying the application
+"""""""""""""""""""""""""
+
+1. Open the project properties and add the symbol ``AUX_AS_RAM=1`` to the linker options: 
+
+- In CCS, right click on the Project |rarr| select Properties |rarr| Build |rarr| ARM Linker |rarr| Advanced Options |rarr| Command File Preprocessing. Click on the small **Add...** button at the top right of the box *Pre-define preprocessor macro _name_to_value_* and type the symbol ``AUX_AS_RAM=1``.
+
+- In IAR, right click on the Project |rarr| Options |rarr| Linker. Locate the box *Configuration file symbol definitions* and type the symbol ``AUX_AS_RAM=1``.
+
+2. Modify the linker command/configuration file. Each toolchain has different options, pragmas and syntax, therefore check the steps below for the three supported toolchains: TI ARMCL, TI ARM Clang and IAR. 
+
+**TI ARMCL:**
+
+- In the linker command file ``cc26xx_app.cmd``, define the AUX_RAM
+  memory area:
+
+  .. code-block:: none
+
+    #ifdef AUX_AS_RAM
+    #define AUX_RAM_BASE            0x400E0000
+    #define AUX_RAM_SIZE            0x800
+    #endif /* AUX_AS_RAM */
+
+-  Create a AUX_RAM memory section in ``MEMORY{}``
+
+  .. code-block:: none
+
+    #ifdef AUX_AS_RAM
+    AUX_RAM (RWX) : origin = AUX_RAM_BASE, length = AUX_RAM_SIZE
+    #endif /* AUX_AS_RAM */
+
+- Add sections of memory or code to AUX\_RAM in ``SECTIONS{}``
+
+  .. code-block:: none
+    :caption: Move object files into AUX\_RAM. Example from simple_peripheral (``cc26xx_app.cmd``).
+
+    #ifdef AUX_AS_RAM
+      reorganized_into_auxram
+      {
+        simple_peripheral.obj(.data)
+        devinfoservice.obj(.data)
+        simple_gatt_profile.obj(.data)
+        icall.obj(.data)
+        board.obj(.bss)
+        } > AUX_RAM
+    #endif/* AUX_AS_RAM */
+
+The .obj files are listed in the FlashROM folder of the app project.
+They are also listed with size in the .map file. A detailed
+description of the linker command file and memory sections is given
+in this article |LINKERPRIMER|.
+
+If you want more control over what is stored in AUX\_RAM, individual
+variables can be stored there with the ``#pragma DATA_SECTION`` command.
+Please note that this is only possible for global variables.
+
+  .. code-block:: c
+    :caption: Move the global *display handle* variable into a new  AUX RAM section called ``my_section``.
+
+    // Display Interface
+    #pragma DATA_SECTION(dispHandle, "my_section")
+    Display_Handle dispHandle = NULL;
+
+You can find ``my_section`` in the map-file. Here you will find the names of the
+objects included in ``my_section``. In this case, the object is
+``simple_peripheral.obj (my_section)``.
+
+  .. code-block:: none
+    :caption: In the linker command file (``cc26xx_app.cmd``), add the section to AUX_RAM.
+
+    #ifdef AUX_AS_RAM
+      reorganized_into_auxram
+      {
+        simple_peripheral.obj(my_section)
+      } > AUX_RAM
+    #endif /* AUX_AS_RAM */
+
+.. important::
+
+  When making alterations only to the linker command file, please make sure to
+  press *Rebuild*, not just *Build*.
+  (CCS will not recognize that you have made changes to the project before you
+  press *Rebuild*.)
+
+**TI ARM Clang:**
+
+The linker command file is very similar to the TI ARMCL toolchain. For additional details, check chapter 5 of the `TI ARM Clang User's Guide <https://software-dl.ti.com/codegen/docs/tiarmclang/rel1_0_0_sts/tiarmclang_ug/tiarmclang-portfolio/index.html>`_.
+
+- In the linker command file ``cc26xx_app.cmd``, define the AUX_RAM memory area:
+
+  .. code-block:: none
+
+    #ifdef AUX_AS_RAM
+    #define AUX_RAM_BASE            0x400E0000
+    #define AUX_RAM_SIZE            0x800
+    #endif /* AUX_AS_RAM */
+
+-  Create a AUX_RAM memory section in ``MEMORY{}``
+
+  .. code-block:: none
+
+    #ifdef AUX_AS_RAM
+    AUX_RAM (RWX) : origin = AUX_RAM_BASE, length = AUX_RAM_SIZE
+    #endif /* AUX_AS_RAM */
+
+- Add sections of memory or code to AUX\_RAM in ``SECTIONS{}``
+
+  .. code-block:: none
+    :caption: Move object files into AUX\_RAM. Example from simple_peripheral (``cc26xx_app.cmd``).
+
+    #ifdef AUX_AS_RAM
+      reorganized_into_auxram
+      {
+        simple_peripheral.o(.data)
+        devinfoservice.o(.data)
+        simple_gatt_profile.o(.data)
+        icall.o(.data)
+        board.o(.bss)
+        } > AUX_RAM
+    #endif/* AUX_AS_RAM */
+
+The .o files are listed in the FlashROM folder of the app project.
+They are also listed with size in the .map file. A detailed description of the
+linker command file and memory sections is given in this article |LINKERPRIMER|.
+
+If you want more control over what is stored in AUX\_RAM, individual
+variables can be stored there with the ``__attribute__((section("section_name")))`` command.
+Please note that this is only possible for global variables.
+
+  .. code-block:: c
+    :caption: Move the global *display handle* variable into a new  AUX RAM section called ``my_section``.
+
+    // Display Interface
+    __attribute__((section("my_section")))
+    Display_Handle dispHandle = NULL;
+
+You can find ``my_section`` in the map-file. Here you will find the names of the
+objects included in ``my_section``. In this case, the object is
+``simple_peripheral.o (my_section)``.
+
+  .. code-block:: none
+    :caption: In the linker command file (``cc26xx_app.cmd``), add the section to AUX_RAM.
+
+    #ifdef AUX_AS_RAM
+      reorganized_into_auxram
+      {
+        simple_peripheral.o(my_section)
+      } > AUX_RAM
+    #endif /* AUX_AS_RAM */
+
+.. important::
+
+  When making alterations only to the linker command file, please make sure to
+  press *Rebuild*, not just *Build*.
+  (CCS will not recognize that you have made changes to the project before you
+  press *Rebuild*.)
+
+
+**IAR:** 
+
+- Open the linker configuration file ``cc26xx_app.icf``. Under ``Memory Definitions``, add
+
+  .. code-block:: none
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // AUX_RAM
+    //
+    if ( isdefinedsymbol(AUX_AS_RAM) )
+    {
+      define symbol AUX_RAM_START        = 0x400E0000;
+      define symbol AUX_RAM_SIZE         = 0x800;
+      define symbol AUX_RAM_END          = AUX_RAM_START + AUX_RAM_SIZE;
+    }
+
+- Under ``Memory Regions``, add
+
+  .. code-block:: none
+
+    if ( isdefinedsymbol(AUX_AS_RAM) )
+    {
+      define region AUX_RAM               = mem:[from AUX_RAM_START to AUX_RAM_END];
+    }
+
+- Under ``Memory Placement``, add
+
+  .. code-block:: none
+    :caption: Move object files into AUX\_RAM. Example from simple_peripheral (``cc26xx_app.icf``).
+
+    if ( isdefinedsymbol(AUX_AS_RAM) )
+    {
+      // AUX_RAM
+      define block AUXDATA { section .data object simple_peripheral.o,
+                             section .data object devinfoservice.o,
+                             section .data object simple_gatt_profile,
+                             section .data object icall.o,
+                             section .data object board.o};
+      place in AUX_RAM { block AUXDATA };
+    }
+
+The .o-files are listed in the .map file. For more information on the linker
+configuration file, please see `IAR C/C++ Development Guide <http://ftp.iar.se/WWWfiles/arm/webic/doc/EWARM_DevelopmentGuide.ENU.pdf>`_.
+
+If you want more control over what is stored in AUX\_RAM, individual
+variables can be stored there with the ``#pragma location`` command.
+Please note that this is only possible for global variables.
+
+  .. code-block:: c
+    :caption: Move the global *display handle* variable into a new Cache RAM section called ``my_section``.
+
+    // Display Interface
+    #pragma location="my_section"
+    Display_Handle dispHandle = NULL;
+
+You can find ``my_section`` in the map-file. Here you will find the names of the
+objects included in ``my_section``. In this case, the object is
+``simple_peripheral.o (my_section)``.
+
+  .. code-block:: none
+    :caption: In the linker configuration file (``cc26xx_app.cmd``), add the section to AUX_RAM.
+
+    if ( isdefinedsymbol(AUX_AS_RAM) )
+    {
+      // AUX_RAM
+      define block AUXDATA { section my_section object simple_peripheral.o };
+      place in AUX_RAM { block AUXDATA };
+    }

@@ -1,0 +1,1242 @@
+ATT_ErrorRsp
+------------
+:Opcode: 0x0501
+:Event Description: ATT Error Response.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:reqOpcode: Request that generated this error response
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  ATT_ERROR_RSP
+         0x02                  ATT_EXCHANGE_MTU_REQ
+         0x03                  ATT_EXCHANGE_MTU_RSP
+         0x04                  ATT_FIND_INFO_REQ
+         0x05                  ATT_FIND_INFO_RSP
+         0x06                  ATT_FIND_BY_TYPE_VALUE_REQ
+         0x07                  ATT_FIND_BY_TYPE_VALUE_RSP
+         0x08                  ATT_READ_BY_TYPE_REQ
+         0x09                  ATT_READ_BY_TYPE_RSP
+         0x0A                  ATT_READ_REQ
+         0x0B                  ATT_READ_RSP
+         0x0C                  ATT_READ_BLOB_REQ
+         0x0D                  ATT_READ_BLOB_RSP
+         0x0E                  ATT_READ_MULTI_REQ
+         0x0F                  ATT_READ_MULTI_RSP
+         0x10                  ATT_READ_BY_GRP_TYPE_REQ
+         0x11                  ATT_READ_BY_GRP_TYPE_RSP
+         0x12                  ATT_WRITE_REQ
+         0x13                  ATT_WRITE_RSP
+         0x16                  ATT_PREPARE_WRITE_REQ
+         0x17                  ATT_PREPARE_WRITE_RSP
+         0x18                  ATT_EXECUTE_WRITE_REQ
+         0x19                  ATT_EXECUTE_WRITE_RSP
+         0x1B                  ATT_HANDLE_VALUE_NOTI
+         0x1D                  ATT_HANDLE_VALUE_IND
+         0x1E                  ATT_HANDLE_VALUE_CFM
+         ===================== ========================================================
+
+:handle: Attribute handle that generated error response
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:errorCode: Reason why the request has generated error response
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  INVALID_HANDLE
+         0x02                  READ_NOT_PERMITTED
+         0x03                  WRITE_NOT_PERMITTED
+         0x04                  INVALID_PDU
+         0x05                  INSUFFICIENT_AUTHEN
+         0x06                  UNSUPPORTED_REQ
+         0x07                  INVALID_OFFSET
+         0x08                  INSUFFICIENT_AUTHOR
+         0x09                  PREPARE_QUEUE_FULL
+         0x0a                  ATTR_NOT_FOUND
+         0x0b                  ATTR_NOT_LONG
+         0x0c                  INSUFFICIENT_KEY_SIZE
+         0x0d                  INVALID_VALUE_SIZE
+         0x0e                  UNLIKELY_ERROR
+         0x0f                  INSUFFICIENT_ENCRYPTION
+         0x10                  UNSUPPORTED_GRP_TYPE
+         0x11                  INSUFFICIENT_RESOURCES
+         0x80                  INVALID_VALUE
+         ===================== ========================================================
+
+
+ATT_ExchangeMTUReq
+------------------
+:Opcode: 0x0502
+:Event Description: ATT Exchange MTU Request.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:clientRxMTU: Server receive MTU size
+
+ :Size: 2 byte(s)
+ :Range: 
+
+
+ATT_ExchangeMTURsp
+------------------
+:Opcode: 0x0503
+:Event Description: ATT Exchange MTU Response.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:serverRxMTU: Server receive MTU size
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: 2 byte(s)
+ :Range: 
+
+
+ATT_FindInfoReq
+---------------
+:Opcode: 0x0504
+:Event Description: ATT Find Information Request.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+
+ATT_FindInfoRsp
+---------------
+:Opcode: 0x0505
+:Event Description: ATT Find Information Response.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:format: Format of information data
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x01                  HANDLE_BT_UUID_TYPE - handle(s) and 16-bit Bluetooth UUID(s)
+         0x02                  HANDLE_UUID_TYPE - handle(s) and 128-bit UUID(s)
+         ===================== ========================================================
+
+
+An array of size "(pduLen-1)/(format==0x01 ? 4 : 18)" will be returned containing the parameters starting here:
+
+:handle: Attribute handle
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: 2 byte(s)
+ :Range: 
+
+:uuid: Characteristic UUID
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16 format==0x01)
+ :Size: 2 byte(s)
+ :Range: 
+
+:uuid: Characteristic UUID
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16 format==0x02)
+ :Size: 16 byte(s)
+ :Range: 
+
+
+The array of parameters ends here.
+
+ATT_FindByTypeValueReq
+----------------------
+:Opcode: 0x0506
+:Event Description: ATT Find By Type Value Request.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:type: 2-octet UUID to find
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:value: Attribute value to find
+
+ :Condition: ( pduLen.gt.6)
+ :Size: pduLen-6 byte(s)
+ :Range: Any (0 to ATT_MTU_SIZE-7) byte value
+
+
+ATT_FindByTypeValueRsp
+----------------------
+:Opcode: 0x0507
+:Event Description: ATT Find By Type Value Response
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+
+An array of size "pduLen/4" will be returned containing the parameters starting here:
+
+:handle: Found Attribute Handle
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: 2 byte(s)
+ :Range: 
+
+:grpEndHandle: Group End Handle
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: 2 byte(s)
+ :Range: 
+
+
+The array of parameters ends here.
+
+ATT_ReadByTypeReq
+-----------------
+:Opcode: 0x0508
+:Event Description: ATT Read By Type Request
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:type: 2-octet UUID to find
+
+ :Condition: ( pduLen.gt.4)
+ :Size: pduLen-4 byte(s)
+ :Range: 
+
+
+ATT_ReadByTypeRsp
+-----------------
+:Opcode: 0x0509
+:Event Description: ATT Read By Type Response.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:length: The size of each attribute handle-value pair
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: 1 byte(s)
+ :Range: 
+
+
+An array of size "(pduLen-1)/length" will be returned containing the parameters starting here:
+
+:handle: Attribute handle
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: 2 byte(s)
+ :Range: 
+
+:value: Attribute value
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16 length.gt.2)
+ :Size: length-2 byte(s)
+ :Range: 
+
+
+The array of parameters ends here.
+
+ATT_ReadReq
+-----------
+:Opcode: 0x050A
+:Event Description: ATT Read Request.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:handle: The handle of the attribute that was read
+
+ :Size: 2 byte(s)
+ :Range: 
+
+
+ATT_ReadRsp
+-----------
+:Opcode: 0x050B
+:Event Description: ATT Read Response.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:value: The value of the attribute that was read
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: pduLen byte(s)
+ :Range: 
+
+
+ATT_ReadBlobReq
+---------------
+:Opcode: 0x050C
+:Event Description: ATT Read Blob Request.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:handle: The handle of the attribute that was read
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:offset: The offset of the first byte that was read
+
+ :Size: 2 byte(s)
+ :Range: 
+
+
+ATT_ReadBlobRsp
+---------------
+:Opcode: 0x050D
+:Event Description: ATT Read Blob Response.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:value: The value of the attribute that was read
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: pduLen byte(s)
+ :Range: 
+
+
+ATT_ReadMultiReq
+----------------
+:Opcode: 0x050E
+:Event Description: ATT Read Multiple Request.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:handles: A set of two or more attribute handles.
+
+ :Size: pduLen byte(s)
+ :Range: 
+
+
+ATT_ReadMultiRsp
+----------------
+:Opcode: 0x050F
+:Event Description: ATT Read Multiple Response.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:values: A set of two or more values
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: pduLen byte(s)
+ :Range: 
+
+
+ATT_ReadByGrpTypeReq
+--------------------
+:Opcode: 0x0510
+:Event Description: ATT Read By Group Type Request.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:startHandle: First requested handle number
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:endHandle: Last requested handle number
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:groupType: UUID of group to read
+
+ :Condition: ( pduLen.gt.4)
+ :Size: pduLen-4 byte(s)
+ :Range: 
+
+
+ATT_ReadByGrpTypeRsp
+--------------------
+:Opcode: 0x0511
+:Event Description: ATT Read By Group Type Response.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:length: The size of each attribute handle-value pair
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: 1 byte(s)
+ :Range: 
+
+
+An array of size "(pduLen-1)/length" will be returned containing the parameters starting here:
+
+:handle: Attribute Handle
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: 2 byte(s)
+ :Range: 
+
+:endGrpHandle: End Group Handle
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: 2 byte(s)
+ :Range: 
+
+:value: Attribute Value
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16 length.gt.4)
+ :Size: length-4 byte(s)
+ :Range: 
+
+
+The array of parameters ends here.
+
+ATT_WriteReq
+------------
+:Opcode: 0x0512
+:Event Description: ATT Write Request.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:signature: Whether to include the authentication signature.
+
+ :Condition: ( bStatus==0x00)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SIG_NOT_INCLUDED
+         0x01                  SIG_VALID
+         0x02                  SIG_INVALID
+         ===================== ========================================================
+
+:command: Whether this is a Write Command.
+
+ :Condition: ( bStatus==0x00)
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  No 
+         0x01                  Yes  
+         ===================== ========================================================
+
+:handle: The handle of the attribute to be written.
+
+ :Condition: ( bStatus==0x00)
+ :Size: 2 byte(s)
+ :Range: 
+
+:value: The value to be written to the attribute.
+
+ :Condition: ( bStatus==0x00 pduLen.gt.4)
+ :Size: pduLen-4 byte(s)
+ :Range: 
+
+
+ATT_WriteRsp
+------------
+:Opcode: 0x0513
+:Event Description: ATT Write Response.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+
+ATT_PrepareWriteReq
+-------------------
+:Opcode: 0x0516
+:Event Description: ATT Prepare Write Request.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:handle: The handle of the attribute to be written.
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:offset: The offset of the first byte to be written.
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:value: Part of the value of the attribute to be written.
+
+ :Condition: ( pduLen.gt.4)
+ :Size: pduLen-4 byte(s)
+ :Range: 
+
+
+ATT_PrepareWriteRsp
+-------------------
+:Opcode: 0x0517
+:Event Description: ATT Prepare Write Response.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:handle: The handle of the attribute to be written.
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: 2 byte(s)
+ :Range: 
+
+:offset: The offset of the first octet to be Written.
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16)
+ :Size: 2 byte(s)
+ :Range: 
+
+:value: Part of the value of the attribute to be written.
+
+ :Condition: ( bStatus==0x00 || bStatus==0x16 pduLen.gt.4)
+ :Size: pduLen-4 byte(s)
+ :Range: 
+
+
+ATT_ExecuteWriteReq
+-------------------
+:Opcode: 0x0518
+:Event Description: ATT Execute Write Request.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:flags: What to do with pending prepared writes.
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  CANCEL_WRITES
+         0x01                  WRITE_VALUES
+         ===================== ========================================================
+
+
+ATT_ExecuteWriteRsp
+-------------------
+:Opcode: 0x0519
+:Event Description: ATT Execute Write Response.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+
+ATT_HandleValueNoti
+-------------------
+:Opcode: 0x051B
+:Event Description: ATT Handle Value Notification.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:handle: The handle of the attribute.
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:The current value of the attribute.: 
+
+ :Condition: ( pduLen.gt.2)
+ :Size: pduLen-2 byte(s)
+ :Range: 
+
+
+ATT_HandleValueInd
+------------------
+:Opcode: 0x051D
+:Event Description: ATT Handle Value Indication.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:handle: The handle of the attribute.
+
+ :Size: 2 byte(s)
+ :Range: 
+
+:value: The current value of the attribute.
+
+ :Condition: ( pduLen.gt.2)
+ :Size: pduLen-2 byte(s)
+ :Range: 
+
+
+ATT_HandleValueCfm
+------------------
+:Opcode: 0x051E
+:Event Description: ATT Handle Value Confirmation.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+
+ATT_FlowCtrlViolatedEvt_t
+-------------------------
+:Opcode: 0x057E
+:Event Description: Sent when ATT flow control is violated on a connection.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:opcode: Opcode of message that caused flow control violation
+
+ :Size: 1 byte(s)
+ :Range: 
+
+:pendingOpcode: Opcode of pending message
+
+ :Size: 1 byte(s)
+ :Range: 
+
+
+ATT_MtuUpdatedEvt
+-----------------
+:Opcode: 0x057F
+:Event Description: Sent when MTU is updated for a connection.
+
+**Event Parameters**
+
+:Status: 
+
+ :Size: 1 byte(s)
+ :Range:
+         ===================== ========================================================
+         Value                 Description
+         ===================== ========================================================
+         0x00                  SUCCESS
+         0x12                  bleIncorrectMode
+         0x02                  INVALIDPARAMETER
+         ===================== ========================================================
+
+:connectionHandle: Connection handle of the link
+
+ :Size: 2 byte(s)
+ :Range: Any 2 byte value
+
+:pduLen: PDU length
+
+ :Size: 1 byte(s)
+ :Range: Any 1 byte value
+
+:MTU: New MTU size
+
+ :Size: 2 byte(s)
+ :Range: 
+
+

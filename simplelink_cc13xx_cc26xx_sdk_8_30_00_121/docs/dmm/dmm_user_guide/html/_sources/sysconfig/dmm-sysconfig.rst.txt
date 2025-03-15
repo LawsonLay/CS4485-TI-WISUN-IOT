@@ -1,0 +1,137 @@
+
+.. _sec-dmm-sysconfig:
+
+DMM SysConfig Features
+**********************
+
+.. note::
+	:ref:`sysconfig-sysconfig` provides an overview of what SysConfig is and how
+	to get started with it. Please take a look at this if you have not already.
+
+After importing a |STACK| SysConfig project into CCS, double click on the
+\*.syscfg file and a GUI will appear where the project can be configured more
+easily. The SysConfig GUI will let you configure the DMM software, and the two
+RF stacks controlled by DMM in this specific example.
+
+RF Stack Configuration
+======================
+
+You can read about SysConfig in each RF Stack User's Guide:
+
+- :docs_root:`BLE-Stack SysConfig Configuration <ble5stack/ble_user_guide/ble5stack-sysconfig.html>`
+- :docs_root:`TI 15.4-Stack SysConfig Configuration <ti154stack/ti-15.4-stack-sysconfig.html>`
+- :docs_root:`Thread SysConfig Configuration <thread/thread-sysconfig.html>`
+- :docs_root:`TI Z-Stack SysConfig Configuration <zigbee/zstack-sysconfig.html>`
+
+DMM Configuration
+=================
+
+When opening the DMM tab (under Multi-protocol) you will see the DMM configuration:
+
+.. figure:: resources/dmm_import.png
+    :align: center
+
+    After Import
+
+Protocol Stack Roles
+^^^^^^^^^^^^^^^^^^^^
+
+Here you will see which RF stack roles are associated with this example project.
+
+.. note::
+
+	SysConfig is not intended to change what RF protocol stacks are used by an
+	example project. If you want to switch, e.g. switch between BLE + TI
+	15.4-Stack to BLE + Z-Stack, you should import the example project which
+	already has this configuration.
+
+Application States
+------------------
+
+.. figure:: resources/dmm_application_states.png
+	:align: center
+
+	Application States
+
+Since the DMM does not hook directly into the stack, it relies on each stack’s
+application to inform the policy module of any changes in the stack. Such stack
+changes are usually signaled to the application via a message, callback, or event.
+
+Whenever the application is signaled that its stack has changed state and it
+results in a chance of application state, the application should immediately
+notify the DMM of the state using the :dmm_api:`DMMPolicy_updateStackState` API.
+
+The number of states should reflect the application. Note that there is no
+distinction between the two application threads (here: BLE and 15.4-Stack 
+applications) in this list. If you remove or change the name of an application 
+state, make sure to make the same change in the application source file(s).
+
+Policy Table
+------------
+
+.. note::
+
+	When you open a DMM example project, the policy table is already configured.
+	For most use cases you will not need to make any changes to the Policy Table.
+
+.. figure:: resources/dmm_policy_table.png
+	:align: center
+
+	Policy Table
+
+The DMM Policy Table provides a service for the stack applications to update the
+priority of stack activities, which is then used to make scheduling decisions.
+
+A DMM policy tells the scheduler how to increase the priority of stack activities
+and whether or not to pause an application based on defined states within the
+application. The policy structure can contain none, one or multiple policies
+depending on the application requirements. Each policy within the structure
+represents a comprehensive system state for each application and consists of the
+following parameters:
+
+* **Application Weight** where a higher weight represents a higher priority. Note
+  that actual priority is set based on to the Global Priority of the stack
+  activity and the application weight.
+* **Paused State**, whether or not the specified stack's application is paused
+  during this state
+* **Applied Activity**, one or more specified stack activities of which priorities
+  are adjusted by weight
+
+An application can have multiple possible states. For instance, while a
+BLE-Stack application is in connected state with a high priority, a Sub-1 GHz
+connection might be in idle state or transmit state or might receive an
+acknowledgment. That is why a flag type is used for application states.
+
+.. figure:: resources/dmm_policy0.png
+	:align: center
+
+	Policy 0
+
+For each policy, the application stack states are described by assigning an
+application state. The application states correspond with the same number as
+assigned in the Application States tab. In this example, Application State 6
+corresponds to ``DMMPOLICY_BLE_OAD``. Note that you can choose several
+application states for one policy.
+
+Weight
+^^^^^^
+
+The weight sets the priority of the stack for the configured application state.
+A higher weight represents a higher priority. The default values for the weight
+are assigned based on relative assigned importance when all the possible applied
+activities are compared.
+
+Pause Stack
+^^^^^^^^^^^
+
+If the stack is paused when preforming this applied activity, there will be no
+radio activity from this stack.
+
+Applied Activity
+^^^^^^^^^^^^^^^^
+
+Specified stack activities of which priorities are adjusted by weight. All stack
+activities and their default weights are defined in the global priority table
+(:term:`GPT`). Activities are defined as flags and OR’ed together,
+meaning selecting multiple will modify the priority of all activities selected.
+Custom stacks have the option to add and assign their own stack activities.

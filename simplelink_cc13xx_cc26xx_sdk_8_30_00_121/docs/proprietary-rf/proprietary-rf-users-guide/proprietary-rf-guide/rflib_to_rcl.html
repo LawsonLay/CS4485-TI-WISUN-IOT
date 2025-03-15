@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rflib to RCL Migration Guide &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User&#39;s Guide
+ 7.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug proprietary-rf-guide rflib_to_rcl";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples-cc13xx_cc26xx.html">Examples User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-hardware.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nortos-index.html">noRTOS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rf-core-index.html">RF Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physical-rf-layer-cc13xx_cc26xx.html">Physical Layer (PHY)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proprietary-rf-oad-bim-index.html">BIM Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proprietary-rf-oad-mcuboot-index.html">MCUBoot Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration-cc13xx_cc26xx.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary-cc13xx_cc26xx.html">Terms and acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>rflib to RCL Migration Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="rflib-to-rcl-migration-guide">
+<span id="rflib-rcl-migration-guide"></span><h1>rflib to RCL Migration Guide<a class="headerlink" href="#rflib-to-rcl-migration-guide" title="Permalink to this headline">¶</a></h1>
+<p>As CC13xx or CC26xx devices do not have a separate CM0 core for RF, a
+<a href="#id2"><span class="problematic" id="id3">`Radio Control Layer (RCL)`_</span></a> which is entirely different from the
+existing CC26x2 device rflib must be used.</p>
+<p>The following sections discuss the major changes to radio commands from the
+main application file between CC26x2 devices and the CC13xx or CC26xx devices,
+using <code class="docutils literal notranslate"><span class="pre">rfPacketTx.c</span></code> as an example.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is not a fully comprehensive list and the API documentation
+should be consulted when attempting to convert radio commands. File
+comparison software is highly recommended to compare the difference
+between application files’ radio commands.</p>
+</div>
+<div class="section" id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<p>The rflib directory was included for CC26x2 devices</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/***** Includes *****/</span><span class="w"></span>
+<span class="c1">//...</span>
+
+<span class="cm">/* TI Drivers */</span><span class="w"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ti/drivers/rf/RF.h&gt;</span><span class="cp"></span>
+
+<span class="cm">/* Driverlib Header files */</span><span class="w"></span>
+<span class="cp">#include DeviceFamily_constructPath(driverlib/rf_prop_mailbox.h)</span>
+
+<span class="cm">/* Board Header files */</span><span class="w"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ti_radio_config.h&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>CC13xx or CC26xx devices will use RCL instead</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/***** Includes *****/</span><span class="w"></span>
+<span class="c1">//...</span>
+
+<span class="cm">/* TI Drivers */</span><span class="w"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ti/drivers/rcl/RCL.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ti/drivers/rcl/RCL_Scheduler.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ti/drivers/rcl/commands/generic.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#if defined(USE_250KBPS_MSK) || defined(USE_500KBPS_MSK)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;setup/generic_fsk_prop_setup.h&gt;</span><span class="cp"></span>
+<span class="cp">#else</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;setup/generic_1m_prop_setup.h&gt;</span><span class="cp"></span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defines">
+<h2>Defines<a class="headerlink" href="#defines" title="Permalink to this headline">¶</a></h2>
+<p>CC13xx or CC26xx devices are bound to rely on different definitions since the commands
+are not similar</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/***** Defines *****/</span><span class="w"></span>
+<span class="cm">/* Packet TX Configuration */</span><span class="w"></span>
+<span class="cp">#define MAX_LENGTH              (30U) </span><span class="c1">// Max packet length</span>
+<span class="cp">#define NUM_DATA_ENTRIES        (2U)  </span><span class="c1">// Number of data entries</span>
+<span class="cp">#define NUM_PAD_BYTES           (3U)  </span><span class="c1">// Number of pad bytes</span>
+
+<span class="cm">/* Header length */</span><span class="w"></span>
+<span class="cp">#if defined(USE_500KBPS_MSK) || defined(FIXED_LENGTH_SETUP) </span><span class="c1">// 500KBPS is always set up for fixed length packets</span>
+<span class="cp">#define HDR_LEN                 (0U)</span>
+<span class="cp">#else</span>
+<span class="cp">#if defined(USE_250KBPS_MSK) </span><span class="c1">// 250KBPS with variable length enabled</span>
+<span class="cp">#define HDR_LEN                 (1U)</span>
+<span class="cp">#else </span><span class="c1">// 1 Mbps with variable length enabled</span>
+<span class="cp">#define HDR_LEN                 (2U)</span>
+<span class="cp">#endif</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#define PACKET_INTERVAL     500000  </span><span class="cm">/* Set packet interval to 500000us or 500ms */</span><span class="cp"></span>
+
+<span class="cm">/* Indicates if FS is off */</span><span class="w"></span>
+<span class="cp">#define FS_OFF                  (1U)  </span><span class="c1">// 0: On, 1: Off</span>
+
+<span class="cp">#if defined(USE_250KBPS_MSK) || defined(USE_500KBPS_MSK)</span>
+<span class="cp">#define FREQUENCY               (2433000000U)</span>
+<span class="cp">#else</span>
+<span class="cp">#define FREQUENCY               (2440000000U)</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="variables-and-initialization">
+<h2>Variables and initialization<a class="headerlink" href="#variables-and-initialization" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">RF_*</span></code> had been initialized for CC26x2 devices</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">RF_Object</span><span class="w"> </span><span class="n">rfObject</span><span class="p">;</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="n">RF_Handle</span><span class="w"> </span><span class="n">rfHandle</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// ...</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">mainThread</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg0</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">   </span><span class="n">RF_Params</span><span class="w"> </span><span class="n">rfParams</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">RF_Params_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rfParams</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">   </span><span class="cm">/* Request access to the radio */</span><span class="w"></span>
+<span class="cp">#if defined(DeviceFamily_CC26X0R2)</span>
+<span class="w">   </span><span class="n">rfHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RF_open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rfObject</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">RF_prop</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">RF_RadioSetup</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">RF_cmdPropRadioSetup</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rfParams</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#else</span>
+<span class="w">   </span><span class="n">rfHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RF_open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rfObject</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">RF_prop</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">RF_RadioSetup</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">RF_cmdPropRadioDivSetup</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rfParams</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#endif</span><span class="c1">// DeviceFamily_CC26X0R2</span>
+
+<span class="w">   </span><span class="cm">/* Set the frequency */</span><span class="w"></span>
+<span class="w">   </span><span class="n">RF_postCmd</span><span class="p">(</span><span class="n">rfHandle</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">RF_Op</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">RF_cmdFs</span><span class="p">,</span><span class="w"> </span><span class="n">RF_PriorityNormal</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Which CC13xx or CC26xx devices replace with <code class="docutils literal notranslate"><span class="pre">RCL_*</span></code> variants</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* RCL Commands */</span><span class="w"></span>
+<span class="n">RCL_CmdGenericTx</span><span class="w">   </span><span class="n">txCmd</span><span class="p">;</span><span class="w">               </span><span class="c1">// TX command</span>
+
+<span class="cm">/* RCL Client used to open RCL */</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="n">RCL_Client</span><span class="w">  </span><span class="n">rclClient</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// ...</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">mainThread</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg0</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">   </span><span class="cm">/* Initialize and open RCL */</span><span class="w"></span>
+<span class="w">   </span><span class="n">RCL_init</span><span class="p">();</span><span class="w"></span>
+
+<span class="cp">#if defined(USE_250KBPS_MSK)</span>
+<span class="w">   </span><span class="n">RCL_Handle</span><span class="w"> </span><span class="n">rclHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCL_open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rclClient</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rclRadioConfigGenericMsk250k</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#elif defined(USE_500KBPS_MSK)</span>
+<span class="w">   </span><span class="n">RCL_Handle</span><span class="w"> </span><span class="n">rclHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCL_open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rclClient</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rclRadioConfigGenericMsk500k</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#else</span>
+<span class="w">   </span><span class="n">RCL_Handle</span><span class="w"> </span><span class="n">rclHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCL_open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rclClient</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rclRadioConfigGenericBle</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#endif</span>
+
+<span class="w">   </span><span class="cm">/* Setup generic transmit command */</span><span class="w"></span>
+<span class="w">   </span><span class="n">txCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCL_CmdGenericTx_DefaultRuntime</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">   </span><span class="cm">/* Set RF frequency */</span><span class="w"></span>
+<span class="w">   </span><span class="n">txCmd</span><span class="p">.</span><span class="n">rfFrequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FREQUENCY</span><span class="p">;</span><span class="w"></span>
+<span class="cp">#if !(defined(USE_250KBPS_MSK) || defined(USE_500KBPS_MSK))</span>
+<span class="w">   </span><span class="n">txCmd</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">phyFeatures</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCL_GENERIC_PHY_FEATURE_PHY_1MBPS</span><span class="p">;</span><span class="w"></span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rf-commands">
+<h2>RF commands<a class="headerlink" href="#rf-commands" title="Permalink to this headline">¶</a></h2>
+<p>Different command parameters should be expected. Below is an example for CC26x2
+devices</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">RF_cmdPropTx</span><span class="p">.</span><span class="n">pktLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PAYLOAD_LENGTH</span><span class="p">;</span><span class="w"></span>
+<span class="n">RF_cmdPropTx</span><span class="p">.</span><span class="n">pPkt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">packet</span><span class="p">;</span><span class="w"></span>
+<span class="n">RF_cmdPropTx</span><span class="p">.</span><span class="n">startTrigger</span><span class="p">.</span><span class="n">triggerType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TRIG_NOW</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// ...</span>
+
+<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* Create packet with incrementing sequence number and random payload */</span><span class="w"></span>
+<span class="w">    </span><span class="n">packet</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)(</span><span class="n">seqNumber</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">packet</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)(</span><span class="n">seqNumber</span><span class="o">++</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">PAYLOAD_LENGTH</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">packet</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/* Send packet */</span><span class="w"></span>
+<span class="w">    </span><span class="n">RF_EventMask</span><span class="w"> </span><span class="n">terminationReason</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RF_runCmd</span><span class="p">(</span><span class="n">rfHandle</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">RF_Op</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">RF_cmdPropTx</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                                </span><span class="n">RF_PriorityNormal</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Compared to CC13xx or CC26xx devices</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="cm">/* Start command as soon as possible */</span><span class="w"></span>
+<span class="w">   </span><span class="n">txCmd</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">scheduling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCL_Schedule_Now</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">txCmd</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCL_CommandStatus_Idle</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">   </span><span class="n">txCmd</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">fsOff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FS_OFF</span><span class="p">;</span><span class="w"> </span><span class="c1">// Turn off FS</span>
+
+<span class="w">   </span><span class="cm">/* Callback triggers on last command done */</span><span class="w"></span>
+<span class="w">   </span><span class="n">txCmd</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">runtime</span><span class="p">.</span><span class="n">callback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">defaultCallback</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">txCmd</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">runtime</span><span class="p">.</span><span class="n">rclCallbackMask</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCL_EventLastCmdDone</span><span class="p">.</span><span class="n">value</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">   </span><span class="cm">/* Set RCL TX buffer packet to be packet buffer */</span><span class="w"></span>
+<span class="w">   </span><span class="n">RCL_Buffer_TxBuffer</span><span class="w"> </span><span class="o">*</span><span class="n">txPacket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">RCL_Buffer_TxBuffer</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">packet</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">   </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">   </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="cm">/* Create packet with random payload */</span><span class="w"></span>
+<span class="w">      </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">txData</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">txData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCL_TxBuffer_init</span><span class="p">(</span><span class="n">txPacket</span><span class="p">,</span><span class="w"> </span><span class="n">NUM_PAD_BYTES</span><span class="p">,</span><span class="w"> </span><span class="n">HDR_LEN</span><span class="p">,</span><span class="w"> </span><span class="n">MAX_LENGTH</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#if !(defined(USE_500KBPS_MSK) || defined(FIXED_LENGTH_SETUP))</span>
+<span class="cp">#if defined(USE_250KBPS_MSK)</span>
+<span class="w">      </span><span class="n">txData</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MAX_LENGTH</span><span class="p">;</span><span class="w"></span>
+<span class="cp">#else</span>
+<span class="w">      </span><span class="n">txData</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">txData</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MAX_LENGTH</span><span class="p">;</span><span class="w"></span>
+<span class="cp">#endif</span>
+<span class="cp">#endif</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HDR_LEN</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MAX_LENGTH</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">txData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="cm">/* Set packet to transmit */</span><span class="w"></span>
+<span class="w">      </span><span class="n">RCL_TxBuffer_put</span><span class="p">(</span><span class="o">&amp;</span><span class="n">txCmd</span><span class="p">.</span><span class="n">txBuffers</span><span class="p">,</span><span class="w"> </span><span class="n">txPacket</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">txCmd</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCL_CommandStatus_Idle</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="cm">/* Submit command */</span><span class="w"></span>
+<span class="w">      </span><span class="n">RCL_Command_submit</span><span class="p">(</span><span class="n">rclHandle</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">txCmd</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="cm">/* Pend on command completion */</span><span class="w"></span>
+<span class="w">      </span><span class="n">RCL_Command_pend</span><span class="p">(</span><span class="o">&amp;</span><span class="n">txCmd</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If changing the <code class="docutils literal notranslate"><span class="pre">txCmd-&gt;txPower</span></code> parameter it is important to note that
+two additional sub-parameters, <code class="docutils literal notranslate"><span class="pre">dbm</span></code> and <code class="docutils literal notranslate"><span class="pre">fraction</span></code>, will each need to be
+initialized.  For example,
+<code class="docutils literal notranslate"><span class="pre">txCmd-&gt;txPower</span> <span class="pre">=</span> <span class="pre">(RCL_Command_TxPower){.dBm</span> <span class="pre">=</span> <span class="pre">txPower_dBm,</span> <span class="pre">.fraction</span> <span class="pre">=</span> <span class="pre">0};</span></code></p>
+</div>
+</div>
+<div class="section" id="rf-api-comparison">
+<h2>RF API comparison<a class="headerlink" href="#rf-api-comparison" title="Permalink to this headline">¶</a></h2>
+<p>Below is a table summarizing the different API functions, however it is once
+again advised that the rflib and <a href="#id4"><span class="problematic" id="id5">`Radio Control Layer (RCL)`_</span></a> APIs be further
+referenced for a full understanding of differences.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 53%" />
+<col style="width: 21%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head" rowspan="2"><p><strong>Function</strong></p></th>
+<th class="head" rowspan="2"><p><strong>rflib API</strong></p></th>
+<th class="head" rowspan="2"><p><strong>RCL API</strong></p></th>
+</tr>
+<tr class="row-even"></tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>Initialize the radio driver</p></td>
+<td><p>RF_Params_init</p></td>
+<td><p>RCL_init</p></td>
+</tr>
+<tr class="row-even"><td><p>Open the radio instance</p></td>
+<td><p>RF_open</p></td>
+<td><p>RCL_open</p></td>
+</tr>
+<tr class="row-odd"><td><p>Close the radio instance</p></td>
+<td><p>RF_close</p></td>
+<td><p>RCL_close</p></td>
+</tr>
+<tr class="row-even"><td><p>Submit a radio command</p></td>
+<td><p>RF_postCmd</p></td>
+<td><p>RCL_Command_submit</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wait for the radio command to complete</p></td>
+<td><p>RF_pendCmd</p></td>
+<td><p>RCL_Command_pend</p></td>
+</tr>
+<tr class="row-even"><td><p>Submit a radio command and wait for it
+to complete</p></td>
+<td><p>RF_runCmd</p></td>
+<td><p>RCL_Command_submit
+&amp; RCL_Command_pend</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stop a radio command</p></td>
+<td><p>RF_cancelCmd</p></td>
+<td><p>RCL_Command_stop</p></td>
+</tr>
+<tr class="row-even"><td><p>Get RSSI</p></td>
+<td><p>RF_getRssi</p></td>
+<td><p>RCL_readRssi</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

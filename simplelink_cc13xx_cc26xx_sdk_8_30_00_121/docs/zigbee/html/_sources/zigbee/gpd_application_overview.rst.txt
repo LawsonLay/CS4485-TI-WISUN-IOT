@@ -1,0 +1,510 @@
+Green Power Application Overview
+=======================================
+
+Green Power Device
+------------------
+
+A Green Power Device (GPD) is a special type of Zigbee device different from the three logical devices defined in Zigbee PRO: 
+*Coordinator*, *Router* or *End Device*.  GPDs are designed for applications where the end product has a very strict 
+energy budget, such as an energy-harvesting device or batteryless devices. GPDs follow their own Zigbee Green Power specification which 
+defines the possible capabilities of a given GPD implementation, such as security level, commissioning procedures and supported 
+commands per device definition.
+
+As GPDs are the most restricted device in terms of functionality, these devices are not part of 
+the Zigbee network unless they are commissioned to a Green Power Sink (GPS) device directly or through a Green Power Proxy 
+(GPP). Although GPS is a specific application function to be added, the GPP feature is automatically applied to all routing nodes 
+(Zigbee coordinators and routers) as required to meet Zigbee product compliancy (see :ref:`sec-product-certification`). If the device to 
+which a GPD is commissioned to is not present, then the GPD must be recommissioned, as it does not have a means to keep communication 
+with any other device.
+
+Once the GPD is commissioned it can send Green Power Data Frames (GPDF) which 
+are converted by the GPP into Green Power Notifications (ZCL frames) that can travel through the Zigbee network until it reaches 
+its GPS destination to be processed by the application. For further details on GPDs and their interactions with the network, 
+please refer to :ref:`z-stack-overview-green-power`.
+
+
+.. _sec-gpd-general-application-architecture:
+
+General Application Architecture
+--------------------------------
+
+This section describes how a Green Power Device application task is 
+structured in more detail.  Refer to the :ref:`chap-example-applications` to 
+determine which |STACK| examples support specific Green Power functionality 
+(GPD and GPS). 
+
+.. _sec-gpd-configuration:
+
+Green Power Device Configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:code:`gpd_config.h` provides configuration definitions for security level and keys.
+These are used at build time and determine the behavior of the device at runtime. 
+Thus, to change the Green Power Device behavior, it is necessary to modify the SysConfig settings, 
+the descriptions of which are covered in :ref:`z-stack-overview-green-power`.
+An example of creating a GPD switch is given below (found in :code:`default/syscfg/ti_zstack_config.h` 
+of the :code:`gpd_switch` project after building).
+
+.. code-block:: c
+
+  #ifndef GPD_CHANNEL
+  #define GPD_CHANNEL            11
+  #endif
+
+  #ifndef DEVICE_ID
+  #define DEVICE_ID              0x02
+  #endif
+
+  #ifndef GPD_APP_ID
+  #define GPD_APP_ID             GPD_APP_TYPE_SRC_ID
+  #endif
+
+  #if ( GPD_APP_ID == GPD_APP_TYPE_SRC_ID )
+  #define GPD_ID                 0x11223344
+  #elif ( GPD_APP_ID == GPD_APP_TYPE_IEEE_ID )
+  #define GPD_ID                 ApiMac_extAddr
+  #endif
+
+  #ifndef GP_SECURITY_LEVEL
+  #define GP_SECURITY_LEVEL      GP_SECURITY_LVL_NO_SEC
+  #endif
+
+  #ifndef EXT_OPT_KEY_TYPE
+  #define EXT_OPT_KEY_TYPE       KEY_TYPE_OUT_BOX_GPD_KEY
+  #endif
+
+  #ifndef GP_SECURITY_KEY
+  #define GP_SECURITY_KEY        {0xCF,0xCE,0xCD,0xCC,0xCB,0xCA,0xC9,0xC8,0xC7,0xC6,0xC5,0xC4,0xC3,0xC2,0xC1,0xC0}
+  #endif
+
+  #ifndef GPDF_FRAME_DUPLICATES
+  #define GPDF_FRAME_DUPLICATES  3
+  #endif
+
+  #ifndef AUTO_COMMISSIONING
+  #define AUTO_COMMISSIONING     TRUE
+  #endif
+
+  #ifndef RX_AFTER_TX
+  #define RX_AFTER_TX            FALSE
+  #endif
+
+  #ifndef SEQUENCE_NUMBER_CAP
+  #define SEQUENCE_NUMBER_CAP    FALSE
+  #endif
+
+Furthermore, it is possible to define :code:`BATTERYLESS_DEVICE` from the 
+*Project Properties* |rarr| *Build* |rarr| *ARM Compiler* |rarr| *Predefined Symbols*
+to operate in batteryless mode (if supported). For example, when :code:`gpd_sw` is operating 
+in batteryless mode, it will immediately send an on, off, or toggle command on power up
+(based on the combination of keys pressed).
+
+.. _sec-gpd-non-volatile-memory:
+
+Non Volatile Memory
+^^^^^^^^^^^^^^^^^^^
+
+:code:`gpd_memory.c` provides an interface for Non Volatile (NV) memory required for
+attribute persistence in some GPD configurations. For example the persistence
+of sequence number when ``SEQUENCE_NUMBER_CAP`` is required. Use :code:`gp_nv_item_init()`
+to create a new NV item, then :code:`gp_nv_read()` to get the NV value and
+:code:`gp_nv_write()` to update the NV value when necessary.
+
+.. _sec-gpd-callbacks:
+
+Callbacks
+^^^^^^^^^
+
+The application code also likely includes various callbacks from the protocol
+stack layer and |RTOS| modules. To ensure thread safety, processing should be
+minimized in the actual callback, and the bulk of the processing should be done
+in the application context.
+
+.. code-block:: c
+
+    static uint16 gpdSampleSw_process_loop( void )
+    {
+        /* Forever loop */
+        for(;;)
+        {
+            if(events & SAMPLEAPP_KEY_EVT)
+            {
+                // Process Key Presses
+                gpdSampleSw_processKey(keys);
+                keys = 0;
+                events &= ~SAMPLEAPP_KEY_EVT;
+            }
+
+            ApiMac_processIncoming();
+        }
+    }
+
+.. _sec-send-green-power-data-frames:
+
+Send Green Power Data Frames
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+An API to send Green Power Data Frames (GPDF) is provided in :code:`gpd.c`. The generic 
+function :code:`GreenPowerDataFrameSend()` sends a frame formated for the Green
+Power Device configuration automatically by providing a :code:`gpdfReq_t` struct,
+the desired channel and a flag to enable frame security.
+
+Additionally :code:`GreenPowerCommissioningSend()` and :code:`GreenPowerAttributeReportingSend()`
+functions use :code:`GreenPowerDataFrameSend()` to generate the corresponding commands.
+
+Setting Up the Network with GPD and GPS
+---------------------------------------
+
+To set up a network with a Green Power Device (GPD) and a Green Power Sink (GPS), you will need 2-3 devices:
+
+  1. Green Power Device (:code:`gpd_switch` or :code:`gpd_temperaturesensor`)
+  #. Green Power Sink (:code:`zc/zr_light_sink` or :code:`zc/zr_thermostat_sink`)
+  #. Optional: Green Power Proxy (any other Zigbee 3.0 routing device, e.g. :code:`zc/zr_genericapp`)
+
+Select Network Channel
+^^^^^^^^^^^^^^^^^^^^^^
+
+First, determine which channel you would like to use for your test.
+On the Green Power Sink (and Green Power Proxy, if applicable), configure the channel mask accordingly (see :ref:`z-stack-overview-configuring-channel`).
+Select the same channel for the Green Power Device (see :ref:`sysconfig-zigbee-radio-configuration`).
+
+Create and Open the Network on the GPS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Next, create a network with your coordinator. For example, use :code:`zc_light_sink` to create a network, following the
+instructions in the **Commissioning the Device Into the Network** section of this readme:
+
+-  :docs_root:`Light Sink Coordinator Readme  <../examples/rtos/CC26X2R1_LAUNCHXL/zstack/zc_light_sink/README.html>`
+
+Join the GPP Device
+^^^^^^^^^^^^^^^^^^^
+
+If you would prefer a Green Power Proxy (GPP) to route GP Data Frames, it must be joined to the network formed by the coordinator. 
+For example, we can use :code:`zr_genericapp` as a GPP by simply joining it into the network,
+following the instructions **Example Usage** section of this readme:
+
+-  :docs_root:`Generic App Router Readme  <../examples/rtos/CC26X2R1_LAUNCHXL/zstack/zr_genericapp/README.html>`
+
+    .. note:: This step is entirely optional as the GPD can be directly commissioned to the GPS coordinator
+
+Enable Commissioning on the GPS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Next, enable GPS Commissioning on the :code:`zc_light_sink` by following the instructions in the **Interfacing with the GP On/Off Switch Example App**
+section of this readme:
+
+-  :docs_root:`Light Sink Coordinator Readme  <../examples/rtos/CC26X2R1_LAUNCHXL/zstack/zc_light_sink/README.html>`
+
+Commission the GPD into the Network
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Lastly, commission a GPD like the :code:`gpd_switch` into the network by following the instructions in the **Interfacing with the Light Sink Example App** 
+section of this readme:
+
+-  :docs_root:`Green Power Switch Readme  <../examples/rtos/CC26X2R1_LAUNCHXL/zstack/gpd_switch/README.html>`
+
+Example Sniffer Capture of Green Power Traffic
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Here is an annotated Zigbee sniffer log of the expected behavior following the instructions above:
+
+.. figure:: resources/green-power-network-example.png
+    :align: center
+
+
+Adding Green Power Proxy Capabilities to Routing Sample Applications
+--------------------------------------------------------------------
+
+As required for Zigbee 3.0, routing device sample applications must implement the proxy functionality (Green Power Proxy Basic, or GPPB).
+Although this functionality is enabled by default, for testing purposes it may be disabled by defining DISABLE_GREENPOWER_BASIC_PROXY.
+
+This section will detail the necessary application code that is required for the GPPB.
+Note that necessary code to implement the GPPB is included in all routing sample applications (those prepended with :code:`zc_` or :code:`zr_`).
+The following steps are applied to a Zigbee `zc/zr_light` project:
+
+
+1. Include the :code:`gp_common` header file in :code:`zcl_samplelight.c`:
+
+.. code-block:: c
+
+  #include "gp_common.h"
+
+2. Add the three definitions for Green Power application events in :code:`zcl_samplelight.h`. Choose event bitmasks that aren't already used for other events.
+
+.. code-block:: c
+
+  // Green Power Events
+  #define SAMPLEAPP_PROCESS_GP_DATA_SEND_EVT              0x0200
+  #define SAMPLEAPP_PROCESS_GP_EXPIRE_DUPLICATE_EVT       0x0400
+  #define SAMPLEAPP_PROCESS_GP_TEMP_MASTER_EVT            0x0800
+
+3. In the ZCL initialization function :code:`zclSampleLight_Init()` initialize the Green Power EndPoint and Green Power application events.
+
+.. code-block:: c
+
+  gp_endpointInit(appServiceTaskId);
+  app_Green_Power_Init(appServiceTaskId, &appServiceTaskEvents, appSemHandle,
+                       SAMPLEAPP_PROCESS_GP_DATA_SEND_EVT,
+                       SAMPLEAPP_PROCESS_GP_EXPIRE_DUPLICATE_EVT,
+                       SAMPLEAPP_PROCESS_GP_TEMP_MASTER_EVT);
+
+4. Add the handlers for application events in the application process loop :code:`zclSampleLight_process_loop()`.
+All the required processing that the spec mandates is done by these handlers; any other processing specific to the application
+implementation is out of the specification scope.
+
+.. code-block:: c
+
+  static void zclSampleLight_process_loop(void)
+  {
+    // Forever loop
+    for(;;)
+    {
+      zstackmsg_genericReq_t *pMsg = NULL;
+
+      // Wait for response message
+      if(Semaphore_pend(appSemHandle, BIOS_WAIT_FOREVER ))
+      {
+      .
+      .
+      .
+      if(appServiceTaskEvents & SAMPLEAPP_PROCESS_GP_DATA_SEND_EVT)
+      {
+        if(zgGP_ProxyCommissioningMode == TRUE)
+        {
+          zcl_gpSendCommissioningNotification();
+        }
+        else
+        {
+          zcl_gpSendNotification();
+        }
+        appServiceTaskEvents &= ~SAMPLEAPP_PROCESS_GP_DATA_SEND_EVT;
+      }
+
+      if(appServiceTaskEvents & SAMPLEAPP_PROCESS_GP_EXPIRE_DUPLICATE_EVT)
+      {
+        gp_expireDuplicateFiltering();
+        appServiceTaskEvents &= ~SAMPLEAPP_PROCESS_GP_EXPIRE_DUPLICATE_EVT;
+      }
+
+      if(appServiceTaskEvents & SAMPLEAPP_PROCESS_GP_TEMP_MASTER_EVT)
+      {
+        gp_returnOperationalChannel();
+        appServiceTaskEvents &= ~SAMPLEAPP_PROCESS_GP_TEMP_MASTER_EVT;
+      }
+      .
+      .
+      .
+
+5. Add the handlers to process messages from the stack in :code:`zclSampleLight_processZStackMsgs()`. All the required
+processing that the spec mandates is done by this handlers, any other processing specific to the application implementation
+is out of the specification scope.
+
+.. code-block:: c
+
+  static void zclSampleLight_processZStackMsgs(zstackmsg_genericReq_t *pMsg)
+  {
+    switch(pMsg->hdr.event)
+    {
+    .
+    .
+    .
+      case zstackmsg_CmdIDs_GP_DATA_IND:
+      {
+        zstackmsg_gpDataInd_t *pInd;
+        pInd = (zstackmsg_gpDataInd_t*)pMsg;
+        gp_processDataIndMsg( &(pInd->Req) );
+      }
+      break;
+
+      case zstackmsg_CmdIDs_GP_SECURITY_REQ:
+      {
+        zstackmsg_gpSecReq_t *pInd;
+        pInd = (zstackmsg_gpSecReq_t*)pMsg;
+        gp_processSecRecMsg( &(pInd->Req) );
+      }
+      break;
+
+      case zstackmsg_CmdIDs_GP_CHECK_ANNCE:
+      {
+        zstackmsg_gpCheckAnnounce_t *pInd;
+        pInd = (zstackmsg_gpCheckAnnounce_t*)pMsg;
+        gp_processCheckAnnceMsg( &(pInd->Req) );
+      }
+    .
+    .
+    .
+
+
+Adding Green Power Sink Capabilities to Routing Sample Applications
+-------------------------------------------------------------------
+
+This section provides guidance on how to add sink functionality to a coordinator or router sample application, using :code:`zc/zr_light` as an example.
+
+Basic Steps
+^^^^^^^^^^^^
+
+In the |SDK|, sink examples are provided for the corresponding GPD examples.
+For example, there are :code:`zc/zr_light_sink` and :code:`zc/zr_thermostat_sink`, which respectively correspond to :code:`gpd_switch` and :code:`gpd_temperaturesensor`.
+Default application functionality is provided for the sinks to act upon the GPDFs sent by commissioned GPDs.
+For this reason, it is a simple task to enable the default sink functionality on :code:`zc/zr_light` and :code:`zc/zr_thermostat`:
+
+1. Add these files to :code:`<project>/Common/gp`:
+    - :code:`gp_bit_fields.c/h`
+    - :code:`gp_sink_table.c`
+    - :code:`gp_sink.c/h`
+2. Add this to predefined symbols:
+    - :code:`ENABLE_GREENPOWER_COMBO_BASIC`
+        - To access predefined symbols in CCS: (right-click project -> *Project Properties* -> *Build* -> *ARM Compiler* -> *Predefined Symbols*)
+        - To access predifned symbols in IAR: (right-click project -> *Options* -> *C/C++ Compiler* -> *Preprocessor* -> *Defined symbols*)
+    
+
+Detailed Steps of Adding Sink Functionality
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Here are detailed instructions on adding sink functionality. This will serve as a guide on how other sample applications may also be modified to support their respective GPD.
+The `zc/zr_light` sample application will be used for this purpose.
+
+1. Define :code:`ENABLE_GREENPOWER_COMBO_BASIC` compilation flag on the project options to enable the sink related functionality.
+
+2. Declare the sink application callbacks struct (:code:`GpSink_AppCallbacks_t`) in :code:`zcl_samplelight.c`.
+The pointers defined in this structure are the callbacks that will process the Green Power application commands
+sent by the Green Power Devices. This example only defines pointers for a Sample Light application; every thing else is declared
+as null. Adjust this structure according to the specific application requirements.
+
+.. code-block:: c
+
+  GpSink_AppCallbacks_t zclSampleLight_GpSink_AppCallbacks =
+  {
+  #ifdef ZCL_IDENTIFY
+      zclSampleLight_GPSink_Identify,     //IdentifyCmd;
+  #endif
+  #ifdef ZCL_SCENES
+      NULL,                               //RecallSceneCmd;
+      NULL,                               //StoreSceneCmd;
+  #endif
+  #ifdef ZCL_ON_OFF
+      zclSampleLight_GPSink_Off,          //OffCmd;
+      zclSampleLight_GPSink_On,           //OnCmd;
+      zclSampleLight_GPSink_Toggle,       //ToggleCmd;
+  #endif
+  #ifdef ZCL_LEVEL_CTRL
+      NULL,                               //LevelControlStopCmd;
+      NULL,                               //MoveUpCmd;
+      NULL,                               //MoveDownCmd;
+      NULL,                               //StepUpCmd;
+      NULL,                               //StepDownCmd;
+      NULL,                               //MoveUpWithOnOffCmd;
+      NULL,                               //MoveDownWithOnOffCmd;
+      NULL,                               //StepUpWithOnOffCmd;
+      NULL,                               //StepDownWithOnOffCmd;
+  #endif
+      NULL,                               //MoveHueStopCmd;
+      NULL,                               //MoveHueUpCmd;
+      NULL,                               //MoveHueDownCmd;
+      NULL,                               //StepHueUpCmd;
+      NULL,                               //StepHueDownCmd;
+      NULL,                               //MoveSaturationStopCmd;
+      NULL,                               //MoveSaturationUpCmd;
+      NULL,                               //MoveSaturationDownCmd;
+      NULL,                               //StepSaturationUpCmd;
+      NULL,                               //StepSaturationDownCmd;
+      NULL,                               //MoveColorCmd;
+      NULL,                               //StepColorCmd;
+  #ifdef ZCL_DOORLOCK
+      NULL,                               //LockDoorCmd;
+      NULL,                               //UnlockDoorCmd;
+  #endif
+      NULL,                               //AttributeReportingCmd;
+      NULL,                               //MfrSpecificReportingCmd;
+      NULL,                               //MultiClusterReportingCmd;
+      NULL,                               //MfrSpecificMultiReportingCmd;
+      NULL,                               //RequestAttributesCmd;
+      NULL,                               //ReadAttributeRspCmd;
+      NULL,                               //zclTunnelingCmd;
+  };
+
+3. Register the sink application callbacks using :code:`zclGp_RegisterCBForGPDCommand(&zclSampleLight_GpSink_AppCallbacks);`, as in :code:`zclSampleLight_Init()`.
+
+.. code-block:: c
+
+  static void zclSampleLight_Init( void )
+  {
+  
+      // ...
+  
+  #if defined (ENABLE_GREENPOWER_COMBO_BASIC)
+      zclGp_RegisterCBForGPDCommand(&zclSampleLight_GpSink_AppCallbacks);
+  #endif
+  
+      // ...
+  
+  }
+
+4. Declare all the functions required as application callbacks by the sink. Look at :code:`zcl_samplelight.c` for reference.
+
+.. code-block:: c
+
+  /*********************************************************************
+   * @fn      zclSampleLight_GPSink_Identify
+   *
+   * @brief   Callback to process Identify command from a GPD
+   *
+   * @param   zclGpNotification
+   *
+   * @return  none
+   */
+  static void zclSampleLight_GPSink_Identify(zclGpNotification_t *zclGpNotification)
+  {
+    afAddrType_t  dstAddr;
+
+    dstAddr.endPoint = SAMPLELIGHT_ENDPOINT;
+    dstAddr.panId = 0;
+    dstAddr.addrMode = afAddr16Bit;
+    dstAddr.addr.shortAddr = _NIB.nwkDevAddress;
+
+    //Identify is a payloadless command which triggers a 60 seconds identify in
+    /// the device (doc 14-0563-16 GP spec Table 49)
+    zclGeneral_SendIdentify(SAMPLELIGHT_ENDPOINT,&dstAddr,60,TRUE, 1);
+  }
+
+  /*********************************************************************
+   * @fn      zclSampleLight_GPSink_Off
+   *
+   * @brief   Callback to process Off command from a GPD
+   *
+   * @param   zclGpNotification
+   *
+   * @return  none
+   */
+  static void zclSampleLight_GPSink_Off(zclGpNotification_t *zclGpNotification)
+  {
+    zclSampleLight_OnOffCB(COMMAND_ON_OFF_OFF);
+  }
+
+  /*********************************************************************
+   * @fn      zclSampleLight_GPSink_On
+   *
+   * @brief   Callback to process On command from a GPD
+   *
+   * @param   zclGpNotification
+   *
+   * @return  none
+   */
+  static void zclSampleLight_GPSink_On(zclGpNotification_t *zclGpNotification)
+  {
+    zclSampleLight_OnOffCB(COMMAND_ON_OFF_ON);
+  }
+
+  /*********************************************************************
+   * @fn      zclSampleLight_GPSink_Toggle
+   *
+   * @brief   Callback to process Toggle command from a GPD
+   *
+   * @param   zclGpNotification
+   *
+   * @return  none
+   */
+  static void zclSampleLight_GPSink_Toggle(zclGpNotification_t *zclGpNotification)
+  {
+    zclSampleLight_OnOffCB(COMMAND_ON_OFF_TOGGLE);
+  }

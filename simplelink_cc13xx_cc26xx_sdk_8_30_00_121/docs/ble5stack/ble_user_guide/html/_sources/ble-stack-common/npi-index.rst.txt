@@ -1,0 +1,21 @@
+.. _sec-npi:
+
+*********************************
+Network Processor Interface (NPI)
+*********************************
+
+TI's Network Processor Interface (:term:`NPI`) is used for establishing a serial
+data link between a TI SoC and external MCUs or PCs. It is an abstraction layer
+above the serial interface (UART or SPI) that handles sending / receiving
+data power management, and data parsing. It is mainly used by TI's
+network processor solutions. 
+
+.. ifconfig:: device != 'cc23xx'
+
+    There are two types of NPI used by BLE and they are described in the 
+    following sections.
+
+    .. include:: /npi/inc_legacy_npi.rst
+
+
+.. include:: /npi/inc_unified_npi.rst

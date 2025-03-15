@@ -1,0 +1,178 @@
+.. _power-config:
+
+Power Configuration
+$$$$$$$$$$$$$$$$$$$
+
+Overview
+========
+
+The following sections provides different code and variables to be considered
+when designing a low-power mesh network. Power management functionality
+is handled by the TI-RTOS7 power driver and used by the peripheral drivers
+(e.g. UART, SPI, I2C, etc). For power consumption measurements on Z-Stack,
+refer to `SWRA625 <http://www.ti.com/lit/swra625>`_.
+
+TX Power Configuration
+======================
+
+The following sections provide configurations which can be implemented to
+modify the application's TX power, to achieve a greater distance the device
+can communicate with other devices on the network, or lower the application's
+power consumption for a longer battery life in your device.
+
+Changing TX Power Level
+-----------------------
+
+By default, the |DEVICE| P-device variants (which have a Power Amplifier
+integrated) have the TX power set to 0 dBm. To modify the TX power
+level during compile time change the SysConfig *RF Stacks* |rarr| *Z-Stack* |rarr|
+*Radio* |rarr| *Transmit Power* value.
+
+The maximum power level supported for a non-PA |DEVICE| device in IEEE
+802.15.4 mode is 5 dBm. A P-type device can support up to 20 dBm TX power in
+IEEE mode, where the High PA will automatically be enabled for
+P-devices with a desired TX power level above 5 dBm. To verify High PA is
+enabled check the *Advanced Radio Settings* (disabled section) in SysConfig. 
+
+The allowable TX power range with High PA enabled (programmmable by up to 6 dB) is 
+dependent on the hardware circuitry designed for the 2.4 GHz band.  The 
+P-2 LaunchPad variants maximize output from 14 to 20 dBm.  By contrast, the 
+P-4 LaunchPads are optimized to support power levels from 6 to 10 dBm.  
+These considerations are accounted for inside SysConfig depending on the hardware 
+option selected in *RF DESIGN* |rarr| *RF Design*.
+
+To change the TX power during runtime to a different value, the best place to
+insert the following code is inside of the ZCL application function. For example, 
+the switch project would be ``zclSampleSw_Init``.
+
+.. code-block:: c
+
+    zstack_sysSetTxPowerReq_t powerReq;
+    zstack_sysSetTxPowerRsp_t powerRsp;
+    powerReq.requestedTxPower = 0; // Set power to 0 dBm
+
+    Zstackapi_sysSetTxPowerReq(appServiceTaskId, &powerReq, &powerRsp);
+
+This code snippet can be used for any example project (excluding ZNP and
+Green Power projects).
+
+
+Additional Optimizations
+========================
+
+|STACK| provides several parameters which control the device runtime behavior.
+The :ref:`sec-app-configuration` section discusses several of these parameters.
+The most useful for reducing power consumption include setting ``CUI_DISABLE`` and
+removing ``BOARD_DISPLAY_USE_UART``. Making these changes to the Predefined Symbols 
+from Project Settings will disable UART communication, LED, and push button 
+peripherals used for application information and interaction.
+
+Additionally, shutting down the external flash can save on current consumption.
+To shutdown external flash, you can add :code:`Board_initHook` inside
+of :code:`main()`:
+
+.. note:: Do not perform this modification with OTA client projects which use the 
+    external flash for over-the-air downloads
+
+.. _sec-power-test:
+
+Example Application Power Test Definitions
+==========================================
+
+Power consumption use cases have been included inside of the ``zcl_samplelight`` 
+and ``zcl_samplesw`` example applications for users to further evaluate the low
+power operation of |STACK| as part of the |SDK|.  To include this feature, 
+``Z_POWER_TEST`` must be added to the project preprocessor symbols (refer to 
+:ref:`sec-app-configuration` for more information) along with
+``POWER_TEST_TX_PWR`` set to a valid TX power level for the |DEVICE| being used
+and one specific power test case configuration:
+
+-  ``POWER_TEST_POLL_ACK``
+-  ``POWER_TEST_DATA_ACK``
+-  ``POWER_TEST_POLL_DATA``
+
+The operation and behavior of each will be further explained by the following 
+sections.  The LEDs and UI are disabled in these modes for greater power savings, 
+also the devices start commissioning automatically on startup.  Otherwise, 
+behavior of the examples, including |LP| BTN-1/2 operation, is the same as 
+described in the :ref:`chap-example-applications` READMEs.
+
+Average power consumption will vary based on the hardware used.  When using a |LP|
+with an external DC power analyzer (as shown in the provided screenshots) 
+note that all XDS110 jumpers should be removed for accurate results.  If taking
+measurements using EnergyTrace™ software please reference the 
+:ref:`energytrace-users-guide`.
+
+POWER_TEST_POLL_ACK
+-------------------
+
+This test measures the current consumption of a ZED switch as it polls, with no
+data transferred between either device.
+
+``zc_light`` behavior:
+
+1. Form the network and perform steering to open permit joining,
+   but do not commence the finding & binding procedure
+#. Stay idle and do not buffer any packets from ``zed_sw`` after the ZED joins the network
+
+``zed_sw`` behavior:
+
+1. Start steering to search for and join the ZC's network
+#. After joining, set ``zgPollRate`` to 5 seconds with ``Zstackapi_sysConfigWriteReq``
+#. Send a data poll over-the-air every ``zgPollRate`` seconds
+
+.. figure:: resources/Zigbee-PollAck.png
+    :align: center
+
+POWER_TEST_DATA_ACK
+-------------------
+
+This test measures the current consumption of a ZED switch as it sends ZCL ON/OFF
+packets to the ZC light.
+
+``zc_light`` behavior:
+
+1. Form the network, perform steering to open permit joining, 
+   and begin the Finding & Binding procedure
+#. Remain idle
+
+``zed_sw`` behavior:
+
+1. Start steering to search for and join the ZC's network
+#. Once joined, finding & binding is enabled so that a bind may automatically
+   be created on the switch client for the On/Off cluster
+#. After finding & binding, set ``zgPollRate`` to 0 seconds to disable data reception from the ZC
+#. Send ZCL on/off toggle packets over-the-air every 5 seconds with ``OsalPortTimers_startReloadTimer`` and
+   ``SAMPLEAPP_POWER_TEST_TOGGLE_EVT``
+
+.. figure:: resources/Zigbee-DataAck.png
+    :align: center
+
+POWER_TEST_POLL_DATA
+--------------------
+
+This test measures the current consumption of a ZED switch as it polls and
+receives ZCL data from the ZC light
+
+``zc_light`` behavior:
+
+1. Form the network and perform steering to open permit joining
+   on startup, but do not find & bind to prevent the ZED switch from sending ZCL On/Off packets 
+#. After the ZED joins the network, process the ``zstackmsg_CmdIDs_ZDO_DEVICE_ANNOUNCE`` to 
+   locally save the short address of the ZED
+#. Use ``OsalPortTimers_startReloadTimer`` and ``SAMPLEAPP_POWER_TEST_ZCL_DATA_EVT``
+   to occassionally send ZCL data to the ZED switch with ``Zstackapi_AfDataReq``
+
+``zed_sw`` behavior:
+
+1. Start steering to search for and join the ZC's network
+#. After joining, set ``zgPollRate`` to 5 seconds with ``Zstackapi_sysConfigWriteReq``
+#. Send a data poll over-the-air every ``zgPollRate`` seconds and receive ZCL packet from the
+   ZC if it indicates that data is pending
+
+.. figure:: resources/Zigbee-PollData.png
+    :align: center
+
+For more information regarding low power operaion of the |DEVICE| with |STACK|, including
+battery-less Green Power devices and further practical usage scenarios for battery life 
+estimations, please refer to `SWRA625 <http://www.ti.com/lit/swra625>`_.

@@ -1,0 +1,272 @@
+.. |OLD_STACK_VER| replace:: BLE5-Stack 2.02.07
+.. |NEW_STACK_VER| replace:: BLE5-Stack 2.02.08
+
+|OLD_STACK_VER| (SDK 6.40) to |NEW_STACK_VER| (SDK 7.10)
+========================================================
+
+This section will describe a few methods to migrate a project from |OLD_STACK_VER| to
+a |NEW_STACK_VER| project.
+
+Porting via CCS ProjectSpec Modifications
+-----------------------------------------
+
+Porting by modifying the CCS ProjectSpec file (``.projectspec``) can be done when a ProjectSpec
+file has been updated and maintained throughout the project's development. All
+example projects included in the SDK each come with their own ProjectSpec file.
+During development, the included ProjectSpec file should be updated to match any
+changes or additions made to the project. This will make a project more easily
+package-able and ease migration efforts when future SDK's are released
+For example the ProjectSpec file of the simple_peripheral project is located in
+``{SDK_INSTALL_DIR}\examples\rtos\{BOARD}\ble5stack\simple_peripheral\tirtos7\ticlang``
+
+This portion of the migration guide will focus on how to port an existing 
+project from |OLD_STACK_VER| to |NEW_STACK_VER| by modifying the ProjectSpec
+file to import the project as a |NEW_STACK_VER| project. The following steps
+will detail the changes needed when porting a Simple Peripheral project. 
+
+.. warning:: This porting method might be more complex for customer specific
+   projects. The following steps are the minimum set of changes
+   required to port a project from |OLD_STACK_VER| to |NEW_STACK_VER|.
+
+#. Open the ProjectSpec file in a text editor and modify the product definition
+   line to reflect the new SDK revision and the corresponding sysconfig
+   revision.
+   ``products="com.ti.SIMPLELINK_CC13XX_CC26XX_SDK:x.xx.xx.xx;sysconfig:x.xx.x"``
+   Refer to the Dependencies section in the SDK release notes for the correct
+   SysConfig version. The SDK release notes may be found in 
+   ``{SDK_INSTALL_DIR}\release_notes_simplelink_cc13xx_cc26xx_sdk_x_xx_xx_xx.html``
+
+#. Update line ``cgtVersion="TICLANG_x.x.x"`` if it exists in the ProjectSpec
+   file. Refer to the Dependencies section in the SDK release notes for the 
+   recommended TI ARM Clang Compiler version.
+
+#. In the file simple_peripheral.syscfg under ``...\tirtos7\``, remove the
+   lines ``aesctrdrbg.$name = "CONFIG_AESCTRDRBG_0";`` and 
+   ``aesctrdrbg.aesctrObject.$name = "CONFIG_AESCTR_0";``, as these names are
+   no longer defined. Also remove line
+   ``Hwi.vectorTableAddress = system.utils.bigInt("020000000", 16);``.
+   Alternatively replace the simple_peripheral.syscfg with the file, provided
+   with the new SDK.
+
+#. In file cc13x2_cc26x2_app_tirtos7.cmd in folder ``.\tirtos7\ticlang``, add
+   the following section declaration at the end of the file.
+   ``.ramVecs:   > SRAM, type = NOLOAD, ALIGN(256)``
+   Alternatively replace the cc13x2_cc26x2_app_tirtos7.cmd by the file,
+   provided with the new SDK.
+
+#. Afterwards, the project may be re-imported using the new ProjectSpec file.
+   The newly imported project is now configured to use |NEW_STACK_VER| instead
+   of |OLD_STACK_VER|.
+
+To learn more information about ProjectSpec files, please 
+reference `ProjectSpec Documentation <https://software-dl.ti.com/ccs/esd/documents/ccs_projectspecs.html>`_.
+
+Porting by modifying the project properties in CCS
+--------------------------------------------------
+
+An equivalent way of porting an existing project to a newer SDK is to modify
+the project properties in CCS.
+
+.. warning:: This porting method might be more complex for customer specific
+   projects. The following steps are the minimum set of changes
+   required to port a project from |OLD_STACK_VER| to |NEW_STACK_VER|.
+
+In this example the simple_peripheral project of the |OLD_STACK_VER| will be
+ported to |NEW_STACK_VER| with the following steps:
+
+#. In the |OLD_STACK_VER| simple_peripheral CCS project, right-click on the 
+   project name and select ``Properties`` or use the CCS menu ``Project`` -
+   ``Properties``.
+
+#. Under ``Resource`` - ``General`` click the ``Products`` tab and select the
+   ``SimpleLink CC13xx CC26xx SDK`` entry and press the ``Edit`` button.
+
+#. Select the new SDK from the drop-down field on the right side and press OK.
+
+#. In the same tab select the SysConfig entry and update similarly if needed.
+   Refer to the Dependencies section in the SDK release notes for the correct
+   SysConfig version. The SDK release notes may be found in 
+   ``{SDK_INSTALL_DIR}\release_notes_simplelink_cc13xx_cc26xx_sdk_x_xx_xx_xx.html``
+
+#. Under ``Resource`` - ``General`` click the ``Project`` tab and select the
+   desired compiler version. Refer to the Dependencies section in the SDK
+   release notes for the correct compiler version. The SDK release notes may be
+   found in 
+   ``{SDK_INSTALL_DIR}\release_notes_simplelink_cc13xx_cc26xx_sdk_x_xx_xx_xx.html``
+
+#. In the file simple_peripheral.syscfg of the project folder, remove the lines
+   ``aesctrdrbg.$name = "CONFIG_AESCTRDRBG_0";`` and 
+   ``aesctrdrbg.aesctrObject.$name = "CONFIG_AESCTR_0";``, as these names are
+   no longer defined. Also remove line
+   ``Hwi.vectorTableAddress = system.utils.bigInt("020000000", 16);``.
+   Alternatively replace the simple_peripheral.syscfg of the CCS project by 
+   the simple_peripheral.syscfg file, provided with the new SDK.
+
+#. In file cc13x2_cc26x2_app_tirtos7.cmd of the project folder, add the 
+   following section declaration at the end of the file.
+   ``.ramVecs:   > SRAM, type = NOLOAD, ALIGN(256)``
+   Alternatively replace the cc13x2_cc26x2_app_tirtos7.cmd of the CCS project
+   by the cc13x2_cc26x2_app_tirtos7.cmd file, provided with the new SDK.
+
+Now it should be possible to build and run the ported project.
+
+Legacy Porting
+--------------
+
+The following three sections are covering a legacy migration method for
+different examples. The approach of this method is to open a new project from
+the new SDK and transfer your changes and application code over to the new
+example.
+
+Legacy Porting Simple Peripheral
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For this migration guide, Simple Peripheral from |OLD_STACK_VER| will be 
+ported over to |NEW_STACK_VER|. Start with a |NEW_STACK_VER| project that
+contains the same base functionality as the porting target project and merge in
+any custom functionality.
+
+#. Choose a |NEW_STACK_VER| example project that contains your target
+   project's base functionality.
+
+#. Transfer all modified application files from |OLD_STACK_VER| into the
+   |NEW_STACK_VER| example project.
+
+   In this example, the following files from |OLD_STACK_VER| were moved into
+   Simple Peripheral |NEW_STACK_VER| example:
+
+      - ``simple_peripheral.c``
+      - ``simple_peripheral.h``
+
+#. Move any profiles and services that the application is using to the 
+   |NEW_STACK_VER| project.
+
+#. Transfer the SysConfig settings either visually through the GUI or open both 
+   the old and the new project ``.syscfg`` files and copy-paste the desired 
+   settings.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|. Additional details are provided 
+   in :ref:`noteworthy-ble-migration-sdk-7-10`.
+
+#. Refer to the Core SDK release notes for additional information and the 
+   TI-RTOS examples included with |SDK|. The Core SDK release notes may be
+   found in ``{SDK_INSTALL_DIR}\docs\simplelink_mcu_sdk\release_notes_coresdk_cc13xx_cc26xx_x_xx_xx_xx.html``
+
+   For additional information on how |NEW_STACK_VER| uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+Legacy Porting Simple Central
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This section of the migration guide will focus on porting Simple Central 
+from |OLD_STACK_VER| to the |NEW_STACK_VER|. Start with a |NEW_STACK_VER|
+project that contains the same base functionality as the porting target project
+and merge in any custom functionality.
+
+#. Choose a |NEW_STACK_VER| example project that contains your target
+   project's base functionality.
+
+#. Transfer all modified application files from |OLD_STACK_VER| into the
+   |NEW_STACK_VER| example project.
+
+   In this example, the following files from |OLD_STACK_VER| were moved into
+   Simple Central |NEW_STACK_VER| example:
+
+      - ``simple_central.c``
+      - ``simple_central.h``
+
+#. Modify ``main.c`` in the |NEW_STACK_VER| example if additional tasks were
+   added in the |OLD_STACK_VER| project.
+
+#. Move any profiles and services that the application is using to the
+   |NEW_STACK_VER|.
+
+#. Transfer the Sysconfig settings either visually through the GUI or open both 
+   the old and the new project ``.syscfg`` files and copy-paste the desired settings.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|. Additional details are provided 
+   in :ref:`noteworthy-ble-migration-sdk-7-10`.
+
+#. Refer to the Core SDK release notes for additional information and the TI-RTOS
+   examples included with |SDK|.  The Core SDK release notes may be
+   found in ``{SDK_INSTALL_DIR}\docs\simplelink_mcu_sdk\release_notes_coresdk_cc13xx_cc26xx_x_xx_xx_xx.html``
+
+   For additional information on how |NEW_STACK_VER| uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+Legacy Porting Basic BLE
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+In this section of this migration guide, the Basic BLE example from
+|OLD_STACK_VER| will be ported over to |NEW_STACK_VER|. Start with the Basic
+BLE project of the |NEW_STACK_VER| and merge in any custom functionality.
+
+#. Import a |NEW_STACK_VER| Basic BLE project.
+
+#. Change the default BLE Basic project configuration options in the BLE Module
+   present in SysConfig to match the configuration used in the |OLD_STACK_VER|
+   project.
+
+#. Transfer all modified application files from |OLD_STACK_VER| into the
+   |NEW_STACK_VER| example project.
+
+   In this example, the following files from |OLD_STACK_VER| were moved into
+   the Basic BLE example of the |NEW_STACK_VER|:
+
+      - ``app_peripheral.c``
+      - ``app_central.c``
+
+#. Move any profiles and services that the application is using to the 
+   |NEW_STACK_VER| project.
+
+#. Transfer the SysConfig settings either visually through the GUI or open both 
+   the old and the new project ``.syscfg`` files and copy-paste the desired 
+   settings.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|. Additional details are provided 
+   in :ref:`noteworthy-ble-migration-sdk-7-10`.
+
+#. Refer to the Core SDK release notes for additional information and the 
+   TI-RTOS examples included with |SDK|. The Core SDK release notes may be
+   found in ``{SDK_INSTALL_DIR}\docs\simplelink_mcu_sdk\release_notes_coresdk_cc13xx_cc26xx_x_xx_xx_xx.html``
+
+   For additional information on how |NEW_STACK_VER| uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.
+
+.. _noteworthy-ble-migration-sdk-7-10:
+
+A Few Noteworthy Changes from |OLD_STACK_VER| to |NEW_STACK_VER|
+----------------------------------------------------------------
+
+You can follow the guide above without addressing these updates, they are listed
+for your information only. All fine grained details might not be mentioned, 
+please refer to the specific example you need to port and do a compare between 
+the old and new project files. Please refer to the |STACK| Release Notes for 
+all the details.
+
+.. note::   
+   The examples available in SDK 6.20 and newer
+
+   - Rely either on TI-RTOS7 or FreeRTOS as RTOS
+   - Leverage GPIO++ and UART2 drivers for GPIO and UART applications
+   - Use TI-CLANG or IAR as compiler
+  
+   This guide assumes the previously mentioned components are used. If this is not the case for your projects,
+   please refer to :ref:`tirtos_to_tirtos7-porting-guide`, :ref:`sec-cc13xx-cc26xx-gpio++-porting-guide`, :ref:`uart_to_uart2-porting-guide`
+   and `TI ARM Clang Migration Guide <https://software-dl.ti.com/codegen/docs/tiarmclang/rel1_0_0_sts/tiarmclang_ug/tiarmclang-portfolio/migration_guide/index.html>`_.
+
+.. note::   
+   Several Function names, structure field names, defines, and SysConfig field
+   names have been updated in order to follow inclusive technical terminology.
+   Refer to the Inclusive Terminology section in the Core SDK release notes for
+   more details and for a list of affected APIs. The Core SDK release notes may
+   be found in ``{SDK_INSTALL_DIR}\docs\simplelink_mcu_sdk\release_notes_coresdk_cc13xx_cc26xx_x_xx_xx_xx.html``

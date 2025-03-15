@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCUboot OAD Image Header &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Flash Layout for On-Chip OAD" href="flash-layout-on-chip-stack-library.html" />
+    <link rel="prev" title="MCUboot for On-Chip OAD (Stack Library)" href="on-chip-stack-library.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug oad-mcuboot image-header";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oad-types.html">OAD Storage &amp; Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mcuboot.html">MCUboot Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="on-chip-stack-library.html">MCUboot for On-Chip OAD (Stack Library)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MCUboot OAD Image Header</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">MCUboot OAD Image Header</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-on-chip-stack-library.html">Flash Layout for On-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-off-chip.html">Flash Layout for Off-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imgtool.html">Post-Build Script imgtool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-application.html">OAD Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-oad/mcuboot-oad-profile.html">BLE-Stack OAD Profile</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a> &raquo;</li>
+      <li>MCUboot OAD Image Header</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="mcuboot-oad-image-header">
+<span id="sec-mcuboot-oad-image-header"></span><h1>MCUboot OAD Image Header<a class="headerlink" href="#mcuboot-oad-image-header" title="Permalink to this headline">¶</a></h1>
+<p>All firmware images delivered via OAD are in binary format and contain an image
+header and an image trailer. The information in the trailer is used for image authentication.
+The location of the trailer is based on which design you choose (Direct XIP or Overwrite only,
+please see MCUboot section for more information). The information in the image header is used by the application and
+secure bootloader to determine the suitability of an image for download or
+loading. In order to prevent this information from being calculated multiple
+times all MCUboot OAD images use a standard image header.</p>
+<p>This section explains the various fields within the image header and what they
+mean.</p>
+<p>MCUboot provides a tool to generate an OAD ready image, it is called
+<a class="reference internal" href="imgtool.html#sec-mcuboot-imgtool"><span class="std std-ref">Post-Build Script imgtool</span></a>. By default, this tool runs as a
+post-build step of all OAD enabled projects.</p>
+<div class="section" id="id2">
+<h2>MCUboot OAD Image Header<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>The header contains the essential information required for all types of OAD
+across all supported wireless stacks. The core header must be present as the
+secure bootloader relies heavily on it to boot and OAD image.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-number">Listing 221. </span><span class="caption-text">MCUboot OAD Image Header</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define IMAGE_MAGIC                 0x96f3b83d</span>
+
+<span class="cp">#define IMAGE_HEADER_SIZE           32</span>
+
+<span class="k">struct</span> <span class="nc">image_version</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">iv_major</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">iv_minor</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">iv_revision</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">iv_build_num</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="cm">/** Image header.  All fields are in little endian byte order. */</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">image_header</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ih_magic</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ih_load_addr</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">ih_hdr_size</span><span class="p">;</span><span class="w">           </span><span class="cm">/* Size of image header (bytes). */</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">ih_protect_tlv_size</span><span class="p">;</span><span class="w">   </span><span class="cm">/* Size of protected TLV area (bytes). */</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ih_img_size</span><span class="p">;</span><span class="w">           </span><span class="cm">/* Does not include header. */</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ih_flags</span><span class="p">;</span><span class="w">              </span><span class="cm">/* IMAGE_F_[...]. */</span><span class="w"></span>
+<span class="w">  </span><span class="k">struct</span> <span class="nc">image_version</span><span class="w"> </span><span class="n">ih_ver</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">_pad1</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="#tbl-mcuboot-image-header-description-table"><span class="std std-numref">Table 46.</span></a> below shows a description of the
+core image header.</p>
+<span id="tbl-mcuboot-image-header-description-table"></span><table class="docutils align-default" id="id4">
+<caption><span class="caption-number">Table 46. </span><span class="caption-text">Description of the core image header.</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 20%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Size (in bytes)</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ih_magic</p></td>
+<td><p>4</p></td>
+<td><p>Magic number checked by secure bootloader. Need to
+match for the image to be valid.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ih_load_addr</p></td>
+<td><p>4</p></td>
+<td><p>Where the image should be programmed at</p></td>
+</tr>
+<tr class="row-even"><td><p>ih_hdr_size</p></td>
+<td><p>2</p></td>
+<td><p>Header size</p></td>
+</tr>
+<tr class="row-odd"><td><p>ih_protect_tlv_size</p></td>
+<td><p>2</p></td>
+<td><p>Sizde of protected TLV area</p></td>
+</tr>
+<tr class="row-even"><td><p>ih_img_size</p></td>
+<td><p>4</p></td>
+<td><p>Image size excluded header</p></td>
+</tr>
+<tr class="row-odd"><td><p>ih_flags</p></td>
+<td><p>4</p></td>
+<td><p>The total length of the image including header</p></td>
+</tr>
+<tr class="row-even"><td><p>ih_ver</p></td>
+<td><p>8</p></td>
+<td><p>Version number of the image. Secure bootloader
+uses this field to determine which image to run.</p></td>
+</tr>
+<tr class="row-odd"><td><p>_pad1</p></td>
+<td><p>2</p></td>
+<td><p>Not used but can be customized if needed</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="on-chip-stack-library.html" class="btn btn-neutral float-left" title="MCUboot for On-Chip OAD (Stack Library)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="flash-layout-on-chip-stack-library.html" class="btn btn-neutral float-right" title="Flash Layout for On-Chip OAD" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+|SDK| Overview
+$$$$$$$$$$$$$$$$$$$$$$$
+
+The SimpleLink\ |trade| |DEVICEAND| Software Development Kit provides a
+complete package for the development of Bluetooth LE, Sub-1 GHz, Zigbee, Thread, 
+and IEEE\ |trade| 802.15.4 based applications for the |DEVICE| 
+wireless microcontroller.
+
+Introduction to the |SDK|
+#########################
+
+.. Copied from product page (http://www.ti.com/tool/launchxl-cc26x2r1)
+
+TI's royalty-free |SDK| is a complete software platform for developing
+applications that require low-power, security, reliability, and mesh
+networking. The |DEVICEAND| devices are part of the SimpleLink\ |trade| MCU
+platform which consists of Wi-Fi\ |reg|, Bluetooth\ |reg| Low Energy, Sub-1 GHz,
+Thread, Zigbee, IEEE 802.15.4 and host MCUs, which all share a common, easy-to-use
+development environment and rich tool set. A one-time integration of the
+SimpleLink\ |trade| platform enables you to add any combination of the
+portfolio's devices into your design, allowing 100 percent code reuse when
+your design requirements change. For more information, visit the
+`SimpleLink™ Solutions Overview
+<http://www.ti.com/lsds/ti/wireless-connectivity/simplelink-solutions/overview.page>`_.
+
+Solution Platform
+^^^^^^^^^^^^^^^^^
+
+This section describes the various components that are installed with the
+|SDK|, the directory structure of the protocol stack, and any tools required
+for development.
+
+The following components are included in the solution platform:
+
+- Real-time operating system (|RTOS|) with the TI-RTOS7\ |trade| SYS/BIOS
+  kernel, optimized power management support, and peripheral drivers.
+
+- The driverLib provides a register abstraction layer that is used by software
+  and drivers to control the |DEVICE| MCU.
+
+- TI-Drivers are a set of RTOS aware drivers designed to allow seemless use of
+  |DEVICE| peripherals inside your application.
+
+- Example applications make the beginning stages of development easier. Example
+  applications are provided for the |DEVICE| platform
+
+
+.. _sec-directory-structure:
+
+Directory Structure
+-------------------
+
+The |SDK| directory structure is broken down into a few major directories at
+the root to allow easy differentiation between documentation, examples, kernel
+source, and other source code. From the root directory, the sub-directories
+are:
+
+:docs: Contains HTML and PDF documentation for the |SDK|.
+:examples: Contains the example projects and example source for this |SDK|.
+:kernel: Contains the source and build tools for the kernels supported by this
+         |SDK|.
+:source: Contains the source code for the larger components of the |SDK|. A
+         more detailed description of this directory follows.
+:tools: Scripts and definition files used by the |SDK|. Contains scripts
+        referenced by the |SDK| documentation.
+:tfm_s: Resources pertaining to crypto drivers stored in secure memory and 
+        secure key storage features of the Cortex-M33, as only available on
+        |DEVICE1M_AND| devices.
+
+The source directory is split into major categories based on where the source
+code came from. All of the source code within the ``source\third_party`` directory
+comes from vendors other than Texas Instruments. All of the source code within
+the ``source\ti`` directory comes from Texas Instruments.
+
+:ti\\boards: Contains the board hardware configurations.
+:ti\\devices: Contains the board support source code.
+:ti\\display: Contains the source code for the display libraries.
+:ti\\drivers: Contains the source code for the TI-RTOS7 drivers.
+:ti\\grlib: Contains the source code for the graphics libraries.
+
+End Production Development Architecture Choices
+###############################################
+
+.. _sec-protocol-stack-application-configuration:
+
+Protocol Stack and Application Configurations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:numref:`fig-device-configuration` shows the two different system architectures
+enabled by |STACK|.
+
+-   A single device is shown in :numref:`fig-device-configuration` (left). The
+    application and protocol stack are both implemented on the |DEVICE| as a true
+    single-chip solution. This configuration is the simplest and most common when
+    using the |DEVICE| for network nodes and also using the |DEVICE| as a
+    personal area network (PAN) coordinator node. This configuration is the
+    most cost-effective technique and provides the best power performance.
+
+-   A coprocessor is shown in :numref:`fig-device-configuration` (right). The
+    protocol stack runs on the |DEVICE| while the application is executed on an
+    external MPU or MCU. The application interfaces with the |DEVICE| using the
+    network protocol interface (NPI) over a serial universal asynchronous
+    receiver/transmitter (UART) connection. The description of the API
+    interface is provided in the `ZNP Interface Guide <./znp_interface.html>`_ 
+    and further ZNP usage is described in :ref:`znp-interface`.
+    This configuration is useful for applications that require long-range
+    wireless connectivity or peripheral applications, which execute on another
+    device (such as an external MCU) or on a
+    PC without the requirement to implement the complexities associated with a
+    wireless networking protocol. As well for implementing the Feature rich
+    gateway applications e.g. on Linux host.
+    In these cases, the application can be developed
+    externally on a host processor while running |STACK| on the |DEVICE|, which
+    provides ease of development and quickly adds Zigbee wireless
+    connectivity to existing products.
+
+.. _fig-device-configuration:
+.. figure:: resources/fig-single-device-znp-configuration.png
+    :align: center
+
+    Single Device and ZNP Configuration

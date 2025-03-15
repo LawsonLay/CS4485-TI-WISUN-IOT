@@ -1,0 +1,521 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_a_e_s_e_c_b_c_c26_x4__s_8h" kind="file" language="C++">
+    <compoundname>AESECBCC26X4_s.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes refid="_crypto_c_c26_x4__s_8h" local="no">ti/drivers/crypto/CryptoCC26X4_s.h</includes>
+    <includes refid="_a_e_s_e_c_b_8h" local="no">ti/drivers/AESECB.h</includes>
+    <includes refid="_secure_callback_8h" local="no">ti/drivers/tfm/SecureCallback.h</includes>
+    <includes local="no">third_party/tfm/interface/include/psa/error.h</includes>
+    <includes local="no">third_party/tfm/interface/include/psa/service.h</includes>
+    <incdepgraph>
+      <node id="388">
+        <label>stdbool.h</label>
+      </node>
+      <node id="390">
+        <label>ti/drivers/AESCommon.h</label>
+        <link refid="_a_e_s_common_8h"/>
+        <childnode refid="388" relation="include">
+        </childnode>
+        <childnode refid="389" relation="include">
+        </childnode>
+        <childnode refid="385" relation="include">
+        </childnode>
+      </node>
+      <node id="385">
+        <label>stdint.h</label>
+      </node>
+      <node id="392">
+        <label>ti/drivers/tfm/SecureCallback.h</label>
+        <link refid="_secure_callback_8h"/>
+        <childnode refid="389" relation="include">
+        </childnode>
+        <childnode refid="385" relation="include">
+        </childnode>
+        <childnode refid="393" relation="include">
+        </childnode>
+      </node>
+      <node id="389">
+        <label>stddef.h</label>
+      </node>
+      <node id="387">
+        <label>ti/drivers/AESECB.h</label>
+        <link refid="_a_e_s_e_c_b_8h"/>
+        <childnode refid="388" relation="include">
+        </childnode>
+        <childnode refid="389" relation="include">
+        </childnode>
+        <childnode refid="385" relation="include">
+        </childnode>
+        <childnode refid="390" relation="include">
+        </childnode>
+        <childnode refid="391" relation="include">
+        </childnode>
+      </node>
+      <node id="393">
+        <label>ti/drivers/utils/List.h</label>
+        <link refid="_list_8h"/>
+        <childnode refid="385" relation="include">
+        </childnode>
+        <childnode refid="388" relation="include">
+        </childnode>
+        <childnode refid="389" relation="include">
+        </childnode>
+      </node>
+      <node id="386">
+        <label>ti/drivers/crypto/CryptoCC26X4_s.h</label>
+        <link refid="_crypto_c_c26_x4__s_8h"/>
+        <childnode refid="385" relation="include">
+        </childnode>
+      </node>
+      <node id="391">
+        <label>ti/drivers/cryptoutils/cryptokey/CryptoKey.h</label>
+        <link refid="_crypto_key_8h"/>
+        <childnode refid="385" relation="include">
+        </childnode>
+        <childnode refid="388" relation="include">
+        </childnode>
+      </node>
+      <node id="394">
+        <label>third_party/tfm/interface/include/psa/error.h</label>
+      </node>
+      <node id="384">
+        <label>AESECBCC26X4_s.h</label>
+        <link refid="_a_e_s_e_c_b_c_c26_x4__s_8h"/>
+        <childnode refid="385" relation="include">
+        </childnode>
+        <childnode refid="386" relation="include">
+        </childnode>
+        <childnode refid="387" relation="include">
+        </childnode>
+        <childnode refid="392" relation="include">
+        </childnode>
+        <childnode refid="394" relation="include">
+        </childnode>
+        <childnode refid="395" relation="include">
+        </childnode>
+      </node>
+      <node id="395">
+        <label>third_party/tfm/interface/include/psa/service.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="struct_a_e_s_e_c_b__s___secure_callback" prot="public">AESECB_s_SecureCallback</innerclass>
+    <innerclass refid="struct_a_e_s_e_c_b__s___construct_msg" prot="public">AESECB_s_ConstructMsg</innerclass>
+    <innerclass refid="struct_a_e_s_e_c_b__s___open_msg" prot="public">AESECB_s_OpenMsg</innerclass>
+    <innerclass refid="struct_a_e_s_e_c_b__s___callback_msg" prot="public">AESECB_s_CallbackMsg</innerclass>
+    <innerclass refid="struct_a_e_s_e_c_b__s___close_msg" prot="public">AESECB_s_CloseMsg</innerclass>
+    <innerclass refid="struct_a_e_s_e_c_b__s___operation_msg" prot="public">AESECB_s_OperationMsg</innerclass>
+    <innerclass refid="struct_a_e_s_e_c_b__s___setup_operation_msg" prot="public">AESECB_s_SetupOperationMsg</innerclass>
+    <innerclass refid="struct_a_e_s_e_c_b__s___cancel_operation_msg" prot="public">AESECB_s_CancelOperationMsg</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1ac6930f72c5d71ea6e437ee40385a6359" prot="public" static="no">
+        <name>AESECB_S_MSG_TYPE_CONSTRUCT</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a72d257ef99fb06b4c6c1e797d7d218dd" kindref="member">AESECB_S_MSG_TYPE</ref>(0U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="57" column="9" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1a89e862d9a1e78ff449add279cdf52ff8" prot="public" static="no">
+        <name>AESECB_S_MSG_TYPE_OPEN</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a72d257ef99fb06b4c6c1e797d7d218dd" kindref="member">AESECB_S_MSG_TYPE</ref>(1U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="58" column="9" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1acd91a398f13458d5f2c49d86195938df" prot="public" static="no">
+        <name>AESECB_S_MSG_TYPE_REGISTER_CALLBACK</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a72d257ef99fb06b4c6c1e797d7d218dd" kindref="member">AESECB_S_MSG_TYPE</ref>(2U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="59" column="9" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1a8187107fcec916ade4b6c04fd860092d" prot="public" static="no">
+        <name>AESECB_S_MSG_TYPE_CLOSE</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a72d257ef99fb06b4c6c1e797d7d218dd" kindref="member">AESECB_S_MSG_TYPE</ref>(3U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="60" column="9" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1a343bc4117208635f1e08ca5bf22335f0" prot="public" static="no">
+        <name>AESECB_S_MSG_TYPE_ONE_STEP_ENCRYPT</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a72d257ef99fb06b4c6c1e797d7d218dd" kindref="member">AESECB_S_MSG_TYPE</ref>(4U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="61" column="9" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1af8c813369f3ee780ed169f95c18ad5d0" prot="public" static="no">
+        <name>AESECB_S_MSG_TYPE_ONE_STEP_DECRYPT</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a72d257ef99fb06b4c6c1e797d7d218dd" kindref="member">AESECB_S_MSG_TYPE</ref>(5U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="62" column="9" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1a50f47d48c6c6d795815e66b1dcdc2a03" prot="public" static="no">
+        <name>AESECB_S_MSG_TYPE_SETUP_ENCRYPT</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a72d257ef99fb06b4c6c1e797d7d218dd" kindref="member">AESECB_S_MSG_TYPE</ref>(6U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="63" column="9" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1a46583d73172f60b45e2f3219283eed38" prot="public" static="no">
+        <name>AESECB_S_MSG_TYPE_SETUP_DECRYPT</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a72d257ef99fb06b4c6c1e797d7d218dd" kindref="member">AESECB_S_MSG_TYPE</ref>(7U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="64" column="9" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1a43e08aef7997fb8ca424e0ed2ffbfde5" prot="public" static="no">
+        <name>AESECB_S_MSG_TYPE_ADD_DATA</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a72d257ef99fb06b4c6c1e797d7d218dd" kindref="member">AESECB_S_MSG_TYPE</ref>(8U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="65" column="9" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1a4fb7a984b3b8561270560646c5062dff" prot="public" static="no">
+        <name>AESECB_S_MSG_TYPE_FINALIZE</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a72d257ef99fb06b4c6c1e797d7d218dd" kindref="member">AESECB_S_MSG_TYPE</ref>(9U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="66" column="9" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1a8fe80348957057ac4f12c9b4085828aa" prot="public" static="no">
+        <name>AESECB_S_MSG_TYPE_CANCEL_OPERATION</name>
+        <initializer><ref refid="_crypto_c_c26_x4__s_8h_1a72d257ef99fb06b4c6c1e797d7d218dd" kindref="member">AESECB_S_MSG_TYPE</ref>(10U)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="67" column="9" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1aa24676041c195e06fbd2375655369c5e" prot="public" static="no">
+        <name>CONFIG_AESECB_S_CONFIG_POOL_SIZE</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="74" column="13" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1af818468806def2469959676e4ab7e6c5" prot="public" static="no">
+        <name>AESECB_SECURE_CALLBACK_COUNT</name>
+        <initializer>(CONFIG_TI_DRIVERS_AESECB_COUNT + <ref refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1aa24676041c195e06fbd2375655369c5e" kindref="member">CONFIG_AESECB_S_CONFIG_POOL_SIZE</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="77" column="9" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1ac821e6147bfc0009d97c8b88d86e00a9" prot="public" static="no">
+        <type><ref refid="struct_a_e_s_e_c_b__s___operation_msg" kindref="compound">AESECB_s_OperationMsg</ref></type>
+        <definition>typedef AESECB_s_OperationMsg AESECB_s_OneStepOperationMsg</definition>
+        <argsstring></argsstring>
+        <name>AESECB_s_OneStepOperationMsg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="132" column="1" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1a0668982d893b1ae198c87239ff0c4430" prot="public" static="no">
+        <type><ref refid="struct_a_e_s_e_c_b__s___operation_msg" kindref="compound">AESECB_s_OperationMsg</ref></type>
+        <definition>typedef AESECB_s_OperationMsg AESECB_s_AddDataMsg</definition>
+        <argsstring></argsstring>
+        <name>AESECB_s_AddDataMsg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="140" column="1" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1a334b4a4e8c1b153fcaa4503b8f87e9d5" prot="public" static="no">
+        <type><ref refid="struct_a_e_s_e_c_b__s___operation_msg" kindref="compound">AESECB_s_OperationMsg</ref></type>
+        <definition>typedef AESECB_s_OperationMsg AESECB_s_FinalizeMsg</definition>
+        <argsstring></argsstring>
+        <name>AESECB_s_FinalizeMsg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="142" column="1" bodyfile="source/ti/drivers/aesecb/AESECBCC26X4_s.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1a0b0b270212a7c15ce668868962bc02b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>psa_status_t</type>
+        <definition>psa_status_t AESECB_s_handlePsaMsg</definition>
+        <argsstring>(psa_msg_t *msg)</argsstring>
+        <name>AESECB_s_handlePsaMsg</name>
+        <param>
+          <type>psa_msg_t *</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Handles PSA messages for AES ECB secure driver. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This function should be called by secure partition thread only.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to PSA message</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>PSA_SUCCESS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if successful. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>PSA_ERROR_PROGRAMMER_ERROR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if any args point to secure addresses. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="159" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_a_e_s_e_c_b_c_c26_x4__s_8h_1a39dc17d7d98f15e2c88d142ed5b4add1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AESECB_s_init</definition>
+        <argsstring>(void)</argsstring>
+        <name>AESECB_s_init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Initializes the AES ECB secure driver. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This function should be called by secure partition thread only. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h" line="166" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2022-2023,<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>-<sp/>http://www.ti.com</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>*<sp/><sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>Texas<sp/>Instruments<sp/>Incorporated<sp/>nor<sp/>the<sp/>names<sp/>of</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>its<sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>from<sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>PURPOSE<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>CONTRIBUTORS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>EXEMPLARY,<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>OR<sp/>BUSINESS<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>WHETHER<sp/>IN<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>OTHERWISE)<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ti_drivers_aesecb_AESECBCC26X4_s__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ti_drivers_aesecb_AESECBCC26X4_s__include</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_crypto_c_c26_x4__s_8h" kindref="compound">ti/drivers/crypto/CryptoCC26X4_s.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_a_e_s_e_c_b_8h" kindref="compound">ti/drivers/AESECB.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_secure_callback_8h" kindref="compound">ti/drivers/tfm/SecureCallback.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;third_party/tfm/interface/include/psa/error.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;third_party/tfm/interface/include/psa/service.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(TFM_BUILD)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;ti_drivers_config.h&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="comment">/*<sp/>Sysconfig<sp/>generated<sp/>header<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/>*<sp/>AES<sp/>ECB<sp/>secure<sp/>message<sp/>types</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1ac6930f72c5d71ea6e437ee40385a6359" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AESECB_S_MSG_TYPE_CONSTRUCT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AESECB_S_MSG_TYPE(0U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a89e862d9a1e78ff449add279cdf52ff8" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AESECB_S_MSG_TYPE_OPEN<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AESECB_S_MSG_TYPE(1U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1acd91a398f13458d5f2c49d86195938df" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AESECB_S_MSG_TYPE_REGISTER_CALLBACK<sp/>AESECB_S_MSG_TYPE(2U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a8187107fcec916ade4b6c04fd860092d" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AESECB_S_MSG_TYPE_CLOSE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AESECB_S_MSG_TYPE(3U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a343bc4117208635f1e08ca5bf22335f0" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AESECB_S_MSG_TYPE_ONE_STEP_ENCRYPT<sp/><sp/>AESECB_S_MSG_TYPE(4U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1af8c813369f3ee780ed169f95c18ad5d0" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AESECB_S_MSG_TYPE_ONE_STEP_DECRYPT<sp/><sp/>AESECB_S_MSG_TYPE(5U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a50f47d48c6c6d795815e66b1dcdc2a03" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AESECB_S_MSG_TYPE_SETUP_ENCRYPT<sp/><sp/><sp/><sp/><sp/>AESECB_S_MSG_TYPE(6U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a46583d73172f60b45e2f3219283eed38" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AESECB_S_MSG_TYPE_SETUP_DECRYPT<sp/><sp/><sp/><sp/><sp/>AESECB_S_MSG_TYPE(7U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a43e08aef7997fb8ca424e0ed2ffbfde5" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AESECB_S_MSG_TYPE_ADD_DATA<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AESECB_S_MSG_TYPE(8U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a4fb7a984b3b8561270560646c5062dff" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AESECB_S_MSG_TYPE_FINALIZE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AESECB_S_MSG_TYPE(9U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a8fe80348957057ac4f12c9b4085828aa" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AESECB_S_MSG_TYPE_CANCEL_OPERATION<sp/><sp/>AESECB_S_MSG_TYPE(10U)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/>*<sp/>Config<sp/>pool<sp/>size<sp/>determines<sp/>how<sp/>many<sp/>dynamic<sp/>driver<sp/>instances<sp/>can<sp/>be<sp/>created</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/>*<sp/>by<sp/>the<sp/>non-secure<sp/>client<sp/>using<sp/>AESECB_construct().</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>CONFIG_AESECB_S_CONFIG_POOL_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1aa24676041c195e06fbd2375655369c5e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/>CONFIG_AESECB_S_CONFIG_POOL_SIZE<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1af818468806def2469959676e4ab7e6c5" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>AESECB_SECURE_CALLBACK_COUNT<sp/>(CONFIG_TI_DRIVERS_AESECB_COUNT<sp/>+<sp/>CONFIG_AESECB_S_CONFIG_POOL_SIZE)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/>*<sp/>=========<sp/>AES<sp/>ECB<sp/>Secure<sp/>Callback<sp/>struct<sp/>=========</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/>*<sp/>Non-secure<sp/>clients<sp/>must<sp/>register<sp/>their<sp/>callback<sp/>after<sp/>opening<sp/>or</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/>*<sp/>constructing<sp/>a<sp/>driver<sp/>instance<sp/>with<sp/>blocking<sp/>or<sp/>callback<sp/>return<sp/>behavior.</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="struct_a_e_s_e_c_b__s___secure_callback" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="86" refid="struct_a_e_s_e_c_b__s___secure_callback_1a30e09ce9ed827bd7208736d74b8b77e6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_secure_callback___object" kindref="compound">SecureCallback_Object</ref><sp/><ref refid="struct_a_e_s_e_c_b__s___secure_callback_1a30e09ce9ed827bd7208736d74b8b77e6" kindref="member">object</ref>;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>AES<sp/>ECB<sp/>callback<sp/>fxn<sp/>parameters<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="struct_a_e_s_e_c_b__s___secure_callback_1a50ef342b08510291dba14dcf6d25d26c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_a_e_s_common___config" kindref="compound">AESECB_Handle</ref><sp/><ref refid="struct_a_e_s_e_c_b__s___secure_callback_1a50ef342b08510291dba14dcf6d25d26c" kindref="member">handle</ref>;</highlight></codeline>
+<codeline lineno="89" refid="struct_a_e_s_e_c_b__s___secure_callback_1ad5a4f882f7a6d28c7923da5ee044bec4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>int_fast16_t<sp/><ref refid="struct_a_e_s_e_c_b__s___secure_callback_1ad5a4f882f7a6d28c7923da5ee044bec4" kindref="member">returnValue</ref>;</highlight></codeline>
+<codeline lineno="90" refid="struct_a_e_s_e_c_b__s___secure_callback_1a017787c9aef03679843b49bcd0b0016f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_a_e_s_e_c_b___operation" kindref="compound">AESECB_Operation</ref><sp/>*<ref refid="struct_a_e_s_e_c_b__s___secure_callback_1a017787c9aef03679843b49bcd0b0016f" kindref="member">operation</ref>;</highlight></codeline>
+<codeline lineno="91" refid="struct_a_e_s_e_c_b__s___secure_callback_1ae7e8e3cb61b11f1e534616844d4a05ce" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_a_e_s_e_c_b_8h_1aba58ffed04918dd60cf61212e2adb8d8" kindref="member">AESECB_OperationType</ref><sp/><ref refid="struct_a_e_s_e_c_b__s___secure_callback_1ae7e8e3cb61b11f1e534616844d4a05ce" kindref="member">operationType</ref>;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">}<sp/><ref refid="struct_a_e_s_e_c_b__s___secure_callback" kindref="compound">AESECB_s_SecureCallback</ref>;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/>*<sp/>=========<sp/>AES<sp/>ECB<sp/>Secure<sp/>Message<sp/>Structs<sp/>=========</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*<sp/>These<sp/>secure<sp/>message<sp/>structs<sp/>correspond<sp/>to<sp/>the<sp/>secure<sp/>message<sp/>types<sp/>defined</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/>*<sp/>above.<sp/>Together,<sp/>they<sp/>are<sp/>used<sp/>by<sp/>non-secure<sp/>client<sp/>to<sp/>make<sp/>PSA<sp/>calls<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*<sp/>AES<sp/>ECB<sp/>secure<sp/>service.<sp/>There<sp/>is<sp/>a<sp/>single<sp/>input<sp/>vector<sp/>for<sp/>the<sp/>PSA<sp/>call</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/>*<sp/>which<sp/>is<sp/>a<sp/>pointer<sp/>to<sp/>secure<sp/>message<sp/>struct.<sp/>If<sp/>the<sp/>underlying<sp/>function</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/>*<sp/>has<sp/>a<sp/>return<sp/>value,<sp/>there<sp/>is<sp/>a<sp/>single<sp/>output<sp/>vector<sp/>which<sp/>is<sp/>a<sp/>pointer<sp/>to</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/>*<sp/>storage<sp/>for<sp/>the<sp/>return<sp/>value.</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103" refid="struct_a_e_s_e_c_b__s___construct_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="105" refid="struct_a_e_s_e_c_b__s___construct_msg_1a22de40804845632c3aa84122c615abd2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_a_e_s_common___config" kindref="compound">AESECB_Config</ref><sp/>*<ref refid="struct_a_e_s_e_c_b__s___construct_msg_1a22de40804845632c3aa84122c615abd2" kindref="member">config</ref>;</highlight></codeline>
+<codeline lineno="106" refid="struct_a_e_s_e_c_b__s___construct_msg_1a538017606bbd2d3207c8fd0e44da0faf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_a_e_s_e_c_b___params" kindref="compound">AESECB_Params</ref><sp/>*<ref refid="struct_a_e_s_e_c_b__s___construct_msg_1a538017606bbd2d3207c8fd0e44da0faf" kindref="member">params</ref>;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal">}<sp/><ref refid="struct_a_e_s_e_c_b__s___construct_msg" kindref="compound">AESECB_s_ConstructMsg</ref>;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109" refid="struct_a_e_s_e_c_b__s___open_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="111" refid="struct_a_e_s_e_c_b__s___open_msg_1ab6e753c2329b553c391297c3c1ae27be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint_least8_t<sp/><ref refid="struct_a_e_s_e_c_b__s___open_msg_1ab6e753c2329b553c391297c3c1ae27be" kindref="member">index</ref>;</highlight></codeline>
+<codeline lineno="112" refid="struct_a_e_s_e_c_b__s___open_msg_1a685a789e0f1e94aa945599b471fb3274" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_a_e_s_e_c_b___params" kindref="compound">AESECB_Params</ref><sp/>*<ref refid="struct_a_e_s_e_c_b__s___open_msg_1a685a789e0f1e94aa945599b471fb3274" kindref="member">params</ref>;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal">}<sp/><ref refid="struct_a_e_s_e_c_b__s___open_msg" kindref="compound">AESECB_s_OpenMsg</ref>;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115" refid="struct_a_e_s_e_c_b__s___callback_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="117" refid="struct_a_e_s_e_c_b__s___callback_msg_1ac860e18143df5c4ee94d67de99a2bc19" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_a_e_s_common___config" kindref="compound">AESECB_Handle</ref><sp/><ref refid="struct_a_e_s_e_c_b__s___callback_msg_1ac860e18143df5c4ee94d67de99a2bc19" kindref="member">handle</ref>;</highlight></codeline>
+<codeline lineno="118" refid="struct_a_e_s_e_c_b__s___callback_msg_1a248f3a271fe9451b11ab9d0aef492f51" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_a_e_s_e_c_b__s___secure_callback" kindref="compound">AESECB_s_SecureCallback</ref><sp/>*<ref refid="struct_a_e_s_e_c_b__s___callback_msg_1a248f3a271fe9451b11ab9d0aef492f51" kindref="member">callback</ref>;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal">}<sp/><ref refid="struct_a_e_s_e_c_b__s___callback_msg" kindref="compound">AESECB_s_CallbackMsg</ref>;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121" refid="struct_a_e_s_e_c_b__s___close_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="123" refid="struct_a_e_s_e_c_b__s___close_msg_1a8a71ac44671c0e66c940056ac8eef1d1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_a_e_s_common___config" kindref="compound">AESECB_Handle</ref><sp/><ref refid="struct_a_e_s_e_c_b__s___close_msg_1a8a71ac44671c0e66c940056ac8eef1d1" kindref="member">handle</ref>;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal">}<sp/><ref refid="struct_a_e_s_e_c_b__s___close_msg" kindref="compound">AESECB_s_CloseMsg</ref>;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126" refid="struct_a_e_s_e_c_b__s___operation_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="128" refid="struct_a_e_s_e_c_b__s___operation_msg_1a85696fe20f73748d014946397211d913" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_a_e_s_common___config" kindref="compound">AESECB_Handle</ref><sp/><ref refid="struct_a_e_s_e_c_b__s___operation_msg_1a85696fe20f73748d014946397211d913" kindref="member">handle</ref>;</highlight></codeline>
+<codeline lineno="129" refid="struct_a_e_s_e_c_b__s___operation_msg_1a08501d062db9b1ec9ca129041ac32d5b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_a_e_s_e_c_b___operation" kindref="compound">AESECB_Operation</ref><sp/>*<ref refid="struct_a_e_s_e_c_b__s___operation_msg_1a08501d062db9b1ec9ca129041ac32d5b" kindref="member">operation</ref>;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal">}<sp/><ref refid="struct_a_e_s_e_c_b__s___operation_msg" kindref="compound">AESECB_s_OperationMsg</ref>;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1ac821e6147bfc0009d97c8b88d86e00a9" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="struct_a_e_s_e_c_b__s___operation_msg" kindref="compound">AESECB_s_OperationMsg</ref><sp/><ref refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1ac821e6147bfc0009d97c8b88d86e00a9" kindref="member">AESECB_s_OneStepOperationMsg</ref>;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134" refid="struct_a_e_s_e_c_b__s___setup_operation_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="136" refid="struct_a_e_s_e_c_b__s___setup_operation_msg_1aaefd242efa64f2b9a043fe6430fd692c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_a_e_s_common___config" kindref="compound">AESECB_Handle</ref><sp/><ref refid="struct_a_e_s_e_c_b__s___setup_operation_msg_1aaefd242efa64f2b9a043fe6430fd692c" kindref="member">handle</ref>;</highlight></codeline>
+<codeline lineno="137" refid="struct_a_e_s_e_c_b__s___setup_operation_msg_1abe58c3877b33a918c1c2533b046e062d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="struct_crypto_key" kindref="compound">CryptoKey</ref><sp/>*<ref refid="struct_a_e_s_e_c_b__s___setup_operation_msg_1abe58c3877b33a918c1c2533b046e062d" kindref="member">key</ref>;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal">}<sp/><ref refid="struct_a_e_s_e_c_b__s___setup_operation_msg" kindref="compound">AESECB_s_SetupOperationMsg</ref>;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a0668982d893b1ae198c87239ff0c4430" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="struct_a_e_s_e_c_b__s___operation_msg" kindref="compound">AESECB_s_OperationMsg</ref><sp/><ref refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a0668982d893b1ae198c87239ff0c4430" kindref="member">AESECB_s_AddDataMsg</ref>;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142" refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a334b4a4e8c1b153fcaa4503b8f87e9d5" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="struct_a_e_s_e_c_b__s___operation_msg" kindref="compound">AESECB_s_OperationMsg</ref><sp/><ref refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a334b4a4e8c1b153fcaa4503b8f87e9d5" kindref="member">AESECB_s_FinalizeMsg</ref>;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144" refid="struct_a_e_s_e_c_b__s___cancel_operation_msg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="146" refid="struct_a_e_s_e_c_b__s___cancel_operation_msg_1a1eb9d996fb47717ab2d3ee20d0d2a5e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_a_e_s_common___config" kindref="compound">AESECB_Handle</ref><sp/><ref refid="struct_a_e_s_e_c_b__s___cancel_operation_msg_1a1eb9d996fb47717ab2d3ee20d0d2a5e3" kindref="member">handle</ref>;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal">}<sp/><ref refid="struct_a_e_s_e_c_b__s___cancel_operation_msg" kindref="compound">AESECB_s_CancelOperationMsg</ref>;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal">psa_status_t<sp/><ref refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a0b0b270212a7c15ce668868962bc02b1" kindref="member">AESECB_s_handlePsaMsg</ref>(psa_msg_t<sp/>*msg);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_a_e_s_e_c_b_c_c26_x4__s_8h_1a39dc17d7d98f15e2c88d142ed5b4add1" kindref="member">AESECB_s_init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ti_drivers_aesecb_AESECBCC26X4_s__include<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="source/ti/drivers/aesecb/AESECBCC26X4_s.h"/>
+  </compounddef>
+</doxygen>

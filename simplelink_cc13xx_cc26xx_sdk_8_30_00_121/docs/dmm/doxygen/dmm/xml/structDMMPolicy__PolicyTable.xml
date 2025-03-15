@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="structDMMPolicy__PolicyTable" kind="struct" language="C++" prot="public">
+    <compoundname>DMMPolicy_PolicyTable</compoundname>
+    <includes refid="dmm__policy_8h" local="no">dmm_policy.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structDMMPolicy__PolicyTable_1a6fcf9777e72f183c3eb201fca4f4b38a" prot="public" static="no" mutable="no">
+        <type><ref refid="dmm__policy_8h_1a9b3ff96be7e4b8668995e1359f44789f" kindref="member">DMMPolicy_StackRole</ref></type>
+        <definition>DMMPolicy_StackRole DMMPolicy_PolicyTable::stackRole[2]</definition>
+        <argsstring>[2]</argsstring>
+        <name>stackRole</name>
+        <briefdescription>
+<para>policy roles for policy entry </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="268" column="1" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structDMMPolicy__PolicyTable_1a74746b904ba250b40116979692f1c12f" prot="public" static="no" mutable="no">
+        <type><ref refid="structDMMPolicy__Policy" kindref="compound">DMMPolicy_Policy</ref> *</type>
+        <definition>DMMPolicy_Policy* DMMPolicy_PolicyTable::policy</definition>
+        <argsstring></argsstring>
+        <name>policy</name>
+        <briefdescription>
+<para>pointer to the policy </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="269" column="1" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="269" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structDMMPolicy__PolicyTable_1a43abc5e6ff4d3fa15c70ff16398f46ee" prot="public" static="no" mutable="no">
+        <type><ref refid="structDMMPolicy__StackCmdIndexTable" kindref="compound">DMMPolicy_StackCmdIndexTable</ref> *</type>
+        <definition>DMMPolicy_StackCmdIndexTable* DMMPolicy_PolicyTable::indexTable</definition>
+        <argsstring></argsstring>
+        <name>indexTable</name>
+        <briefdescription>
+<para>reserved for future use </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/dmm/dmm_policy.h" line="270" column="1" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="270" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>policy table entry </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="20">
+        <label>DMMPolicy_State</label>
+        <link refid="structDMMPolicy__State"/>
+      </node>
+      <node id="19">
+        <label>DMMPolicy_Policy</label>
+        <link refid="structDMMPolicy__Policy"/>
+        <childnode refid="20" relation="usage">
+          <edgelabel>appState</edgelabel>
+        </childnode>
+      </node>
+      <node id="17">
+        <label>DMMPolicy_PolicyTable</label>
+        <link refid="structDMMPolicy__PolicyTable"/>
+        <childnode refid="18" relation="usage">
+          <edgelabel>indexTable</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>policy</edgelabel>
+        </childnode>
+      </node>
+      <node id="18">
+        <label>DMMPolicy_StackCmdIndexTable</label>
+        <link refid="structDMMPolicy__StackCmdIndexTable"/>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/dmm/dmm_policy.h" line="267" column="1" bodyfile="source/ti/dmm/dmm_policy.h" bodystart="266" bodyend="271"/>
+    <listofallmembers>
+      <member refid="structDMMPolicy__PolicyTable_1a43abc5e6ff4d3fa15c70ff16398f46ee" prot="public" virt="non-virtual"><scope>DMMPolicy_PolicyTable</scope><name>indexTable</name></member>
+      <member refid="structDMMPolicy__PolicyTable_1a74746b904ba250b40116979692f1c12f" prot="public" virt="non-virtual"><scope>DMMPolicy_PolicyTable</scope><name>policy</name></member>
+      <member refid="structDMMPolicy__PolicyTable_1a6fcf9777e72f183c3eb201fca4f4b38a" prot="public" virt="non-virtual"><scope>DMMPolicy_PolicyTable</scope><name>stackRole</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

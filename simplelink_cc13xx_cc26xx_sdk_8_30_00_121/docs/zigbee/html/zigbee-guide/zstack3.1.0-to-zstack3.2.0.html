@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Z-Stack 3.1.0 to Z-Stack 3.2.0 &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User&#39;s Guide
+ 8.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Z-Stack 3.0.x to Z-Stack 3.1.0" href="zstack3.0.x-to-zstack3.1.0.html" />
+    <link rel="prev" title="Z-Stack 3.2.0 to Z-Stack 3.3.0" href="zstack3.2.0-to-zstack3.3.0.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug zigbee-guide zstack3.1.0-to-zstack3.2.0";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+
+          </a>
+              <div class="version">
+                8.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/overview.html">SimpleLink CC13xx/CC26xx SDK Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/developing_zigbee_applications.html">Developing Zigbee Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zigbee-ota-index.html">Zigbee Over-The-Air Firmware Upgrade</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/packet_sniffer.html">Packet Sniffer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="migration_guide.html">Migration Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="migration_guide.html#updating-from-previous-sdks">Updating from previous SDKs</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="migration_guide.html#porting-guides">Porting Guides</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="zstack3.6.0-to-zstack4.3.0.html">Z-Stack 3.6.0+ to Z-Stack 4.3.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zstack3.4.0-to-zstack3.5.0.html">Z-Stack 3.4.0 to Z-Stack 3.5.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zstack3.2.0-to-zstack3.3.0.html">Z-Stack 3.2.0 to Z-Stack 3.3.0</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Z-Stack 3.1.0 to Z-Stack 3.2.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zstack3.0.x-to-zstack3.1.0.html">Z-Stack 3.0.x to Z-Stack 3.1.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zstack1.2.2a-cc253x-to-zstack3.1.0.html">Z-Stack 1.2.2a (CC253x) to Z-Stack 3.1.0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zstack1.2.2a-cc26x0-to-zstack3.1.0.html">Z-Stack 1.2.2a (CC26x0) to Z-Stack 3.1.0</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="migration_guide.html#migration-guides">Migration Guides</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="migration_guide.html">Migration Guide</a> &raquo;</li>
+      <li>Z-Stack 3.1.0 to Z-Stack 3.2.0</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="z-stack-3-1-0-to-z-stack-3-2-0">
+<span id="sec-zstack3-1-0-to-stack3-2-0"></span><h1>Z-Stack 3.1.0 to Z-Stack 3.2.0<a class="headerlink" href="#z-stack-3-1-0-to-z-stack-3-2-0" title="Permalink to this headline">¶</a></h1>
+<p>This section will describe a way to migrate a project from Z-Stack 3.1.0 to
+a Z-Stack 3.2.0 project.</p>
+<p>For this guide, <em>samplelight</em> from Z-Stack 3.1.0 will be ported
+over to Z-Stack 3.2.0.  The two releases have minor differences mostly
+pertaining to bug fixes listed in the Z-Stack release notes, however one change to note
+is Z-Stack’s transition from a SDK Plugin to being a part of the SDK itself.
+The recommended approach is to start with a Z-Stack 3.1.0 project that contains
+the same base application as the porting target project and merge any custom functionality</p>
+<ol class="arabic">
+<li><p>Choose a Z-Stack 3.2.0 example project that contains your target project’s base
+functionality.  For reference and use in this example, <em>zc_light</em> from
+simplelink_&lt;device&gt;_sdk_2_30_00_xx\examples\rtos\CC13xx or CC26xx_LAUNCHXL\zstack
+is chosen as a starting point.</p></li>
+<li><p>No changes are required for the Z-Stack 3.2.0 <code class="docutils literal notranslate"><span class="pre">zcl_samplelight_data.c</span></code> file unless
+clusters, attributes, or simple descriptors were added or altered in the Z-Stack 3.1.0 project.
+Note that <code class="docutils literal notranslate"><span class="pre">SAMPLELIGHT_ZCLVERSION</span></code> has been redefined as <code class="docutils literal notranslate"><span class="pre">BASIC_ZCL_VERSION</span></code>.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">zcl_samplelight.h</span></code>, User Interface and Green Power events have been redefined:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// UI Events</span>
+<span class="cp">#define SAMPLEAPP_UI_AUTO_REFRESH_EVT         0x0010</span>
+<span class="cp">#define SAMPLEAPP_UI_INPUT_EVT                0x0040</span>
+<span class="cp">#define SAMPLEAPP_PROCESS_UI_GPP_EVT          0x0080</span>
+
+<span class="c1">// Green Power Events</span>
+<span class="cp">#define SAMPLEAPP_PROCESS_GP_DATA_SEND_EVT              0x0100</span>
+<span class="cp">#define SAMPLEAPP_PROCESS_GP_EXPIRE_DUPLICATE_EVT       0x0200</span>
+<span class="cp">#define SAMPLEAPP_PROCESS_GP_TEMP_MASTER_EVT            0x0400</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">macCryptoDriverTable</span></code> is used instread of <code class="docutils literal notranslate"><span class="pre">cryptoDriverTable</span></code> in <code class="docutils literal notranslate"><span class="pre">main.c</span></code></p></li>
+</ol>
+<p>The following items specifically concern <code class="docutils literal notranslate"><span class="pre">zcl_samplelight.c</span></code>:</p>
+<ol class="arabic">
+<li><p>Include <code class="docutils literal notranslate"><span class="pre">timer.h</span></code> has been renamed <code class="docutils literal notranslate"><span class="pre">util_timer.h</span></code> and <code class="docutils literal notranslate"><span class="pre">string.h</span></code> is added by default</p></li>
+<li><p>User interface functions have changed due to deprecated LCD functionality:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">zclSampleLight_UiUpdateLcd</span></code> is now <code class="docutils literal notranslate"><span class="pre">zclSampleLight_UiRefresh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UI_Init</span></code> and events in <code class="docutils literal notranslate"><span class="pre">zclSampleLight_process_loop</span></code> have updated to reflect the new definitions from <code class="docutils literal notranslate"><span class="pre">zcl_samplelight.h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UI_UpdateLcd</span></code> is now <code class="docutils literal notranslate"><span class="pre">UI_Refresh</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p>3. Green Power Sink support can be optionally added by defining
+<code class="docutils literal notranslate"><span class="pre">ENABLE_GREENPOWER_COMBO_BASIC</span></code> and including several additions to the application code:</p>
+<blockquote>
+<div><ul>
+<li><p>Includes and definitions</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifdef ENABLE_GREENPOWER_COMBO_BASIC</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gp_sink.h&quot;</span><span class="cp"></span>
+<span class="cp">#define UI_STATE_GP_SINK_SET_COMMISSIONING  2</span>
+<span class="k">static</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">zclSampleLight_SetSinkCommissioningMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_setGPSinkCommissioningMode</span><span class="p">(</span><span class="n">uint16</span><span class="w"> </span><span class="n">keys</span><span class="p">);</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_GPSink_Toggle</span><span class="p">(</span><span class="n">zclGpNotification_t</span><span class="w"> </span><span class="o">*</span><span class="n">zclGpNotification</span><span class="p">);</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_GPSink_On</span><span class="p">(</span><span class="n">zclGpNotification_t</span><span class="w"> </span><span class="o">*</span><span class="n">zclGpNotification</span><span class="p">);</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_GPSink_Off</span><span class="p">(</span><span class="n">zclGpNotification_t</span><span class="w"> </span><span class="o">*</span><span class="n">zclGpNotification</span><span class="p">);</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_GPSink_Identify</span><span class="p">(</span><span class="n">zclGpNotification_t</span><span class="w"> </span><span class="o">*</span><span class="n">zclGpNotification</span><span class="p">);</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">uiState_t</span><span class="w"> </span><span class="n">zclSampleLight_UiStatesMain</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/*  UI_STATE_BACK_FROM_APP_MENU        */</span><span class="w">   </span><span class="p">{</span><span class="n">UI_STATE_DEFAULT_MOVE</span><span class="p">,</span><span class="w">       </span><span class="n">UI_STATE_GP_SINK_SET_COMMISSIONING</span><span class="p">,</span><span class="w"> </span><span class="n">UI_KEY_SW_5_PRESSED</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">UI_ActionBackFromAppMenu</span><span class="p">},</span><span class="w"> </span><span class="c1">//do not change this line, except for the second item, which should point to the last entry in this menu</span>
+<span class="w">  </span><span class="cm">/*  UI_STATE_TOGGLE_LIGHT              */</span><span class="w">   </span><span class="p">{</span><span class="n">UI_STATE_DEFAULT_MOVE</span><span class="p">,</span><span class="w">       </span><span class="n">UI_STATE_DEFAULT_MOVE</span><span class="p">,</span><span class="w">              </span><span class="n">UI_KEY_SW_5_PRESSED</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">zclSampleLight_UiActionToggleLight</span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/*  UI_STATE_GP_SINK_SET_COMMISSIONING */</span><span class="w">   </span><span class="p">{</span><span class="n">UI_STATE_BACK_FROM_APP_MENU</span><span class="p">,</span><span class="w"> </span><span class="n">UI_STATE_DEFAULT_MOVE</span><span class="p">,</span><span class="w">              </span><span class="n">UI_KEY_SW_5_PRESSED</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">zclSampleLight_setGPSinkCommissioningMode</span><span class="p">},</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">sGpSink</span><span class="p">[]</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;GREEN POWER SINK&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">sGpSinkCommissioning</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot; COMMISSIONING  &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">sGpSinkEnabled</span><span class="p">[]</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&lt;   ENABLED    &gt;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">sGpSinkDisabled</span><span class="p">[]</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&lt;   DISABLED   &gt;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="cp">#else</span>
+<span class="cp">#define UI_STATE_TOGGLE_LIGHT 1 </span><span class="c1">//UI_STATE_BACK_FROM_APP_MENU is item #0, so app item numbers should start from 1</span>
+<span class="k">const</span><span class="w"> </span><span class="n">uiState_t</span><span class="w"> </span><span class="n">zclSampleLight_UiStatesMain</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/*  UI_STATE_BACK_FROM_APP_MENU  */</span><span class="w">   </span><span class="p">{</span><span class="n">UI_STATE_DEFAULT_MOVE</span><span class="p">,</span><span class="w">       </span><span class="n">UI_STATE_TOGGLE_LIGHT</span><span class="p">,</span><span class="w">  </span><span class="n">UI_KEY_SW_5_PRESSED</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">UI_ActionBackFromAppMenu</span><span class="p">},</span><span class="w"> </span><span class="c1">//do not change this line, except for the second item, which should point to the last entry in this menu</span>
+<span class="w">  </span><span class="cm">/*  UI_STATE_TOGGLE_LIGHT        */</span><span class="w">   </span><span class="p">{</span><span class="n">UI_STATE_BACK_FROM_APP_MENU</span><span class="p">,</span><span class="w"> </span><span class="n">UI_STATE_DEFAULT_MOVE</span><span class="p">,</span><span class="w">  </span><span class="n">UI_KEY_SW_5_PRESSED</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">zclSampleLight_UiActionToggleLight</span><span class="p">},</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</li>
+<li><p>Application Callbacks</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#if defined (ENABLE_GREENPOWER_COMBO_BASIC)</span>
+<span class="n">GpSink_AppCallbacks_t</span><span class="w"> </span><span class="n">zclSampleLight_GpSink_AppCallbacks</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="cp">#ifdef ZCL_IDENTIFY</span>
+<span class="w">    </span><span class="n">zclSampleLight_GPSink_Identify</span><span class="p">,</span><span class="w">     </span><span class="c1">//IdentifyCmd;</span>
+<span class="cp">#endif</span>
+<span class="cp">#ifdef ZCL_SCENES</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//RecallSceneCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//StoreSceneCmd;</span>
+<span class="cp">#endif</span>
+<span class="cp">#ifdef ZCL_ON_OFF</span>
+<span class="w">    </span><span class="n">zclSampleLight_GPSink_Off</span><span class="p">,</span><span class="w">          </span><span class="c1">//OffCmd;</span>
+<span class="w">    </span><span class="n">zclSampleLight_GPSink_On</span><span class="p">,</span><span class="w">           </span><span class="c1">//OnCmd;</span>
+<span class="w">    </span><span class="n">zclSampleLight_GPSink_Toggle</span><span class="p">,</span><span class="w">       </span><span class="c1">//ToggleCmd;</span>
+<span class="cp">#endif</span>
+<span class="cp">#ifdef ZCL_LEVEL_CTRL</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//LevelControlStopCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MoveUpCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MoveDownCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//StepUpCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//StepDownCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MoveUpWithOnOffCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MoveDownWithOnOffCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//StepUpWithOnOffCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//StepDownWithOnOffCmd;</span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MoveHueStopCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MoveHueUpCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MoveHueDownCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//StepHueUpCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//StepHueDownCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MoveSaturationStopCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MoveSaturationUpCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MoveSaturationDownCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//StepSaturationUpCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//StepSaturationDownCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MoveColorCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//StepColorCmd;</span>
+<span class="cp">#ifdef ZCL_DOORLOCK</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//LockDoorCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//UnlockDoorCmd;</span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//AttributeReportingCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MfrSpecificReportingCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MultiClusterReportingCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//MfrSpecificMultiReportingCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//RequestAttributesCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//ReadAttributeRspCmd;</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                               </span><span class="c1">//zclTunnelingCmd;</span>
+<span class="p">};</span><span class="w"></span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</li>
+<li><p>Endpoint registration and initialization in <code class="docutils literal notranslate"><span class="pre">zclSampleLight_Init</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#if defined (ENABLE_GREENPOWER_COMBO_BASIC)</span>
+<span class="w">  </span><span class="n">zclGp_RegisterCBForGPDCommand</span><span class="p">(</span><span class="o">&amp;</span><span class="n">zclSampleLight_GpSink_AppCallbacks</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">gp_endpointInit</span><span class="p">(</span><span class="n">zclSampleLight_Entity</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zstackmsg_CmdIDs_GP_COMMISSIONING_MODE_IND</span></code> case in <code class="docutils literal notranslate"><span class="pre">zclSampleLight_processZStackMsgs</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifdef BOARD_DISPLAY_USE_UART</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">zstackmsg_CmdIDs_GP_COMMISSIONING_MODE_IND</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">zstackmsg_gpCommissioningModeInd_t</span><span class="w"> </span><span class="o">*</span><span class="n">pInd</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">pInd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">zstackmsg_gpCommissioningModeInd_t</span><span class="o">*</span><span class="p">)</span><span class="n">pMsg</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">UI_SetGPPCommissioningMode</span><span class="p">(</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">pInd</span><span class="o">-&gt;</span><span class="n">Req</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</li>
+<li><p>UI Commissioning lines in <code class="docutils literal notranslate"><span class="pre">zclSampleLight_UiRefresh</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_UiRefresh</span><span class="p">(</span><span class="n">uint8</span><span class="w"> </span><span class="n">UiState</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="cp">#if defined (BOARD_DISPLAY_USE_UART)</span>
+<span class="cp">#if defined (ENABLE_GREENPOWER_COMBO_BASIC)</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">UiState</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">UI_STATE_GP_SINK_SET_COMMISSIONING</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">sGpSink</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">sGpSinkCommissioning</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">zclSampleLight_SetSinkCommissioningMode</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">sGpSinkEnabled</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">sGpSinkDisabled</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="cp">#ifdef ZCL_LEVEL_CTRL</span>
+<span class="w">          </span><span class="n">zclHA_uint8toa</span><span class="p">(</span><span class="w"> </span><span class="n">zclSampleLight_LevelCurrentLevel</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sLightLevel</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">sLightLevel</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="cp">#endif </span><span class="c1">// ZCL_LEVEL_CTRL</span>
+<span class="w">          </span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)(</span><span class="n">zclSampleLight_OnOff</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nl">sLightOn</span> <span class="p">:</span><span class="w"> </span><span class="n">sLightOff</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&lt; TOGGLE LIGHT &gt;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="cp">#else</span>
+<span class="w">    </span><span class="cp">#ifdef ZCL_LEVEL_CTRL</span>
+<span class="w">      </span><span class="n">zclHA_uint8toa</span><span class="p">(</span><span class="w"> </span><span class="n">zclSampleLight_LevelCurrentLevel</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sLightLevel</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">sLightLevel</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="cp">#endif </span><span class="c1">// ZCL_LEVEL_CTRL</span>
+<span class="w">      </span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)(</span><span class="n">zclSampleLight_OnOff</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nl">sLightOn</span> <span class="p">:</span><span class="w"> </span><span class="n">sLightOff</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&lt; TOGGLE LIGHT &gt;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="cp">#endif</span>
+<span class="cp">#endif</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+<li><p>Local functions</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#if defined (ENABLE_GREENPOWER_COMBO_BASIC)</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_setGPSinkCommissioningMode</span><span class="p">(</span><span class="n">uint16</span><span class="w"> </span><span class="n">keys</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">zclSampleLight_SetSinkCommissioningMode</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">gp_SetCommissioningMode</span><span class="p">(</span><span class="n">zclSampleLight_SetSinkCommissioningMode</span><span class="p">);</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"></span>
+
+<span class="cm">/*********************************************************************</span>
+<span class="cm"> * @fn      zclSampleLight_GPSink_Identify</span>
+<span class="cm"> *</span>
+<span class="cm"> * @brief   Callback to process Identify command from a GPD</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   zclGpNotification</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  none</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_GPSink_Identify</span><span class="p">(</span><span class="n">zclGpNotification_t</span><span class="w"> </span><span class="o">*</span><span class="n">zclGpNotification</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">afAddrType_t</span><span class="w">  </span><span class="n">dstAddr</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">dstAddr</span><span class="p">.</span><span class="n">endPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMPLELIGHT_ENDPOINT</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">dstAddr</span><span class="p">.</span><span class="n">panId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">dstAddr</span><span class="p">.</span><span class="n">addrMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">afAddr16Bit</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">dstAddr</span><span class="p">.</span><span class="n">addr</span><span class="p">.</span><span class="n">shortAddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_NIB</span><span class="p">.</span><span class="n">nwkDevAddress</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">//Identify is a payloadless command which triggers a 60 seconds identify in the device (doc 14-0563-16 GP spec Table 49)</span>
+<span class="w">  </span><span class="n">zclGeneral_SendIdentify</span><span class="p">(</span><span class="n">SAMPLELIGHT_ENDPOINT</span><span class="p">,</span><span class="o">&amp;</span><span class="n">dstAddr</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="n">TRUE</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="cm">/*********************************************************************</span>
+<span class="cm"> * @fn      zclSampleLight_GPSink_Off</span>
+<span class="cm"> *</span>
+<span class="cm"> * @brief   Callback to process Off command from a GPD</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   zclGpNotification</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  none</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_GPSink_Off</span><span class="p">(</span><span class="n">zclGpNotification_t</span><span class="w"> </span><span class="o">*</span><span class="n">zclGpNotification</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">zclSampleLight_OnOffCB</span><span class="p">(</span><span class="n">COMMAND_OFF</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="cm">/*********************************************************************</span>
+<span class="cm"> * @fn      zclSampleLight_GPSink_On</span>
+<span class="cm"> *</span>
+<span class="cm"> * @brief   Callback to process On command from a GPD</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   zclGpNotification</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  none</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_GPSink_On</span><span class="p">(</span><span class="n">zclGpNotification_t</span><span class="w"> </span><span class="o">*</span><span class="n">zclGpNotification</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">zclSampleLight_OnOffCB</span><span class="p">(</span><span class="n">COMMAND_ON</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="cm">/*********************************************************************</span>
+<span class="cm"> * @fn      zclSampleLight_GPSink_Toggle</span>
+<span class="cm"> *</span>
+<span class="cm"> * @brief   Callback to process Toggle command from a GPD</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param   zclGpNotification</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return  none</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_GPSink_Toggle</span><span class="p">(</span><span class="n">zclGpNotification_t</span><span class="w"> </span><span class="o">*</span><span class="n">zclGpNotification</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">zclSampleLight_OnOffCB</span><span class="p">(</span><span class="n">COMMAND_TOGGLE</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic" start="4">
+<li><p>Code can optionally be added to <code class="docutils literal notranslate"><span class="pre">zclSampleLight_initialization</span></code> to clear the NV if
+the right push-button is pressed on startup:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">zclSampleLight_initialization</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">key</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/* Initialize user clocks */</span><span class="w"></span>
+<span class="w">    </span><span class="n">zclSampleLight_initializeClocks</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/* Initialize keys */</span><span class="w"></span>
+<span class="w">    </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Board_Key_initialize</span><span class="p">(</span><span class="n">zclSampleLight_changeKeyCallback</span><span class="p">);</span><span class="w"></span>
+
+
+<span class="w">    </span><span class="cm">/* Initialize the LEDS */</span><span class="w"></span>
+<span class="w">    </span><span class="n">Board_Led_initialize</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Register the current thread as an ICall dispatcher application</span>
+<span class="w">    </span><span class="c1">// so that the application can send and receive messages.</span>
+<span class="w">    </span><span class="n">ICall_registerApp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">zclSampleLight_Entity</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sem</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">KEY_RIGHT</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Zstackapi_bdbResetLocalActionReq</span><span class="p">(</span><span class="n">zclSampleLight_Entity</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">//Initialize stack</span>
+<span class="w">    </span><span class="n">zclSampleLight_Init</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Add any other Z-Stack 3.1.0 application changes to the Z-Stack 3.2.0 file if not
+pertaining to the items listed above</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Difference comparison software is recommended for discerning all differences
+between software stacks.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="zstack3.2.0-to-zstack3.3.0.html" class="btn btn-neutral float-left" title="Z-Stack 3.2.0 to Z-Stack 3.3.0" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="zstack3.0.x-to-zstack3.1.0.html" class="btn btn-neutral float-right" title="Z-Stack 3.0.x to Z-Stack 3.1.0" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2005-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

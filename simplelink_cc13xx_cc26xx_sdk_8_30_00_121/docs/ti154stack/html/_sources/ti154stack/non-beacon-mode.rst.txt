@@ -1,0 +1,217 @@
+.. _sec-non-beacon-mode:
+
+Non-Beacon Mode
+===============
+
+Introduction
+------------
+
+The IEEE 802.15.4 specification defines the non-beacon mode of network
+operation where the coordinator does not send out periodic beacons. The non-
+beacon mode is an asynchronous network mode of operation where the devices
+communicate by using the :term:`CSMA-CA` mechanism.
+
+Network Operations
+------------------
+
+Network Start-Up
+^^^^^^^^^^^^^^^^
+
+A network is always started by a full function device. The procedure to start
+the network begins with a MAC layer reset. The application can directly start
+the network on a desired channel with a desired or random PAN-ID, or it can
+first check for a channel with lowest RF energy by performing a energy detect
+scan to select the channel with lowest energy or least interference (see
+:numref:`fig-non-beacon-network-start-up-sequence`). The application then
+performs an active scan to detect the existing networks in the area, and
+select network parameters for its own network which do not conflict. After
+selecting the channel, the PAN Coordinator application must set the short
+address and PAN-ID, and then set the beacon payload and (optionally) turn
+on the associate permit flag if it wants new devices to join the network.
+The network is then started using the API ``ApiMac_mlmeStartReq()`` with the
+``panCoordinator`` parameter set to TRUE.
+
+.. figure:: resources/fig-non-beacon-network-start-up-sequence.png
+    :name: fig-non-beacon-network-start-up-sequence
+    :align: center
+
+    Nonbeacon Mode Network Start-Up Sequence
+
+.. _sec-non-beacon-join:
+
+Network Join
+^^^^^^^^^^^^
+
+When a device is ready to join a non-beacon network, it must first perform an
+active scan broadcasting a beacon request. After receiving the beacon request,
+the non-beacon PAN coordinators in the radio range of the device respond with
+their beacons. When the scan is complete, TI 15.4-Stack calls the registered
+callback of type ``ApiMac_scanCnfFp_t`` with the PAN descriptors of the beacons
+it has received during the scan to the device application. The device
+application examines the PAN descriptors and selects a coordinator.
+
+The next step is to perform the network association (see
+:numref:`fig-non-beacon-association-sequence`). The device application calls
+the ``ApiMac_mlmeAssociateReq()`` API to send the association request
+message to the coordinator. The association process is successful when the
+device application receives the association confirmation from the TI
+15.4-Stack layer.
+
+.. figure:: resources/fig-non-beacon-association-sequence.png
+    :name: fig-non-beacon-association-sequence
+    :align: center
+
+    Nonbeacon Mode Device Association Sequence
+
+Data Exchange
+^^^^^^^^^^^^^
+
+The sequence diagram in :numref:`fig-non-beacon-direct-data-sequence` depicts
+the various direct data transactions between a device and a coordinator in a
+non-beacon network.
+
+.. figure:: resources/fig-non-beacon-direct-data-sequence.png
+    :name: fig-non-beacon-direct-data-sequence
+    :align: center
+
+    Non-beacon Mode Direct Data Exchange Sequence
+
+The sequence diagram in :numref:`fig-non-beacon-indirect-data-sequence` depicts
+the indirect data transaction in a non-beacon network.
+
+.. figure:: resources/fig-non-beacon-indirect-data-sequence.png
+    :name: fig-non-beacon-indirect-data-sequence
+    :align: center
+
+    Non-beacon Mode Indirect Data Exchange Sequence
+
+Maintaining a Connection for End Nodes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If the device application receives repeated communication failures following
+requests to transmit data, the device application may conclude that it has been
+orphaned and can initiate an orphaned-device realignment procedure.
+:numref:`fig-non-beacon-orphan-sequence` shows the non-beacon mode orphan
+sequence.
+
+In the orphan realignment procedure, the device application requests TI
+15.4-Stack to perform the orphan scan over a specified set of channels by using
+the ``ApiMac_MlmeScanReq()`` API with the scan-type parameter set to orphan
+scan. For each channel specified, TI 15.4-Stack at the device switches to the
+channel and then sends an orphan notification command. After successfully
+transmitting the orphan notification command, the MAC layer enables the
+receiver for at most ``ApiMac_attribute_responseWaitTime``. If the device
+successfully receives a coordinator realignment command, the device terminates
+the scan and calls the registered callback of type ``ApiMac_scanCnfFp_t``. At
+the coordinator side, the reception of the orphan notification command results
+in the call of the registered callback of type ``ApiMac_orphanIndFp_t`` by TI
+15.4-Stack. If the coordinator application finds the record of the device, it
+sends a coordinator realignment command to the orphaned device by using the
+``ApiMac_MlmeOrphanRsp()`` call.
+
+.. figure:: resources/fig-non-beacon-orphan-sequence.png
+    :name: fig-non-beacon-orphan-sequence
+    :align: center
+
+    Nonbeacon Mode Orphan Sequence
+
+Disassociating
+^^^^^^^^^^^^^^
+
+Two scenarios are described in the following: the first is initiated by the
+coordinator and the second is initiated by the device.
+:numref:`fig-non-beacon-indirect-disassociation-sequence` shows the indirect
+disassociation sequence initiated by the non-beacon mode coordinator.
+
+When the coordinator application wants one of the associated devices must leave
+the PAN, the coordinator application requests that TI 15.4-Stack send the
+disassociation notification command by using the
+``ApiMac_mlmeDiassociateReq()`` call. If the ``txIndirect`` parameter is set to
+TRUE, TI 15.4-Stack sends the disassociation notification command to the device
+using indirect transmission; then, the disassociation notification command is
+added to the list of pending transactions stored on the coordinator and pulled
+by the device using data request command.
+
+.. figure:: resources/fig-non-beacon-indirect-disassociation-sequence.png
+    :name: fig-non-beacon-indirect-disassociation-sequence
+    :align: center
+
+    Indirect Disassociation Sequence Initiated by the Non-beacon Mode Coordinator
+
+The end device application can also initiate the disassociation process as
+described in :numref:`fig-non-beacon-device-disassociation-sequence`, which
+shows the sequence of messages exchanged when the end device initiates the
+disassociation process in the non-beacon network.
+
+.. figure:: resources/fig-non-beacon-device-disassociation-sequence.png
+    :name: fig-non-beacon-device-disassociation-sequence
+    :align: center
+
+    Disassociation Sequence Initiated by the Nonbeacon Mode Device
+
+There is a corner case in which a collector is factory reset but has not previously
+asked the sensor devices to disassociate.  In this state the sensors have no means 
+of knowing that the network has been removed and thus should disassociate from it.  
+For a non-beacon mode rejoin process, if the sensor retains the network's Pan ID and 
+the collector creates a new network over the same channel, then the sensor begins
+to poll this reset collector and waits for a response.  It is the collector's 
+responsibility to reject a poll from a sensor whose address is not stored as an 
+associated device in its tables.  It however does not do this by default as with 
+data requests, communication statuses, and orphan requests.  Therefore the sensor 
+is misled to believe that it has rejoined the network.  Therefore a disassociation 
+request must be sent when receiving a poll from an unknown device.  This should be 
+accomplished from the collector application.  If this cannot be modified then a
+sensor application should be designed to monitor the status of data requests that are 
+not responded to and decide whether to disassociate accordingly.
+
+Stack Configuration Knobs
+-------------------------
+
+Attribute Configuration
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``ApiMac_attribute_associatePermit`` is used by the coordinator application
+to indicate to the joining devices whether association is allowed or not. When
+the coordinator sets this attribute item to TRUE, this indicates to the joining
+devices within the beacon frame that association is allowed.
+:numref:`tab-non-beacon-configuration` lists the attribute configurations that
+apply to non-beacon mode.
+
+If set to TRUE, the ``ApiMac_attribute_RxOnWhenIdle`` enables the receiver
+during the idle period.
+
+.. _tab-non-beacon-configuration:
+.. table:: Attribute Configuration Applicable to Beacon Mode
+
+    +----------------------------------+----------+-------------+------------+-----------------------------------------------------------+
+    | **Name**                         | **Type** | **Range**   | **Number** | **Description**                                           |
+    +==================================+==========+=============+============+===========================================================+
+    | ApiMac_attribute_associatePermit | Bool     | TRUE, FALSE | 0x41       | TRUE if a coordinator is currently allowing association.  |
+    +----------------------------------+----------+-------------+------------+-----------------------------------------------------------+
+    | ApiMac_attribute_RxOnWhenIdle    | Bool     | TRUE, FALSE | 0x52       | TRUE if the MAC enables its receiver during idle periods. |
+    +----------------------------------+----------+-------------+------------+-----------------------------------------------------------+
+
+Configuration Constants
+^^^^^^^^^^^^^^^^^^^^^^^
+
+TI 15.4-Stack uses a structure containing various user-configurable parameters
+(at compile time). This structure, called ``macCfg_t``, is in the ``mac_cfg.c``
+file. :numref:`tab-non-beacon-config-constants` lists the configuration
+elements.
+
+.. _tab-non-beacon-config-constants:
+.. table:: Configuration Constants
+
+    +-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+-------------+
+    | **Name**        | **Description**                                                                                                                                              | **Range**    | **Default** |
+    +=================+==============================================================================================================================================================+==============+=============+
+    | txDataMax       | Maximum number of data frames queued in the transmit data queue.                                                                                             | 1 – 255      | 2           |
+    +-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+-------------+
+    | txMax           | Maximum number of frames of all types queued in the transmit data queue.                                                                                     | 1 – 255      | 5           |
+    +-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+-------------+
+    | rxMax           | Maximum number of frames queued in the receive data queue.                                                                                                   | 1 – 255      | 2           |
+    +-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+-------------+
+    | dataIndOffset   | Allocate additional bytes in the data indication for application-defined headers.                                                                            | 0 – 127      | 0           |
+    +-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+-------------+
+    | appPendingQueue | When TRUE, registered callback of type ApiMac_pollIndFp_t will be made to the application when a data request command frame is received from another device. | TRUE – FALSE | FALSE       |
+    +-----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+-------------+

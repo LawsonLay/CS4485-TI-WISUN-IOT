@@ -1,0 +1,71 @@
+.. _sec-oad:
+
+Introduction
+============
+
+This chapter serves as a guide to the Texas Instruments Over-the-Air Download
+(:term:`OAD`) ecosystem including the custom over the air specification,
+application architecture, drivers, and middleware. OAD is a device
+firmware upgrade method that allows the firmware image running on a device to be
+updated over the air while providing power loss protection.
+
+The guide will cover the principles of the OAD process, the out of
+the box examples included in the |SDK|, and the process for adding OAD
+to an existing project.
+
+.. note::
+
+    Updating the device firmware over serial (UART or SPI) connection from a
+    host MCU using the CC26xx embedded ROM Serial Bootloader (SBL) is covered in
+    application note CC2538/CC26xx Bootloader Interface (SWRA466).
+
+
+The OAD guide chapter will cover:
+
+    - Boot Image Manager (:term:`BIM`) and the device startup procedure. See
+      :ref:`sec-oad-bim`
+    - OAD image header and how it is populated. See :ref:`sec-oad-image-header`
+    - OAD theory of operation and architecture
+    - Flash layout for OAD applications
+    - Protocol stack specific examples of OAD
+    - How to add OAD to an existing sample application.
+
+The supported development kit for OAD is the |LP|. To follow the
+procedures listed in this guide, two |LP| development kits are required.
+The flow of this document will follow the boot process of the device from
+:term:`BIM` to the user application, explaining the concepts as they come up.
+
+
+.. _sec-oad-topology:
+
+OAD Topology Overview
+---------------------
+
+Two wireless devices are required to perform an OAD.
+The terms for the devices involved in an OAD exchange are listed below:
+
+    - :term:`OAD Target`
+    - :term:`OAD Distributor`
+
+The OAD target is the device that receives the incoming image over the
+air. The OAD target is responsible for implementing the protocol stack
+specific transport layer that is used for sending and receiving OAD image data.
+
+The OAD distributor is responsible for fragmenting the new firmware image
+into protocol stack specific packets and sending them over the air.
+
+.. note::
+
+    The OAD distributor may take any form. Below it is illustrated as a TI
+    development kit connected to an associated PC tool, but it can also be a
+    mobile device or another TI embedded device that implements the protocol
+    specific transport.
+
+:numref:`fig-oad-downloader-and-target` shows a graphical relationship of the
+devices required for an OAD transfer.
+
+.. _fig-oad-downloader-and-target:
+.. figure:: resources/oad_topology.png
+    :align: center
+
+    OAD Distributor and OAD Target

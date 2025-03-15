@@ -1,0 +1,294 @@
+.. _sec-zstack3.0.x-to-stack3.1.0:
+
+Z-Stack 3.0.x to Z-Stack 3.1.0
+==============================
+
+This section will describe a way to migrate a project from Z-Stack 3.0.x to
+a Z-Stack 3.1.0 project.
+
+For this guide, *SampleLight* from Z-Stack 3.0.x will be ported
+over to Z-Stack 3.1.0.  The two releases are vastly divergent due to differences
+in both device and RTOS support, as is covered in :ref:`cc253x-to-cc26x2`.
+The recommended approach is to start with a Z-Stack 3.1.0 project that contains 
+the same base application as the porting target project and merge any custom functionality
+
+1. Choose a Z-Stack 3.1.0 example project that contains your target project's base 
+   functionality.  For reference and use in this example, *zc_light* from 
+   C:\\ti\\simplelink_zigbee_sdk_plugin_2_20_00_06\\examples\\rtos\\\ |DEVICE|\_LAUNCHXL\\zstack
+   is chosen as a starting point.
+
+#. No changes are required for the Z-Stack 3.1.0 ``zcl_samplelight_data.c`` file unless 
+   clusters, attributes, or simple descriptors were added or altered in the Z-Stack 3.0.x project.
+
+#. In ``zcl_samplelight.h``, ``bdb_tlCommissioning.h`` has been renamed ``bdb_tl_commissioning.h`` and
+
+    .. code-block:: c
+
+        /*
+        *  Application task entry point for the ZStack Sample Light Application
+        */
+        extern void zclSampleLight_task(NVINTF_nvFuncts_t *pfnNV);
+
+    is used in place of
+
+    .. code-block:: c
+
+        /*
+        * Initialization for the task
+        */
+        extern void zclSampleLight_Init( byte task_id );
+
+        /*
+        *  Event Process for the task
+        */
+        extern UINT16 zclSampleLight_event_loop( byte task_id, UINT16 events );
+
+#. Do not copy the Z-Stack 3.0.x ``OSAL_SampleLight.c`` file and only make changes to the following
+   lines of the 3.1.0 ``main.c``
+
+    .. code-block:: c
+
+        #include "zcl_samplelight.h"
+
+        /* Kick off application */
+        zclSampleLight_task(&zstack_user0Cfg.nvFps);
+
+    if the task name has been changed inside of ``zcl_samplelight.c``
+
+The following items specifically concern ``zcl_samplelight.c``:
+
+1. Note the following changes due to the TI-RTOS implementation:
+
+    - ICALL framework used to dispatch messages between Z-Stack and the application
+    - Semaphores used to post and pend during event callbacks
+    - Timer handling, i.e
+
+    .. code-block:: c
+
+        Timer_setTimeout( LevelControlClkHandle, 100 );
+        Timer_start(&LevelControlClkStruct);
+
+    versus ``osal_start_timerEx( zclSampleLight_TaskID, SAMPLELIGHT_LEVEL_CTRL_EVT, 100 );``.
+    Due to this and the reasons further provided below, all related code from Z-Stack 3.0.x should 
+    not be transferred to the Z-Stack 3.1.0 project.
+
+#. Key events are now handled locally in ``zclSampleLight_processKey`` instead 
+   of ``UI_MainStateMachine`` from ``zcl_sampleapps_ui.c``.  A UART interface is preferred over LCD.
+
+#. ``main.c`` calls the ``zclSampleLight_task`` function
+
+    .. code-block:: c
+
+        void zclSampleLight_task(NVINTF_nvFuncts_t *pfnNV)
+		{
+		  // Save and register the function pointers to the NV drivers
+		  pfnZdlNV = pfnNV;
+		  zclport_registerNV(pfnZdlNV, ZCL_PORT_SCENE_TABLE_NV_ID);
+
+		  // Initialize application
+		  zclSampleLight_initialization();
+
+		  // No return from task process
+		  zclSampleLight_process_loop();
+		}
+
+    to initialize the application
+
+    .. code-block:: c
+
+        static void zclSampleLight_initialization(void)
+		{
+
+		    /* Initialize user clocks */
+		    zclSampleLight_initializeClocks();
+
+		    /* Initialize keys */
+		    Board_Key_initialize(zclSampleLight_changeKeyCallback);
+
+		    /* Initialize the LEDS */
+		    Board_Led_initialize();
+
+		    // Register the current thread as an ICall dispatcher application
+		    // so that the application can send and receive messages.
+		    ICall_registerApp(&zclSampleLight_Entity, &sem);
+
+
+		    //Initialize stack
+		    zclSampleLight_Init();
+		}
+    
+    which in-turn initializes the clocks, keys, LEDs, and ICall dispatcher before initializing 
+    the stack.  This is compared with Z-Stack 3.0.x where all of the above was accomplished 
+    in ``main`` and ``zclSampleLight_Init``.
+
+#. ``zclSampleLight_Init`` registers endpoints using
+
+    .. code-block:: c
+
+        //Register Endpoint
+        zclSampleLightEpDesc.endPoint = SAMPLELIGHT_ENDPOINT;
+        zclSampleLightEpDesc.simpleDesc = &zclSampleLight_SimpleDesc;
+        zclport_registerEndpoint(zclSampleLight_Entity, &zclSampleLightEpDesc);
+
+    instead of 
+
+    .. code-block:: c
+
+        // Register the Simple Descriptor for this application
+        bdb_RegisterSimpleDescriptor( &zclSampleLight_SimpleDesc );
+
+    and registers applications with
+
+    .. code-block:: c
+
+        // Register the Application to receive the unprocessed Foundation command/response messages
+        zclport_registerZclHandleExternal(zclSampleLight_ProcessIncomingMsg);
+
+    as compared to
+
+    .. code-block:: c
+
+        // Register the Application to receive the unprocessed Foundation command/response messages
+        zcl_registerForMsg( zclSampleLight_TaskID );
+    
+    Furthermore, bdb initialization parameters and ZDO callbacks are set up outside of ``UI_Init``
+
+    .. code-block:: c
+
+        //Write the bdb initialization parameters
+        zclSampleLight_initParameters();
+
+        //Setup ZDO callbacks
+        SetupZStackCallbacks();
+
+#. Green Power is further expanded for endpoints, Application Events and Z-Stack messages:
+   
+   - ``gp_endpointInit(zclSampleLight_Entity);`` and ``app_Green_Power_Init`` inside ``zclSampleLight_Init``
+   - In ``zclSampleLight_process_loop``
+
+     .. code-block:: c
+
+         #if !defined (DISABLE_GREENPOWER_BASIC_PROXY) && (ZG_BUILD_RTR_TYPE)
+                if(events & SAMPLEAPP_PROCESS_GP_DATA_SEND_EVT)
+                {
+                    zcl_gpSendNotification();
+                    events &= ~SAMPLEAPP_PROCESS_GP_DATA_SEND_EVT;
+                }
+
+                if(events & SAMPLEAPP_PROCESS_GP_EXPIRE_DUPLICATE_EVT)
+                {
+                    gp_expireDuplicateFiltering();
+                    events &= ~SAMPLEAPP_PROCESS_GP_EXPIRE_DUPLICATE_EVT;
+                }
+         #endif
+
+   - In ``zclSampleLight_processZStackMsgs``:
+
+     .. code-block:: c
+
+         #if !defined (DISABLE_GREENPOWER_BASIC_PROXY) && (ZG_BUILD_RTR_TYPE)
+          case zstackmsg_CmdIDs_GP_DATA_IND:
+          {
+              zstackmsg_gpDataInd_t *pInd;
+              pInd = (zstackmsg_gpDataInd_t*)pMsg;
+              gp_processDataIndMsg( &(pInd->Req) );
+          }
+          break;
+
+          case zstackmsg_CmdIDs_GP_SECURITY_REQ:
+          {
+              zstackmsg_gpSecReq_t *pInd;
+              pInd = (zstackmsg_gpSecReq_t*)pMsg;
+              gp_processSecRecMsg( &(pInd->Req) );
+          }
+          break;
+
+          case zstackmsg_CmdIDs_GP_CHECK_ANNCE:
+          {
+              zstackmsg_gpCheckAnnounce_t *pInd;
+              pInd = (zstackmsg_gpCheckAnnounce_t*)pMsg;
+              gp_processCheckAnnceMsg( &(pInd->Req) );
+          }
+         #endif
+
+#. ``zclSampleLight_process_loop`` is used in place of ``zclSampleLight_event_loop`` and uses 
+   ICall to receive messages instead of ``SYS_EVENT_MSG`` events and ``osal_msg_receive``
+
+   .. code-block:: c
+
+        ICall_ServiceEnum stackid;
+        ICall_EntityID dest;
+        zstackmsg_genericReq_t *pMsg = NULL;
+
+        /* Wait for response message */
+        if(ICall_wait(ICALL_TIMEOUT_FOREVER) == ICALL_ERRNO_SUCCESS)
+        {
+            /* Retrieve the response message */
+            if(ICall_fetchServiceMsg(&stackid, &dest, (void **)&pMsg)
+               == ICALL_ERRNO_SUCCESS)
+            {
+                if( (stackid == ICALL_SERVICE_CLASS_ZSTACK)
+                    && (dest == zclSampleLight_Entity) )
+                {
+                    if(pMsg)
+                    {
+                        zclSampleLight_processZStackMsgs(pMsg);
+
+                        // Free any separately allocated memory
+                        Zstackapi_freeIndMsg(pMsg);
+                    }
+                }
+
+                if(pMsg)
+                {
+                    ICall_freeMsg(pMsg);
+                }
+            }
+            //**EVENT HANDLING NOT SHOWN**
+        }
+
+#. ``zclSampleLight_processZStackMsgs`` and ``zclSampleLight_processAfIncomingMsgInd``
+   is used in place of ``zclSampleLight_ProcessIncomingMsg``
+
+   - In ``zclSampleLight_processZStackMsgs``:
+
+     .. code-block:: c
+
+        switch(pMsg->hdr.event)
+        {
+            //**OTHER CASES NOT SHOWN**
+            case zstackmsg_CmdIDs_AF_INCOMING_MSG_IND:
+            {
+                // Process incoming data messages
+                zstackmsg_afIncomingMsgInd_t *pInd;
+                pInd = (zstackmsg_afIncomingMsgInd_t *)pMsg;
+                zclSampleLight_processAfIncomingMsgInd( &(pInd->req) );
+            }
+            break;
+        }
+
+#. Different APIs are used for BDB.  For example, the ``BDB_COMMISSIONING_FORMATION`` case inside of 
+   ``zclSampleLight_ProcessCommissioningStatus`` is handled using
+
+    .. code-block:: c
+
+        zstack_bdbStartCommissioningReq_t zstack_bdbStartCommissioningReq;
+    
+        //After formation, perform nwk steering again plus the remaining commissioning modes that has not been process yet        
+        zstack_bdbStartCommissioningReq.commissioning_mode = BDB_COMMISSIONING_MODE_NWK_STEERING | bdbCommissioningModeMsg->bdbRemainingCommissioningModes;
+        Zstackapi_bdbStartCommissioningReq(zclSampleLight_Entity,&zstack_bdbStartCommissioningReq);
+
+    when it was previously
+
+    .. code-block:: c
+    
+        //After formation, perform nwk steering again plus the remaining commissioning modes that has not been process yet
+        bdb_StartCommissioning(BDB_COMMISSIONING_MODE_NWK_STEERING | bdbCommissioningModeMsg->bdbRemainingCommissioningModes);
+
+#. Structure type ``zclIncomingMsg_t`` has been renamed ``zclIncoming_t``
+
+#. Add any other Z-Stack 3.0.x application changes to the Z-Stack 3.1.0 file if not
+   pertaining to the items listed above
+
+.. note:: Difference comparison software is recommended for discerning all differences
+    between software stacks.

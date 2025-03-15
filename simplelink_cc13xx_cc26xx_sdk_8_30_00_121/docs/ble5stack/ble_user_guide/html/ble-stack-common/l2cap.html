@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logical Link Control and Adaptation Layer Protocol (L2CAP) &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Link Layer (LL)" href="link-layer-cc13xx_cc26xx.html" />
+    <link rel="prev" title="Privacy" href="../ble-stack-5.x/privacy.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-stack-common l2cap";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x/overview-cc13xx_cc26xx.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x/gap-cc13xx_cc26xx.html">Generic Access Profile (GAP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x/gatt.html">Generic Attribute Profile (GATT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x/gatt.html#gap-gatt-service-ggs">GAP GATT Service (GGS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x/gatt.html#generic-attribute-profile-service-gatt-service">Generic Attribute Profile Service (GATT Service)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x/gatt.html#gattservapp-module">GATTServApp Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x/gapbondmngr-cc13xx_cc26xx.html">GAP Bond Manager and LE Secure Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x/privacy.html">Privacy</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Logical Link Control and Adaptation Layer Protocol (L2CAP)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general-l2cap-terminology">General L2CAP Terminology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#l2cap-modes-of-operation">L2CAP Modes of Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#l2cap-channels">L2CAP Channels</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fixed-channels">Fixed Channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynamically-allocated-channels">Dynamically Allocated Channels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#l2cap-frame-types">L2CAP Frame types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fragmentation-recombination">Fragmentation/Recombination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#segmentation-reassembly">Segmentation/Reassembly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-l2cap">Configuring L2CAP</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#build-configuration">Build Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#runtime-configuration">Runtime Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#l2cap-mtu">L2CAP MTU</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ram-considerations">RAM Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#controller-to-host-flow-control">Controller to Host Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connection-oriented-channels-example">Connection Oriented Channels Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="link-layer-cc13xx_cc26xx.html">Link Layer (LL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x/channel-selection-algorithm-number-two.html">Channel Selection Algorithm #2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x/hci.html">Host Controller Interface (HCI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x/phy.html">Physical Layer (PHY)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x/stack-configuration-cc13xx_cc26xx.html">Stack Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a> &raquo;</li>
+      <li>Logical Link Control and Adaptation Layer Protocol (L2CAP)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="logical-link-control-and-adaptation-layer-protocol-l2cap">
+<span id="sec-l2cap"></span><h1>Logical Link Control and Adaptation Layer Protocol (L2CAP)<a class="headerlink" href="#logical-link-control-and-adaptation-layer-protocol-l2cap" title="Permalink to this headline">¶</a></h1>
+<p>The L2CAP layer sits on top of the HCI layer on the host side and
+transfers data between the upper layers of the host (GAP, GATT, SM,
+application) and the link layer. This layer is
+responsible for protocol multiplexing capability, segmentation, and
+reassembly operation for data exchanged between the host and the
+protocol stack. All data from the host or application goes through and is
+encapsulated in an L2CAP packet. L2CAP permits higher-level protocols
+(such as GATT and SM) and applications to transmit and receive upper layer data
+packets (L2CAP service data units, SDU) up to 64KB long. See
+<a class="reference internal" href="#l2cap-architectural-blocks"><span class="std std-numref">Figure 93.</span></a> for more information.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The actual L2CAP payload size is limited by the amount of memory
+available on the specific device being implemented. L2CAP also permits
+per-channel flow control and retransmission.</p>
+</div>
+<div class="figure align-center" id="id5">
+<span id="l2cap-architectural-blocks"></span><img alt="../_images/l2cap-architectural-blocks.jpg" src="../_images/l2cap-architectural-blocks.jpg" />
+<p class="caption"><span class="caption-number">Figure 93. </span><span class="caption-text">L2CAP Architectural blocks.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="general-l2cap-terminology">
+<h2>General L2CAP Terminology<a class="headerlink" href="#general-l2cap-terminology" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><table class="docutils align-default" id="id6">
+<caption><span class="caption-number">Table 12. </span><span class="caption-text">General L2CAP Terminology</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 59%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>L2CAP channel</p></td>
+<td><p>The logical connection between two endpoints in peer devices,
+characterized by their Channel Identifiers (CIDs)</p></td>
+</tr>
+<tr class="row-odd"><td><p>SDU or L2CAP SDU</p></td>
+<td><p>Service Data Unit: a packet of data that L2CAP exchanges with
+the upper layer and transports transparently over an L2CAP
+channel using the procedures specified in this document.
+This is the raw payload from the host/app, and does not include
+L2CAP headers.</p></td>
+</tr>
+<tr class="row-even"><td><p>PDU or L2CAP PDU</p></td>
+<td><p>Protocol Data Unit: a packet of data containing L2CAP protocol
+information fields, control information, and/or upper layer
+information data. This packet includes L2CAP headers.
+A single SDU may be split across multiple PDUs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Maximum Transmission Unit (MTU)</p></td>
+<td><p>The maximum size of payload data, in octets, that the upper
+layer entity can accept (that is, the MTU corresponds to the
+maximum SDU size). Note: This is different than ATT_MTU.</p></td>
+</tr>
+<tr class="row-even"><td><p>Maximum PDU Payload Size (MPS)</p></td>
+<td><p>The maximum size of payload data in octets that the L2CAP
+layer entity can accept (that is, the MPS corresponds to the
+maximum PDU payload size).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Credit</p></td>
+<td><p>The number of LE-frames that the device can receive.
+Credits may range between 1 and 65535, and are used as a flow
+control mechanism between devices.</p></td>
+</tr>
+<tr class="row-even"><td><p>L2CAP Basic Header</p></td>
+<td><p>L2CAP protocol information that is prepended to each PDU.
+This includes CID and  length</p></td>
+</tr>
+<tr class="row-odd"><td><p>Protocol/Service Multiplexer (PSM)</p></td>
+<td><p>A two octet field that is used to define the interpretation of
+L2CAP channel data. There are both dynamic and fixed PSMs.
+Fixed PSMs are assigned by the SIG, while dynamic PSMs may
+be discovered by GATT.</p></td>
+</tr>
+<tr class="row-even"><td><p>Fragmentation/Recombination</p></td>
+<td><p>Fragmentation is the process of breaking down L2CAP PDUs into
+smaller pieces for the controller to send out.
+Recombination is the process of the controller reassembling
+fragments into complete L2CAP PDUs.
+Fragmentation/Recombination is performed by the controller
+and is based on the LE Data Length Extension feature.
+Fragmentation/Recombination operations are transparent to L2CAP.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Segmentation/Reassembly</p></td>
+<td><p>Segmentation is the process of breaking a single L2CAP SDU up
+multiple L2CAP packets called SDU segments. Reassembly in the
+inverse of this operation on the receive side. Each segment is
+encapsulated in a proper L2CAP header. Both segmentation and
+reassembly is handled by the L2CAP layer and transparent to
+lower and higher layers.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The max SDU size supported by the stack is <code class="docutils literal notranslate"><span class="pre">L2CAP_SDU_SIZE</span></code>.</p>
+</div>
+</div>
+<div class="section" id="l2cap-modes-of-operation">
+<h2>L2CAP Modes of Operation<a class="headerlink" href="#l2cap-modes-of-operation" title="Permalink to this headline">¶</a></h2>
+<p>The BLE5-Stack supports two different modes of operation of the L2CAP layer.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Basic L2CAP Mode</p></li>
+<li><p>LE Credit Based Flow Control Mode</p></li>
+</ul>
+</div></blockquote>
+<p>Note that the L2CAP section is shared for BR/EDR, BR/EDR/LE (dual mode), and
+LE only controller implementations. The BLE5-Stack controller implementation is
+LE only, thus only the modes above are relevant.</p>
+</div>
+<div class="section" id="l2cap-channels">
+<span id="id3"></span><h2>L2CAP Channels<a class="headerlink" href="#l2cap-channels" title="Permalink to this headline">¶</a></h2>
+<p>There are three types of channels in L2CAP:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Connection-oriented</p></li>
+<li><p>Connectionless data</p></li>
+<li><p>L2CAP signaling</p></li>
+</ul>
+</div></blockquote>
+<p>Each endpoint of an L2CAP channel is referred to by a channel identifier (CID).
+See the Channel Identifiers section ([Vol 3], Part A, Section 2.1) of
+the <a class="reference external" href="https://www.bluetooth.com/specifications/adopted-specifications">Bluetooth Core Specifications Version 5.3</a> for more details on L2CAP Channel Identifiers. Connectionless
+channels are not supported over the LE-U controller, and thus are not used by
+the BLE5-Stack.</p>
+<p>Channels can be divided into fixed and dynamic channels.</p>
+<div class="section" id="fixed-channels">
+<h3>Fixed Channels<a class="headerlink" href="#fixed-channels" title="Permalink to this headline">¶</a></h3>
+<p>Fixed channels perform a specific L2CAP function, and use CIDs
+between 0x0001 and 0x003F. The characteristics of each fixed channel (such as
+MTU) are defined on a per channel basis.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Higher level protocols such as ATT may enforce their own MTU, which is
+different than the L2CAP MTU.</p>
+</div>
+<p>The relevant CIDs that are available for use by the stack or application are
+listed below.</p>
+<span id="l2cap-cids"></span><table class="docutils align-default" id="id7">
+<caption><span class="caption-number">Table 13. </span><span class="caption-text">L2CAP CIDs</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 38%" />
+<col style="width: 44%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>CID</p></td>
+<td><p>Description</p></td>
+<td><p>Usage</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0004</p></td>
+<td><p>Attribute Protocol (ATT)</p></td>
+<td><p>Sending ATT information</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0005</p></td>
+<td><p>LE Signaling Channel</p></td>
+<td><p>Sending L2CAP commands</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0006</p></td>
+<td><p>Security Manager Protocol (SMP)</p></td>
+<td><p>Sending pairing/security information</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0040-0x007F</p></td>
+<td><p>Dynamically Allocated</p></td>
+<td><p>LE Credit Based Flow control packets</p></td>
+</tr>
+</tbody>
+</table>
+<p>For example, data exchanged over the GATT protocol uses channel 0x0004, SMP
+(pairing and security) uses 0x0006, and the LE signaling channel uses 0x0005.
+The ATT, SMP, and signaling channels are not directly accessible via the
+application as they are used by their associated Host layers. Put another way,
+when calling a GATT related API, it handles the necessary encapsulation into
+an L2CAP packet. The signaling channel is used for L2CAP connection parameter
+update procedure, establishing LE credit based connections on the
+dynamic channels, and exchanging credits.</p>
+</div>
+<div class="section" id="dynamically-allocated-channels">
+<h3>Dynamically Allocated Channels<a class="headerlink" href="#dynamically-allocated-channels" title="Permalink to this headline">¶</a></h3>
+<p>A dynamically allocated CID is allocated to identify the logical link and the
+local endpoint. The local endpoint must be in the range from 0x0040 to 0xFFFF.
+This endpoint is used in the connection-orientated L2CAP channels described in
+the following section. Credit Based Flow Control mode is used by the L2CAP
+layer for Connection-Oriented Channels. These dynamically assigned channels
+are accessible and managed directly at the application layer. This means that
+the application is responsible for defining its own protocol on top of L2CAP
+CoC. L2CAP channels are bidirectional and are analogous to sockets.</p>
+<p>When a channel is dynamically allocated, it must have the following parameters
+set:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>PSM</p></li>
+<li><p>MTU</p></li>
+<li><p>CID</p></li>
+</ul>
+</div></blockquote>
+<p>Fixed PSMs are defined by the Bluetooth SIG, these range between 0x0001 and
+0x007F. Dynamic PSMs range between 0x0080 and 0x00FF. PSMs may be fixed on
+GATT server devices, while GATT clients shall obtain PSMs from the GATT
+service.</p>
+</div>
+</div>
+<div class="section" id="l2cap-frame-types">
+<h2>L2CAP Frame types<a class="headerlink" href="#l2cap-frame-types" title="Permalink to this headline">¶</a></h2>
+<p>There are two frame types that are used by the BLE5-Stack. These are the Basic
+frame which is used by the fixed channels in basic mode, and the LE information
+frame which is used by the dynamic channels in LE credit based flow control
+mode. L2CAP handles framing of the SDU data from the host or application, but
+it is important to keep the protocol overhead of each frame in mind as it will
+affect how much application data ends up in a PDU.</p>
+<p>The contents of the L2CAP frames are defined in Vol 3, Part A. The LE
+information frame is defined in section 3.4 and the basic frame is defined in
+section 3.1. The headers sizes are summarized here for reference.</p>
+<span id="l2cap-frames"></span><table class="docutils align-default" id="id8">
+<caption><span class="caption-number">Table 14. </span><span class="caption-text">L2CAP Frames and Overhead</span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>L2CAP Frame Type</p></td>
+<td><p>Header Size (octets)</p></td>
+<td><p>Header contents</p></td>
+</tr>
+<tr class="row-even"><td><p>Basic frame</p></td>
+<td><p>4</p></td>
+<td><p>Length: 2 octets
+CID: 2 octets</p></td>
+</tr>
+<tr class="row-odd"><td><p>LE Information Frame</p></td>
+<td><p>6</p></td>
+<td><p>Length: 2 octets
+CID: 2 octets
+SDU length: 2 octets</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fragmentation-recombination">
+<span id="l2cap-fragmentation"></span><h2>Fragmentation/Recombination<a class="headerlink" href="#fragmentation-recombination" title="Permalink to this headline">¶</a></h2>
+<p>From an L2CAP perspective, all packets are delivered to and received from
+the controller as complete packets. This means that fragmentation/recombination
+(if enabled by LE Data Length Extension) is performed by the controller
+and not visible to L2CAP. See <a class="reference internal" href="link-layer-cc13xx_cc26xx.html#le-data-length-extension"><span class="std std-ref">LE Data Length Extension (DLE)</span></a> for more
+information.</p>
+<p>When fragmentation is used, larger packets are split
+into multiple link layer packets and reassembled by the link layer
+of the peer device. The picture below shows this
+relationship.</p>
+<img alt="../_images/ditaa-608e85feddc802733c7023cf82d9db56808dcf82.png" src="../_images/ditaa-608e85feddc802733c7023cf82d9db56808dcf82.png" />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <strong>DLE PDU</strong> is negotiated by <code class="docutils literal notranslate"><span class="pre">LL_LEN_REQ</span></code> and <code class="docutils literal notranslate"><span class="pre">LL_LEN_RSP</span></code>. DLE PDU is <em>NOT</em> the same
+as L2CAP PDU. For more information regarding how to change the DLE PDU, see
+<a class="reference internal" href="link-layer-cc13xx_cc26xx.html#le-data-length-extension"><span class="std std-ref">LE Data Length Extension (DLE)</span></a>.</p>
+</div>
+</div>
+<div class="section" id="segmentation-reassembly">
+<span id="l2cap-segmentation"></span><h2>Segmentation/Reassembly<a class="headerlink" href="#segmentation-reassembly" title="Permalink to this headline">¶</a></h2>
+<p>When operating in Basic Mode, L2CAP will not perform any segmentation or
+reassembly. However, when operating in LE Credit Based Flow Control mode on a
+dynamic channel (CoC) segmentation and reassembly at the L2CAP layer may occur.</p>
+</div>
+<div class="section" id="configuring-l2cap">
+<span id="l2cap-config"></span><h2>Configuring L2CAP<a class="headerlink" href="#configuring-l2cap" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="build-configuration">
+<span id="l2cap-enable-config"></span><h3>Build Configuration<a class="headerlink" href="#build-configuration" title="Permalink to this headline">¶</a></h3>
+<p>The L2CAP CoC dynamic channels by default is not enabled in the projects.
+It can be enabled by the following methods:</p>
+<p><strong>SysConfig tool</strong>: For projects that support SysConfig tool, you can enable
+L2CAP CoC dynamic channels by checking <code class="docutils literal notranslate"><span class="pre">L2CAP</span> <span class="pre">Connection</span> <span class="pre">Oriented</span> <span class="pre">Channels</span></code> box.
+Please refer to <a class="reference internal" href="../sysconfig/ble5-sysconfig.html#fig-ble5-stack-feature"><span class="std std-numref">Figure 264.</span></a> for BLE5-Stack feature overview.</p>
+<ul class="simple">
+<li><p><strong>build_config.opt</strong>: For projects that do not support SysConfig tool, you
+can enable L2CAP CoC dynamic channels by adding <code class="docutils literal notranslate"><span class="pre">-DV41_FEATURES=L2CAP_COC_CFG</span></code>
+to <code class="docutils literal notranslate"><span class="pre">build_config.opt</span></code> file.</p></li>
+</ul>
+</div>
+<div class="section" id="runtime-configuration">
+<h3>Runtime Configuration<a class="headerlink" href="#runtime-configuration" title="Permalink to this headline">¶</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is a bit of a misnomer because generally these parameters are set
+via <code class="docutils literal notranslate"><span class="pre">#define</span></code> but they are in fact initialized dynamically at the time
+of the stack boot. In this case, runtime means that they not fixed by the
+protocol stack library and may be changed by the user.</p>
+</div>
+<p>These L2CAP parameters are passed into the BLE5-Stack at initialization via the
+<code class="docutils literal notranslate"><span class="pre">.opt</span></code> file. These include:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">L2CAP_NUM_PSM</span></code> : Number of Protocol/Service multiplexers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">L2CAP_NUM_CO_CHANNELS</span></code> : Number of allowed dynamic CoCs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MAX_PDU_SIZE</span></code>: Max PDU buffer size that the controller accepts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MAX_NUM_PDU</span></code>: Number of L2CAP TX PDU buffers in the controller</p>
+<blockquote>
+<div><p>For more information for how to change the above parameters, please
+see <a class="reference internal" href="../ble-stack-5.x/stack-configuration-cc13xx_cc26xx.html#stack-features-configuration"><span class="std std-ref">Stack Configurations</span></a></p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="l2cap-mtu">
+<span id="id4"></span><h2>L2CAP MTU<a class="headerlink" href="#l2cap-mtu" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned in <a class="reference internal" href="#id2"><span class="std std-ref">General L2CAP Terminology</span></a>, the L2CAP MTU is the maximum
+payload that can be processed by the L2CAP layer. The MTU size is the largest
+SDU that L2CAP will accept.</p>
+<p>However, the MTU used by L2CAP will vary depending on the mode and channel type</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Signaling channel will use the <code class="docutils literal notranslate"><span class="pre">L2CAP_SIG_MTU_SIZE</span></code></p></li>
+<li><p>Fixed channel packets are limited by <code class="docutils literal notranslate"><span class="pre">MAX_PDU_SIZE</span> <span class="pre">-</span> <span class="pre">L2CAP_HDR_SIZE</span></code></p></li>
+<li><p>CoC packets depend on the PSM’s MTU and are limited by <code class="docutils literal notranslate"><span class="pre">L2CAP_SDU_SIZE</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>For fixed channel MTU is defined by a higher level protocol such as ATT.
+On dynamic connection oriented channels, the MTU is bound by the minimum of
+<code class="docutils literal notranslate"><span class="pre">L2CAP_SDU_SIZE</span></code> and the peer’s supported MTU.</p>
+<div class="section" id="ram-considerations">
+<span id="l2cap-ram"></span><h3>RAM Considerations<a class="headerlink" href="#ram-considerations" title="Permalink to this headline">¶</a></h3>
+<p>Care must be taken with respect to RAM when enabling these features as they
+will consume heap memory. Additionally, since L2CAP is responsible for
+encapsulating packets from higher layers, the higher level protocols may have
+requirements on how L2CAP is configured.</p>
+<table class="docutils align-default" id="id9">
+<caption><span class="caption-number">Table 15. </span><span class="caption-text">L2CAP RAM Usage</span><a class="headerlink" href="#id9" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 58%" />
+<col style="width: 19%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>L2CAP Frame Type</p></td>
+<td><p>Heap Allocation</p></td>
+<td><p>Alloc time</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">L2CAP_NUM_PSM</span></code></p></td>
+<td><p>sizeof(l2capPsm_t)*L2CAP_NUM_PSM</p></td>
+<td><p>L2CAP init</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">L2CAP_NUM_CO_CHANNELS</span></code></p></td>
+<td><p>sizeof(l2capChannel_t)* (MAX_NUM_BLE_CONNS + L2CAP_NUM_CO_CHANNELS)</p></td>
+<td><p>L2CAP Init</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">L2CAP_NUM_CO_CHANNELS</span></code></p></td>
+<td><p>sizeof( l2capCoChannel_t )</p></td>
+<td><p>Channel creation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MAX_PDU_SIZE</span></code></p></td>
+<td><p>Depends on application usage, can be up to MAX_PDU_SIZE*MAX_NUM_PDU
+in TX case. In the RX case it depends on RX throughput</p></td>
+<td><p>Runtime</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MAX_NUM_PDU</span></code></p></td>
+<td><p>See above</p></td>
+<td><p>Runtime</p></td>
+</tr>
+</tbody>
+</table>
+<p>The two parameters are only used by dynamic connection oriented channels,
+and do not need to be considered if the feature is not used. <code class="docutils literal notranslate"><span class="pre">MAX_PDU_SIZE</span></code>
+and <code class="docutils literal notranslate"><span class="pre">MAX_NUM_PDU</span></code> as they do affect both the fixed channels used by ATT and
+SM as well as the dynamic connection oriented channels.</p>
+<p>When using connection oriented channels, L2CAP will allocate space for each TX
+segment of the SDU before passing to the controller. The size is based on the
+max packet size that is negotiated by the controller.</p>
+<p>On RX, L2CAP will allocate the size of the entire SDU on receiving the first
+packet based on the length field in the header.</p>
+<p>For signaling commands on the fixed channels, L2CAP will allocate the memory
+for the packet itself, based on <code class="docutils literal notranslate"><span class="pre">L2CAP_SIG_MTU_SIZE</span></code> which is the MTU of the
+signaling channel.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For data packet payloads, the higher level protocol (ATT, SM, Application)
+is responsible for allocating using <code class="docutils literal notranslate"><span class="pre">L2CAP_bm_alloc(...)</span></code>. In the case
+of ATT and SM, this is done transparent to the user. For CoC SDUs, the user
+owns the memory associated with the payload.</p>
+</div>
+</div>
+</div>
+<div class="section" id="controller-to-host-flow-control">
+<span id="l2cap-flow-ctrl"></span><h2>Controller to Host Flow Control<a class="headerlink" href="#controller-to-host-flow-control" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned above, <code class="docutils literal notranslate"><span class="pre">MAX_NUM_PDU</span></code> defines the max number of TX packets that
+can be queued up to the controller at a time. Attempting to send more packets
+will result in a failure code being returned by the high level API and the
+packet not being queued up by the controller.</p>
+<p>The application may not know how many packets are queued up at a given time
+so it is best to always check return codes. Additionally, the application
+can increase the efficiency at which is queues packets up by registering
+for flow control notifications from the L2CAP layer.</p>
+<p>This can be done with <a class="reference external" href="../../doxygen/ble/html/group___l2_c_a_p.html#ga29468f495dccb0dd3dfab4a2a6c4012e">L2CAP_RegisterFlowCtrlTask()</a>. When enabled,
+the API will notify the application with <code class="docutils literal notranslate"><span class="pre">L2CAP_NUM_CTRL_DATA_PKT_EVT</span></code> with
+the number of data packets that are available for sending. This event is
+triggered each time a new buffer becomes available.</p>
+</div>
+<div class="section" id="connection-oriented-channels-example">
+<h2>Connection Oriented Channels Example<a class="headerlink" href="#connection-oriented-channels-example" title="Permalink to this headline">¶</a></h2>
+<p>The BLE5-Stack provides APIs to create L2CAP CoC channels to transfer
+bidirectional data between two Bluetooth Low Energy devices supporting this
+feature. Following are the steps and generic code example which are needed
+to create L2CAP CoC channels communication using TI BLE5-Stack.</p>
+<ol class="arabic">
+<li><p><strong>Enable L2CAP CoC Feature</strong>, please refer to <a class="reference internal" href="#l2cap-enable-config"><span class="std std-ref">Build Configuration</span></a></p></li>
+<li><p><strong>Register Simplified Protocol/Service Multiplexer (SPSM)</strong>.
+<a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html#term-SPSM"><span class="xref std std-term">SPSM</span></a> registration is needed for both central and peripheral devices.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-number">Listing 131. </span><span class="caption-text">Register SPSM</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#define App_SPSM      0x0080</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">application_openL2CAPChanCoc</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="n">l2capPsm_t</span><span class="w"> </span><span class="n">psm</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="n">l2capPsmInfo_t</span><span class="w"> </span><span class="n">psmInfo</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">L2CAP_PsmInfo</span><span class="p">(</span><span class="n">App_SPSM</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">psmInfo</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">INVALIDPARAMETER</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">    </span><span class="c1">// Prepare the PSM parameters</span>
+<span class="linenos">12</span><span class="w">    </span><span class="n">psm</span><span class="p">.</span><span class="n">initPeerCredits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFFFF</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">    </span><span class="n">psm</span><span class="p">.</span><span class="n">maxNumChannels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MAX_NUM_BLE_CONNS</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">    </span><span class="n">psm</span><span class="p">.</span><span class="n">mtu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MAX_PDU_SIZE</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">    </span><span class="n">psm</span><span class="p">.</span><span class="n">peerCreditThreshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">16</span><span class="w">    </span><span class="n">psm</span><span class="p">.</span><span class="n">pfnVerifySecCB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">    </span><span class="n">psm</span><span class="p">.</span><span class="n">psm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">App_SPSM</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">    </span><span class="n">psm</span><span class="p">.</span><span class="n">taskId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ICall_getLocalMsgEntityId</span><span class="p">(</span><span class="n">ICALL_SERVICE_CLASS_BLE_MSG</span><span class="p">,</span><span class="w"> </span><span class="n">selfEntity</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="w">    </span><span class="c1">// Register SPSM with L2CAP task</span>
+<span class="linenos">21</span><span class="w">    </span><span class="n">L2CAP_RegisterPsm</span><span class="p">(</span><span class="o">&amp;</span><span class="n">psm</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">22</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">23</span><span class="w">  </span><span class="k">else</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">25</span><span class="w">    </span><span class="c1">// print L2CAP setup failed</span>
+<span class="linenos">26</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This function might be called at the end of the
+<code class="docutils literal notranslate"><span class="pre">GAP_DEVICE_INIT_DONE_EVENT</span></code>.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Central or peripheral device sends <strong>L2CAP LE Credit Based Connection Request</strong>.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">Listing 132. </span><span class="caption-text">Sends out L2CAP LE Credit Based Connection Request</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1">// Send out L2CAP_LE_CREDIT_BASED_CONNECTION_REQ</span>
+<span class="linenos">2</span><span class="n">L2CAP_ConnectReq</span><span class="p">(</span><span class="n">connHandle</span><span class="p">,</span><span class="w"> </span><span class="n">App_SPSM</span><span class="p">,</span><span class="w"> </span><span class="n">App_SPSM</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Both central and peripheral device can request to establish L2CAP CoC channels.
+As long as one of the device requests, the link establishment request will be sent.
+There is no need to add this part of the code for both devices.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This function might be called at the end of the
+<code class="docutils literal notranslate"><span class="pre">GAP_LINK_ESTABLISHED_EVENT</span></code>.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Once the L2CAP credit based connection establishment is successful, the BLE5-Stack will
+send <code class="docutils literal notranslate"><span class="pre">L2CAP_SIGNAL_EVENT</span></code> to the application with opcode
+<code class="docutils literal notranslate"><span class="pre">L2CAP_CHANNEL_ESTABLISHED_EVT</span></code> for both central and peripheral devices.
+Therefore, we will <strong>implement a function to handle L2CAP messages</strong>
+under application process stack message function.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">Listing 133. </span><span class="caption-text">Process L2CAP event</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">Application_processStackMsg</span><span class="p">(</span><span class="n">ICall_Hdr</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">event</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">L2CAP_SIGNAL_EVENT</span><span class="p">:</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">      </span><span class="n">Application_processL2CAPSignalEvent</span><span class="p">((</span><span class="n">l2capSignalEvent_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">      </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="w">      </span><span class="p">...</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">      </span><span class="p">...</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">Listing 134. </span><span class="caption-text">Process L2CAP events</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// Connected device information.</span>
+<span class="linenos"> 2</span><span class="c1">// If this structure already exists, it is sufficient to add the cocCID.</span>
+<span class="linenos"> 3</span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span>
+<span class="linenos"> 4</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">connHandle</span><span class="p">;</span><span class="w">        </span><span class="c1">// Connection Handle</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">charHandle</span><span class="p">;</span><span class="w">        </span><span class="c1">// Characteristic Handle</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">addr</span><span class="p">[</span><span class="n">B_ADDR_LEN</span><span class="p">];</span><span class="w">  </span><span class="c1">// Peer Device Address</span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="n">Clock_Struct</span><span class="w"> </span><span class="o">*</span><span class="n">pRssiClock</span><span class="p">;</span><span class="w">   </span><span class="c1">// pointer to clock struct</span>
+<span class="linenos"> 9</span><span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">cocCID</span><span class="p">;</span><span class="w">            </span><span class="c1">// CID for the L2CAP channel</span>
+<span class="linenos">10</span><span class="p">}</span><span class="w"> </span><span class="n">connRec_t</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="cm">/******************************************************************************</span>
+<span class="linenos">13</span><span class="cm">* @fn          Application_processL2CAPSignalEvent</span>
+<span class="linenos">14</span><span class="cm">*</span>
+<span class="linenos">15</span><span class="cm">* @brief       This function is used to handle all the L2CAP signal events.</span>
+<span class="linenos">16</span><span class="cm">*</span>
+<span class="linenos">17</span><span class="cm">* @param       pMsg - pointer to the signal that was received</span>
+<span class="linenos">18</span><span class="cm">*</span>
+<span class="linenos">19</span><span class="cm">* @return      None.</span>
+<span class="linenos">20</span><span class="cm">*/</span><span class="w"></span>
+<span class="linenos">21</span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">Application_processL2CAPSignalEvent</span><span class="p">(</span><span class="n">l2capSignalEvent_t</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">22</span><span class="p">{</span><span class="w"></span>
+<span class="linenos">23</span><span class="w">  </span><span class="c1">// Sanity check</span>
+<span class="linenos">24</span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">25</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">26</span><span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">27</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">opcode</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">30</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">31</span><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">L2CAP_CHANNEL_ESTABLISHED_EVT</span><span class="p">:</span><span class="w"></span>
+<span class="linenos">32</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">33</span><span class="w">      </span><span class="n">l2capChannelEstEvt_t</span><span class="w"> </span><span class="o">*</span><span class="n">pEstEvt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">cmd</span><span class="p">.</span><span class="n">channelEstEvt</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">connHandle</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">LINKDB_CONNHANDLE_INVALID</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">connHandle</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MAX_NUM_BLE_CONNS</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">36</span><span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">37</span><span class="w">        </span><span class="c1">// Successfully establish link over L2CAP</span>
+<span class="linenos">38</span><span class="w">        </span><span class="c1">// Extract the CID and store in the application layer</span>
+<span class="linenos">39</span><span class="w">        </span><span class="c1">// This will be useful when sending data over L2CAP channels</span>
+<span class="linenos">40</span><span class="w">        </span><span class="n">connList</span><span class="p">[</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">connHandle</span><span class="p">].</span><span class="n">cocCID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pEstEvt</span><span class="o">-&gt;</span><span class="n">CID</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">41</span><span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">42</span><span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="linenos">43</span><span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">44</span><span class="w">        </span><span class="c1">// Could not establish an L2CAP link</span>
+<span class="linenos">45</span><span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">46</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">47</span><span class="w">    </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">48</span>
+<span class="linenos">49</span><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">L2CAP_SEND_SDU_DONE_EVT</span><span class="p">:</span><span class="w"></span>
+<span class="linenos">50</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">51</span><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">hdr</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SUCCESS</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">52</span><span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">53</span><span class="w">       </span><span class="c1">// Successfully sending data over L2CAP</span>
+<span class="linenos">54</span><span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">55</span><span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="linenos">56</span><span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">57</span><span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">58</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">59</span><span class="w">    </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">60</span>
+<span class="linenos">61</span><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">L2CAP_CHANNEL_TERMINATED_EVT</span><span class="p">:</span><span class="w"></span>
+<span class="linenos">62</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">63</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">64</span><span class="w">    </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">65</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">66</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Both peripheral and central devices need to <strong>exchange L2CAP Credits</strong>.
+After the link is established, devices can distribute credit using the
+following code snippet.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">Listing 135. </span><span class="caption-text">Exchange credits</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">l2capChannelEstEvt_t</span><span class="w"> </span><span class="o">*</span><span class="n">pEstEvt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">cmd</span><span class="p">.</span><span class="n">channelEstEvt</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="c1">// Give max credits to the other side</span>
+<span class="linenos">4</span><span class="n">L2CAP_FlowCtrlCredit</span><span class="p">(</span><span class="n">pEstEvt</span><span class="o">-&gt;</span><span class="n">CID</span><span class="p">,</span><span class="w"> </span><span class="mh">0xFFFF</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This code can be placed when application receives successful
+<code class="docutils literal notranslate"><span class="pre">L2CAP_CHANNEL_ESTABLISHED_EVT</span></code>.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Send data using L2CAP CoC channel</strong>. In order to send data over L2CAP,
+<a class="reference external" href="../../doxygen/ble/html/group___l2_c_a_p.html#ga4756c83b98db5cf43ff8d4e82b84e2db">L2CAP_SendSDU()</a> is needed. After successfully sending data over
+the air, the BLE5-Stack will send <code class="docutils literal notranslate"><span class="pre">L2CAP_SIGNAL_EVENT</span></code> to application with
+opcode <code class="docutils literal notranslate"><span class="pre">L2CAP_SEND_SDU_DONE_EVT</span></code>.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-number">Listing 136. </span><span class="caption-text">Sending data over L2CAP</span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="n">bStatus_t</span><span class="w"> </span><span class="nf">Application_sendL2capData</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">  </span><span class="n">l2capPacket_t</span><span class="w"> </span><span class="n">pkt</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="n">bStatus_t</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SUCCESS</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">appData</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Example Data!&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="c1">// Tell L2CAP the desired Channel ID</span>
+<span class="linenos"> 8</span><span class="w">  </span><span class="n">pkt</span><span class="p">.</span><span class="n">CID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connList</span><span class="p">[</span><span class="n">connIndex</span><span class="p">].</span><span class="n">cocCID</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">  </span><span class="c1">// Allocate space for payload</span>
+<span class="linenos">11</span><span class="w">  </span><span class="n">pkt</span><span class="p">.</span><span class="n">pPayload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L2CAP_bm_alloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">appData</span><span class="p">));</span><span class="w"></span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">  </span><span class="c1">// Copy payload data</span>
+<span class="linenos">14</span><span class="w">  </span><span class="n">memcpy</span><span class="p">(</span><span class="n">pkt</span><span class="p">.</span><span class="n">pPayload</span><span class="p">,</span><span class="w"> </span><span class="n">appData</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">appData</span><span class="p">));</span><span class="w"></span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pkt</span><span class="p">.</span><span class="n">pPayload</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="w">    </span><span class="n">pkt</span><span class="p">.</span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">appData</span><span class="p">));</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L2CAP_SendSDU</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pkt</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="w">    </span><span class="c1">// Check that the packet was sent</span>
+<span class="linenos">23</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">SUCCESS</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">25</span><span class="w">      </span><span class="c1">// If SDU wasn&#39;t sent, free</span>
+<span class="linenos">26</span><span class="w">      </span><span class="n">BM_free</span><span class="p">(</span><span class="n">pkt</span><span class="p">.</span><span class="n">pPayload</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">27</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">28</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">29</span><span class="w">  </span><span class="k">else</span><span class="w"></span>
+<span class="linenos">30</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">31</span><span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bleMemAllocError</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">32</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">35</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Process received data over L2CAP</strong>. When device receives data from L2CAP,
+the BLE5-Stack will send <code class="docutils literal notranslate"><span class="pre">L2CAP_DATA_EVENT</span></code> to the application. Therefore, we will
+handle this under application process stack message function.</p>
+<blockquote>
+<div><div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-number">Listing 137. </span><span class="caption-text">Received data over L2CAP</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="nf">Application_processStackMsg</span><span class="p">(</span><span class="n">ICall_Hdr</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="w">   </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">event</span><span class="p">)</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">   </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">     </span><span class="k">case</span><span class="w"> </span><span class="nl">L2CAP_DATA_EVENT</span><span class="p">:</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">       </span><span class="n">Application_processL2CAPDataEvent</span><span class="p">((</span><span class="n">l2capDataEvent_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">pMsg</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">       </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="w">       </span><span class="p">...</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">       </span><span class="p">...</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-number">Listing 138. </span><span class="caption-text">Extract data received over L2CAP</span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm">/******************************************************************************</span>
+<span class="linenos"> 2</span><span class="cm">* @fn          Application_processL2CAPDataEvent</span>
+<span class="linenos"> 3</span><span class="cm">*</span>
+<span class="linenos"> 4</span><span class="cm">* @brief       This function is used to handle the L2CAP data extraction.</span>
+<span class="linenos"> 5</span><span class="cm">*</span>
+<span class="linenos"> 6</span><span class="cm">* @param       pMsg - pointer to the signal that was received</span>
+<span class="linenos"> 7</span><span class="cm">*</span>
+<span class="linenos"> 8</span><span class="cm">* @return      None.</span>
+<span class="linenos"> 9</span><span class="cm">*/</span><span class="w"></span>
+<span class="linenos">10</span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">Application_processL2CAPDataEvent</span><span class="p">(</span><span class="n">l2capDataEvent_t</span><span class="w"> </span><span class="o">*</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">11</span><span class="p">{</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">pMsg</span><span class="p">)</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">      </span><span class="c1">// Caller needs to figure out by himself that pMsg is NULL</span>
+<span class="linenos">15</span><span class="w">      </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">16</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="w">    </span><span class="c1">// The data locates under pMsg-&gt;pkt.pPayload</span>
+<span class="linenos">19</span><span class="w">    </span><span class="c1">// Extract the data and do what you want to do</span>
+<span class="linenos">20</span><span class="w">    </span><span class="c1">// For example:</span>
+<span class="linenos">21</span><span class="w">    </span><span class="c1">//Display_printf(dispHandle, 19, 0, &quot;L2CAP data Rx: %s&quot;, pMsg-&gt;pkt.pPayload);</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="w">    </span><span class="c1">// Free the payload (must use BM_free here)</span>
+<span class="linenos">24</span><span class="w">    </span><span class="n">BM_free</span><span class="p">(</span><span class="n">pMsg</span><span class="o">-&gt;</span><span class="n">pkt</span><span class="p">.</span><span class="n">pPayload</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">25</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>The <a class="reference internal" href="#sample-connection-central-peripheral"><span class="std std-numref">Figure 94.</span></a> shows a sample connection
+and data exchange process between central and peripheral device using a L2CAP
+connection-oriented channel in LE Credit Based Flow Control Mode.</p>
+<div class="figure align-center" id="id29">
+<span id="sample-connection-central-peripheral"></span><p class="plantuml">
+<img src="../_images/plantuml-2cc6d15f4badbae37e5cb80dea8863c8c7605ef7.png" alt=" &#64;startuml
+  participant Central
+  participant Peripheral
+
+  rnote over Central
+  Resgister PSM
+  end note
+
+  rnote over Peripheral
+  Register PSM
+  end note
+
+  == Connection Established  ==
+
+  Central --&gt; Peripheral : L2CAP_ConnectReq()
+  Central -&gt; Central : L2CAP_SIGNAL_EVENT\nL2CAP_CHANNEL_ESTABLISHED_EVT
+  Peripheral -&gt; Peripheral : L2CAP_SIGNAL_EVENT\nL2CAP_CHANNEL_ESTABLISHED_EVT
+
+  Central &lt;--&gt; Peripheral : L2CAP_FlowCtrlCredit()
+
+  group Central device sends data to peripheral device
+    Central --&gt; Peripheral : L2CAP_SendSDU()
+    Central -&gt; Central: L2CAP_SIGNAL_EVENT\nL2CAP_SEND_SDU_DONE_EVT
+    Peripheral-&gt; Peripheral: L2CAP_DATA_EVENT
+    rnote over Peripheral
+      App task process data
+    end note
+  end
+
+  group Peripheral device sends data to central device
+    Peripheral --&gt; Central : L2CAP_SendSDU()
+    Peripheral -&gt; Peripheral: L2CAP_SIGNAL_EVENT\nL2CAP_SEND_SDU_DONE_EVT
+    Central-&gt; Central: L2CAP_DATA_EVENT
+    rnote over Central
+      App task process data
+    end note
+  end
+
+  Central --&gt; Peripheral : L2CAP_DisconnectReq()
+  Central -&gt; Central : L2CAP_SIGNAL_EVENT\nL2CAP_CHANNEL_TERMINATED_EVT
+  Peripheral -&gt; Peripheral : L2CAP_SIGNAL_EVENT\nL2CAP_CHANNEL_TERMINATED_EVT
+
+  Central &lt;-&gt; Peripheral : L2CAP_DeregisterPsm()
+&#64;enduml"/>
+</p>
+<p class="caption"><span class="caption-number">Figure 94. </span><span class="caption-text">L2CAP Connection Oriented Channels Example</span><a class="headerlink" href="#id29" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ble-stack-5.x/privacy.html" class="btn btn-neutral float-left" title="Privacy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="link-layer-cc13xx_cc26xx.html" class="btn btn-neutral float-right" title="Link Layer (LL)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

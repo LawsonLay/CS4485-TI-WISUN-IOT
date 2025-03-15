@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User&#39;s Guide
+ 7.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Application Overview" href="application-overview.html" />
+    <link rel="prev" title="TI 15.4-Stack" href="../ti154stack-guide/ti154stack-index-cc13xx_cc26xx.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ti154stack ti154stack-overview-cc13xx_cc26xx";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ti154stack-guide/ti154stack-index-cc13xx_cc26xx.html">TI 15.4-Stack</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-choices">Architecture Choices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-rate-and-phy">Data Rate and PHY</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#phy-selection-in-ti-15-4-stack">PHY Selection in TI 15.4-Stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-phy">Custom PHY</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="application-overview.html">Application Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-applications.html">Example Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common-user-interface.html">Common User Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secure-commissioning.html">Secure Commissioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beacon-mode.html">Beacon Enabled Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="non-beacon-mode.html">Non-Beacon Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frequency-hopping-mode.html">Frequency-Hopping Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arib-regulation-type.html">ARIB Regulation Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuring-stack.html">Configuring Stack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating-custom-applications.html">Creating Custom Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack-guide/oad-secure-index.html">Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ti154stack-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/migration-guide-cc13xx_cc26xx.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api-reference.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ti154stack-guide/references-cc13xx_cc26xx.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ti154stack-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI 15.4-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ti154stack-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ti154stack-guide/ti154stack-index-cc13xx_cc26xx.html">TI 15.4-Stack</a> &raquo;</li>
+      <li>Overview</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="overview">
+<span id="chap-ti154stack-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>TI’s royalty-free TI 15.4-Stack is a complete software platform for developing
+applications that require extremely low-power, long-range, reliable, robust and
+secure wireless star-topology based networking solutions. This chapter explains
+in detail the different network-configuration modes supported by the TI
+15.4-Stack for application development. Useful information is presented for
+developers using the TI 15.4-Stack for their custom application development,
+which lets developers quickly understand the basics of the selected
+configuration mode and develop their end products with ease.</p>
+</div>
+<div class="section" id="architecture-choices">
+<h1>Architecture Choices<a class="headerlink" href="#architecture-choices" title="Permalink to this headline">¶</a></h1>
+<p>TI 15.4-Stack can be used in two separate architectures based on the end product
+application. <a class="reference internal" href="#fig-device-configuration"><span class="std std-numref">Figure 21.</span></a> shows the two different system
+architectures enabled by TI 15.4-Stack.</p>
+<ul class="simple">
+<li><p>A single device is shown in <a class="reference internal" href="#fig-device-configuration"><span class="std std-numref">Figure 21.</span></a> (left). The
+application and protocol stack are both implemented on the CC13xx or CC26xx as a
+true single-chip solution. This configuration is the simplest and most
+common when using the CC13xx or CC26xx for network nodes and also using the
+CC13xx or CC26xx as a personal area network (PAN) coordinator node. This
+configuration is the most cost-effective technique and provides the lowest-
+power performance.</p></li>
+<li><p>A coprocessor is shown in <a class="reference internal" href="#fig-device-configuration"><span class="std std-numref">Figure 21.</span></a> (right). The
+protocol stack runs on the CC13xx or CC26xx while the application is executed on an
+external MPU or MCU. The application interfaces with the CC13xx or CC26xx using the
+network protocol interface (NPI) over a serial universal asynchronous
+receiver/transmitter (UART) connection. The description of the API interface
+is provided in the <a class="reference external" href="../../ti-15.4-stack-cop-interface-guide.pdf">TI 15.4-Stack CoP Interface Guide</a> document found in
+the <code class="docutils literal notranslate"><span class="pre">docs/ti154stack</span></code> folder of the SDK installation directory. This
+configuration is useful for applications that must add long-range wireless
+connectivity or peripheral applications, which execute on another device
+(such as an external MCU) or on a PC without the requirement to implement
+the complexities associated with a wireless networking protocol. In these
+cases, the application can be developed externally on a host processor while
+running TI 15.4-Stack on the CC13xx or CC26xx, which provides ease of development and
+quickly adds long-range wireless connectivity to existing products.</p></li>
+</ul>
+<div class="figure align-center" id="id2">
+<span id="fig-device-configuration"></span><img alt="../_images/fig-device-configuration.png" src="../_images/fig-device-configuration.png" />
+<p class="caption"><span class="caption-number">Figure 21. </span><span class="caption-text">Single Device and Coprocessor Configuration</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="data-rate-and-phy">
+<span id="chap-ti154stack-datarate-and-phy"></span><h1>Data Rate and PHY<a class="headerlink" href="#data-rate-and-phy" title="Permalink to this headline">¶</a></h1>
+<p>Data rate and PHY is selected through SysConfig:</p>
+<ol class="arabic" start="0">
+<li><p>(Only dual-band devices) Selecting your frequency band is done by selecting
+which version of the example you use as a starting point:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Sub-1 GHz band: Use the regular examples</p></li>
+<li><p>2.4 GHz frequency band: Use examples with <code class="docutils literal notranslate"><span class="pre">_2_4g</span></code> tag. E.g. the
+<code class="docutils literal notranslate"><span class="pre">collector_2_4g</span></code> example.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Open SysConfig -&gt; RF STACKS -&gt; TI 15.4-Stack -&gt; Radio</p></li>
+<li><p>Select your Regulation type. This is the region your product will be used in.</p></li>
+<li><p>Select your frequency. Please note, available frequencies are restricted by
+your selected Regulation type. If you can’t find the frequency you want, you
+may need to select a different Regulation type.</p></li>
+<li><p>Select your Phy Type. Here you choose your modulation and data rate. Again,
+the available Phy Types are restricted based on Regulation type. If you can’t
+find the Phy Type you want, you may need to select a different Regulation type.</p></li>
+</ol>
+<div class="figure align-center" id="id3">
+<img alt="../_images/freq_sysconfig.png" src="../_images/freq_sysconfig.png" />
+<p class="caption"><span class="caption-number">Figure 22. </span><span class="caption-text">Configure frequency and data rate in SysConfig.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="phy-selection-in-ti-15-4-stack">
+<h2>PHY Selection in TI 15.4-Stack<a class="headerlink" href="#phy-selection-in-ti-15-4-stack" title="Permalink to this headline">¶</a></h2>
+<p>The choice of PHY band and data rate is done by opening SysConfig -&gt; RF Stacks
+-&gt; TI 15.4-Stack -&gt; Radio and selecting the Phy Type. Please note the Phy Types
+available is determined by the Regulation Type, so this should always be
+selected first.</p>
+<div class="figure align-center">
+<img alt="../_images/phy-type-sysconfig.png" src="../_images/phy-type-sysconfig.png" />
+</div>
+<p>The SysConfig PHY type will set the <code class="docutils literal notranslate"><span class="pre">ApiMac_attribute_phyCurrentDescriptorId</span></code>
+PIB attribute. All available PHYs are listed in the table below.</p>
+<table class="docutils align-default" id="tab-phy-channels">
+<caption><span class="caption-number">Table 1. </span><span class="caption-text">TI 15.4-Stack PHY’s and their channel frequencies</span><a class="headerlink" href="#tab-phy-channels" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 18%" />
+<col style="width: 33%" />
+<col style="width: 18%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>PHY ID</p></th>
+<th class="head"><p>PHY Data Rate</p></th>
+<th class="head"><p>Channel 0 Freq</p></th>
+<th class="head"><p># of Channels</p></th>
+<th class="head"><p>Channel Spacing</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>250 kbps</p></td>
+<td><p>2405 MHz (<strong>ch11</strong>*)</p></td>
+<td><p>16</p></td>
+<td><p>5 MHz</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>50 kbps</p></td>
+<td><p>902.2 MHz</p></td>
+<td><p>129</p></td>
+<td><p>200 kHz</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>50 kbps</p></td>
+<td><p>863.125 MHz</p></td>
+<td><p>64</p></td>
+<td><p>200 kHz</p></td>
+</tr>
+<tr class="row-odd"><td><p>128</p></td>
+<td><p>50 kbps</p></td>
+<td><p>433.05 MHz</p></td>
+<td><p>7</p></td>
+<td><p>200 kHz</p></td>
+</tr>
+<tr class="row-even"><td><p>129</p></td>
+<td><p>5 kbps</p></td>
+<td><p>902.2 MHz</p></td>
+<td><p>129</p></td>
+<td><p>200 kHz</p></td>
+</tr>
+<tr class="row-odd"><td><p>130</p></td>
+<td><p>5 kbps</p></td>
+<td><p>433.05 MHz</p></td>
+<td><p>7</p></td>
+<td><p>200 kHz</p></td>
+</tr>
+<tr class="row-even"><td><p>131</p></td>
+<td><p>5 kbps</p></td>
+<td><p>863.125 MHz</p></td>
+<td><p>64</p></td>
+<td><p>200 kHz</p></td>
+</tr>
+<tr class="row-odd"><td><p>132</p></td>
+<td><p>200 kbps</p></td>
+<td><p>902.4 MHz</p></td>
+<td><p>64</p></td>
+<td><p>400 kHz</p></td>
+</tr>
+<tr class="row-even"><td><p>133</p></td>
+<td><p>200 kbps</p></td>
+<td><p>863.225 MHz</p></td>
+<td><p>32</p></td>
+<td><p>400 kHz</p></td>
+</tr>
+<tr class="row-odd"><td><p>136</p></td>
+<td><p>200 kbps</p></td>
+<td><p>920.7 MHz (<strong>ch 24, 25</strong>)</p></td>
+<td><p>36</p></td>
+<td><p>200 kHz</p></td>
+</tr>
+</tbody>
+</table>
+<p>* When operating TI 15.4-Stack at 2.4 GHz (PHY ID 0) the data-rate is locked at the
+standard IEEE 802.15.4 data-rate of 250 kbps. Channel count starts at channel 11
+for this PHY.</p>
+</div>
+<div class="section" id="custom-phy">
+<h2>Custom PHY<a class="headerlink" href="#custom-phy" title="Permalink to this headline">¶</a></h2>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The Custom PHY option is only implemented for certain devices and modes.</p>
+<p>Please note, the PHYs and RF settings available through Custom PHY have not
+been tested with the TI 15.4-Stack. It is only recommended to use this
+feature if you have a good understanding of RF settings and the IEEE
+802.25.4 spec.</p>
+<p>If you see an issue while using Custom PHY, please revert back to using a
+tested TI 15.4-Stack PHY.</p>
+</div>
+<p>By checking the Custom PHY check-box in SysConfig, you will get access to
+configure RF settings for your TI 15.4-Stack network. By expanding the tabs
+under Custom PHY you can control most RF settings.</p>
+<div class="figure align-center">
+<img alt="../_images/custom-phy.png" src="../_images/custom-phy.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ti154stack-guide/ti154stack-index-cc13xx_cc26xx.html" class="btn btn-neutral float-left" title="TI 15.4-Stack" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="application-overview.html" class="btn btn-neutral float-right" title="Application Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

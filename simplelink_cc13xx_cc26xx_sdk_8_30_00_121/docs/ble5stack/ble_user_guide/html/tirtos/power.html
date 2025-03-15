@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Power Management &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="TI-RTOS to TI-RTOS7 Migration" href="bios7_migration.html" />
+    <link rel="prev" title="Clocks" href="../ble-stack-tirtos/clocks.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug tirtos power";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="hwis_swis_idle.html">Threading Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bios7_config.html">Kernel Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_vs_construct.html">Creating vs. Constructing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synchronization.html">Thread Synchronization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-tirtos/queues.html">Queues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-tirtos/tasks.html">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-tirtos/clocks.html">Clocks</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Power Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bios7_migration.html">TI-RTOS to TI-RTOS7 Migration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a> &raquo;</li>
+      <li>Power Management</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="power-management">
+<span id="sec-rtos-power-management"></span><h1>Power Management<a class="headerlink" href="#power-management" title="Permalink to this headline">¶</a></h1>
+<p>All power-management functionality is handled by the TI power driver and
+are used by the peripheral drivers (e.g. UART, SPI, I2C, etc..). Applications
+can prevent, if they choose, the CC13xx or CC26xx from entering low power modes by
+setting a power constraint.</p>
+<p>By default, all the examples in <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> will put the CC13xx or CC26xx in standby mode if
+there is no task running.</p>
+<p>This is achieved by configuring the TI power driver and the kernel to do so,
+as shown in the following step.</p>
+<ol class="arabic">
+<li><p>As configured via SysConfig, you can find the Idle functions defined inside
+<code class="docutils literal notranslate"><span class="pre">TI-RTOS</span></code> → <code class="docutils literal notranslate"><span class="pre">Core</span> <span class="pre">Kernel</span></code> → <code class="docutils literal notranslate"><span class="pre">Idle</span></code>.</p>
+<p>By doing this, the TI-RTOS7 kernel will call Power_idleFunc whenever no task
+is running.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Power_idleFunc</span></code> takes in policyFxn and policyFxn is defined using
+SysConfig tool <a class="reference internal" href="#tirtos-sysconfig-power-policy"><span class="std std-numref">Figure 64.</span></a>. By default, TI sets
+the <code class="docutils literal notranslate"><span class="pre">PowerCCxxxx_standbyPolicy</span></code> as policyFxn.
+<code class="docutils literal notranslate"><span class="pre">Power_idleFunc</span></code> is defined in <code class="docutils literal notranslate"><span class="pre">{SDK_INSTALL_DIR}\source\ti\drivers\power\PowerCCxxxx.c</span></code> and
+<code class="docutils literal notranslate"><span class="pre">PowerCCxxxx_standbyPolicy</span></code> can be found in <code class="docutils literal notranslate"><span class="pre">{SDK_INSTALL_DIR}\kernel\tirtos7\packages\ti\dpl\PowerCCxxxx_tirtos.c</span></code></p>
+<div class="figure align-center" id="id2">
+<span id="tirtos-sysconfig-power-policy"></span><img alt="../_images/tirtos_sysconfig_power_policy.png" src="../_images/tirtos_sysconfig_power_policy.png" />
+<p class="caption"><span class="caption-number">Figure 64. </span><span class="caption-text">Configure Power Policy for Idle Function.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>In the SysConfig generated files, you will find the following example in
+<code class="docutils literal notranslate"><span class="pre">ti_drivers_config.c.</span></code></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">PowerCC26X2_Config</span><span class="w"> </span><span class="n">PowerCC26X2_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">   </span><span class="p">.</span><span class="n">enablePolicy</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="p">.</span><span class="n">policyInitFxn</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="p">.</span><span class="n">policyFxn</span><span class="w">                </span><span class="o">=</span><span class="w"> </span><span class="n">PowerCC26XX_standbyPolicy</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="p">.</span><span class="n">calibrateFxn</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="n">PowerCC26XX_calibrate</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="p">.</span><span class="n">calibrateRCOSC_LF</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="p">.</span><span class="n">calibrateRCOSC_HF</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="p">.</span><span class="n">enableTCXOFxn</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>More information on power-management functionality, see <a class="reference external" href="../../../../drivers/Power_Management.pdf">Power Management User’s Guide</a>.
+These APIs are required only when using a custom driver.</p>
+<p>With BLE5-Stack applications, the power constraint is set in <code class="docutils literal notranslate"><span class="pre">main()</span></code> by
+defining the <code class="docutils literal notranslate"><span class="pre">POWER_SAVING</span></code> preprocessor symbol. When defined,
+enabled, the device enters and exits sleep as required for BLE5-Stack events,
+peripheral events, application timers, and so forth. When undefined, the
+device stays awake.</p>
+<p>Also see <a class="reference external" href="https://ti.com/lit/swra478">Measuring Bluetooth Smart Power Consumption</a>
+for steps to analyze the system power consumption and battery life.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ble-stack-tirtos/clocks.html" class="btn btn-neutral float-left" title="Clocks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bios7_migration.html" class="btn btn-neutral float-right" title="TI-RTOS to TI-RTOS7 Migration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

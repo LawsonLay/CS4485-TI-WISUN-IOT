@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['addrmode_5fpublic',['ADDRMODE_PUBLIC',['../group___g_a_p___constants.html#ggab19de39a8d30e54fe6845305e6ca63f1a740709a99f4f110add2b070d7c63a17c',1,'gap.h']]],
+  ['addrmode_5frandom',['ADDRMODE_RANDOM',['../group___g_a_p___constants.html#ggab19de39a8d30e54fe6845305e6ca63f1a1c78f4b4b9080068dccc5a0b67aa66b8',1,'gap.h']]],
+  ['addrmode_5frp_5fwith_5fpublic_5fid',['ADDRMODE_RP_WITH_PUBLIC_ID',['../group___g_a_p___constants.html#ggab19de39a8d30e54fe6845305e6ca63f1a5cead6a064c96c7188375e674015397f',1,'gap.h']]],
+  ['addrmode_5frp_5fwith_5frandom_5fid',['ADDRMODE_RP_WITH_RANDOM_ID',['../group___g_a_p___constants.html#ggab19de39a8d30e54fe6845305e6ca63f1ab7152cc40647bc99c07128d03a422b1a',1,'gap.h']]],
+  ['addrtype_5fnone',['ADDRTYPE_NONE',['../group___g_a_p___constants.html#gga7e22bcf3e5f39ac591975301dbee397da3f704e43aabc213c4eb8cfa10e8dd483',1,'gap.h']]],
+  ['addrtype_5fpublic',['ADDRTYPE_PUBLIC',['../group___g_a_p___constants.html#gga7e22bcf3e5f39ac591975301dbee397da50113d3dfc2369279d7c92457ae9fe9e',1,'gap.h']]],
+  ['addrtype_5fpublic_5fid',['ADDRTYPE_PUBLIC_ID',['../group___g_a_p___constants.html#gga7e22bcf3e5f39ac591975301dbee397da606dfd14ec3742bc5ed921d088168b52',1,'gap.h']]],
+  ['addrtype_5frandom',['ADDRTYPE_RANDOM',['../group___g_a_p___constants.html#gga7e22bcf3e5f39ac591975301dbee397dad444ed1f59a671072b503824272558ee',1,'gap.h']]],
+  ['addrtype_5frandom_5fid',['ADDRTYPE_RANDOM_ID',['../group___g_a_p___constants.html#gga7e22bcf3e5f39ac591975301dbee397da25f5451cb198d013417634ee08860e60',1,'gap.h']]],
+  ['addrtype_5frandom_5fnr',['ADDRTYPE_RANDOM_NR',['../group___g_a_p___constants.html#gga7e22bcf3e5f39ac591975301dbee397da3ebeffeb6d2a5c5e32c39b9fe9e7c594',1,'gap.h']]],
+  ['adv_5frpt_5fevt_5fstatus_5fcomplete',['ADV_RPT_EVT_STATUS_COMPLETE',['../group___gap_scan___constants.html#gga01e19fae0ebd5694232399bb26f68522a73cc89668152ce91c8333079487d448c',1,'gap_scanner.h']]],
+  ['adv_5frpt_5fevt_5fstatus_5fmore_5fdata',['ADV_RPT_EVT_STATUS_MORE_DATA',['../group___gap_scan___constants.html#gga01e19fae0ebd5694232399bb26f68522ae58ce431eaaff7a6823b16016a500d7f',1,'gap_scanner.h']]],
+  ['adv_5frpt_5fevt_5fstatus_5frfu',['ADV_RPT_EVT_STATUS_RFU',['../group___gap_scan___constants.html#gga01e19fae0ebd5694232399bb26f68522acb066fbea571dbdb1389a083d9e7a48f',1,'gap_scanner.h']]],
+  ['adv_5frpt_5fevt_5fstatus_5ftruncated',['ADV_RPT_EVT_STATUS_TRUNCATED',['../group___gap_scan___constants.html#gga01e19fae0ebd5694232399bb26f68522a1c439dd5cb07611e5b0a3bb6b4472110',1,'gap_scanner.h']]],
+  ['adv_5frpt_5fevt_5ftype_5fconnectable',['ADV_RPT_EVT_TYPE_CONNECTABLE',['../group___gap_scan___constants.html#gga01e19fae0ebd5694232399bb26f68522af2d9fdc27144bc8cc9e14d9dfe2c35be',1,'gap_scanner.h']]],
+  ['adv_5frpt_5fevt_5ftype_5fdirected',['ADV_RPT_EVT_TYPE_DIRECTED',['../group___gap_scan___constants.html#gga01e19fae0ebd5694232399bb26f68522a10f6f6d837de6fb53b656179245a3c12',1,'gap_scanner.h']]],
+  ['adv_5frpt_5fevt_5ftype_5flegacy',['ADV_RPT_EVT_TYPE_LEGACY',['../group___gap_scan___constants.html#gga01e19fae0ebd5694232399bb26f68522aad7c2b3dababd63daa04e4311fb3c54e',1,'gap_scanner.h']]],
+  ['adv_5frpt_5fevt_5ftype_5fscan_5frsp',['ADV_RPT_EVT_TYPE_SCAN_RSP',['../group___gap_scan___constants.html#gga01e19fae0ebd5694232399bb26f68522abbbfb924c70f915ae141ed3ff1642d05',1,'gap_scanner.h']]],
+  ['adv_5frpt_5fevt_5ftype_5fscannable',['ADV_RPT_EVT_TYPE_SCANNABLE',['../group___gap_scan___constants.html#gga01e19fae0ebd5694232399bb26f68522af999f498f4d9d29fa4919f7a2b5c8e3a',1,'gap_scanner.h']]]
+];

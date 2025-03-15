@@ -1,0 +1,82 @@
+.. _sec-mcuboot-oad-image-header:
+
+MCUboot OAD Image Header
+========================
+
+All firmware images delivered via OAD are in binary format and contain an image
+header and an image trailer. The information in the trailer is used for image authentication. 
+The location of the trailer is based on which design you choose (Direct XIP or Overwrite only,
+please see MCUboot section for more information). The information in the image header is used by the application and
+secure bootloader to determine the suitability of an image for download or 
+loading. In order to prevent this information from being calculated multiple 
+times all MCUboot OAD images use a standard image header.
+
+This section explains the various fields within the image header and what they
+mean.
+
+MCUboot provides a tool to generate an OAD ready image, it is called
+:ref:`sec-mcuboot-imgtool`. By default, this tool runs as a
+post-build step of all OAD enabled projects.
+
+MCUboot OAD Image Header
+------------------------
+
+The header contains the essential information required for all types of OAD
+across all supported wireless stacks. The core header must be present as the
+secure bootloader relies heavily on it to boot and OAD image.
+
+.. code-block:: c
+    :caption: MCUboot OAD Image Header
+    
+    #define IMAGE_MAGIC                 0x96f3b83d
+
+    #define IMAGE_HEADER_SIZE           32
+
+    struct image_version {
+      uint8_t iv_major;
+      uint8_t iv_minor;
+      uint16_t iv_revision;
+      uint32_t iv_build_num;
+    };
+
+    /** Image header.  All fields are in little endian byte order. */
+    struct image_header {
+      uint32_t ih_magic;
+      uint32_t ih_load_addr;
+      uint16_t ih_hdr_size;           /* Size of image header (bytes). */
+      uint16_t ih_protect_tlv_size;   /* Size of protected TLV area (bytes). */
+      uint32_t ih_img_size;           /* Does not include header. */
+      uint32_t ih_flags;              /* IMAGE_F_[...]. */
+      struct image_version ih_ver;
+      uint32_t _pad1;
+    };
+
+:numref:`tbl-mcuboot-image-header-description-table` below shows a description of the
+core image header.
+
+.. _tbl-mcuboot-image-header-description-table:
+.. table:: Description of the core image header.
+
+    +------------------------+-------------------+-----------------------------------------------------+
+    | Field                  | Size (in bytes)   | Description                                         |
+    +========================+===================+=====================================================+
+    | ih_magic               | 4                 | Magic number checked by secure bootloader. Need to  |
+    |                        |                   | match for the image to be valid.                    |
+    +------------------------+-------------------+-----------------------------------------------------+
+    | ih_load_addr           | 4                 | Where the image should be programmed at             |
+    +------------------------+-------------------+-----------------------------------------------------+
+    | ih_hdr_size            | 2                 | Header size                                         |
+    +------------------------+-------------------+-----------------------------------------------------+
+    | ih_protect_tlv_size    | 2                 | Sizde of protected TLV area                         |
+    +------------------------+-------------------+-----------------------------------------------------+
+    | ih_img_size            | 4                 | Image size excluded header                          |
+    +------------------------+-------------------+-----------------------------------------------------+
+    | ih_flags               | 4                 | The total length of the image including header      |
+    +------------------------+-------------------+-----------------------------------------------------+
+    | ih_ver                 | 8                 | Version number of the image. Secure bootloader      |
+    |                        |                   | uses this field to determine which image to run.    |
+    +------------------------+-------------------+-----------------------------------------------------+
+    | _pad1                  | 2                 | Not used but can be customized if needed            |
+    +------------------------+-------------------+-----------------------------------------------------+
+
+

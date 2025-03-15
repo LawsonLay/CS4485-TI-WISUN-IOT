@@ -1,0 +1,219 @@
+BLE5-Stack 2.00.04 (SDK 3.20) to BLE5-Stack 2.01.00 (SDK 3.30)
+==============================================================
+
+This section will describe a way to migrate a project from BLE5-Stack 2.00.04 to
+a BLE5-Stack 2.01.00 project. The porting steps are provided in section 
+:ref:`sec-porting-examplesgen-2-00-05` below which in turn partly overlap with 
+the :ref:`ble-sysconfig-migration` guide.
+
+.. note::
+    Most of the projects in the BLE5-Stack 2.01.00 SDK are now fully SysConfig 
+    enabled.
+
+
+Brief Overview of BLE5-Stack 2.01.00 SysConfig-Enabled Example Projects
+-----------------------------------------------------------------------
+As all the examples are SysConfig enabled the reader is encouraged to get 
+familiar with the tool by reading the :ref:`sysconfig-sysconfig` chapter. This
+Chapter will provide a very brief overview only for the BLE SysConfig examples.
+
+SysConfig is short for System Configuration Tool, a GUI tool used to configure 
+and generate source code for TI-RTOS Driver configuration 
+(ti_drivers_config.c/h), Device configuration (ti_devices_config.c), Board file, 
+radio configuration (ti_radio_config.c/h), BLE stack configuration 
+(ti_ble_config.c/h), BLE build config options (ti_build_config.opt) and BLE 
+module defines (ti_ble_app_config.opt). Some of the generated files replace 
+certain projects files from earlier non-SysConfig example projects:
+
+    - ``ti_devices_config`` replace ``ccfg_app_ble.c``.
+    - ``ti_drivers_config`` replace board files.
+    - ``ti_ble_config`` replace BLE related application code.
+    - ``ti_radio_config`` expose low level Radio configuration.
+    - ``ti_build_config.opt`` replace ``build_config.opt``.
+    - ``ti_ble_app_config.opt`` replace ``project_name_app.opt``.
+
+All the default SysConfig settings for the examples can be found in the 
+``project_name.syscfg`` file that reside in the examples folders. In CCS the 
+SysConfig generated files will be created in a build step and placed in the 
+build output folder under a separate ``syscfg`` folder.
+
+
+.. note::
+   The BLE stack module in SysConfig is intended to simplify the stack 
+   configuration for the user. This module can be used only with the following 
+   applications: multi_role, simple_broadcaster, simple_central and 
+   simple_peripheral. For more information, refer to the BLE User's Guide. This 
+   module will generate BLE application specific code such as Bond manager 
+   parameters, advertising set configuration, advertising data and more.
+
+Here is an overview of SysConfig generated files for the different examples.
+ti_ble_config in the table below indicate that SysConfig will generate the BLE 
+module defines ti_build_config.opt and ti_ble_app_config.opt as well.
+
+   +--------------------------------+----------------------------------------------------------------------+
+   | Example Project                | SysConfig Generated Files                                            |
+   +================================+=================================+====================================+
+   | Host test                      | ti_drivers_config, ti_radio_config                                   |
+   +--------------------------------+---------------------------------+------------------------------------+
+   | Multi role                     | ti_drivers_config, ti_radio_config, ti_devices_config, ti_ble_config |
+   +--------------------------------+---------------------------------+------------------------------------+
+   | Project zero                   | ti_drivers_config, ti_radio_config                                   |
+   +--------------------------------+---------------------------------+------------------------------------+
+   | rtls_master                    | ti_drivers_config, ti_radio_config, ti_devices_config                |
+   +--------------------------------+---------------------------------+------------------------------------+
+   | rtls_passive                   | ti_drivers_config, ti_devices_config                                 |
+   +--------------------------------+---------------------------------+------------------------------------+
+   | rtls_slave                     | ti_drivers_config, ti_radio_config, ti_devices_config                |
+   +--------------------------------+---------------------------------+------------------------------------+
+   | Simple broadcaster             | ti_drivers_config, ti_radio_config, ti_devices_config, ti_ble_config |
+   +--------------------------------+---------------------------------+------------------------------------+
+   | Simple central                 | ti_drivers_config, ti_radio_config, ti_devices_config, ti_ble_config |
+   +--------------------------------+---------------------------------+------------------------------------+
+   | Simple peripheral              | ti_drivers_config, ti_radio_config, ti_devices_config, ti_ble_config |
+   +--------------------------------+---------------------------------+------------------------------------+
+   | Simple peripheral oad off-chip | ti_drivers_config, ti_radio_config, ti_ble_config                    |
+   +--------------------------------+---------------------------------+------------------------------------+
+   | Simple peripheral oad on-chip  | ti_drivers_config, ti_radio_config, ti_ble_config                    |
+   +--------------------------------+---------------------------------+------------------------------------+
+   | Persistent app                 | ti_drivers_config, ti_radio_config                                   |
+   +--------------------------------+---------------------------------+------------------------------------+
+
+
+Other changes (not needed for method used in porting guide below) between 
+BLE5-Stack 2.00.04 and BLE5-Stack 2.01.00 are:
+
+#. NVS Driver updated to be configurable for more than 2 NV pages.
+   The previous NVS driver (nvoctp.c) with constraint for maximum of 2 flash pages 
+   has been updated (nvocmp.c) with number of NV pages configurable to more than 2.
+   Refer to :ref:`using-simple-nv` for more details. The nv include directory has 
+   been changed from ``/source/ti/ble5stack/services/src/nv/`` to 
+   ``/source/ti/common/nv/``.
+
+#. New API functions defined in icall_ble_api.h:
+
+      - ``HCI_EXT_SetVirtualAdvAddrCmd``
+      - ``GAPBondMgr_SCGetLocalOOBParameters``
+      - ``GAPBondMgr_SCGetLocalOOBParameters``
+      - ``GAPBondMgr_GenerateEccKeys``
+      - ``GapAdv_setVirtualAdvAddr``
+      - ``SM_GenerateRandBuf``
+
+#. ``GAPBondMgr_Init`` called in osal_icall_ble.c takes on 2 extra arguments to
+   define maximum number of bonds and client characteristic configurations that can
+   be saved in SNV:
+
+      ``GAPBondMgr_Init( taskID++, GAP_BONDINGS_MAX, GAP_CHAR_CFG_MAX)``
+
+#. XDCtools updated from version 3.51.03.28_core to 3.60.00.24_core.
+
+
+Porting A SysConfig Preview (syscfg_preview) BLE5-Stack 2.00.04 Project to BLE5-Stack 2.01.00
+---------------------------------------------------------------------------------------------
+In BLE5-Stack 2.01.00 Sysconfig has moved to version 2.0 compared to version 1.0
+for preview state in BLE5-Stack 2.00.04. In v2.0 there is added support for 
+Dynamic Multi-protocol Manager (DMM), Device configuration that control 
+variables in CCFG, TI Driver apps (high level IO funcationality) and generally 
+more finer grained settings. There has been some change in naming convention 
+used as well as GUI layout changes. For simplicity, the user it is advised 
+to follow the same guide for porting as in the section 
+:ref:`sec-porting-examplesgen-2-00-05` below.
+
+
+.. _sec-porting-examplesgen-2-00-05:
+
+Porting A non-SysConfig BLE5-Stack 2.00.04 Project to BLE5-Stack 2.01.00
+------------------------------------------------------------------------
+
+For this migration guide, Simple non-SysConfig Peripheral from BLE5-Stack 
+2.00.04 will be ported over to BLE5-Stack 2.01.00. The recommended approach 
+is to start with a BLE5-Stack 2.01.00 project that contains the same base 
+functionality as the porting target project and merge in any custom 
+functionality.
+
+#. Choose a BLE5-Stack 2.01.00 example project that contains your target
+   project's base functionality.
+
+#. Transfer all modified application files from BLE5-Stack 2.00.04 into the
+   BLE5-Stack 2.01.00 example project.
+
+   In this example, the following files from BLE5-Stack 2.00.04 were moved into
+   Simple Peripheral BLE5-Stack 2.01.00 example:
+
+    - ``simple_peripheral.c``
+    - ``simple_peripheral.h``
+
+#. Remove #include <Board.h> from ``simple_peripheral.c``.
+
+    .. code-block:: c
+        :emphasize-lines: 1
+        :linenos:
+
+        //#include <Board.h>
+
+#. Add the following to the INCLUDES section in ``simple_peripheral.c``:
+
+    .. code-block:: c
+        :linenos:
+
+        #include <ti_drivers_config.h>
+        #include "ti_ble_config.h"
+
+#. Follow the :ref:`ble-sysconfig-migration` guide from step "Changes in 
+   Application File".
+
+#. Rename the variables ``advParamLegacy`` to ``advParams1`` and 
+   ``advParamLongRange`` to ``advParams2``.
+
+#. In ``simple_peripheral.c`` replace define ``Board_PIN_BUTTON0`` with 
+   ``CONFIG_PIN_BTN1`` and ``Board_PIN_BUTTON1`` with ``CONFIG_PIN_BTN2``.
+
+#. Advertising set 1 now refer to ``advData1`` and ``scanResData1`` and 
+   advertising set 2 refer to ``advData2`` and ``scanResData2``.
+
+    .. code-block:: c
+        :emphasize-lines: 3,9
+        :linenos:
+
+        // Load advertising data for set #1 that is statically allocated by the app
+        status = GapAdv_loadByHandle(advHandleLegacy, GAP_ADV_DATA_TYPE_ADV,
+        //                             sizeof(advertData), advertData);
+                                     sizeof(advData1), advData1);
+        SIMPLEPERIPHERAL_ASSERT(status == SUCCESS);
+
+        // Load scan response data for set #1 that is statically allocated by the app
+        status = GapAdv_loadByHandle(advHandleLegacy, GAP_ADV_DATA_TYPE_SCAN_RSP,
+        //                            sizeof(scanRspData), scanRspData);
+                                     sizeof(scanResData1), scanResData1);
+        SIMPLEPERIPHERAL_ASSERT(status == SUCCESS);
+
+
+#. In ``simple_peripheral.c`` replace references to ``advertData`` in a 
+   similar fashion as shown below:
+
+    .. code-block:: c
+        :emphasize-lines: 1-2
+        :linenos:
+
+        //advertData[2] = 'G';
+        //advertData[3] = 'A';
+        advData1[2] = 'G';
+        advData1[3] = 'B';
+        advData2[2] = 'G';
+        advData2[3] = 'B';
+
+#. Modify ``main.c`` in the BLE5-Stack 2.01.00 example if additional tasks were
+   added in the BLE5-Stack 2.00.04 project.
+
+#. Move any profiles and services that the application is using to the BLE5-Stack
+   2.01.00 project.
+
+#. If necessary, update the project to use the newer TI-RTOS drivers that are
+   supplied with the |SDK|.
+
+#. Refer to the Core SDK release notes for additional information and the TI-RTOS
+   examples included with |SDK|.
+
+   For additional information on how BLE5-Stack 2.01.00 uses TI-RTOS see
+   :ref:`sec-tirtos-overview`.
+
+   For any utilized TI Drivers, review |TI-RTOS_UG_BLE_MG_LOC| and |TI_DRIVERS_API_BLE_MG_LOC|.

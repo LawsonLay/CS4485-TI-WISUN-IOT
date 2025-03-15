@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Production and Direct Test Mode (PTM, DTM) &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="RF Testing using BTool" href="testing-with-btool-cc26xx.html" />
+    <link rel="prev" title="Compiler and Linker Options" href="compiler_and_linker_options.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-stack-5.x ptm-and-dtm";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#application-layer">Application Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#memory-management">Memory Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#compiler-and-linker-options">Compiler and Linker Options</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#production-test-mode-and-direct-test-mode">Production Test Mode and Direct Test Mode</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Production and Direct Test Mode (PTM, DTM)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#direct-test-mode-dtm">Direct Test Mode (DTM)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#production-test-mode-ptm">Production Test Mode (PTM)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="testing-with-btool-cc26xx.html">RF Testing using BTool</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#bluetooth-le-network-processor">Bluetooth LE Network Processor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#running-the-sdk-on-custom-hardware">Running the SDK on Custom Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html#optimizing-memory-usage">Optimizing Memory Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a> &raquo;</li>
+      <li>Production and Direct Test Mode (PTM, DTM)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="production-and-direct-test-mode-ptm-dtm">
+<span id="sec-using-production-test-mode"></span><h1>Production and Direct Test Mode (PTM, DTM)<a class="headerlink" href="#production-and-direct-test-mode-ptm-dtm" title="Permalink to this headline">¶</a></h1>
+<p>This page will describe Production Test Mode (PTM) which allows a
+CC13xx or CC26xx BLE application in a “single-chip” configuration to
+temporarily expose the host control interface (HCI) test commands over the
+serial interface when triggered externally to do so (e.g. holding a GPIO pin
+low during power up). This test mode allows the device to be connected to a
+Bluetooth RF Tester in order to run Direct Test Mode (DTM) commands on a
+production line using the final release firmware, while leaving the UART GPIO
+pins available for the application to use at all other times. Note that this
+page only considers UART, and not SPI, as the transport protocol since it uses
+the least amount of GPIO’s and throughput is not a factor for DTM.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note: DTM defines two interface methods for controlling the LE PHY: HCI and
+2-wire UART. The TI Bluetooth Low Energy protocol stack only supports the HCI
+method for DTM and PTM.</p>
+</div>
+<div class="section" id="direct-test-mode-dtm">
+<h2>Direct Test Mode (DTM)<a class="headerlink" href="#direct-test-mode-dtm" title="Permalink to this headline">¶</a></h2>
+<p>DTM is a standard method for testing BLE devices using the DTM HCI commands. A
+number of wireless test equipment manufactures, including Anritsu (MT8852B),
+Keysight and Rhode and Schwarz, make BLE Testers that use this mode. It is very
+useful to use these testers during development or on the production line in
+order to verify the RF performance of a BLE system. Complementary to these
+testers, it is also possible to create your own PC application that sends
+these DTM commands over the serial link. DTM is very well described in the
+<a class="reference external" href="https://www.bluetooth.com/specifications/adopted-specifications">Bluetooth Core Specifications Version 5.3</a> Volume 6 Part F. All DTM commands as well as
+TI Vendor Specific modem test commands are accessible in embedded
+(single-device) application via API calls as well as over HCI in the
+Host_Test sample application. Refer to the <a class="reference external" href="../../../vendor_specific_guide/BLE_Vendor_Specific_HCI_Guide/index.html">TI Vendor Specific HCI Guide</a> in
+the documents folder of the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>.</p>
+</div>
+<div class="section" id="production-test-mode-ptm">
+<h2>Production Test Mode (PTM)<a class="headerlink" href="#production-test-mode-ptm" title="Permalink to this headline">¶</a></h2>
+<p>One problem with DTM is that it relies on a certain stack configuration
+(network processor with HCI exposed over UART) in order to work with the
+testers, though many end-applications don’t use this configuration.
+This would require the customer, during production, to flash the wireless
+MCU with a network processor image (e.g., <code class="docutils literal notranslate"><span class="pre">host_test</span></code>) before testing, and
+then re-flash with the final product image. To circumvent this, the TI
+BLE-Stack has implemented a feature called Production Test Mode (PTM), which
+allows for an embedded software application to support direct test mode without
+exposing the HCI to the UART pins under normal operation.
+Note that the pins used for PTM can also be used for an application UART
+interface. In this case, it is necessary to ensure that the other device that
+is connected to the UART interface does not run at the same time that DTM is
+being exercised. If the device powers up and goes into PTM mode (by a GPIO
+being held high or low or some other stimulus), the UART will then be used for
+DTM commands. If the device powers up normally and does not go into PTM mode,
+then the UART can be initialized by the application and used to communicate
+with the other device.
+DTM commands can also be called by the embedded BLE application.</p>
+<p>To add PTM to the <code class="docutils literal notranslate"><span class="pre">simple_peripheral</span></code> project follow the steps below:</p>
+<ol class="arabic simple">
+<li><p>Open the SysConfig file (double-click on the simple_peripheral.sysconfig
+file)</p></li>
+<li><p>Open the BLE tab and enter Advanced Settings</p></li>
+<li><p>Check the PTM box</p></li>
+</ol>
+<p>This is the only configuration required to enable PTM as checking the PTM box
+automatically increases the Max Number of ICall Enabled tasks to 4.
+If you want to enable the NPI packet flow control, this can be done in the
+NPI panel. The default settings when enabling PTM is shown in the figure
+below.</p>
+<blockquote>
+<div><div class="figure align-center" id="id3">
+<span id="fig-ptm-sysconfig-setup-png"></span><img alt="../_images/ptm_sysconfig_setup.png" src="../_images/ptm_sysconfig_setup.png" />
+<p class="caption"><span class="caption-number">Figure 111. </span><span class="caption-text">Default settings when enabling PTM.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When adding PTM mode to the application, it is recommended to change the
+NPI task to use <code class="docutils literal notranslate"><span class="pre">Task_create(...)</span></code> as opposed to construct. In this way,
+the RAM needed by the NPI runtime task stack is consuming RAM that is
+not used in the application’s default behavior.</p>
+</div>
+<p>In order to determine if a command is accessible via PTM mode, users should
+refer to the translation tables created in <code class="docutils literal notranslate"><span class="pre">icall_hci_tl.c</span></code> under the define
+<code class="docutils literal notranslate"><span class="pre">PTM_MODE</span></code>.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="compiler_and_linker_options.html" class="btn btn-neutral float-left" title="Compiler and Linker Options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="testing-with-btool-cc26xx.html" class="btn btn-neutral float-right" title="RF Testing using BTool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

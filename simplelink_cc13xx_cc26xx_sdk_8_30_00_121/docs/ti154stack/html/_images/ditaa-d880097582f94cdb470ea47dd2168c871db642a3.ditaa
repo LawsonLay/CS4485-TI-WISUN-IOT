@@ -1,0 +1,43 @@
++--------------------+       /-
+|                    |       |
+|       cRED         |       | - ROM firmware initializes device
+|      Device        | <-----+ - ROM firmware jumps to location pointed
+|      Reset         |       |   to by CCFG IMAGE_VALID_CONF
+|                    |       |
++---------+----------+       \-
+          |
+          |
+          |
+          v
++--------------------+       /-
+|                    |       |
+|       cRED         |       | - ResetISR() function
+|      Driverlib     | <-----+ - Device trim and C runtime init
+|      Startup       |       | - Jump to BIM's main()
+|      Code          |       |
+|                    |       |
++---------+----------+       \-
+          |
+          |
+          |
+          v
++--------------------+       /-
+|                    |       |
+|  Find and validate |       |
+|       Image        | <-----+ - BIM interates through image headers
+|       c7AF         |       | - Prepares optimal image for execution
+|                    |       |
+|                    |       |
++---------+----------+       \-
+          |
+          |
+          |
+          v
++--------------------+       /-
+|                    |       |
+|    Jump to user    |       |
+|    application     | <-----+ - Load stack pointer of user application
+|       c7AF         |       | - Branch to user app's reset vector
+|                    |       |
+|                    |       |
++--------------------+       \-

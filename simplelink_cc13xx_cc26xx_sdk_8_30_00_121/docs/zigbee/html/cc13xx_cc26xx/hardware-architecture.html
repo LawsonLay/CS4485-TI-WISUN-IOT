@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hardware Architecture &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User&#39;s Guide
+ 8.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sensor Controller" href="../sensor-controller/sensor-controller.html" />
+    <link rel="prev" title="SimpleLink Wireless MCU CC13xx and CC26xx Overview" href="index-platform.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug cc13xx_cc26xx hardware-architecture";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../zigbee-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+
+          </a>
+              <div class="version">
+                8.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Hardware Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-core">System Core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#radio-core-arm-cortex-m0">Radio Core (Arm Cortex-M0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flash-ram-and-peripherals">Flash, RAM, and Peripherals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cc13x1x3-and-cc26x1x3">CC13x1x3 and CC26x1x3</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#programming-internal-flash-with-the-rom-bootloader">Programming Internal Flash With the ROM Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#startup-sequence">Startup Sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#resets">Resets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index-platform.html#further-information">Further information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/overview.html">SimpleLink CC13xx/CC26xx SDK Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/developing_zigbee_applications.html">Developing Zigbee Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/zigbee-ota-index.html">Zigbee Over-The-Air Firmware Upgrade</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/packet_sniffer.html">Packet Sniffer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/migration_guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/glossary.html">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../zigbee-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../zigbee-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a> &raquo;</li>
+      <li>Hardware Architecture</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="hardware-architecture">
+<span id="sec-cc13xx-cc26xx-hw-architecture"></span><h1>Hardware Architecture<a class="headerlink" href="#hardware-architecture" title="Permalink to this headline">¶</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The main source of information for CC13xx and CC26xx hardware is the Technical
+Reference Manual:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ti.com/lit/pdf/swcu191">CC13x1x3 CC26x1x3 SimpleLink Wireless MCU Technical Reference Manual</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/pdf/swcu185">CC13x2 CC26x2 SimpleLink Wireless MCU Technical Reference Manual</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/pdf/swcu192">CC13x2x7 CC26x2x7 SimpleLink Wireless MCU Technical Reference Manual</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/pdf/swcu194">CC13x4 CC26x4 SimpleLink Wireless MCU Technical Reference Manual</a></p></li>
+</ul>
+</div>
+<div class="section" id="system-core">
+<h2>System Core<a class="headerlink" href="#system-core" title="Permalink to this headline">¶</a></h2>
+<p>The system core is designed to run the wireless protocol stack from the
+link layer up to the user application.</p>
+<ul class="simple">
+<li><p>For CC13x1 and CC26x1 devices the system core is ARM Cortex M4</p></li>
+<li><p>For CC13x2 and CC26x2 devices the system core is ARM Cortex M4F</p></li>
+<li><p>For CC13x4 and CC26x4 devices the system core is ARM Cortex M33</p></li>
+</ul>
+<p>You can read more about ARM Cortex in the <a class="reference external" href="https://infocenter.arm.com/help/topic/com.arm.doc.dui0553a/DUI0553A_cortex_m4_dgug.pdf">Arm Cortex User Guide</a>.</p>
+<p>The link layer interfaces to the radio core through a software module called the
+RF driver, which sits above the RF doorbell software layer. The RF driver runs
+on the system core and acts as an interface to the radio on the CC13xx or CC26xx, and
+also manages the power domains of the radio hardware and radio core.
+Documentation for the RF driver can be found at the <a class="reference external" href="../../../drivers/tidriversAPIs.html">TI Drivers API Reference</a>.</p>
+</div>
+<div class="section" id="radio-core-arm-cortex-m0">
+<h2>Radio Core (Arm Cortex-M0)<a class="headerlink" href="#radio-core-arm-cortex-m0" title="Permalink to this headline">¶</a></h2>
+<p>The Cortex-M0 (CM0) core within the CC13xx or CC26xx is responsible for both interfacing
+to the radio hardware, and translating complex instructions from the system core
+into bits that are sent over the air using the radio. For Z-Stack, the CM0
+implements the PHY layer of the protocol stack. The CM0 is able to operate
+autonomously, which frees up the system core for higher-level protocol and
+application-layer processing.</p>
+<p>The system core communicates with the CM0 through a hardware interface called the RF
+doorbell, which is documented in the <a class="reference external" href="https://www.ti.com/lit/pdf/swcu185">CC13x2 CC26x2 SimpleLink Wireless MCU Technical Reference Manual</a>. The radio core firmware is not
+intended to be used or modified by the application developer.</p>
+</div>
+<div class="section" id="flash-ram-and-peripherals">
+<h2>Flash, RAM, and Peripherals<a class="headerlink" href="#flash-ram-and-peripherals" title="Permalink to this headline">¶</a></h2>
+<p>The following in-system programmable flash memory and SRAM options are available
+for the CC13xx or CC26xx. For a full memory of your device, please refer to the CC13xx or CC26xx
+datasheet.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 51%" />
+<col style="width: 26%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Device</p></th>
+<th class="head"><p>Flash (kB)</p></th>
+<th class="head"><p>SRAM (kB)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CC13x1x3 or CC26x1x3</p></td>
+<td><p>352</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-odd"><td><p>CC13x2x1 or CC26x2x1</p></td>
+<td><p>352</p></td>
+<td><p>80</p></td>
+</tr>
+<tr class="row-even"><td><p>CC13x2x7 or CC26x2x7</p></td>
+<td><p>704</p></td>
+<td><p>144</p></td>
+</tr>
+<tr class="row-odd"><td><p>CC13x4x10 or CC26x4x10</p></td>
+<td><p>1024</p></td>
+<td><p>256</p></td>
+</tr>
+</tbody>
+</table>
+<p>Devices outside of the CC13x1x3 or CC26x1x3 also contain 8 kB of cache SRAM that can be
+utilized to extend RAM capacity or can function as a normal cache to increase
+application performance. The CC13xx or CC26xx also hosts a full range of peripherals
+including UART, I2C, I2S, AES, TRNG, temperature and battery monitors, 4x 32-bit
+timers, 2x SSI, and an integrated and autonomous sensor controller (an exception
+being CC13x1x3 or CC26x1x3 devices). See <a class="reference internal" href="../sensor-controller/sensor-controller.html#sensor-controller"><span class="std std-ref">Sensor Controller</span></a> for more information
+on the sensor controller.</p>
+<p>Below is a sample device block diagram. Please check the datasheet for an
+accurate block diagram of your device.</p>
+<div class="figure align-center" id="fig-simplelink-block-diagram">
+<img alt="../_images/fig-agama-block-diagram.png" src="../_images/fig-agama-block-diagram.png" />
+<p class="caption"><span class="caption-number">Figure 11. </span><span class="caption-text">SimpleLink™ CC1352P1 Block Diagram</span><a class="headerlink" href="#fig-simplelink-block-diagram" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="cc13x1x3-and-cc26x1x3">
+<h3>CC13x1x3 and CC26x1x3<a class="headerlink" href="#cc13x1x3-and-cc26x1x3" title="Permalink to this headline">¶</a></h3>
+<p>The CC13x1x3 or CC26x1x3 are cost-optimized devices with a reduced feature set, as such
+the following changes have taken effect:</p>
+<ul class="simple">
+<li><p>Features and peripherals which have been <strong>removed</strong> (when compared with
+CC13x2x1 or CC26x2x1 devices)</p>
+<ul>
+<li><p>IEEE 754-compliant single-precision Floating Point Unit (FPU)</p></li>
+<li><p>Memory Protection Unit (MPU)</p></li>
+<li><p>AES 256-bit crypto accelerator</p></li>
+<li><p>ECC and RSA Public Key Hardware Accelerator</p></li>
+<li><p>SHA2 Accelerator</p></li>
+<li><p>Sensor Controller with 4KB of SRAM</p></li>
+</ul>
+</li>
+<li><p>Further peripheral modifications</p>
+<ul>
+<li><p>Only 1x UART</p></li>
+<li><p>Only 1x SSI (SPI, MICROWIRE, TI)</p></li>
+<li><p>Reduced to 32KB + 8KB GP cache SRAM, parity removed</p></li>
+<li><p>Reduced to 40 KB ROM</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One implication of SRAM reduction is that Dynamic Multiprotocol Management
+(DMM) is not possible for common use cases with CC13x1x3 or CC26x1x3 devices.</p>
+</div>
+</div>
+</div>
+<div class="section" id="programming-internal-flash-with-the-rom-bootloader">
+<span id="sec-programming-internal-flash-rom-bootloader"></span><h2>Programming Internal Flash With the ROM Bootloader<a class="headerlink" href="#programming-internal-flash-with-the-rom-bootloader" title="Permalink to this headline">¶</a></h2>
+<p>The CC13xx or CC26xx internal flash memory can be programmed using the bootloader
+located in device ROM. Both UART and SPI protocols are supported. See the
+Bootloader chapter of the <a class="reference external" href="https://www.ti.com/lit/pdf/swcu185">CC13x2 CC26x2 SimpleLink Wireless MCU Technical Reference Manual</a> for more details on the programming protocol and
+requirements.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because the ROM bootloader uses predefined DIO pins for internal flash
+programming, allocate these pins in the board layout. The <a class="reference external" href="https://www.ti.com/lit/pdf/swcu185">CC13x2 CC26x2 SimpleLink Wireless MCU Technical Reference Manual</a> has more
+details on the pins allocated to the bootloader based on the chip package type.</p>
+</div>
+</div>
+<div class="section" id="startup-sequence">
+<h2>Startup Sequence<a class="headerlink" href="#startup-sequence" title="Permalink to this headline">¶</a></h2>
+<p>For a complete description of the CC13xx or CC26xx reset sequence, see the <a class="reference external" href="https://www.ti.com/lit/pdf/swcu185">CC13x2 CC26x2 SimpleLink Wireless MCU Technical Reference Manual</a>.</p>
+</div>
+<div class="section" id="resets">
+<span id="sec-resets"></span><h2>Resets<a class="headerlink" href="#resets" title="Permalink to this headline">¶</a></h2>
+<p>Reset the device using only hard resets. From the software, this reset can be
+accomplished using:</p>
+<p><code class="code docutils literal notranslate"><span class="pre">HAL_SYSTEM_RESET();</span></code></p>
+<p>In CCS, select Board Reset (automatic) from the reset menu (see
+<a class="reference internal" href="#fig-board-reset"><span class="std std-numref">Figure 12.</span></a>). Then you can press the reset button to reset the
+device.</p>
+<div class="figure align-default" id="id5">
+<span id="fig-board-reset"></span><img alt="../_images/fig-board-reset.png" src="../_images/fig-board-reset.png" />
+<p class="caption"><span class="caption-number">Figure 12. </span><span class="caption-text">Board Reset</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index-platform.html" class="btn btn-neutral float-left" title="SimpleLink Wireless MCU CC13xx and CC26xx Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../sensor-controller/sensor-controller.html" class="btn btn-neutral float-right" title="Sensor Controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2005-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

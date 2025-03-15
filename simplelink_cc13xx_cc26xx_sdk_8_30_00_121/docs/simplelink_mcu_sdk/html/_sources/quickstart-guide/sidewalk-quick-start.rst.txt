@@ -1,0 +1,237 @@
+.. DO NOT RENAME OR MOVE THIS FILE FROM THE QUICKSTART GUIDE! THIS GUARANTEES
+   EXTERNAL LINKS TO THIS GUIDE WILL PERSIST IN E2E AND SUCH.
+
+.. _sec-sidewalk-quick-start:
+
+Amazon Sidewalk Quick Start Guide
+#################################
+
+This section serves as a road map for users developing applications
+and products using the TI SimpleLink |DEVICE| wireless MCU platform for
+|SID| applications. Whether a seasoned developer or just getting
+started, TI has created a variety of resources to simplify development on the
+|DEVICE| platform. These resources will enhance your experience with the
+|SID| stack from the out-of-the-box demo to production.
+
+:numref:`fig_sidewalk_suggested_workflow` shows the suggested workflow for getting
+started with the |SID| development environment.
+
+.. _fig_sidewalk_suggested_workflow:
+.. figure:: resources/sidewalk/sidewalk-suggestedworkflow.png
+    :align: center
+
+    Suggested Workflow
+
+If you have already evaluated |SID| in the past, you can skip most of the
+following section and skip directly to the :ref:`sec-flash-edge-device` section.
+If not, please read about |SID| on Amazon's `website <https://developer.amazon.com/en-US/blogs/alexa/device-makers/2020/09/amazon-sidewalk-paves-the-way-for-more-connected-communities>`_ 
+and follow the guide thoroughly.
+
+Prerequisites
+*************
+
+Hardware
+========
+
+* `Echo (4th generation) <https://www.amazon.com/Echo-4th-Gen/dp/B07XKF5RM3>`_, or any of the other `Sidewalk Bridges <https://www.amazon.com/Amazon-Sidewalk/b?ie=UTF8&node=21328123011>`_.
+* `CC1352P7-1 LaunchPad`_ (FSK or BLE) or `CC2652R7 LaunchPad`_ (BLE only)
+
+Software
+========
+
+* UniFlash_
+* |SDK|
+* `Amazon AWS account <https://aws.amazon.com/>`_
+* `Amazon account setup in the US <https://www.amazon.com/gp/help/customer/display.html?nodeId=201248840>`_
+* `FreeRTOS v202104.00 <https://github.com/FreeRTOS/FreeRTOS/releases/tag/202104.00>`_
+* ARM GCC Compiler Tools, will be installed from Code Composer Studio.
+
+.. dropdown:: :fa:`eye,mr-1` Additional pre-requisites for developers based outside of the US
+
+  .. danger:: 
+    Amazon Sidewalk is available only in the United States of America. 
+    To the extent any Sidewalk gateway functionality might be used outside of
+    the U.S., it should be used ONLY for Amazon Sidewalk endpoint development purposes.
+    In addition, we recommend that you consult with your local regulatory bodies, and 
+    check if the gateway is allowed to operate its radio in your locale, as U.S. license-free band devices, only for development.
+
+  |SID| being only deployed in the USA as of today, it is required to use a VPN in order spoof the network location of your Echo device. 
+  This is needed in order to set up the Alexa app and make it think that we are based in the United States.
+
+  * VPN Router. This is mandatory in order to enable |SID| on a non-US Echo device. We recommend using an OpenWRT-based router.
+
+      * That can also be a computer being used as a hotspot.
+  * A VPN service provider with decent bandwidth. This VPN will be used on the aforementioned router.
+  * A GPS spoofing application. An Android smartphone is thus recommended.
+  
+  A good way to make sure that the VPN setup is correct is to go on the following website: `IPleak <https://ipleak.net/>`_.
+  If the website shows any other location than USAs, especially with regards to "DNS address", it means your setup is not complete yet.
+  
+  Moreover, if not already done, please set your Amazon Country account to United States, 
+  as shown in the following `guide <https://www.amazon.com/gp/help/customer/display.html?nodeId=201248840>`_. 
+  The rest of the guide assumes that you have configured every Amazon/Ring account as an account located in the United States. 
+ 
+  .. attention::
+
+      Ensure that the location information is consistent accross all apps. 
+      For instance, if your VPN endpoint is located in New-York, 
+      make sure that your location is configured as New York in the Ring, Alexa, and GPS spoofing application.
+ 
+  With the above work done, you can now follow the rest of the guide.
+
+FreeRTOS installation
+---------------------
+
+Download FreeRTOSv202104.00 from `GitHub <https://github.com/FreeRTOS/FreeRTOS/releases/tag/202104.00>`_.
+Copy the ``FreeRTOSv202104.00`` folder contained in the archive to, for instance, **C:/**.
+We now want to let Code Composer Studio where FreeRTOS is installed. To do so,
+in Code Composer Studio, go to **Window** -> **Preferences**. Once the window
+opens, on the left most menu, click on **Code Composer Studio* -> **Build** ->
+**Variables**. Click on **Add...**. Now fill in the information as follows:
+
+* Variable **FREERTOS_INSTALL_DIR**
+* Type: **Path**
+* Value: *path to the FreeRTOS folder you extracted*
+
+.. _fig_sidewalk_freertos_ccs_var:
+.. figure:: resources/sidewalk/sidewalk-freertos-ccs-var.png
+    :align: center
+
+    FREERTOS_INSTALL_DIR variable configuration.
+
+FreeRTOS is now installed in Code Composer Studio.
+
+Get started
+***********
+
+Once you have gathered the required components, you can evaluate |SID| through 
+the `TI Amazon Sidewalk Sample IoT App <https://github.com/TexasInstruments/ti-amazon-sidewalk-sample-iot-app>`_. 
+This app will provide you with prebuilt firmware so that you can focus on 
+learning more about |SID|. It should take you around 1 hour to follow that 
+tutorial. Please return to this quick start guide when it is time to flash the
+binaries you have generated, as it provides more in-depth instructions on how 
+to flash the edge devices.
+
+.. _sec-flash-edge-device:
+
+Flashing the edge device
+************************
+
+The provisioning script should now have generated one folder containing binary personalisation data.
+Open UniFlash_ and create a new session. Now go to **Settings & Utilities**, and under **Manual Erase**, click on **Erase Entire Flash**.
+Once the mass erase is finished, it is now time to flash the following two binaries, in that order:
+
+#. Under **EdgeDeviceProvisioning/DeviceProfile_xxxxxx/WirelessDevice_xxxx**, please select the ``TI.bin`` binary.
+   Check **Binary** and set **Load Addr:** to **0xAE000** (**0x56000** for P1 devices).
+
+#. Under **EdgeDeviceBinaries/ti/**, please select either binary:
+
+   * ``ble_sid_demo_cc1352p7_asl.hex`` is using the BLE (2.4 GHz frequency band).
+   
+   * ``fsk_sid_demo_cc1352p7_asl.hex`` is using FSK (900 MHz frequency band)
+
+.. note:: You can use both **fsk** and **ble** binaries for that demo. The Web app will display the medium used.
+
+Here is a recapitulative of what your UniFlash_ window is supposed to look like.
+
+.. _fig_sidewalk_uniflash_2bins:
+.. figure:: resources/sidewalk/sidewalk-uniflash-2bins.png
+    :align: center
+
+    UniFlash window after the instructions have been followed correctly.
+
+If it looks like that, click **Load Images**.
+Once the edge device has been flashed with the 2 aforementioned binary files, please proceed immediately to the next section.
+
+Checking debug logs
+*******************
+
+Open a serial console, such as `PuTTY <https://www.putty.org/>`_ with the following parameters:
+
+  +-----------------+-----------------+
+  | UART Param      | Default Values  |
+  +=================+=================+
+  | Baud Rate       | 921600          |
+  +-----------------+-----------------+
+  | Data length     | 8 bits          |
+  +-----------------+-----------------+
+  | Parity          | None            |
+  +-----------------+-----------------+
+  | Stop bits       | 1 bit           |
+  +-----------------+-----------------+
+  | Flow Control    | None            |
+  +-----------------+-----------------+
+
+Now, please reset your |LP|. You should now see similar data logs in the console. 
+
+.. code-block::
+  
+  [00000000003] <info> Sidewalk example started
+  [00000002368] <info> DR state [3]
+  [00000002420] <info> status changed: 1
+  [00000002420] <info> Registration Status = 0, Time Sync Status = 1 and Link Status Mask = 0
+  [00000002420] <info> Link 0 Mode 0
+  [00000002421] <info> Link 1 Mode 0
+  [00000002421] <info> Link 2 Mode 0
+  [00000005871] <info> ama_gateway_set_state Gateway [01 47] state changing from 0 to 1
+  [00000005906] <info> New Rx S:0 T:0
+  [00000005906] <info> Rx S:0 T:0 (5/5)
+  [00000005907] <info> Tx Start (6)
+  [00000005908] <info> Tx S:0 T:0 (0) I:0
+  [00000005910] <info> Delete rx_buffer :: Gateway [01 47] :: Stream [0] :: Transaction [0]
+  [00000005934] <info> New Rx S:0 T:1
+  [00000005934] <info> Rx S:0 T:1 (5/5)
+  [00000005935] <info> Tx Start (6)
+  [00000005935] <info> Tx S:0 T:1 (0) I:0
+  [00000005937] <info> Delete rx_buffer :: Gateway [01 47] :: Stream [0] :: Transaction [1]
+  [00000005975] <info> New Rx S:0 T:2
+  [00000005975] <info> Rx S:0 T:2 (5/5)
+  [00000005976] <info> Tx Start (9)
+  [00000005976] <info> Tx S:0 T:2 (0) I:0
+  [00000005978] <info> Delete rx_buffer :: Gateway [01 47] :: Stream [0] :: Transaction [2]
+  [00000005985] <info> ama_gateway_set_state Gateway [01 47] state changing from 1 to 2
+  [00000005985] <info> [MET] B:200 N:0
+  [00000006017] <info> New Rx S:7 T:0
+  [00000006018] <info> Rx S:7 T:0 (55/55)
+  [00000006021] <info> RX CRID: 00000000245E6B04C8
+  [00000006021] <info> [PAD]DL:0
+  [00000006021] <info> DEC: M:7 [0:108:3]
+  [00000006021] <info> on_recv_ready [CMD:0:108:3]
+  [00000006021] <info> on_recv_ready [RT:LOCAL]
+  [00000006022] <info> Updated time: 1366506644.580169
+  [00000006022] <info> [MET] B:200 N:0
+  [00000006022] <info> SID_API: Unknown Sender Using cloud address
+  [00000006022] <info> status changed: 0
+  [00000006023] <info> Registration Status = 0, Time Sync Status = 0 and Link Status Mask = 1
+  [00000006023] <info> Link 0 Mode 1
+  [00000006023] <info> Link 1 Mode 0
+  [00000006023] <info> Link 2 Mode 0
+  [00000006025] <info> Time Sync Counter = 2
+  [00000006025] <info> RESP_TIME: remote_drift[0 secs] curr_drift[-1 secs]
+  [00000006026] <info> Delete rx_buffer :: Gateway [01 47] :: Stream [7] :: Transaction [0]
+  [00000006062] <info> ama_gateway_set_state Gateway [01 47] state changing from 2 to 0
+  [00000006073] <info> [MET] B:0 N:0
+  [00000006073] <info> status changed: 1
+  [00000006073] <info> Registration Status = 0, Time Sync Status = 0 and Link Status Mask = 0
+  [00000006074] <info> Link 0 Mode 0
+  [00000006074] <info> Link 1 Mode 0
+  [00000006074] <info> Link 2 Mode 0
+  
+Next steps
+**********
+Now that your setup is functional, you can check out the **sid_demo** example, 
+located in the SDK, and start building your application upon it using the |SDK|.
+
+Learning More About |SID|
+*************************
+
+* `Introduction to Sidewalk <https://docs.sidewalk.amazon/introduction/>`_
+* `Getting Started Guide <https://docs.sidewalk.amazon/getting-started/>`_
+* `Protocol Specification <https://docs.sidewalk.amazon/assets/pdf/Amazon_Sidewalk_Specification-1.0-rev-A-032823.pdf>`_
+* `Test Specification <https://docs.sidewalk.amazon/specifications/#amazon-sidewalk-test-specification>`_
+* `Manufacturing <https://docs.sidewalk.amazon/manufacturing/>`_
+* `Provisioning and Registration <https://docs.sidewalk.amazon/provisioning/>`_
+* `Amazon Sidewalk qualification <https://docs.sidewalk.amazon/qualification/>`_
+* `Sidewalk Mobile SDK <https://docs.sidewalk.amazon/mobile-sdk/>`_
+* Interact with your device through AWS: `Boto3 Docs <https://boto3.amazonaws.com/v1/documentation/api/latest/index.html>`_
+* |SID| `API Reference <https://docs.aws.amazon.com/iot/latest/developerguide/sidewalk-aws-api-reference.html>`_

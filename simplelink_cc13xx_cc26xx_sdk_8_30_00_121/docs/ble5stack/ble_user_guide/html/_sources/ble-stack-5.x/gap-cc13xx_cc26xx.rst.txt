@@ -1,0 +1,2348 @@
+.. _gap:
+
+Generic Access Profile (GAP)
+----------------------------
+
+The GAP layer of the Bluetooth Low Energy protocol stack is
+responsible for connection functionality. This layer handles the
+access modes and procedures of the device including device
+discovery, link establishment, link termination, initiation of
+security features, and device configuration. See :ref:`gap_state_diagram` for
+more details.
+
+.. _gap_state_diagram:
+.. figure:: resources/image72.jpeg
+    :align: center
+
+    GAP State Diagram.
+
+Based on the role for which the device is configured, :ref:`gap_state_diagram`
+shows the states of the device. The following describes these states.
+
+-  **Standby**: The device is in the initial idle state upon reset.
+
+-  **Advertiser**: The device is advertising with specific data letting
+   any initiating devices know that it is a connectable device (this
+   advertisement contains the device address and can contain some
+   additional data such as the device name).
+
+-  **Scanner**: When receiving the advertisement, the scanning device
+   sends a scan request to the advertiser. The advertiser responds
+   with a scan response. This process is called device discovery.
+   The scanning device is aware of the advertising device and can
+   initiate a connection with it.
+
+-  **Initiator**: When initiating, the initiator must specify a peer
+   device address to which to connect. If an advertisement is
+   received matching that address of the peer device, the initiating
+   device then sends out a request to establish a connection (link) with the
+   advertising device with the connection parameters described in
+   :ref:`connection_parameters`.
+
+-  **Peripheral/Central**: When a connection is formed, the device functions
+   as a Peripheral if it is the advertiser and a Central if it is the initiator.
+
+Bluetooth devices operate in one or more GAP roles based on the application use
+case. The GAP roles utilize one or more of the GAP states.
+Based on this configuration, many Bluetooth Low Energy protocol stack events
+are handled directly by the main application task and sometimes routed from the
+GAP Bond Manager. The application can register with the stack to be notified of
+certain events.
+
+.. _gap_roles:
+
+GAP Roles
+^^^^^^^^^
+
+Based on the configuration of the device, the GAP layer always operates in one
+of four (4) roles as defined by the specification:
+
+-  **Broadcaster** - The device is an advertiser that is non connectable.
+
+-  **Observer** - The device scans for advertisements but cannot initiate
+   connections.
+
+-  **Peripheral** - The device is an advertiser that is connectable and operates as
+   Peripheral in a single link-layer connection.
+
+-  **Central** - The device scans for advertisements and initiates
+   connections and operates as a Central in a single or multiple
+   link-layer connections.
+
+The |CORESPEC| allows for certain combinations of multiple roles, which are
+supported by the Bluetooth Low Energy protocol stack. For configuration of the
+Bluetooth Low Energy stack features, see :ref:`creating_custom_ble_app`
+
+.. note::
+    Bluetooth 5 also introduces new features including Extended Advertising. Bluetooth 5
+    supports legacy advertising maintaining backwards compatibility with previous versions.
+    The following sections will describe how to operate the device for various GAP roles along with
+    how to use the new Extended Advertising features with the new APIs.
+
+The following sections will describe how to use the LE Advertising Extension
+feature. As its name suggests, the amount of advertising data that can be sent
+over the air has been extended from 31 bytes to 1650 bytes. Also multiple
+advertising sets can be created using a mix of legacy and extended
+advertisements. Extended advertisements introduces use the secondary
+advertising channels which uses the data channels to send extensive data in
+addition to the primary advertising channels (Ch. 37, 38, and 39) used in
+legacy advertisement.
+
+.. _gap-constraints:
+
+GAP Constraints
+^^^^^^^^^^^^^^^
+
+* GAP Scanner can only scan one PHY per scanning cycle.
+* The data length of the advertising data and the scan response data for
+  Extended Advertising is limited to 1650 bytes. The connectable undirected
+  advertising data is limited to 212 bytes. The connectable directed advertising
+  data is limited to 206 bytes. For more information, refer to the Host Advertising Data section
+  ([Vol 6], Part B, Section 2.3.4.9) of the |CORESPEC|. Following
+  is the overview of maximum payload with different Advertising Extension events.
+
+**Advertisement Extensions Event Type and its Maximum Payload Size**
+
+.. container:: table-wrap
+
+  +---------------------+-------------+-------------+--------------+-------------------+
+  | Type                | Max AdvData | Max ScanRsp | PDUs Used    | PDUs Listened for |
+  +=====================+=============+=============+==============+===================+
+  | Connectable         | 212 bytes   | 0           | ADV_EXT_IND  | AUX_CONNECT_REQ   |
+  | (Non-Scannable)     |             |             | AUX_ADV_IND  |                   |
+  +---------------------+-------------+-------------+--------------+-------------------+
+  | Scannable           | 0           | 1650 bytes  | ADV_EXT_IND  | AUX_SCAN_REQ      |
+  |                     |             | w/chain     | AUX_ADV_IND  |                   |
+  |                     |             |             | AUX_CHAIN_IND|                   |
+  +---------------------+-------------+-------------+--------------+-------------------+
+  | Broadcast           | 1650 bytes  | 0           | ADV_EXT_IND  | N/A               |
+  |                     |             |             | AUX_ADV_IND  |                   |
+  |                     |             |             | AUX_CHAIN_IND|                   |
+  +---------------------+-------------+-------------+--------------+-------------------+
+  | Periodic Advertising| 1650 bytes  | 0           | ADV_EXT_IND  | N/A               |
+  |                     |             |             | AUX_ADV_IND  |                   |
+  |                     |             |             | AUX_SYNC_IND |                   |
+  +---------------------+-------------+-------------+--------------+-------------------+
+
+.. _gap-advertiser:
+
+GAP Advertiser
+^^^^^^^^^^^^^^
+
+The application and profiles can directly call GAP API functions to perform
+Bluetooth Low Energy-related functions such as advertising or connecting.
+The GAP layer functionality is mostly defined in library code. The
+function headers can be found in :ble_api:`gap.h`. The advertising specific
+implementation is found in :ble_api:`gap_advertiser.h`. Most of these functions
+can be called directly.
+
+The GAP Advertiser module lets you create advertisement sets. The application
+can then enable and disable the sets. This way, the application can quickly
+change the advertisement parameters and advertisement data. For example, an
+application can create an advertisement set for legacy advertising and one for
+long range advertising. If both sets are enabled, the application advertises
+both on the primary advertising channels with legacy advertising, and on a LE
+Coded PHY with the long range set. With long range advertising, more advertising data can
+be sent and connections can be formed from larger distances compared to legacy advertising.
+
+.. note::
+  The advertisement data is de-coupled from the advertisement sets, so multiple
+  sets can use the same advertisement data.
+
+Multiple active advertising sets can set different advertising intervals. The 
+figure below illustrate how two advertising sets with different intervals are 
+scheduled. The intervals do not have to be multiples of each other. In the 
+examples the advertising interval can be set in the ``.primIntMin`` and 
+``primIntMax`` Advertisement Params (``GapAdv_params_t``) member before the 
+advertisement set is enabled or during advertising as described in 
+:ref:`gap-changing-adv-param`.
+
+  .. code-block:: c
+    :caption: **simple\_peripheral.c :: SimplePeripheral\_processGapMessage() :: GAP\_DEVICE\_INIT\_DONE\_EVENT** -  Change advertising interval before advertisment enable
+    :linenos:
+
+      advParams1.primIntMin = 160; // 100 ms
+      advParams1.primIntMax = 160; // 100 ms
+      advParams2.primIntMin = 800; // 500 ms
+      advParams2.primIntMax = 800; // 500 ms
+
+.. _gap_diff_adv_interval:
+.. figure:: resources/multiple_ae_adv_diff_interval.png
+    :align: center
+
+    Multiple AE Advertising sets with different interval.
+
+The following list describes how to configure the GAP layer for
+advertising. The *simple peripheral* example project will be used as an example.
+
+.. note:: The advertisement set creation can be done using SysConfig.
+
+.. _sbp_gap_configuration_example:
+
+#. **Create Advertisement set with** :ble_api:`GapAdv_create`. The return value
+   of :ble_api:`GapAdv_create` is a handle for the advertisement set. The create
+   function takes a :ble_api:`GapAdv_params_t` variable, so the first thing to do
+   is to create this variable.
+   **The Tx Power of legacy advertisements cannot be individually set.**
+
+   Some :ble_api:`GapAdv_params_t` variables are defined in
+   :ble_api:`gap_advertiser.h`. In this example we will use one of
+   them, ``GAPADV_PARAMS_LEGACY_SCANN_CONN``. You can of course define your own
+   :ble_api:`GapAdv_params_t` variable or modify an existing :ble_api:`GapAdv_params_t`
+   variable.
+
+   .. code-block:: c
+     :caption: **simple\_peripheral.c :: SimplePeripheral\_processGapMessage() :: GAP\_DEVICE\_INIT\_DONE\_EVENT** - Creating an advertising parameters variable.
+     :linenos:
+
+       // Temporary memory for advertising parameters. These will be copied by the GapAdv module
+       GapAdv_params_t advParamLegacy = GAPADV_PARAMS_LEGACY_SCANN_CONN;
+
+   .. code-block:: c
+     :caption: **simple\_peripheral.c :: LOCAL VARIABLES** - Create advertisement handle
+     :linenos:
+
+       // Advertising handle
+       static uint8 advHandleLegacy;
+
+   .. code-block:: c
+     :caption: **simple\_peripheral.c :: SimplePeripheral\_processGapMessage() :: GAP\_DEVICE\_INIT\_DONE\_EVENT** - Create advertisement set and assign handle
+     :linenos:
+
+       // Create Advertisement set and assign handle
+       status = GapAdv_create(&SimplePeripheral_advCallback, &advParamLegacy, &advHandleLegacy);
+
+#. **Set Advertiser's virtual address set with** :ble_api:`GapAdv_setVirtualAdvAddr`.
+   The handle for the advertisement set, returned from :ble_api:`GapAdv_create`, can 
+   also be used to create a custom private address for that advertisement set. This
+   allows different advertising sets to have different addresses. This is only 
+   applicable for legacy non-connectable and non-scannable advertising sets.
+   
+   .. code-block:: c
+     :caption: **simple\_peripheral.c :: SimplePeripheral\_processGapMessage() :: GAP\_DEVICE\_INIT\_DONE\_EVENT** - Set advertiser's virtual address
+     :linenos:
+
+       // Set virtual address
+       status = GapAdv_setVirtualAdvAddr(advHandleLegacy, &bdAddr);
+
+#. **Load Advertisement and Scan Response data**. Advertising and scan response
+   data is decoupled from the advertising set. That is, it is possible for multiple
+   advertising sets to use the same memory for advertising\/scan response data. An
+   advertising set could also use the same memory for its advertising and scan
+   response data. (Note that this requires diligence as there are some data types
+   that are only allowed once in the advertisement and scan response data. See the
+   `Bluetooth Core Specification Supplement (CSSv7) <https://www.bluetooth.com/
+   specifications/bluetooth-core-specification>`_ for specifics.)
+
+   If your advertisement set is not scannable, you can of course skip the last step
+   (load scan response data). Example advertising and scan response data is shown
+   in :numref:`sp_advertdata` and :numref:`sp_scanrspdata`
+
+   .. code-block:: c
+     :caption: Loading advertising data in SimplePeripheral\_processGapMessage()
+     :linenos:
+
+        // Load advertising data that is statically allocated by the app
+        status = GapAdv_loadByHandle(advHandleLegacy, GAP_ADV_DATA_TYPE_ADV,
+                                     sizeof(advertData), advertData);
+
+        // Load scan response data that is statically allocated by the app
+        status = GapAdv_loadByHandle(advHandleLegacy, GAP_ADV_DATA_TYPE_SCAN_RSP,
+                                     sizeof(scanRspData), scanRspData);
+
+   .. code-block:: c
+     :name: sp_advertdata
+     :caption: **simple\_peripheral.c :: LOCAL VARIABLES** - Example advertisement data.
+
+       // Advertisement data
+       static uint8_t advertData[] =
+       {
+         0x02,   // length of this data
+         GAP_ADTYPE_FLAGS,
+         DEFAULT_DISCOVERABLE_MODE | GAP_ADTYPE_FLAGS_BREDR_NOT_SUPPORTED,
+
+         // service UUID, to notify central devices what services are included
+         // in this peripheral
+         0x03,   // length of this data
+         GAP_ADTYPE_16BIT_MORE,      // some of the UUID's, but not all
+         LO_UINT16(SIMPLEPROFILE_SERV_UUID),
+         HI_UINT16(SIMPLEPROFILE_SERV_UUID)
+       };
+
+   .. code-block:: c
+     :name: sp_scanrspdata
+     :caption: **simple\_peripheral.c :: LOCAL VARIABLES** - Example scan response data.
+
+       // Scan Response Data
+       static uint8_t scanRspData[] =
+       {
+         // complete name
+         17,   // length of this data
+         GAP_ADTYPE_LOCAL_NAME_COMPLETE,
+         'S',
+         'i',
+         'm',
+         'p',
+         'l',
+         'e',
+         'P',
+         'e',
+         'r',
+         'i',
+         'p',
+         'h',
+         'e',
+         'r',
+         'a',
+         'l',
+
+         // connection interval range
+         5,   // length of this data
+         GAP_ADTYPE_SLAVE_CONN_INTERVAL_RANGE,
+         LO_UINT16(DEFAULT_DESIRED_MIN_CONN_INTERVAL),   // 100ms
+         HI_UINT16(DEFAULT_DESIRED_MIN_CONN_INTERVAL),
+         LO_UINT16(DEFAULT_DESIRED_MAX_CONN_INTERVAL),   // 1s
+         HI_UINT16(DEFAULT_DESIRED_MAX_CONN_INTERVAL),
+
+         // Tx power level
+         2,   // length of this data
+         GAP_ADTYPE_POWER_LEVEL,
+         5       // 5dBm
+       };
+
+#. **Set which events to send to application.** The events will be sent to the
+   callback function given in :ble_api:`GapAdv_create` (in this
+   case ``SimplePeripheral_advCallback()``).
+
+   .. code-block:: c
+     :caption: **simple\_peripheral.c :: SimplePeripheral\_processGapMessage() :: GAP\_DEVICE\_INIT\_DONE\_EVENT** - Setting advertising mask.
+     :linenos:
+
+        // Set event mask
+        status = GapAdv_setEventMask(advHandleLegacy,
+                                     GAP_ADV_EVT_MASK_START_AFTER_ENABLE |
+                                     GAP_ADV_EVT_MASK_END_AFTER_DISABLE |
+                                     GAP_ADV_EVT_MASK_SET_TERMINATED);
+
+#. **Enable advertising.** Calling :ble_api:`GapAdv_enable` will start
+   advertising.
+
+   .. code-block:: c
+     :caption: **simple\_peripheral.c :: SimplePeripheral\_processGapMessage() :: GAP\_DEVICE\_INIT\_DONE\_EVENT** - Start advertising.
+     :linenos:
+
+        // Enable advertising
+        status = GapAdv_enable(advHandleLegacy, GAP_ADV_ENABLE_OPTIONS_USE_MAX , 0);
+
+The above steps can be repeated to create multiple advertising sets. There is an
+upper limit of six advertising sets (defined in the controller). The heap may
+also restrict the number of advertising sets you can create in one application.
+
+.. _gap-changing-adv-param:
+
+Changing advertising parameters
+*******************************
+In order to change an individual parameter after advertising has been enabled,
+advertising must first be disabled. Re-enable advertising after the parameter is modified.
+
+.. code-block:: c
+  :caption: Changing advertising parameter during advertising.
+  :linenos:
+
+     // Stop advertising
+     GapAdv_disable(advHandleLegacy);
+
+     // Set a parameter
+     uint32_t newAdvInt = 200;
+     GapAdv_setParam(advHandleLegacy, GAP_ADV_PARAM_PRIMARY_INTERVAL_MIN, &newAdvInt);
+
+     // Re-enable advertising
+     GapAdv_enable(advHandleLegacy, GAP_ADV_ENABLE_OPTIONS_USE_MAX , 0);
+
+Ending Advertisement
+********************
+An advertising set can be disabled with :ble_api:`GapAdv_disable` and deleted
+(such that all memory related to the set is freed) with :ble_api:`GapAdv_destroy`.
+
+.. code-block:: c
+  :caption: Stop advertising and free memory.
+  :linenos:
+
+    // Stop advertising
+    GapAdv_disable(advHandleLegacy);
+
+    // Free all data related to advertising set (besides advertising / scan response data).
+    // Note that this can be called while advertising is still enabled
+    GapAdv_destroy(advHandleLegacy, GAP_ADV_FREE_OPTION_DONT_FREE);
+
+The advertising and scan response data is statically allocated and is thus not
+freed as part of :ble_api:`GapAdv_destroy`.
+
+Updating Advertisement/Scan Response Data
+*****************************************
+Again, since the advertising and scan response data is decoupled from the
+advertising set, it is possible for multiple advertising sets to use the same
+memory for advertising\/scan response data. An advertising set could also use
+the same memory for its advertising and scan response data.  The memory used for
+advertising\/scan response data is referred to as a "buffer" throughout this
+section.
+
+The preferred and safest method to update a buffer is to use the prepare\/load
+latching mechanism. This will ensure the following:
+
+- No buffer is freed if it is used by another advertising set.
+- Advertising is always disabled before the buffer is modified, thus ensuring
+  that no corrupted advertisement packets are transmitted.
+- Prevent double-copying.
+
+The following offers several ways to update the advertising and scan response
+data.
+
+.. _gap-update-adv-scan-data:
+
+Update the Advertising\/Scan Response Data of a Single Handle
+#############################################################
+
+If the application wants to modify a few bytes of advertising\/scan response data
+that is used by a single advertisement set, use :ble_api:`GapAdv_prepareLoadByHandle`
+and :ble_api:`GapAdv_loadByHandle`.
+
+.. code-block:: c
+  :caption: Update the advertising buffer of a single handle.
+  :linenos:
+
+    // Don't free anything since we're going to use the same buffer to re-load
+    GapAdv_prepareLoadByHandle(advHandleLegacy, GAP_ADV_FREE_OPTION_DONT_FREE);
+
+    // Sample buffer modification
+    advertData[3] = 0xAA;
+
+    // Reload buffer to handle
+    GapAdv_loadByHandle(advHandleLegacy, GAP_ADV_DATA_TYPE_ADV, ADV_DATA_LEN, advertData);
+
+The GapAdv_prepareLoadByHandle() will perform the following here:
+
+- Check that this buffer isn't used by other handles. If
+  :ble_api:`GapAdv_prepareLoadByHandle` returns success, the application will
+  know that it can now safely modify this buffer.
+- Automatically disable advertising and mark it for re-enabling
+
+:ble_api:`GapAdv_loadByHandle` will automatically re-enable advertising with the
+updated buffer. This method can also be used to use a subset of the original
+advertising data. In this case, simply update the data length parameter of
+:ble_api:`GapAdv_loadByHandle`.
+
+.. warning:: 
+    The above methods of changing advertising or scan response data have one
+    limitation. A special procedure is required when the data length is 
+    currently set to zero and application wants to change that to a non-zero
+    length. In this case the application needs to destroy the advertisement set
+    and re-create it with the desired data as shown in below code example for
+    legacy advertisements.
+
+.. code-block:: c
+  :caption: Destroy advertisement set and create new one with desired data.
+  :linenos:
+
+    // Stop advertising
+    GapAdv_disable(advHandleLegacy);
+    // Free all data related to advertising set (besides advertising / scan response data).
+    GapAdv_destroy(advHandleLegacy);
+
+    // Create Advertisement set and assign handle
+    GapAdv_create(&SimplePeripheral_advCallback, &advParams1,
+                           &advHandleLegacy);
+    // Load advertising data that is statically allocated by the app
+    GapAdv_loadByHandle(advHandleLegacy, GAP_ADV_DATA_TYPE_ADV,
+                                 sizeof(advData1), advData1);
+    // Load scan response data that is statically allocated by the app
+    GapAdv_loadByHandle(advHandleLegacy, GAP_ADV_DATA_TYPE_SCAN_RSP,
+                                 sizeof(scanResData1), scanResData1);
+    // Set event mask
+    GapAdv_setEventMask(advHandleLegacy,
+                                 GAP_ADV_EVT_MASK_START_AFTER_ENABLE |
+                                 GAP_ADV_EVT_MASK_END_AFTER_DISABLE |
+                                 GAP_ADV_EVT_MASK_SET_TERMINATED);
+    // Enable legacy advertising
+    GapAdv_enable(advHandleLegacy, GAP_ADV_ENABLE_OPTIONS_USE_MAX , 0);
+
+Load a New Buffer to a Single Advertising Handle
+################################################
+
+If the application wants to load a new buffer to a single advertising handle
+without double-copying, use :ble_api:`GapAdv_prepareLoadByHandle` and
+:ble_api:`GapAdv_loadByHandle`. This way, the advertising data exists in only one
+place in memory that is used by the GAP Advertiser. In this case we will free the buffer and
+allocate a new one.
+
+.. code-block:: c
+  :caption: Load a new advertising buffer for a single handle.
+  :linenos:
+
+    // Free the buffer (to avoid double copying) since we're loading a new buffer
+    GapAdv_prepareLoadByHandle(advHandleLegacy, GAP_ADV_FREE_OPTION_ADV_DATA);
+
+    // Allocate new buffer (and then fill it as desired)
+    uint8_t *advertData2= ICall_malloc(ADV_DATA2_LEN);
+
+    // Load the new buffer to the advertisement set handle
+    GapAdv_loadByHandle(advHandleLegacy, GAP_ADV_DATA_TYPE_ADV, ADV_DATA2_LEN, advertData2);
+
+:ble_api:`GapAdv_prepareLoadByHandle` will perform the following here:
+
+- Check that the buffer isn't used by any other advertisement handles. If
+  :ble_api:`GapAdv_prepareLoadByHandle` returns success, the application will
+  know that it can now safely modify this buffer.
+- Automatically disable advertising and mark it for re-enabling
+- Free the original buffer
+
+The :ble_api:`GapAdv_loadByHandle` will automatically re-enable advertising on
+the handle with the new buffer.
+
+Update Advertising\/Scan Response Data that is Used for Multiple Advertising Handles
+####################################################################################
+
+This is the case where the application wants to modify a few bytes of
+advertising or scan response data that is shared among advertisement sets.
+
+.. code-block:: c
+  :caption: Update an advertising buffer used by multiple handles.
+  :linenos:
+
+    // Don't free anything since we're going to use the same buffer to reload
+    GapAdv_prepareLoadByBuffer(advertData, FALSE);
+
+    // Sample buffer modification
+    advertData[3] = 0xAA;
+
+    // Reload the buffer to be used by the advertisement set handles
+    GapAdv_loadByBuffer(ADV_DATA_LEN, advertData);
+
+:ble_api:`GapAdv_prepareLoadByBuffer` will automatically disable advertising for
+all advertising handles that use this buffer. :ble_api:`GapAdv_loadByBuffer`
+will automatically re-enable advertising for all handles that use this buffer.
+
+Load a New Buffer To Multiple Advertising Handles
+#################################################
+
+This is the case where the applications wants to load a new buffer to all
+advertisement set handles that are using this buffer.
+
+.. code-block:: c
+  :caption: Load new advertising buffer for multiple handles.
+  :linenos:
+
+    // Free buffer (to avoid double copying) since we're loading a new buffer
+    GapAdv_prepareLoadByBuffer(advertData, TRUE);
+
+    // Allocate new buffer (and then fill as desired)
+    uint8_t *advertData2= ICall_malloc(ADV_DATA2_LEN);
+
+    // Reload the buffer to be used by all the handles
+    GapAdv_loadByBuffer(ADV_DATA2_LEN, advertData2);
+
+:ble_api:`GapAdv_loadByBuffer` will perform the following here:
+
+- Automatically disable advertising and mark it for re-enabling on all handles
+  that use this buffer
+- Free the original buffer
+
+:ble_api:`GapAdv_loadByBuffer` will automatically re-enable advertising on all
+handles that used the original buffer.
+
+Directly Manipulating a Buffer While Advertising is Enabled
+***********************************************************
+
+Since the application owns the advertising and scan response buffers and thus has access to
+the memory where the buffers are stored, there is nothing preventing it from directly
+modifying this memory. While discouraged, there are scenarios where this can
+be useful, such as updating the data after each advertisement in the most power-efficient
+manner. The main drawback to this is that there is no way to guarantee that this update
+won't occur while an advertising packet is being transmitted that is using this buffer,
+potentially resulting in a corrupted advertising packet. This is especially true if
+multiple advertising sets are using the same buffer. If the application accepts the risk
+of potentially corrupting an advertising packet, there is a recommended way to do this with
+minimized risk.
+
+The buffer should be updated directly in the advertising callback (in the stack context)
+when the ``GAP_EVT_ADV_END`` is received. Generally, it is recommended to
+minimize processing in these callbacks and, instead, to post an event to process
+in the application context. It should be noted that any processing in the stack
+context has the potential to break the timing of the controller. This should not
+be a problem if the only processing is to update the buffer. Also, for both this
+reason and because it will lead to a semaphore that never gets posted due to
+calling an ICall API from the stack context, it should be noted that no stack
+API calls can be made from the stack context. To reiterate for clarity, no BLE-Stack APIs
+can be called from the callback (stack) context.
+
+.. code-block:: c
+  :caption: Directly update advertising data in stack context.
+  :linenos:
+
+    // Callback passed into GapAdv_create(). This code is running in the stack context.
+    static void SimplePeripheral_advCallback(uint32_t event, void *pBuf, uintptr_t arg)
+    {
+      // Advertisement just ended so it should be safe to update buffer here
+      // without corrupting an advertisement.
+      if (event == GAP_EVT_ADV_END)
+      {
+         advertData[3] = 0xAA;
+      }
+    }
+
+Note that this can not be guaranteed to work all the time without corrupting an
+advertisement. Also, if the buffer is used by multiple advertisement handles, the
+application would need to track the ``GAP_EVT_ADV_ENDs`` across all of these handles to
+find an ideal time to update the buffer. If this processing is added to the callback
+in the stack context, this increases the risk of breaking the timing of the
+controller. Also, remember to include ``GAP_EVT_ADV_END`` in the event mask
+passed in :ble_api:`GapAdv_setEventMask`.
+
+Adding TX Power to an Advertisement Payload
+*******************************************
+.. note::
+  This feature is only available for Extended Advertisements.
+
+In some cases, it is desired to add the TX power to an advertisement payload. At
+the application layer, a central device who scans for the advertisment can use
+this field (amongst others) to filter out devices and connect to a specific
+peripheral.
+
+The TX power value can be added using SysConfig. To do so, open the project's
+SysConfig file. 
+
+#. Navigate to BLE |rarr| Broadcaster Configuration |rarr| Advertisement Set # |rarr| Advertisement Parameters #. 
+#. Under **Event Properties**, select ``Include TxPower in the extended header of the advertising PDU``.
+#. Navigate to the Advertisement Data section and select the ``TX Power Level``
+   check box to add this to the advertisement payload.
+
+Sending Up To 1650 Bytes Scan Response Data
+*******************************************
+The Advertising Extension enables user to send huge amount of data without forming 
+connections and prevent jamming legacy advertising channels. 
+There are currently three methods for sending 1650 bytes data without 
+establishing connections which listed under :ref:`gap-constraints`.
+
+Here we are focusing on transmitting 1650 bytes through scan response data.
+Even though broadcasting and periodic advertising can achieve the same outcome, it
+can sometimes consume more energy than necessary due to it is always transmitting 
+1650 bytes of data whether or not there are scanners listening. 
+To avoid wasting energy, we can store 1650 bytes data in scan response. Then only 
+when the advertiser receives scan request, it will respond with 1650 scan response data.
+
+To send 1650 bytes scan response data, you will need to enable
+the extended advertisement which contains PDU type ``ADV_EXT_IND`` and ``AUX_ADV_IND`` packets.
+The ``ADV_EXT_IND`` contains the following information which makes it possible for
+scanner to send ``AUX_SCAN_REQ`` packets under correct timing.
+
+* The data channel for the Auxiliary Packet Pointer which is ``AUX_ADV_IND`` packet.
+* The clock accuracy for advertiser.
+* The time of when the ``AUX_ADV_IND`` packet will be transmitted.
+* The PHY which is used by ``AUX_ADV_IND`` packet.
+
+With the information provided by ``ADV_EXT_IND`` packet, the scanner can jump
+to data channel to listen for ``AUX_ADV_IND`` ahead of time and then send 
+out ``AUX_SCAN_REQ`` packet to request more data.
+
+Once the advertiser receives ``AUX_SCAN_REQ`` packet, it will respond with
+``AUX_SCAN_RSP`` packet which can hold up to 242 bytes application data. 
+If the scan response data is more than 242 bytes, then the |STACK| will
+automatically create ``AUX_CHAIN_IND`` packet(s), which can also
+hold up to 242 bytes application data, and fragment the rest of the
+scan response data until all the 1650 bytes are sent. 
+
+
+.. ditaa::
+   :--no-separation:
+   :--no-shadows:
+
+    Primary Channels
+
+    +-----------+  +-----------+  +-----------+  
+    |ADV_EXT_IND|  |ADV_EXT_IND|  |ADV_EXT_IND|-\
+    | cGRE      |  | cGRE      |  | cGRE      | | 
+    +-----------+  +-----------+  +-----------+ |
+                                                |
+    --------------------------------------------|---------------------------------------------------------------------
+                                                |
+                                                v 
+    Data Channels                  +-------------+                   +-------------+ +-------------+ +-------------+ 
+                                   | AUX_ADV_IND |                   | AUX_SCAN_RSP| |AUX_CHAIN_IND| |AUX_CHAIN_IND| 
+                                   | c189        |                   | c189        | | cAAA        | | cAAA        |  
+                                   +-------------+                   +-------------+ +-------------+ +-------------+   
+                                                    +-------------+
+                                                    | AUX_SCAN_REQ|
+                                                    | c189        |
+                                                    +-------------+
+
+
+.. important::
+    This is currently not supported through Sysconfig, therefore
+    to implement this feature, you will need to :ref:`sysconfig-disable`.
+
+To acheive this using |STACK|, follow the steps below:
+
+#. Set the advertising event property to ``GAP_ADV_PROP_SCANNABLE``.
+
+    .. code-block:: c
+      :caption: Configure advertising parameters
+      :emphasize-lines: 3 
+      :linenos:
+
+        // Advertisement Params 
+        GapAdv_params_t advParams = {
+          .eventProps =   GAP_ADV_PROP_SCANNABLE,
+          .primIntMin =   160,
+          .primIntMax =   160,
+          .primChanMap =  GAP_ADV_CHAN_ALL,
+          .peerAddrType = PEER_ADDRTYPE_PUBLIC_OR_PUBLIC_ID,
+          .peerAddr =     { 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa },
+          .filterPolicy = GAP_ADV_WL_POLICY_ANY_REQ,
+          .txPower =      GAP_ADV_TX_POWER_NO_PREFERENCE,
+          .primPhy =      GAP_ADV_PRIM_PHY_1_MBPS,
+          .secPhy =       GAP_ADV_SEC_PHY_2_MBPS,
+          .sid =          0
+         };
+
+#. Create advertising handle with above parameters. 
+
+    .. code-block:: c
+      :caption: Configure advertising parameters
+      :linenos:
+
+        static uint8 advHandle;
+        GapAdv_create(&Application_advCallback, &advParams, &advHandle);
+
+    .. warning::
+        Here we do NOT load the advertising data as we are creating AE
+        scannable packet which is not allowed to have data on legacy 
+        advertising channels.
+
+#. Change the size of scanResData.
+
+    .. code-block:: c
+      :caption: scanResData[] can be found under ti_ble_config.h.
+      :linenos:
+
+        extern uint8_t scanResData[1650];
+
+#. Fill out the scanResData to what you want to send over the air
+   under application_init function.
+
+    .. code-block:: c
+      :caption: Fill out scan response data array
+      :linenos:
+
+        uint16_t i;
+        
+        // Use the sysconfig-generated scan response
+        // data for the first 27 bytes and fill out
+        // the rest with 0x55
+        for ( i = 27; i < sizeof(scanResData); i++)
+        {
+          scanResData[i] = 0x55;
+        }
+
+#. Load scan response data and enable advertising.
+
+    .. code-block:: c
+      :caption: Load scan response data
+      :linenos:
+
+        // Load scan response data
+        GapAdv_loadByHandle(advHandle, GAP_ADV_DATA_TYPE_SCAN_RSP,
+                            sizeof(scanResData), scanResData);
+        // Enable advertising
+        GapAdv_enable(advHandle, GAP_ADV_ENABLE_OPTIONS_USE_MAX , 0);                    
+
+    .. note::
+        To change scan response data on the fly, you can refer
+        to :ref:`gap-update-adv-scan-data`.
+
+.. _gap_limited_advertising:
+
+Limited Advertising
+*******************
+The above code sets the advertising interval for limited and general
+advertising modes. By default, the peripheral advertises in general
+discoverable mode. To use limited discoverable mode, the
+corresponding fields inside the advertising data packet should be
+changed by defining ``DEFAULT_DISCOVERABLE_MODE`` to
+``GAP_ADTYPE_FLAGS_LIMITED``. The application is responsible for setting the advertising
+data and advertising duration.
+
+.. _gap_periodic_advertising:
+
+Periodic Advertising
+********************
+
+.. important::
+    The symbol ``USE_PERIODIC_ADV`` must be pre-defined if you
+    wish to send periodic advertisements (for more details, please see 
+    :ref:`stackconfigurablefeatures`).
+
+Periodic adverting is part of the Advertising Extension and it allows device to 
+send data synchronously at a fixed interval. Periodic advertising is not scannable, 
+not connectable and the advertiser's address should not be hidden.
+
+In order for scanner to receive periodic advertisement, the extended advertisement 
+needs to be enabled and contain at least one PDU type ``AUX_ADV_IND`` packet. The reason for that
+is the ``SyncInfo`` to the periodic advertisement packets can only be found 
+under ``AUX_ADV_IND`` packet. 
+
+The detailed process for enabling periodic advertisement is as follows:
+
+- Advertiser sends out ``ADV_EXT_IND`` PDU type. Scanner will find the channel index, timing and PHY that a coming 
+  auxiliary packet(``AUX_ADV_IND``) will be sent at under AuxPtr field. 
+- Advertiser then sends out ``AUX_ADV_IND`` PDU type package. If there is periodic advertisement coming
+  up, scanner will find ``SyncInfo`` field under extended header. The SyncInfo field
+  contains the needed information for a scanner to follow periodic advertisement packets. 
+  For more detail, please refer to the picture below and Vol 6, Part B, Section 2.3 of |CORESPEC|.
+
+.. ditaa::
+  :--no-separation:
+  :--no-shadows:
+
+   +-----------------------------------------------------------------------------------------------------+
+   |                                   Advertising  PDU c900                                             | 
+   +-------------------------------------------------+---------------------------------------------------+
+   |                    Header         c156          | Payload (Common Extended Advertising Payload) c156|
+   +----------+-----+-------+-------+-------+--------+---------------------+---------+------------+------+
+   | PDU Type | RFU | ChSel | TxAdd | RxAdd | Length |  Extended Header    | AdvMode |  Extended  | Data |
+   |  c189    | c189| c189  | c189  | c189  | c189   |       Length c189   | c189    |   Header   | c189 |
+   |  0b111   |     |       |       |       |        |                     |         |    c189    |      | 
+   +----------+-----+-------+-------+-------+--------+---------------------+---------+------------+------+
+                                                                                     |            |
+                                                                                     |            |
+          /--------------------------------------------------------------------------/            |
+          |                                                                                       |
+          |                                                                                       |
+          v                                                                                       v
+          +---------------------------------------------------------------------------------------+
+          |                                   Extended Header c156                                |
+          +------------+-------+---------+---------+---------+--------+----------+---------+------+
+          |   Extended | AdvA  | TargetA | CTEInfo | AdvData | AuxPtr | SyncInfo | TxPower | ACAD |
+          | Header Flag|       |         |         |  Info   |        |          |         |      |
+          |   c189     | c189  | c189    | c189    | c189    | c189   | c189     | c189    | c189 |
+          +------------+-------+---------+---------+---------+--------+----------+---------+------+
+                                                                      |          | 
+        /-------------------------------------------------------------/          \------------\
+        |                                                                                     |
+        v                                                                                     v
+        +-------------------------------------------------------------------------------------+
+        |                                       SyncInfo c189                                 |  
+        +-------------+--------+--------+-----+----------+-----+-----+----+---------+---------+
+        | Sync Packet | Offset | Offset | RFU | Interval | ChM | SCA | AA | CRCInit | Event   |
+        |   Offset    | Units  | Adjust |     |          |     |     |    |         | Counter |
+        |  cAAA       | cAAA   | cAAA   | cAAA| cAAA     | cAAA|cAAA |cAAA| cAAA    | cAAA    |
+        +-------------+--------+--------+-----+----------+-----+-----+----+---------+---------+
+        <------------------------------->     <---------> <----------------------------------->
+           packet timing                      advertising     has same meaning as when in 
+                                               interval              connection
+
+
+
+The picture below depicts the overall flow of how periodic advertisement works.
+
+
+.. ditaa::
+   :--no-separation:
+   :--no-shadows:
+
+                      +-----------+    +-----------+    +-----------+  
+    Primary Channels  |ADV_EXT_IND|    |ADV_EXT_IND|    |ADV_EXT_IND|--\
+                      | cGRE      |    | cGRE      |    | cGRE      |  | 
+                      +-----------+    +-----------+    +-----------+  |
+                                                                       |
+    -------------------------------------------------------------------|----------------------------------
+                                                                       |
+                                                                       v 
+    Data Channels                                          +-------------+
+                                                           | AUX_ADV_IND |--\
+                                                           | c189        |  |
+                                                           +-------------+  |
+                                                                            |
+                                                                            |
+                                                                            v
+                                                                     +------------+       +------------+       
+                                                                     |AUX_SYNC_IND|       |AUX_SYNC_IND|
+                                                                     | cAAA       |       | cAAA       |
+                                                                     +------------+       +------------+ 
+                                                                     
+                                                                     <------------------->
+                                                                       Fixed Interval
+
+
+
+The following list describes how to configure the GAP layer for periodic advertising.
+
+.. warning:: The periodic advertisement set creation is not supported in SysConfig.
+
+Enable Non-Connectable Non-Scannable Extended Advertisement
+###########################################################
+
+#. Setup parameters for **non-connectable and non-scannable** extended advertisement.  
+   To achieve this, you can set eventProps = 0 and sid != 0
+
+   .. code-block:: c
+     :caption: Setting up advertising parameters for non-connectable and non-scannable extended advertisement set
+     :emphasize-lines: 3, 13
+     :linenos:
+   
+      /// Non-Connectable & Non-Scannable advertising set
+      #define GAPADV_PARAMS_AE_NC_NS {                                           \
+        .eventProps = 0,                                                         \
+        .primIntMin = 160,                                                       \
+        .primIntMax = 160,                                                       \
+        .primChanMap = GAP_ADV_CHAN_ALL,                                         \
+        .peerAddrType = PEER_ADDRTYPE_PUBLIC_OR_PUBLIC_ID,                       \
+        .peerAddr = { 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa },                      \
+        .filterPolicy = GAP_ADV_WL_POLICY_ANY_REQ,                               \
+        .txPower = GAP_ADV_TX_POWER_NO_PREFERENCE,                               \
+        .primPhy = GAP_ADV_PRIM_PHY_1_MBPS,                                      \
+        .secPhy = GAP_ADV_SEC_PHY_1_MBPS,                                        \
+        .sid = 1                                                                 \
+      }
+
+      // Create non connectable & non scannable advertising
+      GapAdv_params_t advParamNonConn = GAPADV_PARAMS_AE_NC_NS;
+
+#. Creating **non-connectable and non-scannable** extended advertisement.
+   
+   .. code-block:: c
+     :caption: Creating and enable extended advertisement
+     :linenos:
+
+        static uint8 advHandleNCNS;      // Non-Connactable & Non-Scannable
+
+        // Create Advertisement set #3 and assign handle
+        status = GapAdv_create(&advCallback, &advParamNonConn,
+                                             &advHandleNCNS);
+
+        // Load advertising data for set #3 that is statically allocated by the app
+        status = GapAdv_loadByHandle(advHandleNCNS, GAP_ADV_DATA_TYPE_ADV,
+                                     sizeof(advertData), advertData);
+
+        // Set event mask for set #3
+        status = GapAdv_setEventMask(advHandleNCNS,
+                                     GAP_ADV_EVT_MASK_START_AFTER_ENABLE |
+                                     GAP_ADV_EVT_MASK_END_AFTER_DISABLE |
+                                     GAP_ADV_EVT_MASK_SET_TERMINATED);
+
+        // Enable non connectable & non scannable advertising for set #3
+        // This is a must in order to enable periodic advertisement
+        status = GapAdv_enable(advHandleNCNS, GAP_ADV_ENABLE_OPTIONS_USE_MAX , 0);
+
+#. Setup parameters for periodic advertisement.
+   The |STACK| will then return ``GAP_ADV_SET_PERIODIC_ADV_PARAMS_EVENT`` to the application layer whether 
+   or not the parameters are set successfully.
+        
+   .. code-block:: c
+     :caption: Setting up advertising parameters for non-connectable and non-scannable extended advertisement set
+     :linenos:
+   
+      /// Non-Connectable & Non-Scannable advertising set
+      #define GAPADV_PARAMS_PERIODIC_ADV {                                     \
+        .periodicAdvIntervalMin = 160,                                         \
+        .periodicAdvIntervalMax = 160,                                         \
+        .periodicAdvProp = GAPADV_PERIODIC_ADV_ENABLE_TX_POWER                 \
+      }
+
+      // Set Periodic Advertising parameters
+      GapAdv_periodicAdvParams_t advParamsPerAdv = GAPADV_PARAMS_PERIODIC_ADV;
+
+      status = GapAdv_SetPeriodicAdvParams(advHandleNCNS, &advParamsPerAdv);
+
+   .. warning:: Only bit 6 in periodicAdvProp field can be set, otherwise the |STACK| will return bleInvalidRange. 
+
+.. _gap_periodic_advertising_advdata_set:
+
+Configure Advertising Data For Periodic Advertisement
+#####################################################
+Advertising data for periodic advertisement is optional. It's not needed to have periodic advertisment running.
+
+#. Setup advertising data for periodic advertisement.
+   The |STACK| will then return ``GAP_ADV_SET_PERIODIC_ADV_DATA_EVENT`` to the application layer whether 
+   or not the adverting data are set successfully.
+
+   .. code-block:: c
+     :caption: Setting up advertising data for periodic advertising
+     :linenos:
+
+      // Periodic Advertising Data
+      static uint8_t periodicData[] =
+      {
+        'P',
+        'e',
+        'r',
+        'i',
+        'o',
+        'd',
+        'i',
+        'c',
+        'A',
+        'd',
+        'v'
+      };
+      
+      #define GAPADV_DATA_PERIODIC_ADV {                          \
+        .operation = GAPADV_PERIODIC_ADV_DATA_COMPLETE,           \
+        .dataLength = sizeof(periodicData),                       \
+        .pData = periodicData                                     \
+      }
+
+      GapAdv_periodicAdvData_t periodicDataParams = GAPADV_DATA_PERIODIC_ADV;
+      status = GapAdv_SetPeriodicAdvData(advHandleNCNS, &periodicDataParams);
+
+   .. note:: You can find a list of define made for periodic advertisement under gap_advertiser.h.
+      
+
+   .. warning:: The maximum data length that is supported here is 252 bytes. Therefore, if you have a advertising
+      data for more than 252 bytes, you will have to fragment the payload in the application layer before calling
+      :ble_api:`GapAdv_SetPeriodicAdvData`.
+
+      For example, if you have 1000 bytes advertising data you want to send using periodic advertisement, you will
+      have to call :ble_api:`GapAdv_SetPeriodicAdvData` four times. 
+      The operation field for first 252 bytes needs to be set to ``GAPADV_PERIODIC_ADV_DATA_FIRST_FRAG(0x01)``. 
+      The operation field for 253 ~ 504 and 505 ~ 756 bytes needs to be set to 
+      ``GAPADV_PERIODIC_ADV_DATA_INTERMIDIATE_FRAG (0x00)``, and the operation field for the last part of 
+      the data needs to be set to ``GAPADV_PERIODIC_ADV_DATA_LAST_FRAG (0x02)``.
+
+      The |STACK| will chain the data based on the order of :ble_api:`GapAdv_SetPeriodicAdvData` calls.
+
+.. _gap_periodic_advertising_enable:
+
+Enable Periodic Advertisement
+#############################
+
+#. Enable periodic advertisement.
+   The |STACK| will then return ``GAP_ADV_SET_PERIODIC_ADV_ENABLE_EVENT`` to the application layer whether 
+   or not the periodic advertising starts successfully.
+
+   .. code-block:: c
+     :caption: Enable periodic advertising
+     :linenos:
+
+      status = GapAdv_SetPeriodicAdvEnable(1, advHandleNCNS);
+
+   .. attention:: Even when :ble_api:`GapAdv_SetPeriodicAdvEnable` was called, if the non-connectable non-scannable 
+      extended advertisement is not enabled, the periodic advertisement will not start.
+
+.. _gap_periodic_advertising_disable:
+
+Disable Periodic Advertisement
+##############################
+
+#. Disable periodic advertisement.
+   The |STACK| will then return ``GAP_ADV_SET_PERIODIC_ADV_ENABLE_EVENT`` to the application layer whether 
+   or not the periodic advertising stops successfully.
+
+   .. code-block:: c
+     :caption: Enable periodic advertising
+     :linenos:
+
+      status = GapAdv_SetPeriodicAdvEnable(0, advHandleNCNS);
+
+
+Change Advertising Data For Periodic Advertisement
+##################################################
+There are two methods to change the advertising data for periodic advertisement.
+
+#. If the new data is less than or equal to 252 bytes, which means operation mode = 
+   ``GAPADV_PERIODIC_ADV_DATA_COMPLETE (0x3)``. Then you can just follow 
+   :ref:`gap_periodic_advertising_advdata_set` to populate the new data.
+
+#. If the new data is more than 252 bytes, then you will have to disable the periodic advertisement 
+   first, please refer to :ref:`gap_periodic_advertising_disable` and then 
+   follow :ref:`gap_periodic_advertising_advdata_set` to populate the new data.
+
+
+.. _gaprole_peripheral_role:
+
+GAP Peripheral
+^^^^^^^^^^^^^^
+
+The peripheral role is demonstrated in simple_peripheral.c and
+simple_peripheral.h. The Peripheral role demonstrates the use of the advertising and
+connection states. The steps to use this role are as follows:
+
+#. Initialize the GAP parameters. This initialization should occur in the
+   application initialization function, for example in ``SimplePeripheral_init``
+   as shown below.
+
+   .. _gaprole_init:
+
+   .. code-block:: c
+     :caption: **simple_peripheral.c :: SimplePeripheral_init()** - Setup of the GAP Peripheral Role
+     :linenos:
+
+      // Configure GAP
+      {
+        uint16_t paramUpdateDecision = DEFAULT_PARAM_UPDATE_REQ_DECISION;
+
+        // Pass all parameter update requests to the app for it to decide
+        GAP_SetParamValue(GAP_PARAM_LINK_UPDATE_DECISION, &paramUpdateDecision);
+      }
+
+#. Initialize the application task for the Peripheral Role and register to
+   receive GAP events.
+
+   .. code-block:: c
+     :caption: **simple_peripheral.c :: SimplePeripheral_init()** - Initialize the GAP layer and register for GAP events.
+     :linenos:
+
+        //Initialize GAP layer for Peripheral role and register to receive GAP events
+        GAP_DeviceInit(GAP_PROFILE_PERIPHERAL, selfEntity, addrMode, NULL);
+
+#. Now you can send commands from the application. The following is an example
+   of the application initiating PHY change using :ble_api:`HCI_LE_SetPhyCmd`.
+
+   .. code-block:: c
+     :caption: **simple_peripheral.c :: SimplePeripheral_setPhy()** - Changing the PHY
+     :linenos:
+
+       // Send PHY Update
+       HCI_LE_SetPhyCmd(connHandle, allPhys, txPhy, rxPhy, phyOpts);
+
+   The following shows the software flow when the user chooses to set the PHY preference
+   from the terminal in simple\_peripheral example:
+
+   .. uml::
+       :caption: Context Diagram of Application Updating PHY.
+       :align: center
+
+       @startuml
+       participant Application
+       participant "BLE Stack"
+
+       group Connected to a device
+
+       group User presses button to initiate PHY change
+         Application -> Application: Button ISR
+       end
+
+         rnote over Application
+          Button handler calls
+          application callback
+         end note
+
+         Application -> Application : SimplePeripheral_doSetConnPhy()
+         Application -> Application : SimplePeripheral_setPhy()
+         Application -> "BLE Stack" : HCI_LE_SetPhyCmd()
+
+         "BLE Stack" -> Application : return(status)
+
+         group Receive HCI Event
+           "BLE Stack" -> Application : SimplePeripheral_processStackMsg
+
+           rnote over "Application"
+            HCI_GAP_EVENT_EVENT -> HCI_LE_EVENT_CODE -> HCI_BLE_PHY_UPDATE_COMPLETE_EVENT
+           end note
+
+           rnote over "Application"
+            Display changed PHY
+           end note
+         end
+       end
+
+       @enduml
+
+   As shown in the diagram above, the actual PHY change is returned asynchronously and is
+   passed to the application with event code HCI_BLE_PHY_UPDATE_COMPLETE_EVENT.
+
+#. The application task processes most of the GAP-related events passed to it
+   from the Bluetooth Low Energy protocol stack. For example, when a link is
+   terminated, the application automatically restarts advertising. The following
+   code snippet can be found in ``simple_peripheral.c``:
+
+   .. code-block:: c
+     :caption: **simple_peripheral.c :: SimplePeripheral_processGapMessage()** - Restart advertising after disconnect
+     :linenos:
+
+       static void SimplePeripheral_processGapMessage(gapEventHdr_t *pMsg)
+       {
+         //.......
+         case GAP_LINK_TERMINATED_EVENT:
+           {
+             //.......
+
+             // Restart advertising since there is now an active connection
+             GapAdv_enable(advHandleLegacy, GAP_ADV_ENABLE_OPTIONS_USE_MAX , 0);
+
+             //.......
+           break;
+
+
+.. _gapscanner:
+
+GAP Scanner
+^^^^^^^^^^^
+
+The GAP Scanner performs Extended Scanning, Legacy Scanning and 
+Synchronization with periodic advertisements operations as
+defined by the |CORESPEC|. It controls the Scanner GAP state (see
+:ref:`gap_state_diagram`). The Central and Observer role uses the scanning
+state implemented by the GAP Scanner. The GAP Scanner is demonstrated in the
+*simple central* and *simple observer* example projects. The periodic
+advertisement synchronization capability of the GAP Scanner is
+demonstrated in the *rtls_master* example project. See the
+:ref:`ble_api_reference` for the full GAP Scanner API including commands,
+configurable parameters, events, and callbacks. The steps to use this module are
+listed in the following, along with example code from *simple central*.
+
+#. **Start a Central or Observer GAP role.** In this case we will use the GAP
+   Central role.
+
+   .. code-block:: c
+     :caption: **simple_central.c :: SimpleCentral_init()** - Initialize the GAP central role.
+
+       // Initialize GAP layer for Central role and register to receive GAP events
+       GAP_DeviceInit(GAP_PROFILE_CENTRAL, selfEntity, addrMode, NULL);
+
+#. **Set up a callback function for scanner events and register to**
+   :ble_api:`gap_advertiser.h`. Since the callback (in this
+   case ``SimpleCentral_scanCb()``) is called from the stack, as little processing
+   as possible should happen in it.
+
+   .. code-block:: c
+     :caption: **simple_central.c :: SimpleCentral_processGapMsg() :: GAP_DEVICE_INIT_DONE_EVENT** - Initialize the GAP central role.
+
+       // Register callback to process Scanner events
+       GapScan_registerCb(SimpleCentral_scanCb, NULL);
+
+#. **Set which events to pass to application.**
+
+   .. code-block:: c
+     :caption: **simple_central.c :: SimpleCentral_processGapMsg() :: GAP_DEVICE_INIT_DONE_EVENT** - Set which events to pass to the callback function.
+
+       // Set Scanner Event Mask
+       GapScan_setEventMask(GAP_EVT_SCAN_ENABLED | GAP_EVT_SCAN_DISABLED |
+                               GAP_EVT_ADV_REPORT);
+
+#. **Set scan parameters.** It's worth noting that the parameters are split into
+   PHY-related parameters (set with :ble_api:`GapScan_setPhyParams`) and
+   non-PHY-related parameters (set with :ble_api:`GapScan_setParam`). Remember
+   to set both.
+
+.. note::
+    Make sure the scanning window is at least twice the length of the expected advertising interval to ensure at least 1 advertising event 
+    is captured in each scanning window. Otherwise, the scanning device may not find the advertising device.
+
+.. code-block:: c
+ :caption: **simple_central.c :: SimpleCentral_processGapMsg() :: GAP_DEVICE_INIT_DONE_EVENT** - Set PHY-related GAP scanner parameters.
+
+   // Set Scan PHY parameters
+   GapScan_setPhyParams(DEFAULT_SCAN_PHY, SCAN_TYPE_ACTIVE,
+                        SCAN_PARAM_DFLT_INTERVAL, SCAN_PARAM_DFLT_INTERVAL);
+
+Set which advertising report fields to send to the application (to the callback function, in this case ``SimpleCentral_scanCb()``).
+
+.. code-block:: c
+ :caption: **simple_central.c :: SimpleCentral_processGapMsg() :: GAP_DEVICE_INIT_DONE_EVENT** - Set GAP scanner parameter.
+
+     // Set Advertising report fields to keep
+     temp16 = SC_ADV_RPT_FIELDS;
+     GapScan_setParam(SCAN_PARAM_RPT_FIELDS, &temp16);
+
+Enable filter to remove duplicate advertising reports.
+
+.. code-block:: c
+ :caption: **simple_central.c :: SimpleCentral_processGapMsg() :: GAP_DEVICE_INIT_DONE_EVENT** - Set GAP scanner parameter.
+
+     // Set LL Duplicate Filter
+     temp8 = SCAN_FLT_DUP_ENABLE;
+     GapScan_setParam(SCAN_PARAM_FLT_DUP, &temp8);
+
+Set which PHY to scan on.
+
+.. code-block:: c
+ :caption: **simple_central.c :: SimpleCentral_processGapMsg() :: GAP_DEVICE_INIT_DONE_EVENT** - Set GAP scanner parameter.
+
+     // Set Scanning Primary PHY
+     temp8 = DEFAULT_SCAN_PHY;
+     GapScan_setParam(SCAN_PARAM_PRIM_PHYS, &temp8);
+
+Set scan filter to filter by PDU type.
+
+.. code-block:: c
+
+     // Set PDU type filter -
+     // Only 'Connectable' and 'Complete' packets are desired.
+     // It doesn't matter if received packets are
+     // Scannable or Non-Scannable, Directed or Undirected,
+     // Scan_Rsp's or Advertisements, and whether they are Legacy or Extended.
+     temp16 = SCAN_FLT_PDU_CONNECTABLE_ONLY | SCAN_FLT_PDU_COMPLETE_ONLY;
+     GapScan_setParam(SCAN_PARAM_FLT_PDU_TYPE, &temp16);
+
+#. **Start scanning**. Remember to reset the number of scan results every time
+   you start scanning.
+
+   .. code-block:: c
+
+     // Scanning for DEFAULT_SCAN_DURATION x 10 ms.
+     // The stack does not need to record advertising reports
+     // since the application will filter them by Service UUID and save.
+
+     // Reset number of scan results to 0 before starting scan
+     numScanRes = 0;
+     GapScan_enable(0, DEFAULT_SCAN_DURATION, 0);
+
+   The return status from the protocol stack call of :ble_api:`GapScan_enable`
+   indicates only whether or not the attempt to perform device discovery was
+   successful. The actual device discovered is returned asynchronously as a
+   ``SC_EVT_ADV_REPORT`` forwarded through the GAP Scanner callbacks
+   registered by the application (here: ``SimpleCentral_scanCb()``). This is
+   described below.
+
+#. The GAP Scanner performs some processing on the GAP events it
+   receives from the protocol stack. The task also forwards some events
+   to the application. :numref:`cd_gap_dev_disc` shows this and how the
+   ``SC_EVT_ADV_REPORT`` is processed from the protocol stack to the
+   application.
+
+   .. _cd_gap_dev_disc:
+   .. uml::
+       :caption: Context Diagram of Application using GapScan_enable()
+       :align: center
+
+       @startuml
+       participant Application
+       participant "BLE Stack"
+
+       group !scanning && (central or observer)
+
+         Application -> "BLE Stack" : GapScan_enable()
+
+         rnote over "BLE Stack"
+          BLE stack attempts to
+          start device discovery
+         end note
+
+         "BLE Stack" -> Application : return(status)
+
+
+       group status==SUCCESS
+       rnote over "Application"
+       SC_EVT_SCAN_ENABLED
+       indicates scanning has started
+       end note
+       ...
+       ... BLE Stack does device discovery ...
+       ...
+       "BLE Stack"->Application : SimpleCentral_scanCb()
+       Application->Application: SimpleCentral_enqueueMsg()
+       Application ->Application: SimpleCentral_processAppMsg()
+
+         rnote over "Application"
+         SC_EVT_ADV_REPORT
+         end note
+         ...
+         rnote over "Application"
+         SC_EVT_SCAN_DISABLED
+         indicates scanning has ended
+         end note
+       end
+
+       end
+
+       @enduml
+
+Note that during scanning, individual advertisements and scan responses are
+returned as ``SC_EVT_ADV_REPORT``.This is defined by the |CORESPEC|. By
+default, duplicate reports are filtered such that only one event is returned to
+the application per peer device BDA. This can be configured via the
+:ble_api:`SCAN_PARAM_FLT_DUP` GAP Scanner parameter.
+``SC_EVT_SCAN_ENABLED`` indicates the start of scanning. After the scan
+has completed, a summary of discovered reports will be returned to the
+application with ``SC_EVT_SCAN_DISABLED``. You can see the implementation
+of this in ``SimpleCentral_processAppMsg()``.
+
+The maximum amount of scan responses that can be discovered during one scan can
+be set with the ``DEFAULT_MAX_SCAN_RES`` parameter that is passed into the ``maxNumReport``
+parameter of :ble_api:`GapScan_enable`.
+
+In an environment saturated with advertisements and scan responses, this can have
+a drastic impact on heap usage to the point of potentially breaking the stack.
+Therefore, it is essential to profile your application for the worst-case
+scenario where the maximum amount of scan responses are discovered during a scan.
+
+You can change scanning parameters with :ble_api:`GapScan_setParam`. Note that some scanning parameters will not be updated before scanning has been disabled and re-enabled. This is true for the following parameters:
+
+  - :ble_api:`SCAN_PARAM_FLT_PDU_TYPE` - Filter by PDU Type
+  - :ble_api:`SCAN_PARAM_FLT_MIN_RSSI` - Filter by Minimum RSSI
+  - :ble_api:`SCAN_PARAM_FLT_DISC_MODE` - Filter by Discoverable Mode
+  - :ble_api:`SCAN_PARAM_RPT_FIELDS` - Advertising Report Fields
+
+
+
+Advertising Report Recording
+****************************
+
+In addition to the advertising report, the advertising report recording feature can be used
+to record only a certain part of the Advertising Report information without the data payload.
+The application can specify which fields of the Advertising Report information by using
+GapScan_setParam() with the parameter ID SCAN_PARAM_RPT_FIELDS and the associate bitmap.
+This is useful in the use case where the application is not interested in the payload of
+Advertising Reports thus doesn't want to get GAP_EVT_ADV_REPORT event from GAP Scanner but
+needs some specific information such as address type, address, RSSI, etc.. To prepare
+recording, GAP Scanner allocates necessary amount of memory in GapScan_enable().
+Then whenever GAP Scanner gets a new packet, it puts only the specified fields of the
+information in the Advertising Report List in packed form. The list is kept in RAM even
+after the scanning ends until the application calls GapScan_discardAdvReportList()
+or a new scanning starts. While the list is available, the application can retrieve the
+information by using GapScan_getAdvReport(). When the list gets full, GAP Scanner issues
+SCAN_EVT_ADV_REPORT_FULL to the application to notify that no more Advertising Report
+information will be recorded. How many Advertising Reports' information have been recorded
+can be found in the numReport field of the data buffer of type GapScan_Evt_End_t,
+coming with GAP_EVT_SCAN_END event. Alternatively, if the application didn't mask
+GAP_EVT_SCAN_END and doesn't get it, GapScan_getParam() with parameter
+ID SCAN_PARAM_NUM_ADV_RPT can be used.
+
+.. _gap_scanner_filtering:
+
+.. _gap_advertising_channel:
+
+Obtain Advertising Channel from Advertising Report
+**************************************************
+
+The application can extract the advertising channel from the advertising report with the following modifications:
+
+#. Enable the advertising channel in the advertising report:
+
+   * With SysConfig: Enable the setting ``Add Advertisement Channel Number`` inside ``Observer Configuration``, see :ref:`fig-observer-configurations`
+   * Without SysConfig: Add ``-DADV_RPT_INC_CHANNEL=1`` in the file ``ti_ble_app_config.opt``
+  
+#. Use the following example code in ``SimpleCentral_processAppMsg()`` to access the channel information
+
+   .. code-block:: c
+     :caption: **simple_central.c :: SimpleCentral_processAppMsg() :: SC_EVT_ADV_REPORT** - Extract the advertising channel
+     :emphasize-lines: 4
+
+        case SC_EVT_ADV_REPORT:
+        {
+          GapScan_Evt_AdvRpt_t* pAdvRpt = (GapScan_Evt_AdvRpt_t*) (pMsg->pData);
+          volatile uint8_t advChannel = pAdvRpt->secPhy >> 2;
+          
+          //...
+		
+Filtering
+*********
+
+The GAP Scanner module provides 5 different types of filter to reduce the amount of advertising
+report notifications to the application and eventually save memory and power consumption.
+The result of the filtering affects both advertising reports and advertising report recording.
+The packets filtered out by the filter configurations are discarded and will
+neither be reported nor recorded. The filters are set by using the API
+:ble_api:`GapScan_setParam` with the following parameter IDs:
+
+- :ref:`cd_gap_filter_policy`: :ble_api:`SCAN_PARAM_FLT_POLICY`
+- :ref:`cd_gap_filter_type`: :ble_api:`SCAN_PARAM_FLT_PDU_TYPE`
+- :ref:`cd_gap_filter_rssi`: :ble_api:`SCAN_PARAM_FLT_MIN_RSSI`
+- :ref:`cd_gap_filter_discoverable`: :ble_api:`SCAN_PARAM_FLT_DISC_MODE`
+- :ref:`cd_gap_filter_duplicates`: :ble_api:`SCAN_PARAM_FLT_DUP`.
+
+All parameter IDs are described in the following sections. The GAP Scanner
+allows the application to apply any combination of the individual filters at the
+same time to narrow the scope of packets to receive.
+
+.. _cd_gap_filter_policy:
+
+Filter by LL Filter Policy
+##########################
+
+This filter is a link layer-level filter. The associated parameter ID used in
+:ble_api:`GapScan_setParam` is :ble_api:`SCAN_PARAM_FLT_POLICY`. The parameter
+accompanying :ble_api:`SCAN_PARAM_FLT_POLICY` is passed to the link layer when
+:ble_api:`GapScan_enable` is called before actually enabling scanning. Since the filtering
+is done by the link layer, the application only receives advertising report events
+that have passed the filter. The parameter value can be one of the following:
+
++-------------------------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Name                          | Value   | Description                                                                                                                                                                    |
++===============================+=========+================================================================================================================================================================================+
+| SCAN\_FLT\_POLICY\_ALL        | 0       | Accept all Advs except directed Adv not addressed to this device.                                                                                                              |
++-------------------------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_POLICY\_WL         | 1       | Accept only Advs from devices where the advertiser’s address is in the FIlter Accept List.                                                                                     |
++-------------------------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_POLICY\_ALL\_RPA   | 2       | Accept all Advs except directed Adv not addressed to this device and any packet addressed to this device or addressed to a private resolvable address.                         |
++-------------------------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_POLICY\_WL\_RPA    | 3       | Accept only Advs from devices where the advertiser’s address is in the FIlter Accept List and any packet addressed to this device or addressed to a private resolvable address.|
++-------------------------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. _cd_gap_filter_type:
+
+Filter by PDU Type
+##################
+
+This filter is based on the ``Event_Type`` parameter coming with the LE Extended
+Advertising Report Event. The associated parameter ID is
+``SCAN_PARAM_FLT_PDY_TYPE``. The parameter value specifies packets
+classified in six categories:
+
+- Connectable/Non-Connectable
+- Scannable/Non-Scannable
+- Directed/Undirected
+- ScanRsp/Adv
+- Legacy/Extended
+- Complete/Incomplete.
+
+Every incoming packet has exactly one attribute in each category. For example,
+:ble_api:`SCAN_FLT_PDU_NONSCANNABLE_ONLY` and
+:ble_api:`SCAN_FLT_PDU_SCANNABLE_ONLY` cannot be chosen together since they
+represent scannable and non-scannable packets. Only either one can be used. If
+neither type is selected in a set, the filter will not care about that category.
+For example, if neither :ble_api:`SCAN_FLT_PDU_NONCONNECTABLE_ONLY` nor
+:ble_api:`SCAN_FLT_PDU_CONNECTABLE_ONLY` is set in the parameter value, the GAP
+Scanner will notify the application of both connectable packets and
+non-connectable packets. It will also record both connectable packets and
+non-connectable packets. The ``SCAN_PARAM_FLT_PDY_TYPE`` parameter value
+can be any combination of the following individual values (except individual
+values that are mutually exclusive):
+
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+| Name                                   | Value    | Description                                                                               |
++========================================+==========+===========================================================================================+
+| SCAN\_FLT\_PDU\_NONCONNECTABLE\_ONLY   | 0x0001   | Non-connectable packets only. Mutually exclusive with SCAN\_FLT\_PDU\_CONNECTABLE\_ONLY   |
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_PDU\_CONNECTABLE\_ONLY      | 0x0002   | Connectable packets only. Mutually exclusive with SCAN\_FLT\_PDU\_NONCONNECTABLE\_ONLY    |
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_PDU\_NONSCANNABLE\_ONLY     | 0x0004   | Non-scannable packets only. Mutually exclusive with SCAN\_FLT\_PDU\_SCANNABLE\_ONLY       |
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_PDU\_SCANNABLE\_ONLY        | 0x0008   | Scannable packets only. Mutually exclusive with SCAN\_FLT\_PDU\_NONSCANNABLE\_ONLY        |
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_PDU\_UNDIRECTED\_ONLY       | 0x0010   | Undirected packets only. Mutually exclusive with SCAN\_FLT\_PDU\_DIRECTIED\_ONLY          |
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_PDU\_DIRECTED\_ONLY         | 0x0020   | Directed packets only. Mutually exclusive with SCAN\_FLT\_PDU\_UNDIRECTED\_ONLY           |
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_PDU\_ADV\_ONLY              | 0x0040   | Advertisement packets only. Mutually exclusive with SCAN\_FLT\_PDU\_SCANRSP\_ONLY         |
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_PDU\_SCANRSP\_ONLY          | 0x0080   | Scan Response packets only. Mutually exclusive with SCAN\_FLT\_PDU\_ADV\_ONLY             |
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_PDU\_EXTENDED\_ONLY         | 0x0100   | Extended packets only. Mutually exclusive with SCAN\_FLT\_PDU\_LEGACY\_ONLY               |
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_PDU\_LEGACY\_ONLY           | 0x0200   | Legacy packets only. Mutually exclusive with SCAN\_FLT\_PDU\_EXTENDED\_ONLY               |
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_PDU\_TRUNCATED\_ONLY        | 0x0400   | Truncated packets only. Mutually exclusive with SCAN\_FLT\_PDU\_COMPLETE\_ONLY            |
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+| SCAN\_FLT\_PDU\_COMPLETE\_ONLY         | 0x0800   | Complete packets only. Mutually exclusive with SCAN\_FLT\_PDU\_TRUNCATED\_ONLY            |
++----------------------------------------+----------+-------------------------------------------------------------------------------------------+
+
+.. _cd_gap_filter_rssi:
+
+Filter by Minimum RSSI
+######################
+
+This filter is based on the RSSI parameter coming with the LE Extended
+Advertising Report Event. The associated parameter ID used in
+:ble_api:`GapScan_setParam` is :ble_api:`SCAN_PARAM_FLT_MIN_RSSI`. The GAP
+Scanner will discard LE Extended Advertising Report Event whose RSSI parameter
+value is smaller than the minimum RSSI value given by the application. The
+available range is -128 dBm to 127 dBm.
+
+.. _cd_gap_filter_discoverable:
+
+Filter by Discoverable Mode
+###########################
+
+This filter is based on the ``Flags AD`` type value in the payload (in
+the ``Data`` parameter) of the LE Extended Advertising Report Event. The
+associated parameter ID used in :ble_api:`GapScan_setParam` is
+:ble_api:`SCAN_PARAM_FLT_DISC_MODE`. This filter is applied after the GAP
+Scanner reassembles all the fragmented payloads delivered by multiple LE
+Extended Advertising Report Events. The GAP Scanner will discard the
+defragmented packet if the found Flags AD type value doesn't match the parameter
+value given by the application. The parameter value can be one of the following:
+
++----------------------------+---------+---------------------------------------------------------------------------+
+| Name                       | Value   | Description                                                               |
++============================+=========+===========================================================================+
+| SCAN\_FLT\_DISC\_NONE      | 0       | Accept only Non-Discoverable mode                                         |
++----------------------------+---------+---------------------------------------------------------------------------+
+| SCAN\_FLT\_DISC\_GENERAL   | 1       | Accept only General Discoverable mode                                     |
++----------------------------+---------+---------------------------------------------------------------------------+
+| SCAN\_FLT\_DISC\_LIMITED   | 2       | Accept only Limited Discoverable mode                                     |
++----------------------------+---------+---------------------------------------------------------------------------+
+| SCAN\_FLT\_DISC\_ALL       | 3       | Accept both General and Limited Discoverable mode                         |
++----------------------------+---------+---------------------------------------------------------------------------+
+| SCAN\_FLT\_DISC\_DISABLE   | 4       | Discoverable Mode Filter Off (Don’t care about the Flags AD type value)   |
++----------------------------+---------+---------------------------------------------------------------------------+
+
+.. _cd_gap_filter_duplicates:
+
+Filter by Duplicates
+####################
+
+Like the Link Layer Scanner Filter Policy, this filter is a link layer-level filter.
+The associated parameter ID used in :ble_api:`GapScan_setParam` is
+:ble_api:`SCAN_PARAM_FLT_DUP`. The parameter accompanying the
+:ble_api:`SCAN_PARAM_FLT_DUP` parameter ID is passed to the link layer when
+:ble_api:`GapScan_enable` internally calls ``LE_SetExtScanEnable`` to
+enable scanning. Since the filtering is done by the link layer, GAP Scanner
+receives only the LE Extended Advertising Report Events that have passed the
+filter. The parameter value can be one of the following:
+
++---------------------------+---------+-----------------------------------------------------------+
+| Name                      | Value   | Description                                               |
++===========================+=========+===========================================================+
+| SCAN\_FLT\_DUP\_DISABLE   | 0       | Disable duplicate filtering.                              |
++---------------------------+---------+-----------------------------------------------------------+
+| SCAN\_FLT\_DUP\_ENABLE    | 1       | Enable duplicate filtering.                               |
++---------------------------+---------+-----------------------------------------------------------+
+| SCAN\_FLT\_DUP\_RESET     | 2       | Enable duplicate filtering. Reset for each scan period.   |
++---------------------------+---------+-----------------------------------------------------------+
+
+.. warning:: When the duplicate filtering is enabled, the maximum amount of devices that can
+   be found is 16. If more than 16 devices need to be discovered, the duplicate filtering needs to
+   be disabled.
+
+Synchronize with a Periodic Advertising Train
+*********************************************
+
+.. important::
+    The symbol ``USE_PERIODIC_SCAN`` must be pre-defined if you
+    wish to use the functions related to scanning and synchronization with
+    periodic advertising (for more details, please see 
+    :ref:`stackconfigurablefeatures`).
+
+Additional information about periodic advertisements is provided within the section
+:ref:`gap_periodic_advertising`.
+
+From a high level point of view, in order to synchronize with a periodic advertiser,
+the scanner has to:
+
+#. Start a Central or Observer GAP role
+#. Set up a callback function for scanner events and register to
+#. Set which events to pass to application.
+#. Set scan parameters
+#. Start scanning
+#. Identify periodic advertisers
+#. Synchronize with a periodic advertising train
+#. Enable the reception of the periodic advertisements
+#. Handle the periodic advertisements reports
+#. Disable the reception of the periodic advertisements and terminate the synchronization
+
+The first steps are detailed at the beginning of the :ref:`gapscanner` section.
+
+Identify periodic advertisers
+#############################
+
+The advertising reports for
+periodic advertisements have the exact same structure and the exact same way
+of reception like other advertisement types. 
+The actual device discovered is returned asynchronously as a
+``SC_EVT_ADV_REPORT`` forwarded through the GAP Scanner callbacks
+registered by the application (here: ``SimpleCentral_scanCb()``).
+
+Periodic advertisements are non-connectable, non-scannable. By default, the
+``simple_central`` project example filters out non-connectable
+advertisements. Make sure to change this PDU filtering policy.
+
+ .. code-block:: c
+   :caption: **simple_central.c :: SimpleCentral_processGapMsg() :: GAP_DEVICE_INIT_DONE_EVENT** - Disable filtering out of non-connectable advertisements / keep only non-connectable advertisements
+
+      uint16_t temp16;
+
+      // ...
+
+      //temp16 = SCAN_FLT_PDU_CONNECTABLE_ONLY | SCAN_FLT_PDU_COMPLETE_ONLY;
+      temp16 = SCAN_FLT_PDU_NONCONNECTABLE_ONLY;
+
+      GapScan_setParam(SCAN_PARAM_FLT_PDU_TYPE, &temp16);
+
+The parameter ``periodicAdvInt`` from the structure :ble_api:`GapScan_Evt_AdvRpt_t`
+will help to assess it is possible to synchronize with the advertiser.
+It means this field of the advertise report has to be activated.
+The same apply to the field ``advSid`` (Advertise Set Id).
+
+ .. code-block:: c
+   :caption: **simple_central.c :: SimpleCentral_processAppMsg() :: SC_EVT_ADV_REPORT** - Assess if the advertisement is a periodic advertisement
+
+      GapScan_Evt_AdvRpt_t* pAdvRpt = (GapScan_Evt_AdvRpt_t*) (pMsg->pData);
+
+      if(0 != pAdvRpt->periodicAdvInt)
+      {
+          // this is a periodic advertisement
+      }
+      else
+      {
+          // this is NOT a periodic advertisement
+      }
+
+Synchronize with a periodic advertising train
+#############################################
+
+When a periodic advertisement is identified, the synchronization can be started.
+
+.. note::
+    The |CORESPEC| (Vol 6, Part B, §4.3.5) define two ways for the scanner's Link
+    Layer to process advertising PDUs when attempting to synchronize to a
+    periodic advertising train.
+    The first policy which requires specifying the device to synchronize with.
+    The second policy allows to synchronize with all the devices in the
+    Periodic Advertiser List with only one scan. This is then a way to save
+    time and energy.
+
+- **Policy 1: Ignore the Periodic Advertiser List and process advertising PDUs from a specific single device**
+
+ .. code-block:: c
+   :caption: **simple_central.c :: SimpleCentral_processAppMsg() :: SC_EVT_ADV_REPORT** - Create synchronization with a periodic advertsiement train
+
+      GapScan_Evt_AdvRpt_t* pAdvRpt = (GapScan_Evt_AdvRpt_t*) (pMsg->pData);
+
+      if(0 != pAdvRpt->periodicAdvInt)
+      {
+          // this is a periodic advertisement
+          GapScan_PeriodicAdvCreateSyncParams_t pSyncParams;
+
+          pSyncParams.options = SCAN_PERIODIC_DO_NOT_USE_PERIODIC_ADV_LIST |
+                                SCAN_PERIODIC_REPORTING_INITIALLY_DISABLED;
+          pSyncParams.advAddrType = (uint8)pAdvRpt->addrType; // only ADDRTYPE_PUBLIC and ADDRTYPE_RANDOM are allowed
+          osal_memcpy(pSyncParams.advAddress, pAdvRpt->addr, B_ADDR_LEN);
+          pSyncParams.skip = 0; // should be between 0 and SCAN_PERIODIC_SKIP_MAX 
+          pSyncParams.syncTimeout = 1000; // synchronization timeout for the periodic advertising train is 1000*10ms = 10s
+                                          // should be between SCAN_PERIODIC_TIMEOUT_MIN and SCAN_PERIODIC_TIMEOUT_MAX
+          pSyncParams.syncCteType = SCAN_PERIODIC_CTE_TYPE_ALL;
+
+          uint8_t status = GapScan_PeriodicAdvCreateSync(pAdvRpt->advSid, &pSyncParams);
+          if(SUCCESS != status){
+            // handle error
+          }
+
+          GapScan_disable("");
+
+          break;
+      }
+      else
+      {
+          // this is NOT a periodic advertisement
+      }
+
+- **Policy 2: process advertising PDUs from all devices in the Periodic Advertiser List.**
+
+  This policy first requires to add one or several device(s) to the
+  Periodic Advertiser List. This can be done using the function
+  :ble_api:`GapScan_AddDeviceToPeriodicAdvList`
+
+   .. code-block:: c
+     :caption: **simple_central.c :: SimpleCentral_processAppMsg() :: SC_EVT_ADV_REPORT** - Create synchronization with a periodic advertsiement train using the Periodic Advertiser List
+
+      GapScan_Evt_AdvRpt_t* pAdvRpt = (GapScan_Evt_AdvRpt_t*) (pMsg->pData);
+
+      if(0 != pAdvRpt->periodicAdvInt)
+      {
+          // this is a periodic advertisement
+
+          // add the device to the Periodic Advertiser List
+          GapScan_AddDeviceToPeriodicAdvList((uint8)pAdvRpt->addrType,
+                                             pAdvRpt->addr,
+                                             pAdvRpt->advSid);
+
+          // connect the devices on the Periodic Advertiser List.
+          GapScan_PeriodicAdvCreateSyncParams_t pSyncParams;
+
+          pSyncParams.options = SCAN_PERIODIC_USE_PERIODIC_ADV_LIST |
+                                SCAN_PERIODIC_REPORTING_INITIALLY_DISABLED;
+          pSyncParams.skip = 0; // should be between 0 and SCAN_PERIODIC_SKIP_MAX 
+          pSyncParams.syncTimeout = 1000; // synchronization timeout for the periodic advertising train is 1000*10ms = 10s
+                                          // should be between SCAN_PERIODIC_TIMEOUT_MIN and SCAN_PERIODIC_TIMEOUT_MAX
+          pSyncParams.syncCteType = SCAN_PERIODIC_CTE_TYPE_ALL;
+
+          uint8_t status = GapScan_PeriodicAdvCreateSync(0, &pSyncParams);
+          if(SUCCESS != status){
+            // handle error
+          }
+
+          GapScan_disable("");
+
+          break;
+      }
+
+  The functions :ble_api:`GapScan_RemoveDeviceFromPeriodicAdvList`
+  and :ble_api:`GapScan_ClearPeriodicAdvList` can be used to remove
+  device(s) from the Periodic Advertiser List.
+
+Once the synchronization is created, a :ble_api:`GAP_SCAN_CREATE_SYNC_EVENT`
+event with status ``SUCCESS`` is issued. After this, scanning has to be
+enabled in order to let the device find the periodic advertisement train
+that has been specified before.
+
+ .. code-block:: c
+   :caption: **simple_central.c :: SimpleCentral_processGapMsg() :: GAP_SCAN_CREATE_SYNC_EVENT** - Re-enable scanning after receiving GAP_SCAN_CREATE_SYNC_EVENT event to establish the synchronization 
+      
+      {
+        GapScan_PeriodicAdvEvt_t *pPkt = (GapScan_PeriodicAdvEvt_t *)pMsg;
+        uint8_t status;
+
+        if(pPkt->status == SUCCESS)
+        {
+          status = GapScan_enable(0, DEFAULT_SCAN_DURATION, 0);
+          if(SUCCESS != status){
+            // handle error
+          }
+        }
+
+        break;
+      }
+
+Enable the reception of the periodic advertisements
+###################################################
+
+  After the synchronization is established, the event ``GAP_SCAN_PERIODIC_ADV_SYNC_EST_EVENT``
+  is issued. If not already done, the reception of the periodic advertisements reports
+  has to be turned on.
+
+   .. code-block:: c
+     :caption: **simple_central.c :: SimpleCentral_processGapMsg() :: GAP_SCAN_PERIODIC_ADV_SYNC_EST_EVENT** - Enable the reception of the periodic advertisements after the reception of GAP_SCAN_PERIODIC_ADV_SYNC_EST_EVENT
+        
+        {
+          GapScan_Evt_PeriodicAdvSyncEst_t *pPkt = (GapScan_Evt_PeriodicAdvSyncEst_t *)pMsg;
+          uint8_t status;
+
+          if(pPkt->status == SUCCESS)
+          {
+            status = GapScan_SetPeriodicAdvReceiveEnable(pPkt->syncHandle, 0x01);
+            if(SUCCESS != status){
+              // handle error
+            }
+          }
+
+          break;
+        }
+
+Handle the periodic advertisements reports
+##########################################
+
+After enabling the reception of the periodic advertisements,
+the reception of a periodic advertisement leads to the generation of a
+``GAP_SCAN_PERIODIC_ADV_REPORT_EVENT`` event.
+
+ .. code-block:: c
+   :caption: **simple_central.c :: SimpleCentral_processGapMsg() :: GAP_SCAN_PERIODIC_ADV_REPORT_EVENT** - Reception of the periodic advertisement reports
+      
+      {
+        GapScan_Evt_PeriodicAdvRpt_t *pPkt = (GapScan_Evt_PeriodicAdvRpt_t *)pMsg;
+
+        // Handle periodic advertisement report
+        // ...
+
+        // Free report payload data
+        if (pPkt->pData != NULL)
+        {
+          ICall_free(pPkt->pData);
+        }
+
+        break;
+      }
+
+Disable the reception of the periodic advertisements and terminate the synchronization
+######################################################################################
+
+The periodic advertisement reports can be disabled using the function 
+:ble_api:`GapScan_SetPeriodicAdvReceiveEnable`.
+
+ .. code-block:: c
+   :caption: **simple_central.c :: SimpleCentral_processGapMsg() :: GAP_SCAN_PERIODIC_ADV_REPORT_EVENT** - Disable the reception of periodic advertisement reports
+      
+      {
+        GapScan_Evt_PeriodicAdvRpt_t *pPkt = (GapScan_Evt_PeriodicAdvRpt_t *)pMsg;
+        uint8_t status;
+
+        status = GapScan_SetPeriodicAdvReceiveEnable(pPkt->syncHandle, 0x00);
+        if(SUCCESS != status){
+            // handle error
+        }
+
+        break;
+      }
+
+Disabling the periodic advertisement reports does NOT interrupt the synchronization.
+In other words, the device will still wake-up and scan at each periodic advertisement.
+The function :ble_api:`GapScan_PeriodicAdvTerminateSync` is used to terminate
+the synchronization.
+
+ .. code-block:: c
+   :caption: **simple_central.c :: SimpleCentral_processGapMsg() :: GAP_SCAN_PERIODIC_ADV_REPORT_EVENT** - Disable the reception of periodic advertisement reports
+      
+      {
+        GapScan_Evt_PeriodicAdvRpt_t *pPkt = (GapScan_Evt_PeriodicAdvRpt_t *)pMsg;
+        uint8_t status;
+
+        status = GapScan_PeriodicAdvTerminateSync(pPkt->syncHandle);
+        if(SUCCESS != status){
+          // handle error
+        }
+
+        break;
+      }
+
+The event :ble_api:`GAP_SCAN_TERMINATE_SYNC_EVENT` will be received once the
+synchronization is terminated.
+
+.. _gapinitiator:
+
+GAP Initiator
+^^^^^^^^^^^^^
+
+The initiator module is used to initiate the connection to a peripheral device.
+An initiator generally scans for advertisements then connects to a specific
+device. The initiator is a short lived state that transitions to the Central
+Role after a connection is established.
+Unlike the GAP Advertiser and GAP Scanner modules, GAP Initiator doesn't have
+any callback function to call or to be called.
+
+Only a device initiated with the GAP Central Role can become an initiator.
+
+.. code-block:: c
+    :caption: **simple_central.c :: SimpleCentral_init()** Setup of Central Role
+    :linenos:
+
+    void SimpleCentral_init(void)
+    {
+        // Register with GAP for HCI/Host messages (for RSSI)
+        GAP_RegisterForMsgs(selfEntity);
+
+        // Initialize GAP layer for Central role and register to receive GAP events
+        GAP_DeviceInit(GAP_PROFILE_CENTRAL, selfEntity, addrMode, NULL);
+    }
+
+The following API is used to initiate connection to a peer device, see
+:ble_api:`GapInit_connect`
+
+.. code-block:: c
+    :caption: Initiating connection in Central Role
+    :linenos:
+
+    GapScan_Evt_AdvRpt_t advRpt;
+
+    GapScan_getAdvReport(index, &advRpt);
+
+    /*
+     * The initiating timeout is in milliseconds and will automatically cancel
+     * connection initiation if the peer is not connected. This can be set to
+     * 0 to wait indefinitely.
+     */
+    uint16_t initTimeout = 500;
+
+    GapInit_connect(advRpt.addrType & MASK_ADDRTYPE_ID,
+                  advRpt.addr, DEFAULT_INIT_PHY, initTimeout);
+
+
+If the on-going connection attempt is intended to be canceled by either timeout
+or a user request (the application calling :ble_api:`GapInit_cancelConnect`),
+the stack notifies the application of the cancellation completion with a
+:ble_api:`GAP_CONNECTING_CANCELLED_EVENT`.
+
+The initiator task will use the parameters saved for the PHY specified in the
+call to :ble_api:`GapInit_connect`. These may be set with
+:ble_api:`GapInit_setPhyParam`. Defaults are shown in ``gap_initiator.h``
+
+.. attention::
+   When initiating timeout is set to 0 (wait indefinitely), the |DEVICE| will
+   stay in initiator role until a connection is successfully established.
+   If the peripheral device disappeared from the network before the connection
+   is established, the only method for initiator to exit this state is 
+   to call :ble_api:`GapInit_cancelConnect`.
+
+GAP Central
+^^^^^^^^^^^
+
+The GAP Central role is demonstrated in simple_central.c and simple_central.h. The Central
+role demonstrates the use of the scanning and initiating states and supports connections
+to peripheral devices. See the simple\_central example project for an example of
+implementing the Central role. The steps to use this module are as follows.
+
+#. Initialize the GAP and GATT parameters.
+   This initialization should occur in the application
+   initialization function (for example in ``SimpleCentral_init``).
+   GAP parameters can also be set in this initialization function.
+
+   .. code-block:: c
+
+     static void SimpleCentral_init(void)
+     {
+       // Initialize GATT Client
+       VOID GATT_InitClient();
+       ...
+       // Accept all parameter update requests
+       GAP_SetParamValue(GAP_PARAM_LINK_UPDATE_DECISION, GAP_UPDATE_REQ_ACCEPT_ALL);
+     }
+
+#. Start the GAP Central role and register to receive events in the application task.
+
+   .. code-block:: c
+
+        // Initialize GAP layer for Central role and register to receive GAP events
+        GAP_DeviceInit(GAP_PROFILE_CENTRAL, selfEntity, addrMode, NULL);
+
+.. _connection_parameters:
+
+GAP Connection State
+^^^^^^^^^^^^^^^^^^^^
+
+A BLE device can be either in the Central or Peripheral role in
+the Connection State. After devices enter connection state,
+the devices exchange data under specific time within a specific time slot. 
+This slot where the data is exchanged is called a **Connection Event**.
+
+The beginning of the Connection Event is called an **Anchor Point**. 
+During the connection event, the central and peripheral device will meet at 
+the anchor point and the central will transmit the first packet, while the 
+peripheral will have woken up to listen for the central devices transmitted packet.
+
+.. ditaa::
+   :--no-separation:
+   :--no-shadows:
+
+             Anchor Point     
+                   |
+                   |
+                   v  
+                   +-----+ +-----+                        +-----+ +-----+             
+                   | TX  | | RX  |       IDLE             | TX  | | RX  |            
+      Central      | cGRE| | cAAA|                        | cGRE| | cAAA| 
+                   +-----+-+-----+------------------------+-----+-+-----+
+                   <------------->
+                     Connection
+                       Event
+                   <-------------------------------------->
+                            Connection Interval
+
+                   +-----+ +-----+                        +-----+ +-----+                   
+                   | RX  | | TX  |       IDLE             | RX  | | TX  |
+      Peripheral   | cAAA| | cGRE|                        | cAAA| | cGRE|
+                   +-----+-+-----+------------------------+-----+-+-----+       
+
+.. note:: 
+    There is no limitation on the number of packet transactions per connection
+    event other than MAX_NUM_PDU define in TI's |STACK|. It can either be one packet 
+    per direction or multiple packets per direction.
+
+.. _connection_event_callback:
+
+Connection Event Callback
+*************************
+
+Knowing what happened during the connection event can be beneficial for
+the system design. For example, by knowing which channels has higher CRC error,
+the application layer can decide to do a channelmap update to avoid those channels
+to ensure better communication. In addition to CRC error, the connection report
+also contains RSSI value per channel, which can be useful for Real Time Localization System
+(:term:`RTLS`) to distinguish which channel has higher interference. For more information on
+RSSI based RTLS, please refer to :ref:`sec-rssi-localization`
+
+TI's |STACK| provides the ability for application to obtain a detailed report of thes 
+connection event. The report will be sent at the end of the connection event and 
+it contains status and statistics of the most recent connection event.
+ 
+The report contains the following parameters:
+
+- **status** - Status of the last connection event.
+
+    +-----------------------------+--------------------------------------------------------------------+
+    |     **status**              |     **Description**                                                |
+    +=============================+====================================================================+
+    | GAP_CONN_EVT_STAT_SUCCESS   | Both central and peripheral show up for the conenction event and   |
+    |                             | exchange packets.                                                  |
+    +-----------------------------+--------------------------------------------------------------------+
+    | GAP_CONN_EVT_STAT_CRC_ERROR | Packets were exchanged but the failed at the CRC checkout.         |
+    +-----------------------------+--------------------------------------------------------------------+
+    | GAP_CONN_EVT_STAT_MISSED    | The peer device did not show up for the connection event.          |
+    +-----------------------------+--------------------------------------------------------------------+
+
+- **handle** - Connection event handle which is used to identify the most recent connection 
+  event when there are multilple connections per device.
+- **channel** - The RF channel which the most recent connection event used.   
+- **phy** - The PHY which the most recent connection event used.
+- **lastRssi** - The RSSI value measured on the last packet of the most recent connection event.
+- **packets** - Number of packets received during the most recent connection event.
+- **errors** - Accumulated number of packets with CRC error for this connection handle.  
+- **nextTaskType** - The next task the link layer is going to run.
+- **nextTaskTime** - The time to next task.
+- **eventCounter** - The event counter of the most recent connection event.
+- **timeStamp** - The anchor point of the most recent connection event.
+- **eventType** - There are 3 types of events returning from |STACK|.
+
+    +-------------------------+--------------------------------------------------------------------+
+    |     **eventType**       |     **Description**                                                |
+    +=========================+====================================================================+
+    | GAP_CB_CONN_ESTABLISHED | This event is returned when connection is established. When this   |
+    |                         | returns, the eventCount will be 0.                                 |
+    +-------------------------+--------------------------------------------------------------------+
+    |   GAP_CB_PHY_UPDATE     | This event is returned when last connection event received         |
+    |                         | LL_PHY_UPDATE_IND packet.                                          |
+    +-------------------------+--------------------------------------------------------------------+
+    |  GAP_CB_CONN_EVENT_ALL  | This event covers the above and rest of the scenarios.             |
+    +-------------------------+--------------------------------------------------------------------+
+
+To enable the application layer to receive connection report, you can use
+:ble_api:`Gap_RegisterConnEventCb`.
+
+The following code is an example of how to register connection event report 
+for all types of event within certain connection. 
+
+.. code-block:: c
+    :caption: Register for connection event report
+    :linenos:
+    
+    // Assuming connHandle was assigned when the connection established.
+    uint16_t connHandle;
+
+    Gap_RegisterConnEventCb(application_connEvtCB, GAP_CB_REGISTER, GAP_CB_CONN_EVENT_ALL, connHandle);
+
+Connection Parameters
+*********************
+
+This section describes the connection parameters which are sent by
+the initiating device with the connection request and can be
+modified by either device when the connection is established. These
+parameters are as follows:
+
+-  **Connection Interval** - In Bluetooth Low Energy connections, a
+   frequency-hopping scheme is used. The two devices each send and
+   receive data from one another only on a specific channel at a
+   specific time. These devices meet a specific amount of time later
+   at a new channel (the link layer of the Bluetooth Low Energy
+   protocol stack handles the channel switching). This meeting
+   where the two devices send and receive data is known as a
+   ``connection event``. If there is no application data to be sent or
+   received, the two devices exchange link layer data with empty 
+   application payload to maintain the connection. 
+   The connection interval is the amount of time
+   between two connection events in units of 1.25 ms. The connection
+   interval can range from a minimum value of 6 (7.5 ms) to a
+   maximum of 3200 (4.0 s). See :ref:`gap_connection_event` for more details.
+
+.. _gap_connection_event:
+.. figure:: resources/image73.jpeg
+    :align: center
+
+    Connection Event and Interval
+
+Different applications may require different connection intervals.
+As described in :ref:`connection_parameter_considerations`, these requirements
+affect the power consumption of the device. For more detailed information on
+power consumption, see the `Measuring Bluetooth Smart Power Consumption Application Report (SWRA478) <http://www.ti.com/lit/pdf/swra478>`_.
+
+-  **Peripheral Latency** - Formerly known as 'Slave Latency'.
+   This parameter gives the Peripheral 
+   device the option of skipping a number of connection events. This
+   ability gives the peripheral device some flexibility. If the
+   peripheral does not have any data to send, it can skip connection
+   events, stay asleep, and save power. The peripheral device
+   selects whether to wake or not on a per connection event basis.
+   The peripheral can skip connection events but must not skip more
+   than allowed by the Peripheral latency parameter or the connection
+   fails. See picture below for more details.
+
+.. ditaa::
+   :--no-separation:
+   :--no-shadows:
+
+     Peripheral Latency 0
+
+       +----+ +----+          +----+ +----+          +----+ +----+          +----+ +----+          +----+ +----+            
+       | C  | | P  |          | C  | | P  |          | C  | | P  |          | C  | | P  |          | C  | | P  |            
+       |cGRE| |cAAA|          |cGRE| |cAAA|          |cGRE| |cAAA|          |cGRE| |cAAA|          |cGRE| |cAAA|
+       +----+-+----+----------+----+-+----+----------+----+-+----+----------+----+-+----+----------+----+-+----+
+       <---------------------->                                                                       
+         Connection Interval             
+
+     Peripheral Latency 3
+
+       +----+ +----+          +----+                 +----+                 +----+                 +----+ +----+
+       | C  | | P  |          | C  |                 | C  |                 | C  |                 | C  | | P  |
+       |cGRE| |cAAA|          |cGRE|                 |cGRE|                 |cGRE|                 |cGRE| |cAAA|
+       +----+-+----+----------+----+-----------------+----+-----------------+----+-----------------+----+-+----+
+       <---------------------->
+         Connection Interval                                                                       
+
+-  **Supervision Time-out** - This time-out is the maximum amount of
+   time between two successful connection events. If this time
+   passes without a successful connection event, the device
+   terminates the connection and returns to an unconnected state.
+   This parameter value is represented in units of 10 ms. The
+   supervision time-out value can range from a minimum of 10 (100
+   ms) to 3200 (32.0 s). The time-out must be larger than the
+   effective connection interval (see :ref:`effective_connection_interval` for
+   more details).
+
+.. _effective_connection_interval:
+
+Effective Connection Interval
+*****************************
+
+The effective connection interval is equal to the amount of time
+between two connection events, assuming that the Peripheral skips the
+maximum number of possible events if Peripheral latency is allowed (the
+effective connection interval is equal to the actual connection
+interval if Peripheral latency is set to 0).
+
+The Peripheral Latency value represents the maximum number of events that
+can be skipped. This number can range from a minimum value of 0
+(meaning that no connection events can be skipped) to a maximum of
+499. The maximum value must not make the effective connection
+interval (see the following formula) greater than 16 s. The interval
+can be calculated using the following formula:
+
+ ``Effective Connection Interval = (Connection Interval) * (1 + [Peripheral Latency])``
+
+Consider the following example:
+
+-  Connection Interval: 80 (100 ms)
+
+-  Peripheral Latency: 4
+
+-  Effective Connection Interval: (100 ms) * (1 + 4) = 500 ms
+
+When no data is being sent from the Peripheral to the Central, the Peripheral
+transmits during a connection event once every 500 ms.
+
+.. _connection_parameter_considerations:
+
+Connection Parameter Considerations
+***********************************
+
+In many applications, the Peripheral skips the maximum number of
+connection events. Consider the effective connection interval when
+selecting or requesting connection parameters. Selecting the correct
+group of connection parameters plays an important role in power
+optimization of the Bluetooth Low Energy device. The following list
+gives a general summary of the trade-offs in connection parameter
+settings.
+
+Reducing the connection interval does as follows:
+
+-  Increases the power consumption for both devices
+-  Increases the throughput in both directions
+-  Reduces the time for sending data in either direction
+
+Increasing the connection interval does as follows:
+
+-  Reduces the power consumption for both devices
+-  Reduces the throughput in both directions
+-  Increases the time for sending data in either direction
+
+Reducing the Peripheral latency (or setting it to zero) does as follows:
+
+-  Increases the power consumption for the peripheral device
+-  Reduces the time for the peripheral device to receive the data sent
+   from a central device
+
+Increasing the Peripheral latency does as follows:
+
+-  Reduces power consumption for the peripheral during periods when the
+   peripheral has no data to send to the central device
+-  Increases the time for the peripheral device to receive the data sent
+   from the central device
+
+Connection Parameter Update
+***************************
+
+In some cases, the central device requests a connection with a
+peripheral device containing connection parameters that are
+unfavorable to the peripheral device. In other cases, a peripheral
+device might have the desire to change connection parameters in the middle of a
+connection, based on the peripheral application. The peripheral
+device can request the central device to change the connection
+parameters by sending a ``Connection Parameter Update Request``.
+For Bluetooth 4.1, 4.2, 5.0 and 5.1-capable devices, this request is handled directly by
+the Link Layer. For Bluetooth 4.0 devices, the L2CAP layer of the
+protocol stack handles the request. The Bluetooth Low Energy stack
+automatically selects the update method.
+
+The ``Connection Parameter Update Request`` contains four parameters:
+
+- Minimum connection interval
+- Maximum connection interval
+- Peripheral latency
+- Supervision time-out
+
+These values represent the parameters that the peripheral device wants for
+the connection. The connection interval is given as a range. When
+the central device receives the ``Connection Parameter Update Request`` request,
+it can accept or reject the new parameters.
+
+Sending a ``Connection Parameter Update Request`` is optional and it is not
+required for the central device to accept or apply the requested
+parameters. Some applications try to establish a connection at a
+faster connection interval to allow for a faster service discovery
+and initial setup. These applications later request a longer
+(slower) connection interval for optimal power usage.
+
+Regardless of the roles (peripheral or central), connection parameter updates can
+be sent asynchronously with the :ble_api:`GAP_UpdateLinkParamReq` command. The
+simple\_peripheral application can be configured to automatically send a
+parameter update a certain amount of time after establishing a connection. An
+example is provided in the simple\_peripheral application, which sends a
+connection parameter update upon a connection **by default**. 
+
+.. note::
+    To change or modify the default connection parameter update settings,
+    open the project's SysConfig file. Navigate to BLE |rarr| Peripheral 
+    Configuration. Here you can modify the Connection Update Request Params
+    to configure the symbols below. If desired, you can also turn off the 
+    default connection parameter update by unchecking 
+    *`Send Parameter Update Request`*.
+
+By default, the following symbols are generated by the SysConfig tool:
+
+.. code-block:: c
+
+    // Pass parameter updates to the app for it to decide.
+    #define DEFAULT_SEND_PARAM_UPDATE_REQ
+
+    // Delay (in ms) after connection establishment before sending a parameter update requst
+    #define SEND_PARAM_UPDATE_DELAY                 6000
+
+    // Minimum connection interval (units of 1.25ms) if automatic parameter update
+    // request is enabled
+    #define DEFAULT_DESIRED_MIN_CONN_INTERVAL      400
+
+    // Maximum connection interval (units of 1.25ms) if automatic parameter update
+    // request is enabled
+    #define DEFAULT_DESIRED_MAX_CONN_INTERVAL      800
+
+    // Slave latency to use if automatic parameter update request is enabled
+    #define DEFAULT_DESIRED_SLAVE_LATENCY          0
+
+    // Supervision timeout value (units of 10ms) if automatic parameter update
+    // request is enabled
+    #define DEFAULT_DESIRED_CONN_TIMEOUT           600
+
+In simple\_peripheral, six seconds after a connection is established the application
+automatically sends a GAP Update Link Parameter Request:
+
+.. code-block:: c
+  :caption: **simple_peripheral.c :: SimplePeripheral_processParamUpdate()** - Initiating parameter update request
+  :linenos:
+
+    static void SimplePeripheral_processParamUpdate(uint16_t connHandle)
+    {
+      gapUpdateLinkParamReq_t req;
+      uint8_t connIndex;
+
+      req.connectionHandle = connHandle;
+    #ifdef DEFAULT_SEND_PARAM_UPDATE_REQ
+      req.connLatency = DEFAULT_DESIRED_SLAVE_LATENCY;
+      req.connTimeout = DEFAULT_DESIRED_CONN_TIMEOUT;
+      req.intervalMin = DEFAULT_DESIRED_MIN_CONN_INTERVAL;
+      req.intervalMax = DEFAULT_DESIRED_MAX_CONN_INTERVAL;
+    #endif
+
+      //...
+      
+      // Send parameter update
+      bStatus_t status = GAP_UpdateLinkParamReq(&req);
+
+When the peer device receives this update request, the GAP parameter
+:ble_api:`GAP_PARAM_LINK_UPDATE_DECISION` determines how it responds. See
+:ref:`gaprole_peripheral_role` for an explanation of how this parameter is
+configured.
+
+Connection Termination
+**********************
+
+Either the Central or the Peripheral can terminate a connection for any
+reason. One side initiates termination and the other side must
+respond before both devices exit the connected state. Use the
+:ble_api:`GAP_TerminateLinkReq` command to terminate an existing connection.

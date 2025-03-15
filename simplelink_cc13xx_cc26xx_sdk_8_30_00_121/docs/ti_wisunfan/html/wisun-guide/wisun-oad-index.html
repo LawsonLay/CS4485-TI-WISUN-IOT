@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCUBoot Over-the-Air Download (OAD) &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction" href="../oad-mcuboot/intro.html" />
+    <link rel="prev" title="Using the Cache as RAM" href="../memory/cache-as-ram.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug wisun-guide wisun-oad-index";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wisun-index.html">TI Wi-SUN FAN Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced-wisun-features.html">Advanced TI Wi-SUN FAN Stack Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="network-management.html">Wi-SUN Network Topology Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NWP_interface.html">TI Wi-SUN FAN NWP Interface Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory-index.html">Memory overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MCUBoot Over-the-Air Download (OAD)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/intro.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wisun-oad-storage-and-security.html">OAD Storage &amp; Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/mcuboot.html">MCUboot Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-off-chip-oad.html">Flash Layout for Off-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-on-chip-oad.html">Flash Layout for On-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/image-header.html">MCUboot OAD Image Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imgtool-wisun.html">Post-Build Script imgtool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oad-application.html">Wi-SUN OAD</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration-guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>MCUBoot Over-the-Air Download (OAD)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="mcuboot-over-the-air-download-oad">
+<h1>MCUBoot Over-the-Air Download (OAD)<a class="headerlink" href="#mcuboot-over-the-air-download-oad" title="Permalink to this headline">¶</a></h1>
+<p>The following sections aim to describe the lower layers of OAD software that are
+common across all protocol stack implementations. This includes the OAD image
+header, the flash layout, Secure Bootloader, and the oad image tool.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The TI Wi-SUN FAN Stack OAD Profile does not implement or perform any security or
+authentication mechanisms as part of the firmware update process.
+System developers should take measures to adequately authenticate peer
+devices and only accept and/or apply firmware images transferred from
+trusted sources via the OAD Profile.</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Due to memory constraints, the TI Wi-SUN FAN Stack does not support on-chip OAD on CC13x2 or CC13x2x7 devices.</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../oad-mcuboot/intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/intro.html#oad-topology-overview">OAD Topology Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wisun-oad-storage-and-security.html">OAD Storage &amp; Security</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="wisun-oad-storage-and-security.html#oad-storage">OAD Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wisun-oad-storage-and-security.html#oad-security">OAD Security</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../oad-mcuboot/mcuboot.html">MCUboot Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flash-layout-off-chip-oad.html">Flash Layout for Off-Chip OAD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-off-chip-oad.html#constraints-and-requirements-for-off-chip-oad">Constraints and Requirements for Off-chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-off-chip-oad.html#internal-flash-memory-layout">Internal Flash Memory Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-off-chip-oad.html#external-flash-memory-layout">External Flash Memory Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="flash-layout-on-chip-oad.html">Flash Layout for On-Chip OAD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="flash-layout-on-chip-oad.html#internal-flash-memory-layout">Internal Flash Memory Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../oad-mcuboot/image-header.html">MCUboot OAD Image Header</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oad-mcuboot/image-header.html#id2">MCUboot OAD Image Header</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="imgtool-wisun.html">Post-Build Script imgtool</a></li>
+</ul>
+</div>
+<p>The following sections aim to describe the TI Wi-SUN FAN Stack specific application and
+profile layer of the OAD solution. The OAD application section will describe
+the TI Wi-SUN FAN Stack process from a high level in terms of events and states, and the
+profile section will cover the actual structures that are sent over the air.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="oad-application.html">Wi-SUN OAD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="oad-application.html#oad-protocol">OAD Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oad-application.html#oad-state-machines">OAD State Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oad-application.html#oad-messages">OAD Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#oad-firmware-request">OAD Firmware Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#oad-notification-request">OAD Notification Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#oad-notification-response">OAD Notification Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#oad-image-block-request">OAD Image Block Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#oad-image-block-response">OAD Image Block Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#oad-complete-request">OAD Complete Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#oad-complete-response">OAD Complete Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#oad-abort">OAD Abort</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="oad-application.html#oad-target-module">OAD Target Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#oad-tasklet">OAD Tasklet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#oad-coap-callbacks">OAD CoAP Callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#oad-storage">OAD Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="oad-application.html#oad-distributor">OAD Distributor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#token-based-coap-response-tracking">Token based CoAP Response Tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#block-request-handling">Block Request handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oad-application.html#response-handling">Response handling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../memory/cache-as-ram.html" class="btn btn-neutral float-left" title="Using the Cache as RAM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../oad-mcuboot/intro.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

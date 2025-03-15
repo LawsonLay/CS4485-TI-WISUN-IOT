@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_p_d_m_c_c26_x_x___i2_s___params" kind="struct" language="C++" prot="public">
+    <compoundname>PDMCC26XX_I2S_Params</compoundname>
+    <includes refid="_p_d_m_c_c26_x_x__util_8h" local="no">PDMCC26XX_util.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___i2_s___params_1aff2142d7edd36c676ba466157f3e00bd" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t PDMCC26XX_I2S_Params::blockCount</definition>
+        <argsstring></argsstring>
+        <name>blockCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Number of PDM buffers the I2S driver can fill without the PDM driver processing them. Must be larger than 3. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX_util.h" line="681" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX_util.h" bodystart="681" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___i2_s___params_1ae24ad0b8694eecadda238df85e7a5f82" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t PDMCC26XX_I2S_Params::requestTimeout</definition>
+        <argsstring></argsstring>
+        <name>requestTimeout</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Timeout for the request when in blocking mode </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX_util.h" line="683" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX_util.h" bodystart="683" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___i2_s___params_1a2bd373c5a35eb5708499735ad1d1b0bb" prot="public" static="no" mutable="no">
+        <type><ref refid="_p_d_m_c_c26_x_x__util_8h_1aef896b2a7fc07d3b145f8d02eaa9e377" kindref="member">PDMCC26XX_I2S_RequestMode</ref></type>
+        <definition>PDMCC26XX_I2S_RequestMode PDMCC26XX_I2S_Params::requestMode</definition>
+        <argsstring></argsstring>
+        <name>requestMode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Blocking or Callback mode </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX_util.h" line="684" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX_util.h" bodystart="684" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___i2_s___params_1a2d7f98ab25330b887dc309873a26f7c3" prot="public" static="no" mutable="no">
+        <type><ref refid="_p_d_m_c_c26_x_x__util_8h_1a5b4e6b7c39c913bc6ae97261a5f2a226" kindref="member">PDMCC26XX_I2S_TransferSize</ref></type>
+        <definition>PDMCC26XX_I2S_TransferSize PDMCC26XX_I2S_Params::blockSizeInSamples</definition>
+        <argsstring></argsstring>
+        <name>blockSizeInSamples</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>I2S DMA transfer size in number of samples. Each sample consumes either 16 or 24 bits per channel, set by <ref refid="struct_p_d_m_c_c26_x_x___i2_s___audio_format_config_1aa6310978bb3efcf50aab7226f34597b1" kindref="member">PDMCC26XX_I2S_AudioFormatConfig.memLen</ref>. Number of channels are set in <ref refid="union_p_d_m_c_c26_x_x___i2_s___audio_pin_config_1aefb4fcc1a8af0204f4daf2dd82b6498a" kindref="member">PDMCC26XX_I2S_AudioPinConfig.ad0NumOfChannels</ref> and <ref refid="union_p_d_m_c_c26_x_x___i2_s___audio_pin_config_1aabec0b0c95bf1757afb8fd80e06ef515" kindref="member">PDMCC26XX_I2S_AudioPinConfig.ad1NumOfChannels</ref> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX_util.h" line="685" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX_util.h" bodystart="685" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___i2_s___params_1a00d6ad911e30febe21d265d9808859b3" prot="public" static="no" mutable="no">
+        <type><ref refid="_p_d_m_c_c26_x_x__util_8h_1a82786f08d1b22895c79dcd8880fb92f3" kindref="member">PDMCC26XX_I2S_CallbackFxn</ref></type>
+        <definition>PDMCC26XX_I2S_CallbackFxn PDMCC26XX_I2S_Params::callbackFxn</definition>
+        <argsstring></argsstring>
+        <name>callbackFxn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Callback function pointer </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX_util.h" line="692" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX_util.h" bodystart="692" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___i2_s___params_1aa300017bc6e99f06398d3eea8fab5414" prot="public" static="no" mutable="no">
+        <type><ref refid="_p_d_m_c_c26_x_x__util_8h_1ae0835bec1853c8f956ef5bfeaa22769b" kindref="member">PDMCC26XX_I2S_MallocFxn</ref></type>
+        <definition>PDMCC26XX_I2S_MallocFxn PDMCC26XX_I2S_Params::mallocFxn</definition>
+        <argsstring></argsstring>
+        <name>mallocFxn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Malloc function pointer </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX_util.h" line="694" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX_util.h" bodystart="694" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___i2_s___params_1ad7a28838be0626f4ac923686e82098ac" prot="public" static="no" mutable="no">
+        <type><ref refid="_p_d_m_c_c26_x_x__util_8h_1afec03dc00074b8cc95d6268dcae8999c" kindref="member">PDMCC26XX_I2S_FreeFxn</ref></type>
+        <definition>PDMCC26XX_I2S_FreeFxn PDMCC26XX_I2S_Params::freeFxn</definition>
+        <argsstring></argsstring>
+        <name>freeFxn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Free function pointer </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX_util.h" line="695" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX_util.h" bodystart="695" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_p_d_m_c_c26_x_x___i2_s___params_1aaabb96f9076a3e32f28c22164ab32159" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_p_d_m_c_c26_x_x___i2_s___stream_notification" kindref="compound">PDMCC26XX_I2S_StreamNotification</ref> *</type>
+        <definition>PDMCC26XX_I2S_StreamNotification* PDMCC26XX_I2S_Params::currentStream</definition>
+        <argsstring></argsstring>
+        <name>currentStream</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to information about the current state of the stream </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/pdm/PDMCC26XX_util.h" line="696" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX_util.h" bodystart="696" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>PDMCC26XX I2S Parameters are used when calling <ref refid="_p_d_m_c_c26_x_x__util_8h_1a8168bcdab9f1e46c26823555df6f797f" kindref="member">PDMCC26XX_I2S_open()</ref>. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1429">
+        <label>PDMCC26XX_I2S_StreamNotification</label>
+        <link refid="struct_p_d_m_c_c26_x_x___i2_s___stream_notification"/>
+      </node>
+      <node id="1428">
+        <label>PDMCC26XX_I2S_Params</label>
+        <link refid="struct_p_d_m_c_c26_x_x___i2_s___params"/>
+        <childnode refid="1429" relation="usage">
+          <edgelabel>currentStream</edgelabel>
+        </childnode>
+        <childnode refid="1430" relation="usage">
+          <edgelabel>callbackFxn</edgelabel>
+        </childnode>
+      </node>
+      <node id="1430">
+        <label>PDMCC26XX_I2S_Config</label>
+        <link refid="struct_p_d_m_c_c26_x_x___i2_s___config"/>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/pdm/PDMCC26XX_util.h" line="680" column="1" bodyfile="source/ti/drivers/pdm/PDMCC26XX_util.h" bodystart="679" bodyend="698"/>
+    <listofallmembers>
+      <member refid="struct_p_d_m_c_c26_x_x___i2_s___params_1aff2142d7edd36c676ba466157f3e00bd" prot="public" virt="non-virtual"><scope>PDMCC26XX_I2S_Params</scope><name>blockCount</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___i2_s___params_1a2d7f98ab25330b887dc309873a26f7c3" prot="public" virt="non-virtual"><scope>PDMCC26XX_I2S_Params</scope><name>blockSizeInSamples</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___i2_s___params_1a00d6ad911e30febe21d265d9808859b3" prot="public" virt="non-virtual"><scope>PDMCC26XX_I2S_Params</scope><name>callbackFxn</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___i2_s___params_1aaabb96f9076a3e32f28c22164ab32159" prot="public" virt="non-virtual"><scope>PDMCC26XX_I2S_Params</scope><name>currentStream</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___i2_s___params_1ad7a28838be0626f4ac923686e82098ac" prot="public" virt="non-virtual"><scope>PDMCC26XX_I2S_Params</scope><name>freeFxn</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___i2_s___params_1aa300017bc6e99f06398d3eea8fab5414" prot="public" virt="non-virtual"><scope>PDMCC26XX_I2S_Params</scope><name>mallocFxn</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___i2_s___params_1a2bd373c5a35eb5708499735ad1d1b0bb" prot="public" virt="non-virtual"><scope>PDMCC26XX_I2S_Params</scope><name>requestMode</name></member>
+      <member refid="struct_p_d_m_c_c26_x_x___i2_s___params_1ae24ad0b8694eecadda238df85e7a5f82" prot="public" virt="non-virtual"><scope>PDMCC26XX_I2S_Params</scope><name>requestTimeout</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

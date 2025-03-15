@@ -1,0 +1,32 @@
+.. _sec-mcuboot-imgtool-wisun:
+
+Post-Build Script imgtool
+=========================
+
+The compiler output requires a post-build step to generate a .bin file that can
+be used by MCUboot. An MCUboot compatible image tool must be executed called
+``imgtool``. It is responsible for adding the MCUBoot image header, managing
+keys and sign the image. More detailed description is provided on the
+`imgtool documentation page <https://docs.mcuboot.com/imgtool.html>`_.
+This tool requires Python3 and is included in the SimpleLink SDK in the folder
+``<simplelink-install-dir>\source\third_party\mcuboot\scripts``.
+
+The script can be executed automatically after every build by adding below lines
+as ``Post-Build steps`` in ``Properties > Build`` as shown below. This command
+defines the image version. To update the version number, adjust the string
+``--version 1.0.0``.
+
+.. ifconfig:: device == 'cc13xx_cc26xx'
+
+    .. code-block:: c
+        :caption: Post-Build Steps
+        :linenos:
+
+        ${CG_TOOL_ROOT}/bin/tiarmobjcopy ${ProjName}.out --output-target ihex ${ProjName}.hex
+        ${CG_TOOL_ROOT}/bin/tiarmobjcopy ${ProjName}.out --output-target binary ${ProjName}-noheader.bin
+        ${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/tools/common/mcuboot/imgtool sign --header-size 0x80 --align 4 --slot-size 0x56000 --pad --version 1.0.0 --pad-header --key ${COM_TI_SIMPLELINK_CC13XX_CC26XX_SDK_INSTALL_DIR}/source/third_party/mcuboot/root-ec-p256.pem ${ProjName}-noheader.bin ${ProjName}.bin
+
+    .. figure:: resources/postbuild-steps-oad-bin-gen.PNG
+        :align: center
+
+        Post-Build steps included in CCS properties

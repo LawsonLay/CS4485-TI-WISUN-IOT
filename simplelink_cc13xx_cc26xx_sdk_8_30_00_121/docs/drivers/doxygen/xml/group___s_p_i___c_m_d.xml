@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="group___s_p_i___c_m_d" kind="group">
+    <compoundname>SPI_CMD</compoundname>
+    <title>Command Codes</title>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1ga34c49fde4df8fd436cf431b8c69e64d2" prot="public" static="no">
+        <name>SPICC26X2DMA_CMD_RETURN_PARTIAL_ENABLE</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 0)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to enable partial return. </para>        </briefdescription>
+        <detaileddescription>
+<para>Enabling this command allows SPI_transfer to return partial data if the controller de-asserts the CS line before the expected number of frames were received. This command <bold>arg</bold> is of type <emphasis>don&apos;t</emphasis> <emphasis>care</emphasis> and it returns SPI_STATUS_SUCCESS or SPI_STATUS_ERROR. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X2DMA.h" line="729" column="9" bodyfile="source/ti/drivers/spi/SPICC26X2DMA.h" bodystart="729" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1ga0e1ad744e41c95b652bc5c04f492d609" prot="public" static="no">
+        <name>SPICC26X2DMA_CMD_RETURN_PARTIAL_DISABLE</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 1)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to disable partial return. </para>        </briefdescription>
+        <detaileddescription>
+<para>Disabling this command returns the SPICC26X2DMA to the default blocking behavior where <ref refid="_s_p_i_8h_1a989e17f96b54fcc3dc2cac5f8ac6bdb2" kindref="member">SPI_transfer()</ref> blocks until all data bytes were received. With this command <bold>arg</bold> is <emphasis>don&apos;t</emphasis> <emphasis>care</emphasis> and it returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X2DMA.h" line="738" column="9" bodyfile="source/ti/drivers/spi/SPICC26X2DMA.h" bodystart="738" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1ga572d479a9a8504cf5c096d16465f8e9d" prot="public" static="no">
+        <name>SPICC26X2DMA_CMD_SET_CSN_PIN</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 2)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to re-configure chip select pin. </para>        </briefdescription>
+        <detaileddescription>
+<para>Enables hardware control of the chip select pin <bold>arg</bold> should be a <computeroutput>uint_least8_t</computeroutput> indicating the device DIO to be used as the hardware CS pin.</para><para>Passing GPIO_INVALID_INDEX or PIN_UNASSIGNED to this command is equivalent to calling <ref refid="group___s_p_i___c_m_d_1ga21f3e5d69d096a16c9569f2615a56b0b" kindref="member">SPICC26X2DMA_CMD_CLEAR_CSN_PIN</ref>.</para><para>Always returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X2DMA.h" line="751" column="9" bodyfile="source/ti/drivers/spi/SPICC26X2DMA.h" bodystart="751" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1ga21f3e5d69d096a16c9569f2615a56b0b" prot="public" static="no">
+        <name>SPICC26X2DMA_CMD_CLEAR_CSN_PIN</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 3)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to disable the hardware chip select pin. </para>        </briefdescription>
+        <detaileddescription>
+<para><bold>arg</bold> should be NULL. This command will disable all hardware control and muxing of the csnPin. It can then be controlled by user software using the GPIO driver, or configured later using <ref refid="group___s_p_i___c_m_d_1ga572d479a9a8504cf5c096d16465f8e9d" kindref="member">SPICC26X2DMA_CMD_SET_CSN_PIN</ref>.</para><para>Always returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X2DMA.h" line="762" column="9" bodyfile="source/ti/drivers/spi/SPICC26X2DMA.h" bodystart="762" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1ga2e83f10ecd69aa4b117acb2e64565f5b" prot="public" static="no">
+        <name>SPICC26X2DMA_CMD_SET_MANUAL</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 4)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to enable manual start mode. </para>        </briefdescription>
+        <detaileddescription>
+<para>Manual start mode can only be used when in callback mode. In manual start mode, calls to <ref refid="_s_p_i_8h_1a989e17f96b54fcc3dc2cac5f8ac6bdb2" kindref="member">SPI_transfer()</ref> queue the transaction but does not start the transfer until another control call is made with <ref refid="group___s_p_i___c_m_d_1ga3b4361e2cabb4ae7fedda98551aee5ef" kindref="member">SPICC26X2DMA_CMD_MANUAL_START</ref>. This allows multiple transactions to be queued and executed seamlessly using the DMA&apos;s ping pong mechanism. This mode is MANDATORY for peripherals queueing multiple short transactions. Manual start mode can only be enabled or disabled when no transactions are queued.</para><para>Returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref> or <ref refid="group___s_p_i___s_t_a_t_u_s_1ga2d0020dd673cc28a9e1c20b0ff101073" kindref="member">SPI_STATUS_ERROR</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X2DMA.h" line="777" column="9" bodyfile="source/ti/drivers/spi/SPICC26X2DMA.h" bodystart="777" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1ga687eef73eab3644a3000ab89b2a83cf3" prot="public" static="no">
+        <name>SPICC26X2DMA_CMD_CLR_MANUAL</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 5)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to disable manual start mode. </para>        </briefdescription>
+        <detaileddescription>
+<para>Manual start mode is disabled by default. Enabling and disabling manual mode can only be done if no transactions are currently queued.</para><para>Returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref> or <ref refid="group___s_p_i___s_t_a_t_u_s_1ga2d0020dd673cc28a9e1c20b0ff101073" kindref="member">SPI_STATUS_ERROR</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X2DMA.h" line="788" column="9" bodyfile="source/ti/drivers/spi/SPICC26X2DMA.h" bodystart="788" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1ga3b4361e2cabb4ae7fedda98551aee5ef" prot="public" static="no">
+        <name>SPICC26X2DMA_CMD_MANUAL_START</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 6)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to enable manual start mode. </para>        </briefdescription>
+        <detaileddescription>
+<para>This command is used with manual start mode enabled. If transactions have been queued and the driver is in manual mode, this command will enable the SSI and DMA. For controller devices, the transfer will start. For peripheral devices, the transfer will start when the controller initiates.</para><para>Returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref> or <ref refid="group___s_p_i___s_t_a_t_u_s_1ga2d0020dd673cc28a9e1c20b0ff101073" kindref="member">SPI_STATUS_ERROR</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X2DMA.h" line="800" column="9" bodyfile="source/ti/drivers/spi/SPICC26X2DMA.h" bodystart="800" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1ga192bd0f60f8bfa96d1db0a141ddee76f" prot="public" static="no">
+        <name>SPICC26X4DMA_CMD_RETURN_PARTIAL_ENABLE</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 0)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to enable partial return. </para>        </briefdescription>
+        <detaileddescription>
+<para>Enabling this command allows SPI_transfer to return partial data if the controller de-asserts the CS line before the expected number of frames were received. This command <bold>arg</bold> is of type <emphasis>don&apos;t</emphasis> <emphasis>care</emphasis> and it returns SPI_STATUS_SUCCESS or SPI_STATUS_ERROR. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X4DMA.h" line="739" column="9" bodyfile="source/ti/drivers/spi/SPICC26X4DMA.h" bodystart="739" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1ga559a483bbb56b61480da98bf143140bd" prot="public" static="no">
+        <name>SPICC26X4DMA_CMD_RETURN_PARTIAL_DISABLE</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 1)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to disable partial return. </para>        </briefdescription>
+        <detaileddescription>
+<para>Disabling this command returns the SPICC26X4DMA to the default blocking behavior where SPI_transfer blocks until all data bytes were received. With this command <bold>arg</bold> is <emphasis>don&apos;t</emphasis> <emphasis>care</emphasis> and it returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X4DMA.h" line="748" column="9" bodyfile="source/ti/drivers/spi/SPICC26X4DMA.h" bodystart="748" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1ga3e400a6fad49329b3b50b3d5b3ed7787" prot="public" static="no">
+        <name>SPICC26X4DMA_CMD_SET_CSN_PIN</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 2)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to re-configure chip select pin. </para>        </briefdescription>
+        <detaileddescription>
+<para>This command specifies a chip select pin in <bold>arg</bold> with type <computeroutput>uint_least8_t</computeroutput>. It always returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X4DMA.h" line="756" column="9" bodyfile="source/ti/drivers/spi/SPICC26X4DMA.h" bodystart="756" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1ga2cacc6c9602b6ed301ac2fcab92abeb1" prot="public" static="no">
+        <name>SPICC26X4DMA_CMD_CLEAR_CSN_PIN</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 3)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to clear the chip select pin. </para>        </briefdescription>
+        <detaileddescription>
+<para>This command <bold>arg</bold> should be NULL. It always returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X4DMA.h" line="763" column="9" bodyfile="source/ti/drivers/spi/SPICC26X4DMA.h" bodystart="763" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1gacd75acabb1c42d1b954b2ce789b9651e" prot="public" static="no">
+        <name>SPICC26X4DMA_CMD_SET_MANUAL</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 4)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to enable manual start mode. </para>        </briefdescription>
+        <detaileddescription>
+<para>Manual start mode can only be used when in callback mode. In manual start mode, calls to <ref refid="_s_p_i_8h_1a989e17f96b54fcc3dc2cac5f8ac6bdb2" kindref="member">SPI_transfer()</ref> queue the transaction but does not start the transfer until another control call is made with <ref refid="group___s_p_i___c_m_d_1gac1fe538038acf32f02d409b3e7da1dd5" kindref="member">SPICC26X4DMA_CMD_MANUAL_START</ref>. This allows multiple transactions to be queued and executed seamlessly using the DMA&apos;s ping pong mechanism. This mode is MANDATORY for peripherals queueing multiple short transactions. Manual start mode can only be enabled or disabled when no transactions are queued.</para><para>Returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref> or <ref refid="group___s_p_i___s_t_a_t_u_s_1ga2d0020dd673cc28a9e1c20b0ff101073" kindref="member">SPI_STATUS_ERROR</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X4DMA.h" line="778" column="9" bodyfile="source/ti/drivers/spi/SPICC26X4DMA.h" bodystart="778" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1ga59124a6ca9c71925b87d2f654bc5352f" prot="public" static="no">
+        <name>SPICC26X4DMA_CMD_CLR_MANUAL</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 5)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to disable manual start mode. </para>        </briefdescription>
+        <detaileddescription>
+<para>Manual start mode is disabled by default. Enabling and disabling manual mode can only be done if no transactions are currently queued.</para><para>Returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref> or <ref refid="group___s_p_i___s_t_a_t_u_s_1ga2d0020dd673cc28a9e1c20b0ff101073" kindref="member">SPI_STATUS_ERROR</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X4DMA.h" line="789" column="9" bodyfile="source/ti/drivers/spi/SPICC26X4DMA.h" bodystart="789" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1gac1fe538038acf32f02d409b3e7da1dd5" prot="public" static="no">
+        <name>SPICC26X4DMA_CMD_MANUAL_START</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 6)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to enable manual start mode. </para>        </briefdescription>
+        <detaileddescription>
+<para>This command is used with manual start mode enabled. If transactions have been queued and the driver is in manual mode, this command will enable the SPI and DMA. For controller devices, the transfer will start. For peripheral devices, the transfer will start when the controller initiates.</para><para>Returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref> or <ref refid="group___s_p_i___s_t_a_t_u_s_1ga2d0020dd673cc28a9e1c20b0ff101073" kindref="member">SPI_STATUS_ERROR</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X4DMA.h" line="801" column="9" bodyfile="source/ti/drivers/spi/SPICC26X4DMA.h" bodystart="801" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___s_p_i___c_m_d_1gad0660437cc385b2390eda674888957e7" prot="public" static="no">
+        <name>SPICC26X4DMA_CMD_SET_SAMPLE_DELAY</name>
+        <initializer>(<ref refid="group___s_p_i___c_o_n_t_r_o_l_1ga3d23d16525ee76f77276472d8dea80b0" kindref="member">SPI_CMD_RESERVED</ref> + 7)</initializer>
+        <briefdescription>
+<para>Command used by <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref> to set the sample delay in controller mode. </para>        </briefdescription>
+        <detaileddescription>
+<para>This command is only used when in controller mode. After <ref refid="_s_p_i_8h_1a9c9022decfb136991d6b53f7dd2ae2fc" kindref="member">SPI_open()</ref> is called, the default DSAMPLE value is set as follows.<itemizedlist>
+<listitem><para>(bitRate &lt; 4MHz) -&gt; delay = 0</para></listitem><listitem><para>(bitRate &gt;= 4MHz) -&gt; delay = 1</para></listitem><listitem><para>(bitRate &gt;= 8MHz) -&gt; delay = 2</para></listitem></itemizedlist>
+</para><para>The sample delay is a measurement of clock cycles. In controller mode the data on the input pin will delay sampling by the defined clock cycles. At lower bitRates a delay is usually not necessary. At higher bitRates a delay may become necessary if the peripheral device is not keeping pace with the controller device. In this case, the delay can be used to ensure the controller device captures the data on the input pin. This command <bold>arg</bold> is of type uint8_t.</para><para>Returns <ref refid="group___s_p_i___s_t_a_t_u_s_1gab38fa90ff62128dbc98b2ecd84ca106f" kindref="member">SPI_STATUS_SUCCESS</ref> or <ref refid="group___s_p_i___s_t_a_t_u_s_1ga2d0020dd673cc28a9e1c20b0ff101073" kindref="member">SPI_STATUS_ERROR</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/spi/SPICC26X4DMA.h" line="822" column="9" bodyfile="source/ti/drivers/spi/SPICC26X4DMA.h" bodystart="822" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>SPI_CMD_* macros are general command codes for <ref refid="_s_p_i_8h_1a1b3fafc9892141b7bab1bc9c19ede9ef" kindref="member">SPI_control()</ref>. Not all SPI driver implementations support these command codes.</para><para>SPICC26X2DMA_CMD_* macros are command codes only defined in the <ref refid="_s_p_i_c_c26_x2_d_m_a_8h" kindref="compound">SPICC26X2DMA.h</ref> driver implementation and need to: <programlisting><codeline><highlight class="normal">#include<sp/>&lt;ti/drivers/spi/SPICC26X2DMA.h&gt;</highlight></codeline>
+</programlisting></para><para>SPICC26X4DMA_CMD_* macros are command codes only defined in the <ref refid="_s_p_i_c_c26_x4_d_m_a_8h" kindref="compound">SPICC26X4DMA.h</ref> driver implementation and need to: <programlisting><codeline><highlight class="normal">#include<sp/>&lt;ti/drivers/spi/SPICC26X4DMA.h&gt;</highlight></codeline>
+</programlisting> </para>    </detaileddescription>
+  </compounddef>
+</doxygen>

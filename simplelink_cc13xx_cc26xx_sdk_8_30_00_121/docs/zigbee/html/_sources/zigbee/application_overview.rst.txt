@@ -1,0 +1,1622 @@
+Application Overview
+====================
+
+|STACK| example applications are designed to enable faster end-product development by
+providing different implementations of Zigbee device definitions while conforming to
+|ZCL7| requirements for certification.  This allows the
+developers to explore the usage of the stack for configuring and running a device in
+a network along with other essential features, such as nonvolatile (NV) memory storage 
+to save the network parameters and application specific information. The configuration 
+and usage of peripherals such as UART, switches, and LEDs are also shown by these 
+sample applications. This chapter explains the application's implementation to help 
+developers quickly modify the |STACK| out-of-box example applications for customized 
+development. The following sections detail the example applications of the |STACK| projects.
+ 
+-   Application architecture: the Application task which is the lowest priority
+    task in the system. The code for this task resides in the ``Application`` IDE folder.
+
+-   Application Builder: changes required to customize sample applications based 
+    on the *SampleApp* project's unique SysConfig feature.
+
+-   OSALPort: an interface module between |STACK| services (such as |STACK| APIs) as well as 
+    certain primitive services (such as thread synchronization) provided by the real-time
+    operating system (|RTOS|)
+
+-   Common User Interface: instructions for utilizing LaunchPad push buttons, 
+    LEDs, and UART to control the commissioning configuration and application behavior.
+
+.. _sec-application-architecture:
+
+Application Architecture
+------------------------
+
+:numref:`fig-example-application-block-diagram` shows the block diagram of the
+Light and Switch example applications on the |DEVICEAND|. 
+
+.. _fig-example-application-block-diagram:
+.. figure:: resources/fig-example-application-block-diagram.png
+    :align: center
+
+    Example Application Block Diagram
+
+
+High-level descriptions of various blocks in :numref:`fig-example-application-block-diagram` 
+are as follows:
+
+**TI-RTOS7 Start-up Code:** Initializes the application (see
+:ref:`sec-start-up-in-main` for more
+details).
+
+**Example Application:** The platform-independent implementation of the example
+use case. The |STACK| out-of-box demonstrates two use cases – Light and
+Switch. Developers can modify this module's out-of-box example code for custom
+for custom application requirements to quickly develop end products. 
+
+**Utility Functions:** Provides various platform utilities which the application
+can use.  Examples include LED, timers, keys, UART and so on.
+
+**Application-Specific Functions:** Implements platform-specific functions such
+as data storage over power cycles (nonvolatile) and provides user interface
+functions, such as handling button presses or displaying essential information on
+the UART.
+
+**Z-Stack API Module (API Z-Stack Module):** This module provides an interface
+to the management and data services of the Zigbee stack through the OSALPort 
+Framework module.  This is further described in :ref:`sec-osalport-framework`.
+
+.. _sec-app-configuration:
+
+Application Preprocessor Configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following table contains the preprocessor symbols which can be added or 
+removed pertaining to device operation.  They are located in the Project Properties 
+as further discussed in the *Useful CCS IDE Settings* section of the |ZB_QUICK_START_GUIDE|.
+
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| **Symbol**                             | **Description**                                   | **Modifiable?** | **Applicable projects**   |
++========================================+===================================================+=================+===========================+
+| BDB_FINDING_BINDING_CAPABILITY_ENABLED | Set to zero to disable BDB F&B                    | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| BDB_REPORTING                          | Allows automatic cluster attibute reporting       | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| BOARD_DISPLAY_USE_UART                 | Use UART communication for application            | Y               | All                       |
+|                                        | information                                       |                 |                           |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| [LaunchPad variant]                    | LaunchPad variant, may be changed when migrating  | Y               | All                       |
+|                                        | to a custom development board                     |                 |                           |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| COMBO_MAC                              | MAC radio configuration                           | N               | CC1352 devices            |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| CONFIG_PA_TYPE                         | Set to APIMAC_HIGH_PA for the internal power      | Y               | CC1352P devices           |
+|                                        | amplifier, otherwise APIMAC_DEFAULT_PA            |                 |                           |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| CUI_DISABLE                            | Determines whether to disable the Common User     | Y               | All                       |
+|                                        | Interface                                         |                 |                           |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| DISABLE_GREENPOWER_BASIC_PROXY         | Disable GP proxy functionality                    | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| DeviceFamily_CC[13/26]X2               | Select the chipset                                | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| DEVICE_FAMILY                          | Select the chipset                                | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| ENABLE_GREENPOWER_COMBO_BASIC          | Enable Green Power Sink functionality             | N               | Green power sink examples |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| FACTORY_IMAGE                          | Creates factory image backup of current image     | Y               | [zc/zed/zr]_sw_ota_client |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| FEATURE_NON_BEACON_MODE                | Standard beacon type per the Zigbee specification | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| FREQ_2_4G                              | Frequency to be used, only 2.4 GHz is supported   | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| HEAPMGR_CONFIG                         | Type of heap configuration used                   | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| HEAPMGR_SIZE                           | Heap size if not automatically configured         | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| MAX_DEVICE_TABLE_ENTRIES               | Required as part of 15.4 stack                    | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| MAX_STATUS_LINES                       | Maximum lines supported by the CUI                | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| MT_[FUNC]                              | Function enabled for the MT interface             | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| NO_CC1312R1_SUPPORT                    | Board-specific key initialization                 | N               | CC1352 devices            |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| NPI                                    | Include Network Processor Interface               | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| NPI_FLOW_CTRL                          | Enables CTS/RTS for UART transportation           | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| NPI_USE_UART                           | Use UART communication for ZNP processing         | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| NVOCMP_NVPAGES                         | Number of flash pages allocated for NV memory     | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| NV_INIT                                | Store network settings in non-volatile memory     | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| NV_RESTORE                             | Restore previous network settings on start-up     | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| NWK_MANAGER                            | Enables device to become the Network Manager      | Y               | zc/zr/znp builds          |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| OSAL_PORT2TIRTOS[_OSALMAP]             | Use the OSAL Port to interface with the           | N               | All                       |
+|                                        | management and data services of the Zigbee stack  |                 |                           |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| OTA_APP_VERSION                        | Version of OTA application                        | Y               | [zc/zed/zr]_sw_ota_client |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| OTA_CLIENT_INTEGRATED                  | Device is an OTA client                           | N               | [zc/zed/zr]_sw_ota_client |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| OTA_MANUFACTURER_ID                    | ID of manufacturer for OTA applications           | Y               | [zc/zed/zr]_sw_ota_client |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| OTA_SERVER                             | Application is an OTA server for host interaction | Y               | [zc/zr]_ota_server        |
+|                                        | Define as TRUE or FALSE                           |                 |                           |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| OTA_TYPE_ID                            | OTA device type                                   | N               | [zc/zed/zr]_sw_ota_client |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| POWER_TEST_DATA_ACK                    | Enables data transmit power test mode             | Y               | light and sw examples     |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| POWER_TEST_POLL_ACK                    | Enables data request power test mode              | Y               | light and sw examples     |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| POWER_TEST_POLL_DATA                   | Enables data receive power test mode              | Y               | light and sw examples     |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| POWER_TEST_TX_PWR                      | Define a TX output level for power tests          | Y               | light and sw examples     |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| SECURITY                               | Enables OTA secure BIM                            | N               | [zc/zed/zr]_sw_ota_client |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| TC_LINKKEY_JOIN                        | Check if a specific device has been authenticated | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| TIMAC_ROM_IMAGE_BUILD                  | Use the TIMAC image stored in ROM                 | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| TIMAC_ROM_PATCH                        | Apply TIMAC ROM patches                           | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| TIRTOS7_SUPPORT                        | Use TI-RTOS 7                                     | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| CUI_DISABLE                            | Disable the common user interface                 | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| ZCL_[CLUSTER NAME]                     | Zigbee clusters allowed by the application        | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| ZCL_[READ/WRITE/ETC]                   | Ability to process ZCL foundation incoming        | Y               | All                       |
+|                                        | command and response messages                     |                 |                           |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| ZCL_REPORT_CONFIGURING_DEVICE          | Device can can configure reporting parameters     | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| ZCL_REPORT_DESTINATION_DEVICE          | Device is a destination for ZCL reports           | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| ZCL_STANDALONE                         | Enables local ZCL function control                | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| ZDO_API_BASIC                          | Basic ZDO functions enabled                       | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| ZDO_API_ADVANCED                       | Advanced ZDO functions enabled                    | Y               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| ZNP_NPI                                | If the device is a Zigbee Network Processor       | Y               | znp                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| Z_POWER_TEST                           | Enables power test modes for an application       | Y               | light and sw examples     |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| ZSTACK_SECURITY                        | Initializes the AES ECB module                    | N               | All                       |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+| ZSTACK_GPD                             | Project for a Green Power device                  | N               | gpd_[switch/temperature]  |
++----------------------------------------+---------------------------------------------------+-----------------+---------------------------+
+
+    .. note:: Several of the symbols referenced are used for specific sample
+        applications and do not apply to all projects included in |STACK|.  ZCL
+        definitions are used to reduce project memory space and if enabled then
+        users are responsible for registering the associated endpoints and callbacks
+        inside of the |STACK| application.  Failure to do so will cause issues
+        (ex. failed callbacks) which are not discovered during the project build.
+
+    .. note:: Please refer to the preprocessor symbols section of the 
+        |ZB_QUICK_START_GUIDE| to setup compile options for the project if using IAR.
+
+.. _sec-start-up-in-main:
+
+Start-Up in main()
+^^^^^^^^^^^^^^^^^^
+
+The :code:`main()` function inside of :code:`main.c` is the application starting 
+point at runtime. This is where the board is brought up with interrupts 
+disabled and board-related components are initialized. 
+Tasks in this function are configured by initializing the
+necessary parameters, setting their priority, and initializing the stack size
+for the application. The primary IEEE address (programmed by TI) is
+obtained from the :term:`CCFG` area of the flash memory and NV drivers are
+initialized.  In the final step, interrupts are enabled and the
+``SYS/BIOS`` kernel scheduler is started by calling :code:`BIOS_start()`,
+which does not return. See the |TRM| for information on the start-up sequence
+before :code:`main()` is reached.
+
+.. code-block:: c
+
+	int main()
+	{
+	#ifndef USE_DEFAULT_USER_CFG
+	    zstack_user0Cfg.macConfig.pAssertFP = assertHandler;
+	#endif
+
+	    /* enable iCache prefetching */
+	    VIMSConfigure(VIMS_BASE, TRUE, TRUE);
+
+	#if defined(USE_CACHE_RAM)
+	    /* Disable cache */
+	    VIMSModeSet( VIMS_BASE, VIMS_MODE_DISABLED);
+	#else
+	    /* Enable cache */
+	    VIMSModeSet( VIMS_BASE, VIMS_MODE_ENABLED);
+	#endif
+
+	    /*
+	     Initialization for board related stuff such as LEDs
+	     following TI-RTOS convention
+	     */
+	    Board_initGeneral();
+
+	// OTA client projects use BIM, so CCFG isn't present in this image
+	#if !((defined OTA_CLIENT_STANDALONE) || (defined OTA_CLIENT_INTEGRATED))
+	    /*
+	     * Copy the extended address from the CCFG area
+	     * Assumption: the memory in CCFG_IEEE_MAC_0 and CCFG_IEEE_MAC_1
+	     * is contiguous and LSB first.
+	     */
+	    /* Used to check for a valid extended address */
+	    static const uint8_t dummyExtAddr[] =
+	        { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
+
+	    OsalPort_memcpy(zstack_user0Cfg.extendedAddress, (uint8_t *)&(__ccfg.CCFG_IEEE_MAC_0),
+	           (APIMAC_SADDR_EXT_LEN));
+	    /* Check to see if the CCFG IEEE is valid */
+	    if(memcmp(zstack_user0Cfg.extendedAddress, dummyExtAddr, APIMAC_SADDR_EXT_LEN) == 0)
+	#endif // (defined OTA_CLIENT_STANDALONE) || (defined OTA_CLIENT_INTEGRATED
+	    {
+	        /* No, it isn't valid.  Get the Primary IEEE Address */
+	        OsalPort_memcpy(zstack_user0Cfg.extendedAddress, (uint8_t *)(FCFG1_BASE + EXTADDR_OFFSET),
+	                       (APIMAC_SADDR_EXT_LEN));
+	    }
+
+	    /* Setup the NV driver */
+	    NVOCMP_loadApiPtrs(&zstack_user0Cfg.nvFps);
+	#ifdef NVOCMP_MIN_VDD_FLASH_MV
+	    NVOCMP_setLowVoltageCb(&Main_lowVoltageCb);
+	#endif
+	    if(zstack_user0Cfg.nvFps.initNV)
+	    {
+	        zstack_user0Cfg.nvFps.initNV(NULL);
+	    }
+
+	#ifdef ZSTACK_GPD
+	    OsalPort_memcpy(ApiMac_extAddr, zstack_user0Cfg.extendedAddress,
+	           (APIMAC_SADDR_EXT_LEN));
+	    _macTaskId = macTaskInit(&zstack_user0Cfg.macConfig);
+	#else
+	    /* configure stack task */
+	    stackTask_init(&zstack_user0Cfg);
+	#endif // ZSTACK_GPD
+
+	#ifdef NPI
+	    extern void NPITask_createTask(void);
+	    NPITask_createTask();
+
+	    Semaphore_Params semParam;
+	    Semaphore_Params_init(&semParam);
+	    semParam.mode = ti_sysbios_knl_Semaphore_Mode_COUNTING;
+	    Semaphore_construct(&npiInitializationMutex, 0, &semParam);
+	    npiInitializationMutexHandle = Semaphore_handle(&npiInitializationMutex);
+	#endif
+
+	// ZNP does not need an application task
+	#ifndef ZNP_NPI
+
+	#ifndef CUI_DISABLE
+	    CUI_params_t cuiParams;
+
+	    CUI_paramsInit(&cuiParams);
+	    CUI_init(&cuiParams);
+	#endif
+	    Task_Params taskParams;
+
+	    /* Configure app task. */
+	    Task_Params_init(&taskParams);
+	    taskParams.stack = myTaskStack;
+	    taskParams.stackSize = APP_TASK_STACK_SIZE;
+	    taskParams.priority = 2;
+	    Task_construct(&myTask, taskFxn, &taskParams, NULL);
+
+	#endif
+
+	#ifdef DEBUG_SW_TRACE
+	    IOCPortConfigureSet(IOID_8, IOC_PORT_RFC_TRC, IOC_STD_OUTPUT
+	                    | IOC_CURRENT_4MA | IOC_SLEW_ENABLE);
+	#endif /* DEBUG_SW_TRACE */
+
+	    BIOS_start(); /* enable interrupts and start SYS/BIOS */
+
+	    return 0; // never executed
+	}
+
+In terms of the IDE workspace, ``main.c`` exists in the Application project –
+meaning that when compiled it is placed in the allocated section of the application's flash.
+
+.. _sec-application-init-function:
+
+Application Initialization Function
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:ref:`sec-rtos-overview-tasks` describes how a task is constructed. After the
+task is constructed
+and the ``SYS/BIOS`` kernel scheduler is started, the function that was passed
+during task construction is run when the task is ready. Power-management
+functions are initialized here, then the application task is initialized and started.
+
+.. code-block:: c
+
+    Void taskFxn(UArg a0, UArg a1)
+    {
+    #if defined(USE_CACHE_RAM)
+        /* Retain the Cache RAM */
+        Power_setConstraint(PowerCC26XX_SB_VIMS_CACHE_RETAIN);
+    #endif
+
+    #ifdef ZSTACK_GPD
+
+    #else
+        /* get the service taskId of the Stack */
+        stackServiceTaskId = stackTask_getStackServiceId();
+        /* configure the message API the application will use to communicate with
+           the stack */
+        Zstackapi_init(stackServiceTaskId);
+    #endif
+
+        /* Kick off application */
+        extern void sampleApp_task(NVINTF_nvFuncts_t *pfnNV);
+        sampleApp_task(&zstack_user0Cfg.nvFps);
+    }
+
+For application examples, :code:`main` calls :code:`taskFxn()`,
+which later calls :code:`sampleApp_task` that serves as the entrance for 
+the application code to configure |STACK| network parameters as well as 
+application specific peripherals configurations, callbacks, and stack 
+notifications. Some examples are:
+
+-   Timers initialization.
+-   Button and LEDs.
+-   Register the application endpoint, clusters, and attributes.
+-   Register for callbacks to process general clusters commands.
+-   Initialize network configuration parameters.
+-   Register for ZDO callbacks.
+-   Initialize the serial Common User Interface (CUI).
+
+.. _sec-event-processing-task-function:
+
+
+Event Processing in the Task Function
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+After initializing the peripherals and configuring the application and
+implementing the initialization function from the previous code snippet,
+:code:`zclSampleApp_task()`, it enters an infinite loop so as to continuously 
+process as an independent task and not run to completion, seen 
+in :numref:`fig-light-task-flow-chart`.
+
+.. _fig-light-task-flow-chart:
+.. uml::
+    :align: center
+    :caption: Light Example Application Task Flow Chart
+
+    @startuml
+    :zclSampleApp_task();
+    :zclSampleLight_initialization()]
+    :zclSampleLight_process_loop()]
+        repeat
+        while(Process Z-Stack messages)
+        :Process Application peripheral events]
+        :Process Application events]
+        endwhile (No events to process)
+        repeat while
+    :End;
+    @enduml
+
+:numref:`fig-light-task-flow-chart` shows various reasons for posting to the
+semaphore, causing the task to become active.
+
+.. _sec-events-signaled-through-internal-event-variable:
+
+Events Signaled Through the Internal Event Variable
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Application task uses an event variable bit mask to identify what action
+caused the process to wake up and take appropriate action. Each bit of the
+event variable corresponds to a defined event such as:
+
+.. code-block:: c
+
+	// Application Events
+	#define SAMPLELIGHT_POLL_CONTROL_TIMEOUT_EVT  0x0001
+	#define SAMPLELIGHT_LEVEL_CTRL_EVT            0x0002
+	#define SAMPLEAPP_END_DEVICE_REJOIN_EVT       0x0004
+	#define SAMPLEAPP_DISCOVERY_TIMEOUT_EVT       0x0008
+	#define SAMPLEAPP_PROV_CONNECT_EVT            0x0080
+	#define SAMPLEAPP_PROV_DISCONNECT_EVT         0x0010
+	#define SAMPLEAPP_POLICY_UPDATE_EVT           0x0020
+	#define SAMPLEAPP_SYNC_ATTR_EVT               0x0040
+
+Whichever function sets this bit in the event variable must also ensure to post
+to the semaphore to wake up the application for processing. An example of this
+is the clock handler for clock timeouts.
+
+.. code-block:: c
+
+    static void zclSampleLight_processLevelControlTimeoutCallback(UArg a0)
+    {
+        (void)a0; // Parameter is not used
+
+        appServiceTaskEvents |= SAMPLELIGHT_LEVEL_CTRL_EVT;
+
+        // Wake up the application thread when it waits for clock event
+        Semaphore_post(appSemHandle);
+    }
+
+Which is later handled and the event bit is cleared as the event got processed.
+
+.. code-block:: c
+
+    if(appServiceTaskEvents & SAMPLELIGHT_LEVEL_CTRL_EVT)
+    {
+        zclSampleLight_AdjustLightLevel();
+        appServiceTaskEvents &= ~SAMPLELIGHT_LEVEL_CTRL_EVT;
+    }
+
+When adding an event, it must be unique for the given task and be a power of 2
+(so that only 1 bit is set). Because the event variable is initialized as 
+:code:`uint32_t`, this setup allows for a maximum of 32 internal events.
+However, the sample projects pre-determine several application events
+inside their header file (for example, :code:`zcl_samplelight.c`) along with
+0x8000 being generally reserved for :code:`SYS_EVENT_MSG`. Therefore, only
+customizable application events from 0x10000 and above should be utilized.
+
+.. _sec-callbacks:
+
+Callbacks
+^^^^^^^^^
+
+The application code also likely includes various callbacks from the protocol
+stack layer and |RTOS| modules. To ensure thread safety, processing should be
+minimized in the actual callback and the bulk of the processing should be done
+in the application context. The following code snippet shows how the events 
+and callbacks from the stack are processed, the stack notifications are 
+redirected to :code:`zclSampleLight_processZStackMsgs()`, and the application 
+events are directly processed here.
+
+
+.. code-block:: c
+
+	static void zclSampleLight_process_loop(void)
+	{
+	    /* Forever loop */
+	    for(;;)
+	    {
+	        zstackmsg_genericReq_t *pMsg = NULL;
+	        bool msgProcessed = FALSE;
+
+	        /* Wait for response message */
+	        if(Semaphore_pend(appSemHandle, BIOS_WAIT_FOREVER ))
+	        {
+	            /* Retrieve the response message */
+	            if((pMsg = (zstackmsg_genericReq_t*) OsalPort_msgReceive( appServiceTaskId )) != NULL)
+	            {
+
+	                zclSampleLight_processZStackMsgs(pMsg);
+	#ifdef PER_TEST
+	                PERTest_processZStackMsg(pMsg);
+	#endif
+	                // Free any separately allocated memory
+	                msgProcessed = Zstackapi_freeIndMsg(pMsg);
+	            }
+
+	            if((msgProcessed == FALSE) && (pMsg != NULL))
+	            {
+	                OsalPort_msgDeallocate((uint8_t*)pMsg);
+	            }
+
+	#ifdef PER_TEST
+	            PERTest_process();
+	#endif
+
+	#ifndef CUI_DISABLE
+	            //Process the events that the UI may have
+	            zclsampleApp_ui_event_loop();
+	#endif
+
+	            if ( appServiceTaskEvents & SAMPLEAPP_DISCOVERY_TIMEOUT_EVT )
+	            {
+	              discoveryInprogress = FALSE;
+
+	              appServiceTaskEvents &= ~SAMPLEAPP_DISCOVERY_TIMEOUT_EVT;
+	            }
+
+	#if defined(USE_DMM) && defined(BLE_START)
+				// REMOVED DMM CODE
+	#endif // defined(USE_DMM) && defined(BLE_START)
+
+	#ifdef ZCL_LEVEL_CTRL
+	            if(appServiceTaskEvents & SAMPLELIGHT_LEVEL_CTRL_EVT)
+	            {
+	                zclSampleLight_AdjustLightLevel();
+	                appServiceTaskEvents &= ~SAMPLELIGHT_LEVEL_CTRL_EVT;
+	            }
+	#endif // ZCL_LEVEL_CTRL
+
+	#if !defined (DISABLE_GREENPOWER_BASIC_PROXY) && (ZG_BUILD_RTR_TYPE)
+	            if(appServiceTaskEvents & SAMPLEAPP_PROCESS_GP_DATA_SEND_EVT)
+	            {
+	                if(zgGP_ProxyCommissioningMode == TRUE)
+	                {
+	                  zcl_gpSendCommissioningNotification();
+	                }
+	                else
+	                {
+	                  zcl_gpSendNotification();
+	                }
+	                appServiceTaskEvents &= ~SAMPLEAPP_PROCESS_GP_DATA_SEND_EVT;
+	            }
+
+	            if(appServiceTaskEvents & SAMPLEAPP_PROCESS_GP_EXPIRE_DUPLICATE_EVT)
+	            {
+	                gp_expireDuplicateFiltering();
+	                appServiceTaskEvents &= ~SAMPLEAPP_PROCESS_GP_EXPIRE_DUPLICATE_EVT;
+	            }
+
+	            if(appServiceTaskEvents & SAMPLEAPP_PROCESS_GP_TEMP_MASTER_EVT)
+	            {
+	                gp_returnOperationalChannel();
+	                appServiceTaskEvents &= ~SAMPLEAPP_PROCESS_GP_TEMP_MASTER_EVT;
+	            }
+	#endif
+
+	#if ZG_BUILD_ENDDEVICE_TYPE
+	            if ( appServiceTaskEvents & SAMPLEAPP_END_DEVICE_REJOIN_EVT )
+	            {
+	              zstack_bdbRecoverNwkRsp_t zstack_bdbRecoverNwkRsp;
+
+                  Zstackapi_bdbRecoverNwkReq(appServiceTaskId,&zstack_bdbRecoverNwkRsp);
+
+	              appServiceTaskEvents &= ~SAMPLEAPP_END_DEVICE_REJOIN_EVT;
+	            }
+	#endif
+	#if defined (Z_POWER_TEST)
+				// REMOVED POWER TEST CODE
+	#endif // Z_POWER_TEST
+	        }
+	    }
+	}
+
+Stack notifications are meant to provide context to the application 
+to take some decisions and notify the stack, if required. An example of this 
+is the BDB Filter Networks Descriptors indication shown below:
+
+.. code-block:: c
+
+    case zstackmsg_CmdIDs_BDB_FILTER_NWK_DESCRIPTOR_IND:
+
+        /*   User logic to remove networks that do not want to join
+         *   Networks to be removed can be released with Zstackapi_bdbNwkDescFreeReq
+         */
+        Zstackapi_bdbFilterNwkDescComplete(appServiceTaskId);
+
+    break;
+
+In this case the message contained in the notification carries the network descriptor 
+of the networks found during the commissioning process.  The application is in charge 
+of removing those networks that are not meant to be joined (if the application is 
+willing to join specific networks) by calling :code:`Zstackapi_bdbNwkDescFreeReq()` 
+to remove the network descriptor. After the filtering is done, the application must 
+indicate to the stack that it has to process the remaining network descriptors (even 
+if all the network descriptors has been removed) by calling 
+:code:`Zstackapi_bdbFilterNwkDescComplete()` so that the stack may continues with its process.
+
+Other stack notifications can be handled by application logic to update the application 
+state, such as Base Device Behavior :term:`BDB` notifications, which provides status of 
+the previous commissioning requests from the application.
+
+.. code-block:: c
+
+    case zstackmsg_CmdIDs_BDB_NOTIFICATION:
+        {
+
+            zstackmsg_bdbNotificationInd_t *pInd;
+            pInd = (zstackmsg_bdbNotificationInd_t*)pMsg;
+            zclSampleLight_ProcessCommissioningStatus(&(pInd->Req));
+        }
+    break;
+
+Asynchronous |STACK| Callbacks must be registered by calling 
+:code:`Zstackapi_DevZDOCBReq()` with the correct fields set to true in a
+:code:`zstack_devZDOCBReq_t`.  For example, if you would like to receive device state change
+notifications then the following must be called from :code:`zclSampleLight_Init`
+
+.. code-block:: c
+
+	static void SetupZStackCallbacks(void)
+	{
+	    zstack_devZDOCBReq_t zdoCBReq = {0};
+
+	    // Register for Callbacks, turn on:
+	    //  Device State Change,
+	    //  ZDO Match Descriptor Response,
+	    zdoCBReq.has_devStateChange = true;
+	    zdoCBReq.devStateChange = true;
+	    zdoCBReq.has_matchDescRsp = true;
+	    zdoCBReq.matchDescRsp = true;
+	    zdoCBReq.has_ieeeAddrRsp = true;
+	    zdoCBReq.ieeeAddrRsp = true;
+	#if defined Z_POWER_TEST
+	#if defined (POWER_TEST_POLL_DATA)
+	    zdoCBReq.has_deviceAnnounce = true;
+	    zdoCBReq.deviceAnnounce = true;
+	#endif
+	#endif // Z_POWER_TEST
+
+	    (void)Zstackapi_DevZDOCBReq(appServiceTaskId, &zdoCBReq);
+	}
+
+Afterwards it can be handled in a :code:`zclSampleLight_processZStackMsgs()` case statement.
+More information is provided in the |ZSTACK_API|.
+
+.. code-block:: c
+
+    		case zstackmsg_CmdIDs_DEV_STATE_CHANGE_IND:
+	        {
+	#if !defined(CUI_DISABLE) || defined(USE_DMM) && defined(BLE_START)
+	            // The ZStack Thread is indicating a State change
+	            zstackmsg_devStateChangeInd_t *pInd =
+	                (zstackmsg_devStateChangeInd_t *)pMsg;
+	#endif // !defined(CUI_DISABLE) || defined(USE_DMM) && defined(BLE_START)
+
+	#ifndef CUI_DISABLE
+	            UI_DeviceStateUpdated(&(pInd->req));
+	#endif
+
+	#if defined(USE_DMM) && defined(BLE_START)
+	            provState = pInd->req.state;
+
+	            appServiceTaskEvents |= SAMPLEAPP_POLICY_UPDATE_EVT;
+
+	            // Wake up the application thread when it waits for clock event
+	            Semaphore_post(appSemHandle);
+	#endif // defined(USE_DMM) && defined(BLE_START)
+	        }
+    		break;
+
+.. _sec-osalport-framework:
+
+OSALPort Framework
+------------------
+
+OSALPort is a module that provides a mechanism for the Application to
+interface with |STACK| services (such as |STACK| APIs), as well as certain
+primitive services (such as thread synchronization) provided by the real-time
+operating system (|RTOS|). OSALPort allows both the Application and
+protocol stack tasks to efficiently operate, communicate, and share resources in
+a unified |RTOS| environment.
+
+.. _fig-osalport-block-diagram:
+.. figure:: resources/fig-osalport-block-diagram.png
+    :scale: 80 %
+    :align: center
+
+    OSALPort Application – Protocol Stack Abstraction
+
+.. _sec-osalport-zigbee-stack-service:
+
+OSALPort Protocol Stack Service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As depicted in :numref:`fig-osalport-block-diagram`, the OSALPort core use case
+involves messages between a server entity (the |STACK| task) and a client
+entity (the Application task). The reasoning for this architecture is twofold:
+to enable independent updating of the application and |STACK|, and to
+maintain API consistency as the software is ported from legacy platforms (for
+example OSAL for the CC253x) to the |DEVICE| TI-RTOS7. The OSALPort |STACK|
+service serves as the Application interface to all |STACK| APIs.
+Internally, when a |STACK| protocol stack API is called by the
+Application, the OSALPort module routes (dispatches) the command to the
+|STACK|, and where appropriate, routes messages from the |STACK| to the Application.
+
+.. _sec-osalport-service:
+
+OSALPort Service
+^^^^^^^^^^^^^^^^
+
+OSALPort includes a service that abstracts various operating
+system-related functions. Due to shared resources, and to maintain interprocess
+communication, the Application must use the following OSALPort 
+service functions.
+
+-   Messaging and Thread Synchronization
+-   Heap Allocation and Management
+
+.. _sec-messaging-and-thread-synchronization:
+
+Messaging and Thread Synchronization
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The messaging and thread synchronization functions provided by the OSALPort
+let users design an application to protocol stack interface in the multithreaded
+|RTOS| environment. Within the OSALPort, messaging between two tasks is
+achieved by sending a message block from one thread to the other using a message
+queue. The sender allocates memory, writes the content of the message into the
+memory block, and then sends (enqueues) the memory block to the recipient.
+Notification of message delivery is accomplished using a signaling semaphore.
+The receiver wakes up on the semaphore, copies the message memory block (or
+blocks), processes the message, and returns (frees) the memory block to the heap.
+
+The Stack uses the OSALPort for notifying and sending messages to the
+Application. These service messages (such as state change notifications)
+received by the Application task are delivered by the OSALPort and
+processed in the task context of the Application.
+
+.. _sec-heap-allocation-and-management:
+
+Heap Allocation and Management
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The OSALPort provides the Application with global heap APIs for dynamic
+memory allocation. OSALPort uses
+this heap for all protocol stack messaging as well as to obtain memory for other
+OSALPort services. TI recommends that the Application uses these
+OSALPort APIs for dynamic memory allocation within the Application.
+
+The heap itself is automatically sized in :code:`.syscfg` and can be configured by
+changing the :code:`BIOS.heapSize` variable. In order to monitor your heap usage, 
+add the :code:`HEAPMGR_METRICS` definition to the |STACK| project.  Inside a debug 
+session it will then be possible to monitor several heap variables:
+
+.. code-block:: c
+
+    heapmgrBlkMax
+    heapmgrBlkCnt
+    heapmgrBlkFree
+    heapmgrMemAlo
+    heapmgrMemMax
+    heapmgrMemUB
+    heapmgrMemFail
+    heapmgrMemFreeTotal
+	
+.. _sec-osalport-init-and-registration:
+
+OSALPort Initialization and Registration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To instantiate and initialize the OSALPort service, the following functions
+must be called by the application in ``main()`` before starting the ``SYS/BIOS``
+kernel scheduler.
+
+.. code-block:: c
+
+    /* configure stack task */
+    stackTask_init(&zstack_user0Cfg);
+
+    /* get the service taskId of the Stack */
+    stackServiceTaskId = stackTask_getStackServiceId();
+    /* configure the message API the application will use to communicate with
+       the stack */
+    Zstackapi_init(stackServiceTaskId);
+
+Calling :code:`stackTask_init()` initializes the OSALPort service
+(for example, heap manager) and framework. Calling
+:code:`Zstackapi_init()` creates, but does not start, the |STACK|
+protocol stack task.
+
+Semaphores must be created to send and receive messages
+through the OSALPort. This registration is done for the application in
+:code:`zclSampleLight_initialization()`, which is called by the application's initialization
+functions. The following is the call to the OSALPort in ``zclSampleLight_initialization()``
+in :code:`zcl_samplelight.c`
+
+.. code-block:: c
+
+    /* create semaphores for messages / events
+     */
+    Semaphore_Params semParam;
+    Semaphore_Params_init(&semParam);
+    semParam.mode = ti_sysbios_knl_Semaphore_Mode_COUNTING;
+    Semaphore_construct(&appSem, 0, &semParam);
+    appSemHandle = Semaphore_handle(&appSem);
+
+    appServiceTaskId = OsalPort_registerTask(Task_self(), appSemHandle, &appServiceTaskEvents);
+
+:code:`OsalPort_registerTask` supplies the :code:`Task_self()`, :code:`appSemHandle`,
+and :code:`appServiceTaskEvents`  inputs which then returns the :code:`appServiceTaskId` 
+subsequently used by the OSALPort to facilitate messages between the Application and server
+tasks. The :code:`Task_self()` argument points to the task destination message queue,
+:code:`appSemHandle` represents the semaphore used for signaling, and
+:code:`appServiceTaskEvents` points to the event flag. Each task registering with the OSALPort 
+has unique :code:`appSemHandle` and :code:`appServiceTaskEvents` identifiers.
+
+    .. note::
+        |STACK| APIs defined in zstackapi.c, and other OSALPort services, 
+        are not available for use before OSALPort registration.  OsalPort should not be used
+        in place of TI-RTOS7 drivers from inside the application code.
+
+.. _sec-osalport-thread-synchronization:
+
+OSALPort Thread Synchronization
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The OSALPort module switches between Application and Stack threads through
+the use of semaphore synchronization services provided by the
+|RTOS|.  To allow a client or a server thread to block until it receives a 
+message, OSALPort uses :code:`Semaphore_pend(appSemHandle, BIOS_WAIT_FOREVER )`.
+This blocks until the semaphore associated with the caller |RTOS| thread is posted.
+
+Allowing an application or a server thread to block yields the
+processor resource to other lower priority threads, or conserves energy by
+shutting down power and clock domains whenever possible. The semaphore
+associated with an |RTOS| thread is signaled by either of the following
+conditions.
+
+-   A new message is queued to the Application |RTOS| thread queue.
+-   :code:`Semaphore_post()` is called for the semaphore.
+
+:code:`Semaphore_post()` is provided so that an application or a server can add
+its own event to unblock :code:`Semaphore_pend()` and synchronize the thread.
+:code:`Semaphore_post()` accepts a semaphore handle 
+:code:`appSemHandle` as its sole argument. The semaphore handle 
+associated with the thread is registered through the :code:`OsalPort_registerTask()` call.
+
+    .. note::
+        It is not necessary to use OSALPort APIs in place of TI-RTOS7 APIs for the
+        application semaphore
+
+.. _sec-example-osalport-usage:
+
+Example OSALPort Usage
+^^^^^^^^^^^^^^^^^^^^^^
+
+:numref:`fig-osalport-messaging-example` shows an example command being sent from
+the application to the |STACK| through the OSALPort, with a corresponding
+return value passed back to the application. :code:`stackTask_init()` initializes
+the OSALPort module instance itself and :code:`Zstackapi_init()`
+creates a task per external image, with an entry function at a known address.
+After initializing the OSALPort, the Application task registers with the
+OSALPort using :code:`OsalPort_registerTask`. After the SYS/BIOS
+scheduler starts and the Application task runs, the application sends a protocol
+command defined in :code:`zstackapi.c` such as :code:`Zstackapi_bdbSetAttributesReq()`.
+The protocol command is not executed in the application thread. Instead the
+command is encapsulated in an OSALPort message and routed to the |STACK|
+task through the OSALPort. In other words, this command is sent to the
+OSALPort where it is then executed on the |STACK|. The Application thread meanwhile 
+blocks (waits for) the corresponding command status message (status). When the |STACK| 
+protocol stack finishes executing the command, the command status message response is 
+sent through the OSALPort back to the application thread.
+
+.. _fig-osalport-messaging-example:
+.. uml::
+    :align: center
+    :caption: OSALPort Messaging Example
+
+    @startuml
+    App->OSALPort: stackTask_init
+    App->OSALPort: Zstackapi_init
+    App->OSALPort: OsalPort_registerTask
+    App->OSALPort: Zstackapi_bdbSetAttributesReq()\nBDB_SET_REQ
+    OSALPort->"Z-Stack": "Semaphore_pend\n(Z-Stack Service)"
+    note over App: App Task Blocks
+    note over "Z-Stack": Stack Executes\nBDB_SET_REQ
+    "Z-Stack"->OSALPort: Semaphore_post(sendCmdStatus)
+    OSALPort->App: Semaphore_post(sendCmdStatus)
+    @enduml
+
+.. _sec-custom-application-builder-functionality:
+
+Customizing Application Builder Functionality
+---------------------------------------------
+
+For *SampleApp* projects which use the :ref:`sysconfig-zigbee-application-builder`,
+there are specific instructions necessary to modify and use the code produced by the
+:code:`zcl_config.c` file for an application's needs.  ZCL command callbacks generated 
+in :code:`zcl_config.c` can be implemented by copying the function declaration into 
+:code:`sampleapp.c` and removing the :code:`WEAK` tag, this will in effect direct 
+the compiler to use the callback function defined in this file.  Below is pseudocode 
+using :code:`sampleApp_IdentifyCB` as an example:
+
+.. code-block:: c
+
+    // Copy ZCL command callback, attribute variables, and default values
+    // to sampleapp.c after removing the WEAK tag used in zcl_config.c
+    void sampleApp_IdentifyCB( zclIdentify_t *pCmd );
+    const uint16 DEFAULT_IDENTIFY_IDENTIFY_TIME = 60; // Constant can now be redefined
+    uint16 sampleApp_Identify_IdentifyTime;
+    ...
+    // Implementing the function further in sampleapp.c
+    void sampleApp_IdentifyCB( zclIdentify_t *pCmd )
+    {
+    	// Perform action based on application needs
+    	// Variable sampleApp_Identify_IdentifyTime can now be used and modified
+    }
+
+Likewise, ZCL attribute variables and default values which are generated in
+:code:`zcl_config.c` can be modified inside :code:`sampleapp.c` after copying over the
+declarations and removing the :code:`WEAK` tag, as is shown through
+:code:`sampleApp_Identify_IdentifyTime` and :code:`DEFAULT_IDENTIFY_IDENTIFY_TIME`
+in the pseudocode above.  Be sure to only implement changes to application files (such 
+as :code:`sampleapp.c`) given that :code:`zcl_config.c/h` will be overwritten with each 
+project build.
+
+.. note:: Always be sure to Clean and Rebuild projects inside the IDE after making
+    these application changes to ensure that they properly take effect.
+
+.. _sec-common-user-interface:
+
+Common User Interface
+---------------------
+
+It is recommended to use **PuTTY** as the serial terminal program
+for these sample applications because the serial output has been verified to be
+formatted correctly in this program. For serial port setup, select a 115200
+baud rate, 8 data bits, 1 stop bit, no parity, and disable flow control.
+
+The user interface allows to control the commissioning configuration as well as
+application behavior. The commissioning interface is common for all
+applications and is implemented in the module :code:`zcl_sampleapps_ui.c`.
+The application specifics of the serial interface is implemented in its respective application files.
+
+The user interface consists of a series of circular menus that are navigated with the arrow keys. 
+Pressing the **Enter** key will enter submenu. 
+Use the up and down arrow keys to change the parameters on the menu (eg. channel mask, PAN ID, install codes, etc.).
+
+The common user interface is also dependent on the capabilities of the compiled
+device, e.g. Trust Center devices (coordinators) will require the IEEE address
+of the joining device when introducing Install Codes, whereas router or end
+devices will only require the install code as the IEEE address is of itself.
+:numref:`Common-menu-navigation-diagram` shows the common menus for all sample applications. 
+
+.. _Common-menu-navigation-diagram:
+.. figure:: resources/Common-menu-navigation-diagram.png
+    :scale: 70 %
+    :align: center
+
+    Common Sample Application Diagram
+
+The common user interface also allows interaction with the specific application 
+menu system under the App menu screen. To disable the Common User Interface, 
+see the *Additional Optimizations* section of the :ref:`power-config`.
+
+Welcome and <Help> Screens
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Welcome Screen (:numref:`Welcome-screen`) displays the application name and leads to the 
+Help Screen (:numref:`Help-screen`), which outlines the generic functionality of the keys throughout the
+application. The following sections describe the specific functionality of the keys for each
+menu screen.
+
+.. _Welcome-screen:
+.. figure:: resources/Welcome-screen.png
+    :scale: 30 %
+    :align: center
+
+    Welcome screen
+
+.. _Help-screen:
+.. figure:: resources/Help-screen.png
+    :scale: 30 %
+    :align: center
+
+    Help screen
+
++-------------------------------------------------------------------------------------------------------------------------------------+
+|                                     Welcome and Help Screens                                                                        |
++=======================+=================+===========================================================================================+
+| Key                   | Functionality   | Comment                                                                                   |
++-----------------------+-----------------+-------------------------------------------------------------------------------------------+
+| Left/Right Arrow Keys | Menu navigation | Move to previous/next screen                                                              |
++-----------------------+-----------------+-------------------------------------------------------------------------------------------+
+| Enter                 | Help            | Press Enter to show the help screen, press Enter again to go back to the Welcome Screen   |
++-----------------------+-----------------+-------------------------------------------------------------------------------------------+
+
+
+Information Screen
+^^^^^^^^^^^^^^^^^^
+
+The lower portion of the screen (:numref:`Info-screen`) displays various information about the device.
+about the device such as the IEEE address, the PAN ID, the channel,
+short address, logical device type, and the parent short address.
+
+.. _Info-screen:
+.. figure:: resources/Info-screen.png
+    :scale: 40 %
+    :align: center
+
+    Info screen example
+
+Device Info
++++++++++++
+
+The Device Info field shows information about the device.
+
+IEEE Addr:
+
+ * 64-bit IEEE address, unique per device (programmed in manufacturing by TI)
+
+Power Mode:
+
+ * RX Always On - Receiver is always enabled, mandatory for routing devices and optional for end devices
+ * Sleepy - Low power device, where the receiver is enabled as needed
+
+NWK Info
+++++++++
+
+The Network Info field shows information on the current network, unless BDB Info indicates NotOnNwk.
+
+PAN ID (see :ref:`z-stack-overview-configuring-pan-id-and-network-joining`):
+
+ * 16-bit PAN ID which this device is part of
+
+Channel (see :ref:`z-stack-overview-configuring-channel`):
+
+ * Logical channel of the network
+
+Short Address (see :ref:`z-stack-overview-address-types`):
+
+ * 16-bit NWK address of the device
+
+Parent Address:
+
+ * 16-bit NWK address of the device's parent
+
+BDB Info
+++++++++
+
+The Base Device Behavior Info field shows the current state of the commissioning process 
+(see :ref:`z-stack-overview-commissioning` and :ref:`sec-bdb-notifications`).
+
+BDB Commissioning Procedure being executed:
+
+ * IN - Initialization
+ * NS - Network Steering
+ * NF - Network Formation
+ * FB - Finding and Binding
+ * TL - Touchlink
+ * PL - Parent Lost (for end devices only)
+ * -- - idle (commissioning not currently active)
+ 
+Current Network status:
+
+ * NotOnNwk - not currently connected to a network
+ * FORM - network was formed by the current device during the latest execution of the NF method
+ * JOIN - the current device joined an existing network during the latest execution of the NS method
+ * EXST - the device was already connected to a network when the commissioning was started
+ 
+Joining permission state (not shown on end devices):
+
+ * CLOSED - the current device is closed for joining of other devices.
+ * OpenXXX - the current device is open for joining of other devices, and will close in XXX seconds.
+
+Finding and Binding (see :ref:`z-stack-overview-finding-binding`):
+
+ * IdXXX - Time remaining (XXX) for F&B target to stay in Identify mode
+ * SrchXXX/XX - Time remaining (XXX) for F&B initiator to search for F&B targets; Number of binds (XX) created to F&B targets
+
+Touchlink (see :ref:`z-stack-overview-touchlink-commissioning`):
+
+ * TL Target - indicates how long the target is enabled to perform touchlink commissioning
+
+Bind Info
++++++++++
+
+Information on the last bind that this device created.
+
+ * Addr - 64-bit IEEE address of the device to which a bind was created
+ * ClusterId - Cluster involved in the last bind created
+ * Endpoint - Destination endpoint of the last bind created
+
+GP Info
++++++++
+
+The Green Power Info shows information on Green Power.
+
+GPP Commissioning:
+
+The Green Power Proxy Commissioning field shows whether or not the GP Proxy device is set in GP commissioning mode by a Green Power Sink device.
+
+ * DISABLED - GPP commissioning process is not in progress
+ * ENABLED - GPP commissioning process is in progress
+ * TIME XXX - GPP commissioning process is in progress and will end in XXX seconds
+
+APP Info
+++++++++
+
+The Application Info screen shows application specific information. This will vary across different examples.
+
+OTA Info
+++++++++
+
+For OTA-enabled client projects, these two lines provide the current file version followed by OTA status (Stopped, In Progress, Completed).
+
+PER Info
+++++++++
+
+For projects where :code:`PER_TEST` is pre-defined and :code:`per_test.c/h` from |SDK_DIR|\\source\\ti\\zstack\\per_test 
+has been added to the project's main directory, the ongoing results of a packet error rate (PER) test will be
+displayed.  The device under test should also define :code:`PER_TEST_SEND_TO_PARENT` if testing directly with their parent 
+or :code:`PER_TEST_SEND_USE_FINDING_BINDING` to test with a device which they've binded to.  
+:code:`PER_TEST_ENABLE_FWD_NOTIFICATION` should also be enabled on routing devices to enable notification of forwarded frames.
+
+<Configure> Menu
+^^^^^^^^^^^^^^^^
+
+The Configure Menu (:numref:`Configure-menu`) contains several sub-menus that allow the user to manipulate the install
+codes, commissioning procedures, channel masks and PAN ID. This configuration will define
+the device behavior during BDB commissioning procedures.
+
+.. _Configure-Menu:
+.. figure:: resources/Configure-Menu.png
+    :scale: 30 %
+    :align: center
+
+    Configure Menu
+
+<Add Instl Code> Menu
+^^^^^^^^^^^^^^^^^^^^^
+
+The Add Install Code Menu (:numref:`Add-install-code-menu`) provides a user interface to set install codes. The same install code
+must be applied to both the Trust Center and the joining device before attempting to join. These
+devices will use this install code to generate the TCLK. Joining devices can only store a single
+install code at a time, but a Trust Center can store multiple install codes and corresponding IEEE
+addresses for joining devices.
+Pressing **Enter** key while on this screen enters the Install-Code menu 
+(the screens for Trust Center and joining devices will differ).
+
+
+.. _Add-install-code-menu:
+.. figure:: resources/Add-install-code-menu.png
+    :scale: 30 %
+    :align: center
+
+    Add Install Code Screen
+
+<Set Instl Code> Screen
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The Set Install Code Screen (:numref:`Set-install-code-menu`) has two modes of operation, view and edit. In the view
+mode, the install code is shown in the first two lines. The edit mode allows changing the 
+default install code to any desired value. In edit mode, the CRC of the install code is also
+displayed, on the left side of the third line. 
+
+.. _Set-install-code-menu:
+.. figure:: resources/Set-install-code-menu.png
+    :scale: 30 %
+    :align: center
+
+    Set Install Code Screen
+
++-------------------------------------------------------------+
+|   <Set Instl Code> Screen - view mode                       |
++============+=================+==============================+
+| Key        | Functionality   | Comment                      |
++------------+-----------------+------------------------------+
+| Left/Right | Menu navigation | Move to previous/next screen |
++------------+-----------------+------------------------------+
+| Enter      | Select          | Enter edit mode              |
++------------+-----------------+------------------------------+
+
+
++------------------------------------------------------------------------------------------+
+|   <Set Instl Code> Screen - edit mode                                                    |
++============+==================+==========================================================+
+| Key        | Functionality    | Comment                                                  |
++------------+------------------+----------------------------------------------------------+
+| Left/Right | Digit navigation | Move to previous/next digit                              |
++------------+------------------+----------------------------------------------------------+
+| 0-F        | Value change     | Determine the value of the highlighted digit             |
++------------+------------------+----------------------------------------------------------+
+| Enter      | Select           | Save and exit mode                                       |
++------------+------------------+----------------------------------------------------------+
+
+Note that the Apply Install Code Screen must be used to apply the altered install codes.
+
+<Set I.C. Addr> Screen
+^^^^^^^^^^^^^^^^^^^^^^
+
+The Set Install Code Address Screen (:numref:`Set-install-address-code-menu`) is only 
+available for a Trust Center and has two modes of operation. In the first mode, the 
+IEEE address to be associated with the install code entered in the previous screen is 
+shown. The second mode allows this address to be changed. When a device with this IEEE 
+address tries to join the Trust Center, the Trust Center will use the associated 
+Install Code to generate a Trust Center Link Key to use with this device.
+
+.. _Set-install-address-code-menu:
+.. figure:: resources/Set-install-address-code-menu.png
+    :scale: 30 %
+    :align: center
+
+    Set Install Code Address Screen (Trust Center only)
+
+
++-------------------------------------------------------------+
+|   <Set I.C. Addr> Screen - view mode                        |
++============+=================+==============================+
+| Key        | Functionality   | Comment                      |
++------------+-----------------+------------------------------+
+| Left/Right | Menu navigation | Move to previous/next screen |
++------------+-----------------+------------------------------+
+| Enter      | Select          | Enter edit mode              |
++------------+-----------------+------------------------------+
+
++------------------------------------------------------------------------------------------+
+|   <Set I.C. Addr> Screen - edit mode                                                     |
++============+==================+==========================================================+
+| Key        | Functionality    | Comment                                                  |
++------------+------------------+----------------------------------------------------------+
+| Left/Right | Digit navigation | Move to previous/next digit                              |
++------------+------------------+----------------------------------------------------------+
+| 0-F        | Value change     | Determine the value of the highlighted digit             |
++------------+------------------+----------------------------------------------------------+
+| Enter      | Select           | Save and exit mode                                       |
++------------+------------------+----------------------------------------------------------+
+
+
+
+Apply Install Code Screen
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Apply Install Code Screen (:numref:`Apply-install-code-menu`) will save the last 
+configuration done for remote nodes in the case of a Trust Center, or local 
+configuration for routers and end devices. The last status must be successful to
+ensure the correct application of install code.
+
+.. _Apply-install-code-menu:
+.. figure:: resources/Apply-install-code-menu.png
+    :scale: 30 %
+    :align: center
+
+    Apply Install Code screen
+
++----------------------------------------------------------------------------------------------+
+|   <Aply Inst Code> Screen                                                                    |
++============+=================+===============================================================+
+| Key        | Functionality   | Comment                                                       |
++------------+-----------------+---------------------------------------------------------------+
+| Left/Right | Menu navigation | Move to previous/next screen                                  |
++------------+-----------------+---------------------------------------------------------------+
+| Enter      | Select          | Apply the install code configured in the previous screens     |
++------------+-----------------+---------------------------------------------------------------+
+
+
+Channel Mask Screens
+^^^^^^^^^^^^^^^^^^^^
+
+The Channel Mask Screens (:numref:`Primary-Channel-Mask`, :numref:`Secondary-Channel-Mask`) 
+display and allow modification of the default channel configuration of the
+device for primary and secondary channel masks. Channels marked with * are enabled in the
+selected channel mask. Press the **Enter** key to start changing the mask.
+
+The display numbers in the channel mask are read as follows:
+
++-----------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|                                  Channel mask conversion                        | 
++=================+===+===+===+===+===+===+===+===+===+===+===+===+===+===+===+===+
+| Logical Channel | 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26|
++-----------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+| Displayed Digit | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
++-----------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+ 
+
+
+.. _Primary-Channel-Mask:
+.. figure:: resources/Primary-Channel-Mask.png
+    :scale: 30 %
+    :align: center
+
+    Primary Channel Mask Screen
+
+
+.. _Secondary-Channel-Mask:
+.. figure:: resources/Secondary-Channel-Mask.png
+    :scale: 30 %
+    :align: center
+
+    Secondary Channel Mask Screen
+    
+    
++---------------------------------------------------------------------------------+
+|   <Primary Channel Mask>, <Secondary Channel Mask> Screens – view mode          |
++============+=================+==================================================+
+| Key        | Functionality   | Comment                                          |
++------------+-----------------+--------------------------------------------------+
+| Left/Right | Menu navigation | Move to previous/next screen                     |
++------------+-----------------+--------------------------------------------------+
+| Enter      | Select          | Enter edit mode                                  |
++------------+-----------------+--------------------------------------------------+
+
++--------------------------------------------------------------------------------------------+
+|   <Primary Channel Mask>, <Secondary Channel Mask> Screens – edit mode                     |
++============+====================+==========================================================+
+| Key        | Functionality      | Comment                                                  |
++------------+--------------------+----------------------------------------------------------+
+| Left/Right | Channel navigation | Move to previous/next channel indicator                  |
++------------+--------------------+----------------------------------------------------------+
+| 0-F        | Value change       | Determine the value of the highlighted digit             |
++------------+--------------------+----------------------------------------------------------+
+| Enter      | Select             | Save and exit mode                                       |
++------------+--------------------+----------------------------------------------------------+
+
+
+<PAN ID> Screen
+^^^^^^^^^^^^^^^
+
+The PAN ID Screen (:numref:`PAN-ID`) allows changing of the default PAN ID (0xFFFF by default) to any desired
+value.
+
+.. _PAN-ID:
+.. figure:: resources/PAN-ID.png
+    :scale: 30 %
+    :align: center
+
+    PAN ID Screen - view mode
+
+
++-------------------------------------------------------------+
+|   <PAN ID> Screen – view mode                               |
++============+=================+==============================+
+| Key        | Functionality   | Comment                      |
++------------+-----------------+------------------------------+
+| Left/Right | Menu navigation | Move to previous/next screen |
++------------+-----------------+------------------------------+
+| Enter      | Select          | Enter edit mode              |
++------------+-----------------+------------------------------+
+
++------------------------------------------------------------------------------------------+
+|   <PAN ID> Screen – edit mode                                                            |
++============+==================+==========================================================+
+| Key        | Functionality    | Comment                                                  |
++------------+------------------+----------------------------------------------------------+
+| Left/Right | Digit navigation | Move to previous/next digit                              |
++------------+------------------+----------------------------------------------------------+
+| Up/Down    | Value change     | Increase/decrease the value of the highlighted digit     |
++------------+------------------+----------------------------------------------------------+
+| Enter      | Select           | Save and exit mode                                       |
++------------+------------------+----------------------------------------------------------+
+
+
+Base Device Behavior Commissioning Mode Screens
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Base Device Behavior (BDB) Commissioning Screens (:numref:`BDB-TL-Initiator`, 
+:numref:`BDB-Formation`, :numref:`BDB-Steering`, :numref:`BDB-FindingBinding`) allow 
+enabling/disabling of the top level commissioning procedures that will be performed 
+when BDB commissioning is triggered by commissioning screen 
+(:numref:`Commissioning-Screen`) or any other means.
+
+Touchlink
++++++++++
+
+BDB Touchlink is a proximity commissioning method for network formation with 
+distributed security, this means that the network created does not have a Trust Center.
+This procedure can be invoked on *Router* and *End Devices*, but not by *Coordinators*. 
+The commissioning involves two configurations which are touchlink initiator and 
+touchlink target.
+
+If the device supports touchlink target (by setting the compile option :code:`BDB_TL_TARGET`), the screen :numref:`TL-Target-time` in the commissioning 
+menu allows you to change the amount of time the device will accept the touchlink commissioning process. 
+Once a time period is selected, the target is enabled to perform this commissioning procedure with initiators.
+The screen :numref:`TL-Target-steal` sets the *allow stealing* configuration.
+
+.. _TL-Target-time:
+.. figure:: resources/TL-Target-time.png
+    :scale: 30 %
+    :align: center
+
+    Touchlink Target time screen
+
+.. _TL-Target-steal:
+.. figure:: resources/TL-Target-steal.png
+    :scale: 30 %
+    :align: center
+
+    Touchlink Target allow stealing screen
+
+
+If the device supports Touchlink as Initiator (by setting the compile option 
+:code:`BDB_TL_INITIATOR`), the screen :numref:`BDB-TL-Initiator` in the commissioning menu 
+allows you to set if touchlink as initiator will be executed when the commissioning screen is triggered.
+
+.. _BDB-TL-Initiator:
+.. figure:: resources/BDB-TL-Initiator.png
+    :scale: 30 %
+    :align: center
+
+    Touchlink Initiator Screen
+
+More details on this commissioning process are provided in the "Touchlink Commissioning" section of :ref:`z-stack-overview`.
+
+
+Formation
++++++++++
+
+BDB Formation procedure is meant to be used by Coordinator devices and Router devices. 
+Coordinator devices will create a centralized network, whereas Router devices will 
+create a distributed network, after which any other Router or End Device may join these 
+networks. For further details on the differences between these two types of networks 
+please refer to the "Centralized Security Network" and "Distributed Security Network" sections of :ref:`z-stack-overview`. 
+This commissioning procedure cannot be used if the device is already on a network or does not have formation 
+capabilities such as End Devices.
+
+.. _BDB-Formation:
+.. figure:: resources/BDB-Formation.png
+    :scale: 30 %
+    :align: center
+
+    Formation Screen
+
+Network Steering
+++++++++++++++++
+
+BDB Network Steering procedure is meant to allow joining devices such as Routers and 
+End Devices to discover and join a suitable network. 
+Performing the network discovery process is necessary to complete the joining process. 
+Devices that are already in a network will use this commissioning procedure to open the 
+network and allow other devices to join the network.
+    
+.. _BDB-Steering:
+.. figure:: resources/BDB-Steering.png
+    :scale: 30 %
+    :align: center
+
+    Steering Screen
+
+
+Finding and Binding
++++++++++++++++++++
+
+BDB Finding and Binding is an application commissioning procedure that allows 
+applications to match its clusters with other devices and easily create binds. 
+For example, Light devices will set Identify mode state for 180 seconds, in which it 
+can be discovered by Switch devices performing this commissioning procedure. After 
+the Switch device creates the binds with the Light devices found during the procedure, 
+it will be able to control those lights.
+
+.. _BDB-FindingBinding:
+.. figure:: resources/BDB-FindingBinding.png
+    :scale: 30 %
+    :align: center
+
+    Finding and Binding Screen
+
+
++--------------------------------------------------------------------------------------------------+
+|   <T.L. Initiator >,<Nwk Formation>, <Nwk Steering>, <Findng+Bndng> Screens                      |
++============+=================+===================================================================+
+| Key        | Functionality   | Comment                                                           |
++------------+-----------------+-------------------------------------------------------------------+
+| Left/Right | Menu navigation | Move to previous/next screen                                      |
++------------+-----------------+-------------------------------------------------------------------+
+| Enter      | Select          | Toggle enable/disable commissioning procedure                     |
++------------+-----------------+-------------------------------------------------------------------+
+
+
+<Commissioning> Screen
+^^^^^^^^^^^^^^^^^^^^^^
+
+The Commissioning Screen (:numref:`Commissioning-Screen`) starts the BDB top level 
+commissioning processes selected in the configuration menus. 
+
+.. _Commissioning-Screen:
+.. figure:: resources/Commissioning-Screen.png
+    :scale: 30 %
+    :align: center
+
+    Commissioning Screen
+
++----------------------------------------------------------------+
+|   <Commission> Screen                                          |
++============+=================+=================================+
+| Key        | Functionality   | Comment                         |
++------------+-----------------+---------------------------------+
+| Left/Right | Menu navigation | Move to previous/next screen    |
++------------+-----------------+---------------------------------+
+| Enter      | Select          | Start commissioning procedure   |
++------------+-----------------+---------------------------------+
+
+
+<Reset to FN> Screen
+^^^^^^^^^^^^^^^^^^^^
+
+Reset to Factory New (:numref:`Reset-FN-Screen`) clears the device's network 
+information and restores the NVM tables to default. The device will perform a 
+soft reset automatically during this procedure and then display
+the Welcome Screen (:numref:`Welcome-screen`).
+
+.. _Reset-FN-Screen:
+.. figure:: resources/Reset-FN-Screen.png
+    :scale: 30 %
+    :align: center
+
+    Reset to Factory New Screen
+
++-------------------------------------------------------------+
+|   <Reset to Fn> Screen                                      |
++============+=================+==============================+
+| Key        | Functionality   | Comment                      |
++------------+-----------------+------------------------------+
+| Left/Right | Menu navigation | Move to previous/next screen |
++------------+-----------------+------------------------------+
+| Enter      | Select          | Perform Factory New Reset    |
++------------+-----------------+------------------------------+
+
+    .. note::
+        Due to the LaunchPad's XDS110 emulator device control during programming, 
+        the device must undergo a hardware reset (typically via a push button
+        pull-down on the RESET pin or power cycle) in order for this screen to
+        effectively perform a software reset instead of crashing.
+
+
+<Back> Screen
+^^^^^^^^^^^^^
+
+The Back Screen (:numref:`Back-Screen`) allows returning to the previous screen. 
+When the back action is performed the upper level screen will be displayed automatically.
+
+.. _Back-Screen:
+.. figure:: resources/Back-Screen.png
+    :scale: 30 %
+    :align: center
+
+    Back Screen
+
++-------------------------------------------------------------+
+|   <Back> Screen                                             |
++============+=================+==============================+
+| Key        | Functionality   | Comment                      |
++------------+-----------------+------------------------------+
+| Left/Right | Menu navigation | Move to previous/next screen |
++------------+-----------------+------------------------------+
+| Enter      | Select          | Back to upper menu           |
++------------+-----------------+------------------------------+
+
+
+<App> Menu
+^^^^^^^^^^
+
+The App menu (:numref:`App-Screen`) is application specific and will contain
+the menus to interact with the specific application implementation. Those
+specific application menus are explained in the README documentation provided
+by each application and referred in :ref:`chap-example-applications`.
+
+This menu is intended to be used once the device is already commissioned to a
+network, as it provides ways to interact with the other devices in the network.
+For example, the Switch application will have a Toggle Remote Light interface which
+will trigger the Switch application to send a Toggle Light command to all lights
+previously binded.
+
+.. _App-Screen:
+.. figure:: resources/App-Screen.png
+    :scale: 30 %
+    :align: center
+
+    App Screen
+
++------------+-----------------+------------------------------+
+|   <App> Menu                                                |
++============+=================+==============================+
+| Key        | Functionality   | Comment                      |
++------------+-----------------+------------------------------+
+| Left/Right | Menu navigation | Move to previous/next screen |
++------------+-----------------+------------------------------+
+| Enter      | Select          | Application specific action  |
++------------+-----------------+------------------------------+
+
+Buttons and LEDs
+^^^^^^^^^^^^^^^^
+
+The common user interface also controls the funtionality of push buttons
+and LEDs, two of which are already incorporated into the example applications
+for use with the LaunchPad boards:
+
+-   BTN-1: Starts the BDB commissioning process (Network Formation, Steering, 
+    and/or Finding & Binding)
+
+-   BTN-2: Application-specific function (ex. light switch) or Factory New
+    Reset when held down during a power cycle
+
+-   GREEN_LED: Turns on when a network has formed/resumed (ZC/ZR) or been joined 
+    (ZR/ZED), blinking if actively identifying as a Finding & Binding target, off
+    otherwise
+
+-   RED_LED: Application-specific function (ex. light)
+
+More DIOs can be added to fit the requirements of a custom board design and
+specific application in accordance with SysConfig initialization, for more
+information refer to :ref:`sysconfig-board-files`
+

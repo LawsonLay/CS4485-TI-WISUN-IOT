@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zigbee Over-The-Air Firmware Upgrade &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User&#39;s Guide
+ 8.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Z-Stack OTA Upgrade" href="../zigbee/ota_upgrade.html" />
+    <link rel="prev" title="Custom Hardware" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug zigbee-guide zigbee-ota-index";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+
+          </a>
+              <div class="version">
+                8.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/overview.html">SimpleLink CC13xx/CC26xx SDK Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/developing_zigbee_applications.html">Developing Zigbee Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Zigbee Over-The-Air Firmware Upgrade</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/ota_upgrade.html">Z-Stack OTA Upgrade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oad-secure-index.html">Over-the-Air Download (OAD)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/packet_sniffer.html">Packet Sniffer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration_guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Zigbee Over-The-Air Firmware Upgrade</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="zigbee-over-the-air-firmware-upgrade">
+<h1>Zigbee Over-The-Air Firmware Upgrade<a class="headerlink" href="#zigbee-over-the-air-firmware-upgrade" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/ota_upgrade.html">Z-Stack OTA Upgrade</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/ota_upgrade.html#introduction">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#how-to-read-this-document">How to Read this Document</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-overview">OTA Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-theory-of-operation">OTA Theory of Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#otaserver-pc-tool">OtaServer PC Tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-image-converter-applications">OTA Image Converter Applications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-upgrade-image-file-format">OTA Upgrade Image File Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-image-converter-command-line-arguments">OTA Image Converter Command Line Arguments</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#image-manufacturer-identifier">Image Manufacturer Identifier</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#image-type-identifier">Image Type Identifier</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#image-version">Image Version</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#stack-implementation-of-the-ota-upgrade-cluster-for-client-device">Z-Stack Implementation of the OTA Upgrade Cluster for Client Device</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#zcl-functionality">ZCL Functionality</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#zcl-ota-c-and-zcl-ota-h">zcl_ota.c and zcl_ota.h</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-client-app-c-and-ota-client-app-h">ota_client_app.c and ota_client_app.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#bim-functionality">BIM Functionality</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#crc32-c-and-crc32-h">crc32.c and crc32.h</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#flash-interface-ext-rtos-nvs-c">flash_interface_ext_rtos_NVS.c</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#oad-image-header-app-c-oad-image-header-app-h-and-oad-image-header-h">oad_image_header_app.c, oad_image_header_app.h and oad_image_header.h</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#oad-switch-agama-c-and-oad-switch-agama-h">oad_switch_agama.c and oad_switch_agama.h</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#stack-implementation-of-the-ota-upgrade-cluster-for-server-device">Z-Stack Implementation of the OTA Upgrade Cluster for Server Device</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#zcl-functionality-1">ZCL Functionality</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-server-data-c-ota-server-c-and-ota-server-h">ota_server_data.c, ota_server.c, and ota_server.h</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-common-c-and-ota-common-h">ota_common.c and ota_common.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#serial-interface">Serial interface</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#mt">MT</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#npi">NPI</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-upgrade-api">OTA Upgrade API</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-callback-events">OTA Callback Events</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#zclota-requestnextupdate">zclOTA_RequestNextUpdate</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#zclota-sendimagenotify">zclOTA_SendImageNotify</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#zclota-permitota">zclOTA_PermitOta</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-client-memory-partition">OTA Client Memory Partition</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/ota_upgrade.html#sample-ota-applications">Sample OTA Applications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#required-materials">Required Materials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#building-and-downloading-target-applications">Building and Downloading Target Applications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-bim">OTA BIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-client-applications">OTA Client Applications</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#generate-ota-binaries">Generate OTA binaries</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-server-application">OTA Server Application</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-server-compilation-flags">OTA Server Compilation Flags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#performing-an-image-update">Performing an Image Update</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#otaserver-operation-desktop-application">OtaServer Operation (Desktop Application)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/ota_upgrade.html#adding-client-functionality-to-an-application">Adding Client Functionality to an Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#adding-ota-client-source-code">Adding OTA Client Source Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#replace-ota-linker-oad-board-and-configuration-files">Replace OTA Linker, OAD Board, and Configuration Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#replacing-files-in-ccs">Replacing Files in CCS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#replacing-files-in-iar">Replacing Files in IAR</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#add-ota-includes-directories">Add OTA Includes Directories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#add-ota-includes-directories-in-ccs">Add OTA Includes Directories in CCS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#add-ota-includes-directories-in-iar">Add OTA Includes Directories in IAR</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#adding-configuration-compile-time-flags">Adding Configuration Compile Time Flags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#adding-configuration-compile-time-flags-in-ccs">Adding Configuration Compile Time Flags in CCS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#adding-configuration-compile-time-flags-in-iar">Adding Configuration Compile Time Flags in IAR</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#adding-post-build-actions">Adding Post-Build Actions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#adding-post-build-actions-in-ccs">Adding Post-Build Actions in CCS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../zigbee/ota_upgrade.html#adding-post-build-actions-in-iar">Adding Post-Build Actions in IAR</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#ensure-product-target-is-set-to-m4f">Ensure Product Target is Set to M4F</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/ota_upgrade.html#ota-client-application-binary-usage">OTA Client Application Binary Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#flashing-ota-client-sequence">Flashing OTA Client Sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee/ota_upgrade.html#specific-on-chip-ota-considerations">Specific on-chip OTA Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="oad-secure-index.html">Over-the-Air Download (OAD)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/intro.html">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/intro.html#oad-topology-overview">OAD Topology Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/oad-types.html">OAD Storage &amp; Security</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/oad-types.html#oad-storage">OAD Storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/oad-types.html#oad-security">OAD Security</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/bim.html">Boot Image Manager (BIM)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/bim.html#overview-software-architecture">Overview &amp; Software Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/bim.html#boot-procedure">Boot procedure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/bim.html#device-trim">Device trim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/bim.html#halt-in-boot-hib">Halt In Boot (HIB)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/bim.html#secure-bim">Secure BIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/bim.html#locating-and-preparing-a-user-application">Locating and Preparing a user application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/bim-off-chip.html">BIM for Off-Chip OAD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/bim-on-chip-dual-image.html">BIM for On-Chip OAD (Dual Image)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/bim-on-chip-dual-image.html#application-execution-switching-using-validation-bytes-in-flash">Application Execution switching using Validation Bytes in Flash</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/image-header.html">OAD Image Header</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/image-header.html#oad-image-header-overview">OAD Image Header Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/image-header.html#oad-core-image-header">OAD Core Image Header</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#oad-image-identification-value">OAD Image Identification Value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#crc">CRC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#bim-version">BIM Version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#image-header-version">Image Header Version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#wireless-technology">Wireless Technology</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#image-information">Image Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#image-validation">Image Validation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#image-length">Image Length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#program-entry-address">Program Entry Address</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#software-version">Software version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#image-end-address">Image End Address</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#header-length">Header Length</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/image-header.html#oad-image-header-segments">OAD Image Header segments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#segment-header">Segment Header</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#segment-type">Segment Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#id5">Wireless Technology</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#reserved">Reserved</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#payload-length">Payload Length</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#boundary-information-segment">Boundary Information Segment</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#stack-entry-address">Stack Entry Address</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#stack-boundary-address-icall-stack0-addr">Stack Boundary Address (ICALL_STACK0_ADDR)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#lower-ram-boundary-ram-start-addr">Lower RAM Boundary (RAM_START_ADDR)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#upper-ram-boundary-ram-end-addr">Upper RAM Boundary (RAM_END_ADDR)</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#contiguous-image-information-segment">Contiguous Image Information Segment</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#image-start-address">Image Start Address</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../oad-secure/image-header.html#security-information-segment">Security Information Segment</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#verification-status">Verification status</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#security-version">Security Version</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#security-timestamp">Security Timestamp</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../oad-secure/image-header.html#certificate-payload">Certificate Payload</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/ext-flash-image-header.html">OAD External Flash Image Header</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/ext-flash-image-header.html#additional-fields-in-external-flash-image-header">Additional Fields in External Flash Image Header</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/flash-layout-off-chip.html">Flash Layout for Off-Chip OAD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/flash-layout-off-chip.html#requirements-and-constraints-for-off-chip-oad">Requirements and Constraints for Off-chip OAD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/flash-layout-off-chip.html#internal-flash-memory-layout">Internal Flash Memory Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/flash-layout-off-chip.html#external-flash-memory-layout">External Flash Memory Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/flash-layout-on-chip-dual-image.html">Flash Layout for On-Chip OAD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/flash-layout-on-chip-dual-image.html#constraints-and-requirements-for-on-chip-oad-dual-image">Constraints and Requirements for On-chip OAD (dual image)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/flash-layout-on-chip-dual-image.html#internal-flash-memory-layout">Internal Flash Memory Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../oad-secure/tools.html">OAD Image Tool</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/tools.html#running-the-tool">Running the tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/tools.html#running-the-tool-from-source">Running the Tool from Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/tools.html#generating-new-security-keys-embedded">Generating New Security Keys (Embedded)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../oad-secure/tools.html#required-arguments-getting-help">Required Arguments/Getting Help</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="creating-a-production-image.html">Creating a Production Image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="creating-a-production-image.html#change-to-release-bim">Change to Release BIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="creating-a-production-image.html#secure-oad-change-default-keys">Secure OAD: Change default keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="creating-a-production-image.html#loading-a-production-image">Loading a Production Image</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="revert-to-factory.html">Reverting to a Factory Image</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html" class="btn btn-neutral float-left" title="Custom Hardware" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../zigbee/ota_upgrade.html" class="btn btn-neutral float-right" title="Z-Stack OTA Upgrade" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2005-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

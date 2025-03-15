@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLE5-Stack 2.02.06 (SDK 6.20) to BLE5-Stack 2.02.07 (SDK 6.30) &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="BLE5-Stack 2.02.05 (SDK 6.10) to BLE5-Stack 2.02.06 (SDK 6.20)" href="ble5stack2.02.05-to-ble5stack2.02.06.html" />
+    <link rel="prev" title="BLE5-Stack 2.02.07 (SDK 6.40) to BLE5-Stack 2.02.08 (SDK 7.10)" href="ble5stack2.02.07-to-ble5stack2.02.08.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-stack-5.x-guide porting-guides ble5stack2.02.06-to-ble5stack2.02.07";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../migration-cc13xx_cc26xx.html#porting-guides">Porting Guides</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.02.09-to-ble5stack2.02.11.html">BLE5-Stack 2.02.09 (SDK 7.41) to BLE5-Stack 2.02.11 (SDK 8.30)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.02.08-to-ble5stack2.02.09.html">BLE5-Stack 2.02.08 (SDK 7.10) to BLE5-Stack 2.02.09 (SDK 7.40)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.02.07-to-ble5stack2.02.08.html">BLE5-Stack 2.02.07 (SDK 6.40) to BLE5-Stack 2.02.08 (SDK 7.10)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">BLE5-Stack 2.02.06 (SDK 6.20) to BLE5-Stack 2.02.07 (SDK 6.30)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#porting-simple-peripheral">Porting Simple Peripheral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#porting-simple-central">Porting Simple Central</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-few-noteworthy-changes-from-old-stack-ver-to-new-stack-ver">A Few Noteworthy Changes from BLE5-Stack 2.02.06 to BLE5-Stack 2.02.07</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.02.05-to-ble5stack2.02.06.html">BLE5-Stack 2.02.05 (SDK 6.10) to BLE5-Stack 2.02.06 (SDK 6.20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.02.04-to-ble5stack2.02.05.html">BLE5-Stack 2.02.04 (SDK 5.40) to BLE5-Stack 2.02.05 (SDK 6.10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.02.03-to-ble5stack2.02.04.html">BLE5-Stack 2.02.03 (SDK 5.30) to BLE5-Stack 2.02.04 (SDK 5.40)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.02.02-to-ble5stack2.02.03.html">BLE5-Stack 2.02.02 (SDK 5.20) to BLE5-Stack 2.02.03 (SDK 5.30)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.02.01-to-ble5stack2.02.02.html">BLE5-Stack 2.02.01 (SDK 5.10) to BLE5-Stack 2.02.02 (SDK 5.20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.02.00-to-ble5stack2.02.01.html">BLE5-Stack 2.02.00 (SDK 4.40) to BLE5-Stack 2.02.01 (SDK 5.10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.01.04-to-ble5stack2.02.00.html">BLE5-Stack 2.01.04 (SDK 4.30) to BLE5-Stack 2.02.00 (SDK 4.40)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.01.03-to-ble5stack2.01.04.html">BLE5-Stack 2.01.03 (SDK 4.20) to BLE5-Stack 2.01.04 (SDK 4.30)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.01.02-to-ble5stack2.01.03.html">BLE5-Stack 2.01.02 (SDK 4.10) to BLE5-Stack 2.01.03 (SDK 4.20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.01.01-to-ble5stack2.01.02.html">BLE5-Stack 2.01.01 (SDK 3.40) to BLE5-Stack 2.01.02 (SDK 4.10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.01.00-to-ble5stack2.01.01.html">BLE5-Stack 2.01.00 (SDK 3.30) to BLE5-Stack 2.01.01 (SDK 3.40)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.00.04-to-ble5stack2.01.00.html">BLE5-Stack 2.00.04 (SDK 3.20) to BLE5-Stack 2.01.00 (SDK 3.30)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.00.03-to-ble5stack2.00.04.html">BLE5-Stack 2.00.03 (SDK 3.10) to BLE5-Stack 2.00.04 (SDK 3.20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.00.02-to-ble5stack2.00.03.html">BLE5-Stack 2.00.02 (SDK 3.10)  to BLE5-Stack 2.00.03 (SDK 3.10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.00.01-to-ble5stack2.00.02.html">BLE5-Stack 2.00.01 (SDK 2.40) to BLE5-Stack 2.00.02 (SDK 3.10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack2.00.00-to-ble5stack2.00.01.html">BLE5-Stack 2.00.00 to BLE5-Stack 2.00.01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack1.02.01-to-ble5stack2.00.00.html">BLE5-Stack 1.02.01 to BLE5-Stack 2.00.00</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ble5stack1.02.00-to-ble5stack1.02.01.html">BLE5-Stack 1.02.00 to BLE5-Stack 1.02.01</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../migration-cc13xx_cc26xx.html#year-to-year-migration-guides">Year-to-Year Migration Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../migration-cc13xx_cc26xx.html#migration-guides">Migration Guides</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a> &raquo;</li>
+      <li>BLE5-Stack 2.02.06 (SDK 6.20) to BLE5-Stack 2.02.07 (SDK 6.30)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="old-stack-ver-sdk-6-20-to-new-stack-ver-sdk-6-30">
+<h1>BLE5-Stack 2.02.06 (SDK 6.20) to BLE5-Stack 2.02.07 (SDK 6.30)<a class="headerlink" href="#old-stack-ver-sdk-6-20-to-new-stack-ver-sdk-6-30" title="Permalink to this headline">¶</a></h1>
+<p>This section will describe a way to migrate a project from BLE5-Stack 2.02.06 to
+a BLE5-Stack 2.02.07 project.</p>
+<p>The best way to migrate is to open a new project from the new SDK and transfer
+your changes and application code over to the new example.</p>
+<div class="section" id="porting-simple-peripheral">
+<h2>Porting Simple Peripheral<a class="headerlink" href="#porting-simple-peripheral" title="Permalink to this headline">¶</a></h2>
+<p>For this migration guide, Simple Peripheral from BLE5-Stack 2.02.06 will be
+ported over to BLE5-Stack 2.02.07. The recommended approach is to start with a
+BLE5-Stack 2.02.07 project that contains the same base functionality as the
+porting target project and merge in any custom functionality.</p>
+<ol class="arabic">
+<li><p>Choose a BLE5-Stack 2.02.07 example project that contains your target
+project’s base functionality.</p></li>
+<li><p>Transfer all modified application files from BLE5-Stack 2.02.06 into the
+BLE5-Stack 2.02.07 example project.</p>
+<p>In this example, the following files from BLE5-Stack 2.02.06 were moved into
+Simple Peripheral BLE5-Stack 2.02.07 example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_peripheral.c</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_peripheral.h</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Move any profiles and services that the application is using to the
+BLE5-Stack 2.02.07 project.</p></li>
+<li><p>Transfer the SysConfig settings either visually through the GUI or open both
+the old and the new project <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> files and copy-paste the desired
+settings.</p></li>
+<li><p>If necessary, update the project to use the newer TI-RTOS drivers that are
+supplied with the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>. Additional details are provided
+in <a class="reference internal" href="#noteworthy-ble-migration-sdk-6-30"><span class="std std-ref">A Few Noteworthy Changes from BLE5-Stack 2.02.06 to BLE5-Stack 2.02.07</span></a>.</p></li>
+<li><p>Refer to the Core SDK release notes for additional information and the
+TI-RTOS examples included with <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>.</p>
+<p>For additional information on how BLE5-Stack 2.02.07 uses TI-RTOS see
+<a class="reference internal" href="../tirtos-index-cc13xx_cc26xx.html#sec-tirtos-overview"><span class="std std-ref">TI-RTOS7 (RTOS Kernel) Overview</span></a>.</p>
+<p>For any utilized TI Drivers, review <a class="reference external" href="../../../../../tirtos7/Bios_User_Guide.pdf">TI-RTOS Kernel (SYS/BIOS) User’s Guide</a> and <a class="reference external" href="../../../../../drivers/tidriversAPIs.html">TI Drivers API Reference</a>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="porting-simple-central">
+<h2>Porting Simple Central<a class="headerlink" href="#porting-simple-central" title="Permalink to this headline">¶</a></h2>
+<p>This section of the migration guide will focus on porting Simple Central
+from BLE5-Stack 2.02.06 to the BLE5-Stack 2.02.07. The recommended approach is
+to start with a BLE5-Stack 2.02.07 project that contains the same base
+functionality as the porting target project and merge in any custom
+functionality.</p>
+<ol class="arabic">
+<li><p>Choose a BLE5-Stack 2.02.07 example project that contains your target
+project’s base functionality.</p></li>
+<li><p>Transfer all modified application files from BLE5-Stack 2.02.06 into the
+BLE5-Stack 2.02.07 example project.</p>
+<p>In this example, the following files from BLE5-Stack 2.02.06 were moved into
+Simple Central BLE5-Stack 2.02.07 example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_central.c</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">simple_central.h</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">main.c</span></code> in the BLE5-Stack 2.02.07 example if additional tasks were
+added in the BLE5-Stack 2.02.06 project.</p></li>
+<li><p>Move any profiles and services that the application is using to the
+BLE5-Stack 2.02.07.</p></li>
+<li><p>Transfer the Sysconfig settings either visually through the GUI or open both
+the old and the new project <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> files and copy-paste the desired settings.</p></li>
+<li><p>If necessary, update the project to use the newer TI-RTOS drivers that are
+supplied with the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>. Additional details are provided
+in <a class="reference internal" href="#noteworthy-ble-migration-sdk-6-30"><span class="std std-ref">A Few Noteworthy Changes from BLE5-Stack 2.02.06 to BLE5-Stack 2.02.07</span></a>.</p></li>
+<li><p>Refer to the Core SDK release notes for additional information and the TI-RTOS
+examples included with <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>.</p>
+<p>For additional information on how BLE5-Stack 2.02.07 uses TI-RTOS see
+<a class="reference internal" href="../tirtos-index-cc13xx_cc26xx.html#sec-tirtos-overview"><span class="std std-ref">TI-RTOS7 (RTOS Kernel) Overview</span></a>.</p>
+<p>For any utilized TI Drivers, review <a class="reference external" href="../../../../../tirtos7/Bios_User_Guide.pdf">TI-RTOS Kernel (SYS/BIOS) User’s Guide</a> and <a class="reference external" href="../../../../../drivers/tidriversAPIs.html">TI Drivers API Reference</a>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="a-few-noteworthy-changes-from-old-stack-ver-to-new-stack-ver">
+<span id="noteworthy-ble-migration-sdk-6-30"></span><h2>A Few Noteworthy Changes from BLE5-Stack 2.02.06 to BLE5-Stack 2.02.07<a class="headerlink" href="#a-few-noteworthy-changes-from-old-stack-ver-to-new-stack-ver" title="Permalink to this headline">¶</a></h2>
+<p>You can follow the guide above without addressing these updates, they are listed
+for your information only. All fine grained details might not be mentioned,
+please refer to the specific example you need to port and do a compare between
+the old and new project files. Please refer to the BLE5-Stack Release Notes for
+all the details.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The examples available in SDK 6.20 and newer</p>
+<ul class="simple">
+<li><p>Rely either on TI-RTOS7 or FreeRTOS as RTOS</p></li>
+<li><p>Leverage GPIO++ and UART2 drivers for GPIO and UART applications</p></li>
+<li><p>Use TI-CLANG or IAR as compiler</p></li>
+</ul>
+<p>This guide assumes the previously mentioned components are used. If this is not the case for your projects,
+please refer to <a class="reference internal" href="../../tirtos/bios7_migration.html#tirtos-to-tirtos7-porting-guide"><span class="std std-ref">TI-RTOS to TI-RTOS7 Migration</span></a>, <a class="reference internal" href="../../cc13xx_cc26xx/gpio-porting-guide.html#sec-cc13xx-cc26xx-gpio-porting-guide"><span class="std std-ref">GPIO++ Driver Porting Guide</span></a>, <a class="reference internal" href="../../cc13xx_cc26xx/uart_to_uart2.html#uart-to-uart2-porting-guide"><span class="std std-ref">UART to UART2 Porting Guide</span></a>
+and <a class="reference external" href="https://software-dl.ti.com/codegen/docs/tiarmclang/rel1_0_0_sts/tiarmclang_ug/tiarmclang-portfolio/migration_guide/index.html">TI ARM Clang Migration Guide</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ble5stack2.02.07-to-ble5stack2.02.08.html" class="btn btn-neutral float-left" title="BLE5-Stack 2.02.07 (SDK 6.40) to BLE5-Stack 2.02.08 (SDK 7.10)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ble5stack2.02.05-to-ble5stack2.02.06.html" class="btn btn-neutral float-right" title="BLE5-Stack 2.02.05 (SDK 6.10) to BLE5-Stack 2.02.06 (SDK 6.20)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

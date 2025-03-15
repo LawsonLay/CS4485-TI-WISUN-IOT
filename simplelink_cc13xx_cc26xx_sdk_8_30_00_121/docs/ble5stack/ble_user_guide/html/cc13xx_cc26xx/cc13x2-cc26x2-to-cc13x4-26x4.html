@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Migrate Your CC13x2 or CC26x2 Project to CC13x4 or CC26x4 &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Migrate software examples from CC13x4 to CC26x4" href="software-on-cc13x4-26x4.html" />
+    <link rel="prev" title="Running Software Examples on the CC13x1x3 or CC26x1x3" href="software-on-cc13x1x-26x1x.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug cc13xx_cc26xx cc13x2-cc26x2-to-cc13x4-26x4";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html#porting-guides">Porting Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html#year-to-year-migration-guides">Year-to-Year Migration Guides</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html#migration-guides">Migration Guides</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gpio-porting-guide.html">GPIO++ Driver Porting Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devices_without_launchpads.html">Devices without LaunchPads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc2652xSIP-cc2651RSIPA.html">Running Software Examples on CC2652XSIP and CC2651RSIPA devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc2652p.html">Running Software Examples on CC2652P</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x2x7-26x2x7.html">Running Software Examples on the CC13x2x7 or CC26x2x7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x1x-26x1x.html">Running Software Examples on the CC13x1x3 or CC26x1x3</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Migrate Your CC13x2 or CC26x2 Project to CC13x4 or CC26x4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#migrate-your-cc13x2-or-cc26x2-project">Migrate Your CC13x2 or CC26x2 Project</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x4-26x4.html">Migrate software examples from CC13x4 to CC26x4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-on-cc13x4-26x4-rgz-devices.html">CC13x4 and CC26x4 RGZ Variants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ble-stack-5.x-guide/porting-guides/cc2640r2_to_cc26x2.html">CC2640R2 to CC26x2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ble-stack-5.x-guide/porting-guides/cc2640r2_to_cc26x2.html#porting-ble-stack-to-ble5-stack">Porting BLE-Stack to BLE5-Stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ble-stack-5.x-guide/porting-guides/cc26x2_to_cc26x2x1.html">CC13x2x1 or CC26x2x1 to CC13x1x3 or CC26x1x3 Software Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sysconfig/ble5-migration.html">SysConfig Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tirtos/bios7_migration.html">TI-RTOS to TI-RTOS7 Migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart_to_uart2.html">UART to UART2 Porting Guide</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-5.x-guide/reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../ble-stack-5.x-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../ble-stack-5.x-guide/migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a> &raquo;</li>
+      <li>Migrate Your CC13x2 or CC26x2 Project to CC13x4 or CC26x4</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="migrate-your-cc13x2-or-cc26x2-project-to-cc13x4-or-cc26x4">
+<h1>Migrate Your CC13x2 or CC26x2 Project to CC13x4 or CC26x4<a class="headerlink" href="#migrate-your-cc13x2-or-cc26x2-project-to-cc13x4-or-cc26x4" title="Permalink to this headline">¶</a></h1>
+<p>It is not currently possible to use the
+<a class="reference internal" href="../sysconfig/sysconfig-board.html#sec-sysconfig-migrate-device"><span class="std std-ref">Hardware View</span></a> tool to change the device types of
+projects using CC13x2x1 or CC26x2x1 to CC13x4 or CC26x4.  Developers are strongly encouraged
+to import a project which contains the correct settings for their target
+device and port the stack application accordingly. Example projects can be found
+in the following location:</p>
+<p>&lt;SDK_DIR&gt;\examples\rtos\&lt;LaunchPad variant&gt;\&lt;stack&gt;\&lt;application&gt;\tirtos\&lt;ticlang/iar&gt;</p>
+<p>For LP-EM-CC1314R10, LP-EM-CC1354P10-1 and LP-EM-CC1354P10-6, software examples
+are provided in the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>.</p>
+<p>If your product will use CC1354R10, CC2674R10 or CC2674P10, the recommendation
+is to start with a LP-EM-CC1354P10 software example.</p>
+<p>Please refer to <a class="reference internal" href="../security-tfm/secure-migration-guide.html#sec-migration-v1-1-v1-8"><span class="std std-ref">Migrating from TFM v1.1 to v1.8</span></a> for steps to migrate from TFM v1.1 to
+TFM v1.8 based project.</p>
+<div class="section" id="migrate-your-cc13x2-or-cc26x2-project">
+<h2>Migrate Your CC13x2 or CC26x2 Project<a class="headerlink" href="#migrate-your-cc13x2-or-cc26x2-project" title="Permalink to this headline">¶</a></h2>
+<p>This section will describe a way to migrate an existing project to the CC13x4 or
+CC26x4 device.</p>
+<p>The best way to migrate is to open a new project from the new SDK and transfer
+your changes and application code over to the new example.</p>
+<ol class="arabic simple">
+<li><p>Choose the CC13x4 SDK example project that contains your target
+project’s base functionality or corresponds to your existing project.</p></li>
+<li><p>Transfer the SysConfig settings. You can do this through the GUI, or open
+both the old and the new project <code class="docutils literal notranslate"><span class="pre">.syscfg</span></code> files in a text comparison
+program and copy-paste the desired settings.</p></li>
+<li><p>Transfer all modified application files from your existing project into the
+CC13x4 example project. If applicable: delete application files that are not
+used from the CC13x4 example project.</p></li>
+</ol>
+<p>You can find instructions on how to design and configure a custom board in the
+<a class="reference internal" href="custom-hardware-cc13xx_cc26xx.html#sec-custom-hardware"><span class="std std-ref">Custom Hardware</span></a> chapter.</p>
+<div class="section" id="specific-software-changes-from-cc13x2-and-cc26x2-projects">
+<h3>Specific Software Changes from CC13x2 and CC26x2 Projects<a class="headerlink" href="#specific-software-changes-from-cc13x2-and-cc26x2-projects" title="Permalink to this headline">¶</a></h3>
+<p>If your project has not been updated to the latest SDK, you may run into one or
+more of the following limitations:</p>
+<div class="section" id="memory">
+<h4>Memory<a class="headerlink" href="#memory" title="Permalink to this headline">¶</a></h4>
+<p>The CC13x4 or CC26x4 devices contain 1M (1024KB) internal flash and 256KB RAM.</p>
+</div>
+<div class="section" id="rom">
+<h4>ROM<a class="headerlink" href="#rom" title="Permalink to this headline">¶</a></h4>
+<p>On CC13x4 or CC26x4 devices, there is no RTOS or connectivity stack in ROM. Instead,
+the RTOS and stacks are stored in flash. There are no required software changes.</p>
+</div>
+<div class="section" id="pin-and-gpio-drivers">
+<h4>PIN and GPIO Drivers<a class="headerlink" href="#pin-and-gpio-drivers" title="Permalink to this headline">¶</a></h4>
+<p>Legacy PIN drivers are not supported on CC13x4 or CC26x4 devices. Instead you should
+use the GPIO++ driver. For more information about GPIO++ driver, refer to the
+migration guide <a class="reference internal" href="gpio-porting-guide.html#sec-cc13xx-cc26xx-gpio-porting-guide"><span class="std std-ref">GPIO++ Driver Porting Guide</span></a></p>
+</div>
+<div class="section" id="uart-driver">
+<h4>UART Driver<a class="headerlink" href="#uart-driver" title="Permalink to this headline">¶</a></h4>
+<p>The legacy UART driver is not supported. Instead use the new UART2 driver.
+More information available in the <a class="reference internal" href="uart_to_uart2.html#uart-to-uart2-porting-guide"><span class="std std-ref">UART to UART2 Porting Guide</span></a>.</p>
+</div>
+<div class="section" id="rtos">
+<h4>RTOS<a class="headerlink" href="#rtos" title="Permalink to this headline">¶</a></h4>
+<p>CC13x4 or CC26x4 devices will only support TI-RTOS7 and FreeRTOS, not legacy TI-RTOS
+(also called RTOS6 or BIOS6). More information about TI-RTOS7 is available here:
+<a class="reference internal" href="../tirtos/bios7_migration.html#tirtos-to-tirtos7-porting-guide"><span class="std std-ref">TI-RTOS to TI-RTOS7 Migration</span></a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="software-on-cc13x1x-26x1x.html" class="btn btn-neutral float-left" title="Running Software Examples on the CC13x1x3 or CC26x1x3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="software-on-cc13x4-26x4.html" class="btn btn-neutral float-right" title="Migrate software examples from CC13x4 to CC26x4" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

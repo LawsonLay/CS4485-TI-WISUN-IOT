@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_c_a_n___config__" kind="struct" language="C++" prot="public">
+    <compoundname>CAN_Config_</compoundname>
+    <includes refid="_c_a_n_8h" local="no">CAN.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_c_a_n___config___1a798a8ea30b57658aefce6b3e4d95ab8b" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_c_a_n___object" kindref="compound">CAN_Object</ref> *</type>
+        <definition>CAN_Object* CAN_Config_::object</definition>
+        <argsstring></argsstring>
+        <name>object</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to a driver specific data object </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="806" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="806" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_c_a_n___config___1a91e3f27acfc66f4f66d10afddc0a3c8f" prot="public" static="no" mutable="no">
+        <type>const <ref refid="struct_c_a_n___h_w_attrs" kindref="compound">CAN_HWAttrs</ref> *</type>
+        <definition>const CAN_HWAttrs* CAN_Config_::hwAttrs</definition>
+        <argsstring></argsstring>
+        <name>hwAttrs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to a driver specific hardware attributes structure </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/CAN.h" line="809" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="809" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>CAN Global configuration. </para>    </briefdescription>
+    <detaileddescription>
+<para>The CAN_Config structure contains a set of pointers used to characterize the CAN driver implementation. </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="661">
+        <label>StructRingBuf_Object</label>
+        <link refid="struct_struct_ring_buf___object"/>
+      </node>
+      <node id="658">
+        <label>CAN_Config_</label>
+        <link refid="struct_c_a_n___config__"/>
+        <childnode refid="659" relation="usage">
+          <edgelabel>hwAttrs</edgelabel>
+        </childnode>
+        <childnode refid="660" relation="usage">
+          <edgelabel>object</edgelabel>
+        </childnode>
+      </node>
+      <node id="660">
+        <label>CAN_Object</label>
+        <link refid="struct_c_a_n___object"/>
+        <childnode refid="661" relation="usage">
+          <edgelabel>txStructRingBuf</edgelabel>
+          <edgelabel>rxStructRingBuf</edgelabel>
+        </childnode>
+        <childnode refid="658" relation="usage">
+          <edgelabel>eventCbk</edgelabel>
+        </childnode>
+      </node>
+      <node id="659">
+        <label>CAN_HWAttrs</label>
+        <link refid="struct_c_a_n___h_w_attrs"/>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/CAN.h" line="804" column="1" bodyfile="source/ti/drivers/CAN.h" bodystart="803" bodyend="810"/>
+    <listofallmembers>
+      <member refid="struct_c_a_n___config___1a91e3f27acfc66f4f66d10afddc0a3c8f" prot="public" virt="non-virtual"><scope>CAN_Config_</scope><name>hwAttrs</name></member>
+      <member refid="struct_c_a_n___config___1a798a8ea30b57658aefce6b3e4d95ab8b" prot="public" virt="non-virtual"><scope>CAN_Config_</scope><name>object</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

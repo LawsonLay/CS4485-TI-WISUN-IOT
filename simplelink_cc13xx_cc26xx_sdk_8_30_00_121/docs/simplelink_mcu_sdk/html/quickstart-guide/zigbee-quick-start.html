@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TI Z-Stack Quick Start Guide &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Quick Start Guide
+ 7.40.00.xx documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Dynamic Multi-protocol Manager Quick Start Guide" href="dmm-quick-start.html" />
+    <link rel="prev" title="Proprietary RF Quick Start Guide" href="proprietary-rf-quick-start.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug quickstart-guide zigbee-quick-start";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Quick Start Guide
+
+          </a>
+              <div class="version">
+                7.40.00.xx
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tidrivers-quick-start.html">TI Drivers Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ti154stack-quick-start.html">TI 15.4-Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble-mesh-quick-start.html">TI Bluetooth Mesh Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thread-quick-start.html">TI Thread-Stack Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TI Z-Stack Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-zigbee-stack-projects-with-ccs">Using TI Z-Stack Projects with CCS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#import-project-using-resource-explorer">Import Project Using Resource Explorer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-project-using-import-wizard">Import Project Using Import Wizard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-and-download-project">Build and Download Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#useful-ccs-ide-settings">Useful CCS IDE Settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#accessing-preprocessor-symbols">Accessing Preprocessor Symbols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#project-specific-preprocessor-symbols">Project Specific Preprocessor Symbols</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-zigbee-stack-projects-with-iar">Using TI Z-Stack Projects with IAR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#import-project-using-workspace">Import Project Using Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sec-compiling-linking-iar">Build and Download Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#useful-iar-ide-settings">Useful IAR IDE Settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sec-accessing-preprocessor-symbols-iar">Accessing Preprocessor Symbols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sec-configuration-preprocessor-symbols-iar">Project Specific Preprocessor Symbols</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-demo">Running the Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#learning-more-about-zigbee-stack">Learning more about TI Z-Stack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-a-new-zigbee-stack-based-application">Developing a new TI Z-Stack Based Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enhance-your-project">Enhance Your Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-support">Getting Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dmm-quick-start.html">Dynamic Multi-protocol Manager Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wsms-quick-start.html">Wireless Solar Management System Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sidewalk-quick-start.html">Amazon Sidewalk Quick Start Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Quick Start Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>TI Z-Stack Quick Start Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="zigbee-stack-quick-start-guide">
+<span id="quick-start-zstack"></span><h1>TI Z-Stack Quick Start Guide<a class="headerlink" href="#zigbee-stack-quick-start-guide" title="Permalink to this headline">¶</a></h1>
+<p>This section serves as a roadmap for users developing applications and products
+using the TI SimpleLink™ CC13xx or CC26xx Wireless MCU platform using TI Z-Stack.
+Whether a seasoned developer or just getting started, TI has created a variety
+of resources to simplify development on the CC13xx or CC26xx platform. These resources
+will enhance your experience with the TI Z-Stack software from the
+example applications to production.</p>
+<p><a class="reference internal" href="#fig-zstack-suggested-workflow"><span class="std std-numref">Figure 101.</span></a> shows the suggested workflow for getting
+started with TI’s SimpleLink TI Z-Stack development environment.</p>
+<div class="figure align-center" id="id5">
+<span id="fig-zstack-suggested-workflow"></span><img alt="../_images/zstack-suggestedworkflow.png" src="../_images/zstack-suggestedworkflow.png" />
+<p class="caption"><span class="caption-number">Figure 101. </span><span class="caption-text">Suggested Workflow</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="using-zigbee-stack-projects-with-ccs">
+<span id="quick-start-zstack-ccs"></span><h2>Using TI Z-Stack Projects with CCS<a class="headerlink" href="#using-zigbee-stack-projects-with-ccs" title="Permalink to this headline">¶</a></h2>
+<p>Importing TI Z-Stack projects into CCS will also import a <code class="docutils literal notranslate"><span class="pre">README.html</span></code> that
+details the example application design, steps on running the example, and how
+each example works.</p>
+<p>Projects that contain Zigbee over-the-air (OTA) upgrade will also
+import the Boot Image Manager (BIM) into the workspace. For more information on OTA
+and the BIM see the <a class="reference external" href="../../../zigbee/zigbee-users-guide.html">Z-Stack User’s Guide</a>.</p>
+<p>For more details on TI Z-Stack example applications please see the
+<em>Application Overview</em> section of the <a class="reference external" href="../../../zigbee/zigbee-users-guide.html">Z-Stack User’s Guide</a>.</p>
+<div class="section" id="import-project-using-resource-explorer">
+<h3>Import Project Using Resource Explorer<a class="headerlink" href="#import-project-using-resource-explorer" title="Permalink to this headline">¶</a></h3>
+<p>A quick and easy way to start working with the SDK is to use the TI Resource
+Explorer in CCS.</p>
+<p>This section describes how to import and build an existing project and
+references the zc_light project. All of TI Z-Stack projects included
+in the development kit have a similar structure.</p>
+<ol class="arabic">
+<li><p>Open the CCS IDE from the Start Menu.</p></li>
+<li><p>Create a workspace.</p>
+<blockquote>
+<div><div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Ensure that the CCS workspace path does not contain a whitespace.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Import a CCS Project using Resource Explorer</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Open Resource Explorer (if not open already) <strong>View</strong> → <strong>Resource
+Explorer</strong> → Software → <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> → Examples →
+Development Tools → CC13xx or CC26xx LaunchPad → Z-Stack →
+zc_light → TI-RTOS → CCS Compiler → zc_light</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Select the CCS Logo button to import project into Project Explorer</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The import process will also install the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> if a local version does
+not exist. You must accept the End User License Agreement to proceeed.</p>
+<div class="figure align-center" id="id6">
+<span id="fig-zstack-resource-explorer-eula"></span><img alt="../_images/eula.png" src="../_images/eula.png" />
+<p class="caption"><span class="caption-number">Figure 102. </span><span class="caption-text">Install <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>After the installation finishes, you must reopen CCS before importing
+the project.</p>
+</div>
+<ul class="simple">
+<li><p>If everything is successful, the project should appear in Resource
+Explorer.</p></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="import-project-using-import-wizard">
+<h3>Import Project Using Import Wizard<a class="headerlink" href="#import-project-using-import-wizard" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Open CCS</p></li>
+<li><p>Choose <strong>Project</strong> → <strong>Import</strong> CCS Projects from the menu.</p></li>
+<li><p>Select the Browse button in the Import CCS Projects dialog and select the the directory
+<code class="docutils literal notranslate"><span class="pre">&lt;SDK_INSTALL_DIR&gt;/examples</span></code></p>
+<blockquote>
+<div><div class="figure align-center" id="id7">
+<span id="fig-zstack-ccs-import-wizard"></span><img alt="../_images/ccs-import-wizard.jpg" src="../_images/ccs-import-wizard.jpg" />
+<p class="caption"><span class="caption-number">Figure 103. </span><span class="caption-text">CCS Import Wizard</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+<li><p>CCS will automatically discover compatible examples.</p></li>
+<li><p>Select the TI Z-Stack Example Project you would like to use. In this example,
+<a class="reference external" href="../../../../examples/rtos/CC26X2R1_LAUNCHXL/zstack/zc_light/README.html">Light Coordinator Example</a> is chosen. Click Finish to import the zc_light project.</p></li>
+</ol>
+</div>
+<div class="section" id="build-and-download-project">
+<h3>Build and Download Project<a class="headerlink" href="#build-and-download-project" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Build the zc_light project.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Set the zc_light project as the active project. Make sure the Debug project
+configuration is used.</p></li>
+<li><p>Select <strong>Project</strong> → <strong>Rebuild</strong> to build the project.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Set to erase all Flash memory</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Navigate to <strong>Project</strong> → <strong>Properties</strong> → <strong>Debug</strong> →
+<strong>Flash Settings</strong> and select <em>All Unprotected Sectors</em> under
+<em>Erase Settings during Program Load</em></p></li>
+<li><p>This will ensure the NV memory from previous project builds is reset.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Load the zc_light project onto the device</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Select <strong>Run</strong> → <strong>Debug</strong> to download the zc_light application.</p></li>
+<li><p>Once the debugging session starts, click the red stop button</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p>Before beginning execution, open a <strong>PuTTY</strong> terminal window with the following settings:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>UART Param</p></th>
+<th class="head"><p>Default Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Baud Rate</p></td>
+<td><p>115200</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data length</p></td>
+<td><p>8 bits</p></td>
+</tr>
+<tr class="row-even"><td><p>Parity</p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stop bits</p></td>
+<td><p>1 bit</p></td>
+</tr>
+<tr class="row-even"><td><p>Flow Control</p></td>
+<td><p>None</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>When the debugging session opens, click the Green start button to start
+execution. Continue on to the <code class="docutils literal notranslate"><span class="pre">README.html</span></code> for information about using the
+example application.</p>
+</div>
+<div class="section" id="useful-ccs-ide-settings">
+<span id="sec-useful-ccs-settings"></span><h3>Useful CCS IDE Settings<a class="headerlink" href="#useful-ccs-ide-settings" title="Permalink to this headline">¶</a></h3>
+<p>The CCS provides a large number of configurable settings that can be used to
+customize the IDE and individual projects. The following examples do not alter
+the generated program code, but they can improve the developer’s experience
+when working with CCS projects. The CCS can reduce project compilation time by
+taking advantage of multiple processor cores on the development computer.</p>
+<p>To use this feature, navigate to <strong>Project</strong> → <strong>Properties</strong> →
+<strong>Build</strong> → <strong>Builder</strong> and select Enable parallel build, as shown in
+<a class="reference internal" href="#fig-properties-light"><span class="std std-numref">Figure 104.</span></a>.</p>
+<div class="figure align-center" id="id8">
+<span id="fig-properties-light"></span><img alt="../_images/fig-properties-light.png" src="../_images/fig-properties-light.png" />
+<p class="caption"><span class="caption-number">Figure 104. </span><span class="caption-text">Project Properties for zc_light</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<p>Decreasing the <strong>Build</strong> → <strong>ARM Compiler</strong> → <strong>Optimization</strong> level to
+<em>Interprocedure</em> will also reduce compile times but may increase the code
+flash requirements.  CCS users can control the amount of information that is
+displayed in the Console portion of the screen during project compilation and
+linking, ranging from <em>Verbose</em> to <em>Super quiet</em>. To change this setting, navigate
+to <strong>Window</strong> → <strong>Preferences</strong> → <strong>Code Composer Studio</strong> → <strong>Build</strong>
+and select an entry from the Console verbosity level drop-down, as shown in
+<a class="reference internal" href="#fig-ccs-console-verbosity"><span class="std std-numref">Figure 105.</span></a></p>
+<div class="figure align-center" id="id9">
+<span id="fig-ccs-console-verbosity"></span><img alt="../_images/fig-ccs-console-verbosity.png" src="../_images/fig-ccs-console-verbosity.png" />
+<p class="caption"><span class="caption-number">Figure 105. </span><span class="caption-text">Console Verbosity Level Preferences</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="accessing-preprocessor-symbols">
+<span id="sec-accessing-preprocessor-symbols-ccs"></span><h4>Accessing Preprocessor Symbols<a class="headerlink" href="#accessing-preprocessor-symbols" title="Permalink to this headline">¶</a></h4>
+<p>Throughout this document and in the source code, various C preprocessor symbols
+may need to be defined or modified at the project level. Preprocessor symbols
+(also known as Predefined Symbols) are used to enable and disable features and
+set operational values to be considered when the program is compiled. The
+preprocessor symbols are split between project specific preprocessor symbols
+and configuration header preprocessor symbols.</p>
+</div>
+<div class="section" id="project-specific-preprocessor-symbols">
+<span id="sec-configuration-preprocessor-symbols-ccs"></span><h4>Project Specific Preprocessor Symbols<a class="headerlink" href="#project-specific-preprocessor-symbols" title="Permalink to this headline">¶</a></h4>
+<p>Configurations for a given example project are stored in CCS’s predefined
+symbols setting for that project.</p>
+<p>In CCS, preprocessor symbols are accessed in the <strong>Project</strong> → <strong>Properties</strong>
+→ <strong>CCS Build</strong> → <strong>ARM Compiler</strong> → <strong>Predefined Symbols</strong>.
+To add, delete, or edit a preprocessor symbol, use one of the icons shown in the
+red box in <a class="reference internal" href="#fig-ccs-predefined-symbols"><span class="std std-numref">Figure 106.</span></a>.</p>
+<div class="figure align-center" id="id10">
+<span id="fig-ccs-predefined-symbols"></span><img alt="../_images/fig-ccs-predefined-symbols.png" src="../_images/fig-ccs-predefined-symbols.png" />
+<p class="caption"><span class="caption-number">Figure 106. </span><span class="caption-text">Predefined Symbols Pane</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<p>A list of the preprocessor symbols which can be added or removed is located in
+<a class="reference external" href="../../../zigbee/zigbee-users-guide.html">Z-Stack User’s Guide</a>: <em>Developing Zigbee Applications</em> → <em>Application Overview</em></p>
+<p>Other compile options taken from preinclude header files can be accessed by
+opening the appropriate Project Properties.  Right click on the project in the
+Project Explorer and selecting <strong>Properties</strong>, then navigating to <strong>CCS Build</strong> →
+<strong>ARM Compiler</strong> → <strong>Include Options</strong>. To add, delete, or edit a
+preincluded files, use one of the icons shown in the red box in
+<a class="reference internal" href="#fig-ccs-preincluded-files"><span class="std std-numref">Figure 107.</span></a>.</p>
+<div class="figure align-center" id="id11">
+<span id="fig-ccs-preincluded-files"></span><img alt="../_images/fig-ccs-preincluded-files.png" src="../_images/fig-ccs-preincluded-files.png" />
+<p class="caption"><span class="caption-number">Figure 107. </span><span class="caption-text">Include Options Pane</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-zigbee-stack-projects-with-iar">
+<span id="quick-start-zstack-iar"></span><h2>Using TI Z-Stack Projects with IAR<a class="headerlink" href="#using-zigbee-stack-projects-with-iar" title="Permalink to this headline">¶</a></h2>
+<p>When building with IAR, it is recommended to enable all build messages. This
+can be done by right-clicking in the Build window and selecting “All” as shown
+below:</p>
+<blockquote>
+<div><div class="figure align-center" id="id12">
+<span id="fig-zstack-iar-enable-build-messages"></span><img alt="../_images/iar_enable_build_messages.png" src="../_images/iar_enable_build_messages.png" />
+<p class="caption"><span class="caption-number">Figure 108. </span><span class="caption-text">Enable All Build Messages</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<p>Before starting to work with any of the TI Z-Stack projects in the SDK, you need
+to load a set of variables that will be set for your current workspace.</p>
+<ol class="arabic">
+<li><p>Select Tools -&gt; Configure Custom Argument Variables</p>
+<blockquote>
+<div><div class="figure align-center" id="id13">
+<span id="fig-zstack-iar-configure-argvars"></span><img alt="../_images/iar-configure-argvars.jpg" src="../_images/iar-configure-argvars.jpg" />
+<p class="caption"><span class="caption-number">Figure 109. </span><span class="caption-text">Configure Custom Argument Variables</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Select the Global tab, then click Import..</p>
+<blockquote>
+<div><div class="figure align-center" id="id14">
+<span id="fig-zstack-iar-import-argvars"></span><img alt="../_images/iar-import-argvars.jpg" src="../_images/iar-import-argvars.jpg" />
+<p class="caption"><span class="caption-number">Figure 110. </span><span class="caption-text">Import Global Argument Variables</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>3. Import the custom argvars from the SDK. The argvars are stored in a SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars file, which is located in the
+tools/iar directory of the SDK
+(<code class="docutils literal notranslate"><span class="pre">&lt;SDK_INSTALL_PATH&gt;/tools/iar/SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars</span></code>)</p>
+<blockquote>
+<div><div class="figure align-center" id="id15">
+<span id="fig-zstack-iar-custom-argvars"></span><img alt="../_images/iar-custom-argvars.jpg" src="../_images/iar-custom-argvars.jpg" />
+<p class="caption"><span class="caption-number">Figure 111. </span><span class="caption-text">Custom Argvars Location</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<p>4. You can open
+(<code class="docutils literal notranslate"><span class="pre">&lt;SDK_INSTALL_PATH&gt;/tools/iar/SIMPLELINK_CC13XX_CC26XX_SDK.custom_argvars</span></code>)
+in a text editor if you need to modify the default path argument variables.</p>
+<blockquote>
+<div><div class="figure align-center" id="id16">
+<span id="fig-zstack-iar-default-argvars"></span><img alt="../_images/iar-default-argvars.jpg" src="../_images/iar-default-argvars.jpg" />
+<p class="caption"><span class="caption-number">Figure 112. </span><span class="caption-text">Default Path Argument Variables</span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>Restart IAR</p></li>
+</ol>
+<div class="section" id="import-project-using-workspace">
+<h3>Import Project Using Workspace<a class="headerlink" href="#import-project-using-workspace" title="Permalink to this headline">¶</a></h3>
+<p>This section describes how to open and build an existing project and references
+the zc_light project.</p>
+<ol class="arabic">
+<li><p>Open the IAR Embedded Workbench IDE from the Start Menu.</p></li>
+<li><p>Open an IAR workspace project: <strong>File</strong> → <strong>Open</strong> → <strong>Workspace</strong>
+and select &lt;SDK_INSTALL_DIR&gt;\examples\rtos\<em>DEVICE</em> _LAUNCHXL\zstack\zc_light\tirtos\iar\zc_light_<em>DEVICE</em> .eww</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After selecting, IAR will open a workspace from a template and save
+it in a new folder.  It is important to create this IAR workspace folder directly
+inside the &lt;SDK_INSTALL_DIR&gt; in order for the project to build properly.  Do
+not use spaces in the folder name.</p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>This workspace file is for the zc_light project. When selected, the
+files associated with the workspace become visible in the Workspace pane on the
+left side of the screen.</p>
+</div>
+<div class="section" id="sec-compiling-linking-iar">
+<span id="id2"></span><h3>Build and Download Project<a class="headerlink" href="#sec-compiling-linking-iar" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Build the zc_light project.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Set the zc_light project as the active project. Make sure the Debug project
+configuration is used.</p></li>
+<li><p>Select <strong>Project</strong> → <strong>Make</strong> to build the project.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Erase all Flash memory</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Navigate to <strong>Project</strong> → <strong>Download</strong> → <strong>Erase memory</strong></p></li>
+<li><p>This will delete the NV memory from previous project builds.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Load the zc_light project</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>First choose <strong>Project</strong> → <strong>Options</strong> → <strong>Runtime Checking</strong> →
+<strong>Debugger</strong> → <strong>Driver</strong> from <strong>Emulator</strong> to <strong>TI XDS</strong> if debugging
+with <strong>Project</strong> → <strong>Download and Debug</strong></p></li>
+<li><p>To download without debugging: Select <strong>Project</strong> → <strong>Download</strong> →
+<strong>Download Active Application</strong></p></li>
+<li><p>When the download process is complete, you will see a message that the
+.out file was downloaded to flash memory in the Debug Log.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p>Before beginning execution, open a <strong>PuTTY</strong> terminal window with the following settings:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>UART Param</p></th>
+<th class="head"><p>Default Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Baud Rate</p></td>
+<td><p>115200</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data length</p></td>
+<td><p>8 bits</p></td>
+</tr>
+<tr class="row-even"><td><p>Parity</p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stop bits</p></td>
+<td><p>1 bit</p></td>
+</tr>
+<tr class="row-even"><td><p>Flow Control</p></td>
+<td><p>None</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>When the debugging session opens, click the start button to start execution.
+See the <code class="docutils literal notranslate"><span class="pre">README.html</span></code> for information about using the example application.</p>
+</div>
+<div class="section" id="useful-iar-ide-settings">
+<h3>Useful IAR IDE Settings<a class="headerlink" href="#useful-iar-ide-settings" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="sec-accessing-preprocessor-symbols-iar">
+<span id="id3"></span><h4>Accessing Preprocessor Symbols<a class="headerlink" href="#sec-accessing-preprocessor-symbols-iar" title="Permalink to this headline">¶</a></h4>
+<p>Throughout this document and in the source code, various C preprocessor symbols
+may need to be defined or modified at the project level. Preprocessor symbols
+(also known as Predefined Symbols) are used to enable and disable features and
+set operational values to be considered when the program is compiled. The
+preprocessor symbols are split between project specific preprocessor symbols
+and configuration header preprocessor symbols.</p>
+</div>
+<div class="section" id="sec-configuration-preprocessor-symbols-iar">
+<span id="id4"></span><h4>Project Specific Preprocessor Symbols<a class="headerlink" href="#sec-configuration-preprocessor-symbols-iar" title="Permalink to this headline">¶</a></h4>
+<p>Configurations for a given example project are stored in IAR’s <em>Extra Options</em>
+in the <em>Project Options</em> menu for that project. These are accessed by opening
+the project options by going <strong>Project</strong> → <strong>Options</strong>, in the options pane, go to
+<strong>C/C++ Compiler</strong> in the <strong>Extra Options</strong> tab as shown in
+<a class="reference internal" href="#fig-iar-extra-options-symbols"><span class="std std-numref">Figure 113.</span></a>.</p>
+<div class="figure align-center" id="id17">
+<span id="fig-iar-extra-options-symbols"></span><img alt="../_images/fig-iar-extra-options-symbols.png" src="../_images/fig-iar-extra-options-symbols.png" />
+<p class="caption"><span class="caption-number">Figure 113. </span><span class="caption-text">Extra Options to Define Preprocessor Symbols</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+</div>
+<p>The preprocessor symbols are added in a new line and are preceded by <cite>-D</cite>.  For example:
+to add the compile flag <em>ZCL_READ</em>, <code class="docutils literal notranslate"><span class="pre">-DZCL_READ</span></code> must be added as an extra option.</p>
+<p>A list of the preprocessor symbols which can be added or removed is located in
+<a class="reference external" href="../../../zigbee/zigbee-users-guide.html">Z-Stack User’s Guide</a>: <em>Developing Zigbee Applications</em> → <em>Application Overview</em></p>
+<p>The precompile files can be accessed by the same way as the preprocessor symbols in
+<a class="reference internal" href="#fig-iar-extra-options-symbols"><span class="std std-numref">Figure 113.</span></a></p>
+</div>
+</div>
+</div>
+<div class="section" id="running-the-demo">
+<span id="quick-start-demo"></span><h2>Running the Demo<a class="headerlink" href="#running-the-demo" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>Light &amp; Switch Example</strong> refers to the example applications
+included as part of the TI Z-Stack. This is the first place where developers
+new to TI Z-Stack should start. These examples help developers to quickly get
+familiar with TI Z-Stack and with development tools such as CCS.</p>
+<p>The TI Z-Stack example applications can be modified, built, downloaded, and
+debugged from the desktop version of CCS. With the <strong>Light &amp; Switch</strong> Example running on two separate
+LaunchPads, you can quickly create a Zigbee network. The first LaunchPad™ will
+run the <a class="reference external" href="../../../../examples/rtos/CC26X2R1_LAUNCHXL/zstack/zc_light/README.html">Light Coordinator Example</a>. The second LaunchPad will run the <a class="reference external" href="../../../../examples/rtos/CC26X2R1_LAUNCHXL/zstack/zed_sw/README.html">Switch End Device Example</a>.
+With this configuration, the switch will control the light.</p>
+<p>Use CCS to import and build the two example applications.
+See <a class="reference internal" href="#quick-start-zstack-ccs"><span class="std std-ref">Using TI Z-Stack Projects with CCS</span></a> for instructions on importing, compiling and building
+TI Z-Stack examples. Refer to the example readmes referenced above for instructions
+on running the example applications. To view all
+example application readmes, refer to the <a class="reference external" href="../../../zigbee/zigbee-users-guide.html">Z-Stack User’s Guide</a>.</p>
+</div>
+<div class="section" id="learning-more-about-zigbee-stack">
+<span id="quick-start-learn"></span><h2>Learning more about TI Z-Stack<a class="headerlink" href="#learning-more-about-zigbee-stack" title="Permalink to this headline">¶</a></h2>
+<p>Resources contained in the Learn track of <a class="reference internal" href="#fig-zstack-suggested-workflow"><span class="std std-numref">Figure 101.</span></a> are
+intended for users who are new to TI-RTOS. These modules
+demonstrate how to create custom applications with TI’s Real
+Time Operation System (TI-RTOS) which TI Z-Stack is based on.</p>
+<p><a class="reference external" href="https://dev.ti.com/tirex/nodeContent?node=A__AA78LmvkwjuaUT184Nz.jg__com.ti.SIMPLELINK_ACADEMY_CC13XX_CC26XX_SDK__AfkT0vQ__LATEST">SimpleLink Academy</a> contains Z-Stack modules to help users learn the fundamentals of TI Z-Stack and how
+to develop a custom Zigbee product. TI-RTOS modules demonstrate the rich debug environment and
+peripheral driver capability provided by the RTOS.  It also provides a comprehensive set of
+other training tools that allow users from beginners to experienced developers to learn about
+the SimpleLink MCU Platform.</p>
+<p><a class="reference external" href="https://training.ti.com/ti-rtos-kernel-workshop">TI-RTOS Kernel Workshop</a>
+teaches users who are new to TI-RTOS or any RTOS programming in
+general about TI-RTOS kernel implementation. Modules within the kernel training
+greatly expand the information presented in the TI-RTOS overview section of the
+<a class="reference external" href="../../../zigbee/zigbee-users-guide.html">Z-Stack User’s Guide</a>.</p>
+<p>Learn how the TI-RTOS provides the most optimal power management and design
+flexibility with the
+<a class="reference external" href="https://training.ti.com/ti-rtos-power-manager-overview">TI-RTOS Power Manager Overview</a>.</p>
+</div>
+<div class="section" id="developing-a-new-zigbee-stack-based-application">
+<span id="quick-start-develop"></span><h2>Developing a new TI Z-Stack Based Application<a class="headerlink" href="#developing-a-new-zigbee-stack-based-application" title="Permalink to this headline">¶</a></h2>
+<p>The develop track of <a class="reference internal" href="#fig-zstack-suggested-workflow"><span class="std std-numref">Figure 101.</span></a> is intended for
+programmers who are ready to start developing an end product using the
+CC13xx or CC26xx.  To begin:</p>
+<ol class="arabic simple">
+<li><p><strong>Download and install the SDK</strong>.
+The <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> contains the TI-RTOS kernel, peripheral drivers and stacks
+needed with the TI Z-Stack.</p></li>
+<li><p><strong>Begin Development with an Integrated Development Environment (IDE).</strong>
+An IDE can be set up to make it easier to
+browse through the relevant projects and view code. All embedded software
+for the CC13xx or CC26xx is developed using TI’s Code Composer Studio on a Windows
+7® or later PC. To begin development in CCS, jump to:
+<a class="reference internal" href="#quick-start-zstack-ccs"><span class="std std-ref">Using TI Z-Stack Projects with CCS</span></a>.</p></li>
+<li><p><strong>Complete the Project Zero SimpleLink Academy Lab</strong>
+The TI Z-Stack <a class="reference external" href="https://dev.ti.com/tirex/nodeContent?node=A__AA78LmvkwjuaUT184Nz.jg__com.ti.SIMPLELINK_ACADEMY_CC13XX_CC26XX_SDK__AfkT0vQ__LATEST">SimpleLink Academy</a> includes a Project Zero Lab which helps introduce
+users to the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> and Zigbee basics through step-by-step instructions for
+programming LaunchPads, setting up a Zigbee Network, and sniffing OTA messages.</p></li>
+<li><p><strong>Get Familiar with the Z-Stack User’s Guide.</strong>
+The <a class="reference external" href="../../../zigbee/zigbee-users-guide.html">Z-Stack User’s Guide</a> is meant to be used alongside the
+TI Z-Stack when developing an end product. It contains documentation on the
+stack architecture, APIs, and suggestions for developing applications.</p></li>
+<li><p><strong>Select an Example Project.</strong>
+TI Z-Stack includes a basic set of projects to use as a starting point
+for development of your custom application. To view examples applications
+available in TI Z-Stack, refer to the <a class="reference external" href="../../../zigbee/zigbee-users-guide.html">Z-Stack User’s Guide</a>.</p></li>
+<li><p><strong>Troubleshooting Help.</strong>
+While developing your custom application, you may run into issues that
+require the use of packet sniffer software or IDE debugger.
+The Debugging chapter of the <a class="reference external" href="../../../zigbee/zigbee-users-guide.html">Z-Stack User’s Guide</a> provides
+help with configuring your debugger and understanding common problems while the
+Packet Sniffer chapter explains how to run software for recording OTA activity.</p></li>
+</ol>
+</div>
+<div class="section" id="enhance-your-project">
+<span id="quick-start-enhance"></span><h2>Enhance Your Project<a class="headerlink" href="#enhance-your-project" title="Permalink to this headline">¶</a></h2>
+<p>The enhance track of <a class="reference internal" href="#fig-zstack-suggested-workflow"><span class="std std-numref">Figure 101.</span></a> is intended to take your
+product to the next level by leveraging TI’s web-based collateral. Additional
+resources found in these pages include application-specific source code
+examples and complete sub-system designs. Examples of system designs with
+complete hardware and software examples using the CC13xx or CC26xx are contained in
+<a class="reference external" href="http://www.ti.com/lsds/ti/tools-software/tidesigns.page">TI Designs</a>.</p>
+<p>The <a class="reference external" href="http://www.nxtbook.com/nxtbooks/webcom/zigbee_rg2017/">Zigbee Resource Guide</a>
+is a magazine-style guide with products, applications, and solutions for end-users.</p>
+</div>
+<div class="section" id="getting-support">
+<span id="quick-start-support"></span><h2>Getting Support<a class="headerlink" href="#getting-support" title="Permalink to this headline">¶</a></h2>
+<p>The support track is intended to provide you additional help and resources
+that aren’t contained in the previous tracks.</p>
+<p><a class="reference external" href="http://e2e.ti.com/">E2E™</a> is a support community providing answers to questions relating
+to the TI Z-Stack and the CC13xx or CC26xx. You can browse questions from other developers or ask your
+own questions if you run into issues developing with the TI Z-Stack.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="proprietary-rf-quick-start.html" class="btn btn-neutral float-left" title="Proprietary RF Quick Start Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dmm-quick-start.html" class="btn btn-neutral float-right" title="Dynamic Multi-protocol Manager Quick Start Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

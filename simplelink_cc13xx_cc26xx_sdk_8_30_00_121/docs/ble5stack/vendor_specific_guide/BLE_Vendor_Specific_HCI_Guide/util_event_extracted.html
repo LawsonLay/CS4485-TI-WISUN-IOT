@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UTIL_GetMemStats &mdash; Vendor Specific Guide 5.00.00 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Vendor Specific Guide
+          </a>
+              <div class="version">
+                5.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hci_interface.html">HCI Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="att_api.html">ATT Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gap_api.html">GAP Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gapbondmgr_api.html">GapBondMgr Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gatt_api.html">GATT Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hci_ext_api.html">HCI Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="l2cap_api.html">L2CAP Extension Vendor Specific API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util_api.html">UTIL Extension Vendor Specific API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Vendor Specific Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>UTIL_GetMemStats</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="util-getmemstats">
+<h1>UTIL_GetMemStats<a class="headerlink" href="#util-getmemstats" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Opcode<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0x0681</p>
+</dd>
+<dt class="field-even">Event Description<span class="colon">:</span></dt>
+<dd class="field-even"><p>This event displays memory statistics for debugging.</p>
+</dd>
+</dl>
+<p><strong>Event Parameters</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Status<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><p>See Status Table</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Module<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>HCI TL</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>Host TL</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">cmdID<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Size<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1 byte(s)</p>
+</dd>
+<dt class="field-even">Range<span class="colon">:</span></dt>
+<dd class="field-even"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>Light Heap Statistic</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>Full Heap Statistic (requieres HEAPMGR_METRICS)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>Thread usage Statistic (requieres HEAPMGR_METRICS)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">cmdID<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x01) == 0x01)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>Light Heap Statistic</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>Full Heap Statistic (requieres HEAPMGR_METRICS)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>Thread usage Statistic (requieres HEAPMGR_METRICS)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Heap Size<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x01) == 0x01)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>4 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">Heap Size Free<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x01) == 0x01)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>4 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">Biggest free buffer Available<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x01) == 0x01)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>4 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">cmdID<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x02) == 0x02)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>Light Heap Statistic</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>Full Heap Statistic (requieres HEAPMGR_METRICS)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>Thread usage Statistic (requieres HEAPMGR_METRICS)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Heap Fail number<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x02) == 0x02)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>2 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">Heap Allocated<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x02) == 0x02)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>4 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">Heap Max Allocated<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x02) == 0x02)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>4 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">cmdID<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x04) ==0x04)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>Light Heap Statistic</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>Full Heap Statistic (requieres HEAPMGR_METRICS)</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>Thread usage Statistic (requieres HEAPMGR_METRICS)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Number of Thread<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x04) ==0x04)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+</dl>
+<p>An array of size “Count” will be returned containing the parameters starting here:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x04) ==0x04)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">Handle<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x04) ==0x04)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>2 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">max Stack used<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x04) ==0x04)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>2 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+<dt class="field-even">stack size<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="field-list simple">
+<dt class="field-odd">Condition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>( (cmdID &amp; 0x04) ==0x04)</p>
+</dd>
+<dt class="field-even">Size<span class="colon">:</span></dt>
+<dd class="field-even"><p>2 byte(s)</p>
+</dd>
+<dt class="field-odd">Range<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd>
+</dl>
+<p>The array of parameters ends here.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright &amp;copy; Copyright 1995-2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

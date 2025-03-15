@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_clock_p___params" kind="struct" language="C++" prot="public">
+    <compoundname>ClockP_Params</compoundname>
+    <includes refid="_clock_p_8h" local="no">ClockP.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_clock_p___params_1a5bd3c79ea5ac343e0f504b86c76e39c6" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ClockP_Params::startFlag</definition>
+        <argsstring></argsstring>
+        <name>startFlag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Start immediately after instance is created. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/ClockP.h" line="142" column="1" bodyfile="source/ti/drivers/dpl/ClockP.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_clock_p___params_1af92c3f4d44aed9c643128e6049294f94" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ClockP_Params::period</definition>
+        <argsstring></argsstring>
+        <name>period</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Period of clock object. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/ClockP.h" line="143" column="1" bodyfile="source/ti/drivers/dpl/ClockP.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_clock_p___params_1a262d7e91bc0a7f98b23033084e68531c" prot="public" static="no" mutable="no">
+        <type>uintptr_t</type>
+        <definition>uintptr_t ClockP_Params::arg</definition>
+        <argsstring></argsstring>
+        <name>arg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Argument passed to the clock function. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/dpl/ClockP.h" line="144" column="1" bodyfile="source/ti/drivers/dpl/ClockP.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Basic ClockP Parameters. </para>    </briefdescription>
+    <detaileddescription>
+<para>Structure that contains the parameters passed into <ref refid="_clock_p_8h_1a4b5539d012f41ca5d7b158ca99832e63" kindref="member">ClockP_create()</ref> or <ref refid="_clock_p_8h_1a78a546df2ea3d317ddf07236a4d1ab1c" kindref="member">ClockP_construct()</ref> when creating a ClockP instance. The <ref refid="_clock_p_8h_1a666e9ded465c969456e6c4ef95e849f4" kindref="member">ClockP_Params_init()</ref> function should be used to initialize the fields to default values before the application sets the fields manually. The ClockP default parameters are noted in <ref refid="_clock_p_8h_1a666e9ded465c969456e6c4ef95e849f4" kindref="member">ClockP_Params_init()</ref>.</para><para>The default startFlag is false, meaning the user will have to call <ref refid="_clock_p_8h_1ac4a1abafab221d989e19458af7d88a63" kindref="member">ClockP_start()</ref>. If startFlag is true, the clock instance will be started automatically when it is created.</para><para>The default value of period is 0, indicating a one-shot clock object. A non-zero period indicates the clock function will be called periodically at the period rate (in system clock ticks), after the clock is initially started and set to expire with the &apos;timeout&apos; argument. </para>    </detaileddescription>
+    <location file="source/ti/drivers/dpl/ClockP.h" line="141" column="1" bodyfile="source/ti/drivers/dpl/ClockP.h" bodystart="140" bodyend="145"/>
+    <listofallmembers>
+      <member refid="struct_clock_p___params_1a262d7e91bc0a7f98b23033084e68531c" prot="public" virt="non-virtual"><scope>ClockP_Params</scope><name>arg</name></member>
+      <member refid="struct_clock_p___params_1af92c3f4d44aed9c643128e6049294f94" prot="public" virt="non-virtual"><scope>ClockP_Params</scope><name>period</name></member>
+      <member refid="struct_clock_p___params_1a5bd3c79ea5ac343e0f504b86c76e39c6" prot="public" virt="non-virtual"><scope>ClockP_Params</scope><name>startFlag</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

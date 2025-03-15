@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="_driver___init_8h" kind="file" language="C++">
+    <compoundname>Driver_Init.h</compoundname>
+    <includes refid="_a_d_c_8h" local="no">ti/drivers/ADC.h</includes>
+    <incdepgraph>
+      <node id="847">
+        <label>stdbool.h</label>
+      </node>
+      <node id="848">
+        <label>stdint.h</label>
+      </node>
+      <node id="846">
+        <label>ti/drivers/ADC.h</label>
+        <link refid="_a_d_c_8h"/>
+        <childnode refid="847" relation="include">
+        </childnode>
+        <childnode refid="848" relation="include">
+        </childnode>
+      </node>
+      <node id="845">
+        <label>Driver_Init.h</label>
+        <link refid="_driver___init_8h"/>
+        <childnode refid="846" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_driver___init_8h_1aa82097ed1f0645430d93c94b50a0ea63" prot="public" static="no">
+        <name>ADC_INSTANCE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/etc/Driver_Init.h" line="5" column="9" bodyfile="source/etc/Driver_Init.h" bodystart="5" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_a_d_c___params" kindref="compound">ADC_Params</ref></type>
+        <definition>ADC_Params_init &amp; params</definition>
+        <argsstring></argsstring>
+        <name>params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/etc/Driver_Init.h" line="11" column="1" bodyfile="source/etc/Driver_Init.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_driver___init_8h_1a3b7c3847324c258b21d4494cb28928db" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_d_c_8h_1a7447d17264445ab6285ddab2bb794582" kindref="member">ADC_Handle</ref></type>
+        <definition>ADC_Handle adcHandle</definition>
+        <argsstring></argsstring>
+        <name>adcHandle</name>
+        <initializer>= <ref refid="_a_d_c_8h_1a1bfe07e93650e1288ba5fc6acc212c46" kindref="member">ADC_open</ref>( 0 , &amp;<ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/etc/Driver_Init.h" line="15" column="1" bodyfile="source/etc/Driver_Init.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_driver___init_8h_1a9e7f7fb01e763738087472df241a0c78" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>resultUv</definition>
+        <argsstring></argsstring>
+        <name>resultUv</name>
+        <initializer>= <ref refid="_a_d_c_8h_1aa1cd6feaa85ea5409dbe1769586bff20" kindref="member">ADC_convertToMicroVolts</ref>(<ref refid="_driver___init_8h_1a3b7c3847324c258b21d4494cb28928db" kindref="member">adcHandle</ref>, result)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/etc/Driver_Init.h" line="21" column="1" bodyfile="source/etc/Driver_Init.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_driver___init_8h_1adfb40697335cb1c514fa84793cf3d369" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ADC_init</definition>
+        <argsstring>()</argsstring>
+        <name>ADC_init</name>
+        <briefdescription>
+<para>Function to initialize the ADC driver. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function must also be called before any other ADC driver APIs. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/etc/Driver_Init.h" line="8" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_driver___init_8h_1a4a1d7fb78888c72f01527c902e00bd15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ADC_convert</definition>
+        <argsstring>(adcHandle, &amp;result)</argsstring>
+        <name>ADC_convert</name>
+        <param>
+          <type><ref refid="_driver___init_8h_1a3b7c3847324c258b21d4494cb28928db" kindref="member">adcHandle</ref></type>
+        </param>
+        <param>
+          <type>&amp;</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/etc/Driver_Init.h" line="18" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="_driver___init_8h_1ab0355eb89f016af8ca0b02cd1af200a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ADC_close</definition>
+        <argsstring>(adcHandle)</argsstring>
+        <name>ADC_close</name>
+        <param>
+          <type><ref refid="_driver___init_8h_1a3b7c3847324c258b21d4494cb28928db" kindref="member">adcHandle</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/etc/Driver_Init.h" line="23" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;<ref refid="_a_d_c_8h" kindref="compound">ti/drivers/ADC.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Define<sp/>name<sp/>for<sp/>ADC<sp/>index</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>is<sp/>an<sp/>index<sp/>into<sp/>the<sp/>ADC_config[]<sp/>array</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5" refid="_driver___init_8h_1aa82097ed1f0645430d93c94b50a0ea63" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ADC_INSTANCE<sp/><sp/><sp/><sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>One-time<sp/>init<sp/>of<sp/>ADC<sp/>driver</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><ref refid="_driver___init_8h_1adfb40697335cb1c514fa84793cf3d369" kindref="member">ADC_init</ref>();</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Initialize<sp/>optional<sp/>ADC<sp/>parameters</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" refkind="member"><highlight class="normal"><ref refid="struct_a_d_c___params" kindref="compound">ADC_Params</ref><sp/><ref refid="_driver___init_8h_1af93f10d4f7393a01dff58c92f91d8cbc" kindref="member">params</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><ref refid="_a_d_c_8h_1a21df1c0987f5cecb660581ae081c4dc7" kindref="member">ADC_Params_init</ref>(&amp;params);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Open<sp/>ADC<sp/>instance<sp/>for<sp/>usage</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="_driver___init_8h_1a3b7c3847324c258b21d4494cb28928db" refkind="member"><highlight class="normal"><ref refid="struct_a_d_c___config__" kindref="compound">ADC_Handle</ref><sp/><ref refid="_driver___init_8h_1a3b7c3847324c258b21d4494cb28928db" kindref="member">adcHandle</ref><sp/>=<sp/><ref refid="_a_d_c_8h_1a1bfe07e93650e1288ba5fc6acc212c46" kindref="member">ADC_open</ref>(<ref refid="_driver___init_8h_1aa82097ed1f0645430d93c94b50a0ea63" kindref="member">ADC_INSTANCE</ref>,<sp/>&amp;params);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Sample<sp/>the<sp/>analog<sp/>pin</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><ref refid="_driver___init_8h_1a4a1d7fb78888c72f01527c902e00bd15" kindref="member">ADC_convert</ref>(adcHandle,<sp/>&amp;result);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Convert<sp/>the<sp/>sample<sp/>to<sp/>microvolts</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="_driver___init_8h_1a9e7f7fb01e763738087472df241a0c78" refkind="member"><highlight class="normal"><ref refid="_driver___init_8h_1a9e7f7fb01e763738087472df241a0c78" kindref="member">resultUv</ref><sp/>=<sp/><ref refid="_a_d_c_8h_1aa1cd6feaa85ea5409dbe1769586bff20" kindref="member">ADC_convertToMicroVolts</ref>(adcHandle,<sp/>result);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><ref refid="_driver___init_8h_1ab0355eb89f016af8ca0b02cd1af200a0" kindref="member">ADC_close</ref>(adcHandle);</highlight></codeline>
+    </programlisting>
+    <location file="source/etc/Driver_Init.h"/>
+  </compounddef>
+</doxygen>

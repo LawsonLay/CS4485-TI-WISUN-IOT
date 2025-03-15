@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wi-SUN Network Topology Management &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="TI Wi-SUN FAN NWP Interface Guide" href="NWP_interface.html" />
+    <link rel="prev" title="Advanced TI Wi-SUN FAN Stack Features" href="advanced-wisun-features.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug wisun-guide network-management";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wisun-index.html">TI Wi-SUN FAN Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced-wisun-features.html">Advanced TI Wi-SUN FAN Stack Features</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Wi-SUN Network Topology Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mac-filterlist">MAC filterlist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pan-id-allow-deny-list">PAN ID allow/deny list</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NWP_interface.html">TI Wi-SUN FAN NWP Interface Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wisun-oad-index.html">MCUBoot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration-guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Wi-SUN Network Topology Management</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="wi-sun-network-topology-management">
+<span id="sec-network-management"></span><h1>Wi-SUN Network Topology Management<a class="headerlink" href="#wi-sun-network-topology-management" title="Permalink to this headline">¶</a></h1>
+<p>In a typical Wi-SUN FAN network deployment, the nodes are allowed to join the
+border router’s network and the most optimal network is formed automatically. But
+in certain use-cases (typically in a test scenario) where the user wants to control
+the topology of the deployed network, the user can leverage the features provided in
+TI Wi-SUN FAN stack examples to form a network of required topology.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>During deployment of a Wi-SUN network, it is recommended to allow the nodes to form
+the Wi-SUN network on their own without any filter lists, so that they form the
+most optimal network.</p>
+</div>
+<p>There are three features that allow the user to control the network topology.
+Two of them (MAC filterlist, PAN ID list) are Wi-SUN FAN compliant and
+are described in this section.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <a class="reference internal" href="advanced-wisun-features.html#join-to-specific-border-router-eui-based-controlled-device-joining"><span class="std std-ref">Join to Specific Border Router/EUI based Controlled Device Joining</span></a>
+feature also allows topology control but is not Wi-SUN compliant and is
+described under Advanced TI Wi-SUN FAN Stack Features section.</p>
+</div>
+<div class="section" id="mac-filterlist">
+<h2>MAC filterlist<a class="headerlink" href="#mac-filterlist" title="Permalink to this headline">¶</a></h2>
+<p>MAC filtering can be used to force Wi-SUN nodes to communicate with other Wi-SUN
+nodes of specific MAC addresses. By limiting the potential neighbours of a node,
+you can force hops in a small network and test your application when there are
+hops in the network. This allows you to perform tests on how the number of hops,
+affect your application.</p>
+<p>This feature can be used in the ns_br (border router) and ns_node (router node)
+projects through pyspinel. Pyspinel help command will provide an example usage.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-wisun-help-macfilter"></span><img alt="../_images/helpmacfilterlist.png" src="../_images/helpmacfilterlist.png" />
+<p class="caption"><span class="caption-number">Figure 32. </span><span class="caption-text">Pyspinel help for macfilterlist</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>To get the MAC address of the device, you can use UniFlash. Under Settings and
+Utilities, it is the primary IEEE address. While using the address in the macfilter APIs,
+remove the ‘:’ damarcators from the address.</p>
+<div class="figure align-center" id="id3">
+<span id="fig-wisun-macaddress-uniflash"></span><img alt="../_images/mac_address_uniflash.PNG" src="../_images/mac_address_uniflash.PNG" />
+<p class="caption"><span class="caption-number">Figure 33. </span><span class="caption-text">Mac Address of device on UniFlash</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>Alternatively, you can use the <cite>hwaddress</cite> API on pyspinel to get the MAC address of
+the device.</p>
+<div class="figure align-center" id="id4">
+<span id="fig-wisun-macaddress-pyspinel"></span><img alt="../_images/mac_address_pyspinel.PNG" src="../_images/mac_address_pyspinel.PNG" />
+<p class="caption"><span class="caption-number">Figure 34. </span><span class="caption-text">Mac Address of device on PySpinel</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>An example use-case of the MAC filterlist is depicted below.</p>
+<p>The following network topology is enforced by strategically allowing the nodes
+to communicate to only specific neighbours.</p>
+<p>Consider the border router (BR) and router nodes (RN) A, B and C.
+We can force a topology where node C joins the network through node B,
+which in turn joins through node A. The following image depicts the achieved
+topology with the MAC filter applied on the devices.</p>
+<div class="figure align-center" id="id5">
+<span id="fig-wisun-macfilter-list"></span><img alt="../_images/macfilterlist.png" src="../_images/macfilterlist.png" />
+<p class="caption"><span class="caption-number">Figure 35. </span><span class="caption-text">Forcing hops using Macfilterlist feature</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>The border router has only router node A in its allow list. This allows border
+router to talk only with router node A. Router node A can talk to the border router and
+RN B.RN B is allowed to communicate with RN A and RN C. And RN C can only communicate
+with RN B.</p>
+<p>This forces all the communication between border router and router node C to pass
+through router node B and A.</p>
+<p>Some things to note when using the mac filter list feature:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>The macfilter lists must be applied before the interface and stack is brought
+up. This means that macfilter lists must be updated before <cite>interface up</cite> and
+<cite>wisunstack start</cite> is called on pyspinel.</p></li>
+<li><p>Mac filter lists get erased on a reset and must be applied again
+before the stack is brought up.</p></li>
+<li><p>Each node has its own MAC filter list. This is not something that is maintained at
+the border router.</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="pan-id-allow-deny-list">
+<h2>PAN ID allow/deny list<a class="headerlink" href="#pan-id-allow-deny-list" title="Permalink to this headline">¶</a></h2>
+<p>PAN ID allow/deny list is a list of network PAN IDs that a coap node is allowed
+to join or blocked from joining. Each coap node has its allow list/deny list.
+In a deployment scenario where you want specific router nodes to join the network (PAN)
+of a specific border router, then you can use the PAN ID allow/deny list feature.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>PAN ID allow/deny list only works with the CoAP node example. You need to build
+the projects with COAP_PANID_LIST predefine to use this functionality.
+Pyspinel is used on the host side to update the allow/deny lists.
+The feature is implemented in the application layer.
+The decision to allow/deny a node happens once the node joins the network.
+If the node is allowed to stay, there is no effect. If the node is not allowed,
+it triggers a rediscover and the node searches for a new PAN.</p>
+</div>
+<p>There are two approaches to make use of this feature.
+The first approach is to maintain a JSON file with the MAC addresses of the coap nodes
+and its corresponding allow/deny lists. This JSON file is supplied to the border
+router through <cite>setpanidlistjson</cite> API on pyspinel.</p>
+<p>When a new coap node built with the predefined symbol COAP_PANID_LIST, joins the
+network, the border router looks up the MAC address of the joined node in the supplied list
+in the json file. If the address of the node exists, it sends the allow/deny list of
+the node as a CoAP packet and the node updates its allow/deny lists.
+Then the node checks if the panid of the current network it has joined, is on the
+allow list or not. If it is not, then it triggers a rediscover.</p>
+<blockquote>
+<div><div class="figure align-center" id="id6">
+<p class="plantuml">
+<img src="../_images/plantuml-0e2d42257f8bb46da078e533d51dd0243b770815.png" alt=" &#64;startuml
+ participant &quot;CoAP Node&quot;
+ participant &quot;Border Router&quot;
+ group CoAP Node joins Border Router PAN
+ end
+ &quot;CoAP Node&quot; -&gt; &quot;Border Router&quot; : Request PAN ID allow/list from Border Router
+  rnote over &quot;Border Router&quot;
+  Look up MAC address of joined node
+  in json file and retrieve the PAN ID list
+  of joined node
+  end note
+
+ &quot;CoAP Node&quot; &lt;-- &quot;Border Router&quot; : PAN ID allow/deny list from Border Router to CoAP Node
+  rnote over &quot;CoAP Node&quot;
+  Update its PAN ID lists and
+  Check if PAN ID of current network is in allow list
+  end note
+ &quot;CoAP Node&quot; -&gt; &quot;Border Router&quot; : Notify Border Router that rediscover is not necessary
+
+ &#64;enduml"/>
+</p>
+<p class="caption"><span class="caption-number">Figure 36. </span><span class="caption-text">Join process when PAN ID is in allow list of node</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-center" id="id7">
+<p class="plantuml">
+<img src="../_images/plantuml-31d6914b7609c882b229d52c857a653138312e1c.png" alt=" &#64;startuml
+ participant &quot;CoAP Node&quot;
+ participant &quot;Border Router (BR)&quot;
+ group CoAP Node joins Border Router PAN
+ end
+ &quot;CoAP Node&quot; -&gt; &quot;Border Router (BR)&quot; : Request PAN ID allow/deny list from BR
+  rnote over &quot;Border Router (BR)&quot;
+  Look up MAC address of joined node
+  in json file and retrieve the corresponding
+  PAN ID list of joined node
+  end note
+
+ &quot;CoAP Node&quot; &lt;-- &quot;Border Router (BR)&quot; : PAN ID allow/deny list from BR to CoAP Node
+  rnote over &quot;CoAP Node&quot;
+  Update its PAN ID lists and check if
+  PAN ID of current network is in allow list
+  of the node
+  end note
+ &quot;CoAP Node&quot; -&gt; &quot;Border Router (BR)&quot; : Notify BR that rediscover is necessary
+ &quot;CoAP Node&quot; -&gt; &quot;CoAP Node&quot; : Trigger PAN rediscover
+  rnote over &quot;CoAP Node&quot;
+  Look for new PANs and
+  restart join process with a new BR
+  end note
+
+ &#64;enduml"/>
+</p>
+<p class="caption"><span class="caption-number">Figure 37. </span><span class="caption-text">Join process when PAN ID is in deny list of node</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+<p>The second approach is useful if you haven’t maintained a JSON file with allow/deny lists.
+You can update the PAN ID allow/deny lists of a specific node with <cite>setpanidlist</cite>
+API on pyspinel.You can retrieve the PAN ID lists from the nodes with the <cite>getpanidlist`</cite> API and
+trigger a PAN rediscover of the node through <cite>panrediscover</cite> API.
+Please refer to pyspinel help for example usage of these APIs.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="advanced-wisun-features.html" class="btn btn-neutral float-left" title="Advanced TI Wi-SUN FAN Stack Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="NWP_interface.html" class="btn btn-neutral float-right" title="TI Wi-SUN FAN NWP Interface Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

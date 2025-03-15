@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="struct_r_n_g___params" kind="struct" language="C++" prot="public">
+    <compoundname>RNG_Params</compoundname>
+    <includes refid="_r_n_g_8h" local="no">RNG.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_r_n_g___params_1a48abd0b97444c80cd43415ed5d584b49" prot="public" static="no" mutable="no">
+        <type><ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17" kindref="member">RNG_ReturnBehavior</ref></type>
+        <definition>RNG_ReturnBehavior RNG_Params::returnBehavior</definition>
+        <argsstring></argsstring>
+        <name>returnBehavior</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Blocking, callback, or polling return behavior </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="535" column="1" bodyfile="source/ti/drivers/RNG.h" bodystart="535" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_r_n_g___params_1a38dd1d40deb45010e36507bdb6365682" prot="public" static="no" mutable="no">
+        <type><ref refid="_r_n_g_8h_1ad5cded400eae369dc7d6a6fbf5f33168" kindref="member">RNG_CryptoKeyCallbackFxn</ref></type>
+        <definition>RNG_CryptoKeyCallbackFxn RNG_Params::cryptoKeyCallbackFxn</definition>
+        <argsstring></argsstring>
+        <name>cryptoKeyCallbackFxn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Callback function to use with <ref refid="_r_n_g_8h_1af0d87cb0f061c45161597771a92f6360" kindref="member">RNG_generateKey()</ref> and RNG_generateKeyInRange(). Set randomBitsCallbackFxn to NULL if using this. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="536" column="1" bodyfile="source/ti/drivers/RNG.h" bodystart="536" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_r_n_g___params_1a56b635e5f67b341fbb0a9e98b5f26e6c" prot="public" static="no" mutable="no">
+        <type><ref refid="_r_n_g_8h_1ac30888d0e097bb5d21872797f43c31fb" kindref="member">RNG_RandomBitsCallbackFxn</ref></type>
+        <definition>RNG_RandomBitsCallbackFxn RNG_Params::randomBitsCallbackFxn</definition>
+        <argsstring></argsstring>
+        <name>randomBitsCallbackFxn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Callback function to use with <ref refid="_r_n_g_8h_1a2ea3a4ebb1fdf9ce8707eb1c75bcf4d4" kindref="member">RNG_getRandomBits()</ref>, <ref refid="_r_n_g_8h_1a10d0f6139e387ca2c2863e52b74fda48" kindref="member">RNG_getLERandomNumberInRange()</ref>, and <ref refid="_r_n_g_8h_1ab886feb4749365da4c820b7a53b06ed3" kindref="member">RNG_getBERandomNumberInRange()</ref>. Set cryptoKeyCallbackFxn to NULL if using this. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="540" column="1" bodyfile="source/ti/drivers/RNG.h" bodystart="540" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_r_n_g___params_1acb1811e8008c9d1f718ebae9484a8de7" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t RNG_Params::timeout</definition>
+        <argsstring></argsstring>
+        <name>timeout</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Timeout (in ClockP ticks) before the driver returns an error in <ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17aea00815364b26007576f615660b49ffa" kindref="member">RNG_RETURN_BEHAVIOR_BLOCKING</ref> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/RNG.h" line="545" column="1" bodyfile="source/ti/drivers/RNG.h" bodystart="545" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>RNG Parameters. </para>    </briefdescription>
+    <detaileddescription>
+<para>RNG Parameters are used with the <ref refid="_r_n_g_8h_1a05443f21d6827a6524f936ecc96736ca" kindref="member">RNG_open()</ref> call. Default values for these parameters are set using <ref refid="_r_n_g_8h_1a2d222b0cdeac690905f6be9df444e23f" kindref="member">RNG_Params_init()</ref>.</para><para><simplesect kind="attention"><para>When using the driver in <ref refid="_r_n_g_8h_1a4593445fc926069c4b1f40e288f49a17a89864eea2d3bf5da6902f34f9f2f0dca" kindref="member">RNG_RETURN_BEHAVIOR_CALLBACK</ref>, set the appropriate callback function field to point to a valid callback function and set the other one to NULL.</para></simplesect>
+<simplesect kind="see"><para><ref refid="_r_n_g_8h_1a2d222b0cdeac690905f6be9df444e23f" kindref="member">RNG_Params_init()</ref> </para></simplesect>
+</para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="1488">
+        <label>RNG_Params</label>
+        <link refid="struct_r_n_g___params"/>
+        <childnode refid="1489" relation="usage">
+          <edgelabel>cryptoKeyCallbackFxn</edgelabel>
+          <edgelabel>randomBitsCallbackFxn</edgelabel>
+        </childnode>
+      </node>
+      <node id="1489">
+        <label>RNG_Config</label>
+        <link refid="struct_r_n_g___config"/>
+      </node>
+    </collaborationgraph>
+    <location file="source/ti/drivers/RNG.h" line="534" column="1" bodyfile="source/ti/drivers/RNG.h" bodystart="533" bodyend="548"/>
+    <listofallmembers>
+      <member refid="struct_r_n_g___params_1a38dd1d40deb45010e36507bdb6365682" prot="public" virt="non-virtual"><scope>RNG_Params</scope><name>cryptoKeyCallbackFxn</name></member>
+      <member refid="struct_r_n_g___params_1a56b635e5f67b341fbb0a9e98b5f26e6c" prot="public" virt="non-virtual"><scope>RNG_Params</scope><name>randomBitsCallbackFxn</name></member>
+      <member refid="struct_r_n_g___params_1a48abd0b97444c80cd43415ed5d584b49" prot="public" virt="non-virtual"><scope>RNG_Params</scope><name>returnBehavior</name></member>
+      <member refid="struct_r_n_g___params_1acb1811e8008c9d1f718ebae9484a8de7" prot="public" virt="non-virtual"><scope>RNG_Params</scope><name>timeout</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

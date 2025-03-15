@@ -1,0 +1,262 @@
+Thread Synchronization
+----------------------
+
+The |TIRTOS| kernel provides several modules for synchronizing tasks such as
+Semaphore, Event, and Queue. The following sections discuss these common
+|TIRTOS| primitives.
+
+.. _sec-rtos-semaphores:
+
+Semaphores
+^^^^^^^^^^
+
+Semaphores are commonly used for task synchronization and mutual exclusions
+throughout |TIRTOS| applications. :numref:`fig-semaphore` shows the semaphore
+functionality. Semaphores can be counting semaphores or binary semaphores.
+Counting semaphores keep track of the number of times the semaphore is posted
+with ``Semaphore_post()``. When a group of resources are shared between tasks,
+this function is useful. Such tasks might call ``Semaphore_pend()`` to see if a
+resource is available before using one. Binary semaphores can have only two
+states: available (count = 1) and unavailable (count = 0). Binary semaphores
+can be used to share a single resource between tasks or for a basic-signaling
+mechanism where the semaphore can be posted multiple times. Binary semaphores
+do not keep track of the count; they track only whether the semaphore has been
+posted.
+
+.. _fig-semaphore:
+.. figure:: resources/fig-semaphore.jpg
+    :align: center
+
+    Semaphore Functionality
+
+Initializing a Semaphore
+""""""""""""""""""""""""
+
+The following code depicts how a semaphore is initialized in |TIRTOS|.
+Semaphores can be *created* and *constructed* as explained in
+:ref:`create_vs_construct`.
+
+See :numref:`create-example-listing` on how to create a Semaphore.
+
+See :numref:`construct-example-listing` on how to construct a Semaphore.
+
+Pending on a Semaphore
+""""""""""""""""""""""
+
+``Semaphore_pend()`` is a blocking function call. This call may only be called
+from within a Task context. A task calling this function will allow lower
+priority tasks to execute, if they are ready to run. A task calling
+``Semaphore_pend()`` will block if its counter is 0, otherwise it will
+decrement the counter by one. The task will remain blocked until another thread
+calls ``Semaphore_post()`` or if the supplied system tick timeout has occurred;
+whichever comes first. By reading the return value of ``Semaphore_pend()`` it
+is possible to distinguish if a semaphore was posted or if it timed out.
+
+.. _pending-semaphore-listing:
+.. code-block:: c
+    :linenos:
+    :caption: Pending on a Semaphore
+    :emphasize-lines: 5
+
+    bool isSuccessful;
+    uint32_t timeout = 1000 * (1000/Clock_tickPeriod);
+
+    /* Pend (approximately) up to 1 second */
+    isSuccessful = Semaphore_pend(sem, timeoutInTicks);
+
+    if (isSuccessful)
+    {
+        System_printf("Semaphore was posted");
+    }
+    else
+    {
+        System_printf("Semaphore timed out");
+    }
+
+.. ifconfig:: device in ['cc13x0', 'cc2640']
+
+    The following example shows the
+    minimum resolution is the TI-RTOS clock tick period set in the TI-RTOS
+    configuration file (``.cfg``).
+
+    .. note::
+        The default TI-RTOS kernel tick period is 1 millisecond. For |DEVICE|
+        devices, this is reconfigured in the TI-RTOS configuration file
+        (``.cfg``)::
+
+            Clock.tickPeriod = 10;
+
+.. ifconfig:: device == 'cc13xx_cc26xx'
+
+    The following example shows the
+    minimum resolution of the TI-RTOS clock tick period as configured via
+    SysConfig in the TI-RTOS configuration panel.
+
+    .. note::
+        The default TI-RTOS kernel tick period is 1 millisecond. For |DEVICE|
+        devices, this is reconfigured by SysConfig inside ``TI-RTOS`` |rarr|
+        ``Core Kernel`` |rarr| ``Clock``, where
+        ``Clock Tick Period in microseconds`` is set to 10.
+
+Posting a Semaphore
+"""""""""""""""""""
+
+Posting a semaphore is accomplished via a call to ``Semaphore_post()``. A task
+that is pending on a posted semaphore will transition from a *blocked* state to
+a *ready* state. If no higher priority thread is *ready* to run, it will allow
+the previously pending task to execute. If no task is pending on the semaphore,
+a call to ``Semaphore_post()`` will increment its counter. Binary semaphores
+have a maximum count of 1.
+
+.. _posting-semaphore-listing:
+.. code-block:: c
+    :linenos:
+    :caption: Posting a Semaphore
+    :emphasize-lines: 1
+
+    Semaphore_post(sem);
+
+.. _sec-rtos-overview-event:
+
+Event
+^^^^^
+
+Semaphores themselves provide rudimentary synchronization between threads.
+There are cases just the Semaphore itself is enough to understand on what
+process needs to be triggered. Often however, a specific causes for the
+synchronization need to be passed across threads as well. To help accomplish
+this, one can utilize the |TIRTOS| **Event** module.
+
+Events are similar to Semaphores in a sense that each instance of an Event
+object actually contains a Semaphore. The added advantage of using Events lie
+in the fact that tasks can be notified of specific events in a thread-safe
+manner.
+
+Initializing an Event
+"""""""""""""""""""""
+
+*Creating* and *constructing* Events follow the same guidelines as explained in
+:ref:`create_vs_construct`. Shown in :numref:`event-initialize-listing` is an
+example on how to *construct* an Event instance.
+
+.. _event-initialize-listing:
+.. code-block:: c
+    :linenos:
+    :caption: Constructing an Event
+    :emphasize-lines: 6
+
+    Event_Handle event;
+    Event_Params eventParams;
+    Event_Struct structEvent; /* Memory allocated at build time */
+
+    Event_Params_init(&eventParams);
+    Event_construct(&structEvent, 0, &eventParams);
+
+    /* It's optional to store the handle */
+    event = Event_handle(&structEvent);
+
+Pending on an Event
+"""""""""""""""""""
+
+Similar to ``Semaphore_pend()``, a Task thread would typically block on an
+``Event_pend()`` until an event is posted via an ``Event_post()`` or if the
+specified timeout expired. Shown in :numref:`pending-event-listing` is a
+snippet of a task pending on *any* of the 3 sample event IDs shown below.
+``BIOS_WAIT_FOREVER`` is used to prevent a timeout from occurring. As a result,
+``Event_pend()`` will have one or more events posted in the returned bit-masked
+value.
+
+Each event returned from ``Event_pend()`` has been automatically cleared within
+the event instance in a thread-safe manner. Therefore, it is only necessary to
+keep a local copy of posted events. For full details on how to use
+``Event_pend()``, see the |TI-RTOS_UG|.
+
+.. _pending-event-listing:
+.. code-block:: c
+    :linenos:
+    :caption: Pending on an Event
+    :emphasize-lines: 8, 13-18
+
+    #define START_ADVERTISING_EVT         Event_Id_00
+    #define START_CONN_UPDATE_EVT         Event_Id_01
+    #define CONN_PARAM_TIMEOUT_EVT        Event_Id_02
+
+    void TaskFxn(..)
+    {
+        /* Local copy of events that have been posted */
+        uint32_t events;
+
+        while(1)
+        {
+            /* Wait for an event to be posted */
+            events = Event_pend(event,
+                                Event_Id_NONE,
+                                START_ADVERTISING_EVT |
+                                START_CONN_UPDATE_EVT |
+                                CONN_PARAM_TIMEOUT_EVT,
+                                BIOS_WAIT_FOREVER);
+
+            if (events & START_ADVERTISING_EVT)
+            {
+                /* Process this event */
+            }
+
+            if (events & START_CONN_UPDATE_EVT)
+            {
+                /* Process this event */
+            }
+
+            if (events & CONN_PARAM_TIMEOUT_EVT)
+            {
+                /* Process this event */
+            }
+        }
+    }
+
+.. ifconfig:: device in ['cc13x0', 'cc2640']
+
+    The following example shows the
+    minimum resolution is the TI-RTOS clock tick period set in the TI-RTOS
+    configuration file (``.cfg``).
+
+    .. note::
+        The default TI-RTOS kernel tick period is 1 millisecond. For |DEVICE|
+        devices, this is reconfigured in the TI-RTOS configuration file
+        (``.cfg``)::
+
+            Clock.tickPeriod = 10;
+
+.. ifconfig:: device == 'cc13xx_cc26xx'
+
+    The following example shows the
+    minimum resolution of the TI-RTOS clock tick period as configured via
+    SysConfig in the TI-RTOS configuration panel.
+
+    .. note::
+        The default TI-RTOS kernel tick period is 1 millisecond. For |DEVICE|
+        devices, this is reconfigured by SysConfig inside ``TI-RTOS`` |rarr|
+        ``Core Kernel`` |rarr| ``Clock``, where
+        ``Clock Tick Period in microseconds`` is set to 10.
+
+Posting an Event
+""""""""""""""""
+
+Events may be posted from any |TIRTOS| kernel contexts and is simply done by
+calling ``Event_post()`` of the Event instance and the Event ID.
+:numref:`posting-event-listing` shows how a high priority thread such as a Swi
+could post a specific event.
+
+.. _posting-event-listing:
+.. code-block:: c
+    :linenos:
+    :caption: Posting an Event
+    :emphasize-lines: 7
+
+    #define START_ADVERTISING_EVT         Event_Id_00
+    #define START_CONN_UPDATE_EVT         Event_Id_01
+    #define CONN_PARAM_TIMEOUT_EVT        Event_Id_02
+
+    void SwiFxn(UArg arg)
+    {
+        Event_post(event, START_ADVERTISING_EVT);
+    }

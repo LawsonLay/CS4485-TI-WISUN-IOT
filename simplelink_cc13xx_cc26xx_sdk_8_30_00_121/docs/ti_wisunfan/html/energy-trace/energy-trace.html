@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EnergyTrace User Guide &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User&#39;s Guide
+ 3.30.00.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Migration Guide" href="../wisun-guide/migration-guide.html" />
+    <link rel="prev" title="Disable SysConfig" href="../sysconfig/sysconfig-disable.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug energy-trace energy-trace";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../wisun-guide/index.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+
+          </a>
+              <div class="version">
+                3.30.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/wisun-quick-start.html">Wi-SUN Stack Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/wisun-index.html">TI Wi-SUN FAN Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/advanced-wisun-features.html">Advanced TI Wi-SUN FAN Stack Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/network-management.html">Wi-SUN Network Topology Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/NWP_interface.html">TI Wi-SUN FAN NWP Interface Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/example-applications.html">Example Application Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/wisun-oad-index.html">MCUBoot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">EnergyTrace User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#energytrace-stand-alone-instructions">EnergyTrace stand-alone Instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#energytrace-instructions">EnergyTrace++ Instructions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#energytrace-update-target-configuration-instructions">EnergyTrace++ Update Target Configuration Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-energytrace-instructions">Using EnergyTrace++ Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-energytrace-with-an-external-target">Using EnergyTrace with an External Target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/migration-guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wisun-guide/references.html#terms-and-acronyms">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../wisun-guide/index.html">
+SimpleLink™ CC13XX/CC26XX SDK
+TI Wi-SUN FAN 1.0 Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../wisun-guide/index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>EnergyTrace User Guide</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="energytrace-user-guide">
+<span id="energytrace-users-guide"></span><h1>EnergyTrace User Guide<a class="headerlink" href="#energytrace-user-guide" title="Permalink to this headline">¶</a></h1>
+<p>EnergyTrace™ technology is a power analyzer tool for CCS that measures
+the application’s current consumption. The tool can be used stand-alone as a
+power profiling tool, or in EnergyTrace++ mode within a debug session for code
+analysis to help optimize the application for ultra-low-power consumption.</p>
+<p>For further information regarding the EnergyTrace Tool, see the
+<a class="reference external" href="https://www.ti.com/tool/ENERGYTRACE">EnergyTrace Tool</a> page. Additionally, please visit further EnergyTrace
+documentation at <a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/xdsdebugprobes/emu_energytrace.html">EnergyTrace overview</a>.</p>
+<div class="section" id="energytrace-stand-alone-instructions">
+<span id="energytrace-standalone-instructions"></span><h2>EnergyTrace stand-alone Instructions<a class="headerlink" href="#energytrace-stand-alone-instructions" title="Permalink to this headline">¶</a></h2>
+<p>The following discusses the necessary steps to use EnergyTrace in
+stand-alone-mode on CC13xx or CC26xx LaunchPad. In stand-alone mode (EnergyTrace mode), the debugger
+is not active and the displayed current consumption is what to expect for the
+final application. As opposed to EnergyTrace++ where the debug interface on the
+device is active and the current consumption from the debugger will be added to
+the displayed current.</p>
+<ol class="arabic">
+<li><p>Flash the target device with the application to be analyzed.</p></li>
+<li><p>Make sure no debug session is active and click the EnergyTrace Button as seen
+in <a class="reference internal" href="#fig-energytrace-standalone-button"><span class="std std-numref">Figure 94.</span></a></p>
+<div class="figure align-center" id="id2">
+<span id="fig-energytrace-standalone-button"></span><img alt="../_images/fig-energytrace-standalone-button.png" src="../_images/fig-energytrace-standalone-button.png" />
+<p class="caption"><span class="caption-number">Figure 94. </span><span class="caption-text">Start EnergyTrace</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>A dialog with instructions on how to use EnergyTrace Stand-alone Measurement
+Mode will pop-up. Click <code class="docutils literal notranslate"><span class="pre">Proceed</span></code> to continue.</p></li>
+<li><p>The first time EnergyTrace is being used within a CCS Workspace some settings
+needs to be set. In the EnergyTrace Window, click on the <code class="docutils literal notranslate"><span class="pre">Advanced</span> <span class="pre">Menu</span></code>
+icon and select <code class="docutils literal notranslate"><span class="pre">Preferences</span></code>, as
+<a class="reference internal" href="#fig-energytrace-preferences-button"><span class="std std-numref">Figure 95.</span></a> shows.</p>
+<div class="figure align-center" id="id3">
+<span id="fig-energytrace-preferences-button"></span><img alt="../_images/fig-energytrace-preferences-button.png" src="../_images/fig-energytrace-preferences-button.png" />
+<p class="caption"><span class="caption-number">Figure 95. </span><span class="caption-text">EnergyTrace Preferences menu</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>Under <code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Connection</span></code>, set <code class="docutils literal notranslate"><span class="pre">Connection</span></code> to <code class="docutils literal notranslate"><span class="pre">XDS110</span></code> and <code class="docutils literal notranslate"><span class="pre">Voltage</span></code>
+to 3300.0 mV. <code class="docutils literal notranslate"><span class="pre">ET-HDR</span> <span class="pre">Range</span> <span class="pre">Selector</span></code> shall be set to <code class="docutils literal notranslate"><span class="pre">Low</span> <span class="pre">current,</span>
+<span class="pre">narrower</span> <span class="pre">range</span> <span class="pre">higher</span> <span class="pre">accuracy</span></code>. If you want to save the captured data to a
+.cvs-file for further analysis, select <code class="docutils literal notranslate"><span class="pre">Raw</span> <span class="pre">data</span> <span class="pre">to</span> <span class="pre">CSV</span> <span class="pre">file</span></code>. You can also
+select the battery cell type the application will be using to get an
+estimated life time of the application. Click <code class="docutils literal notranslate"><span class="pre">Ok</span></code> to save the preferences.</p>
+<div class="figure align-center" id="id4">
+<span id="fig-energytrace-standalone-settings"></span><img alt="../_images/fig-energytrace-standalone-settings.png" src="../_images/fig-energytrace-standalone-settings.png" />
+<p class="caption"><span class="caption-number">Figure 96. </span><span class="caption-text">EnergyTrace Settings</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>Select how long you want to capture data by clicking the <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">Measurement</span>
+<span class="pre">Duration</span></code> button as in <a class="reference internal" href="#fig-energytrace-standalone-time"><span class="std std-numref">Figure 97.</span></a></p>
+<div class="figure align-center" id="id5">
+<span id="fig-energytrace-standalone-time"></span><img alt="../_images/fig-energytrace-standalone-time.png" src="../_images/fig-energytrace-standalone-time.png" />
+<p class="caption"><span class="caption-number">Figure 97. </span><span class="caption-text">Select Measurement Duration</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>To start capturing data, click the green play button.</p>
+<div class="figure align-center" id="id6">
+<span id="fig-energytrace-standalone-start"></span><img alt="../_images/fig-energytrace-standalone-start.png" src="../_images/fig-energytrace-standalone-start.png" />
+<p class="caption"><span class="caption-number">Figure 98. </span><span class="caption-text">Start trace collection</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>When EnergyTrace is finished capturing data, review the application’s power
+profile and have a closer look in the Current
+graph. <a class="reference internal" href="#fig-energytrace-standalone-graph"><span class="std std-numref">Figure 99.</span></a> shows a zoomed-in current
+graph of BLE advertising.</p>
+<div class="figure align-center" id="id7">
+<span id="fig-energytrace-standalone-graph"></span><a class="reference internal image-reference" href="../_images/fig-energytrace-standalone-graph.png"><img alt="../_images/fig-energytrace-standalone-graph.png" src="../_images/fig-energytrace-standalone-graph.png" style="width: 6.0in;" /></a>
+<p class="caption"><span class="caption-number">Figure 99. </span><span class="caption-text">EnergyTrace Current Graph</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="energytrace-instructions">
+<h2>EnergyTrace++ Instructions<a class="headerlink" href="#energytrace-instructions" title="Permalink to this headline">¶</a></h2>
+<p>To run EnergyTrace++, which allows more detailed data regarding power
+consumption, the Target Configuration file must be configured to allow for a
+different debugging interface. Specifically, to use EnergyTrace++, the debugger
+must be set to 4-pin cJTAG mode. The following discusses the necessary steps to
+modify the Target Configuration file and view EnergyTrace++ data on CC13xx or CC26xx LaunchPad.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In EnergyTrace++ mode, the displayed current consists of the
+application current consumption AND the device debugger current
+consumption. Use EnergyTrace stand-alone mode to display only the application
+current consumption.</p>
+</div>
+<div class="section" id="energytrace-update-target-configuration-instructions">
+<span id="energytrace-update-target-conf"></span><h3>EnergyTrace++ Update Target Configuration Instructions<a class="headerlink" href="#energytrace-update-target-configuration-instructions" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>In the CCS, using the Project Explorer, navigate to the <code class="docutils literal notranslate"><span class="pre">targetConfigs</span></code>
+folder.</p></li>
+<li><p>Double click on the <code class="docutils literal notranslate"><span class="pre">*.ccxml</span></code> file to open a configuration menu as seen in
+<a class="reference internal" href="#fig-ccxml-config-menu"><span class="std std-numref">Figure 100.</span></a></p>
+<div class="figure align-default" id="id8">
+<span id="fig-ccxml-config-menu"></span><a class="reference internal image-reference" href="../_images/fig-ccxml-config-menu.png"><img alt="../_images/fig-ccxml-config-menu.png" src="../_images/fig-ccxml-config-menu.png" style="width: 3.0in;" /></a>
+<p class="caption"><span class="caption-number">Figure 100. </span><span class="caption-text">Open .ccxml file</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>On the bottom of the window, navigate to the <code class="docutils literal notranslate"><span class="pre">Advanced</span></code> tab as seen in
+<a class="reference internal" href="#fig-advanced-settings"><span class="std std-numref">Figure 101.</span></a></p>
+<div class="figure align-default" id="id9">
+<span id="fig-advanced-settings"></span><a class="reference internal image-reference" href="../_images/fig-advanced-settings.png"><img alt="../_images/fig-advanced-settings.png" src="../_images/fig-advanced-settings.png" style="width: 3.0in;" /></a>
+<p class="caption"><span class="caption-number">Figure 101. </span><span class="caption-text">Navigate to Advanced Settings Tab</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">Connections</span></code> windows pane, click on the highest level from the
+list tree as seen in <a class="reference internal" href="#fig-connection-properties"><span class="std std-numref">Figure 102.</span></a></p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Connection</span> <span class="pre">Properties</span></code> window pane, modify the <code class="docutils literal notranslate"><span class="pre">JTAG/SWD/cJTAG</span>
+<span class="pre">Mode</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">cJTAG</span> <span class="pre">(1149.7)</span> <span class="pre">4-pin</span> <span class="pre">standard</span> <span class="pre">mode</span></code> from the dropdown
+menu as seen in <a class="reference internal" href="#fig-connection-properties"><span class="std std-numref">Figure 102.</span></a></p>
+<div class="figure align-default" id="id10">
+<span id="fig-connection-properties"></span><a class="reference internal image-reference" href="../_images/fig-connection-properties_updated.png"><img alt="../_images/fig-connection-properties_updated.png" src="../_images/fig-connection-properties_updated.png" style="width: 6.0in;" /></a>
+<p class="caption"><span class="caption-number">Figure 102. </span><span class="caption-text">Configure 4-pin cJTAG Mode</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>After selecting this option, click <code class="docutils literal notranslate"><span class="pre">Save</span></code> in the previous <code class="docutils literal notranslate"><span class="pre">All</span>
+<span class="pre">Connections</span></code> window pane.</p></li>
+<li><p>Close the <code class="docutils literal notranslate"><span class="pre">.ccxml</span></code> file.</p></li>
+</ol>
+</div>
+<div class="section" id="using-energytrace-instructions">
+<h3>Using EnergyTrace++ Instructions<a class="headerlink" href="#using-energytrace-instructions" title="Permalink to this headline">¶</a></h3>
+<p>This section assumes the user has already configured their Target Configuration
+settings to point use <code class="docutils literal notranslate"><span class="pre">cJTAG</span> <span class="pre">(1149.7)</span> <span class="pre">4-pin</span> <span class="pre">standard</span> <span class="pre">mode</span></code> as described in
+the <a class="reference internal" href="#energytrace-update-target-conf"><span class="std std-ref">EnergyTrace++ Update Target Configuration Instructions</span></a> section above.</p>
+<ol class="arabic">
+<li><p>After the Build has successfully completed, <code class="docutils literal notranslate"><span class="pre">Debug</span></code> the project.</p></li>
+<li><p>Open the EnergyTrace Tool by clicking the button seen below in
+<a class="reference internal" href="#fig-energytrace-pp-button"><span class="std std-numref">Figure 103.</span></a></p>
+<div class="figure align-default" id="id11">
+<span id="fig-energytrace-pp-button"></span><a class="reference internal image-reference" href="../_images/fig-energytrace-pp-button.png"><img alt="../_images/fig-energytrace-pp-button.png" src="../_images/fig-energytrace-pp-button.png" style="width: 4.03594in;" /></a>
+<p class="caption"><span class="caption-number">Figure 103. </span><span class="caption-text">Enable EnergyTrace Tool</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>On the far right of the <code class="docutils literal notranslate"><span class="pre">EnergyTrace</span> <span class="pre">Technology</span></code> window, click the
+<code class="docutils literal notranslate"><span class="pre">Switch</span> <span class="pre">to</span> <span class="pre">EnergyTrace++</span></code> button as seen in
+<a class="reference internal" href="#fig-switch-to-energytrace-pp"><span class="std std-numref">Figure 104.</span></a></p>
+<div class="figure align-default" id="id12">
+<span id="fig-switch-to-energytrace-pp"></span><a class="reference internal image-reference" href="../_images/fig-switch-to-energytrace-pp.png"><img alt="../_images/fig-switch-to-energytrace-pp.png" src="../_images/fig-switch-to-energytrace-pp.png" style="width: 6in;" /></a>
+<p class="caption"><span class="caption-number">Figure 104. </span><span class="caption-text">Switch to EnergyTrace++ Mode</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>You should see an additional <code class="docutils literal notranslate"><span class="pre">States</span></code> tab popup.</p></li>
+<li><p>Run the Debug session, click the green arrow button (F8).</p></li>
+<li><p>You should now be able to observe the enhanced EnergyTrace++ details in the
+<code class="docutils literal notranslate"><span class="pre">EnergyTrace</span> <span class="pre">Technology</span></code> and <code class="docutils literal notranslate"><span class="pre">States</span></code> tabs as seen in
+<a class="reference internal" href="#fig-energytrace-pp-tab"><span class="std std-numref">Figure 105.</span></a> and <a class="reference internal" href="#fig-energytrace-pp-tab-states"><span class="std std-numref">Figure 106.</span></a></p></li>
+</ol>
+<div class="figure align-default" id="id13">
+<span id="fig-energytrace-pp-tab"></span><a class="reference internal image-reference" href="../_images/fig-energytrace-pp-tab.png"><img alt="../_images/fig-energytrace-pp-tab.png" src="../_images/fig-energytrace-pp-tab.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Figure 105. </span><span class="caption-text">Sample EnergyTrace++ Tab</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id14">
+<span id="fig-energytrace-pp-tab-states"></span><a class="reference internal image-reference" href="../_images/fig-energytrace-pp-tab-states.png"><img alt="../_images/fig-energytrace-pp-tab-states.png" src="../_images/fig-energytrace-pp-tab-states.png" style="width: 100%;" /></a>
+<p class="caption"><span class="caption-number">Figure 106. </span><span class="caption-text">Sample EnergyTrace++ “States” Tab</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="using-energytrace-with-an-external-target">
+<span id="energytrace-external-target"></span><h2>Using EnergyTrace with an External Target<a class="headerlink" href="#using-energytrace-with-an-external-target" title="Permalink to this headline">¶</a></h2>
+<p>The power profile of an external target can be measured using EnergyTrace and a
+compatible debugger: an XDS110 ETHDR Debug Probe or a CC13xx or CC26xx LaunchPad Kit (the debug
+probe is embedded on the LaunchPad board). In this section, we
+will use a <a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC26x2R1">CC26x2R LaunchPad</a> to measure the power profile of a <a class="reference external" href="https://www.ti.com/product/CC2640R2F">CC2640R2F</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Other types of LaunchPad that include a XDS110 ETHDR Debug Probe may be used
+instead of <a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC26x2R1">CC26x2R LaunchPad</a></p>
+</div>
+<p>Before getting started, make sure the external target is already flashed with
+the application firmware to be tested.</p>
+<p>The following steps are required to use EnergyTrace with an external target:</p>
+<ol class="arabic simple">
+<li><p>Remove all the jumpers from the top row of both LaunchPads as shown in
+<a class="reference internal" href="#fig-energytrace-external-target"><span class="std std-numref">Figure 107.</span></a>.</p></li>
+<li><p>Use jumper wires to supply power to the <a class="reference external" href="https://www.ti.com/product/CC2640R2F">CC2640R2F</a> from the <a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC26x2R1">CC26x2R LaunchPad</a> as
+shown below.</p></li>
+<li><p>At this point, connect only the <a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC26x2R1">CC26x2R LaunchPad</a> to the PC via a USB cable. The
+external target will receive power from the <a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC26x2R1">CC26x2R LaunchPad</a>.</p></li>
+<li><p>Follow the steps in <a class="reference internal" href="#energytrace-standalone-instructions"><span class="std std-ref">EnergyTrace stand-alone Instructions</span></a> to measure the
+power profile of the external target.</p></li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Ensure that only one <a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC26x2R1">CC26x2R LaunchPad</a> is connected to the PC at a time to ensure the
+correct LaunchPad is automatically selected by EnergyTrace.</p>
+</div>
+<div class="figure align-center" id="id15">
+<span id="fig-energytrace-external-target"></span><img alt="../_images/fig-energytrace-external-target.png" src="../_images/fig-energytrace-external-target.png" />
+<p class="caption"><span class="caption-number">Figure 107. </span><span class="caption-text">External Target Hardware Configuration</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+<p>The above diagram shows the hardware setup required to use EnergyTrace to
+measure the power profile of the <a class="reference external" href="https://www.ti.com/product/CC2640R2F">CC2640R2F</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>With the jumpers removed, a 10-pin JTAG cable can be connected to the
+external target for debugging purposes. If UART is required, jumper wires
+should be placed to connect the TX/RX lines of the external target to the
+<a class="reference external" href="https://www.ti.com/tool/LAUNCHXL-CC26x2R1">CC26x2R LaunchPad</a>.</p>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>If EnergyTrace is not able to properly setup remote controls for the
+device, try closing CCS, resetting your Evaluation Board and starting
+again.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../sysconfig/sysconfig-disable.html" class="btn btn-neutral float-left" title="Disable SysConfig" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../wisun-guide/migration-guide.html" class="btn btn-neutral float-right" title="Migration Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

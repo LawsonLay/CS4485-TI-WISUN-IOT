@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Packet Sniffer &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User&#39;s Guide
+ 8.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="System Configuration (SysConfig)" href="../zigbee-guide/sysconfig-index.html" />
+    <link rel="prev" title="Debugging" href="../zigbee-guide/debugging-index.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug zigbee packet_sniffer";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../zigbee-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+
+          </a>
+              <div class="version">
+                8.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">SimpleLink CC13xx/CC26xx SDK Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing_zigbee_applications.html">Developing Zigbee Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/zigbee-ota-index.html">Zigbee Over-The-Air Firmware Upgrade</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Packet Sniffer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id5">Ubiqua Protocol Analyzer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-required-software">Install the Required Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#required-hardware">Required Hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-setup">Hardware Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-packet-sniffer">Running the Packet Sniffer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">Wireshark</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Install the Required Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Required Hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Hardware Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Running the Packet Sniffer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/migration_guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/glossary.html">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../zigbee-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../zigbee-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Packet Sniffer</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="packet-sniffer">
+<h1>Packet Sniffer<a class="headerlink" href="#packet-sniffer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id5">
+<h2>Ubiqua Protocol Analyzer<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-the-required-software">
+<h3>Install the Required Software<a class="headerlink" href="#install-the-required-software" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Download the Ubilogix Ubiqua packet sniffer software from:
+<a class="reference external" href="https://www.ubilogix.com/ubiqua/">https://www.ubilogix.com/ubiqua/</a></p></li>
+<li><p>To get the drivers for the CC2531EMK dongle install the TI Packet sniffer from:
+<a class="reference external" href="http://www.ti.com/tool/packet-sniffer">http://www.ti.com/tool/packet-sniffer</a></p></li>
+<li><p>To program the CC2531EMK install TI Flash Programmer from:
+<a class="reference external" href="http://www.ti.com/tool/flash-programmer">http://www.ti.com/tool/flash-programmer</a></p></li>
+<li><p>To get the drivers for the CC2650/CC2652/CC1352 LaunchPad install the TI Packet sniffer 2 from:
+<a class="reference external" href="http://www.ti.com/tool/packet-sniffer">http://www.ti.com/tool/packet-sniffer</a></p></li>
+<li><p>To program the CC2650/CC2652/CC1352 LaunchPad install UniFlash from:
+<a class="reference external" href="http://www.ti.com/tool/UNIFLASH">http://www.ti.com/tool/UNIFLASH</a></p></li>
+</ul>
+</div>
+<div class="section" id="required-hardware">
+<h3>Required Hardware<a class="headerlink" href="#required-hardware" title="Permalink to this headline">¶</a></h3>
+<p><strong>One of the following boards</strong> should be used:</p>
+<ul class="simple">
+<li><p>TI CC2531EMK USB Dongle: <a class="reference external" href="http://www.ti.com/tool/CC2531USB-RD">http://www.ti.com/tool/CC2531USB-RD</a></p>
+<ul>
+<li><p>(optional for programming CC2531EMK) CC-debugger <a class="reference external" href="http://www.ti.com/tool/cc-debugger">http://www.ti.com/tool/cc-debugger</a></p></li>
+</ul>
+</li>
+<li><p>TI CC2652 Launchpad: <a class="reference external" href="http://www.ti.com/tool/LAUNCHXL-CC26X2R1">http://www.ti.com/tool/LAUNCHXL-CC26X2R1</a></p></li>
+<li><p>TI CC1352 Launchpad: <a class="reference external" href="http://www.ti.com/tool/LAUNCHXL-CC1352R1">http://www.ti.com/tool/LAUNCHXL-CC1352R1</a></p></li>
+<li><p>TI CC1352 PA Launchpad: <a class="reference external" href="http://www.ti.com/tool/LAUNCHXL-CC1352P">http://www.ti.com/tool/LAUNCHXL-CC1352P</a></p></li>
+<li><p>TI CC2650 Launchpad: <a class="reference external" href="http://www.ti.com/tool/LAUNCHXL-CC2650">http://www.ti.com/tool/LAUNCHXL-CC2650</a></p></li>
+</ul>
+</div>
+<div class="section" id="hardware-setup">
+<h3>Hardware Setup<a class="headerlink" href="#hardware-setup" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Connect the CC2531EMK or CC2650/CC2652/CC1352 LaunchPad to the computer with Ubiqua installed.</p></li>
+<li><p>If necessary, program your relevant sniffer hardware.</p>
+<ul>
+<li><p>For CC2531EMK, use the hex
+image <code class="docutils literal notranslate"><span class="pre">sniffer_fw_cc2531.hex</span></code> at <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files</span> <span class="pre">(x86)\Texas</span> <span class="pre">Instruments</span>
+<span class="pre">\SmartRF</span> <span class="pre">Tools\Packet</span> <span class="pre">Sniffer\bin\general\firmware</span></code> and Flash Programmer.</p></li>
+<li><p>To use the CC2531EMK, the Cebal driver must be installed. If you have
+installed Flash Programmer, the Cebal driver should already be installed.
+However, if the driver is not installed, Ubiqua provides the necessary files
+for installing the Cebal driver. The installation files are found under
+<code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files</span> <span class="pre">(x86)\Ubilogix\Drivers\TI\</span></code>, with <code class="docutils literal notranslate"><span class="pre">cebal2.*</span></code> files for 32-bit
+Windows and <code class="docutils literal notranslate"><span class="pre">cebal2_x64.*</span></code> files for 64-bit Windows. Depending on which
+Windows version you are using, refer to a corresponding guide for how to
+install Windows drivers.</p></li>
+<li><p>For CC2650/CC2652/CC1352 LaunchPad, use <code class="docutils literal notranslate"><span class="pre">sniffer_fw.hex</span></code> at <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files</span> <span class="pre">(x86)\Texas</span>
+<span class="pre">Instruments\SmartRF</span> <span class="pre">Tools\SmartRF</span> <span class="pre">Packet</span> <span class="pre">Sniffer</span> <span class="pre">2\sniffer_fw\bin\{your_device}</span></code> and
+UniFlash.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="running-the-packet-sniffer">
+<h3>Running the Packet Sniffer<a class="headerlink" href="#running-the-packet-sniffer" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Connect your sniffing hardware to your PC.</p></li>
+<li><p>Start Ubiqua.</p></li>
+<li><p>Select Menu → Device → Add Device, and the Add Device window will appear.</p>
+<div class="figure align-default" id="id11">
+<img alt="ubiqua add device" src="../_images/fig-ubiqua-add-device1.png" />
+<p class="caption"><span class="caption-number">Figure 133. </span><span class="caption-text">ubiqua add device</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>In the Available Devices column click the Local Devices expander, and select
+your hardware, either the CC2531EMK or the Application COM Port of the CC2650/CC2652/CC1352 LaunchPad.</p></li>
+<li><p>For the CC2531EMK, follow the prompts to add the device. For the CC2650/CC2652/CC1352 LaunchPad, refer to the
+settings below:</p>
+<div class="figure align-default" id="id12">
+<img alt="ubiqua select device" src="../_images/fig-ubiqua-select-device1.png" />
+<p class="caption"><span class="caption-number">Figure 134. </span><span class="caption-text">Ubiqua select device</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>Right click on your device in the Device Manager window, and select the
+Protocol Stack option.</p></li>
+<li><p>Click on the Zigbee checkbox.</p>
+<div class="figure align-default" id="id13">
+<img alt="ubiqua select Zigbee protocol option" src="../_images/fig-ubiqua-select-zigbee-protocol1.png" />
+<p class="caption"><span class="caption-number">Figure 135. </span><span class="caption-text">Ubiqua select Zigbee protocol option</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>Choose the Channel</p>
+<ul class="simple">
+<li><p>In Z-Stack, the channel is set by <code class="code docutils literal notranslate"><span class="pre">DEFAULT_CHANLIST</span></code> in <code class="code docutils literal notranslate"><span class="pre">ti_zstack_config.h</span></code>.
+For details, see <a class="reference internal" href="z-stack-overview.html#z-stack-overview-configuring-channel"><span class="std std-ref">Configuring Channel</span></a>.</p></li>
+</ul>
+<p>From Ubiqua, select Menu → Device Channel, and choose the matching channel:</p>
+<div class="figure align-default" id="id14">
+<img alt="ubiqua select channel" src="../_images/fig-ubiqua-select-channel1.png" />
+<p class="caption"><span class="caption-number">Figure 136. </span><span class="caption-text">Ubiqua channel selection</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>Enter the Default TC Link Key</p>
+<ul class="simple">
+<li><p>In order to decrypt Zigbee traffic, you will need to enter the default Trust Center Link Key
+into the Ubiqua keychain.</p></li>
+</ul>
+<p>From Ubiqua, select Tools → Options → Security → Add → Application or Trust Center Link Key</p>
+<p>Enter the following key:</p>
+<p><code class="docutils literal notranslate"><span class="pre">5a6967426565416c6c69616e63653039</span></code></p>
+<blockquote>
+<div><div class="figure align-default">
+<img alt="ubiqua tc link key entry" src="../_images/fig-ubiqua-tc-linkkey1.png" />
+</div>
+</div></blockquote>
+</li>
+<li><p>Start Capture</p>
+<p>From Ubiqua, Select Menu → Device → Start Device</p>
+<div class="figure align-default" id="id15">
+<img alt="ubiqua start" src="../_images/fig-ubiqua-start-sniff1.png" />
+<p class="caption"><span class="caption-number">Figure 137. </span><span class="caption-text">Starting capture</span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>If required, Select: Menu → View → Traffic View (or other selections) to
+view activity.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>Wireshark<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h3>Install the Required Software<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>TI Packet Sniffer 2 v1.10+:
+<a class="reference external" href="http://www.ti.com/tool/packet-sniffer">http://www.ti.com/tool/packet-sniffer</a></p></li>
+<li><p>Wireshark 4.x:
+<a class="reference external" href="https://www.wireshark.org/#download">https://www.wireshark.org/#download</a></p></li>
+<li><p>To program the CC2650/CC2652/CC1352 LaunchPad install UniFlash from:
+<a class="reference external" href="http://www.ti.com/tool/UNIFLASH">http://www.ti.com/tool/UNIFLASH</a></p></li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3>Required Hardware<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p><strong>One of the following boards</strong> should be used:</p>
+<ul class="simple">
+<li><p>TI CC2652 Launchpad: <a class="reference external" href="http://www.ti.com/tool/LAUNCHXL-CC26X2R1">http://www.ti.com/tool/LAUNCHXL-CC26X2R1</a></p></li>
+<li><p>TI CC1352 Launchpad: <a class="reference external" href="http://www.ti.com/tool/LAUNCHXL-CC1352R1">http://www.ti.com/tool/LAUNCHXL-CC1352R1</a></p></li>
+<li><p>TI CC1352 PA Launchpad: <a class="reference external" href="http://www.ti.com/tool/LAUNCHXL-CC1352P-2">http://www.ti.com/tool/LAUNCHXL-CC1352P-2</a></p></li>
+<li><p>TI CC2650 Launchpad: <a class="reference external" href="http://www.ti.com/tool/LAUNCHXL-CC2650">http://www.ti.com/tool/LAUNCHXL-CC2650</a></p></li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h3>Hardware Setup<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Connect the CC2650/CC2652/CC1352 LaunchPad to the computer with Ubiqua installed
+and determine the correct COM Port for your LaunchPad. It will
+be the “XDS110 Class Application/User UART” port for your device, you can
+determine this in Windows by going to <strong>Device Manager &gt; Ports</strong></p></li>
+<li><p>If necessary, program your relevant sniffer hardware.</p>
+<ul>
+<li><p>For CC2650/CC2652/CC1352 LaunchPads, use <code class="docutils literal notranslate"><span class="pre">sniffer_fw.hex</span></code> at <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files</span> <span class="pre">(x86)\Texas</span> <span class="pre">Instruments</span>
+<span class="pre">\SmartRF</span> <span class="pre">Tools\SmartRF</span> <span class="pre">Packet</span> <span class="pre">Sniffer</span> <span class="pre">2\sniffer_fw\bin\{your_device}</span></code> and
+UniFlash.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h3>Running the Packet Sniffer<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Connect your sniffing hardware to your PC.</p></li>
+<li><p>Start SmartRF Packet Sniffer 2 Sniffer Agent and select <strong>Device Configuration</strong></p>
+<div class="figure align-default">
+<img alt="sniffer agent config" src="../_images/fig-sniffer-agent-config1.png" />
+</div>
+</li>
+<li><p>Select your IEEE channel to sniff</p>
+<blockquote>
+<div><div class="figure align-default">
+<img alt="sniffer agent channel config" src="../_images/fig-sniffer-agent-channel-config1.png" />
+</div>
+</div></blockquote>
+</li>
+<li><p>If your Sniffer Agent looks like this, you are ready to set up Wireshark:</p>
+<div class="figure align-default">
+<img alt="sniffer agent waiting for connection" src="../_images/fig-sniffer-agent-waiting-for-connection1.png" />
+</div>
+</li>
+<li><p>Add the TI 15.4 Wireshark Dissector to Wireshark (assuming x64 installation)</p>
+<p>Navigate to <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files</span> <span class="pre">(x86)\Texas</span> <span class="pre">Instruments\SmartRF</span> <span class="pre">Tools\</span>
+<span class="pre">SmartRF</span> <span class="pre">Packet</span> <span class="pre">Sniffer</span> <span class="pre">2\wireshark\plugins\3.0.x\</span></code> and copy <code class="docutils literal notranslate"><span class="pre">ti802154ge-x64-2x.dll</span></code> and <code class="docutils literal notranslate"><span class="pre">tirpi-x64-2x.dll</span></code>
+to <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files\Wireshark\plugins\3.0\</span></code></p>
+</li>
+<li><p>Open Wireshark go to <strong>Edit &gt; Preferences &gt; Protocols &gt; Zigbee</strong> add the Zigbee TC Link Key</p>
+<p><code class="docutils literal notranslate"><span class="pre">5a6967426565416c6c69616e63653039</span></code></p>
+<div class="figure align-default">
+<img alt="wireshark tc link key" src="../_images/fig-wireshark-tc-link-key1.png" />
+</div>
+</li>
+<li><p>Close Wireshark and create a new Desktop shortcut for Wireshark
+and add the following to the path: <code class="docutils literal notranslate"><span class="pre">-i\\.\pipe\tiwspc_data</span> <span class="pre">-k</span></code></p>
+<p>This will set up the Pipe that sends data from Sniffer Agent into Wireshark</p>
+<div class="figure align-default">
+<img alt="wireshark shortcut config" src="../_images/fig-wireshark-shortcut-config1.png" />
+</div>
+</li>
+<li><p>Open Wireshark with the new shortcut and you will see Wireshark sniffing Zigbee data.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../zigbee-guide/debugging-index.html" class="btn btn-neutral float-left" title="Debugging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../zigbee-guide/sysconfig-index.html" class="btn btn-neutral float-right" title="System Configuration (SysConfig)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2005-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flash Layout for On-Chip OAD &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User&#39;s Guide
+ 8.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OAD Image Tool" href="tools.html" />
+    <link rel="prev" title="Flash Layout for Off-Chip OAD" href="flash-layout-off-chip.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug oad-secure flash-layout-on-chip-dual-image";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../zigbee-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+
+          </a>
+              <div class="version">
+                8.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/tirtos-index.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/overview.html">SimpleLink CC13xx/CC26xx SDK Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/developing_zigbee_applications.html">Developing Zigbee Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/custom-hardware-cc13xx_cc26xx.html">Custom Hardware</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../zigbee-guide/zigbee-ota-index.html">Zigbee Over-The-Air Firmware Upgrade</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../zigbee/ota_upgrade.html">Z-Stack OTA Upgrade</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../zigbee-guide/oad-secure-index.html">Over-the-Air Download (OAD)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="oad-types.html">OAD Storage &amp; Security</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bim.html">Boot Image Manager (BIM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bim-off-chip.html">BIM for Off-Chip OAD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bim-on-chip-dual-image.html">BIM for On-Chip OAD (Dual Image)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="image-header.html">OAD Image Header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ext-flash-image-header.html">OAD External Flash Image Header</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash-layout-off-chip.html">Flash Layout for Off-Chip OAD</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Flash Layout for On-Chip OAD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#constraints-and-requirements-for-on-chip-oad-dual-image">Constraints and Requirements for On-chip OAD (dual image)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#internal-flash-memory-layout">Internal Flash Memory Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tools.html">OAD Image Tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee-guide/creating-a-production-image.html">Creating a Production Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbee-guide/revert-to-factory.html">Reverting to a Factory Image</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence-ieee.html">Wi-Fi Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee/packet_sniffer.html">Packet Sniffer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/sysconfig-index.html">System Configuration (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/migration_guide.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/references-cc13xx_cc26xx.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zigbee-guide/glossary.html">Terms and Acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../zigbee-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Z-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../zigbee-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../zigbee-guide/zigbee-ota-index.html">Zigbee Over-The-Air Firmware Upgrade</a> &raquo;</li>
+          <li><a href="../zigbee-guide/oad-secure-index.html">Over-the-Air Download (OAD)</a> &raquo;</li>
+      <li>Flash Layout for On-Chip OAD</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="flash-layout-for-on-chip-oad">
+<span id="sec-oad-flash-layout-on-chip-dual-image"></span><h1>Flash Layout for On-Chip OAD<a class="headerlink" href="#flash-layout-for-on-chip-oad" title="Permalink to this headline">¶</a></h1>
+<p>This section will describe the method for placing images in internal
+flash when using on-chip OAD.</p>
+<div class="section" id="constraints-and-requirements-for-on-chip-oad-dual-image">
+<h2>Constraints and Requirements for On-chip OAD (dual image)<a class="headerlink" href="#constraints-and-requirements-for-on-chip-oad-dual-image" title="Permalink to this headline">¶</a></h2>
+<p>In order to perform an on-chip OAD:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The active application must be sufficiently small in order to fit into the
+flash layout system described below</p></li>
+</ul>
+</div></blockquote>
+<p>Only one operational user application image may be stored in flash at any time.</p>
+</div>
+<div class="section" id="internal-flash-memory-layout">
+<span id="sect-on-chip-memory-layout-dual-image"></span><h2>Internal Flash Memory Layout<a class="headerlink" href="#internal-flash-memory-layout" title="Permalink to this headline">¶</a></h2>
+<p>The internal flash of the device contains the active  application, the active
+application’s stack, the download application, the download stack, and the BIM.
+Each application’s role is defined below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As we have assumed the dual-image approach, the stack images
+referenced below are a part of each application image (i.e. the active and
+download apps have their own dedicated stack)</p>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 74%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Application Name</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>BIM</p></td>
+<td><ul class="simple">
+<li><p>Search for the proper image in FLASH</p></li>
+<li><p>Copy new active image</p></li>
+<li><p>Ensure validity and optionally security of image before running</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Download application</p></td>
+<td><ul class="simple">
+<li><p>Providing download area equivalent to the active application space</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Stack (2)</p></td>
+<td><ul class="simple">
+<li><p>Stack implementations</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Active application</p></td>
+<td><ul class="simple">
+<li><p>Active application</p></li>
+<li><p>Must implement OAD reset service</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<img alt="../_images/ditaa-864b03db02b5a145e08501fb6a7713c240480656.png" id="fig-on-chip-oad-target-memory-partition" src="../_images/ditaa-864b03db02b5a145e08501fb6a7713c240480656.png" />
+<p>The active application (referred to as OAD_IMG_B) pictured above is responsible
+for the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Implementing the protocol stack definition of the OAD reset service</p></li>
+<li><p>Implementing customer defined behavior</p></li>
+</ul>
+</div></blockquote>
+<p>The download application (referred to as OAD_IMG_A) pictured above is
+responsible for the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Memory area equivalent to the active application flash which is available
+for storage once the over-the-air download begins</p></li>
+</ul>
+</div></blockquote>
+<p>The location of the download application varies depending on the flash size
+available for the selected device variant.  This is done to maximize the active
+application space.  Refer to the linker command file (.cmd) define <code class="docutils literal notranslate"><span class="pre">IMG_A_FLASH_START</span></code>
+to further determine where precisely the download application is located.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The description above provides the starting flash layout for dual images.
+Once a download image has been completed, the BIM will switch the roles of
+the active and download applications.  Thus the download application area will
+be marked as active to become the active application, whereas the active
+application memory will be prepared for the new download application.  This
+will continue to toggle for each new image downloaded over-the-air.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="flash-layout-off-chip.html" class="btn btn-neutral float-left" title="Flash Layout for Off-Chip OAD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tools.html" class="btn btn-neutral float-right" title="OAD Image Tool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2005-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

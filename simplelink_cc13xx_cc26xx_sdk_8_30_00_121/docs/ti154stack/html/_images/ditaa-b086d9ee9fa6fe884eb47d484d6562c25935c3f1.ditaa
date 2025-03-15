@@ -1,0 +1,38 @@
+                                                         Internal Flash
++--------------------------------+ --------------->  +-------------------+ <- DEVICE_SIZE
+| {d}                            |                   |       CCFG  cRED  |
+| o BIM is linked at end of flash|                   +-------------------+
+| o CCFG is linked with BIM      |                   |       BIM         |
++--------------------------------+ --\               | cRED              |
+                                     |               |                   |
+                                     |               |                   |
+                                     |               |                   |
+                                     |               |                   |
+                                     |               +-------------------+
+                                     |               |       BIM         |
+                                     |               | Interrupt Vectors |
+                                     |               | c777              |
+                                     \------------>  +-------------------+ <- DEVICE_SIZE - BIM_SIZE
+                                                     |                   |
+                                                     |                   |
+                                                     |                   |
+                                                     |                   |
+                                                     |                   |
+                                                     |                   |
+                                                     |       User        |
+                                                     |    Application    |
+                                                     |       c7AF        |
+                                                     |                   |
+                                                     |                   |
+                                                     |                   |
+                                                     |                   |
+                                                     |                   |
+                                                     |                   |
+                                                     +-------------------+
+                                                     |       App         |
+                                                     | Interrupt Vectors |
+                                                     | c777              |
+                                                     +-------------------+
+                                                     | OAD Image Header  |
+                                                     | c333              |
+                                                     +-------------------+ <- 0x00000000

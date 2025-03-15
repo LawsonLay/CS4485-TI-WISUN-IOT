@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIM for On-Chip OAD (Split Image) &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User&#39;s Guide
+ 7.30.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug oad-secure bim-on-chip-split-image";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+
+          </a>
+              <div class="version">
+                7.30.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/proprietary-rf-quick-start.html">Proprietary RF Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/index-platform.html">SimpleLink Wireless MCU CC13xx and CC26xx Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/examples-cc13xx_cc26xx.html">Examples User’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/custom-hardware.html">Custom Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/nortos-index.html">noRTOS Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/rf-core-index.html">RF Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/physical-rf-layer-cc13xx_cc26xx.html">Physical Layer (PHY)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/memory-index.html">Memory overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cc13xx_cc26xx/fcc-certification.html">FCC Certification Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-bim-index.html">BIM Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/proprietary-rf-oad-mcuboot-index.html">MCUBoot Based Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/sysconfig-index.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/migration-cc13xx_cc26xx.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proprietary-rf-guide/glossary-cc13xx_cc26xx.html">Terms and acronyms</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+Proprietary RF User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../proprietary-rf-guide/index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+      <li>BIM for On-Chip OAD (Split Image)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="bim-for-on-chip-oad-split-image">
+<span id="sec-oad-bim-on-chip"></span><h1>BIM for On-Chip OAD (Split Image)<a class="headerlink" href="#bim-for-on-chip-oad-split-image" title="Permalink to this headline">¶</a></h1>
+<p>This section describes the behavior of the BIM for on-chip OAD where
+the split image approach is used. This approach requires the application and
+protocol stack to be separately executable images. As with off-chip OAD, it is
+BIM’s responsibility to locate which image should be run. In an on-chip OAD
+system there are only two image types that can be executed safely:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Persistent application (0x00): Permanently resident application that
+implements OAD profile</p></li>
+<li><p>User application (0x01): OAD upgradeable application that implements OAD
+reset service and user functionality</p></li>
+</ul>
+</div></blockquote>
+<p>For more information about OAD image types, refer to the
+<a class="reference internal" href="image-header.html#sec-oad-image-header"><span class="std std-ref">OAD Image Header</span></a> section of this chapter. The roles and
+responsibilities of each application in an on-chip system is defined in the
+<span class="xref std std-ref">oad-process</span> section.</p>
+<p>In summary, the applications are responsible for storing a candidate image in
+internal flash, performing all OAD procedures and protocols, setting the BIM
+variable, and resetting the device when appropriate. The BIM variable is a
+shared RAM variable that allows the application to indicate which image should
+be selected by the BIM before resetting. This is described in
+<a class="reference internal" href="#sect-ram-argument"><span class="std std-ref">Application Execution switching using RAM</span></a>.</p>
+<p>Based on the BIM var and the fields in the image header, the BIM will decide
+which image is most fit to run. The following will
+describe the process by which the BIM selects an image.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-bim-on-chip-split-image-flowchart"></span><a class="reference internal image-reference" href="../_images/bim_sequence_diagram_onchip_splitimage.png"><img alt="../_images/bim_sequence_diagram_onchip_splitimage.png" src="../_images/bim_sequence_diagram_onchip_splitimage.png" style="width: 867.0px; height: 900.0px;" /></a>
+<p class="caption"><span class="caption-text">Functional Overview of On-chip BIM (split image)</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>The image above is described in words below. In order to determine which
+image is best to run, BIM takes the following measures:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><dl class="simple">
+<dt>At startup, the BIM checks the BIM variable and sets active flash page or</dt><dd><p>image type based on <a class="reference internal" href="#sect-ram-argument"><span class="std std-ref">Application Execution switching using RAM</span></a>. If BIM variable is unset
+it will default to flash page of 0 and image type of user application.</p>
+</dd>
+</dl>
+</li>
+<li><p>BIM checks to make sure the max search iterations have not been exceeded</p></li>
+<li><p>BIM looks for a valid image header in internal flash by reading the first
+8 bytes to find the valid image Identification value.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If a valid image header is found, BIM will read the entire image
+header</p></li>
+<li><p>If a header is not found, increment the flash page and search again
+(jump to step #2)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Checks that the header and BIM version are compatible with the current
+BIM</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Also checks that the if the image needs copy, it must be a stack image.</p></li>
+<li><p>If this check fails, increase the flash page number and search again
+(jump to step #2). If user application, change image type to
+persistent application before searching again</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>If a CRC has not been calculated on the image, calculate one and update
+CRC status field.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If pending copy (stack image), do not update the CRC field yet, this
+will be done after copy</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Check for security. (if not persistent application)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Ensure image is from a trusted peer by running ECDSA sign/verify
+algorithm on the image.</p></li>
+<li><p>If security check fails, increment the flash page and search again
+(jump to step #2)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Check if the image needs to be copied (stack image)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Copy image, calculate CRC to ensure copy succeeded. Update copy status
+and CRC status fields accordingly.</p></li>
+<li><p>If succeeded, set image type to persistent application and set flash
+page number to 0.</p></li>
+<li><p>If failed, continue searching.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Continue this process until an image is found or the max iterations is
+performed.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If a valid image is found, jump to it</p></li>
+<li><p>If no valid image is found and the max iterations have been performed,
+go to low power mode.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The execution flow described by the text and diagrams above is assuming
+security is on. If using an unsecured BIM configuration, the process is the
+same with the exception that there is no check for security.</p>
+</div>
+<div class="section" id="application-execution-switching-using-ram">
+<span id="sect-ram-argument"></span><h2>Application Execution switching using RAM<a class="headerlink" href="#application-execution-switching-using-ram" title="Permalink to this headline">¶</a></h2>
+<p>On devices which have RAM retention capability between resets, execution
+switching between application can be done using RAM variables.
+For example, on the CC13xx or CC26xx, execution switching between User and Persistent
+Applications will be done by writing to a RAM variable stored at
+a known RAM location. This location will be used explicitly for application
+switching only. The value will be retained between resets.</p>
+<p>The RAM variable called ‘BIM Argument’ is two bytes long with values as defined
+in <a class="reference internal" href="#tbl-bim-argument"><span class="std std-ref">Description of the BIM Argument variable.</span></a>. The byte 0 value defines the meaning of
+the byte 1 content. In <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a>, there are two valid values for byte 0: ‘0’ and ‘1’.
+Values 2-255 are reserved for future use. If BIM encounters a byte0 value
+greater than 1, it will consider if invalid, will try to find the
+default application starting from flash page ‘0’, by reading image header.</p>
+<span id="tbl-bim-argument"></span><table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Description of the BIM Argument variable.</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 22%" />
+<col style="width: 62%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Byte 0 Value</p></th>
+<th class="head"><p>Byte 1 Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="9"><p>0</p></td>
+<td rowspan="9"><p>0</p></td>
+<td rowspan="9"><p>Default value after hard reset.</p>
+<p>The ‘argument variable’ contents are invalid, BIM</p>
+<p>needs to find a valid on-chip user application and</p>
+<p>execute it.</p>
+<p>If BIM cannot find the valid User Application,</p>
+<p>then it will try to find a valid Persistent App</p>
+<p>and execute.</p>
+<p>If it is unable to find either application it will</p>
+<p>put the device to low power sleep mode.</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="4"><p>0</p></td>
+<td rowspan="4"><p>Flash page number</p></td>
+<td rowspan="4"><p>Byte 1 contains the application start address BIM</p>
+<p>needs to jump to on resuming execution after a soft</p>
+<p>reset. The address will be in terms of flash page</p>
+<p>number.</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Image Type</p></td>
+<td><p>Version required to support image format</p></td>
+</tr>
+<tr class="row-even"><td><p>2-255</p></td>
+<td><p>N/A</p></td>
+<td><p>Version of Image Header contained in image</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

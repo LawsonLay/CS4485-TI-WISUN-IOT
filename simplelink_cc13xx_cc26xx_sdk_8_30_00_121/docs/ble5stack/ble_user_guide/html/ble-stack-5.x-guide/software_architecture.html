@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Software Architecture &mdash; 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User&#39;s Guide
+ 2.2.11.00 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="TI-RTOS7 (RTOS Kernel) Overview" href="tirtos-index-cc13xx_cc26xx.html" />
+    <link rel="prev" title="The CC13xx or CC26xx SDK Platform" href="platform-cc13xx_cc26xx.html" />
+    <script language="JavaScript">
+        var tiPageName;
+        tiPageName = "sug ble-stack-5.x-guide software_architecture";
+
+        if (location.protocol == "file:"){
+            var ci_analytics_poc_load = true;
+        }
+    </script>
+
+    <script src="http://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index-cc13xx_cc26xx.html" class="icon icon-home"> 
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+
+          </a>
+              <div class="version">
+                2.2.11.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="disclaimer.html">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/quickstart-intro-cc13xx_cc26xx.html">Introduction to the SimpleLink CC13xx/CC26xx SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart-guide/ble5-quick-start.html">TI BLE5-Stack Quick Start</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Software Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#stack-protocol-stack-and-application-configurations">BLE5-Stack Protocol Stack and Application Configurations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solution-platform">Solution Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ble-software-architecture">BLE Software Architecture</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#single-project-configuration">Single Project Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standard-project-task-hierarchy">Standard Project Task Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stack-library-configuration">Stack Library Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-hex-and-binary-files">Working With Hex and Binary Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#programming-internal-flash-with-the-rom-bootloader">Programming Internal Flash with the ROM Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#resetting-the-device-via-software">Resetting the CC13xx or CC26xx via software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tirtos-index-cc13xx_cc26xx.html">TI-RTOS7 (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="freertos-index.html">FreeRTOS (RTOS Kernel) Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble-stack-5-index-cc13xx_cc26xx.html">BLE5-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing-with-sdk-index-cc13xx_cc26xx.html">Developing a Bluetooth LE Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coexistence/coexistence.html">Coexistence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="localization-index-cc13xx_cc26xx.html">RTLS Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-mesh/index.html">Bluetooth Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="u-stack-index-cc13xx_cc26xx.html">Micro BLE Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensor-controller/sensor-controller.html">Sensor Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-index.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory-index.html">Memory Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ble-stack-common/npi-index.html">Network Processor Interface (NPI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble5-oad-index-cc13xx_cc26xx.html">TI Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ble5-oad-index-mcuboot.html">MCUboot Over-the-Air Download (OAD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-tfm/index.html">Security Features of CC13x4 and CC26x4 Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sysconfig-index-cc13xx_cc26xx.html">System Configuration Tool (SysConfig)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../energy-trace/energy-trace.html">EnergyTrace User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration-cc13xx_cc26xx.html">Porting Guide and Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api-reference-cc13xx_cc26xx.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference-cc13xx_cc26xx.html">Terms and Definitions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-cc13xx_cc26xx.html">
+SimpleLink™ CC13XX/CC26XX SDK
+BLE5-Stack User's Guide
+</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index-cc13xx_cc26xx.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="platform-cc13xx_cc26xx.html">The CC13xx or CC26xx SDK Platform</a> &raquo;</li>
+      <li>Software Architecture</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="software-architecture">
+<h1>Software Architecture<a class="headerlink" href="#software-architecture" title="Permalink to this headline">¶</a></h1>
+<p>The TI royalty-free Bluetooth Low Energy protocol stack is a software
+component in the <a class="reference external" href="https://www.ti.com/tool/simplelink-cc13xx-cc26xx-sdk">SimpleLink CC13xx/CC26xx SDK</a> for developing single-mode Bluetooth Low Energy (BLE)
+standalone and network processor applications. This component is based on the
+SimpleLink CC13xx or CC26xx family of BLE enabled wireless MCUs. The CC13xx or CC26xx combines a
+2.4-GHz RF transceiver (some wireless MCUs may also contain a Sub-1GHz
+transceiver which is not used for BLE), in-system programmable flash memory
+and SRAM and a full complement of peripherals. The CC13xx or CC26xx wireless MCU is
+centered on an Arm® Cortex® series processor that handles the
+application layer and Bluetooth Low Energy protocol stack, and an autonomous
+radio core centered on an Arm Cortex-M0 processor that handles all the
+low-level radio control and processing associated with the physical layer (PHY).</p>
+<p>The application developer interfaces with the protocol stack through a set of
+C APIs (ICall) to implement a Bluetooth Low Energy application. Although applications can
+be created using C++, all BLE protocol stack APIs must be accessed through the C context.
+The rest of this document intends to document application development on the CC13xx or CC26xx
+using the Bluetooth Low Energy stack.</p>
+<div class="section" id="stack-protocol-stack-and-application-configurations">
+<h2>BLE5-Stack Protocol Stack and Application Configurations<a class="headerlink" href="#stack-protocol-stack-and-application-configurations" title="Permalink to this headline">¶</a></h2>
+<p>The BLE stack platform supports two different protocol stack and application
+operational configurations:</p>
+<ul class="simple">
+<li><p><strong>Single device:</strong> The BLE controller, host, profiles, and application are all
+implemented on the wireless MCU as a true single-chip solution. This
+configuration is the simplest and most common when using the CC13xx or CC26xx. This
+configuration is used by most of TI’s sample projects. This configuration is
+the most cost-effective technique and provides the lowest-power performance.</p></li>
+<li><p><strong>Network processor:</strong> The BLE controller and host reside on the wireless MCU with
+the application and profile residing on an external application processor (AP). Communication
+with the wireless MCU occurs over a UART or SPI interface using the serialized Network Processor
+Interface (NPI) protocol. Using NPI, the AP controls the network processor with a
+combination of TI Vendor Specific Host Controller Interface (HCI) commands and
+Bluetooth HCI commands. The network processor option is ideal for adding BLE to an existing
+non-wireless application. It is important to note that the network processor is not a pure
+HCI LE controller-only implementation and the application must use TI Vendor Specific
+HCI commands for BLE Host operations.</p></li>
+</ul>
+</div>
+<div class="section" id="solution-platform">
+<h2>Solution Platform<a class="headerlink" href="#solution-platform" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the various components that are installed with
+BLE5-Stack 2.2.11.00 and the directory structure of the protocol stack
+and any tools required for development.</p>
+<p><a class="reference internal" href="#fig-single-network-processor-configuration"><span class="std std-numref">Figure 55.</span></a> shows the BLE5-Stack
+development system. Unless otherwise noted, BLE5-Stack applications must be built with component
+from this CC13xx or CC26xx SDK.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-single-network-processor-configuration"></span><img alt="../_images/image8.jpeg" src="../_images/image8.jpeg" />
+<p class="caption"><span class="caption-number">Figure 55. </span><span class="caption-text">Bluetooth Low Energy Stack Development System</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>The solution platform includes the following components within the CC13xx or CC26xx SDK:</p>
+<ul class="simple">
+<li><p><strong>TI’s Real-Time Operating System (TI-RTOS7)</strong> with the TI-RTOS7 SYS/BIOS kernel,
+optimized power management support, and peripheral drivers (SPI, UART, and
+so forth).</p></li>
+<li><p><strong>DriverLib</strong> provides a device register abstraction layer and is used
+by software and drivers to control the CC13xx or CC26xx at the lowest level.</p></li>
+<li><p><strong>The Bluetooth Low Energy protocol stack</strong> is provided in library form with
+parts of the protocol stack in the CC13xx or CC26xx ROM.</p></li>
+<li><p><strong>Sample applications and profiles</strong> make starting development BLE application using both
+custom and adopted solutions easier.</p></li>
+</ul>
+<p>The following integrated development environments (IDEs) are
+supported:</p>
+<ul class="simple">
+<li><p>IAR Embedded Workbench for Arm</p></li>
+<li><p>Code Composer Studio™ (CCS) using the TI Arm Compiler</p></li>
+</ul>
+<p>Refer to the SDK release notes for the specific IDE &amp; toolchain versions supported by this
+release.</p>
+</div>
+<div class="section" id="ble-software-architecture">
+<h2>BLE Software Architecture<a class="headerlink" href="#ble-software-architecture" title="Permalink to this headline">¶</a></h2>
+<p>The CC13xx or CC26xx Bluetooth Low Energy software environment consists of the
+following parts:</p>
+<ul class="simple">
+<li><p>An application with the TI-RTOS7 kernel, drivers and Bluetooth profile</p></li>
+<li><p>A stack library that implements Bluetooth Low Energy Host and Controller protocol</p></li>
+</ul>
+<p>Some examples implement these as two separate projects. In some examples the stack
+is prebuilt and linked as library files.</p>
+<p>TI-RTOS7 is a real-time, preemptive, multi threaded operating system that
+runs the software solution with task synchronization. Both the application and
+Bluetooth Low Energy protocol stack exist as separate tasks within the RTOS. The
+Bluetooth Low Energy protocol stack has the highest priority. A messaging
+framework called indirect call (ICall) is used for thread-safe synchronization
+between the application and stack. It is mandatory to use TI-RTOS7 and ICall when
+developing an application with the BLE Stack.</p>
+<ul class="simple">
+<li><p>The stack includes the lower layers of the Bluetooth Low Energy protocol
+stack from the Link Layer up to and including the GAP, GATT and
+Security Manager (SM) layers. Most of the Bluetooth Low Energy protocol     stack
+code is provided as a library.</p></li>
+<li><p>The application includes the RTOS, profiles/services, application code,
+drivers, and the ICall module.</p></li>
+</ul>
+<div class="section" id="single-project-configuration">
+<span id="sec-architecture-single-project-config"></span><h3>Single Project Configuration<a class="headerlink" href="#single-project-configuration" title="Permalink to this headline">¶</a></h3>
+<p>In BLE5-Stack 2.2.11.00, stack is pre-built as a library that is statically linked
+to the application. This saves a build step compared to using a stack library
+configuration project. See the example project’s README file for the available
+project build configurations.</p>
+<p>Stack library projects have the following properties:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Stack provided as pre-build library files</p></li>
+<li><p>Application project will link the stack library files</p></li>
+<li><p>There is no explicit app/stack boundary. The application’s link step
+decides the memory locations of the code within the stack library.</p></li>
+<li><p>This architecture saves flash by allowing the linker work more efficiently.</p></li>
+<li><p>These projects used the improved ICall architecture</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="standard-project-task-hierarchy">
+<span id="sec-inc-architecture-standard-project-task-hierarchy"></span><h3>Standard Project Task Hierarchy<a class="headerlink" href="#standard-project-task-hierarchy" title="Permalink to this headline">¶</a></h3>
+<p>Bluetooth Low Energy sample applications use the following task priority structure.
+A higher task number corresponds to a higher priority task:</p>
+<ul class="simple">
+<li><p>Priority 5: Bluetooth Low Energy protocol stack task (must be highest priority)</p></li>
+<li><p>Priority 2: NPI task (network processor configurations only)</p></li>
+<li><p>Priority 1: Application task (e.g., simple_peripheral)</p></li>
+</ul>
+<p>In addition, Software Interrupts (SWIs) are used for RF Driver operations.
+Additional tasks may be introduced but the relative priority structure above must be preserved.</p>
+<p><a class="reference internal" href="tirtos-index-cc13xx_cc26xx.html#sec-tirtos-overview"><span class="std std-ref">TI-RTOS7 (RTOS Kernel) Overview</span></a> introduces TI-RTOS7 tasks.
+<a class="reference internal" href="../ble-stack-5.x/overview-cc13xx_cc26xx.html#sec-ble-stack-overview"><span class="std std-ref">Overview</span></a> describes interfacing with the Bluetooth Low
+Energy protocol stack. <a class="reference internal" href="../ble-stack-5.x/the-application.html#start-up-in-main"><span class="std std-ref">Main initialization</span></a> describes the application task.</p>
+</div>
+<div class="section" id="stack-library-configuration">
+<span id="sec-inc-architecture-stack-image-as-a-library"></span><h3>Stack Library Configuration<a class="headerlink" href="#stack-library-configuration" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This configuration is used by example projects for device CC2640R2, and
+only in project <code class="docutils literal notranslate"><span class="pre">host_test</span></code> for the CC13xx/CC26xx devices.</p>
+</div>
+<p>In BLE5-Stack 2.2.11.00, stack is built as a library that is statically linked
+to the application. Using this build configuration yields additional flash
+footprint optimizations by the linker since the application and stack can share
+contiguous flash pages. See the example project’s README file for the available
+project build configurations.</p>
+<p>Stack library projects have the following properties:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Stack project generates a static library (.lib)</p></li>
+<li><p>Application project will link the stack in as a library</p></li>
+<li><p>There is no explicit app/stack boundary. The application’s link step
+decides the memory locations of the code within the stack library. There
+are some exceptions to this such as <a class="reference internal" href="reference-cc13xx_cc26xx.html#term-SNV"><span class="xref std std-term">SNV</span></a>.</p></li>
+<li><p>This architecture saves flash by allowing the linker work more efficiently.</p></li>
+<li><p>These projects used the improved ICall architecture</p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="working-with-hex-and-binary-files">
+<span id="sec-inc-architecture-working-with-hex-files"></span><h2>Working With Hex and Binary Files<a class="headerlink" href="#working-with-hex-and-binary-files" title="Permalink to this headline">¶</a></h2>
+<p>BLE5-Stack projects within this SDK are configured to produce an Intel-extended hex
+file in their respective output folders. These hex files can be programmed
+individually with a compatible flash programming tool, such as UniFlash. To
+simplify the flash programming process, you can combine the application with
+other Intel-extended hex files into a super hex file manually or using freely
+available tools provided the individual hex files lack overlapping memory
+regions. Information on the <a class="reference external" href="https://en.wikipedia.org/wiki/Intel_HEX">Intel Hex standard</a>.</p>
+<p>One method for creating the super hex file is with the IntelHex python script
+hex_merge.py, available at the <a class="reference external" href="https://launchpad.net/intelhex/+download">IntelHEX Canonical page</a>.
+To merge the hex files, install Python® 2.7.x and add it to your system
+path environment variables.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that when using any python script, you must use a compatible version
+of Python. Refer to the tool documentation or contact the developer to
+verify compatibility.</p>
+</div>
+<p>If conversion of the super hex to a binary file is desired, this can be accomplished
+with the “hex2bin.py” or similar tools that support the hex standard.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">C:\Python27\Scripts&gt;python hex2bin.py \</span>
+<span class="linenos">2</span><span class="go">    simple_peripheral_super.hex \</span>
+<span class="linenos">3</span><span class="go">    simple_peripheral_super.bin</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="programming-internal-flash-with-the-rom-bootloader">
+<h2>Programming Internal Flash with the ROM Bootloader<a class="headerlink" href="#programming-internal-flash-with-the-rom-bootloader" title="Permalink to this headline">¶</a></h2>
+<p>The CC13xx or CC26xx internal flash memory can be programmed using the bootloader in the
+ROM of the device. Both UART and SPI protocols are supported. For more details
+on the programming protocol and requirements, see the Bootloader chapter of the
+<a class="reference external" href="https://www.ti.com/lit/pdf/swcu185">CC13x2 CC26x2 SimpleLink Wireless MCU Technical Reference Manual</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because the ROM bootloader uses predefined DIO pins for internal flash
+programming, allocate these pins in the layout of your board. For details on
+the pins allocated to the bootloader based on the chip package type, see
+<a class="reference external" href="https://www.ti.com/lit/pdf/swcu185">CC13x2 CC26x2 SimpleLink Wireless MCU Technical Reference Manual</a>.</p>
+</div>
+</div>
+<div class="section" id="resetting-the-device-via-software">
+<h2>Resetting the CC13xx or CC26xx via software<a class="headerlink" href="#resetting-the-device-via-software" title="Permalink to this headline">¶</a></h2>
+<p>Use only system (hard) resets to reset the device from software. From software,
+a reset can occur through one of the following.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">HCI_EXT_ResetSystemCmd</span><span class="p">(</span><span class="n">HCI_EXT_RESET_SYSTEM_HARD</span><span class="p">);</span><span class="w"></span>
+<span class="n">SysCtrlSystemReset</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="platform-cc13xx_cc26xx.html" class="btn btn-neutral float-left" title="The CC13xx or CC26xx SDK Platform" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tirtos-index-cc13xx_cc26xx.html" class="btn btn-neutral float-right" title="TI-RTOS7 (RTOS Kernel) Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010-2024, Texas Instruments.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

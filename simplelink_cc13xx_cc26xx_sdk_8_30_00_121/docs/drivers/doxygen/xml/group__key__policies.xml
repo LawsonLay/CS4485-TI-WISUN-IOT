@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.12">
+  <compounddef id="group__key__policies" kind="group">
+    <compoundname>key_policies</compoundname>
+    <title>Key policies</title>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__key__policies_1ga434328ced4e7eb4ee65d547bc05118b5" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_USAGE_EXPORT</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1ae56fe7b014c6118a37cd85c6952c9e95" kindref="member">KeyStore_PSA_KeyUsage</ref>)PSA_KEY_USAGE_EXPORT)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether the key may be exported.</para><para>A public key or the public part of a key pair may always be exported regardless of the value of this permission flag.</para><para>If a key does not have export permission, implementations shall not allow the key to be exported in plain form from the cryptoprocessor, whether through <ref refid="_crypto_key_key_store___p_s_a_8h_1acaf3de92ced3940ebaca0e179ac38768" kindref="member">KeyStore_PSA_exportKey()</ref> or through a proprietary interface. The key may however be exportable in a wrapped form, i.e. in a form where it is encrypted by another key. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="973" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="973" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__policies_1ga7b01130e88538177a92063ed7c39c404" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_USAGE_COPY</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1ae56fe7b014c6118a37cd85c6952c9e95" kindref="member">KeyStore_PSA_KeyUsage</ref>)PSA_KEY_USAGE_COPY)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether the key may be copied.</para><para>This flag allows the use of <ref refid="_crypto_key_key_store___p_s_a_8h_1a243cd73a732fadebf382c03b29cca9e4" kindref="member">KeyStore_PSA_copyKey()</ref> to make a copy of the key with the same policy or a more restrictive policy.</para><para>For lifetimes for which the key is located in a secure element which enforce the non-exportability of keys, copying a key outside the secure element also requires the usage flag <ref refid="group__key__policies_1ga434328ced4e7eb4ee65d547bc05118b5" kindref="member">KEYSTORE_PSA_KEY_USAGE_EXPORT</ref>. Copying the key inside the secure element is permitted with just <ref refid="group__key__policies_1ga7b01130e88538177a92063ed7c39c404" kindref="member">KEYSTORE_PSA_KEY_USAGE_COPY</ref> if the secure element supports it. For keys with the lifetime <ref refid="group__key__lifetimes_1ga67c68b7d1a3dd9775e6436682378c455" kindref="member">KEYSTORE_PSA_KEY_LIFETIME_VOLATILE</ref> or <ref refid="group__key__lifetimes_1ga0f9d5620a69b0815445736338f370355" kindref="member">KEYSTORE_PSA_KEY_LIFETIME_PERSISTENT</ref>, the usage flag <ref refid="group__key__policies_1ga7b01130e88538177a92063ed7c39c404" kindref="member">KEYSTORE_PSA_KEY_USAGE_COPY</ref> is sufficient to permit the copy. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="989" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="989" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__policies_1gaa67d52dc99c8cb9f35522abeb2fa3a04" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_USAGE_ENCRYPT</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1ae56fe7b014c6118a37cd85c6952c9e95" kindref="member">KeyStore_PSA_KeyUsage</ref>)PSA_KEY_USAGE_ENCRYPT)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether the key may be used to encrypt a message.</para><para>This flag allows the key to be used for a symmetric encryption operation, for an AEAD encryption-and-authentication operation, or for an asymmetric encryption operation, if otherwise permitted by the key&apos;s type and policy.</para><para>For a key pair, this concerns the public key. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="1000" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="1000" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__policies_1ga0e2ed070c15e64eb148d40e85dcb105b" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_USAGE_DECRYPT</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1ae56fe7b014c6118a37cd85c6952c9e95" kindref="member">KeyStore_PSA_KeyUsage</ref>)PSA_KEY_USAGE_DECRYPT)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether the key may be used to decrypt a message.</para><para>This flag allows the key to be used for a symmetric decryption operation, for an AEAD decryption-and-verification operation, or for an asymmetric decryption operation, if otherwise permitted by the key&apos;s type and policy.</para><para>For a key pair, this concerns the private key. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="1011" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="1011" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__policies_1ga58e4dd3a8450d7008c07eca880b8fce1" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_USAGE_SIGN_MESSAGE</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1ae56fe7b014c6118a37cd85c6952c9e95" kindref="member">KeyStore_PSA_KeyUsage</ref>)PSA_KEY_USAGE_SIGN_MESSAGE)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether the key may be used to sign a message.</para><para>This flag allows the key to be used for a MAC calculation operation or for an asymmetric message signature operation, if otherwise permitted by the keys type and policy.</para><para>For a key pair, this concerns the private key. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="1021" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="1021" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__policies_1ga535cc879b7eb4a5229ecf72e97cc27d3" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_USAGE_VERIFY_MESSAGE</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1ae56fe7b014c6118a37cd85c6952c9e95" kindref="member">KeyStore_PSA_KeyUsage</ref>)PSA_KEY_USAGE_VERIFY_MESSAGE)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether the key may be used to verify a message.</para><para>This flag allows the key to be used for a MAC verification operation or for an asymmetric message signature verification operation, if otherwise permitted by the keys type and policy.</para><para>For a key pair, this concerns the public key. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="1031" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="1031" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__policies_1ga999d229525d5dfbfaa61d3b6c89aed07" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_USAGE_SIGN_HASH</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1ae56fe7b014c6118a37cd85c6952c9e95" kindref="member">KeyStore_PSA_KeyUsage</ref>)PSA_KEY_USAGE_SIGN_HASH)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether the key may be used to sign a message hash.</para><para>This flag allows the key to be used for an asymmetric signature operation, if otherwise permitted by the key&apos;s type and policy.</para><para>For a key pair, this concerns the private key. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="1040" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="1040" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__policies_1gafe6143ba20ba93fd0321c2c279be1ef8" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_USAGE_VERIFY_HASH</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1ae56fe7b014c6118a37cd85c6952c9e95" kindref="member">KeyStore_PSA_KeyUsage</ref>)PSA_KEY_USAGE_VERIFY_HASH)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether the key may be used to verify a message hash.</para><para>This flag allows the key to be used for an asymmetric signature verification operation, if otherwise permitted by by the key&apos;s type and policy.</para><para>For a key pair, this concerns the public key. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="1049" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="1049" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__key__policies_1ga29a66a6486f87634ecbaaf885b953d19" prot="public" static="no">
+        <name>KEYSTORE_PSA_KEY_USAGE_DERIVE</name>
+        <initializer>((<ref refid="_crypto_key_key_store___p_s_a_8h_1ae56fe7b014c6118a37cd85c6952c9e95" kindref="member">KeyStore_PSA_KeyUsage</ref>)PSA_KEY_USAGE_DERIVE)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether the key may be used to derive other keys. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" line="1053" column="9" bodyfile="source/ti/drivers/cryptoutils/cryptokey/CryptoKeyKeyStore_PSA.h" bodystart="1053" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

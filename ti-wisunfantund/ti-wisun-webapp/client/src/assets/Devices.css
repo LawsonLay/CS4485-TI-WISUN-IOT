@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Create four equal columns that floats next to each other */
+.device-card {
+  float: left;
+  width: 20%;
+  background: white;
+  padding: 5px 15px 20px 15px;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  color: black;
+}
+
+/* Clear floats after the columns */
+.devices-table:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the four columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.device-flex-box {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+}
+
+.toggle input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 17px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #FFF;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(13px);
+}

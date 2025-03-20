@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
-import {THEME, ColorScheme, ThemeContext} from './ColorScheme';
+import { THEME, ColorScheme, ThemeContext } from './ColorScheme';
 import produce from 'immer';
 import ThemeToggle from './components/ThemeToggle';
-import {KeysMatching} from './utils';
-import {PingJobsButton} from './components/PingJobsButton';
+import { KeysMatching } from './utils';
+import { PingJobsButton } from './components/PingJobsButton';
 import TabSelector from './components/TabSelector';
 import MonitorTab from './components/MonitorTab';
 import ConfigTab from './components/ConfigTab';
-import {AppContext} from './Contexts';
+import { AppContext } from './Contexts';
 import {
   AutoPingburst,
   BorderRouterIPEntry,
@@ -17,13 +17,14 @@ import {
   PingRecord,
   Topology,
 } from './types';
-import {APIService} from './APIService';
+import { APIService } from './APIService';
 import ConnectBorderRouterMessage from './components/ConnectBorderRouterMessage';
 import InvalidHostMessage from './components/InvalidHostMessage';
-import {io} from 'socket.io-client';
-import {applyPatch, deepClone} from 'fast-json-patch';
-import {WritableDraft} from 'immer/dist/types/types-external';
-import {DashTitle} from './components/DashTitle';
+import { io } from 'socket.io-client';
+import { applyPatch, deepClone } from 'fast-json-patch';
+import { WritableDraft } from 'immer/dist/types/types-external';
+import { DashTitle } from './components/DashTitle';
+import DevicesTab from './components/DevicesTab';
 
 export function getIPAddressInfoByIP(ipAddressInfoArray: IPAddressInfo[], ip: string) {
   for (const ipAddressInfo of ipAddressInfoArray) {
@@ -127,7 +128,7 @@ const DEFAULT_TOPOLOGY = () => {
     numConnected: 0,
     connectedDevices: [],
     routes: [],
-    graph: {nodes: [], edges: []},
+    graph: { nodes: [], edges: [] },
   };
 };
 
@@ -141,7 +142,7 @@ const DEFAULT_AUTOPINGPROPS = () => {
   };
 };
 
-interface AppProps {}
+interface AppProps { }
 
 export class App extends React.Component<AppProps, AppState> {
   /** NCP Properties that are compared to when properties for setProps.  */
@@ -228,7 +229,7 @@ export class App extends React.Component<AppProps, AppState> {
         continue;
       }
       try {
-        const {wasSuccess} = await APIService.setProp(property, value);
+        const { wasSuccess } = await APIService.setProp(property, value);
         if (wasSuccess) {
           keysToDelete.push(property);
         }
@@ -247,8 +248,8 @@ export class App extends React.Component<AppProps, AppState> {
   };
 
   deriveTabView = (prevState: Partial<AppState>, currentState: Partial<AppState>) => {
-    let {connected: currentlyConnected} = currentState;
-    let {connected: previouslyConnected, tabView: previousTabView} = prevState;
+    let { connected: currentlyConnected } = currentState;
+    let { connected: previouslyConnected, tabView: previousTabView } = prevState;
     if (previousTabView === undefined) {
       console.error('tab view not set');
       return TAB_VIEW.INVALID_HOST;
@@ -352,10 +353,10 @@ export class App extends React.Component<AppProps, AppState> {
   }
 
   setTab(tab: TAB_VIEW) {
-    this.setState({tabView: tab});
+    this.setState({ tabView: tab });
   }
   clearDirtyNCPProperties = () => {
-    this.setState({dirtyNCPProperties: {}});
+    this.setState({ dirtyNCPProperties: {} });
   };
 
   render() {
@@ -381,6 +382,11 @@ export class App extends React.Component<AppProps, AppState> {
       case TAB_VIEW.INVALID_HOST:
         currentTab = <InvalidHostMessage />;
         break;
+      case TAB_VIEW.DEVICES:
+        currentTab = (
+          <DevicesTab />
+        );
+        break;
       case TAB_VIEW.MONITOR:
       default:
         currentTab = (
@@ -394,12 +400,13 @@ export class App extends React.Component<AppProps, AppState> {
           />
         );
         break;
+
     }
     return (
       <ThemeContext.Provider value={this.state.theme}>
         <AppContext.Provider value={this}>
           <DashTitle>
-          {this.state.connected && (
+            {this.state.connected && (
               <TabSelector
                 name={TAB_VIEW.CONFIG}
                 isSelected={this.state.tabView === TAB_VIEW.CONFIG}

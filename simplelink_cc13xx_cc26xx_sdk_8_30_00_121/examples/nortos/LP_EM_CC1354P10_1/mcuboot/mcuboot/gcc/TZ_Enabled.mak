@@ -1,5 +1,0 @@
-CFLAGS += -DDUAL_SLOT
-
-LFLAGS += -Wl,--defsym,DUAL_SLOT=1
-
-

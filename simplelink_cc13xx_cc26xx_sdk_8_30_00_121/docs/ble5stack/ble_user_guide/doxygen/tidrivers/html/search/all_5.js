@@ -1,7 +1,0 @@
-var searchData=
-[
-  ['firstlf',['firstLF',['../struct_power_c_c26_x_x___module_state.html#a702ec4760d50a0bcb6577ff029938ae5',1,'PowerCC26XX_ModuleState']]],
-  ['frameformat',['frameFormat',['../struct_s_p_i___params.html#a67b5ebb8ec72796a0260c427c91cc093',1,'SPI_Params']]],
-  ['freefxn',['freeFxn',['../struct_p_d_m_c_c26_x_x___params.html#ae0149ca1615d25422c7e0d9c473ccd2e',1,'PDMCC26XX_Params::freeFxn()'],['../struct_p_d_m_c_c26_x_x___object.html#a1c7fe813d98d451be08b4d7f7618f2f3',1,'PDMCC26XX_Object::freeFxn()'],['../struct_p_d_m_c_c26_x_x___i2_s___params.html#ad7a28838be0626f4ac923686e82098ac',1,'PDMCC26XX_I2S_Params::freeFxn()'],['../struct_p_d_m_c_c26_x_x___i2_s___object.html#a87afffd3d7ce4ccb9afc2d1135a92b68',1,'PDMCC26XX_I2S_Object::freeFxn()']]],
-  ['fxntableptr',['fxnTablePtr',['../struct_a_d_c___config__.html#a451827ead452ffc830675afbef573ee2',1,'ADC_Config_::fxnTablePtr()'],['../struct_a_d_c_buf___config__.html#a2b0117b07999dee4f4189aef978b52c6',1,'ADCBuf_Config_::fxnTablePtr()'],['../struct_p_w_m___config__.html#a36b812aeed91072b4a917e7342278d3b',1,'PWM_Config_::fxnTablePtr()'],['../struct_s_p_i___config__.html#a422fb4ed4cc7ceb4d8f7d03d9f37639f',1,'SPI_Config_::fxnTablePtr()'],['../struct_watchdog___config__.html#a2ceb6aabf71a42cf6e4162d1ce314e58',1,'Watchdog_Config_::fxnTablePtr()'],['../struct_display___config.html#adce10e2738107a8b017ac8df3dbe1d73',1,'Display_Config::fxnTablePtr()']]]
-];

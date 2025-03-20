@@ -1,5 +1,0 @@
-CFLAGS += -DSINGLE_SLOT
-
-LFLAGS += -Wl,--define=SINGLE_SLOT
-
-

@@ -1,5 +1,0 @@
-CFLAGS += -DBIM_ONCHIP \
-    -DxSECURITY \
-    -DxDEBUG_BIM
-
-

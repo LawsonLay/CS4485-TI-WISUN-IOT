@@ -1,4 +1,0 @@
-CFLAGS += -DMCUBOOT \
-    -DDEBUG
-
-

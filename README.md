@@ -6,6 +6,8 @@ For all information, check out the wiki
 
 [Link to the TI-WISUNFANTUND repo](https://github.com/TexasInstruments/ti-wisunfantund/tree/release)
 
+[Link to BeaglePlay backups](https://utdallas.box.com/s/jk7u1kshdwfx10cqdot51ksbmql2kt8m)
+
 If you want to update the ti-wisunfantund subtree, run the following command.
 
 ```

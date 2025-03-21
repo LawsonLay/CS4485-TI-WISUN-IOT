@@ -21,6 +21,9 @@ const tiColorScheme = {
   gray: '#555555',
   grayLight: '#98999B',
   // orange: gruvboxColors["gruvbox-orange"],
+
+  grayDark:"#1E1E1E",
+  hoverLightGray: "#DBDBDB",
 };
 
 export default tiColorScheme;

@@ -7,6 +7,7 @@ import {HamburgerIcon} from './HamburgerIcon';
 interface DashTitleTheme {
   backgroundColor?: Color;
   menuBackgroundColor?: Color;
+  menuTextColor?: Color;
 }
 
 function RowSeparator() {
@@ -21,19 +22,21 @@ const dashTitleThemeImplementations = new ComponentThemeImplementations<DashTitl
 
 const tiDashTitleTheme = {
   backgroundColor: ColorScheme.getColor('red', THEME.TI),
-  menuBackgroundColor: ColorScheme.getColor('redDark', THEME.TI),
+  menuBackgroundColor: ColorScheme.getColor('white', THEME.TI),
+  menuTextColor: ColorScheme.getColor('grayDark', THEME.TI),
 };
 dashTitleThemeImplementations.set(THEME.TI, tiDashTitleTheme);
 
-const gruvboxDashTitleTheme = {
-  backgroundColor: 'rgba(0,0,0,0)',
-  menuBackgroundColor: ColorScheme.getColor('bg0h', THEME.GRUVBOX),
+const gruvboxDashTitleTheme = { 
+  backgroundColor: ColorScheme.getColor('bg2', THEME.GRUVBOX),
+  menuBackgroundColor: ColorScheme.getColor('bg3', THEME.GRUVBOX),
+  menuTextColor: ColorScheme.getColor('white', THEME.GRUVBOX),
 };
 dashTitleThemeImplementations.set(THEME.GRUVBOX, gruvboxDashTitleTheme);
 
 export function DashTitle({children}: {children: ReactNode}) {
   const theme = useContext(ThemeContext);
-  const {backgroundColor, menuBackgroundColor} = dashTitleThemeImplementations.get(theme);
+  const {backgroundColor, menuBackgroundColor, menuTextColor} = dashTitleThemeImplementations.get(theme);
 
   const target = useRef<HTMLDivElement>(null);
   const size = useSize(target);
@@ -107,24 +110,30 @@ export function DashTitle({children}: {children: ReactNode}) {
         >
           Your Wi-SUN Network
         </h1>
+      </div>
+      
         {!isCondensed && (
           <div
             style={{
-              marginRight: '5.9427vw',
+              width: '100%',
+              color: menuTextColor,
+              backgroundColor: menuBackgroundColor,
               display: 'flex',
               flexDirection: 'row',
-              columnGap: 20,
-              alignItems: 'center',
+              justifyContent: 'flex-end',
+              alignItems: 'end',
+              padding: '0',
             }}
           >
             {children}
           </div>
         )}
-      </div>
+
       {isCondensed && isHamburgerEnabled && (
         <div
           style={{
             width: '100%',
+            color: menuTextColor,
             backgroundColor: menuBackgroundColor,
             paddingTop: 20,
             paddingBottom: 20,

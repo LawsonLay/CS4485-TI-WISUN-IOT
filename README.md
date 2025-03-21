@@ -13,3 +13,5 @@ If you want to update the ti-wisunfantund subtree, run the following command.
 ```
 git subtree pull --prefix ti-wisunfantund https://github.com/TexasInstruments/ti-wisunfantund.git main --squash
 ```
+
+If you want to restore a BeaglePlay backup, flash the image file to a microSD card using an image flasher such as balenaEtcher.

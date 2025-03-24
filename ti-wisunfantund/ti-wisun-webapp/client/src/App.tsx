@@ -26,6 +26,7 @@ import { WritableDraft } from 'immer/dist/types/types-external';
 import { DashTitle } from './components/DashTitle';
 import DevicesTab from './components/DevicesTab';
 import RoutinesTab from './components/RoutinesTab';
+import StorkTab from './components/StorkTab';
 
 export function getIPAddressInfoByIP(ipAddressInfoArray: IPAddressInfo[], ip: string) {
   for (const ipAddressInfo of ipAddressInfoArray) {
@@ -391,6 +392,11 @@ export class App extends React.Component<AppProps, AppState> {
       case TAB_VIEW.ROUTINES:
         currentTab = (
           <RoutinesTab />
+        );
+        break;
+      case TAB_VIEW.STORK:
+        currentTab = (
+          <StorkTab />
         );
         break;
       case TAB_VIEW.MONITOR:

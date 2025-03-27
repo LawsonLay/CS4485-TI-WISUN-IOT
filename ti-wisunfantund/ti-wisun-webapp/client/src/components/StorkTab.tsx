@@ -27,7 +27,7 @@ export default function StorkTab() {
     return (
       <div style={{ textAlign: 'center', marginTop: '20vh', fontSize: '24px', color: 'red' }}>
         <h1>404 - Page Not Found</h1>
-        <p>Please make sure that Storked is installed and running!</p>
+        <p>Please make sure that Stork is installed and running!</p>
       </div>
     );
   }

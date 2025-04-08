@@ -2,52 +2,169 @@
   box-sizing: border-box;
 }
 
-.devices-table {
-  margin-left: 90px;
+/* Devices Tab Styles */
+.devices-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
 }
 
-/* Create four equal columns that floats next to each other */
-.device-card {
-  float: left;
-  width: 20%;
-  background: white;
-  padding: 5px 15px 20px 15px;
-  margin: 20px;
-  border-radius: 8px;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-  text-align: center;
+.devices-controls {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.controls-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+}
+
+.search-bar {
+  flex: 1;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.add-random-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.add-random-btn:hover {
+  background-color: #45a049;
+}
+
+.add-random-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-item select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.filter-item label {
   color: black;
 }
 
-/* Clear floats after the columns */
-.devices-table:after {
-  content: "";
-  display: table;
-  clear: both;
+.devices-table {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
 
-/* Responsive layout - makes the four columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-  }
+.device-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.device-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.device-image {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.device-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.device-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+}
+
+.device-card h3:hover {
+  color: #007bff;
+}
+
+.device-name-edit input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
 .device-flex-box {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+}
+
+.device-details {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.device-mac {
+  font-size: 12px;
+  color: #999;
+  margin-top: 5px;
+  font-family: monospace;
 }
 
 .toggle {
   position: relative;
   display: inline-block;
-  width: 30px;
-  height: 17px;
+  width: 60px;
+  height: 34px;
 }
 
 .toggle input {
-  display: none;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .slider {
@@ -58,19 +175,19 @@
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 17px;
+  transition: .4s;
+  border-radius: 34px;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 13px;
-  width: 13px;
-  left: 2px;
-  bottom: 2px;
-  background-color: #FFF;
-  transition: 0.4s;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
   border-radius: 50%;
 }
 
@@ -78,6 +195,28 @@ input:checked + .slider {
   background-color: #2196F3;
 }
 
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
 input:checked + .slider:before {
-  transform: translateX(13px);
+  transform: translateX(26px);
+}
+
+.error-message {
+  color: #d9534f;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #f8d7da;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+}
+
+.loading, .no-devices {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin: 20px 0;
 }

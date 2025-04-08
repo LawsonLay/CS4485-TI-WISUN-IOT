@@ -7,6 +7,9 @@ const http = require('http');
 const SocketIOServer = require('socket.io').Server;
 const {CONSTANTS, setAppConstants, assertDependencies} = require('./AppConstants.js');
 const {initializeSocketIOEvents} = require('./ClientState');
+const {initializeDatabase} = require('./database.js');
+const fs = require('fs');
+const path = require('path');
 
 /**
  * This is the program entry and exit. From here all
@@ -18,6 +21,22 @@ const {initializeSocketIOEvents} = require('./ClientState');
 function main() {
   setAppConstants();
   assertDependencies();
+  
+  // Ensure data directory exists
+  const dataDir = path.join(__dirname, '../data');
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+  
+  // Initialize database
+  initializeDatabase()
+    .then(() => {
+      httpLogger.info('Database initialized successfully');
+    })
+    .catch(err => {
+      httpLogger.error(`Database initialization failed: ${err.message}`);
+    });
+  
   const app = express();
   const httpServer = http.createServer(app);
   const io = new SocketIOServer(httpServer);

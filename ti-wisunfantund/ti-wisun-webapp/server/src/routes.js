@@ -9,6 +9,26 @@ const {sendDBusMessage} = require('./dbusCommands.js');
 const {CONSTANTS} = require('./AppConstants');
 const {SerialPort} = require('serialport');
 const {postLEDStates, getOADFirmwareVersion, startOAD} = require('./coapCommands.js');
+const {deviceOperations, relationshipOperations} = require('./database.js');
+const multer = require('multer');
+const fs = require('fs');
+
+// Configure storage for device images
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    const uploadDir = path.join(__dirname, '../data/images');
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    cb(null, uploadDir);
+  },
+  filename: function(req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage });
 
 /**
  * This function sets up all of the webserver endpoints
@@ -217,7 +237,6 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
     }
   });
 
-
   /** 
    * Webserver endpoint for gathering OAD Firmware Versions
   */
@@ -239,6 +258,156 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
 
     res.json({wasSuccess: true});
   });
+
+  /**
+   * Device management API endpoints
+   */
+  // Get all devices
+  app.get('/api/devices', async (req, res) => {
+    try {
+      const devices = await deviceOperations.getAllDevices();
+      res.json(devices);
+    } catch (error) {
+      httpLogger.error(`Error fetching devices: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Get a specific device by MAC address
+  app.get('/api/devices/:mac', async (req, res) => {
+    try {
+      const device = await deviceOperations.getDeviceByMac(req.params.mac);
+      if (!device) {
+        return res.status(404).json({ error: 'Device not found' });
+      }
+      res.json(device);
+    } catch (error) {
+      httpLogger.error(`Error fetching device: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Add a new device
+  app.post('/api/devices', upload.single('image'), async (req, res) => {
+    try {
+      let device = req.body;
+      
+      // If an image was uploaded, save its path
+      if (req.file) {
+        device.image_path = `/data/images/${req.file.filename}`;
+      }
+      
+      // Default name to vendor_class_type if not provided
+      if (!device.name) {
+        device.name = device.vendor_class_type;
+      }
+      
+      const result = await deviceOperations.addDevice(device);
+      res.status(201).json(result);
+    } catch (error) {
+      httpLogger.error(`Error adding device: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Update a device
+  app.put('/api/devices/:mac', upload.single('image'), async (req, res) => {
+    try {
+      let updates = req.body;
+      
+      // If an image was uploaded, save its path
+      if (req.file) {
+        updates.image_path = `/data/images/${req.file.filename}`;
+      }
+      
+      const result = await deviceOperations.updateDevice(req.params.mac, updates);
+      if (result.changes === 0) {
+        return res.status(404).json({ error: 'Device not found' });
+      }
+      res.json({ updated: true, mac_address: req.params.mac });
+    } catch (error) {
+      httpLogger.error(`Error updating device: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Delete a device
+  app.delete('/api/devices/:mac', async (req, res) => {
+    try {
+      const result = await deviceOperations.deleteDevice(req.params.mac);
+      if (!result.deleted) {
+        return res.status(404).json({ error: 'Device not found' });
+      }
+      res.json({ deleted: true, mac_address: req.params.mac });
+    } catch (error) {
+      httpLogger.error(`Error deleting device: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  /**
+   * Relationship management API endpoints
+   */
+  // Get all relationships
+  app.get('/api/relationships', async (req, res) => {
+    try {
+      const relationships = await relationshipOperations.getAllRelationships();
+      res.json(relationships);
+    } catch (error) {
+      httpLogger.error(`Error fetching relationships: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Add a new relationship
+  app.post('/api/relationships', async (req, res) => {
+    try {
+      const result = await relationshipOperations.addRelationship(req.body);
+      res.status(201).json(result);
+    } catch (error) {
+      httpLogger.error(`Error adding relationship: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Delete a relationship
+  app.delete('/api/relationships/:id', async (req, res) => {
+    try {
+      const result = await relationshipOperations.deleteRelationship(req.params.id);
+      if (!result.deleted) {
+        return res.status(404).json({ error: 'Relationship not found' });
+      }
+      res.json({ deleted: true, id: req.params.id });
+    } catch (error) {
+      httpLogger.error(`Error deleting relationship: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Get relationships by sensor MAC
+  app.get('/api/relationships/sensor/:mac', async (req, res) => {
+    try {
+      const relationships = await relationshipOperations.getRelationshipsBySensor(req.params.mac);
+      res.json(relationships);
+    } catch (error) {
+      httpLogger.error(`Error fetching relationships: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Get relationships by actuator MAC
+  app.get('/api/relationships/actuator/:mac', async (req, res) => {
+    try {
+      const relationships = await relationshipOperations.getRelationshipsByActuator(req.params.mac);
+      res.json(relationships);
+    } catch (error) {
+      httpLogger.error(`Error fetching relationships: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Serve static files for device images
+  app.use('/data/images', express.static(path.join(__dirname, '../data/images')));
 }
 
 module.exports = {initializeRoutes};

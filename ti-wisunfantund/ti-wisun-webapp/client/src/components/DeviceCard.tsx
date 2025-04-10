@@ -101,7 +101,7 @@ export default function DeviceCard(props: DeviceCardProps) {
         <p className="mac-address">{props.mac_address}</p>
         <p className="device-status">
           Status: {props.activated ? 'Activated' : 'Not Activated'}
-          {props.activated && ` (${props.activation_type})`}
+          {props.activated && props.activation_type ? ` (${props.activation_type})` : ''}
         </p>
       </div>
       

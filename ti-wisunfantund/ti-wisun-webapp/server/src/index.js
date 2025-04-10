@@ -4,6 +4,7 @@ const {initializeRoutes} = require('./routes.js');
 const {BorderRouterManager} = require('./BorderRouterManager.js');
 const {getPingExecutor} = require('./PingExecutor.js');
 const http = require('http');
+const coap = require('coap');
 const SocketIOServer = require('socket.io').Server;
 const {CONSTANTS, setAppConstants, assertDependencies} = require('./AppConstants.js');
 const {initializeSocketIOEvents} = require('./ClientState');
@@ -40,10 +41,14 @@ function main() {
   const app = express();
   const httpServer = http.createServer(app);
   const io = new SocketIOServer(httpServer);
+  const coapServer = coap.createServer({
+    type: 'udp6'
+  })
   initializeSocketIOEvents(io);
   const brManager = new BorderRouterManager();
   const pingExecutor = getPingExecutor();
   initializeRoutes(app, pingExecutor, brManager);
+  initializeCoAPServer(coapServer);
 
   httpServer.listen(CONSTANTS.PORT, CONSTANTS.HOST, () => {
     httpLogger.info(`Listening on http://${CONSTANTS.HOST}:${CONSTANTS.PORT}`);

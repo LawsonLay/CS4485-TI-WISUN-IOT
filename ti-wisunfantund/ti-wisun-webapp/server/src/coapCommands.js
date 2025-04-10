@@ -4,6 +4,97 @@ const {canonicalIPtoExpandedIP} = require('./parsing');
 const fs = require('fs');
 const { observe } = require('fast-json-patch');
 
+
+function postCounterState(targetIP, newValue) {
+  const reqOptions = {
+    observe: false,
+    host: targetIP,
+    pathname: 'counter',
+    method: 'post',
+    confirmable: 'true',
+    retrySend: 'true',
+    options: {},
+  };
+
+  putPayload = [];
+  putPayload.push(newValue);
+
+  const postRequest = coap.request(reqOptions);
+  postRequest.on('response', postResponse => {
+    console.log('received post response for Counter', postResponse.code, newValue);
+  });
+  // BOTH OF THESE ARE REQUIRED -> COAP ERRORS OUT OTHERWISE
+  postRequest.on('timeout', e => {});
+  postRequest.on('error', e => {});
+  // Write the new states to the coap payload
+  postRequest.write(Buffer.from(putPayload));
+  postRequest.end();
+}
+
+
+/**
+ * URI: /manual_light
+ * @param newValue - 0 or 1
+ * @param {canonical ipAddr} targetIP
+ */
+function postManualLightState(targetIP, newValue) {
+  const reqOptions = {
+    observe: false,
+    host: targetIP,
+    pathname: 'manual_light',
+    method: 'post',
+    confirmable: 'true',
+    retrySend: 'true',
+    options: {},
+  };
+
+  putPayload = [];
+  putPayload.push(newValue);
+
+  const postRequest = coap.request(reqOptions);
+  postRequest.on('response', postResponse => {
+    // console.log('received post response for Manual Light', postResponse.code, putPayload);
+  });
+  // BOTH OF THESE ARE REQUIRED -> COAP ERRORS OUT OTHERWISE
+  postRequest.on('timeout', e => {});
+  postRequest.on('error', e => {});
+  // Write the new states to the coap payload
+  postRequest.write(Buffer.from(putPayload));
+  postRequest.end();
+}
+
+/**
+ * URI: /light
+ * @param newValue - 0 or 1
+ * @param {canonical ipAddr} targetIP
+ */
+function postLightState(targetIP, newValue) {
+  const reqOptions = {
+    observe: false,
+    host: targetIP,
+    pathname: 'light',
+    method: 'post',
+    confirmable: 'true',
+    retrySend: 'true',
+    options: {},
+  };
+
+  putPayload = [];
+  putPayload.push(newValue);
+
+  const postRequest = coap.request(reqOptions);
+  postRequest.on('response', postResponse => {
+    // console.log('received post response for LEDs', postResponse.code);
+    //update DB
+  });
+  // BOTH OF THESE ARE REQUIRED -> COAP ERRORS OUT OTHERWISE
+  postRequest.on('timeout', e => {});
+  postRequest.on('error', e => {});
+  // Write the new states to the coap payload
+  postRequest.write(Buffer.from(putPayload));
+  postRequest.end();
+}
+
 /**
  * Get the LED states for the node with ipAddr: targetIP
  * @param {canonical ipAddr} targetIP

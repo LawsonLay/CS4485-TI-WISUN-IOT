@@ -44,6 +44,7 @@ const initializeDatabase = () => {
         // Create relationships table
         db.run(`CREATE TABLE IF NOT EXISTS relationships (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL,
           sensor_mac TEXT NOT NULL,
           actuator_mac TEXT NOT NULL,
           actuator_type TEXT NOT NULL,
@@ -167,6 +168,20 @@ const deviceOperations = {
       });
     });
   },
+
+  getDevicesByType: (deviceType) => {
+    return new Promise((resolve, reject) => {
+      const db = getDatabase();
+      db.all('SELECT * FROM devices WHERE device_type LIKE ?', [`%${deviceType}%`], (err, rows) => {
+        db.close();
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(rows);
+      });
+    });
+  },
 };
 
 // Relationship operations
@@ -189,8 +204,8 @@ const relationshipOperations = {
     return new Promise((resolve, reject) => {
       const db = getDatabase();
       db.run(
-        'INSERT INTO relationships (sensor_mac, actuator_mac, actuator_type) VALUES (?, ?, ?)',
-        [relationship.sensor_mac, relationship.actuator_mac, relationship.actuator_type],
+        'INSERT INTO relationships (name, sensor_mac, actuator_mac, actuator_type) VALUES (?, ?, ?, ?)',
+        [relationship.name, relationship.sensor_mac, relationship.actuator_mac, relationship.actuator_type],
         function(err) {
           db.close();
           if (err) {
@@ -202,7 +217,7 @@ const relationshipOperations = {
       );
     });
   },
-  
+
   deleteRelationship: (id) => {
     return new Promise((resolve, reject) => {
       const db = getDatabase();
@@ -242,6 +257,54 @@ const relationshipOperations = {
         }
         resolve(rows);
       });
+    });
+  },
+
+  getRelationshipsWithDeviceInfo: () => {
+    return new Promise((resolve, reject) => {
+      const db = getDatabase();
+      db.all(`
+        SELECT 
+          r.id, 
+          r.name, 
+          r.sensor_mac, 
+          r.actuator_mac, 
+          r.actuator_type,
+          sd.name AS sensor_name, 
+          ad.name AS actuator_name,
+          sd.image_path AS sensor_image, 
+          ad.image_path AS actuator_image,
+          sd.device_type AS sensor_type,
+          ad.device_type AS actuator_device_type
+        FROM relationships r
+        JOIN devices sd ON r.sensor_mac = sd.mac_address
+        JOIN devices ad ON r.actuator_mac = ad.mac_address
+      `, [], (err, rows) => {
+        db.close();
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(rows);
+      });
+    });
+  },
+
+  updateRelationship: (id, relationship) => {
+    return new Promise((resolve, reject) => {
+      const db = getDatabase();
+      db.run(
+        'UPDATE relationships SET name = ?, sensor_mac = ?, actuator_mac = ?, actuator_type = ? WHERE id = ?',
+        [relationship.name, relationship.sensor_mac, relationship.actuator_mac, relationship.actuator_type, id],
+        function(err) {
+          db.close();
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve({ changes: this.changes, id });
+        }
+      );
     });
   },
 };

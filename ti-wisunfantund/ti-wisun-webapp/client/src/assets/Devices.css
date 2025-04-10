@@ -8,6 +8,7 @@
   flex-direction: column;
   width: 100%;
   padding: 20px;
+  color: #000;
 }
 
 .devices-controls {
@@ -31,31 +32,30 @@
 
 .search-bar input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   font-size: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 2px 8px rgba(76,175,80,0.2);
+  outline: none;
 }
 
 .add-random-btn {
   background-color: #4CAF50;
   color: white;
   border: none;
-  border-radius: 4px;
-  padding: 10px 15px;
+  border-radius: 8px;
+  padding: 12px 20px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   white-space: nowrap;
-}
-
-.add-random-btn:hover {
-  background-color: #45a049;
-}
-
-.add-random-btn:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
 }
 
 .filter-controls {
@@ -71,41 +71,57 @@
 }
 
 .filter-item select {
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  font-size: 15px;
+  color: black;
 }
 
 .filter-item label {
   color: black;
+  font-weight: 500;
 }
 
 .devices-table {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  gap: 24px;
 }
 
+/* Device Card Redesign */
 .device-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  position: relative;
 }
 
-.device-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+.device-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.device-name {
+  margin: 0;
+  font-size: 18px;
+  color: #000;
+  cursor: pointer;
+  flex: 1;
 }
 
 .device-image {
   width: 100%;
-  height: 160px;
+  height: 200px;
   overflow: hidden;
-  border-radius: 6px;
-  margin-bottom: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
 }
 
 .device-image img {
@@ -114,51 +130,61 @@
   object-fit: cover;
 }
 
-.device-card h3 {
-  margin-top: 0;
-  margin-bottom: 12px;
-  font-size: 18px;
-  color: #333;
-  cursor: pointer;
-}
-
-.device-card h3:hover {
-  color: #007bff;
-}
-
-.device-name-edit input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-.device-flex-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .device-details {
-  font-size: 14px;
-  color: #666;
-  margin: 5px 0;
+  margin-bottom: 15px;
 }
 
-.device-mac {
-  font-size: 12px;
-  color: #999;
-  margin-top: 5px;
+.device-type {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+.mac-address {
+  font-size: 14px;
+  color: #777;
+  margin: 3px 0;
   font-family: monospace;
+}
+
+.device-status {
+  font-size: 14px;
+  color: #333;
+  margin: 10px 0;
+}
+
+/* Delete button as red X */
+.delete-device-btn {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Toggle Switch */
+.toggle-container {
+  display: flex;
+  align-items: center;
 }
 
 .toggle {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 50px;
+  height: 24px;
 }
 
 .toggle input {
@@ -182,41 +208,69 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
   background-color: white;
   transition: .4s;
   border-radius: 50%;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  background-color: #4CAF50;
 }
 
 input:checked + .slider:before {
   transform: translateX(26px);
 }
 
+/* Edit name mode */
+.edit-name {
+  width: 100%;
+  margin-right: 10px;
+}
+
+.edit-name input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.edit-name button {
+  padding: 6px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.edit-name button:last-child {
+  background-color: #f44336;
+}
+
 .error-message {
   color: #d9534f;
-  padding: 10px;
+  padding: 12px 15px;
   margin-bottom: 20px;
   background-color: #f8d7da;
-  border-radius: 4px;
+  border-radius: 8px;
   border: 1px solid #f5c6cb;
+  font-size: 15px;
 }
 
 .loading, .no-devices {
-  padding: 20px;
+  padding: 25px;
   text-align: center;
-  color: #666;
+  color: #333;
   background-color: #f9f9f9;
-  border-radius: 8px;
+  border-radius: 12px;
   margin: 20px 0;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }

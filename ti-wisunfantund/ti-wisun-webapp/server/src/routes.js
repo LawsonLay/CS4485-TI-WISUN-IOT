@@ -345,6 +345,28 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
     }
   });
 
+  // Get devices by type (sensors)
+  app.get('/api/devices/type/sensors', async (req, res) => {
+    try {
+      const devices = await deviceOperations.getDevicesByType('sensor');
+      res.json(devices);
+    } catch (error) {
+      httpLogger.error(`Error fetching sensor devices: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Get devices by type (actuators)
+  app.get('/api/devices/type/actuators', async (req, res) => {
+    try {
+      const devices = await deviceOperations.getDevicesByType('actuator');
+      res.json(devices);
+    } catch (error) {
+      httpLogger.error(`Error fetching actuator devices: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
   /**
    * Relationship management API endpoints
    */
@@ -359,6 +381,17 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
     }
   });
 
+  // Get all relationships with device information
+  app.get('/api/relationships/full', async (req, res) => {
+    try {
+      const relationships = await relationshipOperations.getRelationshipsWithDeviceInfo();
+      res.json(relationships);
+    } catch (error) {
+      httpLogger.error(`Error fetching relationships with device info: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
   // Add a new relationship
   app.post('/api/relationships', async (req, res) => {
     try {
@@ -366,6 +399,20 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
       res.status(201).json(result);
     } catch (error) {
       httpLogger.error(`Error adding relationship: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Update a relationship
+  app.put('/api/relationships/:id', async (req, res) => {
+    try {
+      const result = await relationshipOperations.updateRelationship(req.params.id, req.body);
+      if (result.changes === 0) {
+        return res.status(404).json({ error: 'Relationship not found' });
+      }
+      res.json({ updated: true, id: req.params.id });
+    } catch (error) {
+      httpLogger.error(`Error updating relationship: ${error.message}`);
       res.status(500).json({ error: error.message });
     }
   });

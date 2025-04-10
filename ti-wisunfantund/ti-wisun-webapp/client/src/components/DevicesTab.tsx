@@ -120,6 +120,21 @@ export default function DevicesTab(props: DevicesTabProps) {
     }
   };
 
+  // Handle device deletion
+  const handleDeleteDevice = async (mac_address: string) => {
+    try {
+      if (window.confirm("Are you sure you want to delete this device? This action cannot be undone.")) {
+        await axios.delete(`/api/devices/${mac_address}`);
+        setDevices(prevDevices => 
+          prevDevices.filter(device => device.mac_address !== mac_address)
+        );
+      }
+    } catch (err) {
+      console.error('Error deleting device:', err);
+      setError('Failed to delete device. Please try again.');
+    }
+  };
+
   // Generate random MAC address (format: XX:XX:XX:XX:XX:XX)
   const generateRandomMac = () => {
     const hexDigits = '0123456789ABCDEF';
@@ -157,7 +172,7 @@ export default function DevicesTab(props: DevicesTabProps) {
       name: `${vendorClassType} ${Math.floor(Math.random() * 100)}`,
       activated,
       activation_type: activationType,
-      device_type: isInput ? 'input' : 'output'
+      device_type: isInput ? 'sensor' : 'actuator' // Changed from 'input'/'output' to 'sensor'/'actuator'
     };
   };
   
@@ -261,6 +276,7 @@ export default function DevicesTab(props: DevicesTabProps) {
               image_path={device.image_path}
               onNameChange={handleNameChange}
               onToggleActivation={handleToggleActivation}
+              onDeleteDevice={handleDeleteDevice} // Add this prop
             />
           ))}
         </div>

@@ -4,7 +4,11 @@ const {canonicalIPtoExpandedIP} = require('./parsing');
 const fs = require('fs');
 const { observe } = require('fast-json-patch');
 
-
+/**
+ * URI: /counter
+ * @param newValue - int
+ * @param {canonical ipAddr} targetIP
+ */
 function postCounterState(targetIP, newValue) {
   const reqOptions = {
     observe: false,
@@ -474,4 +478,4 @@ function startOAD(targetIP, payload, filePath) {
   }
 }
 
-module.exports = {getLEDStates, postLEDStates, getRSSIValues, getOADFirmwareVersion, startOAD};
+module.exports = {getLEDStates, postLEDStates, getRSSIValues, getOADFirmwareVersion, startOAD, postLightState, postManualLightState, postCounterState};

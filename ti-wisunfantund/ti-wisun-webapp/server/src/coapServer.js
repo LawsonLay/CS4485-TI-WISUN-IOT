@@ -1,25 +1,61 @@
 const coap = require('coap');
-const {getTopology} = require('./ClientState');
+const {getTopology,getClientState} = require('./ClientState');
 const {postLightState, postCounterState} = require('./coapCommands.js');
 
-/*URI define*/
-const COAP_SENSOR_URI = "sensor";
+/* coap URI definitions */
+/* sensors */
+// TODO: implement listening to incoming message (request) from coapclients (RNs)
+const COAP_FORCE_SENSOR_URI = "fs";
+const COAP_PIR_SENSOR_URI = "pir";
+const COAP_AMBIENT_SENSOR_URI = "ambient";
+/* actuators */
 const COAP_LIGHT_URI = "light";
 
-/**/
-const COAP_MAC_ADDRESS_URI = "mac_address";
-const COAP_VENDOR_CLASS_URI = "vendor_class";
+/* end of coap URI definitions */
+
+
 const {deviceOperations, relationshipOperations} = require('./database.js');
 const { response } = require('express');
 
 /*address*/
 const COAP_PORT = 5683;
-const BR_ADDRESS = '2020:abcd::';
+const EXT_DHCP_FOWARD_BR_ADDRESS = '2020:abcd::';
 
 /*COAP METHOD*/
 const COAP_METHOD_GET = 'GET';
 const COAP_METHOD_POST = 'POST';
 const COAP_METHOD_PUT = 'PUT';
+
+let ENABLE_EXTERNAL_DHCP_SERVER = false;
+let ENABLE_LISTEN_TO_ALL_ADDRESS = false;
+
+/*
+helper function to get the actual border router IP address
+*/
+function isInterfaceUp() {
+    return getClientState().ncpProperties['Interface:Up'] === true;
+}
+
+async function getBorderRouterGlobalAddressSafe(retryDelay = 1000, maxRetries = 10) {
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+        if (isInterfaceUp()) {
+            const addresses = getClientState().ncpProperties['IPv6:AllAddresses'];
+            if (addresses && Array.isArray(addresses)) {
+                const globalAddress = addresses.find(addr => !addr.startsWith('fe80'));
+                if (globalAddress) {
+                    return globalAddress;
+                }
+            }
+        }
+
+        console.log(`[CoAP Server] BR not ready yet, retrying... attempt ${attempt + 1}/${maxRetries}`);
+        await new Promise(resolve => setTimeout(resolve, retryDelay));
+    }
+
+    console.error(`[CoAP Server] Failed to get BR Global Address after ${maxRetries} attempts.`);
+    return undefined;
+}
+
 
 /*TOPOLOGY NODES*/
 const nodes = getTopology().graph.nodes;
@@ -27,10 +63,22 @@ const node = nodes.find(node => node.data.id === targetIP);
 
 function initializeCoAPServer(coapServer){
 	/*coap server endpoint functionality*/
-	coapServer.listen(COAP_PORT, BR_ADDRESS, () => {
-	  console.log('CoAP server listening on coap://['+BR_ADDRESS+']:'+COAP_PORT);
-	});
-
+    if (ENABLE_EXTERNAL_DHCP_SERVER){
+        coapServer.listen(COAP_PORT, EXT_DHCP_FOWARD_BR_ADDRESS, () => {
+            console.log('CoAP server listening on coap://['+EXT_DHCP_FOWARD_BR_ADDRESS+']:'+COAP_PORT);
+          });
+    }
+    else if(!ENABLE_EXTERNAL_DHCP_SERVER){
+        br_ip_address = getBorderRouterGlobalAddressSafe();
+        coapServer.listen(COAP_PORT, br_ip_address, () => {
+            console.log('CoAP server listening on coap://['+br_ip_address+']:'+COAP_PORT);
+          });
+    }
+    else{
+        coapServer.listen(COAP_PORT, () => {
+            console.log('CoAP server listening on CoAP port ' + COAP_PORT + ' on all addresses.');
+          });
+    }
 	// POST COAP_SENSOR_URI
 	coapServer.on('request', (request, response) => {
         const uriPath = request.url.split('/').filter(Boolean);
@@ -44,7 +92,8 @@ function initializeCoAPServer(coapServer){
         const coapPacketType = uriPath[0];
         const sensor_status = request.payload;
 
-        if(coapPacketType == COAP_SENSOR_URI && request.method == COAP_METHOD_POST) {
+        if(coapPacketType == COAP_FORCE_SENSOR_URI && request.method == COAP_METHOD_POST) {
+            console.log('Received force sensor data:', sensor_status.toString()," from:", senderIP);
             callbackRequestSensorToActuator(senderIP, sensor_status);
             response.end('ack');
         }
@@ -135,3 +184,5 @@ async function callbackRequestSensorToActuator(sensorIP, sensor_status){
     }
 
 }
+
+module.exports = { initializeCoAPServer };

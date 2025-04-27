@@ -9,6 +9,7 @@ const SocketIOServer = require('socket.io').Server;
 const {CONSTANTS, setAppConstants, assertDependencies} = require('./AppConstants.js');
 const {initializeSocketIOEvents} = require('./ClientState');
 const {initializeDatabase} = require('./database.js');
+const {initializeCoAPServer} = require('./coapServer.js');
 const fs = require('fs');
 const path = require('path');
 

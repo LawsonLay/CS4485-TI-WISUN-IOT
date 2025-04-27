@@ -4,35 +4,173 @@ const {canonicalIPtoExpandedIP} = require('./parsing');
 const fs = require('fs');
 const { observe } = require('fast-json-patch');
 
-/**
- * URI: /counter
- * @param newValue - int
- * @param {canonical ipAddr} targetIP
- */
-function postCounterState(targetIP, newValue) {
+/* coap URI definitions */
+
+const COAP_LED_URI = 'led'; //default (not used)
+
+/* actuators */
+const COAP_LIGHT_URI = 'light';
+const COAP_MANUAL_LIGHT_URI = 'manual_light';
+const COAP_COUNTER_URI = 'counter';
+
+/* sensors */
+const COAP_FORCE_SENSOR_URI = "fs";
+const COAP_PIR_SENSOR_URI = "pir";
+const COAP_AMBIENT_SENSOR_URI = "ambient";
+
+/* all devices*/
+const COAP_MAC_ADDRESS_URI = 'mac_address';
+const COAP_VENDOR_CLASS_URI = 'vendor_class';
+
+/* end of coap URI definitions */
+
+
+// TODO: sent GET request
+function getVendorClass(targetIP) {
   const reqOptions = {
     observe: false,
     host: targetIP,
-    pathname: 'counter',
-    method: 'post',
+    pathname: COAP_VENDOR_CLASS_URI,
+    method: 'get',
+    confirmable: 'true',
+    retrySend: 'true',
+    options: {},
+  };
+  const date = new Date();
+  const getRequest = coap.request(reqOptions);
+  getRequest.on('response', getResponse => {
+    let vendorClassState;
+    if (getResponse.payload.length >= 8) {
+      const payload = getResponse.payload;
+      vendorClassState = payload.toString('utf8');
+      const nodes = getTopology().graph.nodes;
+      const node = nodes.find(node => node.data.id === targetIP);
+      if (node) {
+        if (!node.data.time || date.getTime() > node.data.time) {
+          node.data.time = date.getTime();
+          node.data.vendorClassState = vendorClassState;
+        }
+      }
+    }
+  });
+  // BOTH OF THESE ARE REQUIRED -> COAP ERRORS OUT OTHERWISE
+  getRequest.on('timeout', e => {});
+  getRequest.on('error', e => {});
+  getRequest.end();  
+}
+
+
+// TODO: sent GET request
+function getMacAddress(targetIP) {
+  const reqOptions = {
+    observe: false,
+    host: targetIP,
+    pathname: COAP_MAC_ADDRESS_URI,
+    method: 'get',
+    confirmable: 'true',
+    retrySend: 'true',
+    options: {},
+  };
+  const date = new Date();
+  const getRequest = coap.request(reqOptions);
+  getRequest.on('response', getResponse => {
+    // console.log('received get response for LEDs', getResponse.code, date.getTime());
+    let macAddressState;
+    let byte_threshold = 8;
+    if (getResponse.payload.length >= 8) {
+      const payload = getResponse.payload;
+      // byte read for (uint8_t) with 0 offset
+      // formatting the mac address to be 00:00:00:00:00:00
+      macAddressState = payload.toString('hex').match(/.{1,2}/g).join(':');
+      const nodes = getTopology().graph.nodes;
+      const node = nodes.find(node => node.data.id === targetIP);
+      if (node) {
+        if (!node.data.time || date.getTime() > node.data.time) {
+          node.data.time = date.getTime();
+          node.data.macAddressState = macAddressState;
+        }
+      }
+    }
+  });
+  // BOTH OF THESE ARE REQUIRED -> COAP ERRORS OUT OTHERWISE
+  getRequest.on('timeout', e => {});
+  getRequest.on('error', e => {});
+  getRequest.end();
+}
+
+// TODO: sent GET request
+function getLightState(targetIP) {
+  const reqOptions = {
+    observe: false,
+    host: targetIP,
+    pathname: COAP_LIGHT_URI,
+    method: 'get',
     confirmable: 'true',
     retrySend: 'true',
     options: {},
   };
 
-  putPayload = [];
-  putPayload.push(newValue);
+  const date = new Date();
 
-  const postRequest = coap.request(reqOptions);
-  postRequest.on('response', postResponse => {
-    console.log('received post response for Counter', postResponse.code, newValue);
+  const getRequest = coap.request(reqOptions);
+  getRequest.on('response', getResponse => {
+    // console.log('received get response for LEDs', getResponse.code, date.getTime());
+    let lightState
+    if (getResponse.payload.length > 0) {
+      const payload = getResponse.payload;
+      lightState = payload.readUInt8(0);
+      const nodes = getTopology().graph.nodes;
+      const node = nodes.find(node => node.data.id === targetIP);
+
+      if (node) {
+        if (!node.data.time || date.getTime() > node.data.time) {
+          node.data.time = date.getTime();
+          node.data.lightState = lightState;
+        }
+      }
+    }
   });
   // BOTH OF THESE ARE REQUIRED -> COAP ERRORS OUT OTHERWISE
-  postRequest.on('timeout', e => {});
-  postRequest.on('error', e => {});
-  // Write the new states to the coap payload
-  postRequest.write(Buffer.from(putPayload));
-  postRequest.end();
+  getRequest.on('timeout', e => {});
+  getRequest.on('error', e => {});
+
+  getRequest.end();
+}
+
+function getCounterState(targetIP) {
+  const reqOptions = {
+    observe: false,
+    host: targetIP,
+    pathname: COAP_COUNTER_URI,
+    method: 'get',
+    confirmable: 'true',
+    retrySend: 'true',
+    options: {},
+  };
+  const date = new Date();
+  const getRequest = coap.request(reqOptions);
+  getRequest.on('response', getResponse => {
+    // console.log('received get response for LEDs', getResponse.code, date.getTime());
+    let countState
+    if (getResponse.payload.length > 0) {
+      const payload = getResponse.payload;
+      // byte read for (uint8_t) with 0 offset
+      counterState = payload.readUInt8(0);
+      const nodes = getTopology().graph.nodes;
+      const node = nodes.find(node => node.data.id === targetIP);
+      if (node) {
+        if (!node.data.time || date.getTime() > node.data.time) {
+          node.data.time = date.getTime();
+          node.data.counterState = counterState;
+          console.log(node.data.counterState);
+        }
+      }
+    }
+  });
+  // BOTH OF THESE ARE REQUIRED -> COAP ERRORS OUT OTHERWISE
+  getRequest.on('timeout', e => {});
+  getRequest.on('error', e => {});
+  getRequest.end();
 }
 
 
@@ -45,7 +183,7 @@ function postManualLightState(targetIP, newValue) {
   const reqOptions = {
     observe: false,
     host: targetIP,
-    pathname: 'manual_light',
+    pathname: COAP_LIGHT_URI,
     method: 'post',
     confirmable: 'true',
     retrySend: 'true',
@@ -67,6 +205,7 @@ function postManualLightState(targetIP, newValue) {
   postRequest.end();
 }
 
+
 /**
  * URI: /light
  * @param newValue - 0 or 1
@@ -76,7 +215,7 @@ function postLightState(targetIP, newValue) {
   const reqOptions = {
     observe: false,
     host: targetIP,
-    pathname: 'light',
+    pathname: COAP_LIGHT_URI,
     method: 'post',
     confirmable: 'true',
     retrySend: 'true',
@@ -100,6 +239,37 @@ function postLightState(targetIP, newValue) {
 }
 
 /**
+ * URI: /counter
+ * @param newValue - int
+ * @param {canonical ipAddr} targetIP
+ */
+function postCounterState(targetIP, newValue) {
+  const reqOptions = {
+    observe: false,
+    host: targetIP,
+    pathname: COAP_COUNTER_URI,
+    method: 'post',
+    confirmable: 'true',
+    retrySend: 'true',
+    options: {},
+  };
+
+  putPayload = [];
+  putPayload.push(newValue);
+
+  const postRequest = coap.request(reqOptions);
+  postRequest.on('response', postResponse => {
+    console.log('received post response for Counter', postResponse.code, newValue);
+  });
+  // BOTH OF THESE ARE REQUIRED -> COAP ERRORS OUT OTHERWISE
+  postRequest.on('timeout', e => {});
+  postRequest.on('error', e => {});
+  // Write the new states to the coap payload
+  postRequest.write(Buffer.from(putPayload));
+  postRequest.end();
+}
+
+/**
  * Get the LED states for the node with ipAddr: targetIP
  * @param {canonical ipAddr} targetIP
  */
@@ -107,7 +277,7 @@ function getLEDStates(targetIP) {
   const reqOptions = {
     observe: false,
     host: targetIP,
-    pathname: 'led',
+    pathname: COAP_LED_URI,
     method: 'get',
     confirmable: 'true',
     retrySend: 'true',
@@ -157,7 +327,7 @@ function postLEDStates(targetIP, color, newValue) {
   const reqOptions = {
     observe: false,
     host: targetIP,
-    pathname: 'led',
+    pathname: COAP_LED_URI,
     method: 'post',
     confirmable: 'true',
     retrySend: 'true',
@@ -477,5 +647,5 @@ function startOAD(targetIP, payload, filePath) {
     });
   }
 }
-
-module.exports = {getLEDStates, postLEDStates, getRSSIValues, getOADFirmwareVersion, startOAD, postLightState, postManualLightState, postCounterState};
+/* TODO: export new coap functions*/
+module.exports = {getLEDStates, postLEDStates, getRSSIValues, getOADFirmwareVersion, startOAD, postLightState, postManualLightState, postCounterState, getMacAddress, getVendorClass, getLightState, getCounterState};

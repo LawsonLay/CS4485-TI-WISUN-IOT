@@ -8,7 +8,8 @@
   flex-direction: column;
   width: 100%;
   padding: 20px;
-  color: #000;
+  color: #1E1E1E; /* tiColors.grayDark */
+  background-color: #ECECEC; /* tiColors.bg0 */
 }
 
 .devices-controls {
@@ -33,29 +34,36 @@
 .search-bar input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
+  border-radius: 0; /* Remove rounded corners */
   font-size: 16px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
+  box-shadow: none; /* Remove shadow */
+  transition: border-color 0.3s ease;
+  background-color: #FFFFFF; /* tiColors.white / bg3 */
+  color: #1E1E1E; /* tiColors.grayDark */
 }
 
 .search-bar input:focus {
-  border-color: #4CAF50;
-  box-shadow: 0 2px 8px rgba(76,175,80,0.2);
+  border-color: #CC0000; /* tiColors.red */
+  box-shadow: none; /* Remove shadow */
   outline: none;
 }
 
 .add-random-btn {
-  background-color: #4CAF50;
-  color: white;
+  background-color: #007C8C; /* tiColors.blue */
+  color: #FFFFFF; /* tiColors.white */
   border: none;
-  border-radius: 8px;
+  border-radius: 0; /* Remove rounded corners */
   padding: 12px 20px;
   font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: none; /* Remove shadow */
   white-space: nowrap;
+}
+
+.add-random-btn:hover {
+  background-color: #005f6b; /* Darker blue for hover */
 }
 
 .filter-controls {
@@ -68,21 +76,16 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  /* Ensure enough vertical space if needed */
+  min-height: 35px; /* Adjust if ThemedSelect needs more space */
 }
 
-.filter-item select {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  font-size: 15px;
-  color: black;
-}
-
-.filter-item label {
-  color: black;
-  font-weight: 500;
+/* Keep label styles */
+.filter-item label,
+.filter-item span /* Target ThemedLabel's span */ {
+  color: #555555; /* tiColors.gray */
+  font-weight: 600; /* Match ThemedLabel */
+  white-space: nowrap; /* Prevent label wrapping */
 }
 
 .devices-table {
@@ -93,11 +96,12 @@
 
 /* Device Card Redesign */
 .device-card {
-  border: 1px solid #eee;
-  border-radius: 12px;
+  border: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
+  border-top: 3px solid #CC0000; /* tiColors.red - Match Tile */
+  border-radius: 0; /* Remove rounded corners */
   padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  background-color: #F7F7F7; /* tiColors.bg2 - Match Tile */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Adjusted shadow */
   position: relative;
 }
 
@@ -111,7 +115,8 @@
 .device-name {
   margin: 0;
   font-size: 18px;
-  color: #000;
+  color: #1E1E1E; /* tiColors.grayDark */
+  font-weight: 600; /* Match ThemedLabel */
   cursor: pointer;
   flex: 1;
 }
@@ -120,14 +125,20 @@
   width: 100%;
   height: 200px;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 0; /* Remove rounded corners */
   margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFFFFF; /* tiColors.white / bg3 */
+  border: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
 }
 
 .device-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .device-details {
@@ -136,22 +147,31 @@
 
 .device-type {
   font-size: 16px;
-  color: #555;
+  color: #555555; /* tiColors.gray */
   margin: 5px 0;
-  font-weight: 500;
+  font-weight: 600; /* Match ThemedLabel */
 }
 
 .mac-address {
   font-size: 14px;
-  color: #777;
+  color: #555555; /* tiColors.gray */
   margin: 3px 0;
   font-family: monospace;
 }
 
+.ipv6-address {
+  font-size: 13px;
+  color: #555555; /* tiColors.gray */
+  margin: 3px 0;
+  font-family: monospace;
+  word-break: break-all;
+}
+
 .device-status {
   font-size: 14px;
-  color: #333;
+  color: #1E1E1E; /* tiColors.grayDark */
   margin: 10px 0;
+  font-weight: 500;
 }
 
 /* Delete button as red X */
@@ -159,10 +179,10 @@
   position: absolute;
   bottom: 15px;
   right: 15px;
-  background-color: #f44336;
-  color: white;
+  background-color: #CC0000; /* tiColors.red */
+  color: #FFFFFF; /* tiColors.white */
   border: none;
-  border-radius: 50%;
+  border-radius: 0; /* Remove rounded corners */
   width: 30px;
   height: 30px;
   font-size: 20px;
@@ -171,7 +191,11 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: none; /* Remove shadow */
+}
+
+.delete-device-btn:hover {
+  background-color: #AE0000; /* tiColors.redDark */
 }
 
 /* Toggle Switch */
@@ -183,8 +207,8 @@
 .toggle {
   position: relative;
   display: inline-block;
-  width: 50px;
-  height: 24px;
+  width: 50px; /* Keep size */
+  height: 24px; /* Keep size */
 }
 
 .toggle input {
@@ -200,29 +224,29 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #98999B; /* tiColors.grayLight */
   transition: .4s;
-  border-radius: 34px;
+  border-radius: 0; /* Remove rounded corners */
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
+  height: 18px; /* Keep size */
+  width: 18px; /* Keep size */
+  left: 3px; /* Keep position */
+  bottom: 3px; /* Keep position */
+  background-color: #FFFFFF; /* tiColors.white */
   transition: .4s;
-  border-radius: 50%;
+  border-radius: 0; /* Remove rounded corners */
 }
 
 input:checked + .slider {
-  background-color: #4CAF50;
+  background-color: #44BB55; /* tiColors.green */
 }
 
 input:checked + .slider:before {
-  transform: translateX(26px);
+  transform: translateX(26px); /* Keep movement */
 }
 
 /* Edit name mode */
@@ -234,43 +258,59 @@ input:checked + .slider:before {
 .edit-name input {
   width: 100%;
   padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
+  border-radius: 0; /* Remove rounded corners */
   font-size: 16px;
   margin-bottom: 8px;
+  background-color: #FFFFFF; /* tiColors.white / bg3 */
+  color: #1E1E1E; /* tiColors.grayDark */
+}
+
+.edit-name input:focus {
+  border-color: #CC0000; /* tiColors.red */
+  outline: none;
 }
 
 .edit-name button {
   padding: 6px 12px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #007C8C; /* tiColors.blue */
+  color: #FFFFFF; /* tiColors.white */
   border: none;
-  border-radius: 6px;
+  border-radius: 0; /* Remove rounded corners */
   margin-right: 5px;
   cursor: pointer;
+  font-weight: 500;
+}
+
+.edit-name button:hover {
+  background-color: #005f6b; /* Darker blue */
 }
 
 .edit-name button:last-child {
-  background-color: #f44336;
+  background-color: #CC0000; /* tiColors.red */
+}
+
+.edit-name button:last-child:hover {
+  background-color: #AE0000; /* tiColors.redDark */
 }
 
 .error-message {
-  color: #d9534f;
+  color: #AE0000; /* tiColors.redDark */
   padding: 12px 15px;
   margin-bottom: 20px;
-  background-color: #f8d7da;
-  border-radius: 8px;
-  border: 1px solid #f5c6cb;
+  background-color: #f8d7da; /* Keep light red background for contrast */
+  border-radius: 0; /* Remove rounded corners */
+  border: 1px solid #CC0000; /* tiColors.red */
   font-size: 15px;
 }
 
 .loading, .no-devices {
   padding: 25px;
   text-align: center;
-  color: #333;
-  background-color: #f9f9f9;
-  border-radius: 12px;
+  color: #1E1E1E; /* tiColors.grayDark */
+  background-color: #F7F7F7; /* tiColors.bg2 */
+  border-radius: 0; /* Remove rounded corners */
   margin: 20px 0;
   font-size: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  border: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
 }

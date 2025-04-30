@@ -3,6 +3,8 @@ import React, { useContext, useState, useRef, useEffect } from 'react';
 import '../assets/Devices.css';
 import DeviceCard from '../components/DeviceCard';
 import axios from 'axios';
+import { ThemedSelect, OptionType } from './ThemedSelect'; // Import ThemedSelect and OptionType
+import ThemedLabel from './ThemedLabel'; // Import ThemedLabel
 
 interface DevicesTabProps { }
 
@@ -14,17 +16,33 @@ interface Device {
   activation_type: string;
   device_type: string;
   image_path?: string;
+  ipv6_address?: string | null; // Add ipv6_address
 }
+
+// Define options for filters
+const typeFilterOptions: OptionType[] = [
+  { label: 'All Types', value: 'all' },
+];
+
+const activationFilterOptions: OptionType[] = [
+  { label: 'All Devices', value: 'all' },
+  { label: 'Activated', value: 'activated' },
+  { label: 'Not Activated', value: 'not-activated' },
+  { label: 'Sensor Activated', value: 'sensor-activated' },
+  { label: 'Manually Activated', value: 'manual-activated' },
+];
 
 export default function DevicesTab(props: DevicesTabProps) {
   const [devices, setDevices] = useState<Device[]>([]);
   const [filteredDevices, setFilteredDevices] = useState<Device[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [typeFilter, setTypeFilter] = useState("all");
-  const [activationFilter, setActivationFilter] = useState("all");
+  // Update state to hold OptionType
+  const [typeFilter, setTypeFilter] = useState<OptionType>(typeFilterOptions[0]);
+  const [activationFilter, setActivationFilter] = useState<OptionType>(activationFilterOptions[0]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [addingDevice, setAddingDevice] = useState(false);
+  const [currentTypeOptions, setCurrentTypeOptions] = useState<OptionType[]>(typeFilterOptions);
 
   // Fetch devices from the server
   const fetchDevices = async () => {
@@ -61,26 +79,41 @@ export default function DevicesTab(props: DevicesTabProps) {
       );
     }
 
-    // Apply type filter
-    if (typeFilter !== "all") {
-      result = result.filter(device => device.vendor_class_type === typeFilter);
+    // Apply type filter using state value
+    if (typeFilter.value !== "all") {
+      result = result.filter(device => device.vendor_class_type === typeFilter.value);
     }
 
-    // Apply activation filter
-    if (activationFilter !== "all") {
-      if (activationFilter === "activated") {
+    // Apply activation filter using state value
+    if (activationFilter.value !== "all") {
+      if (activationFilter.value === "activated") {
         result = result.filter(device => device.activated);
-      } else if (activationFilter === "not-activated") {
+      } else if (activationFilter.value === "not-activated") {
         result = result.filter(device => !device.activated);
-      } else if (activationFilter === "sensor-activated") {
+      } else if (activationFilter.value === "sensor-activated") {
         result = result.filter(device => device.activation_type === "sensor");
-      } else if (activationFilter === "manual-activated") {
+      } else if (activationFilter.value === "manual-activated") {
         result = result.filter(device => device.activation_type === "manual");
       }
     }
 
     setFilteredDevices(result);
   }, [searchTerm, typeFilter, activationFilter, devices]);
+
+  // Update type filter options when devices change
+  useEffect(() => {
+    const uniqueTypes = ["all", ...new Set(devices.map(device => device.vendor_class_type))];
+    const newTypeOptions = uniqueTypes.map(type => ({
+      label: type === "all" ? 'All Types' : type,
+      value: type
+    }));
+    setCurrentTypeOptions(newTypeOptions);
+
+    // Ensure the current filter value is still valid
+    if (!newTypeOptions.some(option => option.value === typeFilter.value)) {
+        setTypeFilter(newTypeOptions[0]); // Reset to 'All Types' if current type disappears
+    }
+  }, [devices, typeFilter.value]); // Add typeFilter.value dependency
 
   // Handle device name change
   const handleNameChange = async (mac_address: string, newName: string) => {
@@ -157,22 +190,32 @@ export default function DevicesTab(props: DevicesTabProps) {
     // Define possible device types and their properties
     const sensorTypes = ['PIR', 'FSR', 'AMBIENT'];
     const actuatorTypes = ['LIGHT', 'COUNTER'];
-    const isInput = Math.random() > 0.5;
+    const isSensor = Math.random() > 0.5; // Changed variable name for clarity
     
-    const vendorClassType = isInput 
+    const vendorClassType = isSensor 
       ? sensorTypes[Math.floor(Math.random() * sensorTypes.length)]
       : actuatorTypes[Math.floor(Math.random() * actuatorTypes.length)];
       
     const activated = Math.random() > 0.7; // 30% chance of being activated
     const activationType = activated ? (Math.random() > 0.5 ? 'sensor' : 'manual') : 'none';
     
+    // Determine image path based on type
+    let imagePath = '/data/images/default.png';
+    if (isSensor) {
+      imagePath = '/data/images/sensor.png';
+    } else { // is Actuator
+      imagePath = '/data/images/actuator.png';
+    }
+
     return {
       mac_address: generateRandomMac(),
       vendor_class_type: vendorClassType,
       name: `${vendorClassType} ${Math.floor(Math.random() * 100)}`,
       activated,
       activation_type: activationType,
-      device_type: isInput ? 'sensor' : 'actuator' // Changed from 'input'/'output' to 'sensor'/'actuator'
+      device_type: isSensor ? 'sensor' : 'actuator',
+      image_path: imagePath, // Set the image path
+      ipv6_address: null // Default ipv6_address for random devices
     };
   };
   
@@ -198,9 +241,6 @@ export default function DevicesTab(props: DevicesTabProps) {
     }
   };
 
-  // Get unique vendor class types for filter dropdown
-  const vendorClassTypes = ["all", ...new Set(devices.map(device => device.vendor_class_type))];
-
   return (
     <div className='devices-container'>
       <div className='devices-controls'>
@@ -225,30 +265,23 @@ export default function DevicesTab(props: DevicesTabProps) {
         
         <div className='filter-controls'>
           <div className='filter-item'>
-            <label>Device Type:</label>
-            <select 
-              value={typeFilter} 
-              onChange={(e) => setTypeFilter(e.target.value)}
-            >
-              <option value="all">All Types</option>
-              {vendorClassTypes.map(type => 
-                type !== "all" && <option key={type} value={type}>{type}</option>
-              )}
-            </select>
+            <ThemedLabel>Device Type:</ThemedLabel>
+            <ThemedSelect
+              options={currentTypeOptions}
+              value={typeFilter}
+              onChange={(selectedOption) => setTypeFilter(selectedOption as OptionType)}
+              width={180} // Adjust width as needed
+            />
           </div>
           
           <div className='filter-item'>
-            <label>Activation:</label>
-            <select 
-              value={activationFilter} 
-              onChange={(e) => setActivationFilter(e.target.value)}
-            >
-              <option value="all">All Devices</option>
-              <option value="activated">Activated</option>
-              <option value="not-activated">Not Activated</option>
-              <option value="sensor-activated">Sensor Activated</option>
-              <option value="manual-activated">Manually Activated</option>
-            </select>
+            <ThemedLabel>Activation:</ThemedLabel>
+            <ThemedSelect
+              options={activationFilterOptions}
+              value={activationFilter}
+              onChange={(selectedOption) => setActivationFilter(selectedOption as OptionType)}
+              width={180} // Adjust width as needed
+            />
           </div>
         </div>
       </div>
@@ -259,8 +292,8 @@ export default function DevicesTab(props: DevicesTabProps) {
         <div className='loading'>Loading devices...</div>
       ) : filteredDevices.length === 0 ? (
         <div className='no-devices'>
-          {searchTerm || typeFilter !== "all" || activationFilter !== "all" ? 
-            "No devices match your filters" : "No devices found"}
+          {searchTerm || typeFilter.value !== "all" || activationFilter.value !== "all" ? 
+            "No devices match your filters." : "No devices found."}
         </div>
       ) : (
         <div className='devices-table'>
@@ -274,9 +307,10 @@ export default function DevicesTab(props: DevicesTabProps) {
               activation_type={device.activation_type}
               device_type={device.device_type}
               image_path={device.image_path}
+              ipv6_address={device.ipv6_address} // Pass ipv6_address
               onNameChange={handleNameChange}
               onToggleActivation={handleToggleActivation}
-              onDeleteDevice={handleDeleteDevice} // Add this prop
+              onDeleteDevice={handleDeleteDevice} 
             />
           ))}
         </div>

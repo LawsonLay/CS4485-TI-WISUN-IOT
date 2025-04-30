@@ -4,6 +4,7 @@ import '../assets/Routines.css';
 import '../assets/Devices.css';
 import RoutineCard, { Routine } from './RoutineCard';
 import axios from 'axios';
+import { ThemedSelect, OptionType, findOptionByValue } from './ThemedSelect';
 
 interface Device {
   mac_address: string;
@@ -30,8 +31,7 @@ export default function RoutinesTab(props: RoutinesTabProps) {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  
-  // Fetch all routines with device information
+
   const fetchRoutines = async () => {
     try {
       setIsLoading(true);
@@ -47,7 +47,6 @@ export default function RoutinesTab(props: RoutinesTabProps) {
     }
   };
 
-  // Fetch sensors
   const fetchSensors = async () => {
     try {
       const response = await axios.get('/api/devices/type/sensors');
@@ -57,7 +56,6 @@ export default function RoutinesTab(props: RoutinesTabProps) {
     }
   };
 
-  // Fetch actuators
   const fetchActuators = async () => {
     try {
       const response = await axios.get('/api/devices/type/actuators');
@@ -67,7 +65,6 @@ export default function RoutinesTab(props: RoutinesTabProps) {
     }
   };
 
-  // Filter routines when search term changes
   useEffect(() => {
     if (searchTerm.trim() === '') {
       setFilteredRoutines(routines);
@@ -83,7 +80,6 @@ export default function RoutinesTab(props: RoutinesTabProps) {
   }, [searchTerm, routines]);
 
   useEffect(() => {
-    // Fetch data when the component mounts
     fetchRoutines();
     fetchSensors();
     fetchActuators();
@@ -91,7 +87,6 @@ export default function RoutinesTab(props: RoutinesTabProps) {
 
   const togglePopup = () => {
     if (isPopupOpen) {
-      // Reset form data when closing popup
       setFormData({
         name: '',
         sensor_mac: '',
@@ -103,15 +98,26 @@ export default function RoutinesTab(props: RoutinesTabProps) {
     setIsPopupOpen(!isPopupOpen);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | OptionType, name?: string) => {
+    let fieldName: string;
+    let fieldValue: any;
+
+    if ('target' in e) {
+      fieldName = e.target.name;
+      fieldValue = e.target.value;
+    } else {
+      fieldName = name!;
+      fieldValue = e.value;
+    }
+  
+    setFormData(prev => ({ ...prev, [fieldName]: fieldValue }));
     
-    // If changing actuator, update the actuator_type
-    if (name === 'actuator_mac') {
-      const selectedActuator = actuators.find(a => a.mac_address === value);
+    if (fieldName === 'actuator_mac') {
+      const selectedActuator = actuators.find(a => a.mac_address === fieldValue);
       if (selectedActuator) {
         setFormData(prev => ({ ...prev, actuator_type: selectedActuator.device_type }));
+      } else {
+        setFormData(prev => ({ ...prev, actuator_type: '' }));
       }
     }
   };
@@ -126,14 +132,11 @@ export default function RoutinesTab(props: RoutinesTabProps) {
 
     try {
       if (editingRoutine) {
-        // Update existing routine
         await axios.put(`/api/relationships/${editingRoutine.id}`, formData);
       } else {
-        // Create new routine
         await axios.post('/api/relationships', formData);
       }
       
-      // Refresh routines
       await fetchRoutines();
       togglePopup();
     } catch (err) {
@@ -164,17 +167,32 @@ export default function RoutinesTab(props: RoutinesTabProps) {
   };
 
   const clickOutsideHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Check if the click was outside the popup box
     const target = e.target as HTMLDivElement;
     if (target.id === 'popupOverlay') {
       togglePopup();
     }
   };
 
+  const sensorOptions: OptionType[] = [
+    { label: 'Select a sensor', value: '' },
+    ...sensors.map(sensor => ({
+      label: `${sensor.name} (${sensor.mac_address})`,
+      value: sensor.mac_address
+    }))
+  ];
+
+  const actuatorOptions: OptionType[] = [
+    { label: 'Select an actuator', value: '' },
+    ...actuators.map(actuator => ({
+      label: `${actuator.name} (${actuator.mac_address})`,
+      value: actuator.mac_address
+    }))
+  ];
+
   return (
     <div className='routines'>
       <div className='routines-controls'>
-        <div className='controls-row'>
+        <div className='controls-row'> 
           <div className='search-bar'>
             <input
               type="text"
@@ -194,22 +212,20 @@ export default function RoutinesTab(props: RoutinesTabProps) {
       
       {isLoading ? (
         <div className="loading">Loading routines...</div>
+      ) : filteredRoutines.length === 0 ? (
+        <div className="no-routines">
+          {searchTerm ? "No routines match your search" : "No routines found."}
+        </div>
       ) : (
         <div className='routines-table'>
-          {filteredRoutines.length === 0 ? (
-            <div className="no-routines">
-              {searchTerm ? "No routines match your search" : "No routines found. Create a new routine to get started."}
-            </div>
-          ) : (
-            filteredRoutines.map(routine => (
-              <RoutineCard 
-                key={routine.id} 
-                routine={routine}
-                onEdit={handleEditRoutine}
-                onDelete={handleDeleteRoutine}
-              />
-            ))
-          )}
+          {filteredRoutines.map(routine => (
+            <RoutineCard 
+              key={routine.id} 
+              routine={routine}
+              onEdit={handleEditRoutine}
+              onDelete={handleDeleteRoutine}
+            />
+          ))}
         </div>
       )}
 
@@ -239,36 +255,22 @@ export default function RoutinesTab(props: RoutinesTabProps) {
             />
 
             <label className="form-label" htmlFor="sensor_mac">When:</label>
-            <select 
-              className='form-input' 
-              name="sensor_mac"
-              value={formData.sensor_mac}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="">Select a sensor</option>
-              {sensors.map(sensor => (
-                <option key={sensor.mac_address} value={sensor.mac_address}>
-                  {sensor.name} ({sensor.mac_address})
-                </option>
-              ))}
-            </select>
+            <div className="form-select-container">
+              <ThemedSelect
+                options={sensorOptions}
+                value={findOptionByValue(sensorOptions, formData.sensor_mac) || sensorOptions[0]}
+                onChange={(selectedOption) => handleInputChange(selectedOption as OptionType, 'sensor_mac')}
+              />
+            </div>
 
             <label className="form-label" htmlFor="actuator_mac">Run:</label>
-            <select 
-              className='form-input' 
-              name="actuator_mac"
-              value={formData.actuator_mac}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="">Select an actuator</option>
-              {actuators.map(actuator => (
-                <option key={actuator.mac_address} value={actuator.mac_address}>
-                  {actuator.name} ({actuator.mac_address})
-                </option>
-              ))}
-            </select>
+            <div className="form-select-container">
+              <ThemedSelect
+                options={actuatorOptions}
+                value={findOptionByValue(actuatorOptions, formData.actuator_mac) || actuatorOptions[0]}
+                onChange={(selectedOption) => handleInputChange(selectedOption as OptionType, 'actuator_mac')}
+              />
+            </div>
 
             <div className="button-container">
               <button className="btn-submit" type="submit">
@@ -291,7 +293,7 @@ export default function RoutinesTab(props: RoutinesTabProps) {
           </form>
 
           <button className="btn-close-popup" onClick={togglePopup}>
-            Close
+            X
           </button>
         </div>
       </div>

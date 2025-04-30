@@ -1,7 +1,10 @@
 .routines {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   padding: 20px;
-  color: #000;
+  color: #1E1E1E; /* tiColors.grayDark */
+  background-color: #ECECEC; /* tiColors.bg0 */
 }
 
 .hide {
@@ -16,41 +19,37 @@
 }
 
 .btn-open-popup {
-  padding: 12px 20px;
-  background-color: #4caf50;
-  color: white;
+  background-color: #007C8C; /* tiColors.blue */
+  color: #FFFFFF; /* tiColors.white */
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  border-radius: 0; /* Remove rounded corners */
+  padding: 12px 20px;
   font-size: 16px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: none; /* Remove shadow */
   white-space: nowrap;
 }
 
 .btn-open-popup:hover {
-  background-color: #45a049;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  transform: translateY(-2px);
+  background-color: #005f6b; /* Darker blue for hover */
 }
 
 .btn-open-popup-routine {
-  padding: 6px 12px;
-  background-color: #2196F3;
-  color: white;
+  background-color: #007C8C; /* tiColors.blue */
+  color: #FFFFFF; /* tiColors.white */
   border: none;
-  border-radius: 6px;
+  border-radius: 0; /* Remove rounded corners */
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-  font-size: 14px;
+  box-shadow: none; /* Remove shadow */
+  white-space: nowrap;
 }
 
 .btn-open-popup-routine:hover {
-  background-color: #0b7dda;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-  transform: translateY(-1px);
+  background-color: #005f6b; /* Darker blue for hover */
 }
 
 .overlay-container {
@@ -59,12 +58,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.75); /* Slightly darker overlay */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(3px);
+  backdrop-filter: none; /* Remove blur */
 }
 
 .overlay-container.show {
@@ -76,20 +75,22 @@
 }
 
 .popup-box {
-  background-color: white;
+  background-color: #F7F7F7; /* tiColors.bg2 */
   padding: 35px;
-  border-radius: 12px;
+  border-radius: 0; /* Remove rounded corners */
+  border: 1px solid #98999B; /* tiColors.grayLight */
   width: 90%;
   max-width: 500px;
   position: relative;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Adjusted shadow */
 }
 
 .popup-box h2 {
   margin-top: 0;
   margin-bottom: 20px;
   font-size: 22px;
-  color: #333;
+  color: #1E1E1E; /* tiColors.grayDark */
+  font-weight: 600;
   text-align: center;
 }
 
@@ -100,66 +101,75 @@
 
 .form-label {
   margin-bottom: 8px;
-  font-weight: 500;
-  color: #000;
+  font-weight: 600; /* Match ThemedLabel */
+  color: #555555; /* tiColors.gray */
 }
 
 .form-input {
-  padding: 12px;
+  padding: 12px; /* Keep padding for text input */
   margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
+  border-radius: 0; /* Remove rounded corners */
   font-size: 16px;
-  transition: all 0.3s ease;
-  color: #000;
+  transition: border-color 0.3s ease;
+  color: #1E1E1E; /* tiColors.grayDark */
+  background-color: #FFFFFF; /* tiColors.white / bg3 */
+  /* Remove height if it conflicts with ThemedSelect */
+}
+
+/* Add styling for the ThemedSelect container */
+.form-select-container {
+  margin-bottom: 20px; /* Maintain spacing like form-input */
+  /* Add any other necessary container styles */
 }
 
 .form-input:focus {
-  border-color: #4CAF50;
-  box-shadow: 0 0 0 2px rgba(76,175,80,0.2);
+  border-color: #CC0000; /* tiColors.red */
+  box-shadow: none; /* Remove shadow */
   outline: none;
 }
 
 .button-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Center the button(s) */
+  gap: 15px; /* Add space between buttons when both are present */
   margin-top: 15px;
 }
 
 .btn-submit {
-  padding: 12px 18px;
-  background-color: #4caf50;
-  color: white;
+  background-color: #007C8C; /* tiColors.blue */
+  color: #FFFFFF; /* tiColors.white */
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  border-radius: 0; /* Remove rounded corners */
+  padding: 12px 20px;
   font-size: 16px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: none; /* Remove shadow */
+  white-space: nowrap;
 }
 
 .btn-submit:hover {
-  background-color: #45a049;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  transform: translateY(-2px);
+  background-color: #005f6b; /* Darker blue for hover */
 }
 
 .btn-delete {
   padding: 12px 18px;
-  background-color: #f44336;
-  color: white;
+  background-color: #CC0000; /* tiColors.red */
+  color: #FFFFFF; /* tiColors.white */
   border: none;
-  border-radius: 8px;
+  border-radius: 0; /* Remove rounded corners */
   cursor: pointer;
   font-size: 16px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  box-shadow: none; /* Remove shadow */
 }
 
 .btn-delete:hover {
-  background-color: #d32f2f;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  transform: translateY(-2px);
+  background-color: #AE0000; /* tiColors.redDark */
+  box-shadow: none;
+  transform: none;
 }
 
 .btn-close-popup {
@@ -168,23 +178,24 @@
   right: 15px;
   background-color: transparent;
   border: none;
-  color: #777;
-  font-size: 20px;
+  color: #555555; /* tiColors.gray */
+  font-size: 24px; /* Slightly larger */
+  font-weight: bold;
   cursor: pointer;
   transition: color 0.2s ease;
 }
 
 .btn-close-popup:hover {
-  color: #333;
+  color: #1E1E1E; /* tiColors.grayDark */
 }
 
 .error-message {
-  color: #d9534f;
+  color: #AE0000; /* tiColors.redDark */
   padding: 12px 15px;
   margin: 15px 0;
-  background-color: #f8d7da;
-  border-radius: 8px;
-  border: 1px solid #f5c6cb;
+  background-color: #f8d7da; /* Keep light red background */
+  border-radius: 0; /* Remove rounded corners */
+  border: 1px solid #CC0000; /* tiColors.red */
   font-size: 15px;
 }
 
@@ -192,22 +203,23 @@
   text-align: center;
   margin: 25px 0;
   font-size: 18px;
-  color: #333;
+  color: #1E1E1E; /* tiColors.grayDark */
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  background-color: #F7F7F7; /* tiColors.bg2 */
+  border-radius: 0; /* Remove rounded corners */
+  box-shadow: none; /* Remove shadow */
+  border: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
 }
 
 .no-routines {
-  text-align: center;
-  margin: 40px 0;
   padding: 25px;
-  font-size: 18px;
-  color: #333;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  text-align: center;
+  color: #1E1E1E; /* tiColors.grayDark */
+  background-color: #F7F7F7; /* tiColors.bg2 */
+  border-radius: 0; /* Remove rounded corners */
+  margin: 20px 0;
+  font-size: 16px;
+  border: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
 }
 
 .routines-table {
@@ -219,17 +231,18 @@
 
 .routine-card {
   width: 300px;
-  border: 1px solid #eee;
-  border-radius: 12px;
+  border: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
+  border-top: 3px solid #CC0000; /* tiColors.red - Match Tile */
+  border-radius: 0; /* Remove rounded corners */
   padding: 20px;
-  background-color: white;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
+  background-color: #F7F7F7; /* tiColors.bg2 - Match Tile */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Adjusted shadow */
+  transition: none; /* Remove transition */
 }
 
 .routine-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+  transform: none; /* Remove hover effect */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Keep base shadow */
 }
 
 .routine-card-header {
@@ -237,14 +250,15 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
   padding-bottom: 12px;
 }
 
 .routine-card-header h3 {
   margin: 0;
   font-size: 18px;
-  color: #000;
+  color: #1E1E1E; /* tiColors.grayDark */
+  font-weight: 600; /* Match ThemedLabel */
 }
 
 .routine-content {
@@ -264,34 +278,24 @@
 .device-container span {
   margin-top: 10px;
   font-size: 15px;
-  color: #000;
+  color: #1E1E1E; /* tiColors.grayDark */
+  font-weight: 500;
   text-align: center;
 }
 
-/* Updated image styling - bigger and rectangular */
 .routine-device-image {
   width: 100%;
   height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  border: 1px solid #eee;
+  object-fit: contain; /* Use contain like DeviceCard */
+  border-radius: 0; /* Remove rounded corners */
+  box-shadow: none; /* Remove shadow */
+  border: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
+  background-color: #FFFFFF; /* tiColors.white / bg3 */
 }
 
 .connection-arrow {
   font-size: 28px;
-  color: #4CAF50;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.6;
-  }
+  color: #44BB55; /* tiColors.green */
+  animation: none; /* Remove pulse animation */
+  opacity: 1; /* Ensure full opacity */
 }

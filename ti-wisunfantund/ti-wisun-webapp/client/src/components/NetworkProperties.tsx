@@ -5,6 +5,8 @@ import {ComponentThemeImplementations} from '../utils';
 import ThemedLabel from './ThemedLabel';
 import {ThemedSelect} from './ThemedSelect';
 import {ThemedUnorderedList} from './ThemedUnorderedList';
+import ThemedButton, { THEMED_BUTTON_TYPE } from './ThemedButton'; // Import ThemedButton
+import axios from 'axios'; // Import axios
 
 const IP_DISPLAY_WIDTH = 300;
 
@@ -178,6 +180,22 @@ export function NetworkProperties({
   borderRouterIPs,
 }: NetworkPropertiesProps) {
   // const isLoading = connectedDevices.length === 0 && borderRouterIPs.length === 0;
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [refreshError, setRefreshError] = useState<string | null>(null);
+
+  const handleRefresh = useCallback(async () => {
+    setIsRefreshing(true);
+    setRefreshError(null);
+    try {
+      await axios.get('/api/network/refresh');
+      // Optionally show a success message or rely on state updates via WebSocket
+    } catch (err: any) {
+      console.error('Error refreshing network properties:', err);
+      setRefreshError(err.response?.data?.error || 'Failed to refresh network data.');
+    } finally {
+      setIsRefreshing(false);
+    }
+  }, []);
 
   if (!interfaceUp) {
     return (
@@ -215,6 +233,16 @@ export function NetworkProperties({
       >
         <BorderRouterIPs borderRouterIPs={borderRouterIPs} />
         <ConnectedDevicesExplorer connectedDevices={connectedDevices} />
+        <div style={{ width: IP_DISPLAY_WIDTH, display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: 10 }}>
+          <ThemedButton
+            style={{ width: '100%' }}
+            onClick={handleRefresh}
+            themedButtonType={THEMED_BUTTON_TYPE.PRIMARY}
+          >
+            {isRefreshing ? 'Refreshing...' : 'Refresh'}
+          </ThemedButton>
+          {refreshError && <ThemedLabel style={{ color: 'red', fontSize: 12 }}>{refreshError}</ThemedLabel>}
+        </div>
       </div>
     );
   }

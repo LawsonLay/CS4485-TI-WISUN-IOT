@@ -201,7 +201,6 @@ async function setProp(property, newValue) {
 
 module.exports = {
   ClientState,
-  getClientState,
   resetNCPPropertyValues,
   resetTopology,
   setProp,

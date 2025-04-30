@@ -67,14 +67,14 @@ class BorderRouterManager {
     this.connected = true;
     this.updateNCPProperties();
     this.updateTopology();
-    this.ncpPropertyUpdateIntervalID = setInterval(
-      this.updateNCPProperties,
-      CONSTANTS.PROPERTY_UPDATE_INTERVAL
-    );
-    this.topologyUpdateIntervalID = setInterval(
-      this.updateTopology,
-      CONSTANTS.TOPOLOGY_UPDATE_INTERVAL
-    );
+    // this.ncpPropertyUpdateIntervalID = setInterval(
+    //   this.updateNCPProperties,
+    //   CONSTANTS.PROPERTY_UPDATE_INTERVAL
+    // );
+    // this.topologyUpdateIntervalID = setInterval(
+    //   this.updateTopology,
+    //   CONSTANTS.TOPOLOGY_UPDATE_INTERVAL
+    // );
   };
 
   /**

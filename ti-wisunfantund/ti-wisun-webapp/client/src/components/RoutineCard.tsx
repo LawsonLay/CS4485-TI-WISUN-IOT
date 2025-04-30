@@ -23,14 +23,14 @@ interface RoutineCardProps {
 export default function RoutineCard(props: RoutineCardProps) {
   const { routine, onEdit, onDelete } = props;
   
-  // Default image path if none provided
-  const defaultImage = '../assets/images/default-device.png';
+  // Default image path if none provided or error occurs
+  const defaultImage = '/data/images/default.png'; // Corrected path
   
   // Handle image error by setting to default image
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement;
     target.onerror = null; // Prevents infinite loop
-    target.src = defaultImage;
+    target.src = defaultImage; // Use the correct default path
   };
   
   return (
@@ -44,10 +44,10 @@ export default function RoutineCard(props: RoutineCardProps) {
       <div className='routine-content'>
         <div className='device-container'>
           <img 
-            src={routine.sensor_image || defaultImage} 
+            src={routine.sensor_image || defaultImage} // Use specific image or fallback
             alt={routine.sensor_name} 
             className='routine-device-image'
-            onError={handleImageError}
+            onError={handleImageError} // Handle loading errors
           />
           <span>{routine.sensor_name}</span>
         </div>
@@ -58,10 +58,10 @@ export default function RoutineCard(props: RoutineCardProps) {
         
         <div className='device-container'>
           <img 
-            src={routine.actuator_image || defaultImage} 
+            src={routine.actuator_image || defaultImage} // Use specific image or fallback
             alt={routine.actuator_name} 
             className='routine-device-image'
-            onError={handleImageError}
+            onError={handleImageError} // Handle loading errors
           />
           <span>{routine.actuator_name}</span>
         </div>

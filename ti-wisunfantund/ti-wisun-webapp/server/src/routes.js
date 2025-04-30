@@ -205,6 +205,26 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
   });
 
   /**
+   * Webserver endpoint to manually trigger an update of NCP properties and topology.
+   */
+  app.get('/api/network/refresh', async (req, res) => {
+    if (!ClientState.connected) {
+      return res.status(400).json({ error: 'Border Router not connected' });
+    }
+    try {
+      // Trigger updates concurrently
+      await Promise.all([
+        borderRouterManager.updateNCPProperties(),
+        borderRouterManager.updateTopology()
+      ]);
+      res.json({ success: true, message: 'Network properties and topology refreshed.' });
+    } catch (error) {
+      httpLogger.error(`Error refreshing network state: ${error.message}`);
+      res.status(500).json({ error: 'Failed to refresh network state.' });
+    }
+  });
+
+  /**
    * Webserver endpoint for inserting or removing from the
    * macfilterlist. Parameters are passed through the query
    * with the following structure:

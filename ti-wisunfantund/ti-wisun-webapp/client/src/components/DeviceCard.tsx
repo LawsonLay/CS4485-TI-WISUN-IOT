@@ -9,6 +9,7 @@ interface DeviceCardProps {
   activation_type: string;
   device_type: string;
   image_path?: string;
+  ipv6_address?: string | null; // Accept ipv6_address
   onNameChange: (mac_address: string, newName: string) => void;
   onToggleActivation: (mac_address: string, activated: boolean) => void;
   onDeleteDevice: (mac_address: string) => void;
@@ -40,12 +41,8 @@ export default function DeviceCard(props: DeviceCardProps) {
   
   // Get appropriate image path based on device type with fallback
   const getImagePath = () => {
-    if (props.image_path) {
-      return props.image_path;
-    }
-    
-    // Default fallback image
-    return '../assets/images/default-device.png';
+    // Use the specific image path if provided, otherwise use the default
+    return props.image_path || '/data/images/default.png'; 
   };
 
   return (
@@ -91,7 +88,7 @@ export default function DeviceCard(props: DeviceCardProps) {
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.onerror = null; // Prevent infinite loop
-            target.src = '../assets/images/default-device.png';
+            target.src = '/data/images/default.png'; // Fallback on error
           }}
         />
       </div>
@@ -99,6 +96,8 @@ export default function DeviceCard(props: DeviceCardProps) {
       <div className="device-details">
         <p className="device-type">{props.vendor_class_type}</p>
         <p className="mac-address">{props.mac_address}</p>
+        {/* Display IPv6 Address */}
+        <p className="ipv6-address">{props.ipv6_address || 'IPv6: N/A'}</p> 
         <p className="device-status">
           Status: {props.activated ? 'Activated' : 'Not Activated'}
           {props.activated && props.activation_type ? ` (${props.activation_type})` : ''}

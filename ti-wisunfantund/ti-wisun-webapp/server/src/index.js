@@ -1,17 +1,17 @@
 const express = require('express');
 const {httpLogger} = require('./logger.js');
 const {initializeRoutes} = require('./routes.js');
+const {startCoapServer} = require('./coapServer.js');
 const {BorderRouterManager} = require('./BorderRouterManager.js');
 const {getPingExecutor} = require('./PingExecutor.js');
 const http = require('http');
-const coap = require('coap');
 const SocketIOServer = require('socket.io').Server;
 const {CONSTANTS, setAppConstants, assertDependencies} = require('./AppConstants.js');
 const {initializeSocketIOEvents} = require('./ClientState');
 const {initializeDatabase} = require('./database.js');
-const {initializeCoAPServer} = require('./coapServer.js');
 const fs = require('fs');
 const path = require('path');
+const { start } = require('repl');
 
 /**
  * This is the program entry and exit. From here all
@@ -42,14 +42,11 @@ function main() {
   const app = express();
   const httpServer = http.createServer(app);
   const io = new SocketIOServer(httpServer);
-  const coapServer = coap.createServer({
-    type: 'udp6'
-  })
   initializeSocketIOEvents(io);
   const brManager = new BorderRouterManager();
   const pingExecutor = getPingExecutor();
   initializeRoutes(app, pingExecutor, brManager);
-  initializeCoAPServer(coapServer);
+  startCoapServer(brManager);
 
   httpServer.listen(CONSTANTS.PORT, CONSTANTS.HOST, () => {
     httpLogger.info(`Listening on http://${CONSTANTS.HOST}:${CONSTANTS.PORT}`);

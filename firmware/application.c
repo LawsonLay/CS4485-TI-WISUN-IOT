@@ -32,6 +32,8 @@
 
 /*
  *  ======== application.c ========
+ *  CS4485 Modified for new COAP services 
+ *  TODO: Add linker definition settings to change between enabling Actuator/Sensor functions
  */
 
 #ifndef WISUN_NCP_ENABLE
@@ -135,7 +137,10 @@ Defines & enums
 #define COAP_UPDATE_NUM_CARS_URI "upd_num_cars"
 #define COAP_MAC_ADDRESS_URI "mac_address"
 #define COAP_VENDOR_CLASS_URI "vendor_class"
+#define COAP_BUTTON_ACTIVATED_CLASS_URI "button_activated"
+//#define COAP_CONNECT_WEB_APP_URI "connect_web_app"
 
+//#define VENDOR_ID_CLASS "sensor"
 
 #define COAP_SENSOR_URI "fs"
 
@@ -334,6 +339,7 @@ static int coap_handle_get_mac_address(int8_t service_id, uint8_t source_address
                  uint16_t source_port, sn_coap_hdr_s *request_ptr);
 // coap client
 static void coap_trigger_input_send_request(uint8_t btn_id);
+//static void coap_connect_web_app_send_request();
 
 #ifdef WISUN_TEST_METRICS
 static int coap_recv_cb_tstmetrics(int8_t service_id, uint8_t source_address[static 16],
@@ -676,6 +682,8 @@ void nanostack_wait_till_connect()
         /* Solid Green to Indicate that node has Joined */
         GPIO_write(CONFIG_GPIO_RLED, CONFIG_GPIO_LED_OFF);
         GPIO_write(CONFIG_GPIO_GLED, CONFIG_GPIO_LED_ON);
+        //coap_connect_web_app_send_request();
+
 
 #ifdef NWK_TEST
         ticks_after_joining = ClockP_getSystemTicks();
@@ -2061,19 +2069,60 @@ static int coap_handle_get_mac_address(int8_t service_id, uint8_t source_address
 static void coap_trigger_input_send_request(uint8_t btn_id)
 {
     uint8_t status_button = 1;
+    // Define the target multicast address string
+    const char *multicast_target_addr_str = "2020:abcd::";
+    // Array to hold the binary address
+    uint8_t multicast_target_addr[16];
+
     if(connectedFlg)
     {
-        // to the Border Router
-        // to root_unicast_addr
+        // Convert the string address to binary
+        stoip6(multicast_target_addr_str, strlen(multicast_target_addr_str), multicast_target_addr);
 
-        // if ns_br use kea (external dhcp server)
-        // use "2020:adbcd::"
-        coap_service_request_send(service_id, 0, 
-                            root_unicast_addr, COAP_PORT,
-                            COAP_MSG_TYPE_NON_CONFIRMABLE, 
-                            COAP_MSG_CODE_REQUEST_POST, 
-                            COAP_SENSOR_URI,
-                            COAP_CT_TEXT_PLAIN, 
+        // Send the CoAP request to the multicast address with an empty URI
+        coap_service_request_send(service_id, 0,
+                            multicast_target_addr, COAP_PORT, // Use the multicast address
+                            COAP_MSG_TYPE_NON_CONFIRMABLE,
+                            COAP_MSG_CODE_REQUEST_POST,
+                            COAP_BUTTON_ACTIVATED_CLASS_URI, // Use an empty URI
+                            COAP_CT_TEXT_PLAIN,
                             &status_button, sizeof(status_button), 0);
     }
 }
+
+// static void coap_connect_web_app_send_request()
+// {
+//   // Define the target multicast address string
+//   const char *multicast_target_addr_str = "2020:abcd::";
+//   const char *vendor_class = VENDOR_ID_CLASS;
+//   // Array to hold the binary address
+//   uint8_t multicast_target_addr[16];
+//   uint64_t mac_address_int = getMACAddress();
+//   char mac_address_str[17]; // 16 hex chars + null terminator
+//   char json_payload[100]; // Buffer for JSON payload, adjust size as needed
+
+//   if(connectedFlg)
+//   {
+//       // Convert the uint64_t MAC address to a hex string
+//       snprintf(mac_address_str, sizeof(mac_address_str), "%016llX", mac_address_int);
+
+//       // Construct the JSON payload
+//       snprintf(json_payload, sizeof(json_payload),
+//                "{\"vendor_class\":\"%s\",\"mac\":\"%s\"}",
+//                vendor_class, mac_address_str);
+
+//       // Convert the multicast string address to binary
+//       stoip6(multicast_target_addr_str, strlen(multicast_target_addr_str), multicast_target_addr);
+
+//       // Send the CoAP request as CONFIRMABLE to ensure acknowledgement and retransmission
+//       // The underlying coap_service library handles retransmissions for CONFIRMABLE messages.
+//       coap_service_request_send(service_id, 0,
+//                           multicast_target_addr, COAP_PORT,
+//                           COAP_MSG_TYPE_CONFIRMABLE, // Use CONFIRMABLE for acknowledgement
+//                           COAP_MSG_CODE_REQUEST_POST,
+//                           COAP_CONNECT_WEB_APP_URI,
+//                           COAP_CT_JSON, // Set content type to JSON
+//                           (uint8_t *) json_payload, strlen(json_payload), // Send JSON string
+//                           NULL); // No specific callback needed for ACK/RST handling by the library
+//     }
+// }

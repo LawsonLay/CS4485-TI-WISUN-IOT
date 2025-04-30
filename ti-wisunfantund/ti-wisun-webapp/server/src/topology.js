@@ -154,10 +154,10 @@ async function getLatestTopology(ClientState) {
         routes.push(route);
 
         // Fetch the RSSI values with a coap request
-        getRSSIValues(ipAddr);
+        //getRSSIValues(ipAddr);
 
         // Fetch the LED states with a coap request
-        getLEDStates(ipAddr);
+        //getLEDStates(ipAddr);
       }
     }
 

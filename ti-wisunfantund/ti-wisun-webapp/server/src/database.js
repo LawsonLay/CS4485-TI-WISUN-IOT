@@ -33,6 +33,7 @@ const initializeDatabase = () => {
         activation_type TEXT DEFAULT 'none',
         device_type TEXT NOT NULL,
         image_path TEXT,
+        ipv6_address TEXT,
         last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )`, (err) => {
         if (err) {
@@ -103,6 +104,21 @@ const deviceOperations = {
       });
     });
   },
+
+  getDeviceByIPv6: (ipv6Address) => {
+    return new Promise((resolve, reject) => {
+      const db = getDatabase();
+      // Note: IPv6 addresses might have scope IDs (%eth0), consider storing/querying canonical form if needed
+      db.get('SELECT * FROM devices WHERE ipv6_address = ?', [ipv6Address], (err, row) => {
+        db.close();
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(row); // Returns the device row or undefined if not found
+      });
+    });
+  },
   
   addDevice: (device) => {
     return new Promise((resolve, reject) => {
@@ -113,15 +129,24 @@ const deviceOperations = {
       }
       
       db.run(
-        'INSERT OR REPLACE INTO devices (mac_address, vendor_class_type, name, activated, activation_type, device_type, image_path) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        [device.mac_address, device.vendor_class_type, device.name, device.activated || 0, device.activation_type || 'none', device.device_type, device.image_path || null],
+        'INSERT OR REPLACE INTO devices (mac_address, vendor_class_type, name, activated, activation_type, device_type, image_path, ipv6_address, last_seen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)',
+        [device.mac_address, device.vendor_class_type, device.name, device.activated || 0, device.activation_type || 'none', device.device_type, device.image_path || null, device.ipv6_address || null],
         function(err) {
           db.close();
           if (err) {
             reject(err);
             return;
           }
-          resolve({ id: this.lastID, ...device });
+          if (this.changes > 0 && !this.lastID) {
+            const updateDb = getDatabase();
+            updateDb.run('UPDATE devices SET last_seen = CURRENT_TIMESTAMP WHERE mac_address = ?', [device.mac_address], (updateErr) => {
+              updateDb.close();
+              if (updateErr) {
+                console.error("Failed to update last_seen on replace:", updateErr);
+              }
+            });
+          }
+          resolve({ id: this.lastID || device.mac_address, ...device });
         }
       );
     });
@@ -134,11 +159,18 @@ const deviceOperations = {
       let updateValues = [];
       
       Object.keys(updates).forEach(key => {
-        updateFields.push(`${key} = ?`);
-        updateValues.push(updates[key]);
+        if (key !== 'last_seen') { 
+          updateFields.push(`${key} = ?`);
+          updateValues.push(updates[key]);
+        }
       });
-      
+
       updateValues.push(macAddress);
+
+      if (updateFields.length === 0) {
+        db.close();
+        return resolve({ changes: 0 }); 
+      }
       
       db.run(
         `UPDATE devices SET ${updateFields.join(', ')} WHERE mac_address = ?`,
@@ -153,6 +185,68 @@ const deviceOperations = {
         }
       );
     });
+  },
+
+  updateDeviceConnectionInfo: (macAddress, ipv6Address) => {
+    return new Promise((resolve, reject) => {
+      const db = getDatabase();
+      db.run(
+        'UPDATE devices SET ipv6_address = ?, last_seen = CURRENT_TIMESTAMP WHERE mac_address = ?',
+        [ipv6Address, macAddress],
+        function(err) {
+          db.close();
+          if (err) {
+            httpLogger.error(`Error updating connection info for ${macAddress}: ${err.message}`);
+            reject(err);
+            return;
+          }
+          httpLogger.info(`Updated connection info for ${macAddress}. Changes: ${this.changes}`);
+          resolve({ changes: this.changes });
+        }
+      );
+    });
+  },
+
+  ensureDeviceExists: async (macAddress, ipv6Address, defaultName, defaultVendorClass, defaultType) => {
+    try {
+      const existingDevice = await deviceOperations.getDeviceByMac(macAddress);
+      if (existingDevice) {
+        httpLogger.info(`Device ${macAddress} exists. Updating connection info.`);
+        // Only update connection info, don't overwrite existing image/name etc.
+        await deviceOperations.updateDeviceConnectionInfo(macAddress, ipv6Address);
+      } else {
+        httpLogger.info(`Device ${macAddress} not found. Adding new device.`);
+        
+        // Determine default image path based on vendor class or type
+        let imagePath = '/data/images/default.png'; // Default image
+        const lowerVendorClass = defaultVendorClass.toLowerCase();
+        // Simple check if vendor class indicates sensor or actuator
+        if (lowerVendorClass.includes('sensor') || defaultType.toLowerCase().includes('sensor')) {
+            imagePath = '/data/images/sensor.png';
+        } else if (lowerVendorClass.includes('actuator') || defaultType.toLowerCase().includes('actuator')) {
+            imagePath = '/data/images/actuator.png'; // Assuming actuator.png is for actuators
+        }
+        // Add more specific checks if needed, e.g., based on exact vendorClassType
+        else if (['PIR', 'FSR', 'AMBIENT'].includes(defaultVendorClass)) {
+             imagePath = '/data/images/sensor.png';
+        } else if (['LIGHT', 'COUNTER'].includes(defaultVendorClass)) {
+             imagePath = '/data/images/actuator.png';
+        }
+
+        const newDevice = {
+          mac_address: macAddress,
+          vendor_class_type: defaultVendorClass,
+          name: defaultName,
+          device_type: defaultType,
+          ipv6_address: ipv6Address,
+          image_path: imagePath, // Set the determined image path
+        };
+        await deviceOperations.addDevice(newDevice);
+      }
+    } catch (error) {
+      httpLogger.error(`Error in ensureDeviceExists for ${macAddress}: ${error.message}`);
+      throw error;
+    }
   },
   
   deleteDevice: (macAddress) => {

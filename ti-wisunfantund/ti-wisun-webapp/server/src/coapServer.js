@@ -68,6 +68,17 @@ function startCoapServer(borderRouterManager) {
                         vendorClass      // Default type
                     );
                     httpLogger.info(`Successfully processed connection for MAC: ${mac}`);
+
+                    try {
+                        // Trigger updates concurrently
+                        await Promise.all([
+                            borderRouterManager.updateNCPProperties(),
+                            borderRouterManager.updateTopology()
+                        ]);
+                    } catch (error) {
+                        httpLogger.error(`Error refreshing network state: ${error.message}`);
+                    }
+                    
                 } catch (error) {
                     httpLogger.error(`Database operation failed for MAC ${mac}: ${error.message}`);
                     // Consider sending 5.00 Server Error if DB fails
@@ -139,16 +150,6 @@ function startCoapServer(borderRouterManager) {
             httpLogger.info(`Received unhandled CoAP request: ${req.method} ${req.url}`);
             res.code = '4.04'; // Not Found or appropriate code
             res.end('Not Found'); // Changed response message
-        }
-
-        try {
-            // Trigger updates concurrently
-            await Promise.all([
-                borderRouterManager.updateNCPProperties(),
-                borderRouterManager.updateTopology()
-            ]);
-        } catch (error) {
-            httpLogger.error(`Error refreshing network state: ${error.message}`);
         }
     })
 }

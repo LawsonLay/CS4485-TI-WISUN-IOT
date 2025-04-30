@@ -1,7 +1,8 @@
 const coap = require('coap');
-const { deviceOperations } = require('./database'); // Import deviceOperations
+const { deviceOperations, relationshipOperations } = require('./database'); // Import deviceOperations and relationshipOperations
 const { httpLogger } = require('./logger'); // Assuming logger is setup
 const {BorderRouterManager} = require('./BorderRouterManager.js'); // Import BorderRouterManager
+const { postLEDStates } = require('./coapCommands.js'); // Import postLEDStates
 
 const server = coap.createServer(
     {
@@ -82,6 +83,57 @@ function startCoapServer(borderRouterManager) {
 
             res.code = '2.05'; // Content
             res.end('Received connection request');
+        } else if (req.method === 'POST' && req.url === '/button_activated') {
+            const sensorIPv6 = req.rsinfo.address;
+            httpLogger.info(`Received button activation from ${sensorIPv6}`);
+
+            try {
+                // 1. Find the sensor device by its IPv6 address
+                const sensorDevice = await deviceOperations.getDeviceByIPv6(sensorIPv6);
+                if (!sensorDevice) {
+                    httpLogger.warn(`Button activation from unknown device IP: ${sensorIPv6}`);
+                    res.code = '4.04'; // Not Found
+                    res.end('Sensor device not found');
+                    return;
+                }
+                const sensorMac = sensorDevice.mac_address;
+                httpLogger.info(`Button activation identified from sensor MAC: ${sensorMac}`);
+
+                // 2. Find relationships where this device is the sensor
+                const relationships = await relationshipOperations.getRelationshipsBySensor(sensorMac);
+                if (!relationships || relationships.length === 0) {
+                    httpLogger.info(`No relationships found for sensor MAC: ${sensorMac}`);
+                    res.code = '2.05'; // Content (Acknowledged, but no action)
+                    res.end('No actuator relationships found');
+                    return;
+                }
+
+                httpLogger.info(`Found ${relationships.length} relationship(s) for sensor ${sensorMac}`);
+
+                // 3. For each relationship, find the actuator and trigger it
+                let actuatorsTriggered = 0;
+                for (const relationship of relationships) {
+                    const actuatorMac = relationship.actuator_mac;
+                    const actuatorDevice = await deviceOperations.getDeviceByMac(actuatorMac);
+
+                    if (actuatorDevice && actuatorDevice.ipv6_address) {
+                        httpLogger.info(`Triggering actuator ${actuatorMac} (${actuatorDevice.ipv6_address}) via relationship ${relationship.id}`);
+                        // Call postLEDStates: targetIP = actuator IPv6, color = 'red', newValue = 0
+                        postLEDStates(actuatorDevice.ipv6_address, 'red', 0);
+                        actuatorsTriggered++;
+                    } else {
+                        httpLogger.warn(`Actuator ${actuatorMac} in relationship ${relationship.id} not found or has no IPv6 address.`);
+                    }
+                }
+
+                res.code = '2.04'; // Changed
+                res.end(`Triggered ${actuatorsTriggered} actuator(s)`);
+
+            } catch (error) {
+                httpLogger.error(`Error processing button activation from ${sensorIPv6}: ${error.message}`);
+                res.code = '5.00'; // Internal Server Error
+                res.end('Error processing request');
+            }
         } else {
             // Handle other requests or send a default response
             httpLogger.info(`Received unhandled CoAP request: ${req.method} ${req.url}`);

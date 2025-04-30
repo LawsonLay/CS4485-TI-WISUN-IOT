@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Border router IPv6 address and netmask
+# This address will be assigned to the interface on startup
+BORDER_ROUTER_IP=2020:abcd::
+BORDER_ROUTER_NETMASK=64
+
+# ti-wisunfantund paths
+WFANTUND_DIRECTORY=/usr/local/sbin
+WFANTUND_BINARY=wfantund
+WFANCTL_DIRECTROY=/usr/local/bin
+WFANCTL_BINARY=wfanctl
+WFANCTL_CMD=$WFANCTL_DIRECTROY/$WFANCTL_BINARY
+
+############################################################
+
+# Function to bring up border router
+start_wisun() {
+    gpioset -m time -u 200000 gpiochip2 14=0    # Pull reset pin of CC1352P7
+    gpioget gpiochip2 14 > /dev/null            # Set GPIO back to input
+    sleep 2
+
+    # Start wfantund if it is not already running
+    pgrep -x $WFANTUND_BINARY > /dev/null || $WFANTUND_DIRECTORY/$WFANTUND_BINARY 2> /dev/null &
+    sleep 2
+
+    # Bring up Wi-SUN stack
+    echo -n "set Interface:Up true" | $WFANCTL_CMD 2> /dev/null
+    echo -n "set Stack:Up true" | $WFANCTL_CMD 2> /dev/null
+
+    # Add ip address to the network interface
+    ip addr add $BORDER_ROUTER_IP/$BORDER_ROUTER_NETMASK dev wfan0
+}
+
+# Bring up Wi-SUN
+start_wisun
+
+# Notify systemd that startup is complete
+systemd-notify --ready
+
+# Loop to restart NCP in case it goes offline
+# Unfortunately, the NCP firmware still goes offline at random intervals,
+# in which case it needs to be restarted.
+while true
+do
+    sleep 300
+    if [[ $(echo -n "get NCP:State" | $WFANCTL_CMD 2> /dev/null | head -n 1) != 'NCP:State = "associated"' ]]; then
+        pkill -x $WFANTUND_BINARY
+        start_wisun
+    fi
+done
+
+# Wait for wfantund to quit
+wait

@@ -91,6 +91,60 @@ function getLEDStates(targetIP) {
   getRequest.end();
 }
 
+function turnOnLightForSetTime(targetIP, time) {
+  const reqOptions = {
+    observe: false,
+    host: targetIP,
+    pathname: 'activate_light',
+    method: 'post',
+    confirmable: 'true',
+    retrySend: 'true',
+    options: {},
+  };
+
+  putPayload = [];
+  putPayload.push(time);
+
+  const postRequest = coap.request(reqOptions);
+  postRequest.on('response', postResponse => {
+    console.log('received post response for external LEDs', postResponse.code);
+  });
+  // BOTH OF THESE ARE REQUIRED -> COAP ERRORS OUT OTHERWISE
+  postRequest.on('timeout', e => {});
+  postRequest.on('error', e => {});
+  // Write the new states to the coap payload
+  postRequest.write(Buffer.from(putPayload));
+  postRequest.end();
+}
+
+function turnOnLightManual(targetIP, state, manual_mode) {
+  const reqOptions = {
+    observe: false,
+    host: targetIP,
+    pathname: 'activate_light_manual',
+    method: 'post',
+    confirmable: 'true',
+    retrySend: 'true',
+    options: {},
+  };
+
+  putPayload = [];
+  putPayload.push(state);
+  putPayload.push(manual_mode);
+
+  const postRequest = coap.request(reqOptions);
+  postRequest.on('response', postResponse => {
+    console.log('received post response for external LEDs', postResponse.code);
+  });
+  // BOTH OF THESE ARE REQUIRED -> COAP ERRORS OUT OTHERWISE
+  postRequest.on('timeout', e => {});
+  postRequest.on('error', e => {});
+  // Write the new states to the coap payload
+  postRequest.write(Buffer.from(putPayload));
+  postRequest.end();
+}
+
+
 /**
  * Post a new LED states for the node with ipAddr: targetIP,
  * color: 'red', or 'green', and newValue: 0 or 1
@@ -424,4 +478,4 @@ function startOAD(targetIP, payload, filePath) {
   }
 }
 
-module.exports = {getLEDStates, postLEDStates, getRSSIValues, getOADFirmwareVersion, startOAD};
+module.exports = {getLEDStates, postLEDStates, turnOnLightForSetTime, turnOnLightManual, getRSSIValues, getOADFirmwareVersion, startOAD};

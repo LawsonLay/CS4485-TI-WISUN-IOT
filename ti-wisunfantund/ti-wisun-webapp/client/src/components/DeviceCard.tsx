@@ -9,9 +9,11 @@ interface DeviceCardProps {
   activation_type: string;
   device_type: string;
   image_path?: string;
-  ipv6_address?: string | null; // Accept ipv6_address
+  ipv6_address?: string | null;
+  manual_mode?: boolean
   onNameChange: (mac_address: string, newName: string) => void;
   onToggleActivation: (mac_address: string, activated: boolean) => void;
+  onDeviceModeChange: (mac_address: string, mode:  'manual-on' | 'manual-off' | 'automatic') => void;
   onDeleteDevice: (mac_address: string) => void;
 }
 
@@ -34,16 +36,23 @@ export default function DeviceCard(props: DeviceCardProps) {
       setIsEditing(false);
     }
   };
+
+   const handleLegacyToggleActivation = () => {
+    props.onToggleActivation(props.mac_address, !props.activated);
+  };
   
   const handleToggleActivation = () => {
     props.onToggleActivation(props.mac_address, !props.activated);
   };
   
-  // Get appropriate image path based on device type with fallback
   const getImagePath = () => {
     // Use the specific image path if provided, otherwise use the default
     return props.image_path || '/data/images/default.png'; 
   };
+
+  const currentMode = props.manual_mode 
+    ? (props.activated ? 'manual-on' : 'manual-off') 
+    : 'automatic';
 
   return (
     <div className="device-card">
@@ -69,16 +78,34 @@ export default function DeviceCard(props: DeviceCardProps) {
           </h3>
         )}
         
-        <div className="toggle-container">
-          <label className="toggle">
-            <input
-              type="checkbox"
-              checked={props.activated}
-              onChange={handleToggleActivation}
-            />
-            <span className="slider"></span>
-          </label>
-        </div>
+        {props.device_type === 'actuator' ? (
+          <div className="three-way-switch">
+            <button 
+              className={`switch-option ${currentMode === 'manual-off' ? 'active' : ''}`}
+              onClick={() => props.onDeviceModeChange(props.mac_address, 'manual-off')}
+              title="Manual Off"
+            >
+              OFF
+            </button>
+            <button 
+              className={`switch-option ${currentMode === 'automatic' ? 'active' : ''}`}
+              onClick={() => props.onDeviceModeChange(props.mac_address, 'automatic')}
+              title="Automatic"
+            >
+              AUTO
+            </button>
+            <button 
+              className={`switch-option ${currentMode === 'manual-on' ? 'active' : ''}`}
+              onClick={() => props.onDeviceModeChange(props.mac_address, 'manual-on')}
+              title="Manual On"
+            >
+              ON
+            </button>
+          </div>
+        ) : props.vendor_class_type !== 'sensor' && ( // Fallback for non-actuator, non-sensor devices if any
+          <div>
+          </div>
+        )}
       </div>
       
       <div className="device-image">
@@ -96,11 +123,10 @@ export default function DeviceCard(props: DeviceCardProps) {
       <div className="device-details">
         <p className="device-type">{props.vendor_class_type}</p>
         <p className="mac-address">{props.mac_address}</p>
-        {/* Display IPv6 Address */}
         <p className="ipv6-address">{props.ipv6_address || 'IPv6: N/A'}</p> 
         <p className="device-status">
-          Status: {props.activated ? 'Activated' : 'Not Activated'}
-          {props.activated && props.activation_type ? ` (${props.activation_type})` : ''}
+          Status: {props.manual_mode ? `Manual ${props.activated ? 'ON' : 'OFF'}` : (props.activated ? 'Activated (AUTO)' : 'Not Activated (AUTO)')}
+          {props.activation_type && props.activation_type !== 'none' ? ` (${props.activation_type})` : ''}
         </p>
       </div>
       

@@ -10,7 +10,7 @@ const CONSTANTS = {
   OUTPUT_DIR_PATH: '/tmp/ti-wisun-webapp/output',
   PING_RESULTS_FILE_NAME: 'PingResults.csv',
   WFANTUND_PATH: '/usr/local/sbin/wfantund',
-  BR_FILE_PATH: '/dev/play/CC1352/uart',
+  BR_FILE_PATH: '/dev/ttyACM0',
   PROPERTY_UPDATE_INTERVAL: 9998000, // in ms
   TOPOLOGY_UPDATE_INTERVAL: 9999999, // in ms
   MANUAL_DEV_MODE: false,

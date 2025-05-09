@@ -16,7 +16,8 @@ interface Device {
   activation_type: string;
   device_type: string;
   image_path?: string;
-  ipv6_address?: string | null; // Add ipv6_address
+  ipv6_address?: string | null;
+  manual_mode? : boolean;
 }
 
 // Define options for filters
@@ -138,18 +139,35 @@ export default function DevicesTab(props: DevicesTabProps) {
       
       await axios.put(`/api/devices/${mac_address}`, { 
         activated, 
-        activation_type 
+        activation_type,
+        manual_mode: true
       });
       
       setDevices(prevDevices => 
         prevDevices.map(device => 
           device.mac_address === mac_address ? 
-          { ...device, activated, activation_type } : device
+          { ...device, activated, activation_type, manual_mode: true } : device
         )
       );
     } catch (err) {
       console.error('Error toggling device activation:', err);
       setError('Failed to update device activation. Please try again.');
+    }
+  };
+
+  const handleDeviceModeChange = async (mac_address: string, mode: 'manual-on' | 'manual-off' | 'automatic') => {
+    try {
+      const response = await axios.post(`/api/devices/${mac_address}/control`, { mode });
+      const updatedDevice = response.data;
+      setDevices(prevDevices =>
+        prevDevices.map(device =>
+          device.mac_address === mac_address ? { ...device, ...updatedDevice } : device
+        )
+      );
+      setError(null);
+    } catch (err: any) {
+      console.error(`Error changing device ${mac_address} to mode ${mode}:`, err);
+      setError(err.response?.data?.error || `Failed to set device to ${mode} mode. Please try again.`);
     }
   };
 
@@ -307,9 +325,11 @@ export default function DevicesTab(props: DevicesTabProps) {
               activation_type={device.activation_type}
               device_type={device.device_type}
               image_path={device.image_path}
-              ipv6_address={device.ipv6_address} // Pass ipv6_address
+              ipv6_address={device.ipv6_address}
+              manual_mode={device.manual_mode}
               onNameChange={handleNameChange}
               onToggleActivation={handleToggleActivation}
+              onDeviceModeChange={handleDeviceModeChange}
               onDeleteDevice={handleDeleteDevice} 
             />
           ))}

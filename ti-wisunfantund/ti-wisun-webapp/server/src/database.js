@@ -34,7 +34,8 @@ const initializeDatabase = () => {
         device_type TEXT NOT NULL,
         image_path TEXT,
         ipv6_address TEXT,
-        last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        manual_mode BOOLEAN DEFAULT 0
       )`, (err) => {
         if (err) {
           httpLogger.error(`Failed to create devices table: ${err.message}`);
@@ -49,6 +50,7 @@ const initializeDatabase = () => {
           sensor_mac TEXT NOT NULL,
           actuator_mac TEXT NOT NULL,
           actuator_type TEXT NOT NULL,
+          set_time INTEGER DEFAULT 1,
           FOREIGN KEY (sensor_mac) REFERENCES devices (mac_address) ON DELETE CASCADE,
           FOREIGN KEY (actuator_mac) REFERENCES devices (mac_address) ON DELETE CASCADE,
           UNIQUE(sensor_mac, actuator_mac)
@@ -129,8 +131,8 @@ const deviceOperations = {
       }
       
       db.run(
-        'INSERT OR REPLACE INTO devices (mac_address, vendor_class_type, name, activated, activation_type, device_type, image_path, ipv6_address, last_seen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)',
-        [device.mac_address, device.vendor_class_type, device.name, device.activated || 0, device.activation_type || 'none', device.device_type, device.image_path || null, device.ipv6_address || null],
+        'INSERT OR REPLACE INTO devices (mac_address, vendor_class_type, name, activated, activation_type, device_type, image_path, ipv6_address, last_seen, manual_mode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?)',
+        [device.mac_address, device.vendor_class_type, device.name, device.activated || 0, device.activation_type || 'none', device.device_type, device.image_path || null, device.ipv6_address || null, device.manual_mode || 0],
         function(err) {
           db.close();
           if (err) {
@@ -225,7 +227,11 @@ const deviceOperations = {
             imagePath = '/data/images/sensor.png';
         } else if (lowerVendorClass.includes('actuator') || defaultType.toLowerCase().includes('actuator')) {
             imagePath = '/data/images/actuator.png'; // Assuming actuator.png is for actuators
-        }
+        } else if (lowerVendorClass.includes('fsr') || defaultType.toLowerCase().includes('fsr')) {
+          imagePath = '/data/images/sensor.png'; 
+        } else if (lowerVendorClass.includes('light') || defaultType.toLowerCase().includes('light')) {
+          imagePath = '/data/images/actuator.png'; 
+        } 
         // Add more specific checks if needed, e.g., based on exact vendorClassType
         else if (['PIR', 'FSR', 'AMBIENT'].includes(defaultVendorClass)) {
              imagePath = '/data/images/sensor.png';
@@ -240,6 +246,7 @@ const deviceOperations = {
           device_type: defaultType,
           ipv6_address: ipv6Address,
           image_path: imagePath, // Set the determined image path
+          manual_mode: false,
         };
         await deviceOperations.addDevice(newDevice);
       }
@@ -298,8 +305,8 @@ const relationshipOperations = {
     return new Promise((resolve, reject) => {
       const db = getDatabase();
       db.run(
-        'INSERT INTO relationships (name, sensor_mac, actuator_mac, actuator_type) VALUES (?, ?, ?, ?)',
-        [relationship.name, relationship.sensor_mac, relationship.actuator_mac, relationship.actuator_type],
+        'INSERT INTO relationships (name, sensor_mac, actuator_mac, actuator_type, set_time) VALUES (?, ?, ?, ?, ?)',
+        [relationship.name, relationship.sensor_mac, relationship.actuator_mac, relationship.actuator_type, relationship.set_time || 1],
         function(err) {
           db.close();
           if (err) {
@@ -364,6 +371,7 @@ const relationshipOperations = {
           r.sensor_mac, 
           r.actuator_mac, 
           r.actuator_type,
+          r.set_time,
           sd.name AS sensor_name, 
           ad.name AS actuator_name,
           sd.image_path AS sensor_image, 
@@ -388,8 +396,8 @@ const relationshipOperations = {
     return new Promise((resolve, reject) => {
       const db = getDatabase();
       db.run(
-        'UPDATE relationships SET name = ?, sensor_mac = ?, actuator_mac = ?, actuator_type = ? WHERE id = ?',
-        [relationship.name, relationship.sensor_mac, relationship.actuator_mac, relationship.actuator_type, id],
+        'UPDATE relationships SET name = ?, sensor_mac = ?, actuator_mac = ?, actuator_type = ?, set_time = ? WHERE id = ?',
+        [relationship.name, relationship.sensor_mac, relationship.actuator_mac, relationship.actuator_type, relationship.set_time || 1, id],
         function(err) {
           db.close();
           if (err) {

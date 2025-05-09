@@ -249,6 +249,53 @@ input:checked + .slider:before {
   transform: translateX(26px); /* Keep movement */
 }
 
+/* Three-way Switch Styles */
+.three-way-switch {
+  display: flex;
+  border: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
+  border-radius: 0; /* No rounded corners */
+  overflow: hidden; /* Ensures children conform to border radius if any */
+}
+
+.three-way-switch .switch-option {
+  flex: 1;
+  padding: 8px 10px;
+  text-align: center;
+  background-color: #F7F7F7; /* tiColors.bg2 */
+  color: #555555; /* tiColors.gray */
+  border: none;
+  cursor: pointer;
+  font-size: 12px; /* Smaller font for compact switch */
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  white-space: nowrap;
+}
+
+.three-way-switch .switch-option:not(:last-child) {
+  border-right: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
+}
+
+.three-way-switch .switch-option:hover {
+  background-color: #ECECEC; /* tiColors.bg0 */
+}
+
+.three-way-switch .switch-option.active {
+  background-color: #007C8C; /* tiColors.blue */
+  color: #FFFFFF; /* tiColors.white */
+  font-weight: 600;
+}
+
+/* Adjust active states for specific modes if needed */
+.three-way-switch .switch-option.active[title="Manual Off"] {
+  background-color: #CC0000; /* tiColors.red for OFF */
+}
+.three-way-switch .switch-option.active[title="Manual On"] {
+  background-color: #44BB55; /* tiColors.green for ON */
+}
+.three-way-switch .switch-option.active[title="Automatic"] {
+  background-color: #007C8C; /* tiColors.blue for AUTO */
+}
+
 /* Edit name mode */
 .edit-name {
   width: 100%;

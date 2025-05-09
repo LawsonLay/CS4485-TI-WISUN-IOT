@@ -8,7 +8,7 @@ const path = require('path');
 const {sendDBusMessage} = require('./dbusCommands.js');
 const {CONSTANTS} = require('./AppConstants');
 const {SerialPort} = require('serialport');
-const {postLEDStates, getOADFirmwareVersion, startOAD} = require('./coapCommands.js');
+const {postLEDStates, getOADFirmwareVersion, startOAD, turnOnLightManual} = require('./coapCommands.js');
 const {deviceOperations, relationshipOperations} = require('./database.js');
 const multer = require('multer');
 const fs = require('fs');
@@ -339,6 +339,14 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
       if (req.file) {
         updates.image_path = `/data/images/${req.file.filename}`;
       }
+
+      // Convert manual_mode to boolean if it's a string
+      if (updates.manual_mode !== undefined && typeof updates.manual_mode === 'string') {
+        updates.manual_mode = updates.manual_mode === 'true';
+      }
+      if (updates.activated !== undefined && typeof updates.activated === 'string') {
+        updates.activated = updates.activated === 'true';
+      }
       
       const result = await deviceOperations.updateDevice(req.params.mac, updates);
       if (result.changes === 0) {
@@ -384,6 +392,64 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
     } catch (error) {
       httpLogger.error(`Error fetching actuator devices: ${error.message}`);
       res.status(500).json({ error: error.message });
+    }
+  });
+
+  // New endpoint to control device mode (manual on/off, auto)
+  app.post('/api/devices/:mac/control', async (req, res) => {
+    const { mac } = req.params;
+    const { mode } = req.body; // mode: 'manual-on', 'manual-off', 'automatic'
+
+    try {
+      const device = await deviceOperations.getDeviceByMac(mac);
+      if (!device) {
+        return res.status(404).json({ error: 'Device not found' });
+      }
+      if (device.device_type !== 'actuator') {
+        return res.status(400).json({ error: 'Device is not an actuator' });
+      }
+      if (!device.ipv6_address) {
+        return res.status(400).json({ error: 'Device IPv6 address not available for CoAP command.' });
+      }
+
+      let coapState;
+      let coapManualMode;
+      let dbUpdates = {};
+
+      switch (mode) {
+        case 'manual-on':
+          coapState = 1;
+          coapManualMode = 1;
+          dbUpdates = { activated: true, manual_mode: true, activation_type: 'manual-on' };
+          break;
+        case 'manual-off':
+          coapState = 0;
+          coapManualMode = 1;
+          dbUpdates = { activated: false, manual_mode: true, activation_type: 'manual-off' };
+          break;
+        case 'automatic':
+          coapState = 0; // Set light off initially when switching to auto
+          coapManualMode = 0;
+          dbUpdates = { activated: false, manual_mode: false, activation_type: 'automatic' };
+          break;
+        default:
+          return res.status(400).json({ error: 'Invalid mode specified' });
+      }
+
+      // Call CoAP command
+      turnOnLightManual(device.ipv6_address, coapState, coapManualMode);
+      httpLogger.info(`CoAP command turnOnLightManual(${device.ipv6_address}, ${coapState}, ${coapManualMode}) sent for device ${mac} in mode ${mode}.`);
+
+      // Update database
+      await deviceOperations.updateDevice(mac, dbUpdates);
+      
+      // Fetch the updated device to return
+      const updatedDevice = await deviceOperations.getDeviceByMac(mac);
+      res.json(updatedDevice);
+
+    } catch (error) {
+      httpLogger.error(`Error controlling device ${mac} to mode ${mode}: ${error.message}`);
+      res.status(500).json({ error: `Failed to control device: ${error.message}` });
     }
   });
 

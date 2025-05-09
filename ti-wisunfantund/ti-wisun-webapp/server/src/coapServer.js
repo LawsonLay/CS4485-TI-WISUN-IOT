@@ -2,7 +2,7 @@ const coap = require('coap');
 const { deviceOperations, relationshipOperations } = require('./database'); // Import deviceOperations and relationshipOperations
 const { httpLogger } = require('./logger'); // Assuming logger is setup
 const {BorderRouterManager} = require('./BorderRouterManager.js'); // Import BorderRouterManager
-const { postLEDStates } = require('./coapCommands.js'); // Import postLEDStates
+const { turnOnLightForSetTime } = require('./coapCommands.js'); // Import postLEDStates
 
 const server = coap.createServer(
     {
@@ -17,6 +17,21 @@ function startCoapServer(borderRouterManager) {
         httpLogger.info('CoAP server is listening on port 5683'); // Use logger
     })
 
+    // Add a general error handler for the server to catch unhandled errors
+    server.on('error', (err) => {
+        httpLogger.error(`CoAP server error: ${err.message}`, err);
+        // Log the error but attempt to keep the server running
+        console.error('CoAP server encountered an error:', err);
+        // Avoid crashing the process for timeout errors specifically
+        if (err instanceof coap.RetrySendError) {
+            httpLogger.warn('Caught a RetrySendError at the server level, likely due to client timeout.');
+        } else if (err.code === 'EADDRINUSE') {
+             console.error('CoAP server error: Address in use, exiting.');
+             process.exit(1); // Exit for critical errors like port conflict
+        }
+        // For other errors, log them but the server might continue running depending on the error
+    });
+
     server.on('request', async (req, res) => { // Make handler async
         console.log(`Received CoAP request - Method: ${req.method}, URL: ${req.url}, From: ${req.rsinfo.address}`);
         httpLogger.info(`Received CoAP request - Method: ${req.method}, URL: ${req.url}, From: ${req.rsinfo.address}`);
@@ -26,7 +41,7 @@ function startCoapServer(borderRouterManager) {
             const incomingAddress = req.rsinfo.address;
             const payloadBuffer = req.payload;
             let payloadJson;
-            let vendorClass = "Unknown"; // Default vendor class
+            let vendorClass = "Unknown"; 
             let macHex = null;
 
             try {
@@ -69,34 +84,39 @@ function startCoapServer(borderRouterManager) {
                     );
                     httpLogger.info(`Successfully processed connection for MAC: ${mac}`);
 
-                    try {
-                        // Trigger updates concurrently
-                        await Promise.all([
-                            borderRouterManager.updateNCPProperties(),
-                            borderRouterManager.updateTopology()
-                        ]);
-                    } catch (error) {
-                        httpLogger.error(`Error refreshing network state: ${error.message}`);
-                    }
-                    
+                   // Trigger background updates AFTER sending the response.
+                    // Do not await these promises here; let them run in the background.
+                    // Use .then().catch() for logging success/failure of background tasks.
+                    Promise.all([
+                        borderRouterManager.updateNCPProperties(),
+                        borderRouterManager.updateTopology()
+                    ]).then(() => {
+                        httpLogger.info(`Background network state refresh triggered successfully after registration of MAC ${mac}.`);
+                    }).catch(error => {
+                        // Log errors from background tasks, but don't crash the server
+                        httpLogger.error(`Error during background network state refresh triggered by ${mac}: ${error.message}`);
+                    });
+
+                    return; // Request handling complete
+
                 } catch (error) {
                     httpLogger.error(`Database operation failed for MAC ${mac}: ${error.message}`);
-                    // Consider sending 5.00 Server Error if DB fails
+                    // Send 5.00 Server Error if DB fails before response is sent
+                    res.code = '5.00';
+                    res.end('Internal Server Error during device registration');
+                    return;
                 }
 
             } else {
                 httpLogger.warn(`Received invalid MAC hex (${macHex}) from ${incomingAddress} in JSON payload. Requires 12 or 16 hex chars.`);
-                // Optionally send a Bad Request response if MAC format is wrong
-                res.code = '4.00'; 
+                // Send a Bad Request response if MAC format is wrong
+                res.code = '4.00';
                 res.end('Invalid MAC format in JSON');
-                return; 
+                return;
             }
-
-            res.code = '2.05'; // Content
-            res.end('Received connection request');
-        } else if (req.method === 'POST' && req.url === '/button_activated') {
+        } else if (req.method === 'POST' && req.url === '/fsr_activated') {
             const sensorIPv6 = req.rsinfo.address;
-            httpLogger.info(`Received button activation from ${sensorIPv6}`);
+            httpLogger.info(`Received fsr activation from ${sensorIPv6}`);
 
             try {
                 // 1. Find the sensor device by its IPv6 address
@@ -108,7 +128,7 @@ function startCoapServer(borderRouterManager) {
                     return;
                 }
                 const sensorMac = sensorDevice.mac_address;
-                httpLogger.info(`Button activation identified from sensor MAC: ${sensorMac}`);
+                httpLogger.info(`fsr activation identified from sensor MAC: ${sensorMac}`);
 
                 // 2. Find relationships where this device is the sensor
                 const relationships = await relationshipOperations.getRelationshipsBySensor(sensorMac);
@@ -126,11 +146,11 @@ function startCoapServer(borderRouterManager) {
                 for (const relationship of relationships) {
                     const actuatorMac = relationship.actuator_mac;
                     const actuatorDevice = await deviceOperations.getDeviceByMac(actuatorMac);
+                    const setTime = relationship.set_time || 1;
 
                     if (actuatorDevice && actuatorDevice.ipv6_address) {
-                        httpLogger.info(`Triggering actuator ${actuatorMac} (${actuatorDevice.ipv6_address}) via relationship ${relationship.id}`);
-                        // Call postLEDStates: targetIP = actuator IPv6, color = 'red', newValue = 0
-                        postLEDStates(actuatorDevice.ipv6_address, 'red', 0);
+                        httpLogger.info(`Triggering light ${actuatorMac} (${actuatorDevice.ipv6_address}) via relationship ${relationship.id}`);
+                        turnOnLightForSetTime(actuatorDevice.ipv6_address, setTime);
                         actuatorsTriggered++;
                     } else {
                         httpLogger.warn(`Actuator ${actuatorMac} in relationship ${relationship.id} not found or has no IPv6 address.`);

@@ -27,7 +27,8 @@ export default function RoutinesTab(props: RoutinesTabProps) {
     name: '',
     sensor_mac: '',
     actuator_mac: '',
-    actuator_type: ''
+    actuator_type: '',
+    set_time: 1
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
@@ -91,7 +92,8 @@ export default function RoutinesTab(props: RoutinesTabProps) {
         name: '',
         sensor_mac: '',
         actuator_mac: '',
-        actuator_type: ''
+        actuator_type: '',
+        set_time: 1
       });
       setEditingRoutine(null);
     }
@@ -129,12 +131,21 @@ export default function RoutinesTab(props: RoutinesTabProps) {
       setError('Routine name must be less than 64 characters');
       return;
     }
+    if (formData.set_time <= 0) {
+      setError('Set time must be a positive number.');
+      return;
+    }
 
     try {
+      const dataToSend = {
+        ...formData,
+        set_time: Number(formData.set_time) // Ensure set_time is a number
+      };
+
       if (editingRoutine) {
-        await axios.put(`/api/relationships/${editingRoutine.id}`, formData);
+        await axios.put(`/api/relationships/${editingRoutine.id}`, dataToSend);
       } else {
-        await axios.post('/api/relationships', formData);
+        await axios.post('/api/relationships', dataToSend);
       }
       
       await fetchRoutines();
@@ -151,7 +162,8 @@ export default function RoutinesTab(props: RoutinesTabProps) {
       name: routine.name,
       sensor_mac: routine.sensor_mac,
       actuator_mac: routine.actuator_mac,
-      actuator_type: routine.actuator_type
+      actuator_type: routine.actuator_type,
+      set_time: routine.set_time || 1
     });
     setIsPopupOpen(true);
   };
@@ -252,6 +264,20 @@ export default function RoutinesTab(props: RoutinesTabProps) {
               onChange={handleInputChange}
               maxLength={64}
               required 
+            />
+
+            <label className="form-label" htmlFor="set_time">
+              Activation Time (seconds):
+            </label>
+            <input
+              className="form-input"
+              type="number"
+              id="set_time"
+              name="set_time"
+              value={formData.set_time}
+              onChange={handleInputChange}
+              min="1"
+              required
             />
 
             <label className="form-label" htmlFor="sensor_mac">When:</label>

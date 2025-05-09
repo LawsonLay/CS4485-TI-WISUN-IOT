@@ -8,6 +8,7 @@ export interface Routine {
   sensor_mac: string;
   actuator_mac: string;
   actuator_type: string;
+  set_time: number;
   sensor_name: string;
   actuator_name: string;
   sensor_image?: string;
@@ -33,13 +34,15 @@ export default function RoutineCard(props: RoutineCardProps) {
     target.src = defaultImage; // Use the correct default path
   };
   
-  return (
+return (
     <div className='routine-card'>
       <div className='routine-card-header'>
         <h3>{routine.name}</h3>
-        <button className="btn-open-popup-routine" onClick={() => onEdit(routine)}>
-          Edit
-        </button>
+        <div className='routine-card-header-controls'>
+          <button className="btn-open-popup-routine" onClick={() => onEdit(routine)}>
+            Edit
+          </button>
+        </div>
       </div>
       <div className='routine-content'>
         <div className='device-container'>
@@ -65,6 +68,9 @@ export default function RoutineCard(props: RoutineCardProps) {
           />
           <span>{routine.actuator_name}</span>
         </div>
+      </div>
+      <div className='routine-card-footer' style={{ textAlign: 'center', marginTop: '10px' }}>
+        <span className='routine-set-time'>Duration: {routine.set_time || 1}s</span>
       </div>
     </div>
   );

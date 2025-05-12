@@ -10,7 +10,7 @@ const server = coap.createServer(
         sendAcksForNonConfirmablePackets: false
     })
 
-function startCoapServer(borderRouterManager) {
+function startCoapServer(borderRouterManager, io) {
 
     server.listen(5683, () => {
         console.log('CoAP server is listening on port 5683');
@@ -83,6 +83,7 @@ function startCoapServer(borderRouterManager) {
                         vendorClass      // Default type
                     );
                     httpLogger.info(`Successfully processed connection for MAC: ${mac}`);
+                    io.emit('devices_updated');
 
                    // Trigger background updates AFTER sending the response.
                     // Do not await these promises here; let them run in the background.
@@ -143,18 +144,69 @@ function startCoapServer(borderRouterManager) {
 
                 // 3. For each relationship, find the actuator and trigger it
                 let actuatorsTriggered = 0;
+                let anUpdateOccurred = false;
                 for (const relationship of relationships) {
                     const actuatorMac = relationship.actuator_mac;
                     const actuatorDevice = await deviceOperations.getDeviceByMac(actuatorMac);
                     const setTime = relationship.set_time || 1;
 
-                    if (actuatorDevice && actuatorDevice.ipv6_address) {
+                    if (!actuatorDevice) {
+                        httpLogger.warn(`Actuator ${actuatorMac} in relationship ${relationship.id} not found in database.`);
+                        continue;
+                    }
+
+                    // Check if actuator is in manual mode
+                    if (actuatorDevice.manual_mode) {
+                        httpLogger.info(`Actuator ${actuatorMac} (IP: ${actuatorDevice.ipv6_address}) is in manual mode. Skipping automatic activation for relationship ${relationship.id}.`);
+                        continue; // Skip to the next relationship
+                    }
+
+                    if (actuatorDevice.ipv6_address) {
                         httpLogger.info(`Triggering light ${actuatorMac} (${actuatorDevice.ipv6_address}) via relationship ${relationship.id}`);
                         turnOnLightForSetTime(actuatorDevice.ipv6_address, setTime);
                         actuatorsTriggered++;
                     } else {
                         httpLogger.warn(`Actuator ${actuatorMac} in relationship ${relationship.id} not found or has no IPv6 address.`);
                     }
+
+                    if (actuatorDevice.ipv6_address) {
+                        httpLogger.info(`Activating relationship ${relationship.id}: Sensor ${sensorMac}, Actuator ${actuatorMac} (IP: ${actuatorDevice.ipv6_address}) for ${setTime}s.`);
+
+                        // Update database for sensor and actuator: activated = true
+                        try {
+                            await deviceOperations.updateDevice(sensorMac, { activated: true });
+                            await deviceOperations.updateDevice(actuatorMac, { activated: true });
+                            anUpdateOccurred = true;
+                            httpLogger.info(`DB updated: Sensor ${sensorMac} and Actuator ${actuatorMac} set to activated.`);
+                        } catch (dbUpdateError) {
+                            httpLogger.error(`Error updating DB for relationship ${relationship.id} activation: ${dbUpdateError.message}`);
+                        }
+
+                        // Trigger the light
+                        turnOnLightForSetTime(actuatorDevice.ipv6_address, setTime);
+                        actuatorsTriggered++;
+
+                        // Set a timer to deactivate
+                        setTimeout(async () => {
+                            try {
+                                httpLogger.info(`Timer expired for relationship ${relationship.id}. Deactivating Sensor ${sensorMac} and Actuator ${actuatorMac}.`);
+                                await deviceOperations.updateDevice(sensorMac, { activated: false });
+                                await deviceOperations.updateDevice(actuatorMac, { activated: false });
+                                httpLogger.info(`DB updated: Sensor ${sensorMac} and Actuator ${actuatorMac} deactivated after timer.`);
+                                io.emit('devices_updated');
+                            } catch (timerDbError) {
+                                httpLogger.error(`Error in timer deactivating devices for relationship ${relationship.id}: ${timerDbError.message}`);
+                            }
+                        }, setTime * 1000);
+
+                    } else {
+                        httpLogger.warn(`Actuator ${actuatorMac} in relationship ${relationship.id} has no IPv6 address.`);
+                    }
+                }
+
+                if (anUpdateOccurred) {
+                    httpLogger.info(`Initial FSR activation DB updates complete. Emitting devices_updated.`);
+                    io.emit('devices_updated'); 
                 }
 
                 res.code = '2.04'; // Changed

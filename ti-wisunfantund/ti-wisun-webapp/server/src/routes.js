@@ -37,8 +37,9 @@ const upload = multer({ storage: storage });
  * @param {*} app
  * @param {PingExecutor} pingExecutor
  * @param {BorderRouterManager} borderRouterManager
+ * @param {SocketIOServer} io
  */
-function initializeRoutes(app, pingExecutor, borderRouterManager) {
+function initializeRoutes(app, pingExecutor, borderRouterManager, io) {
   app.use(cors());
   app.use(express.json());
 
@@ -323,6 +324,7 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
       }
       
       const result = await deviceOperations.addDevice(device);
+      io.emit('devices_updated');
       res.status(201).json(result);
     } catch (error) {
       httpLogger.error(`Error adding device: ${error.message}`);
@@ -352,6 +354,8 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
       if (result.changes === 0) {
         return res.status(404).json({ error: 'Device not found' });
       }
+
+      io.emit('devices_updated');
       res.json({ updated: true, mac_address: req.params.mac });
     } catch (error) {
       httpLogger.error(`Error updating device: ${error.message}`);
@@ -366,6 +370,8 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
       if (!result.deleted) {
         return res.status(404).json({ error: 'Device not found' });
       }
+
+      io.emit('devices_updated');
       res.json({ deleted: true, mac_address: req.params.mac });
     } catch (error) {
       httpLogger.error(`Error deleting device: ${error.message}`);
@@ -376,7 +382,15 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
   // Get devices by type (sensors)
   app.get('/api/devices/type/sensors', async (req, res) => {
     try {
-      const devices = await deviceOperations.getDevicesByType('sensor');
+      const sensorDevices = await deviceOperations.getDevicesByType('sensor');
+      const fsrDevices = await deviceOperations.getDevicesByType('fsr');
+
+      const combinedDevicesMap = new Map();
+      sensorDevices.forEach(device => combinedDevicesMap.set(device.mac_address, device));
+      fsrDevices.forEach(device => combinedDevicesMap.set(device.mac_address, device));
+
+      const devices = Array.from(combinedDevicesMap.values());
+      
       res.json(devices);
     } catch (error) {
       httpLogger.error(`Error fetching sensor devices: ${error.message}`);
@@ -387,7 +401,15 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
   // Get devices by type (actuators)
   app.get('/api/devices/type/actuators', async (req, res) => {
     try {
-      const devices = await deviceOperations.getDevicesByType('actuator');
+      const actuatorDevices = await deviceOperations.getDevicesByType('actuator');
+      const lightDevices = await deviceOperations.getDevicesByType('light');
+
+      const combinedDevicesMap = new Map();
+      actuatorDevices.forEach(device => combinedDevicesMap.set(device.mac_address, device));
+      lightDevices.forEach(device => combinedDevicesMap.set(device.mac_address, device));
+
+      const devices = Array.from(combinedDevicesMap.values());
+      
       res.json(devices);
     } catch (error) {
       httpLogger.error(`Error fetching actuator devices: ${error.message}`);
@@ -405,7 +427,7 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
       if (!device) {
         return res.status(404).json({ error: 'Device not found' });
       }
-      if (device.device_type !== 'actuator') {
+      if (device.device_type === 'sensor' || device.device_type === 'fsr') {
         return res.status(400).json({ error: 'Device is not an actuator' });
       }
       if (!device.ipv6_address) {
@@ -442,6 +464,7 @@ function initializeRoutes(app, pingExecutor, borderRouterManager) {
 
       // Update database
       await deviceOperations.updateDevice(mac, dbUpdates);
+      io.emit('devices_updated');
       
       // Fetch the updated device to return
       const updatedDevice = await deviceOperations.getDeviceByMac(mac);

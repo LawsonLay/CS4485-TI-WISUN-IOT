@@ -1,10 +1,12 @@
 import '../App.css';
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState, useRef, useEffect, useCallback } from 'react'; 
 import '../assets/Devices.css';
 import DeviceCard from '../components/DeviceCard';
 import axios from 'axios';
-import { ThemedSelect, OptionType } from './ThemedSelect'; // Import ThemedSelect and OptionType
-import ThemedLabel from './ThemedLabel'; // Import ThemedLabel
+import { ThemedSelect, OptionType } from './ThemedSelect'; 
+import ThemedLabel from './ThemedLabel';
+import { AppContext } from '../Contexts'; 
+import { App as AppType } from '../App'; 
 
 interface DevicesTabProps { }
 
@@ -37,7 +39,6 @@ export default function DevicesTab(props: DevicesTabProps) {
   const [devices, setDevices] = useState<Device[]>([]);
   const [filteredDevices, setFilteredDevices] = useState<Device[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  // Update state to hold OptionType
   const [typeFilter, setTypeFilter] = useState<OptionType>(typeFilterOptions[0]);
   const [activationFilter, setActivationFilter] = useState<OptionType>(activationFilterOptions[0]);
   const [loading, setLoading] = useState(true);
@@ -45,26 +46,50 @@ export default function DevicesTab(props: DevicesTabProps) {
   const [addingDevice, setAddingDevice] = useState(false);
   const [currentTypeOptions, setCurrentTypeOptions] = useState<OptionType[]>(typeFilterOptions);
 
+  const app = useContext(AppContext) as AppType | null;
+  const socket = app?.socket;
+
   // Fetch devices from the server
-  const fetchDevices = async () => {
+  const fetchDevices = useCallback(async (isBackgroundRefresh: boolean = false) => {
     try {
-      setLoading(true);
+       if (!isBackgroundRefresh) {
+        setLoading(true);
+      }
+      
       const response = await axios.get('/api/devices');
       setDevices(response.data);
-      setFilteredDevices(response.data);
+      //setFilteredDevices(response.data);
       setError(null);
     } catch (err) {
       console.error('Error fetching devices:', err);
       setError('Failed to fetch devices. Please try again later.');
     } finally {
-      setLoading(false);
+      if (!isBackgroundRefresh) {
+        setLoading(false);
+      }
     }
-  };
+  }, []);
 
   // Initial fetch
   useEffect(() => {
-    fetchDevices();
-  }, []);
+    fetchDevices(false);
+  }, [fetchDevices]);
+
+  // Socket.IO listener for device updates
+  useEffect(() => {
+    if (socket) {
+      const handleDevicesUpdated = () => {
+        console.log('Socket event: devices_updated. Refetching devices...');
+        fetchDevices(true);
+      };
+
+      socket.on('devices_updated', handleDevicesUpdated);
+
+      return () => {
+        socket.off('devices_updated', handleDevicesUpdated);
+      };
+    }
+  }, [socket, fetchDevices]);
 
   // Apply filters when search term or filters change
   useEffect(() => {
@@ -92,9 +117,9 @@ export default function DevicesTab(props: DevicesTabProps) {
       } else if (activationFilter.value === "not-activated") {
         result = result.filter(device => !device.activated);
       } else if (activationFilter.value === "sensor-activated") {
-        result = result.filter(device => device.activation_type === "sensor");
+        result = result.filter(device => device.activation_type === "automatic");
       } else if (activationFilter.value === "manual-activated") {
-        result = result.filter(device => device.activation_type === "manual");
+        result = result.filter(device => device.activation_type === "manual-on" || device.activation_type === "manual-off");
       }
     }
 
@@ -114,7 +139,7 @@ export default function DevicesTab(props: DevicesTabProps) {
     if (!newTypeOptions.some(option => option.value === typeFilter.value)) {
         setTypeFilter(newTypeOptions[0]); // Reset to 'All Types' if current type disappears
     }
-  }, [devices, typeFilter.value]); // Add typeFilter.value dependency
+  }, [devices, typeFilter.value]); 
 
   // Handle device name change
   const handleNameChange = async (mac_address: string, newName: string) => {
@@ -208,7 +233,7 @@ export default function DevicesTab(props: DevicesTabProps) {
     // Define possible device types and their properties
     const sensorTypes = ['PIR', 'FSR', 'AMBIENT'];
     const actuatorTypes = ['LIGHT', 'COUNTER'];
-    const isSensor = Math.random() > 0.5; // Changed variable name for clarity
+    const isSensor = Math.random() > 0.5;
     
     const vendorClassType = isSensor 
       ? sensorTypes[Math.floor(Math.random() * sensorTypes.length)]
@@ -232,8 +257,8 @@ export default function DevicesTab(props: DevicesTabProps) {
       activated,
       activation_type: activationType,
       device_type: isSensor ? 'sensor' : 'actuator',
-      image_path: imagePath, // Set the image path
-      ipv6_address: null // Default ipv6_address for random devices
+      image_path: imagePath, 
+      ipv6_address: null 
     };
   };
   
@@ -272,13 +297,13 @@ export default function DevicesTab(props: DevicesTabProps) {
             />
           </div>
           
-          <button 
+          {/* <button 
             className='add-random-btn'
             onClick={addRandomDevice}
             disabled={addingDevice}
           >
             {addingDevice ? 'Adding...' : 'Add Random Device'}
-          </button>
+          </button> */}
         </div>
         
         <div className='filter-controls'>
@@ -288,7 +313,7 @@ export default function DevicesTab(props: DevicesTabProps) {
               options={currentTypeOptions}
               value={typeFilter}
               onChange={(selectedOption) => setTypeFilter(selectedOption as OptionType)}
-              width={180} // Adjust width as needed
+              width={180} 
             />
           </div>
           
@@ -298,7 +323,7 @@ export default function DevicesTab(props: DevicesTabProps) {
               options={activationFilterOptions}
               value={activationFilter}
               onChange={(selectedOption) => setActivationFilter(selectedOption as OptionType)}
-              width={180} // Adjust width as needed
+              width={180} 
             />
           </div>
         </div>

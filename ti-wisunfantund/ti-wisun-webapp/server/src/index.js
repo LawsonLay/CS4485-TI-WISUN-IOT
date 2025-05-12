@@ -45,8 +45,8 @@ function main() {
   initializeSocketIOEvents(io);
   const brManager = new BorderRouterManager();
   const pingExecutor = getPingExecutor();
-  initializeRoutes(app, pingExecutor, brManager);
-  startCoapServer(brManager);
+  initializeRoutes(app, pingExecutor, brManager, io);
+  startCoapServer(brManager, io);
 
   httpServer.listen(CONSTANTS.PORT, CONSTANTS.HOST, () => {
     httpLogger.info(`Listening on http://${CONSTANTS.HOST}:${CONSTANTS.PORT}`);

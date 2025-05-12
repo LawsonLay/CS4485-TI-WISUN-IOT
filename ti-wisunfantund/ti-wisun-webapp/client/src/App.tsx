@@ -20,7 +20,7 @@ import {
 import { APIService } from './APIService';
 import ConnectBorderRouterMessage from './components/ConnectBorderRouterMessage';
 import InvalidHostMessage from './components/InvalidHostMessage';
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 import { applyPatch, deepClone } from 'fast-json-patch';
 import { WritableDraft } from 'immer/dist/types/types-external';
 import { DashTitle } from './components/DashTitle';
@@ -150,6 +150,7 @@ export class App extends React.Component<AppProps, AppState> {
   /** NCP Properties that are compared to when properties for setProps.  */
   cachedNCPProperties: NCPProperties | null = null;
   lastResetDate = -Infinity;
+  socket: Socket | null = null;
   state = {
     topology: DEFAULT_TOPOLOGY(),
     ipAddressInfoArray: [],
@@ -184,11 +185,11 @@ export class App extends React.Component<AppProps, AppState> {
   componentDidMount() {
     // socket.on('connect', () => {
     // });
-    const socket = io();
-    socket.on('connect_error', () => {
+    this.socket = io();
+    this.socket.on('connect_error', () => {
       console.error('Socket Connect Error');
     });
-    socket.on('disconnect', reason => {
+    this.socket.on('disconnect', reason => {
       this.receivedNetworkError('Socket Disconnected');
     });
 
@@ -201,7 +202,7 @@ export class App extends React.Component<AppProps, AppState> {
       );
     };
 
-    socket.on('initialState', (data: Partial<AppState>) => {
+    this.socket.on('initialState', (data: Partial<AppState>) => {
       console.log('new data', data);
       this.setState(prevState => {
         return produce(prevState, draftState => {
@@ -211,7 +212,7 @@ export class App extends React.Component<AppProps, AppState> {
       });
     });
 
-    socket.on('stateChange', patchArray => {
+    this.socket.on('stateChange', patchArray => {
       console.log('state patch:', deepClone(patchArray));
       this.setState(prevState => {
         return produce(prevState, draftState => {

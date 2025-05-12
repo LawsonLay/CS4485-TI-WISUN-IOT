@@ -37,13 +37,13 @@ export default function DeviceCard(props: DeviceCardProps) {
     }
   };
 
-   const handleLegacyToggleActivation = () => {
-    props.onToggleActivation(props.mac_address, !props.activated);
-  };
+  //  const handleLegacyToggleActivation = () => {
+  //   props.onToggleActivation(props.mac_address, !props.activated);
+  // };
   
-  const handleToggleActivation = () => {
-    props.onToggleActivation(props.mac_address, !props.activated);
-  };
+  // const handleToggleActivation = () => {
+  //   props.onToggleActivation(props.mac_address, !props.activated);
+  // };
   
   const getImagePath = () => {
     // Use the specific image path if provided, otherwise use the default
@@ -54,8 +54,10 @@ export default function DeviceCard(props: DeviceCardProps) {
     ? (props.activated ? 'manual-on' : 'manual-off') 
     : 'automatic';
 
+  const cardClassName = `device-card ${props.activated ? 'device-card-activated' : ''}`;
+
   return (
-    <div className="device-card">
+    <div className={cardClassName}>
       <div className="device-header">
         {isEditing ? (
           <div className="edit-name">
@@ -77,35 +79,36 @@ export default function DeviceCard(props: DeviceCardProps) {
             {props.name}
           </h3>
         )}
-        
-        {props.device_type === 'actuator' ? (
-          <div className="three-way-switch">
-            <button 
-              className={`switch-option ${currentMode === 'manual-off' ? 'active' : ''}`}
-              onClick={() => props.onDeviceModeChange(props.mac_address, 'manual-off')}
-              title="Manual Off"
-            >
-              OFF
-            </button>
-            <button 
-              className={`switch-option ${currentMode === 'automatic' ? 'active' : ''}`}
-              onClick={() => props.onDeviceModeChange(props.mac_address, 'automatic')}
-              title="Automatic"
-            >
-              AUTO
-            </button>
-            <button 
-              className={`switch-option ${currentMode === 'manual-on' ? 'active' : ''}`}
-              onClick={() => props.onDeviceModeChange(props.mac_address, 'manual-on')}
-              title="Manual On"
-            >
-              ON
-            </button>
-          </div>
-        ) : props.vendor_class_type !== 'sensor' && ( // Fallback for non-actuator, non-sensor devices if any
-          <div>
-          </div>
-        )}
+
+        <div className="device-actions-container">
+          {(props.device_type === 'actuator' || props.device_type === 'light') ? (
+            <div className="three-way-switch">
+              <button 
+                className={`switch-option ${currentMode === 'manual-off' ? 'active' : ''}`}
+                onClick={() => props.onDeviceModeChange(props.mac_address, 'manual-off')}
+                title=""
+              >
+                OFF
+              </button>
+              <button 
+                className={`switch-option ${currentMode === 'automatic' ? 'active' : ''}`}
+                onClick={() => props.onDeviceModeChange(props.mac_address, 'automatic')}
+                title=""
+              >
+                AUTO
+              </button>
+              <button 
+                className={`switch-option ${currentMode === 'manual-on' ? 'active' : ''}`}
+                onClick={() => props.onDeviceModeChange(props.mac_address, 'manual-on')}
+                title=""
+              >
+                ON
+              </button>
+            </div>
+          ) : (
+              <div className="three-way-switch-placeholder"></div>
+            )}
+        </div>
       </div>
       
       <div className="device-image">
@@ -126,7 +129,6 @@ export default function DeviceCard(props: DeviceCardProps) {
         <p className="ipv6-address">{props.ipv6_address || 'IPv6: N/A'}</p> 
         <p className="device-status">
           Status: {props.manual_mode ? `Manual ${props.activated ? 'ON' : 'OFF'}` : (props.activated ? 'Activated (AUTO)' : 'Not Activated (AUTO)')}
-          {props.activation_type && props.activation_type !== 'none' ? ` (${props.activation_type})` : ''}
         </p>
       </div>
       

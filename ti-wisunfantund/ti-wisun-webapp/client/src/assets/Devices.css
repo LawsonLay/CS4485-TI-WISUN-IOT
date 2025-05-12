@@ -105,11 +105,17 @@
   position: relative;
 }
 
+.device-card-activated {
+  border: 1px solid #44BB55; /* tiColors.green */
+  border-top: 3px solid #44BB55; /* tiColors.green - Make top border consistent */
+}
+
 .device-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+  min-height: 38px;
 }
 
 .device-name {
@@ -119,6 +125,10 @@
   font-weight: 600; /* Match ThemedLabel */
   cursor: pointer;
   flex: 1;
+  margin-right: 10px; /* Space between name and actions */
+  overflow: hidden; /* Prevent long names from breaking layout */
+  text-overflow: ellipsis; /* Show ellipsis for overflowed names */
+  white-space: nowrap; /* Keep name on one line */
 }
 
 .device-image {
@@ -132,6 +142,7 @@
   align-items: center;
   background-color: #FFFFFF; /* tiColors.white / bg3 */
   border: 1px solid #DBDBDB; /* tiColors.hoverLightGray */
+
 }
 
 .device-image img {
@@ -315,6 +326,7 @@ input:checked + .slider:before {
 
 .edit-name input:focus {
   border-color: #CC0000; /* tiColors.red */
+  box-shadow: none;
   outline: none;
 }
 
@@ -324,9 +336,12 @@ input:checked + .slider:before {
   color: #FFFFFF; /* tiColors.white */
   border: none;
   border-radius: 0; /* Remove rounded corners */
-  margin-right: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  /* margin-right: 5px; */
   cursor: pointer;
-  font-weight: 500;
+  /* font-weight: 500; */
+  white-space: nowrap;
 }
 
 .edit-name button:hover {
@@ -339,6 +354,18 @@ input:checked + .slider:before {
 
 .edit-name button:last-child:hover {
   background-color: #AE0000; /* tiColors.redDark */
+}
+
+/* Container for switch or its placeholder */
+.device-actions-container {
+  flex-shrink: 0; /* Prevent this container from shrinking */
+}
+
+/* Placeholder for the three-way switch to maintain layout consistency */
+.three-way-switch-placeholder {
+  min-width: 130px; /* Approximate width of the three-way switch (adjust if buttons change) */
+  height: 38px;    /* Approximate height of the three-way switch (match header min-height) */
+  display: inline-block; /* Ensures it takes space */
 }
 
 .error-message {

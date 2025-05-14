@@ -1,8 +1,8 @@
 const coap = require('coap');
-const { deviceOperations, relationshipOperations } = require('./database'); // Import deviceOperations and relationshipOperations
-const { httpLogger } = require('./logger'); // Assuming logger is setup
-const {BorderRouterManager} = require('./BorderRouterManager.js'); // Import BorderRouterManager
-const { turnOnLightForSetTime } = require('./coapCommands.js'); // Import postLEDStates
+const { deviceOperations, relationshipOperations } = require('./database'); 
+const { httpLogger } = require('./logger'); 
+const {BorderRouterManager} = require('./BorderRouterManager.js'); 
+const { turnOnLightForSetTime } = require('./coapCommands.js'); 
 
 const server = coap.createServer(
     {
@@ -13,14 +13,11 @@ const server = coap.createServer(
 function startCoapServer(borderRouterManager, io) {
 
     server.listen(5683, () => {
-        console.log('CoAP server is listening on port 5683');
-        httpLogger.info('CoAP server is listening on port 5683'); // Use logger
+        httpLogger.info('CoAP server is listening on port 5683'); 
     })
 
-    // Add a general error handler for the server to catch unhandled errors
     server.on('error', (err) => {
         httpLogger.error(`CoAP server error: ${err.message}`, err);
-        // Log the error but attempt to keep the server running
         console.error('CoAP server encountered an error:', err);
         // Avoid crashing the process for timeout errors specifically
         if (err instanceof coap.RetrySendError) {
@@ -29,11 +26,10 @@ function startCoapServer(borderRouterManager, io) {
              console.error('CoAP server error: Address in use, exiting.');
              process.exit(1); // Exit for critical errors like port conflict
         }
-        // For other errors, log them but the server might continue running depending on the error
     });
 
-    server.on('request', async (req, res) => { // Make handler async
-        console.log(`Received CoAP request - Method: ${req.method}, URL: ${req.url}, From: ${req.rsinfo.address}`);
+    server.on('request', async (req, res) => { 
+        //console.log(`Received CoAP request - Method: ${req.method}, URL: ${req.url}, From: ${req.rsinfo.address}`);
         httpLogger.info(`Received CoAP request - Method: ${req.method}, URL: ${req.url}, From: ${req.rsinfo.address}`);
 
         // Check if it's a POST request to /connect_web_app
@@ -46,7 +42,7 @@ function startCoapServer(borderRouterManager, io) {
 
             try {
                 const payloadString = payloadBuffer.toString('utf8');
-                httpLogger.info(`Received payload string on /connect_web_app: ${payloadString}`);
+                //httpLogger.info(`Received payload string on /connect_web_app: ${payloadString}`);
                 payloadJson = JSON.parse(payloadString);
 
                 // Validate JSON structure
@@ -55,7 +51,7 @@ function startCoapServer(borderRouterManager, io) {
                 }
                 
                 macHex = payloadJson.mac;
-                vendorClass = payloadJson.vendor_class; // Use received vendor class
+                vendorClass = payloadJson.vendor_class; 
 
             } catch (error) {
                 httpLogger.error(`Failed to parse JSON payload from ${incomingAddress}: ${error.message}`);
@@ -78,11 +74,11 @@ function startCoapServer(borderRouterManager, io) {
                     await deviceOperations.ensureDeviceExists(
                         mac,
                         incomingAddress,
-                        "NEW DEVICE", // Default name
-                        vendorClass,  // Use extracted vendor class
-                        vendorClass      // Default type
+                        "NEW DEVICE",
+                        vendorClass,  
+                        vendorClass      
                     );
-                    httpLogger.info(`Successfully processed connection for MAC: ${mac}`);
+                    //httpLogger.info(`Successfully processed connection for MAC: ${mac}`);
                     io.emit('devices_updated');
 
                    // Trigger background updates AFTER sending the response.
@@ -94,7 +90,6 @@ function startCoapServer(borderRouterManager, io) {
                     ]).then(() => {
                         httpLogger.info(`Background network state refresh triggered successfully after registration of MAC ${mac}.`);
                     }).catch(error => {
-                        // Log errors from background tasks, but don't crash the server
                         httpLogger.error(`Error during background network state refresh triggered by ${mac}: ${error.message}`);
                     });
 
@@ -117,7 +112,19 @@ function startCoapServer(borderRouterManager, io) {
             }
         } else if (req.method === 'POST' && req.url === '/fsr_activated') {
             const sensorIPv6 = req.rsinfo.address;
-            httpLogger.info(`Received fsr activation from ${sensorIPv6}`);
+            let receivedDirection = -1;
+
+            try {
+                const directionInt = req.payload.readUInt8(0);
+                if (directionInt >= 0 && directionInt <= 3) {
+                    receivedDirection = directionInt;
+                    httpLogger.info(`Parsed ${sensorIPv6}'s direction from payload: ${receivedDirection}`);
+                } else {
+                    httpLogger.warn(`Invalid or missing 'direction' in FSR payload from ${sensorIPv6}.`);
+                }
+            } catch (error) {
+                httpLogger.error(`Failed to parse uint8 payload for FSR activation from ${sensorIPv6}: ${error.message}`);
+            }
 
             try {
                 // 1. Find the sensor device by its IPv6 address
@@ -129,18 +136,27 @@ function startCoapServer(borderRouterManager, io) {
                     return;
                 }
                 const sensorMac = sensorDevice.mac_address;
-                httpLogger.info(`fsr activation identified from sensor MAC: ${sensorMac}`);
+                //httpLogger.info(`${sensorIPv6} fsr activation identified from sensor MAC: ${sensorMac}`);
 
                 // 2. Find relationships where this device is the sensor
-                const relationships = await relationshipOperations.getRelationshipsBySensor(sensorMac);
+                let relationships = await relationshipOperations.getRelationshipsBySensor(sensorMac);
+
+                // Filter relationships by the received direction
+                if (receivedDirection !== -1) {
+                    relationships = relationships.filter(r => r.direction === receivedDirection);
+                    //httpLogger.info(`Filtered relationships by direction ${receivedDirection}.`);
+                } else {
+                    httpLogger.warn(`Proceeding without direction filtering as it was not valid in payload for sensor ${sensorMac}.`);
+                }
+
                 if (!relationships || relationships.length === 0) {
-                    httpLogger.info(`No relationships found for sensor MAC: ${sensorMac}`);
+                    httpLogger.info(`No relationships with direction ${receivedDirection} found for sensor MAC: ${sensorMac}`);
                     res.code = '2.05'; // Content (Acknowledged, but no action)
                     res.end('No actuator relationships found');
                     return;
                 }
 
-                httpLogger.info(`Found ${relationships.length} relationship(s) for sensor ${sensorMac}`);
+                //httpLogger.info(`Found ${relationships.length} relationship(s) with direction ${receivedDirection} for sensor ${sensorMac}`);
 
                 // 3. For each relationship, find the actuator and trigger it
                 let actuatorsTriggered = 0;
@@ -162,14 +178,6 @@ function startCoapServer(borderRouterManager, io) {
                     }
 
                     if (actuatorDevice.ipv6_address) {
-                        httpLogger.info(`Triggering light ${actuatorMac} (${actuatorDevice.ipv6_address}) via relationship ${relationship.id}`);
-                        turnOnLightForSetTime(actuatorDevice.ipv6_address, setTime);
-                        actuatorsTriggered++;
-                    } else {
-                        httpLogger.warn(`Actuator ${actuatorMac} in relationship ${relationship.id} not found or has no IPv6 address.`);
-                    }
-
-                    if (actuatorDevice.ipv6_address) {
                         httpLogger.info(`Activating relationship ${relationship.id}: Sensor ${sensorMac}, Actuator ${actuatorMac} (IP: ${actuatorDevice.ipv6_address}) for ${setTime}s.`);
 
                         // Update database for sensor and actuator: activated = true
@@ -177,7 +185,7 @@ function startCoapServer(borderRouterManager, io) {
                             await deviceOperations.updateDevice(sensorMac, { activated: true });
                             await deviceOperations.updateDevice(actuatorMac, { activated: true });
                             anUpdateOccurred = true;
-                            httpLogger.info(`DB updated: Sensor ${sensorMac} and Actuator ${actuatorMac} set to activated.`);
+                            //httpLogger.info(`DB updated: Sensor ${sensorMac} and Actuator ${actuatorMac} set to activated.`);
                         } catch (dbUpdateError) {
                             httpLogger.error(`Error updating DB for relationship ${relationship.id} activation: ${dbUpdateError.message}`);
                         }
@@ -189,10 +197,10 @@ function startCoapServer(borderRouterManager, io) {
                         // Set a timer to deactivate
                         setTimeout(async () => {
                             try {
-                                httpLogger.info(`Timer expired for relationship ${relationship.id}. Deactivating Sensor ${sensorMac} and Actuator ${actuatorMac}.`);
+                                //httpLogger.info(`Timer expired for relationship ${relationship.id}. Deactivating Sensor ${sensorMac} and Actuator ${actuatorMac}.`);
                                 await deviceOperations.updateDevice(sensorMac, { activated: false });
                                 await deviceOperations.updateDevice(actuatorMac, { activated: false });
-                                httpLogger.info(`DB updated: Sensor ${sensorMac} and Actuator ${actuatorMac} deactivated after timer.`);
+                                httpLogger.info(`Sensor ${sensorMac} and Actuator ${actuatorMac} deactivated after timer.`);
                                 io.emit('devices_updated');
                             } catch (timerDbError) {
                                 httpLogger.error(`Error in timer deactivating devices for relationship ${relationship.id}: ${timerDbError.message}`);
@@ -205,7 +213,7 @@ function startCoapServer(borderRouterManager, io) {
                 }
 
                 if (anUpdateOccurred) {
-                    httpLogger.info(`Initial FSR activation DB updates complete. Emitting devices_updated.`);
+                    //httpLogger.info(`Initial FSR activation DB updates complete. Emitting devices_updated.`);
                     io.emit('devices_updated'); 
                 }
 

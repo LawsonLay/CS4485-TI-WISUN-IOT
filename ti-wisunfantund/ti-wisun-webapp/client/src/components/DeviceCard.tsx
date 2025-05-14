@@ -86,21 +86,21 @@ export default function DeviceCard(props: DeviceCardProps) {
               <button 
                 className={`switch-option ${currentMode === 'manual-off' ? 'active' : ''}`}
                 onClick={() => props.onDeviceModeChange(props.mac_address, 'manual-off')}
-                title=""
+                title="Manual Off"
               >
                 OFF
               </button>
               <button 
                 className={`switch-option ${currentMode === 'automatic' ? 'active' : ''}`}
                 onClick={() => props.onDeviceModeChange(props.mac_address, 'automatic')}
-                title=""
+                title="Automatic"
               >
                 AUTO
               </button>
               <button 
                 className={`switch-option ${currentMode === 'manual-on' ? 'active' : ''}`}
                 onClick={() => props.onDeviceModeChange(props.mac_address, 'manual-on')}
-                title=""
+                title="Manual On"
               >
                 ON
               </button>

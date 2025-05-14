@@ -9,6 +9,7 @@ export interface Routine {
   actuator_mac: string;
   actuator_type: string;
   set_time: number;
+  direction: number;
   sensor_name: string;
   actuator_name: string;
   sensor_image?: string;
@@ -71,6 +72,7 @@ return (
       </div>
       <div className='routine-card-footer' style={{ textAlign: 'center', marginTop: '10px' }}>
         <span className='routine-set-time'>Duration: {routine.set_time || 1}s</span>
+        <span className='routine-direction' style={{ display: 'block', marginTop: '5px' }}>Direction: {routine.direction}</span>
       </div>
     </div>
   );

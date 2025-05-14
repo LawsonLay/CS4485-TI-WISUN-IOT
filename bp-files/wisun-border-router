@@ -47,6 +47,9 @@ do
     if [[ $(echo -n "get NCP:State" | $WFANCTL_CMD 2> /dev/null | head -n 1) != 'NCP:State = "associated"' ]]; then
         pkill -x $WFANTUND_BINARY
         start_wisun
+	sleep 10
+	systemctl restart isc-kea-dhcp6-server
+	systemctl restart startup
     fi
 done
 

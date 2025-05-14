@@ -28,7 +28,8 @@ export default function RoutinesTab(props: RoutinesTabProps) {
     sensor_mac: '',
     actuator_mac: '',
     actuator_type: '',
-    set_time: 1
+    set_time: 1,
+    direction: 0
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
@@ -93,7 +94,8 @@ export default function RoutinesTab(props: RoutinesTabProps) {
         sensor_mac: '',
         actuator_mac: '',
         actuator_type: '',
-        set_time: 1
+        set_time: 1,
+        direction: 0
       });
       setEditingRoutine(null);
     }
@@ -135,11 +137,16 @@ export default function RoutinesTab(props: RoutinesTabProps) {
       setError('Set time must be a positive number.');
       return;
     }
+    if (formData.direction < 0 || formData.direction > 3) {
+      setError('Direction must be an integer between 0 and 3.');
+      return;
+    }
 
     try {
       const dataToSend = {
         ...formData,
-        set_time: Number(formData.set_time) // Ensure set_time is a number
+        set_time: Number(formData.set_time), 
+        direction: Number(formData.direction)
       };
 
       if (editingRoutine) {
@@ -163,7 +170,8 @@ export default function RoutinesTab(props: RoutinesTabProps) {
       sensor_mac: routine.sensor_mac,
       actuator_mac: routine.actuator_mac,
       actuator_type: routine.actuator_type,
-      set_time: routine.set_time || 1
+      set_time: routine.set_time || 1,
+      direction: routine.direction !== undefined ? routine.direction : 0
     });
     setIsPopupOpen(true);
   };
@@ -199,6 +207,13 @@ export default function RoutinesTab(props: RoutinesTabProps) {
       label: `${actuator.name} (${actuator.mac_address})`,
       value: actuator.mac_address
     }))
+  ];
+
+  const directionOptions: OptionType[] = [
+    { label: '0', value: 0 },
+    { label: '1', value: 1 },
+    { label: '2', value: 2 },
+    { label: '3', value: 3 }
   ];
 
   return (
@@ -244,7 +259,7 @@ export default function RoutinesTab(props: RoutinesTabProps) {
       <div 
         id="popupOverlay" 
         className={`overlay-container ${isPopupOpen ? 'show' : 'hide'}`}
-        onClick={clickOutsideHandler}
+        // onClick={clickOutsideHandler}
       >
         <div className="popup-box">
           <h2 style={{ color: '#000' }}>
@@ -279,6 +294,17 @@ export default function RoutinesTab(props: RoutinesTabProps) {
               min="1"
               required
             />
+
+            <label className="form-label" htmlFor="direction">
+              Direction:
+            </label>
+            <div className="form-select-container">
+              <ThemedSelect
+                options={directionOptions}
+                value={findOptionByValue(directionOptions, formData.direction) || directionOptions[0]}
+                onChange={(selectedOption) => handleInputChange(selectedOption as OptionType, 'direction')}
+              />
+            </div>
 
             <label className="form-label" htmlFor="sensor_mac">When:</label>
             <div className="form-select-container">

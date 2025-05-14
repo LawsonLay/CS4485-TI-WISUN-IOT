@@ -107,7 +107,7 @@ function turnOnLightForSetTime(targetIP, time) {
 
   const postRequest = coap.request(reqOptions);
   postRequest.on('response', postResponse => {
-    console.log('received post response for external LEDs', postResponse.code);
+    //console.log('received post response for external LEDs', postResponse.code);
   });
   // BOTH OF THESE ARE REQUIRED -> COAP ERRORS OUT OTHERWISE
   postRequest.on('timeout', e => {});
@@ -134,7 +134,7 @@ function turnOnLightManual(targetIP, state, manual_mode) {
 
   const postRequest = coap.request(reqOptions);
   postRequest.on('response', postResponse => {
-    console.log('received post response for external LEDs', postResponse.code);
+    //console.log('received post response for external LEDs', postResponse.code);
   });
   // BOTH OF THESE ARE REQUIRED -> COAP ERRORS OUT OTHERWISE
   postRequest.on('timeout', e => {});

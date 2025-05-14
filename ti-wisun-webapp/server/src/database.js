@@ -51,9 +51,10 @@ const initializeDatabase = () => {
           actuator_mac TEXT NOT NULL,
           actuator_type TEXT NOT NULL,
           set_time INTEGER DEFAULT 1,
+          direction INTEGER CHECK(direction >= 0 AND direction <= 3),
           FOREIGN KEY (sensor_mac) REFERENCES devices (mac_address) ON DELETE CASCADE,
           FOREIGN KEY (actuator_mac) REFERENCES devices (mac_address) ON DELETE CASCADE,
-          UNIQUE(sensor_mac, actuator_mac)
+          UNIQUE(sensor_mac, actuator_mac, direction)
         )`, (err) => {
           if (err) {
             httpLogger.error(`Failed to create relationships table: ${err.message}`);
@@ -305,8 +306,8 @@ const relationshipOperations = {
     return new Promise((resolve, reject) => {
       const db = getDatabase();
       db.run(
-        'INSERT INTO relationships (name, sensor_mac, actuator_mac, actuator_type, set_time) VALUES (?, ?, ?, ?, ?)',
-        [relationship.name, relationship.sensor_mac, relationship.actuator_mac, relationship.actuator_type, relationship.set_time || 1],
+         'INSERT INTO relationships (name, sensor_mac, actuator_mac, actuator_type, set_time, direction) VALUES (?, ?, ?, ?, ?, ?)',
+        [relationship.name, relationship.sensor_mac, relationship.actuator_mac, relationship.actuator_type, relationship.set_time || 1, relationship.direction],
         function(err) {
           db.close();
           if (err) {
@@ -372,6 +373,7 @@ const relationshipOperations = {
           r.actuator_mac, 
           r.actuator_type,
           r.set_time,
+          r.direction,
           sd.name AS sensor_name, 
           ad.name AS actuator_name,
           sd.image_path AS sensor_image, 
@@ -396,8 +398,8 @@ const relationshipOperations = {
     return new Promise((resolve, reject) => {
       const db = getDatabase();
       db.run(
-        'UPDATE relationships SET name = ?, sensor_mac = ?, actuator_mac = ?, actuator_type = ?, set_time = ? WHERE id = ?',
-        [relationship.name, relationship.sensor_mac, relationship.actuator_mac, relationship.actuator_type, relationship.set_time || 1, id],
+        'UPDATE relationships SET name = ?, sensor_mac = ?, actuator_mac = ?, actuator_type = ?, set_time = ?, direction = ? WHERE id = ?',
+        [relationship.name, relationship.sensor_mac, relationship.actuator_mac, relationship.actuator_type, relationship.set_time || 1, relationship.direction, id],
         function(err) {
           db.close();
           if (err) {

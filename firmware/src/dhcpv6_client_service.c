@@ -17,7 +17,7 @@
 
 /*
  * CC4485 DHCPv6 Solicit modified for Smart City Demo 
- * Version 1: Changes behaviour based on Pre-defined name (FSR and LIGHT)
+ * Version 2: Add in changed behavior if compiling for Border Router
  */
  
 
@@ -35,6 +35,7 @@
  #include "libDHCPv6/libDHCPv6.h"
  #include "NWK_INTERFACE/Include/protocol.h"
 
+#if defined(FSR) || defined (LIGHT)
  #include "coap_service_api.h"
  #include "eventOS_event_timer.h"
  #include "ip6string.h"
@@ -43,13 +44,16 @@
  #include <string.h>
  #include <stdio.h>
  #include <stdlib.h>
- 
+ #endif
+
  #define TRACE_GROUP "DHP"
 
  #ifdef FSR
   #define VENDOR_ID_CLASS "fsr"
- #elif defined(LIGHT)
+  #elif defined(LIGHT)
   #define VENDOR_ID_CLASS "light"
+  #elif !defined(FSR) || !defined (LIGHT)
+  #define VENDOR_ID_CLASS "br"
  #endif
 
  #define IEEE_MAC_ADDRESS_LOCATION    0x500012F0
@@ -804,6 +808,7 @@
      address_entry->state_timer = renewTimer;
      address_entry->cb = dhcpv6_renew;
 
+    #if defined (FSR) || defined (LIGHT)
     uint64_t macAddr;
     memcpy(&macAddr, (uint8_t *)(IEEE_MAC_ADDRESS_LOCATION),
            (APIMAC_SADDR_EXT_LEN));
@@ -838,6 +843,7 @@
                         COAP_CT_JSON, // Set content type to JSON
                         (uint8_t *) json_payload, strlen(json_payload), // Send JSON string
                         NULL); // No specific callback needed for ACK/RST handling by the library
+    #endif
     
     
      return true;

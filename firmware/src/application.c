@@ -140,7 +140,7 @@
 
  #ifdef FSR
  #define COAP_FSR_ACTIVATED_CLASS_URI "fsr_activated"
- #define PRESSURE_THRESHOLD 75
+ #define PRESSURE_THRESHOLD 50
  #elif defined(LIGHT)
  #define COAP_ACTIVATE_LIGHT_URI "activate_light"
  #define COAP_ACTIVATE_LIGHT_MANUAL_URI "activate_light_manual"

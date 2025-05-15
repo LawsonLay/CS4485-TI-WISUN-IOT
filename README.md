@@ -16,8 +16,8 @@ ECE 2145: Sapna Chandrasekhar (CE), Rita Kaushik (CE), Rayju Paul (EE), Tahsin R
 
 CS 2191 (4485): Lawson Lay (CS), Anh Nguyen (CS), Michael Duvall (CS), Rowan White (CS), Khiem Nguyen (CS), Khue Vu (CS)
 
-Company Mentors: Robert Liang, Caden Stewart
+Texas Instruments Mentors: Robert Liang, Caden Stewart
 
-University Faculty: Dr. Neal Skinner, Dr. Miguel Razo-Razo
+University of Texas at Dallas Faculty: Dr. Neal Skinner, Dr. Miguel Razo-Razo
 
 ![Project Poster](/wiki-files/poster_2191.-Texas%20Instruments%20-%20DHCP%20Service%20Adaptation%20for%20Wi-SUN%20IoT%20networks.png)

@@ -3,7 +3,7 @@ This is the repo for the CS4485 TI-WISUN-IOT project for Spring 2025.
 For all documentation related to the project, check out the wiki:
 [Link to the Wiki](https://github.com/LawsonLay/CS4485-TI-WISUN-IOT/wiki)
 
-For a link to the original TI-WISUNFANTUND repo we built off of, check here:
+For a link to the original TI-WISUNFANTUND repo the project was built off of, check here:
 [Link to the TI-WISUNFANTUND repo](https://github.com/TexasInstruments/ti-wisunfantund/tree/release)
 
 This project was a collaborative final project between 10 ECE students and CS students at the University of Texas at Dallas for the Fall 2025 and Spring 2025 semesters.

@@ -12,4 +12,4 @@ This repo only contains information pertaining to the Spring 2025 semester.
 
 In the Spring 2025 semester, we, the students, created a minature smart city to simulate an application of Wi-SUN technology using Texas Instruments' LaunchPads, ti-web-app, ti-wfantund, the Kea DHCPv6 server, and a BeaglePlay. The smart city had force-sensing resistors across parts of the road. When run over by a RC car, the sensor would send a CoAP request to the central ti-web-app, to activate the corresponding light zone. All Router Nodes (sensors and lights) could be managed and monitored via our modified ti-web-app in real-time. 
 
-!()[/LawsonLay/CS4485-TI-WISUN-IOT/blob/main/wiki-files/poster_2191.-Texas%20Instruments%20-%20DHCP%20Service%20Adaptation%20for%20Wi-SUN%20IoT%20networks.pdf]
+[](/LawsonLay/CS4485-TI-WISUN-IOT/blob/main/wiki-files/poster_2191.-Texas%20Instruments%20-%20DHCP%20Service%20Adaptation%20for%20Wi-SUN%20IoT%20networks.pdf)

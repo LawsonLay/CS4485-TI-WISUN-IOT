@@ -13,8 +13,11 @@ This repo only contains information pertaining to the Spring 2025 semester.
 In the Spring 2025 semester, we, the students, created a minature smart city to simulate an application of Wi-SUN technology using Texas Instruments' LaunchPads, ti-web-app, ti-wfantund, the Kea DHCPv6 server, and a BeaglePlay. The smart city had force-sensing resistors across parts of the road. When run over by a RC car, the sensor would send a CoAP request to the central ti-web-app, to activate the corresponding light zone. All Router Nodes (sensors and lights) could be managed and monitored via our modified ti-web-app in real-time. 
 
 ECE 2145: Sapna Chandrasekhar (CE), Rita Kaushik (CE), Rayju Paul (EE), Tahsin Rishove (CE)
+
 CS 2191 (4485): Lawson Lay (CS), Anh Nguyen (CS), Michael Duvall (CS), Rowan White (CS), Khiem Nguyen (CS), Khue Vu (CS)
+
 Company Mentors: Robert Liang, Caden Stewart
+
 University Faculty: Dr. Neal Skinner, Dr. Miguel Razo-Razo
 
 ![Project Poster](/wiki-files/poster_2191.-Texas%20Instruments%20-%20DHCP%20Service%20Adaptation%20for%20Wi-SUN%20IoT%20networks.png)
